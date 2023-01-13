@@ -430,22 +430,23 @@ Modification history:
     return duration;
 }
 
-- (int) status
-  /* TYPE: Querying; Returns the receiver's status.
-   * Returns the receiver's status as one of the
-   * following values:
-   *
-   *  *   	Status	Meaning
-   *  *		MK_inactive	between performances
-   *  *		MK_active	in performance
-   *  * 	MK_paused	in performance but currently paused
-   *
-   * A performer's status is set as a side effect of 
-   * methods such as activate and pause.
-   */
-{
-    return (int) status;
-}
+@synthesize status;
+//- (MKPerformerStatus) status
+//  /* TYPE: Querying; Returns the receiver's status.
+//   * Returns the receiver's status as one of the
+//   * following values:
+//   *
+//   *  *   	Status	Meaning
+//   *  *		MK_inactive	between performances
+//   *  *		MK_active	in performance
+//   *  * 	MK_paused	in performance but currently paused
+//   *
+//   * A performer's status is set as a side effect of 
+//   * methods such as activate and pause.
+//   */
+//{
+//    return status;
+//}
 
 - (int) performCount
   /* TYPE: Querying; Returns the number of MKNotes the receiver has performed.

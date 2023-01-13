@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment version="1040" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -255,6 +256,7 @@
                     </menu>
                 </menuItem>
             </items>
+            <point key="canvasLocation" x="14" y="142"/>
         </menu>
         <customObject id="4eI-ga-3Z8" userLabel="PatchCordController" customClass="PatchCordController">
             <connections>
@@ -267,18 +269,18 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="873" y="330" width="386" height="213"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
             <value key="minSize" type="size" width="213" height="107"/>
             <view key="contentView" id="UPb-tJ-gCm">
                 <rect key="frame" x="0.0" y="0.0" width="386" height="213"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <popUpButton verticalHuggingPriority="750" id="5Fn-Vx-PCe">
+                    <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Fn-Vx-PCe">
                         <rect key="frame" x="135" y="169" width="230" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                         <popUpButtonCell key="cell" type="push" title="driver 0" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="Inm-6v-30E" id="YdI-ID-cWb">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="titleBar" size="12"/>
+                            <font key="font" metaFont="titleBar" size="12" textStyle="headline"/>
                             <menu key="menu" title="OtherViews" id="sfn-lk-9Hp">
                                 <items>
                                     <menuItem title="driver 0" state="on" id="Inm-6v-30E"/>
@@ -289,12 +291,12 @@
                             <action selector="setDriverName:" target="4eI-ga-3Z8" id="fZD-6y-7bh"/>
                         </connections>
                     </popUpButton>
-                    <popUpButton verticalHuggingPriority="750" tag="1" id="pZP-kB-09f">
+                    <popUpButton verticalHuggingPriority="750" fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="pZP-kB-09f">
                         <rect key="frame" x="135" y="128" width="230" height="26"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                         <popUpButtonCell key="cell" type="push" title="driver 0" bezelStyle="rounded" imagePosition="right" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="jwC-ml-uX8" id="ObO-5d-QCj">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="titleBar" size="12"/>
+                            <font key="font" metaFont="titleBar" size="12" textStyle="headline"/>
                             <menu key="menu" title="OtherViews" id="YU7-Mr-Vtd">
                                 <items>
                                     <menuItem title="driver 0" state="on" id="jwC-ml-uX8"/>
@@ -305,7 +307,7 @@
                             <action selector="setDriverName:" target="4eI-ga-3Z8" id="iLj-bD-NO8"/>
                         </connections>
                     </popUpButton>
-                    <textField verticalHuggingPriority="750" id="8Mt-mJ-IGa">
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Mt-mJ-IGa">
                         <rect key="frame" x="26" y="175" width="74" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="MIDI Input:" id="WUz-5u-ZYu">
@@ -314,7 +316,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" id="OKX-EE-2x5">
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OKX-EE-2x5">
                         <rect key="frame" x="22" y="135" width="85" height="17"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="MIDI Output:" id="VyL-5W-iUU">
@@ -325,17 +327,18 @@
                     </textField>
                 </subviews>
             </view>
+            <point key="canvasLocation" x="198" y="-62"/>
         </window>
         <window title="Info" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="nV6-Sq-fUf" userLabel="Info" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="709" y="758" width="425" height="158"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
             <view key="contentView" id="s73-wd-FvR">
                 <rect key="frame" x="0.0" y="0.0" width="425" height="158"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField verticalHuggingPriority="750" id="jr1-Gi-5CY">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="58" translatesAutoresizingMaskIntoConstraints="NO" id="jr1-Gi-5CY">
                         <rect key="frame" x="3" y="20" width="62" height="13"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" alignment="left" title="Version 2.0" id="VAj-Cm-RoW">
@@ -344,7 +347,7 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" id="t4K-uO-hwV">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="117" translatesAutoresizingMaskIntoConstraints="NO" id="t4K-uO-hwV">
                         <rect key="frame" x="247" y="64" width="121" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" alignment="left" title="by Leigh M. Smith" id="JgC-mi-uzo">
@@ -353,7 +356,7 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" id="IZG-4I-vQf">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="237" translatesAutoresizingMaskIntoConstraints="NO" id="IZG-4I-vQf">
                         <rect key="frame" x="160" y="20" width="241" height="13"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" alignment="left" title="Copyright 1998, Leigh Smith.  All Rights Reserved." id="N8y-Da-4un">
@@ -362,18 +365,16 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <box title="Box" titlePosition="noTitle" id="Uoa-hc-l0I">
+                    <box fixedFrame="YES" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Uoa-hc-l0I">
                         <rect key="frame" x="0.0" y="37" width="402" height="6"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <view key="contentView">
-                            <rect key="frame" x="2" y="2" width="398" height="2"/>
+                        <view key="contentView" id="UAN-LS-WcH">
+                            <rect key="frame" x="4" y="4" width="394" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </view>
-                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <font key="titleFont" size="12" name="Helvetica"/>
                     </box>
-                    <textField verticalHuggingPriority="750" id="tz9-aV-KU3">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="129" translatesAutoresizingMaskIntoConstraints="NO" id="tz9-aV-KU3">
                         <rect key="frame" x="106" y="109" width="133" height="29"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" alignment="center" title="PatchCord" id="mHd-wb-boZ">
@@ -382,7 +383,7 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" id="vFl-7l-5q7">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="125" translatesAutoresizingMaskIntoConstraints="NO" id="vFl-7l-5q7">
                         <rect key="frame" x="247" y="47" width="129" height="15"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" alignment="center" title="leigh@leighsmith.com" id="OZ8-16-Z2L">
@@ -391,16 +392,16 @@
                             <color key="backgroundColor" red="0.31118881999999998" green="0.18268132000000001" blue="0.24832863999999999" alpha="1" colorSpace="calibratedRGB"/>
                         </textFieldCell>
                     </textField>
-                    <imageView id="IfD-bQ-WLm">
+                    <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IfD-bQ-WLm">
                         <rect key="frame" x="18" y="88" width="48" height="48"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="NSApplicationIcon" id="xEa-H5-jhc"/>
                     </imageView>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="F0V-Xe-cCt">
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F0V-Xe-cCt">
                         <rect key="frame" x="84" y="80" width="305" height="28"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="MIDI Synthesiser Patch Librarian" id="ZgV-Sl-Wge">
-                            <font key="font" size="18" name=".HelveticaNeueDeskInterface-Regular"/>
+                            <font key="font" metaFont="system" size="18"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -411,6 +412,6 @@
         </window>
     </objects>
     <resources>
-        <image name="NSApplicationIcon" width="128" height="128"/>
+        <image name="NSApplicationIcon" width="32" height="32"/>
     </resources>
 </document>

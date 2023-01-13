@@ -171,6 +171,8 @@ the MusicKit MKPartPerformer:
 #import "MKNoteSender.h"
 #import "MKConductor.h"
 
+@protocol MKPerformerDelegate;
+
 /*!
   @file MKPerformer.h
  */
@@ -179,7 +181,7 @@ the MusicKit MKPartPerformer:
   @brief This enumeration defines the state of a MKPerformer.  A MKPerformer may be
  in one of the following three states:
  */
-typedef enum _MKPerformerStatus {
+typedef NS_ENUM(int, MKPerformerStatus) {
     /*! Not yet activated or already deactivated. */
     MK_inactive,
     /*! MKPerformer has been activated. MKPerformer is either performing
@@ -189,7 +191,7 @@ typedef enum _MKPerformerStatus {
     MK_active,
     /*! MKPerformer was activated, then paused. */
     MK_paused
-} MKPerformerStatus;
+};
 
 @interface MKPerformer : NSObject
 {
@@ -211,7 +213,7 @@ typedef enum _MKPerformerStatus {
     /*! The object's collection of MKNoteSenders. */
     NSMutableArray *noteSenders;
     /*! The object's delegate, if any. */
-    id delegate;
+    id<MKPerformerDelegate> delegate;
 
 @private
     double _pauseOffset;          // Difference between the beat when a performer is paused and its time.
@@ -370,7 +372,7 @@ typedef enum _MKPerformerStatus {
   @return Returns an int.
   @brief Returns the receiver's status.
 */
-- (int) status; 
+@property (readonly) MKPerformerStatus status;
 
 /*!
   @return Returns an int.
@@ -416,7 +418,7 @@ typedef enum _MKPerformerStatus {
   <b>[super init]</b> before performing its own initialization. 
   
 */
-- init; 
+- (instancetype)init; 
 
 /*!
   @return Returns an id.

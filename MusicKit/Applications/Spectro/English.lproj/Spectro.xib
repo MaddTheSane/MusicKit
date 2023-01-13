@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
+            <connections>
+                <outlet property="delegate" destination="55" id="89"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Panel" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="40" userLabel="SaveToPanel" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="218" y="342" width="387" height="108"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+            <view key="contentView" id="49">
+                <rect key="frame" x="0.0" y="0.0" width="387" height="108"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <box fixedFrame="YES" title="Title" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="19">
+                        <rect key="frame" x="-7" y="5" width="413" height="97"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="ERy-L5-w2g">
+                            <rect key="frame" x="4" y="5" width="405" height="89"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <box fixedFrame="YES" title="Format" translatesAutoresizingMaskIntoConstraints="NO" id="41">
+                                    <rect key="frame" x="13" y="5" width="113" height="88"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <view key="contentView" id="uO0-5X-Dfe">
+                                        <rect key="frame" x="4" y="5" width="105" height="68"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5">
+                                                <rect key="frame" x="12" y="7" width="91" height="62"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <size key="cellSize" width="91" height="18"/>
+                                                <size key="intercellSpacing" width="0.0" height="4"/>
+                                                <buttonCell key="prototype" type="radio" title="Radio" imagePosition="leading" alignment="left" inset="2" id="219">
+                                                    <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" size="12" name="Helvetica"/>
+                                                </buttonCell>
+                                                <cells>
+                                                    <column>
+                                                        <buttonCell type="radio" title="Linear" imagePosition="leading" alignment="left" state="on" inset="2" id="36">
+                                                            <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                        <buttonCell type="radio" title="Mu Law" imagePosition="leading" alignment="left" tag="1" inset="2" id="74">
+                                                            <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                        <buttonCell type="radio" title="Compressed" imagePosition="leading" alignment="left" inset="2" id="61">
+                                                            <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                    </column>
+                                                </cells>
+                                            </matrix>
+                                        </subviews>
+                                    </view>
+                                    <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                                </box>
+                                <box fixedFrame="YES" title="Channels" translatesAutoresizingMaskIntoConstraints="NO" id="13">
+                                    <rect key="frame" x="131" y="5" width="113" height="88"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <view key="contentView" id="uaf-cA-I5h">
+                                        <rect key="frame" x="4" y="5" width="105" height="68"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="26">
+                                                <rect key="frame" x="12" y="27" width="58" height="39"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <size key="cellSize" width="58" height="18"/>
+                                                <size key="intercellSpacing" width="0.0" height="3"/>
+                                                <buttonCell key="prototype" type="radio" title="Radio" imagePosition="leading" alignment="left" inset="2" id="220">
+                                                    <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" size="12" name="Helvetica"/>
+                                                </buttonCell>
+                                                <cells>
+                                                    <column>
+                                                        <buttonCell type="radio" title="Mono" imagePosition="leading" alignment="left" state="on" inset="2" id="77">
+                                                            <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                        <buttonCell type="radio" title="Stereo" imagePosition="leading" alignment="left" tag="1" inset="2" id="38">
+                                                            <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                    </column>
+                                                </cells>
+                                            </matrix>
+                                        </subviews>
+                                    </view>
+                                    <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                                </box>
+                                <box fixedFrame="YES" title="Sampling Rate" translatesAutoresizingMaskIntoConstraints="NO" id="37">
+                                    <rect key="frame" x="250" y="5" width="133" height="88"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <view key="contentView" id="u85-4a-1yO">
+                                        <rect key="frame" x="4" y="5" width="125" height="68"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28">
+                                                <rect key="frame" x="7" y="9" width="119" height="60"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <size key="cellSize" width="119" height="18"/>
+                                                <size key="intercellSpacing" width="0.0" height="3"/>
+                                                <buttonCell key="prototype" type="radio" title="Radio" imagePosition="leading" alignment="left" inset="2" id="221">
+                                                    <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" size="12" name="Helvetica"/>
+                                                </buttonCell>
+                                                <cells>
+                                                    <column>
+                                                        <buttonCell type="radio" title="8013     (CODEC)" imagePosition="leading" alignment="left" state="on" inset="2" id="64">
+                                                            <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                        <buttonCell type="radio" title="22050" imagePosition="leading" alignment="left" tag="1" inset="2" id="67">
+                                                            <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                        <buttonCell type="radio" title="44100   (CD)" imagePosition="leading" alignment="left" inset="2" id="53">
+                                                            <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                    </column>
+                                                </cells>
+                                            </matrix>
+                                        </subviews>
+                                    </view>
+                                    <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                                </box>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica"/>
+                    </box>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="14" y="132"/>
+        </window>
+        <menu title="Spectro" systemMenu="main" id="50" userLabel="MainMenu">
+            <items>
+                <menuItem title="Application" id="127">
+                    <menu key="submenu" title="Application" systemMenu="apple" id="120">
+                        <items>
+                            <menuItem title="About Spectro" id="121">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showInfoPanel:" target="55" id="134"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Preferences..." id="126">
+                                <connections>
+                                    <action selector="showPreferences:" target="55" id="135"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="118">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Services" id="128">
+                                <menu key="submenu" title="Services" systemMenu="services" id="122"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="123">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Hide Spectro" keyEquivalent="h" id="124">
+                                <connections>
+                                    <action selector="hide:" target="-1" id="132"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Hide Others" id="117">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="hideOtherApplications:" target="-1" id="133"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Show All" id="125">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="unhideAllApplications:" target="-1" id="131"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="129">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Quit Spectro" keyEquivalent="q" id="119">
+                                <connections>
+                                    <action selector="terminate:" target="-1" id="130"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="File" id="44">
+                    <menu key="submenu" title="File" id="9">
+                        <items>
+                            <menuItem title="New" keyEquivalent="n" id="2">
+                                <connections>
+                                    <action selector="newDocument:" target="-1" id="205"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Open..." keyEquivalent="o" id="39">
+                                <connections>
+                                    <action selector="openDocument:" target="-1" id="204"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Open Recent" id="155">
+                                <menu key="submenu" title="Open Recent" systemMenu="recentDocuments" id="156">
+                                    <items>
+                                        <menuItem title="Clear Menu" id="157">
+                                            <connections>
+                                                <action selector="clearRecentDocuments:" target="-1" id="158"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="159">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Close" keyEquivalent="w" id="160">
+                                <connections>
+                                    <action selector="performClose:" target="-1" id="167"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Save" keyEquivalent="s" id="35">
+                                <connections>
+                                    <action selector="saveDocument:" target="-1" id="206"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Save As..." keyEquivalent="S" id="8">
+                                <connections>
+                                    <action selector="saveDocumentAs:" target="-1" id="207"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Save To..." keyEquivalent="T" id="22">
+                                <connections>
+                                    <action selector="saveDocumentTo:" target="-1" id="208"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Revert" id="11">
+                                <connections>
+                                    <action selector="revertDocumentToSaved:" target="-1" id="209"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="168">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Page Setup..." keyEquivalent="P" id="161">
+                                <connections>
+                                    <action selector="runPageLayout:" target="-1" id="166"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Print..." keyEquivalent="p" id="163">
+                                <connections>
+                                    <action selector="printDocument:" target="-1" id="210"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="178">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Print Sound Window..." id="172">
+                                <connections>
+                                    <action selector="printSound:" target="55" id="173"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Print Spectrum Window..." id="174">
+                                <connections>
+                                    <action selector="printSpectrum:" target="55" id="175"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Print Waterfall..." id="176">
+                                <connections>
+                                    <action selector="printWaterfall:" target="55" id="177"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Edit" id="59">
+                    <menu key="submenu" title="Edit" id="72">
+                        <items>
+                            <menuItem title="Cut" keyEquivalent="x" id="56">
+                                <connections>
+                                    <action selector="cut:" target="-1" id="81"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Undo" keyEquivalent="z" id="199">
+                                <connections>
+                                    <action selector="undo:" target="-1" id="202"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="203">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Redo" keyEquivalent="Z" id="200">
+                                <connections>
+                                    <action selector="redo:" target="-1" id="201"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Copy" keyEquivalent="c" id="51">
+                                <connections>
+                                    <action selector="copy:" target="-1" id="82"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Paste" keyEquivalent="v" id="34">
+                                <connections>
+                                    <action selector="paste:" target="-1" id="83"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Delete" id="197">
+                                <connections>
+                                    <action selector="delete:" target="-1" id="198"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Select All" keyEquivalent="a" id="60">
+                                <connections>
+                                    <action selector="selectAll:" target="-1" id="84"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="196">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Find" id="186">
+                                <menu key="submenu" title="Find" id="183">
+                                    <items>
+                                        <menuItem title="Find..." keyEquivalent="f" id="181"/>
+                                        <menuItem title="Find Next" keyEquivalent="g" id="185"/>
+                                        <menuItem title="Find Previous" keyEquivalent="d" id="182"/>
+                                        <menuItem title="Use Selection for Find" keyEquivalent="e" id="184"/>
+                                        <menuItem title="Jump to Selection" keyEquivalent="j" id="187"/>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Spelling" id="190">
+                                <menu key="submenu" title="Spelling" id="191">
+                                    <items>
+                                        <menuItem title="Spelling..." keyEquivalent=":" id="189">
+                                            <connections>
+                                                <action selector="showGuessPanel:" target="-1" id="193"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Check Spelling" keyEquivalent=";" id="192">
+                                            <connections>
+                                                <action selector="checkSpelling:" target="-1" id="194"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Check Spelling As You Type" id="188">
+                                            <connections>
+                                                <action selector="toggleContinuousSpellChecking:" target="-1" id="195"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Window" id="43">
+                    <menu key="submenu" title="Window" systemMenu="window" id="25">
+                        <items>
+                            <menuItem title="Minimize" keyEquivalent="m" id="20">
+                                <connections>
+                                    <action selector="performMiniaturize:" target="-1" id="86"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Sound Info" keyEquivalent="i" id="169">
+                                <connections>
+                                    <action selector="sndInfo:" target="55" id="171"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Colors..." keyEquivalent="C" id="179">
+                                <connections>
+                                    <action selector="orderFrontColorPanel:" target="-1" id="180"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="136">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Bring All to Front" id="27">
+                                <connections>
+                                    <action selector="arrangeInFront:" target="-1" id="88"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Help" id="33">
+                    <menu key="submenu" title="Help" id="17">
+                        <items>
+                            <menuItem title="Spectro Help" id="30">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="showHelp:" target="-1" id="85"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+            </items>
+        </menu>
+        <customObject id="55" userLabel="SpectroController" customClass="SpectroController">
+            <connections>
+                <outlet property="infoPanel" destination="57" id="108"/>
+                <outlet property="saveToAccessoryView" destination="19" id="98"/>
+            </connections>
+        </customObject>
+        <window title="Spectro Info Panel" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="57" userLabel="Info" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="415" y="568" width="363" height="156"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+            <view key="contentView" id="42">
+                <rect key="frame" x="0.0" y="0.0" width="363" height="156"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="16">
+                        <rect key="frame" x="125" y="113" width="156" height="43"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="Spectro" id="213">
+                            <font key="font" size="36" name="Helvetica"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="68">
+                        <rect key="frame" x="3" y="20" width="69" height="16"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="left" title="Version 5.6.0" id="216">
+                            <font key="font" size="10" name="Helvetica"/>
+                            <color key="textColor" white="0.33333333999999998" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="21">
+                        <rect key="frame" x="83" y="91" width="252" height="22"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="A Spectrum Analysis Tool" id="214">
+                            <font key="font" size="18" name="Helvetica"/>
+                            <color key="textColor" red="0.55666590000000005" green="0.65122473000000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="31">
+                        <rect key="frame" x="70" y="10" width="285" height="26"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="left" title="Stanford University Center for Computer Research in Music and Acoustics" id="215">
+                            <font key="font" size="10" name="Helvetica"/>
+                            <color key="textColor" white="0.33333333999999998" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <box fixedFrame="YES" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="24">
+                        <rect key="frame" x="0.0" y="37" width="402" height="2"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="Xh1-SJ-poW">
+                            <rect key="frame" x="4" y="2" width="394" height="0.0"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica"/>
+                    </box>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7">
+                        <rect key="frame" x="79" y="65" width="257" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" selectable="YES" state="on" alignment="center" title="by Perry R. Cook &amp; Gary P. Scavone" id="212">
+                            <font key="font" size="14" name="Helvetica"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="115">
+                        <rect key="frame" x="12" y="88" width="60" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSApplicationIcon" id="217"/>
+                    </imageView>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="116">
+                        <rect key="frame" x="20" y="45" width="328" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" selectable="YES" state="on" alignment="center" title="OpenStep conversion by Stephen Brandon &amp; Leigh Smith" id="218">
+                            <font key="font" size="12" name="Helvetica"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="-78" y="-117"/>
+        </window>
+    </objects>
+    <resources>
+        <image name="NSApplicationIcon" width="32" height="32"/>
+    </resources>
+</document>

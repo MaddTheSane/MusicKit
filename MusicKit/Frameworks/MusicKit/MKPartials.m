@@ -877,7 +877,7 @@ NSLocalizedStringFromTableInBundle(@"MKPartials object currently supports table 
 
 /* Same as setPartialCount:freqRatios:ampRatios:phases:orDefaultPhase
   except that the array arguments are not copied or freed. */
-- _setPartialNoCopyCount: (int)howMany
+- (void)_setPartialNoCopyCount: (int)howMany
               freqRatios: (short *)fRatios
                ampRatios: (float *)aRatios
                   phases: (double *)phs
@@ -903,7 +903,6 @@ NSLocalizedStringFromTableInBundle(@"MKPartials object currently supports table 
     partialCount = howMany;
     length = 0;   /* This ensures a recomputation of the tables. */
     dbMode = YES;
-    return self;
 }
 
 - _normalize

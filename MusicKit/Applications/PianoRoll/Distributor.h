@@ -7,7 +7,7 @@
 @interface Distributor:NSObject
 {
     IBOutlet NSWindow * infoPanel;
-    id helpPanel;
+    IBOutlet id helpPanel;
     id openPanel;
     id savePanel;
     id tadList;
@@ -17,15 +17,15 @@
 
 - init;
 - setTadList:theList;
-- (void)closeDoc:sender;
-- (void)openDoc:sender;
-- (void)saveDocAs:sender;
-- (void)saveDoc:sender;
-- (void)showHelp:sender;
-- (void)showInfo:sender;
-- (void)newDoc:sender;
-- (void)play:sender;
-- (void)stopPlay:sender;
+- (IBAction)closeDoc:sender;
+- (IBAction)openDoc:sender;
+- (IBAction)saveDocAs:sender;
+- (IBAction)saveDoc:sender;
+- (IBAction)showHelp:sender;
+- (IBAction)showInfo:sender;
+- (IBAction)newDoc:sender;
+- (IBAction)play:sender;
+- (IBAction)stopPlay:sender;
 - (Document *) findCurrent;
 
 @end

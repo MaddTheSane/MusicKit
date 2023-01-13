@@ -101,12 +101,12 @@
 
 - (void)saveDoc:sender
 {
-	id aDoc;
+	Document *aDoc;
 	
 	aDoc = [self findCurrent];
 	if (!aDoc)
 		return;
-	[[aDoc whatScore] writeScorefile:[aDoc whatName]]; 
+	[[aDoc whatScore] writeScorefile:[aDoc name]];
 }
 
 - (void)closeDoc:sender
@@ -118,7 +118,6 @@
 		return;
 	[[aDoc docWindow] close];
 	[[aDoc whatScore] release];
-	[[aDoc whatName] release]; 
 }
 
 - (void) showInfo: sender

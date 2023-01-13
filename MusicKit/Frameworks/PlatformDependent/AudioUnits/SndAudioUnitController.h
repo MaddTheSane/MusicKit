@@ -13,6 +13,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 #import "SndAudioUnitProcessor.h"
 #import <AudioUnit/AudioUnitCarbonView.h>
 

@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="SpectrumDocument">
+            <connections>
+                <outlet property="currentFrameCell" destination="71" id="87"/>
+                <outlet property="cursorAmp" destination="74" id="96"/>
+                <outlet property="cursorFreq" destination="48" id="95"/>
+                <outlet property="dBLimitsMatrix" destination="6" id="85"/>
+                <outlet property="frameSlider" destination="9" id="79"/>
+                <outlet property="freqRangeMatrix" destination="12" id="92"/>
+                <outlet property="hopRatioCell" destination="35" id="93"/>
+                <outlet property="myWaterfallView" destination="60" id="108"/>
+                <outlet property="peakFreqCell" destination="22" id="97"/>
+                <outlet property="scrollSpectrum" destination="23" id="148"/>
+                <outlet property="sineError" destination="42" id="122"/>
+                <outlet property="spectrumWindow" destination="50" id="77"/>
+                <outlet property="totalFramesCell" destination="46" id="81"/>
+                <outlet property="waterFallButton" destination="25" id="112"/>
+                <outlet property="waterfallWindow" destination="41" id="109"/>
+                <outlet property="wfCurrentFrameCell" destination="18" id="116"/>
+                <outlet property="wfCurrentFrameTime" destination="2" id="115"/>
+                <outlet property="wfFrameSlider" destination="28" id="117"/>
+                <outlet property="wfFreqRangeMatrix" destination="3" id="110"/>
+                <outlet property="wfPlotHeight" destination="75" id="128"/>
+                <outlet property="wfTimeRangeMatrix" destination="61" id="114"/>
+                <outlet property="windowSizeCell" destination="68" id="80"/>
+                <outlet property="windowTypeButton" destination="135" id="146"/>
+                <outlet property="zpFactorCell" destination="20" id="82"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Waterfall Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="41" userLabel="Waterfall">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="472" y="226" width="616" height="560"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+            <view key="contentView" id="17">
+                <rect key="frame" x="0.0" y="0.0" width="616" height="560"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <slider horizontalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="28">
+                        <rect key="frame" x="580" y="66" width="21" height="486"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <sliderCell key="cell" continuous="YES" alignment="left" maxValue="1" tickMarkPosition="right" sliderType="linear" id="152">
+                            <font key="font" size="12" name="Helvetica"/>
+                        </sliderCell>
+                        <connections>
+                            <action selector="wfFrameSliderMoved:" target="-2" id="118"/>
+                        </connections>
+                    </slider>
+                    <form verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="51">
+                        <rect key="frame" x="209" y="20" width="219" height="21"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        <size key="cellSize" width="219" height="21"/>
+                        <size key="intercellSpacing" width="1" height="3"/>
+                        <formCell key="prototype" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="163">
+                            <font key="font" size="12" name="Helvetica"/>
+                            <font key="titleFont" size="12" name="Helvetica"/>
+                        </formCell>
+                        <cells>
+                            <column>
+                                <formCell borderStyle="bezel" alignment="left" title="Start Time of Frame at Slider" stringValue="0.0" id="2">
+                                    <font key="font" size="12" name="Helvetica"/>
+                                    <font key="titleFont" size="12" name="Helvetica"/>
+                                </formCell>
+                            </column>
+                        </cells>
+                    </form>
+                    <form verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33">
+                        <rect key="frame" x="450" y="20" width="128" height="21"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        <size key="cellSize" width="128" height="21"/>
+                        <size key="intercellSpacing" width="1" height="3"/>
+                        <formCell key="prototype" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="162">
+                            <font key="font" size="12" name="Helvetica"/>
+                            <font key="titleFont" size="12" name="Helvetica"/>
+                        </formCell>
+                        <cells>
+                            <column>
+                                <formCell borderStyle="bezel" alignment="left" title="Frame at Slider:" stringValue="0" id="18">
+                                    <font key="font" size="12" name="Helvetica"/>
+                                    <font key="titleFont" size="12" name="Helvetica"/>
+                                </formCell>
+                            </column>
+                        </cells>
+                    </form>
+                    <form verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="26">
+                        <rect key="frame" x="30" y="20" width="168" height="21"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        <size key="cellSize" width="168" height="21"/>
+                        <size key="intercellSpacing" width="1" height="3"/>
+                        <formCell key="prototype" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="161">
+                            <font key="font" size="12" name="Helvetica"/>
+                            <font key="titleFont" size="12" name="Helvetica"/>
+                        </formCell>
+                        <cells>
+                            <column>
+                                <formCell selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Frame Plot Height (&gt;1):" stringValue="3" id="75">
+                                    <font key="font" size="12" name="Helvetica"/>
+                                    <font key="titleFont" size="12" name="Helvetica"/>
+                                </formCell>
+                            </column>
+                        </cells>
+                        <connections>
+                            <action selector="wfPlotHeightChanged:" target="-2" id="119"/>
+                        </connections>
+                    </form>
+                    <box fixedFrame="YES" title="Title" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="67">
+                        <rect key="frame" x="60" y="66" width="518" height="486"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="fxv-C1-VKn">
+                            <rect key="frame" x="4" y="5" width="510" height="478"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="60" customClass="WaterfallView">
+                                    <rect key="frame" x="0.0" y="0.0" width="513" height="482"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <connections>
+                                        <outlet property="frameHeight" destination="75" id="149"/>
+                                    </connections>
+                                </customView>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica"/>
+                    </box>
+                    <matrix verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61">
+                        <rect key="frame" x="21" y="64" width="39" height="489"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        <size key="cellSize" width="39" height="13"/>
+                        <size key="intercellSpacing" width="4" height="106"/>
+                        <textFieldCell key="prototype" state="on" alignment="left" tag="-1" title="Text" id="164">
+                            <font key="font" size="10" name="Helvetica"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <cells>
+                            <column>
+                                <textFieldCell state="on" alignment="left" title="0.000" id="73">
+                                    <font key="font" size="10" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <textFieldCell state="on" alignment="left" tag="1" title="0.000" id="65">
+                                    <font key="font" size="10" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <textFieldCell state="on" alignment="left" tag="2" title="0.000" id="54">
+                                    <font key="font" size="10" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <textFieldCell state="on" alignment="left" tag="3" title="0.000" id="44">
+                                    <font key="font" size="10" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <textFieldCell state="on" alignment="left" tag="4" title="0.000" id="34">
+                                    <font key="font" size="10" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </column>
+                        </cells>
+                    </matrix>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7">
+                        <rect key="frame" x="20" y="80" width="38" height="30"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="left" id="151">
+                            <font key="font" size="12" name="Helvetica-Bold"/>
+                            <string key="title">Start
+Time</string>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="43">
+                        <rect key="frame" x="20" y="512" width="36" height="30"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="left" id="153">
+                            <font key="font" size="12" name="Helvetica-Bold"/>
+                            <string key="title">End
+Time</string>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <matrix verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3">
+                        <rect key="frame" x="42" y="44" width="468" height="21"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        <size key="cellSize" width="68" height="21"/>
+                        <size key="intercellSpacing" width="32" height="4"/>
+                        <textFieldCell key="prototype" state="on" alignment="center" tag="-1" title="0 Hz." id="160">
+                            <font key="font" size="12" name="Helvetica"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <cells>
+                            <column>
+                                <textFieldCell state="on" alignment="center" title="0 Hz" id="66">
+                                    <font key="font" size="12" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </column>
+                            <column>
+                                <textFieldCell state="on" alignment="center" tag="1" title="1000 Hz" id="16">
+                                    <font key="font" size="12" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </column>
+                            <column>
+                                <textFieldCell state="on" alignment="center" tag="2" title="2000 Hz" id="59">
+                                    <font key="font" size="12" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </column>
+                            <column>
+                                <textFieldCell state="on" alignment="center" tag="3" title="3000 Hz" id="29">
+                                    <font key="font" size="12" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </column>
+                            <column>
+                                <textFieldCell selectable="YES" editable="YES" state="on" borderStyle="bezel" alignment="center" tag="-1" title="4000 Hz" drawsBackground="YES" id="70">
+                                    <font key="font" size="12" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <connections>
+                                        <action selector="changeWFFreqRange:" target="-2" id="111"/>
+                                    </connections>
+                                </textFieldCell>
+                            </column>
+                        </cells>
+                    </matrix>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="14" y="132"/>
+        </window>
+        <window title="Spectrum Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="50" userLabel="Spectrum">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="166" y="620" width="727" height="378"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+            <view key="contentView" id="64">
+                <rect key="frame" x="0.0" y="0.0" width="727" height="378"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <matrix verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="12">
+                        <rect key="frame" x="60" y="120" width="664" height="21"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        <size key="cellSize" width="68" height="21"/>
+                        <size key="intercellSpacing" width="81" height="4"/>
+                        <textFieldCell key="prototype" state="on" alignment="center" tag="-1" title="0 Hz." id="166">
+                            <font key="font" size="12" name="Helvetica"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <cells>
+                            <column>
+                                <textFieldCell selectable="YES" editable="YES" state="on" borderStyle="bezel" alignment="center" title="0 Hz" drawsBackground="YES" id="76">
+                                    <font key="font" size="12" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </column>
+                            <column>
+                                <textFieldCell state="on" alignment="center" tag="1" title="5000 Hz" id="62">
+                                    <font key="font" size="12" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </column>
+                            <column>
+                                <textFieldCell state="on" alignment="center" tag="2" title="10000 Hz" id="5">
+                                    <font key="font" size="12" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </column>
+                            <column>
+                                <textFieldCell state="on" alignment="center" tag="3" title="15000 Hz" id="47">
+                                    <font key="font" size="12" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </column>
+                            <column>
+                                <textFieldCell selectable="YES" editable="YES" state="on" borderStyle="bezel" alignment="center" tag="-1" title="20000 Hz" drawsBackground="YES" id="24">
+                                    <font key="font" size="12" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </column>
+                        </cells>
+                        <connections>
+                            <action selector="changeFreqRange:" target="-2" id="91"/>
+                        </connections>
+                    </matrix>
+                    <matrix verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6">
+                        <rect key="frame" x="2" y="160" width="55" height="214"/>
+                        <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        <size key="cellSize" width="55" height="22"/>
+                        <size key="intercellSpacing" width="213" height="26"/>
+                        <textFieldCell key="prototype" state="on" alignment="right" tag="-1" title="0 Hz." id="165">
+                            <font key="font" size="12" name="Helvetica"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <cells>
+                            <column>
+                                <textFieldCell state="on" alignment="right" title="0 dB" id="69">
+                                    <font key="font" size="12" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <textFieldCell state="on" alignment="right" tag="-1" title="-25 dB" id="11">
+                                    <font key="font" size="12" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <textFieldCell state="on" alignment="right" tag="-1" title="-50 dB" id="52">
+                                    <font key="font" size="12" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <textFieldCell state="on" alignment="right" tag="-1" title="-75 dB" id="45">
+                                    <font key="font" size="12" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <textFieldCell selectable="YES" editable="YES" state="on" borderStyle="bezel" alignment="right" tag="-1" title="-100 dB" drawsBackground="YES" id="39">
+                                    <font key="font" size="12" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </column>
+                        </cells>
+                        <connections>
+                            <action selector="changedBLimits:" target="-2" id="86"/>
+                        </connections>
+                    </matrix>
+                    <box fixedFrame="YES" title="Title" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="58">
+                        <rect key="frame" x="60" y="142" width="666" height="236"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <view key="contentView" id="dBF-oX-oEt">
+                            <rect key="frame" x="4" y="5" width="658" height="228"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="23" customClass="ScrollingSpectrum">
+                                    <rect key="frame" x="0.0" y="0.0" width="662" height="232"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </customView>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica"/>
+                    </box>
+                    <button fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="25">
+                        <rect key="frame" x="658" y="0.0" width="64" height="64"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <buttonCell key="cell" type="bevel" title="Cell" bezelStyle="regularSquare" image="WaterFall" imagePosition="only" alignment="center" alternateImage="Stop" borderStyle="border" inset="2" id="154">
+                            <behavior key="behavior" lightByContents="YES"/>
+                            <font key="font" metaFont="system" size="14"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="doWaterfall:" target="-2" id="113"/>
+                        </connections>
+                    </button>
+                    <box fixedFrame="YES" title="FFT Controls" translatesAutoresizingMaskIntoConstraints="NO" id="36">
+                        <rect key="frame" x="296" y="4" width="353" height="69"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="5hM-Bv-jD9">
+                            <rect key="frame" x="4" y="5" width="345" height="49"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <form verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14">
+                                    <rect key="frame" x="5" y="30" width="133" height="21"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    <size key="cellSize" width="133" height="21"/>
+                                    <size key="intercellSpacing" width="1" height="3"/>
+                                    <formCell key="prototype" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="169">
+                                        <font key="font" size="12" name="Helvetica"/>
+                                        <font key="titleFont" size="12" name="Helvetica"/>
+                                    </formCell>
+                                    <cells>
+                                        <column>
+                                            <formCell lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Window Size:" id="68">
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <font key="titleFont" size="12" name="Helvetica"/>
+                                            </formCell>
+                                        </column>
+                                    </cells>
+                                    <connections>
+                                        <action selector="changeWindowSize:" target="-2" id="83"/>
+                                    </connections>
+                                </form>
+                                <form verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4">
+                                    <rect key="frame" x="140" y="30" width="208" height="21"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    <size key="cellSize" width="208" height="21"/>
+                                    <size key="intercellSpacing" width="1" height="3"/>
+                                    <formCell key="prototype" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="170">
+                                        <font key="font" size="12" name="Helvetica"/>
+                                        <font key="titleFont" size="12" name="Helvetica"/>
+                                    </formCell>
+                                    <cells>
+                                        <column>
+                                            <formCell selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Zero Pad Factor (&gt;=1):" id="20">
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <font key="titleFont" size="12" name="Helvetica"/>
+                                            </formCell>
+                                        </column>
+                                    </cells>
+                                    <connections>
+                                        <action selector="changeZPFactor:" target="-2" id="84"/>
+                                    </connections>
+                                </form>
+                                <form verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19">
+                                    <rect key="frame" x="22" y="4" width="117" height="21"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    <size key="cellSize" width="117" height="21"/>
+                                    <size key="intercellSpacing" width="1" height="3"/>
+                                    <formCell key="prototype" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="171">
+                                        <font key="font" size="12" name="Helvetica"/>
+                                        <font key="titleFont" size="12" name="Helvetica"/>
+                                    </formCell>
+                                    <cells>
+                                        <column>
+                                            <formCell selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Hop Ratio:" id="35">
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <font key="titleFont" size="12" name="Helvetica"/>
+                                            </formCell>
+                                        </column>
+                                    </cells>
+                                    <connections>
+                                        <action selector="changeHopRatio:" target="-2" id="99"/>
+                                    </connections>
+                                </form>
+                                <popUpButton verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="135">
+                                    <rect key="frame" x="199" y="0.0" width="152" height="26"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <popUpButtonCell key="cell" type="push" title="Rectangular" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="border" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="139" id="155">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system" size="14"/>
+                                        <menu key="menu" title="OtherViews" id="140">
+                                            <items>
+                                                <menuItem title="Rectangular" state="on" id="139"/>
+                                                <menuItem title="Triangular" id="136"/>
+                                                <menuItem title="Hamming" id="138"/>
+                                                <menuItem title="Hanning" id="141"/>
+                                                <menuItem title="Blackman3" id="142"/>
+                                                <menuItem title="Blackman4" id="143"/>
+                                                <menuItem title="Kaiser" id="144"/>
+                                            </items>
+                                        </menu>
+                                    </popUpButtonCell>
+                                    <connections>
+                                        <action selector="changeWindowType:" target="-2" id="145"/>
+                                    </connections>
+                                </popUpButton>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="147">
+                                    <rect key="frame" x="140" y="7" width="54" height="15"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Window:" id="156">
+                                        <font key="font" size="12" name="Helvetica"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica"/>
+                    </box>
+                    <box fixedFrame="YES" title="Frame Information" translatesAutoresizingMaskIntoConstraints="NO" id="56">
+                        <rect key="frame" x="7" y="4" width="280" height="69"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="dB6-Of-Mne">
+                            <rect key="frame" x="4" y="5" width="272" height="49"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <form verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="21">
+                                    <rect key="frame" x="146" y="28" width="120" height="21"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    <size key="cellSize" width="120" height="21"/>
+                                    <size key="intercellSpacing" width="1" height="3"/>
+                                    <formCell key="prototype" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="174">
+                                        <font key="font" size="12" name="Helvetica"/>
+                                        <font key="titleFont" size="12" name="Helvetica"/>
+                                    </formCell>
+                                    <cells>
+                                        <column>
+                                            <formCell borderStyle="bezel" alignment="left" title="Total Frames:" stringValue="0" id="46">
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <font key="titleFont" size="12" name="Helvetica"/>
+                                            </formCell>
+                                        </column>
+                                    </cells>
+                                </form>
+                                <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9">
+                                    <rect key="frame" x="103" y="1" width="165" height="21"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <sliderCell key="cell" continuous="YES" alignment="left" maxValue="1" tickMarkPosition="below" sliderType="linear" id="158">
+                                        <font key="font" size="12" name="Helvetica"/>
+                                    </sliderCell>
+                                    <connections>
+                                        <action selector="frameSliderMoved:" target="-2" id="88"/>
+                                    </connections>
+                                </slider>
+                                <form verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="40">
+                                    <rect key="frame" x="2" y="28" width="128" height="21"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <size key="cellSize" width="128" height="21"/>
+                                    <size key="intercellSpacing" width="1" height="3"/>
+                                    <formCell key="prototype" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="175">
+                                        <font key="font" size="12" name="Helvetica"/>
+                                        <font key="titleFont" size="12" name="Helvetica"/>
+                                    </formCell>
+                                    <cells>
+                                        <column>
+                                            <formCell borderStyle="bezel" alignment="left" title="Current Frame:" stringValue="0" id="71">
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <font key="titleFont" size="12" name="Helvetica"/>
+                                            </formCell>
+                                        </column>
+                                    </cells>
+                                </form>
+                                <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="10">
+                                    <rect key="frame" x="1" y="-3" width="92" height="31"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <buttonCell key="cell" type="push" title="Next Frame" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="159">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" size="12" name="Helvetica"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="nextFrame:" target="-2" id="94"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica"/>
+                    </box>
+                    <box fixedFrame="YES" title="Cursor Information" translatesAutoresizingMaskIntoConstraints="NO" id="8">
+                        <rect key="frame" x="7" y="73" width="280" height="47"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="EQ9-W3-Lly">
+                            <rect key="frame" x="4" y="5" width="272" height="27"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <form verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="55">
+                                    <rect key="frame" x="5" y="7" width="130" height="21"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    <size key="cellSize" width="130" height="21"/>
+                                    <size key="intercellSpacing" width="1" height="3"/>
+                                    <formCell key="prototype" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="167">
+                                        <font key="font" size="12" name="Helvetica"/>
+                                        <font key="titleFont" size="12" name="Helvetica"/>
+                                    </formCell>
+                                    <cells>
+                                        <column>
+                                            <formCell borderStyle="bezel" alignment="left" title="Frequency:" stringValue="0.0" id="48">
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <font key="titleFont" size="12" name="Helvetica"/>
+                                            </formCell>
+                                        </column>
+                                    </cells>
+                                </form>
+                                <form verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="57">
+                                    <rect key="frame" x="144" y="7" width="119" height="21"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    <size key="cellSize" width="119" height="21"/>
+                                    <size key="intercellSpacing" width="1" height="3"/>
+                                    <formCell key="prototype" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="168">
+                                        <font key="font" size="12" name="Helvetica"/>
+                                        <font key="titleFont" size="12" name="Helvetica"/>
+                                    </formCell>
+                                    <cells>
+                                        <column>
+                                            <formCell borderStyle="bezel" alignment="left" title="Amplitude:" stringValue="0.0" id="74">
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <font key="titleFont" size="12" name="Helvetica"/>
+                                            </formCell>
+                                        </column>
+                                    </cells>
+                                </form>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica"/>
+                    </box>
+                    <box fixedFrame="YES" title="Frequency Peak Information" translatesAutoresizingMaskIntoConstraints="NO" id="49">
+                        <rect key="frame" x="296" y="73" width="424" height="47"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="aZE-94-SIL">
+                            <rect key="frame" x="4" y="5" width="416" height="27"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="32">
+                                    <rect key="frame" x="3" y="-2" width="66" height="32"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <buttonCell key="cell" type="push" title="Peak" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="157">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" size="12" name="Helvetica"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="interpolatePeak:" target="-2" id="98"/>
+                                    </connections>
+                                </button>
+                                <form verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="30">
+                                    <rect key="frame" x="65" y="7" width="180" height="21"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <size key="cellSize" width="180" height="21"/>
+                                    <size key="intercellSpacing" width="1" height="3"/>
+                                    <formCell key="prototype" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="172">
+                                        <font key="font" size="12" name="Helvetica"/>
+                                        <font key="titleFont" size="12" name="Helvetica"/>
+                                    </formCell>
+                                    <cells>
+                                        <column>
+                                            <formCell borderStyle="bezel" alignment="left" title="Frequency at Peak:" stringValue="0.0" id="22">
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <font key="titleFont" size="12" name="Helvetica"/>
+                                            </formCell>
+                                        </column>
+                                    </cells>
+                                </form>
+                                <form verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="13">
+                                    <rect key="frame" x="253" y="7" width="158" height="21"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    <size key="cellSize" width="158" height="21"/>
+                                    <size key="intercellSpacing" width="1" height="3"/>
+                                    <formCell key="prototype" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="173">
+                                        <font key="font" size="12" name="Helvetica"/>
+                                        <font key="titleFont" size="12" name="Helvetica"/>
+                                    </formCell>
+                                    <cells>
+                                        <column>
+                                            <formCell borderStyle="bezel" alignment="left" title="RMS Error of Peak:" stringValue="0.0" id="42">
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <font key="titleFont" size="12" name="Helvetica"/>
+                                            </formCell>
+                                        </column>
+                                    </cells>
+                                </form>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica"/>
+                    </box>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="-67" y="702"/>
+        </window>
+    </objects>
+    <resources>
+        <image name="Stop" width="61" height="48"/>
+        <image name="WaterFall" width="53" height="53"/>
+    </resources>
+</document>

@@ -198,7 +198,7 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
     register id aNote;
     id rtnVal;
     unsigned int readPosition = 0;   // this is the top level.
-    IMP partAddNote = [MKGetPartClass() instanceMethodForSelector: @selector(addNote:)];
+    MKPart *(*partAddNote)(id, SEL, MKNote*) = [MKGetPartClass() instanceMethodForSelector: @selector(addNote:)];
     
     p = _MKNewScoreInStruct(stream, self, self->scorefilePrintStream, NO, fileName, &readPosition);
     if (!p)

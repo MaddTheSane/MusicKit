@@ -17,10 +17,10 @@
 - initWithScore: (MKScore *) aScore;
 - partView;
 - (NSWindow *) docWindow;
-- setName: (NSString *) theName;
+@property (copy) NSString *name;
 - (NSString *) whatName;
 - whatScore;
-- (BOOL) isCurrent;
+@property (readonly, getter=isCurrent) BOOL current;
 
 - (void)windowDidBecomeMain:(NSNotification *)notification;
 - (void)windowDidResignMain:(NSNotification *)notification;

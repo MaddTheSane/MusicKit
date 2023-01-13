@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="SoundDocument">
+            <connections>
+                <outlet property="pauseButton" destination="13" id="44"/>
+                <outlet property="playButton" destination="17" id="42"/>
+                <outlet property="recordButton" destination="16" id="45"/>
+                <outlet property="sDurSamp" destination="3" id="57"/>
+                <outlet property="sDurSec" destination="34" id="58"/>
+                <outlet property="sStartSamp" destination="19" id="59"/>
+                <outlet property="sStartSec" destination="20" id="60"/>
+                <outlet property="scrollSound" destination="32" id="72"/>
+                <outlet property="spectrumButton" destination="39" id="66"/>
+                <outlet property="stopButton" destination="33" id="43"/>
+                <outlet property="wDurSamp" destination="6" id="61"/>
+                <outlet property="wDurSec" destination="38" id="62"/>
+                <outlet property="wStartSamp" destination="21" id="63"/>
+                <outlet property="wStartSec" destination="12" id="64"/>
+                <outlet property="window" destination="10" id="71"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="10" userLabel="Sound Window">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" topStrut="YES"/>
+            <rect key="contentRect" x="64" y="510" width="798" height="346"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+            <view key="contentView" id="23">
+                <rect key="frame" x="0.0" y="0.0" width="798" height="346"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="32" customClass="ScrollingSound">
+                        <rect key="frame" x="250" y="20" width="528" height="326"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
+                    </customView>
+                    <box fixedFrame="YES" title="Window Interval " translatesAutoresizingMaskIntoConstraints="NO" id="5">
+                        <rect key="frame" x="20" y="261" width="223" height="82"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <view key="contentView" id="qjT-Vd-LC9">
+                            <rect key="frame" x="4" y="5" width="215" height="62"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <matrix verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18">
+                                    <rect key="frame" x="72" y="5" width="126" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    <size key="cellSize" width="62" height="21"/>
+                                    <size key="intercellSpacing" width="2" height="2"/>
+                                    <textFieldCell key="prototype" selectable="YES" editable="YES" state="on" borderStyle="bezel" alignment="right" tag="-1" title="Text" drawsBackground="YES" id="87">
+                                        <font key="font" size="12" name="Helvetica"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                    <cells>
+                                        <column>
+                                            <textFieldCell selectable="YES" editable="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" id="21">
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <textFieldCell selectable="YES" editable="YES" state="on" borderStyle="bezel" alignment="right" tag="2" drawsBackground="YES" id="6">
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </column>
+                                        <column>
+                                            <textFieldCell selectable="YES" editable="YES" state="on" borderStyle="bezel" alignment="right" tag="1" drawsBackground="YES" id="12">
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <textFieldCell selectable="YES" editable="YES" state="on" borderStyle="bezel" alignment="right" tag="3" drawsBackground="YES" id="38">
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </column>
+                                    </cells>
+                                    <connections>
+                                        <action selector="windowMatrixChanged:" target="-2" id="50"/>
+                                    </connections>
+                                </matrix>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9">
+                                    <rect key="frame" x="33" y="30" width="39" height="15"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <textFieldCell key="cell" alignment="center" title="start" id="75">
+                                        <font key="font" size="12" name="Helvetica"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="40">
+                                    <rect key="frame" x="14" y="8" width="56" height="15"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <textFieldCell key="cell" alignment="center" title="duration" id="76">
+                                        <font key="font" size="12" name="Helvetica"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="30">
+                                    <rect key="frame" x="77" y="49" width="56" height="15"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <textFieldCell key="cell" alignment="center" title="samples" id="77">
+                                        <font key="font" size="12" name="Helvetica"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="14">
+                                    <rect key="frame" x="139" y="49" width="58" height="15"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <textFieldCell key="cell" alignment="center" title="seconds" id="78">
+                                        <font key="font" size="12" name="Helvetica"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica"/>
+                    </box>
+                    <box fixedFrame="YES" title="Selection Interval " translatesAutoresizingMaskIntoConstraints="NO" id="26">
+                        <rect key="frame" x="20" y="175" width="223" height="82"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <view key="contentView" id="2pc-g5-76V">
+                            <rect key="frame" x="4" y="5" width="215" height="62"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <matrix verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28">
+                                    <rect key="frame" x="73" y="5" width="126" height="44"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    <size key="cellSize" width="62" height="21"/>
+                                    <size key="intercellSpacing" width="2" height="2"/>
+                                    <textFieldCell key="prototype" selectable="YES" editable="YES" state="on" borderStyle="bezel" alignment="right" tag="-1" title="Text" drawsBackground="YES" id="89">
+                                        <font key="font" size="12" name="Helvetica"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                    <cells>
+                                        <column>
+                                            <textFieldCell selectable="YES" editable="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" id="19">
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <textFieldCell selectable="YES" editable="YES" state="on" borderStyle="bezel" alignment="right" tag="2" drawsBackground="YES" id="3">
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </column>
+                                        <column>
+                                            <textFieldCell selectable="YES" editable="YES" state="on" borderStyle="bezel" alignment="right" tag="1" drawsBackground="YES" id="20">
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                            <textFieldCell selectable="YES" editable="YES" state="on" borderStyle="bezel" alignment="right" tag="3" drawsBackground="YES" id="34">
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </column>
+                                    </cells>
+                                    <connections>
+                                        <action selector="selectionMatrixChanged:" target="-2" id="51"/>
+                                    </connections>
+                                </matrix>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7">
+                                    <rect key="frame" x="34" y="30" width="39" height="15"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <textFieldCell key="cell" alignment="center" title="start" id="79">
+                                        <font key="font" size="12" name="Helvetica"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2">
+                                    <rect key="frame" x="15" y="8" width="56" height="15"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <textFieldCell key="cell" alignment="center" title="duration" id="80">
+                                        <font key="font" size="12" name="Helvetica"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="35">
+                                    <rect key="frame" x="78" y="49" width="56" height="15"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <textFieldCell key="cell" alignment="center" title="samples" id="81">
+                                        <font key="font" size="12" name="Helvetica"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="22">
+                                    <rect key="frame" x="140" y="49" width="58" height="15"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <textFieldCell key="cell" alignment="center" title="seconds" id="82">
+                                        <font key="font" size="12" name="Helvetica"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica"/>
+                    </box>
+                    <button fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="39">
+                        <rect key="frame" x="181" y="18" width="64" height="71"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                        <buttonCell key="cell" type="bevel" title="Cell" bezelStyle="regularSquare" image="Go" imagePosition="only" alignment="center" alternateImage="Stop" borderStyle="border" inset="2" id="74">
+                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system" size="14"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="spectrum:" target="-2" id="65"/>
+                        </connections>
+                    </button>
+                    <box fixedFrame="YES" title="Zoom" translatesAutoresizingMaskIntoConstraints="NO" id="25">
+                        <rect key="frame" x="20" y="20" width="154" height="79"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                        <view key="contentView" id="Hpb-Gh-Gkt">
+                            <rect key="frame" x="4" y="5" width="146" height="59"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <matrix verticalHuggingPriority="750" fixedFrame="YES" mode="highlight" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="15">
+                                    <rect key="frame" x="-5" y="-4" width="161" height="68"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <size key="cellSize" width="78" height="32"/>
+                                    <size key="intercellSpacing" width="4" height="4"/>
+                                    <buttonCell key="prototype" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="88">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" size="12" name="Helvetica"/>
+                                    </buttonCell>
+                                    <cells>
+                                        <column>
+                                            <buttonCell type="push" title="In" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="27">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <connections>
+                                                    <action selector="zoomIn:" target="-2" id="46"/>
+                                                </connections>
+                                            </buttonCell>
+                                            <buttonCell type="push" title="Selection" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="37">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <connections>
+                                                    <action selector="zoomSelect:" target="-2" id="47"/>
+                                                </connections>
+                                            </buttonCell>
+                                        </column>
+                                        <column>
+                                            <buttonCell type="push" title="Out" bezelStyle="rounded" alignment="center" borderStyle="border" tag="1" inset="2" id="4">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <connections>
+                                                    <action selector="zoomOut:" target="-2" id="48"/>
+                                                </connections>
+                                            </buttonCell>
+                                            <buttonCell type="push" title="Show All" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="11">
+                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <connections>
+                                                    <action selector="zoomAll:" target="-2" id="49"/>
+                                                </connections>
+                                            </buttonCell>
+                                        </column>
+                                    </cells>
+                                </matrix>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica"/>
+                    </box>
+                    <box fixedFrame="YES" title="Play/Record" translatesAutoresizingMaskIntoConstraints="NO" id="29">
+                        <rect key="frame" x="20" y="103" width="223" height="68"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
+                        <view key="contentView" id="gJX-Xz-ep1">
+                            <rect key="frame" x="4" y="5" width="215" height="48"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <button fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="17">
+                                    <rect key="frame" x="1" y="3" width="56" height="48"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <buttonCell key="cell" type="bevel" title="Cell" image="playbutton" imagePosition="only" alignment="center" alternateImage="playbuttonH" inset="2" id="83">
+                                        <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="system" size="14"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="play:" target="-2" id="52"/>
+                                    </connections>
+                                </button>
+                                <button fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="33">
+                                    <rect key="frame" x="55" y="3" width="56" height="48"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <buttonCell key="cell" type="bevel" title="Cell" image="stopbutton" imagePosition="only" alignment="center" alternateImage="stopbuttonH" inset="2" id="84">
+                                        <behavior key="behavior" lightByContents="YES"/>
+                                        <font key="font" metaFont="system" size="14"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="stop:" target="-2" id="53"/>
+                                    </connections>
+                                </button>
+                                <button fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="13">
+                                    <rect key="frame" x="109" y="3" width="56" height="49"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <buttonCell key="cell" type="bevel" title="Cell" image="pausebutton" imagePosition="only" alignment="center" alternateImage="pausebuttonH" inset="2" id="85">
+                                        <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="system" size="14"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="pause:" target="-2" id="54"/>
+                                    </connections>
+                                </button>
+                                <button fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="16">
+                                    <rect key="frame" x="163" y="3" width="56" height="49"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <buttonCell key="cell" type="bevel" title="Cell" image="recordbutton" imagePosition="only" alignment="center" alternateImage="recordbuttonH" inset="2" id="86">
+                                        <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="system" size="14"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="record:" target="-2" id="55"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica"/>
+                    </box>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="14" y="132"/>
+        </window>
+    </objects>
+    <resources>
+        <image name="Go" width="53" height="53"/>
+        <image name="Stop" width="61" height="48"/>
+        <image name="pausebutton" width="49" height="39"/>
+        <image name="pausebuttonH" width="49" height="39"/>
+        <image name="playbutton" width="49" height="39"/>
+        <image name="playbuttonH" width="49" height="39"/>
+        <image name="recordbutton" width="49" height="39"/>
+        <image name="recordbuttonH" width="49" height="39"/>
+        <image name="stopbutton" width="49" height="39"/>
+        <image name="stopbuttonH" width="49" height="39"/>
+    </resources>
+</document>

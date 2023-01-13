@@ -187,7 +187,7 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
 /*! The score to which this MKPart belongs. */
     MKScore *score;
 /*! NSArray of MKNotes. */
-    NSMutableArray *notes;  
+    NSMutableArray<MKNote*> *notes;  
  /*! A MKNote used to store an arbitrary collection of info associated with the MKPart. */
     MKNote *info;      
 /*! Number of MKNotes in the MKPart. */
@@ -373,7 +373,7 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
   @brief Removes all the MKNotes the MKPart has in common with <i>aNoteList</i>.
   @see -<b>removeNote:</b>, -<b>empty</b>, -<b>addNote:</b>, -<b>firstTimeTag:lastTimeTag:</b>
 */
-- removeNotes: (NSArray *) aNoteList;
+- removeNotes: (NSArray<MKNote*> *) aNoteList;
 
 /*!
   @brief Deletes all MKNotes within this part.

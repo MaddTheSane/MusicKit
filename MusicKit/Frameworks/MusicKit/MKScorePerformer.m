@@ -447,9 +447,9 @@ static void unsetPartPerformers(MKScorePerformer *self)
      Returns an auto-released array of the sender's MKPartPerformers' MKNoteSenders. 
      It's NOT the caller's responsibility to free the array. */
 {
-    unsigned n = [partPerformers count], i;
-    id anArray = [[NSMutableArray alloc] init];
-    IMP addImp = [anArray methodForSelector: @selector(addObject:)];
+    NSInteger n = [partPerformers count], i;
+    NSMutableArray *anArray = [[NSMutableArray alloc] init];
+    void (*addImp)(id _Nonnull, SEL _Nonnull, id) = [anArray methodForSelector: @selector(addObject:)];
     
     for (i = 0; i < n; i++)
         (*addImp)(anArray, @selector(addObject:), [[partPerformers objectAtIndex: i] noteSender]);
@@ -486,15 +486,7 @@ static void unsetPartPerformers(MKScorePerformer *self)
     return partPerformerClass;
 }
 
-- (void) setDelegate: (id) object
-{
-    delegate = object;
-}
-
-- delegate
-{
-    return delegate;
-}
+@synthesize delegate;
 
 #if 0
 -setArchiveScore:(BOOL)yesOrNo
@@ -519,7 +511,7 @@ static void unsetPartPerformers(MKScorePerformer *self)
 - _partPerformerDidDeactivate: sender
 {  
     MKPartPerformer *obj;
-    int n, i;
+    NSInteger n, i;
     
     if (status == MK_inactive) /* No need to bother in this case. */
        	return self;

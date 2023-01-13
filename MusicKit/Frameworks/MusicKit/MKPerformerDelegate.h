@@ -38,7 +38,8 @@
 #define __MK_PerformerDelegate_H___
 
 #import <Foundation/NSObject.h>
-@interface MKPerformerDelegate : NSObject
+@protocol MKPerformerDelegate <NSObject>
+@optional
 
 /*!
   @param  sender is an id.

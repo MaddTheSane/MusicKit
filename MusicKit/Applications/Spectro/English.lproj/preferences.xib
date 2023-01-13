@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="SoundController">
+            <connections>
+                <outlet property="prefController" destination="36" id="62"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Holding Place" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="21" userLabel="HoldingPlace" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="46" y="579" width="868" height="237"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+            <view key="contentView" id="23">
+                <rect key="frame" x="0.0" y="0.0" width="868" height="237"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <box fixedFrame="YES" title="Colors" translatesAutoresizingMaskIntoConstraints="NO" id="29">
+                        <rect key="frame" x="9" y="12" width="180" height="210"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="Vq7-Ox-XiK">
+                            <rect key="frame" x="4" y="5" width="172" height="190"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <colorWell fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="52">
+                                    <rect key="frame" x="113" y="118" width="53" height="30"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="color" red="0.71764707999999999" green="0.0" blue="0.086274511999999998" alpha="1" colorSpace="deviceRGB"/>
+                                </colorWell>
+                                <colorWell fixedFrame="YES" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="16">
+                                    <rect key="frame" x="113" y="80" width="53" height="30"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </colorWell>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="27">
+                                    <rect key="frame" x="-2" y="164" width="114" height="15"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" alignment="right" title="Spectrum Display:" id="102">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="32">
+                                    <rect key="frame" x="51" y="125" width="60" height="15"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" alignment="right" title="Cursor:" id="103">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2">
+                                    <rect key="frame" x="40" y="88" width="73" height="16"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" alignment="right" title="Grid Lines:" id="104">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <colorWell fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="48">
+                                    <rect key="frame" x="113" y="156" width="53" height="30"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </colorWell>
+                                <colorWell fixedFrame="YES" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="91">
+                                    <rect key="frame" x="113" y="42" width="53" height="30"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </colorWell>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="92">
+                                    <rect key="frame" x="39" y="50" width="73" height="16"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" alignment="right" title="Waterfall:" id="105">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <colorWell fixedFrame="YES" tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="95">
+                                    <rect key="frame" x="113" y="4" width="53" height="30"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="color" red="0.34901961999999997" green="0.21568628000000001" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                </colorWell>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="96">
+                                    <rect key="frame" x="28" y="12" width="84" height="16"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" alignment="right" title="Amplitude:" id="106">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                    </box>
+                    <box fixedFrame="YES" title="Start-Up FFT Parameters" translatesAutoresizingMaskIntoConstraints="NO" id="13">
+                        <rect key="frame" x="199" y="12" width="215" height="210"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="UYa-oC-ftT">
+                            <rect key="frame" x="4" y="5" width="207" height="190"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <form verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4">
+                                    <rect key="frame" x="0.0" y="110" width="202" height="69"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <size key="cellSize" width="202" height="21"/>
+                                    <size key="intercellSpacing" width="1" height="3"/>
+                                    <formCell key="prototype" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="108">
+                                        <font key="font" size="12" name="Helvetica"/>
+                                        <font key="titleFont" size="12" name="Helvetica"/>
+                                    </formCell>
+                                    <cells>
+                                        <column>
+                                            <formCell selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Window Size (in samples):" id="35">
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <font key="titleFont" size="12" name="Helvetica"/>
+                                            </formCell>
+                                            <formCell selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Zero-Pad Factor:" id="30">
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <font key="titleFont" size="12" name="Helvetica"/>
+                                            </formCell>
+                                            <formCell selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Hop Ratio:" id="24">
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <font key="titleFont" size="12" name="Helvetica"/>
+                                            </formCell>
+                                        </column>
+                                    </cells>
+                                    <connections>
+                                        <action selector="performClick:" target="34" id="84"/>
+                                    </connections>
+                                </form>
+                                <box fixedFrame="YES" title="Window Types" translatesAutoresizingMaskIntoConstraints="NO" id="6">
+                                    <rect key="frame" x="8" y="9" width="195" height="103"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <view key="contentView" id="wgH-Vq-YMN">
+                                        <rect key="frame" x="4" y="5" width="187" height="83"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11">
+                                                <rect key="frame" x="6" y="2" width="187" height="81"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <size key="cellSize" width="89" height="18"/>
+                                                <size key="intercellSpacing" width="9" height="3"/>
+                                                <buttonCell key="prototype" type="radio" title="Radio" imagePosition="leading" alignment="left" inset="2" id="109">
+                                                    <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" size="12" name="Helvetica"/>
+                                                </buttonCell>
+                                                <cells>
+                                                    <column>
+                                                        <buttonCell type="radio" title="Rectangular" imagePosition="leading" alignment="left" state="on" inset="2" id="49">
+                                                            <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                        <buttonCell type="radio" title="Triangular" imagePosition="leading" alignment="left" tag="1" inset="2" id="14">
+                                                            <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                        <buttonCell type="radio" title="Hamming" imagePosition="leading" alignment="left" inset="2" id="55">
+                                                            <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                        <buttonCell type="radio" title="Hanning" imagePosition="leading" alignment="left" inset="2" id="51">
+                                                            <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                    </column>
+                                                    <column>
+                                                        <buttonCell type="radio" title="Blackman3" imagePosition="leading" alignment="left" inset="2" id="57">
+                                                            <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                        <buttonCell type="radio" title="Blackman4" imagePosition="leading" alignment="left" inset="2" id="5">
+                                                            <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                        <buttonCell type="radio" title="Kaiser" imagePosition="leading" alignment="left" inset="2" id="8">
+                                                            <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                        <buttonCell type="radio" imagePosition="leading" alignment="left" transparent="YES" inset="2" id="37">
+                                                            <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                    </column>
+                                                </cells>
+                                            </matrix>
+                                        </subviews>
+                                    </view>
+                                    <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                                </box>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                    </box>
+                    <box fixedFrame="YES" title="Spectrum Display Parameters" translatesAutoresizingMaskIntoConstraints="NO" id="17">
+                        <rect key="frame" x="424" y="12" width="215" height="210"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="n31-MV-18o">
+                            <rect key="frame" x="4" y="5" width="207" height="190"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <box fixedFrame="YES" title="Waterfall Window" translatesAutoresizingMaskIntoConstraints="NO" id="38">
+                                    <rect key="frame" x="8" y="19" width="195" height="75"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <view key="contentView" id="ueZ-96-Skt">
+                                        <rect key="frame" x="4" y="5" width="187" height="55"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <form verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7">
+                                                <rect key="frame" x="2" y="7" width="180" height="45"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <size key="cellSize" width="180" height="21"/>
+                                                <size key="intercellSpacing" width="1" height="3"/>
+                                                <formCell key="prototype" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="110">
+                                                    <font key="font" size="12" name="Helvetica"/>
+                                                    <font key="titleFont" size="12" name="Helvetica"/>
+                                                </formCell>
+                                                <cells>
+                                                    <column>
+                                                        <formCell selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Maximum Frequency:" id="9">
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                            <font key="titleFont" size="12" name="Helvetica"/>
+                                                        </formCell>
+                                                        <formCell selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Frame Plot Height:" id="43">
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                            <font key="titleFont" size="12" name="Helvetica"/>
+                                                        </formCell>
+                                                    </column>
+                                                </cells>
+                                                <connections>
+                                                    <action selector="performClick:" target="34" id="86"/>
+                                                </connections>
+                                            </form>
+                                        </subviews>
+                                    </view>
+                                    <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                                </box>
+                                <box fixedFrame="YES" title="Spectrum Window" translatesAutoresizingMaskIntoConstraints="NO" id="45">
+                                    <rect key="frame" x="8" y="108" width="195" height="75"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <view key="contentView" id="9Zn-7I-wrm">
+                                        <rect key="frame" x="4" y="5" width="187" height="55"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <form verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="54">
+                                                <rect key="frame" x="2" y="7" width="180" height="45"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <size key="cellSize" width="180" height="21"/>
+                                                <size key="intercellSpacing" width="1" height="3"/>
+                                                <formCell key="prototype" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="111">
+                                                    <font key="font" size="12" name="Helvetica"/>
+                                                    <font key="titleFont" size="12" name="Helvetica"/>
+                                                </formCell>
+                                                <cells>
+                                                    <column>
+                                                        <formCell selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Maximum Frequency:" id="58">
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                            <font key="titleFont" size="12" name="Helvetica"/>
+                                                        </formCell>
+                                                        <formCell selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Lower dB Limit:" id="28">
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                            <font key="titleFont" size="12" name="Helvetica"/>
+                                                        </formCell>
+                                                    </column>
+                                                </cells>
+                                                <connections>
+                                                    <action selector="performClick:" target="34" id="85"/>
+                                                </connections>
+                                            </form>
+                                        </subviews>
+                                    </view>
+                                    <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                                </box>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                    </box>
+                    <box fixedFrame="YES" title="Sound Display Parameters" translatesAutoresizingMaskIntoConstraints="NO" id="12">
+                        <rect key="frame" x="650" y="88" width="184" height="134"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="Ohf-ga-Shr">
+                            <rect key="frame" x="4" y="5" width="176" height="114"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <box fixedFrame="YES" title="Display Type" translatesAutoresizingMaskIntoConstraints="NO" id="50">
+                                    <rect key="frame" x="43" y="23" width="108" height="74"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <view key="contentView" id="g3a-Y9-uBo">
+                                        <rect key="frame" x="4" y="5" width="100" height="54"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="41">
+                                                <rect key="frame" x="12" y="6" width="62" height="46"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                <size key="cellSize" width="62" height="18"/>
+                                                <size key="intercellSpacing" width="0.0" height="10"/>
+                                                <buttonCell key="prototype" type="radio" title="Cell" imagePosition="only" alignment="center" inset="2" id="107">
+                                                    <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                    <font key="font" metaFont="system" size="14"/>
+                                                </buttonCell>
+                                                <cells>
+                                                    <column>
+                                                        <buttonCell type="radio" title="Wave" imagePosition="leading" alignment="left" state="on" inset="2" id="26">
+                                                            <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                        <buttonCell type="radio" title="Outline" imagePosition="leading" alignment="left" tag="1" inset="2" id="18">
+                                                            <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                    </column>
+                                                </cells>
+                                            </matrix>
+                                        </subviews>
+                                    </view>
+                                    <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                                </box>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                    </box>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="14" y="132.5"/>
+        </window>
+        <customObject id="36" userLabel="PrefController" customClass="PrefController">
+            <connections>
+                <outlet property="amplitudeColorWell" destination="95" id="97"/>
+                <outlet property="colorView" destination="29" id="70"/>
+                <outlet property="cursorColorWell" destination="52" id="68"/>
+                <outlet property="dBLimitCell" destination="28" id="83"/>
+                <outlet property="displayMode" destination="41" id="87"/>
+                <outlet property="fftView" destination="13" id="71"/>
+                <outlet property="gridColorWell" destination="16" id="69"/>
+                <outlet property="hopRatioCell" destination="24" id="76"/>
+                <outlet property="multiView" destination="39" id="72"/>
+                <outlet property="soundDisplayView" destination="12" id="88"/>
+                <outlet property="spectrumColorWell" destination="48" id="67"/>
+                <outlet property="spectrumDisplayView" destination="17" id="89"/>
+                <outlet property="spectrumMaxFreqCell" destination="58" id="77"/>
+                <outlet property="waterfallColorWell" destination="91" id="93"/>
+                <outlet property="wfMaxFreqCell" destination="9" id="78"/>
+                <outlet property="wfPlotHeightCell" destination="43" id="79"/>
+                <outlet property="window" destination="56" id="63"/>
+                <outlet property="windowSizeCell" destination="35" id="80"/>
+                <outlet property="windowTypeMatrix" destination="11" id="81"/>
+                <outlet property="zpFactorCell" destination="30" id="82"/>
+            </connections>
+        </customObject>
+        <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="56" userLabel="Preferences" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="376" y="224" width="222" height="293"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+            <view key="contentView" id="33">
+                <rect key="frame" x="0.0" y="0.0" width="222" height="293"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="61">
+                        <rect key="frame" x="27" y="4" width="85" height="32"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <buttonCell key="cell" type="push" title="Defaults" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="101">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="defaults:" target="36" id="65"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="34">
+                        <rect key="frame" x="130" y="4" width="65" height="32"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="100">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                        </buttonCell>
+                        <connections>
+                            <action selector="okay:" target="36" id="64"/>
+                        </connections>
+                    </button>
+                    <box fixedFrame="YES" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="39">
+                        <rect key="frame" x="4" y="40" width="215" height="216"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="0Eh-Lq-105">
+                            <rect key="frame" x="4" y="5" width="207" height="208"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica"/>
+                    </box>
+                    <popUpButton verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="10">
+                        <rect key="frame" x="15" y="263" width="194" height="24"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <popUpButtonCell key="cell" type="push" title="Sound Display Parameters" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="border" tag="3" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="31" id="99">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                            <menu key="menu" title="OtherViews" id="47">
+                                <items>
+                                    <menuItem title="Colors" id="46">
+                                        <connections>
+                                            <action selector="setPref:" target="36" id="73"/>
+                                        </connections>
+                                    </menuItem>
+                                    <menuItem title="FFT Parameters" tag="1" id="40">
+                                        <connections>
+                                            <action selector="setPref:" target="36" id="74"/>
+                                        </connections>
+                                    </menuItem>
+                                    <menuItem title="Spectrum Display Parameters" tag="2" id="15">
+                                        <connections>
+                                            <action selector="setPref:" target="36" id="75"/>
+                                        </connections>
+                                    </menuItem>
+                                    <menuItem title="Sound Display Parameters" state="on" tag="3" id="31">
+                                        <connections>
+                                            <action selector="setPref:" target="36" id="90"/>
+                                        </connections>
+                                    </menuItem>
+                                </items>
+                            </menu>
+                        </popUpButtonCell>
+                    </popUpButton>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="-319" y="-250"/>
+        </window>
+    </objects>
+</document>

@@ -27,6 +27,7 @@
 {
     [theScore release];
     [partView release];
+    [name release];
     [super dealloc];
 }
 
@@ -40,12 +41,7 @@
     return docWindow;
 }
 
-- setName:(NSString *)theName
-{
-    [name release];
-    name = [theName copy];
-    return self;
-}
+@synthesize name;
 
 - (NSString *)whatName
 {
@@ -57,10 +53,7 @@
 	return theScore;
 }
 
-- (BOOL)isCurrent
-{
-	return current;
-}
+@synthesize current;
 
 - (void)windowDidBecomeMain:(NSNotification *)notification
 {
@@ -82,7 +75,7 @@
 	cSize.height = log(MAXFREQ) * 1.6 * [pv freqScale];
 	aSize = [NSScrollView frameSizeForContentSize:cSize hasHorizontalScroller:YES hasVerticalScroller:YES borderType:NSNoBorder];
 	bRect = NSMakeRect(0.0, 0.0, aSize.width, aSize.height);
-	aRect = [NSWindow frameRectForContentRect:bRect styleMask:NSResizableWindowMask];
+	aRect = [NSWindow frameRectForContentRect:bRect styleMask:NSWindowStyleMaskResizable];
 	if (frameSize.height > aRect.size.height)
 		frameSize.height = aRect.size.height;
 	return frameSize;

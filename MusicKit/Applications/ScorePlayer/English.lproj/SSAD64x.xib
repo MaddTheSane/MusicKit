@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="ScorePlayerController"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customObject id="4" userLabel="Font Manager" customClass="NSFontManager"/>
+        <window title="Singular Solutions AD64x Settings" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="7" userLabel="SSAD64xPanel" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="625" y="900" width="354" height="74"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+            <view key="contentView" id="5">
+                <rect key="frame" x="0.0" y="0.0" width="354" height="74"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <box fixedFrame="YES" title="Digital I/O Mode" translatesAutoresizingMaskIntoConstraints="NO" id="9">
+                        <rect key="frame" x="65" y="10" width="203" height="63"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="P0K-cu-ckk">
+                            <rect key="frame" x="4" y="5" width="195" height="43"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2">
+                                    <rect key="frame" x="4" y="2" width="189" height="39"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <size key="cellSize" width="189" height="18"/>
+                                    <size key="intercellSpacing" width="0.0" height="3"/>
+                                    <buttonCell key="prototype" type="radio" title="Radio" imagePosition="leading" alignment="left" inset="2" id="13">
+                                        <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                        <font key="font" size="12" name="Helvetica"/>
+                                    </buttonCell>
+                                    <cells>
+                                        <column>
+                                            <buttonCell type="radio" title="Consumer mode (S/PDIF)" imagePosition="leading" alignment="left" state="on" inset="2" id="3">
+                                                <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <connections>
+                                                    <action selector="setAD64xConsumer:" target="-2" id="10"/>
+                                                </connections>
+                                            </buttonCell>
+                                            <buttonCell type="radio" title="Professional mode (AES/EBU)" imagePosition="leading" alignment="left" tag="1" inset="2" id="6">
+                                                <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" size="12" name="Helvetica"/>
+                                                <connections>
+                                                    <action selector="setAD64xProfessional:" target="-2" id="11"/>
+                                                </connections>
+                                            </buttonCell>
+                                        </column>
+                                    </cells>
+                                </matrix>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                    </box>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="14" y="132"/>
+        </window>
+    </objects>
+</document>

@@ -125,7 +125,8 @@ static void initNeXTTimbres(void)
     int i, j;
     id p,partialsClass;
     MKTimbre *timbre;
-    IMP setAll,addObj; 
+    void (*setAll)(id _Nonnull, SEL _Nonnull, int, short *, float *, double *, double);
+    id (*addObj)(id _Nonnull, SEL _Nonnull, MKWaveTable*, double);
     struct synth *s, **ss;
     partialsClass = MKGetPartialsClass();
     setAll = [partialsClass instanceMethodForSelector:@selector(_setPartialNoCopyCount:freqRatios:ampRatios:

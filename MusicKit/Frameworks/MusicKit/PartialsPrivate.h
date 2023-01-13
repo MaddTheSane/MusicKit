@@ -20,7 +20,7 @@
 @interface MKPartials(Private)
 
 - writeBinaryScorefileStream: (NSMutableData *) aStream;
-- _setPartialNoCopyCount: (int)howMany
+- (void)_setPartialNoCopyCount: (int)howMany
   freqRatios: (short *)fRatios
   ampRatios: (float *)aRatios
   phases: (double *)phs

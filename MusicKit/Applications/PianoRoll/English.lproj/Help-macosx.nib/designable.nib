@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment version="1050" identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="Distributor">
+            <connections>
+                <outlet property="helpPanel" destination="6" id="8"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Help" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="6" userLabel="Panel" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="503" y="567" width="439" height="439"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+            <view key="contentView" id="4">
+                <rect key="frame" x="0.0" y="0.0" width="439" height="439"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <scrollView fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2">
+                        <rect key="frame" x="0.0" y="0.0" width="439" height="439"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <clipView key="contentView" id="bpZ-1i-5e5">
+                            <rect key="frame" x="1" y="1" width="437" height="437"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <textView editable="NO" selectable="NO" importsGraphics="NO" verticallyResizable="YES" baseWritingDirection="leftToRight" usesFontPanel="YES" usesRuler="YES" quoteSubstitution="YES" dashSubstitution="YES" textReplacement="YES" spellingCorrection="YES" smartInsertDelete="YES" id="11">
+                                    <rect key="frame" x="0.0" y="0.0" width="5" height="6075"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" red="0.33333333999999998" green="0.33333333999999998" blue="0.33333333999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <size key="minSize" width="5" height="437"/>
+                                    <size key="maxSize" width="439" height="10000000"/>
+                                    <attributedString key="textStorage">
+                                        <fragment>
+                                            <string key="content">Piano Roll
+</string>
+                                            <attributes>
+                                                <color key="NSBackgroundColor" red="0.33333333999999998" green="0.33333333999999998" blue="0.33333333999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <font key="NSFont" size="36" name="Times-Roman"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops>
+                                                        <textTab alignment="left" location="48">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="96">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="144">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="192">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="240">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="288">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="336">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="384">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="432">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="480">
+                                                            <options/>
+                                                        </textTab>
+                                                    </tabStops>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment>
+                                            <string key="content">An interactive MusicKit score editor
+</string>
+                                            <attributes>
+                                                <color key="NSBackgroundColor" red="0.33333333999999998" green="0.33333333999999998" blue="0.33333333999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <font key="NSFont" size="14" name="Times-Roman"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops>
+                                                        <textTab alignment="left" location="48">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="96">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="144">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="192">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="240">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="288">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="336">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="384">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="432">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="480">
+                                                            <options/>
+                                                        </textTab>
+                                                    </tabStops>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment>
+                                            <string key="content">
+The items in the Document menu all work.  You can open any scorefile and it will appear on the screen as a plot of frequency versus time.  This is basically like real music notation without the lines.
+
+You can move notes around in time and pitch by clicking and dragging on them.
+
+You can save the modified score using the Save or Save As menu items.</string>
+                                            <attributes>
+                                                <color key="NSBackgroundColor" red="0.33333333999999998" green="0.33333333999999998" blue="0.33333333999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <font key="NSFont" size="14" name="Times-Roman"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops>
+                                                        <textTab alignment="left" location="26">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="53">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="80">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="106">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="133">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="160">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="186">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="213">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="240">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="266">
+                                                            <options/>
+                                                        </textTab>
+                                                    </tabStops>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                    <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                </textView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.33333333999999998" alpha="1" colorSpace="calibratedWhite"/>
+                        </clipView>
+                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="13">
+                            <rect key="frame" x="-100" y="-100" width="437" height="16"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="14">
+                            <rect key="frame" x="422" y="1" width="16" height="437"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
+                    <box fixedFrame="YES" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="7">
+                        <rect key="frame" x="20" y="372" width="380" height="2"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="EYf-LU-K6E">
+                            <rect key="frame" x="4" y="2" width="372" height="0.0"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica"/>
+                    </box>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="-136" y="111"/>
+        </window>
+    </objects>
+</document>

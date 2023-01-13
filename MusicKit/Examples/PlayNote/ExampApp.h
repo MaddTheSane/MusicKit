@@ -13,15 +13,15 @@
 
 @interface ExampApp : NSObject
 {
-    id infoPanel;
-    id stringTable;
+    IBOutlet id infoPanel;
+    IBOutlet id stringTable;
 }
 
-- appDidInit:sender;
-- terminate:sender;
-- playNote:sender;
-- bendPitch:sender;
-- showInfoPanel:sender;
+- (IBAction)appDidInit:sender;
+- (IBAction)terminate:sender;
+- (IBAction)playNote:sender;
+- (IBAction)bendPitch:sender;
+- (IBAction)showInfoPanel:sender;
 
 @end
 

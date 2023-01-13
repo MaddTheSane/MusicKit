@@ -29,7 +29,7 @@
     unsigned _toObjectOffset;	
     unsigned _argObjectOffset;
     SEL _aSelector;
-    IMP _methodImp;
+    void (*_methodImp)(id, SEL, id);
 }
 
 - initWithTargetObjectOffset: (int) toObjInt selector: (SEL) aSelector argument: (int) withObjInt;

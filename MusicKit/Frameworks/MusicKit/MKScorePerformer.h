@@ -67,6 +67,8 @@ be seen by the MKScorePerformer.
 #import <Foundation/NSObject.h>
 #import "MKPerformer.h"
 
+@protocol MKPerformerDelegate;
+
 @interface MKScorePerformer : NSObject
 {
     MKPerformerStatus status;       /*! The object's status. */
@@ -79,7 +81,7 @@ be seen by the MKScorePerformer.
     double timeShift;	  /*! The performance offset time for the object in beats, as last broadcast to the MKPartPerformers. */
     double duration;      /*! The maximum performance duration in beats, as last broadcast to the MKPartPerformers. */
     MKConductor *conductor; /*! The object's MKConductor (its MKPartPerformers' MKConductor) as last broadcast to MKPartPerformers.*/
-    id delegate;            /*! The object's delegate. */
+    id<MKPerformerDelegate> delegate;            /*! The object's delegate. */
     Class partPerformerClass;  /*! The MKPartPerformer subclass used. */
 
 @private
@@ -352,6 +354,8 @@ be seen by the MKScorePerformer.
   @see MKPerformerDelegate.h
 */
 - delegate;
+
+@property (assign) id<MKPerformerDelegate> delegate;
 
 /*!
   @brief Archives partPerformers,firstTimeTag,lastTimeTag,timeShift,

@@ -318,7 +318,7 @@ static void removeNote(MKPart *self, MKNote *aNote);
 {
     unsigned noteIndex,count;
     SEL oaiSel;
-    IMP objectAtIndex;
+    id (*objectAtIndex)(id,SEL,NSUInteger);
     id othernotes;
     
     if (!anObject)                           return NO;
@@ -342,15 +342,15 @@ static void removeNote(MKPart *self, MKNote *aNote);
 
 static void unsetPartLinks(MKPart *aPart)
 {
-  id notes = aPart->notes;
+  NSArray *notes = aPart->notes;
   int noteIndex,count;
 
   if (notes) {
     SEL oaiSel = @selector(objectAtIndex:);
     IMP objectAtIndex = [notes methodForSelector: oaiSel];
     count = [notes count];
-    for (noteIndex = 0 ; noteIndex < count ; noteIndex++) {
-      [OBJECTATINDEX(notes, noteIndex) _setPartLink:nil order:0];
+    for (MKNote *anObj in notes) {
+      [anObj _setPartLink:nil order:0];
     }
   }
 }
@@ -411,7 +411,7 @@ static id sortIfNeeded(MKPart *self)
     return sortIfNeeded(self);
 }
 
-static int findNoteIndex(MKPart *self, MKNote *aNote)
+static NSInteger findNoteIndex(MKPart *self, MKNote *aNote)
 {
     NSUInteger matchedNote;
     
@@ -532,7 +532,7 @@ static void removeNote(MKPart *self, MKNote *aNote)
   * it is more efficient to put them in a List and then use removeNotes:.
     */
 {
-    int where;
+    NSInteger where;
     if (!aNote)
 	return nil;
     sortIfNeeded(self);
@@ -562,24 +562,17 @@ static void removeNote(MKPart *self, MKNote *aNote)
     * Returns the receiver.
     */
 {
-    int noteIndex, numOfNotes;
-    SEL oaiSel = @selector(objectAtIndex:);
-    IMP objectAtIndex;
-# define OBJECTATINDEX(x)  (*objectAtIndex)(noteList, oaiSel, (x))
     if (!noteList)
 	return self;
-    objectAtIndex = [noteList methodForSelector: oaiSel];
     
     [self->notes removeObjectsInArray: noteList];
-    numOfNotes = [noteList count];
     /* now unset partlink for each note, in case the notes are used in other
 	* parts
 	*/
-    for (noteIndex = 0; noteIndex < numOfNotes; noteIndex++) {
-	[OBJECTATINDEX(noteIndex) _setPartLink: nil order: 0];
+    for (MKNote *obj in noteList) {
+	[obj _setPartLink: nil order: 0];
     }
     return self;
-# undef OBJECTATINDEX
 }
 
 - addNoteCopies: (NSArray *) noteList timeShift: (double) shift
