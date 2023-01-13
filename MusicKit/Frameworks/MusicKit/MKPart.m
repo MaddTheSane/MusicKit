@@ -343,12 +343,8 @@ static void removeNote(MKPart *self, MKNote *aNote);
 static void unsetPartLinks(MKPart *aPart)
 {
   NSArray *notes = aPart->notes;
-  int noteIndex,count;
 
   if (notes) {
-    SEL oaiSel = @selector(objectAtIndex:);
-    IMP objectAtIndex = [notes methodForSelector: oaiSel];
-    count = [notes count];
     for (MKNote *anObj in notes) {
       [anObj _setPartLink:nil order:0];
     }
