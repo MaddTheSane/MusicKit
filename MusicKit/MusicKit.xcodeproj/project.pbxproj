@@ -9343,17 +9343,21 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 5.6.0;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = 5.6;
+				DYLIB_CURRENT_VERSION = 5.6;
+				FRAMEWORK_VERSION = A;
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_FAST_OBJC_DISPATCH = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Foundation.framework/Headers/Foundation.h";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Frameworks/PlatformDependent/MKPerformSndMIDI_MacOSX/MKPerformSndMIDI-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INSTALL_PATH = "$(USER_APPS_DIR)";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-seg1addr",
@@ -9366,6 +9370,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.MKPerformSndMIDI;
 				PRODUCT_NAME = MKPerformSndMIDI;
 				SECTORDER_FLAGS = "";
+				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = "-Wmost";
 				ZERO_LINK = YES;
 			};
@@ -9376,18 +9381,22 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 5.6.0;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 5.6;
 				FRAMEWORK_SEARCH_PATHS = "$(DSTROOT)/$(INSTALL_PATH)";
-				FRAMEWORK_VERSION = 5.6;
+				FRAMEWORK_VERSION = A;
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Foundation.framework/Headers/Foundation.h";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "Frameworks/PlatformDependent/MKPerformSndMIDI_MacOSX/MKPerformSndMIDI-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-seg1addr",
@@ -9399,6 +9408,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.MKPerformSndMIDI;
 				PRODUCT_NAME = MKPerformSndMIDI;
 				SECTORDER_FLAGS = "";
+				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = "-Wmost";
 			};
 			name = Release;
@@ -9408,17 +9418,21 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 5.6.0;
 				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 5.6;
 				FRAMEWORK_INSTALLED_NAME = "@executable_path$(/)..$(/)Frameworks$(/)$(PRODUCT_NAME).$(WRAPPER_EXTENSION)$(/)Versions$(/)$(FRAMEWORK_VERSION)$(/)$(PRODUCT_NAME)";
-				FRAMEWORK_VERSION = 5.6;
+				FRAMEWORK_VERSION = A;
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Foundation.framework/Headers/Foundation.h";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Frameworks/PlatformDependent/MKPerformSndMIDI_MacOSX/MKPerformSndMIDI-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-seg1addr",
@@ -9431,6 +9445,7 @@
 				PRODUCT_NAME = MKPerformSndMIDI;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = "-Wmost";
 			};
 			name = Embedded;
@@ -9440,6 +9455,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 5.6.0;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = 5.6;
@@ -9458,6 +9474,7 @@
 					/usr/local/lib,
 					/sw/lib,
 				);
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-seg1addr",
@@ -9468,6 +9485,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.SndKit;
 				PRODUCT_NAME = SndKit;
 				SECTORDER_FLAGS = "";
+				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = "-Wmost";
 				ZERO_LINK = YES;
 			};
@@ -9478,6 +9496,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 5.6.0;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = "$(DSTROOT)/$(INSTALL_PATH)";
@@ -9497,6 +9516,7 @@
 					/usr/local/lib,
 					/sw/lib,
 				);
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-seg1addr",
@@ -9507,6 +9527,7 @@
 				PRODUCT_NAME = SndKit;
 				SECTORDER_FLAGS = "";
 				USER_HEADER_SEARCH_PATHS = "/sw/include $(inherited) /usr/local/include";
+				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = "-Wmost";
 			};
 			name = Release;
@@ -9516,6 +9537,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 5.6.0;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_INSTALLED_NAME = "@executable_path$(/)..$(/)Frameworks$(/)$(PRODUCT_NAME).$(WRAPPER_EXTENSION)$(/)Versions$(/)$(FRAMEWORK_VERSION)$(/)$(PRODUCT_NAME)";
@@ -9534,6 +9556,7 @@
 					/usr/local/lib,
 					/sw/lib,
 				);
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-seg1addr",
@@ -9544,6 +9567,7 @@
 				PRODUCT_NAME = SndKit;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = "-Wmost";
 				ZERO_LINK = NO;
 			};
@@ -9554,6 +9578,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 5.6.0;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = 5.6;
@@ -9568,6 +9593,7 @@
 				INFOPLIST_FILE = "Frameworks/MKDSP_Native/MKDSP-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INSTALL_PATH = "$(USER_APPS_DIR)";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -9580,6 +9606,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.MKDSP;
 				PRODUCT_NAME = MKDSP;
 				SECTORDER_FLAGS = "";
+				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = "-Wmost";
 				ZERO_LINK = YES;
 			};
@@ -9590,6 +9617,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 5.6.0;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = "$(DSTROOT)/$(INSTALL_PATH)";
@@ -9605,6 +9633,7 @@
 				INFOPLIST_FILE = "Frameworks/MKDSP_Native/MKDSP-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -9616,6 +9645,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.MKDSP;
 				PRODUCT_NAME = MKDSP;
 				SECTORDER_FLAGS = "";
+				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = "-Wmost";
 			};
 			name = Release;
@@ -9625,6 +9655,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 5.6.0;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_INSTALLED_NAME = "@executable_path$(/)..$(/)Frameworks$(/)$(PRODUCT_NAME).$(WRAPPER_EXTENSION)$(/)Versions$(/)$(FRAMEWORK_VERSION)$(/)$(PRODUCT_NAME)";
@@ -9639,6 +9670,7 @@
 				INFOPLIST_FILE = "Frameworks/MKDSP_Native/MKDSP-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -9651,6 +9683,7 @@
 				PRODUCT_NAME = MKDSP;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = "-Wmost";
 			};
 			name = Embedded;
@@ -9660,6 +9693,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 5.6.0;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXCLUDED_ARCHS = "arm64e arm64";
@@ -9673,6 +9707,7 @@
 				INFOPLIST_FILE = "Frameworks/MusicKit/MusicKit-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INSTALL_PATH = "$(USER_APPS_DIR)";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -9686,6 +9721,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.MusicKit;
 				PRODUCT_NAME = MusicKit;
 				SECTORDER_FLAGS = "";
+				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = "-Wall";
 				ZERO_LINK = YES;
 			};
@@ -9696,6 +9732,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 5.6.0;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXCLUDED_ARCHS = "arm64e arm64";
@@ -9710,6 +9747,7 @@
 				INFOPLIST_FILE = "Frameworks/MusicKit/MusicKit-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -9722,6 +9760,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.MusicKit;
 				PRODUCT_NAME = MusicKit;
 				SECTORDER_FLAGS = "";
+				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Release;
@@ -9731,6 +9770,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 5.6.0;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXCLUDED_ARCHS = "arm64e arm64";
@@ -9744,6 +9784,7 @@
 				INFOPLIST_FILE = "Frameworks/MusicKit/MusicKit-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -9758,6 +9799,7 @@
 				PRODUCT_NAME = MusicKit;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = "-Wall";
 			};
 			name = Embedded;
@@ -10325,6 +10367,7 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = "Examples/MidiRecord/MidiRecord-Info.plist";
 				INSTALL_PATH = "$(USER_APPS_DIR)";
+				MARKETING_VERSION = 5.5.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -10356,6 +10399,7 @@
 				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "Examples/MidiRecord/MidiRecord-Info.plist";
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)/MusicKit";
+				MARKETING_VERSION = 5.5.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -10384,6 +10428,7 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				INFOPLIST_FILE = "Examples/MidiRecord/MidiRecord-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				MARKETING_VERSION = 5.5.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -11847,6 +11892,7 @@
 				INFOPLIST_KEY_NSMainNibFile = Spectro;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(USER_APPS_DIR)";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -11881,6 +11927,7 @@
 				INFOPLIST_KEY_NSMainNibFile = Spectro;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)/MusicKit";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -11912,6 +11959,7 @@
 				INFOPLIST_KEY_NSMainNibFile = Spectro;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -11944,6 +11992,7 @@
 				INFOPLIST_KEY_NSMainNibFile = PatchCord;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(USER_APPS_DIR)";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -11978,6 +12027,7 @@
 				INFOPLIST_KEY_NSMainNibFile = PatchCord;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)/MusicKit";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -12009,6 +12059,7 @@
 				INFOPLIST_KEY_NSMainNibFile = PatchCord;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -12634,6 +12685,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 5.6.0;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = 5.6;
@@ -12643,8 +12695,10 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Frameworks/MKSynthPatches/MKSynthPatches-Info.plist";
 				INSTALL_PATH = "$(USER_APPS_DIR)";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -12655,6 +12709,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.MKSynthPatches;
 				PRODUCT_NAME = MKSynthPatches;
 				SECTORDER_FLAGS = "";
+				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = "-Wmost";
 				ZERO_LINK = YES;
 			};
@@ -12665,6 +12720,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 5.6.0;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = "$(DSTROOT)/$(INSTALL_PATH)";
@@ -12674,9 +12730,11 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "Frameworks/MKSynthPatches/MKSynthPatches-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -12686,6 +12744,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.MKSynthPatches;
 				PRODUCT_NAME = MKSynthPatches;
 				SECTORDER_FLAGS = "";
+				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = "-Wmost";
 			};
 			name = Release;
@@ -12695,6 +12754,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 5.6.0;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_INSTALLED_NAME = "@executable_path$(/)..$(/)Frameworks$(/)$(PRODUCT_NAME).$(WRAPPER_EXTENSION)$(/)Versions$(/)$(FRAMEWORK_VERSION)$(/)$(PRODUCT_NAME)";
@@ -12704,8 +12764,10 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Frameworks/MKSynthPatches/MKSynthPatches-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -12716,6 +12778,7 @@
 				PRODUCT_NAME = MKSynthPatches;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = "-Wmost";
 			};
 			name = Embedded;
@@ -12725,6 +12788,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 5.6.0;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = 5.6;
@@ -12732,8 +12796,11 @@
 				GCC_FAST_OBJC_DISPATCH = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Frameworks/MKUnitGenerators/MKUnitGenerators-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INSTALL_PATH = "$(USER_APPS_DIR)";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -12746,6 +12813,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.MKUnitGenerators;
 				PRODUCT_NAME = MKUnitGenerators;
 				SECTORDER_FLAGS = "";
+				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -12760,6 +12828,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 5.6.0;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = "$(DSTROOT)/$(INSTALL_PATH)";
@@ -12767,9 +12836,12 @@
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "Frameworks/MKUnitGenerators/MKUnitGenerators-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -12781,6 +12853,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.MKUnitGenerators;
 				PRODUCT_NAME = MKUnitGenerators;
 				SECTORDER_FLAGS = "";
+				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -12794,6 +12867,7 @@
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 5.6.0;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_INSTALLED_NAME = "@executable_path$(/)..$(/)Frameworks$(/)$(PRODUCT_NAME).$(WRAPPER_EXTENSION)$(/)Versions$(/)$(FRAMEWORK_VERSION)$(/)$(PRODUCT_NAME)";
@@ -12801,8 +12875,11 @@
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Frameworks/MKUnitGenerators/MKUnitGenerators-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -12815,6 +12892,7 @@
 				PRODUCT_NAME = MKUnitGenerators;
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -12829,6 +12907,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_MODEL_TUNING = "";
+				GCC_OPTIMIZATION_LEVEL = 0;
 				LIBRARY_SEARCH_PATHS = /sw/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				ONLY_ACTIVE_ARCH = YES;

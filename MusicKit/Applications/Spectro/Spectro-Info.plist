@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleDevelopmentRegion</key>
-	<string>English</string>
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
@@ -24,8 +22,6 @@
 			<string>SoundDocument</string>
 		</dict>
 	</array>
-	<key>CFBundleExecutable</key>
-	<string>Spectro</string>
 	<key>CFBundleGetInfoString</key>
 	<string></string>
 	<key>CFBundleHelpBookFolder</key>
@@ -34,23 +30,7 @@
 	<string>Spectro Help</string>
 	<key>CFBundleIconFile</key>
 	<string>Spectro</string>
-	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
-	<key>CFBundleName</key>
-	<string>Spectro</string>
-	<key>CFBundlePackageType</key>
-	<string>APPL</string>
-	<key>CFBundleShortVersionString</key>
-	<string></string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>5.6.0</string>
-	<key>NSMainNibFile</key>
-	<string>Spectro</string>
-	<key>NSPrincipalClass</key>
-	<string>NSApplication</string>
 </dict>
 </plist>
