@@ -483,9 +483,17 @@
 /* Begin PBXProject section */
 		089C1669FE841209C02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = D8F028B81842A9A200EE0FE9 /* Build configuration list for PBXProject "MusicXML" */;
 			compatibilityVersion = "Xcode 2.4";
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				English,
+			);
 			mainGroup = 089C166AFE841209C02AAC07 /* MusicXML */;
 			projectDirPath = "";
 			projectRoot = "";

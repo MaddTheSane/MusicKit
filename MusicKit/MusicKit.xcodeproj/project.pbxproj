@@ -172,6 +172,7 @@
 		556A3CF0297121F8007FFAA7 /* NextDACs.xib in Resources */ = {isa = PBXBuildFile; fileRef = 556A3CE7297121F8007FFAA7 /* NextDACs.xib */; };
 		556A3CF1297121F8007FFAA7 /* MKAlertPanel.xib in Resources */ = {isa = PBXBuildFile; fileRef = 556A3CE9297121F8007FFAA7 /* MKAlertPanel.xib */; };
 		556A3CF2297121F8007FFAA7 /* ScorePlayer.xib in Resources */ = {isa = PBXBuildFile; fileRef = 556A3CEB297121F8007FFAA7 /* ScorePlayer.xib */; };
+		556A3D2A29722665007FFAA7 /* Localized.strings in Resources */ = {isa = PBXBuildFile; fileRef = 556A3D2C29722665007FFAA7 /* Localized.strings */; };
 		D8001DE30762D2F700508A26 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
 		D8001FE00762D3B100508A26 /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D8001FE10762D3B100508A26 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
@@ -409,7 +410,6 @@
 		D82557EA05A21B5900B0192B /* tokenNames.m in Sources */ = {isa = PBXBuildFile; fileRef = D82557E705A21B5900B0192B /* tokenNames.m */; };
 		D82557EB05A21B5900B0192B /* trigonometry.c in Sources */ = {isa = PBXBuildFile; fileRef = D82557E805A21B5900B0192B /* trigonometry.c */; };
 		D82557ED05A21B7F00B0192B /* utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = D82557EC05A21B7F00B0192B /* utilities.m */; };
-		D82557F005A21BBF00B0192B /* Localized.strings in Resources */ = {isa = PBXBuildFile; fileRef = D82557EF05A21BBF00B0192B /* Localized.strings */; };
 		D828F99D0780C24B00215EB9 /* MKAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = D828F99B0780C24B00215EB9 /* MKAlert.m */; };
 		D828F9AE0780C46700215EB9 /* play.tiff in Resources */ = {isa = PBXBuildFile; fileRef = D828F9AC0780C46700215EB9 /* play.tiff */; };
 		D828F9AF0780C46700215EB9 /* playH.tiff in Resources */ = {isa = PBXBuildFile; fileRef = D828F9AD0780C46700215EB9 /* playH.tiff */; };
@@ -1558,6 +1558,7 @@
 		556A3D272972200C007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/SndViewIBPluginInspector.nib; sourceTree = "<group>"; };
 		556A3D282972200C007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/SndViewIBPluginLibrary.nib; sourceTree = "<group>"; };
 		556A3D292972200D007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		556A3D2B29722665007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localized.strings; sourceTree = "<group>"; };
 		D80032570819F0C600E47C6C /* MidiEcho.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = MidiEcho.icns; sourceTree = "<group>"; };
 		D800325C0819F52E00E47C6C /* midi.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = midi.icns; sourceTree = "<group>"; };
 		D80151BF0FA64B24002FB882 /* playpart */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = playpart; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1763,7 +1764,6 @@
 		D82557E705A21B5900B0192B /* tokenNames.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = tokenNames.m; sourceTree = "<group>"; };
 		D82557E805A21B5900B0192B /* trigonometry.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = trigonometry.c; sourceTree = "<group>"; };
 		D82557EC05A21B7F00B0192B /* utilities.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = utilities.m; sourceTree = "<group>"; };
-		D82557EF05A21BBF00B0192B /* Localized.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localized.strings; sourceTree = "<group>"; };
 		D828F99A0780C24B00215EB9 /* MKAlert.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MKAlert.h; sourceTree = "<group>"; };
 		D828F99B0780C24B00215EB9 /* MKAlert.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MKAlert.m; sourceTree = "<group>"; };
 		D828F9AC0780C46700215EB9 /* play.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = play.tiff; sourceTree = "<group>"; };
@@ -1997,15 +1997,15 @@
 		D86D23C006F22BA4003565CB /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Controller.m; sourceTree = "<group>"; };
 		D86D23C506F22BC0003565CB /* TwoWaves_main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TwoWaves_main.m; sourceTree = "<group>"; };
 		D8708B4905B312A70074C18D /* convertscore */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = convertscore; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8708B5205B312E00074C18D /* convertscore.1 */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.man; name = convertscore.1; path = Utilities/ScorefileUtils/Translators/convertscore.tproj/convertscore.1; sourceTree = "<group>"; };
-		D8708B5605B313050074C18D /* convertscore_main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = convertscore_main.m; path = Utilities/ScorefileUtils/Translators/convertscore.tproj/convertscore_main.m; sourceTree = "<group>"; };
+		D8708B5205B312E00074C18D /* convertscore.1 */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.man; path = convertscore.1; sourceTree = "<group>"; };
+		D8708B5605B313050074C18D /* convertscore_main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = convertscore_main.m; sourceTree = "<group>"; };
 		D8708B6A05B313730074C18D /* scorefile2stella */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = scorefile2stella; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8708B7005B313B70074C18D /* scorefile2stella_main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = scorefile2stella_main.m; path = Utilities/ScorefileUtils/Translators/scorefile2stella.tproj/scorefile2stella_main.m; sourceTree = "<group>"; };
+		D8708B7005B313B70074C18D /* scorefile2stella_main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = scorefile2stella_main.m; sourceTree = "<group>"; };
 		D8708B9A05B314800074C18D /* playscore */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = playscore; sourceTree = BUILT_PRODUCTS_DIR; };
-		D8708BA005B314B70074C18D /* playscore.1 */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.man; name = playscore.1; path = Utilities/ScorefileUtils/playscore.tproj/playscore.1; sourceTree = "<group>"; };
-		D8708BA405B314DC0074C18D /* playscore_main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = playscore_main.m; path = Utilities/ScorefileUtils/playscore.tproj/playscore_main.m; sourceTree = "<group>"; };
-		D8708BAF05B3150E0074C18D /* playallscorefiles */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; name = playallscorefiles; path = Utilities/ScorefileUtils/playscore.tproj/playallscorefiles; sourceTree = "<group>"; };
-		D8708BBF05B3155B0074C18D /* scoreinfo.py */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.script.python; name = scoreinfo.py; path = Utilities/ScorefileUtils/scoreinfo/scoreinfo.py; sourceTree = "<group>"; };
+		D8708BA005B314B70074C18D /* playscore.1 */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.man; path = playscore.1; sourceTree = "<group>"; };
+		D8708BA405B314DC0074C18D /* playscore_main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = playscore_main.m; sourceTree = "<group>"; };
+		D8708BAF05B3150E0074C18D /* playallscorefiles */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = playallscorefiles; sourceTree = "<group>"; };
+		D8708BBF05B3155B0074C18D /* scoreinfo.py */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.script.python; path = scoreinfo.py; sourceTree = "<group>"; };
 		D8708F5105B49A430074C18D /* MidiRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MidiRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8708F5305B49A440074C18D /* MidiRecord-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MidiRecord-Info.plist"; sourceTree = "<group>"; };
 		D8708F5705B49A820074C18D /* README */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
@@ -3101,7 +3101,7 @@
 		D825566405A2134600B0192B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D82557EF05A21BBF00B0192B /* Localized.strings */,
+				556A3D2C29722665007FFAA7 /* Localized.strings */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -4487,6 +4487,7 @@
 				D8708B1605B312240074C18D /* convertscore */,
 			);
 			name = "Scorefile Utilities";
+			path = ScorefileUtils;
 			sourceTree = "<group>";
 		};
 		D8708B0205B3119C0074C18D /* playscore */ = {
@@ -4497,6 +4498,7 @@
 				D8708B8805B3145E0074C18D /* Other Sources */,
 			);
 			name = playscore;
+			path = playscore.tproj;
 			sourceTree = "<group>";
 		};
 		D8708B0905B311AE0074C18D /* scoreinfo */ = {
@@ -4504,7 +4506,7 @@
 			children = (
 				D8708BBB05B315370074C18D /* Other Sources */,
 			);
-			name = scoreinfo;
+			path = scoreinfo;
 			sourceTree = "<group>";
 		};
 		D8708B1605B312240074C18D /* convertscore */ = {
@@ -4514,6 +4516,7 @@
 				D8708B3C05B312730074C18D /* Help */,
 			);
 			name = convertscore;
+			path = Translators/convertscore.tproj;
 			sourceTree = "<group>";
 		};
 		D8708B1D05B3122A0074C18D /* scorefile2stella */ = {
@@ -4522,6 +4525,7 @@
 				D8708B5D05B313350074C18D /* Other Sources */,
 			);
 			name = scorefile2stella;
+			path = Translators/scorefile2stella.tproj;
 			sourceTree = "<group>";
 		};
 		D8708B3205B3125C0074C18D /* Other Sources */ = {
@@ -5694,7 +5698,7 @@
 			children = (
 				D8708ADA05B310560074C18D /* Scorefile Utilities */,
 			);
-			name = Utilities;
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		D8DB4E6F059FA12B00624233 /* Palettes */ = {
@@ -7160,7 +7164,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D82557F005A21BBF00B0192B /* Localized.strings in Resources */,
+				556A3D2A29722665007FFAA7 /* Localized.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8441,6 +8445,14 @@
 				556A3D0929722008007FFAA7 /* en */,
 			);
 			name = ScorePlayer.xib;
+			sourceTree = "<group>";
+		};
+		556A3D2C29722665007FFAA7 /* Localized.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				556A3D2B29722665007FFAA7 /* en */,
+			);
+			name = Localized.strings;
 			sourceTree = "<group>";
 		};
 		D828F9B70780C52400215EB9 /* ScorePlayer.sgml */ = {
