@@ -295,7 +295,7 @@ static long secondsToFrames(Snd *s, double time)
 	([newSound samplingRate] != soundFormat.sampleRate)) {
 	double f0 = (([thisNote isParPresent: MK_freq0]) ? [thisNote parAsDouble: MK_freq0] : defaultNewFrequency);
 	double f1 = (([thisNote isParPresent: MK_freq1]) ? [thisNote parAsDouble: MK_freq1] :
-		     (([thisNote isParPresent: MK_keyNum]) ? [thisNote freq] : defaultOriginalFrequency));
+		     (([thisNote isParPresent: MK_keyNum]) ? [thisNote frequency] : defaultOriginalFrequency));
 	
 	if ((f0 != 0.0 && f1 == 0.0) || (f1 != 0.0 && f0 == 0.0))
 	    NSLog(@"Warning: Must specify both MK_freq0 and MK_freq1 if either are specified.\n");

@@ -75,26 +75,24 @@
     [super dealloc];
 }
 
-- newSpectrumLocation:(NSPoint *)p
+- (void)newSpectrumLocation:(NSPoint *)p
 {
-    int cnt, count = [[NSApp delegate] documentCount] - 1;
+    int cnt, count = [(SpectroController*)[NSApp delegate] documentCount] - 1;
     if (count < 0) count = 7;
     
     cnt = (count > 3)? count - 4 : count;
     p->x += (20.0 * count);
     p->y -= (25.0 * cnt);
-    return self;
 }
 
-- newWaterfallLocation:(NSPoint *)p
+- (void)newWaterfallLocation:(NSPoint *)p
 {
-    int cnt, count = [[NSApp delegate] documentCount] - 1;
+    int cnt, count = [(SpectroController*)[NSApp delegate] documentCount] - 1;
     if (count < 0) count = 7;
     
     cnt = (count > 3)? count - 4 : count;
     p->x += (10.0 * cnt);
     p->y -= (25.0 * count);
-    return self;
 }
 
 - (void)awakeFromNib

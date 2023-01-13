@@ -11,7 +11,7 @@
 }
 
 - init;
-- (void)buttonPressed:sender;
+- (IBAction)buttonPressed:sender;
 - (void)show;
 - (void)addText:(NSString *)text;
 - (BOOL)isVisible;

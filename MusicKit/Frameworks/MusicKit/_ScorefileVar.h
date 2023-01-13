@@ -56,9 +56,8 @@
 }
 
 - copy;
-- writeScorefileStream:(NSMutableData *)aStream; 
+- (BOOL)writeScorefileStream:(NSMutableData *)aStream;
 - (NSString *) varName;
-- (void)dealloc; 
 
 @end
 

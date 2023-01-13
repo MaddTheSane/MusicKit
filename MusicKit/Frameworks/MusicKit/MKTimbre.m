@@ -131,7 +131,7 @@ static void initNeXTTimbres(void)
     partialsClass = MKGetPartialsClass();
     setAll = [partialsClass instanceMethodForSelector:@selector(_setPartialNoCopyCount:freqRatios:ampRatios:
 		      phases:orDefaultPhase:)];  
-    addObj = [MKTimbre instanceMethodForSelector:@selector(addWaveTable:forFreq:)];  
+    addObj = [MKTimbre instanceMethodForSelector:@selector(addWaveTable:forFreq:)];
     for (i=0; i<NUMTIMBRES; i++) {
 	timbre = newNeXTTimbre(mmm_table_names[i],mmm_table_lens[i]);
 	ss = (struct synth **)mmm_tables[i];
@@ -142,9 +142,10 @@ static void initNeXTTimbres(void)
 		      @selector(_setPartialNoCopyCount:freqRatios:ampRatios:
 			      phases:orDefaultPharse:),
 		      (int) s->numharms,
-		      (int *) s->hrms,
+		      (short *) s->hrms,
 		      (float *) s->amps,
 		      NULL,0.0);
+//            [timbre addWaveTable:p forFreq:s->frq];
 	    (*addObj)(timbre,@selector(addWaveTable:forFreq:),p,
 		      (double)s->frq);
 	}

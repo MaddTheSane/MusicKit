@@ -346,14 +346,14 @@ be seen by the MKScorePerformer.
   @param  object is an id.  
   @see MKPerformerDelegate.h
 */
-- (void) setDelegate: (id) object;
+- (void) setDelegate: (id<MKPerformerDelegate>) object;
 
 /*!
   @brief Returns the receiver's delegate object, if any.
   @return Returns an id.
   @see MKPerformerDelegate.h
 */
-- delegate;
+- (id<MKPerformerDelegate>)delegate;
 
 @property (assign) id<MKPerformerDelegate> delegate;
 

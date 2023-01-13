@@ -479,7 +479,7 @@ MKEnvStatus _MKGetEnvelopeNth(MKEnvelope *self,int n,double *xPtr,double *yPtr,
 }
 
 
--writeScorefileStream:(NSMutableData *)aStream
+-(BOOL)writeScorefileStream:(NSMutableData *)aStream
 /* Writes on aStream the following:
 Writes itself in the form:
   (0.0, 0.0, 1.0)(1.0,2.0,1.0)|(1.0,1.0,1.0)
@@ -490,7 +490,7 @@ Writes itself in the form:
   double *yP,*xP,*smoothingP;
   if (yArray == NULL) {
     [aStream appendBytes:"[/* Empty envelope. */]" length:23];
-    return nil;
+    return NO;
   }
   if (xArray == NULL)
     for (i = 0, xVal = 0, yP = yArray, smoothingP = smoothingArray; i < pointCount; xVal += samplingPeriod) {
@@ -528,7 +528,7 @@ Writes itself in the form:
           ++i;
 #         endif
         }
-          return self;
+          return YES;
 }
 
 - writeBinaryScorefileStream: (NSMutableData *) aStream

@@ -26,7 +26,7 @@
 
 #import "MusicKit.h"
 
-@protocol MusicKitPlugin
+@protocol MusicKitPlugin <NSObject>
 + (NSString *) protocolVersion;
 - (void) setDelegate:(id)delegate;
 - (NSArray*)fileSavingSuffixes;

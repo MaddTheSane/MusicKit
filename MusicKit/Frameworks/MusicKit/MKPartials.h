@@ -137,7 +137,7 @@ For more information on waveshaping synthesis, see the <b>Shape</b> and
 #import "MKWaveTable.h"
 #import "MKSamples.h"
 
-@interface MKPartials : MKWaveTable 
+@interface MKPartials : MKWaveTable <NSCopying, NSCoding>
 {
     double *ampRatios;   /*! Array of amplitudes. */
     double *freqRatios;  /*! Array of frequencies. */
@@ -162,16 +162,13 @@ For more information on waveshaping synthesis, see the <b>Shape</b> and
   <b>[super init]</b> before performing its own initialization. 
   
 */
-- init; 
+- (instancetype)init;
 
  /* 
   * Returns a copy of the receiver with its own copy of arrays. 
   * See also superclass -copy.
   */
 - copyWithZone:(NSZone *)zone;
-
-  /* Frees the receiver and all its arrays. */
-- (void)dealloc; 
 
 - (NSString*) description;
 
@@ -261,7 +258,7 @@ For more information on waveshaping synthesis, see the <b>Shape</b> and
   You
   should neither free nor alter the array.
 */
-- (double *)freqRatios; 
+- (double *)freqRatios NS_RETURNS_INNER_POINTER;
 
 /*!
   @return Returns a double *.
@@ -270,7 +267,7 @@ For more information on waveshaping synthesis, see the <b>Shape</b> and
   You
   should neither free nor alter the array.
 */
-- (double *)ampRatios; 
+- (double *)ampRatios NS_RETURNS_INNER_POINTER;
 
 /*!
   @return Returns a double.
@@ -285,7 +282,7 @@ For more information on waveshaping synthesis, see the <b>Shape</b> and
   
   You should neither free nor alter the array.
 */
-- (double *)phases; 
+- (double *)phases NS_RETURNS_INNER_POINTER;
 
 /*!
   @param  n is an int.
@@ -326,7 +323,7 @@ For more information on waveshaping synthesis, see the <b>Shape</b> and
   Returns <b>nil</b> if ampRatios or freqRatios is NULL, otherwise
   returns the receiver.
 */
--writeScorefileStream:(NSMutableData *)aStream;
+-(BOOL)writeScorefileStream:(NSMutableData *)aStream;
 
   /* 
      You never send this message directly. It's invoked by 
@@ -339,7 +336,7 @@ For more information on waveshaping synthesis, see the <b>Shape</b> and
 - (id)initWithCoder:(NSCoder *)aDecoder;
 
   /* The following methods are obsolete.  See MKTimbre. */
--setFreqRangeLow:(double)freq1 high:(double)freq2;
+-(void)setFreqRangeLow:(double)freq1 high:(double)freq2;
 -(double)minFreq;
 -(double)maxFreq;
 -(BOOL)freqWithinRange:(double)freq;

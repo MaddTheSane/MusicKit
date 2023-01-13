@@ -37,7 +37,7 @@ Modification history pre-CVS:
   10/22/91/DAJ - Flushed mkerrors.m to make it possible to auto-generate
                  localized error strings.
   06/31/92/daj - Changed NXBundle newFromPath: to initFromDirectory: for 3.0 
-  10/20/92/daj - Set table name to _MK_ERRTAB so that localization will work.
+  10/20/92/daj - Set table name to @"Localized" so that localization will work.
    11/9/92/daj - Added MidiClass
    6/27/93/daj - Added checking for NULL file name in _MKOpenFileStream.
   07/1/93/daj -  Added an arg to machErr for more descritptive error reporting.
@@ -128,7 +128,7 @@ Class _MKCheckClassConductor()
 
 
 /* MusicKit malloc functions */
-char *_MKCalloc(unsigned nelem, unsigned elsize)
+char *_MKCalloc(NSUInteger nelem, NSUInteger elsize)
 {
     void *rtn = calloc(nelem, elsize);
     if (!rtn) {
@@ -138,7 +138,7 @@ char *_MKCalloc(unsigned nelem, unsigned elsize)
     return rtn;
 }
 
-void *_MKMalloc(unsigned size)
+void *_MKMalloc(NSUInteger size)
 {
     void *rtn = malloc(size);
     
@@ -149,7 +149,7 @@ void *_MKMalloc(unsigned size)
     return rtn;
 }
 
-char *_MKRealloc(void *ptr, unsigned size)
+char *_MKRealloc(void *ptr, NSUInteger size)
 {
     char *rtn = realloc(ptr,size);
     
@@ -216,6 +216,8 @@ BOOL MKIsTraced(int debugFlag)
 }
 
 /* Error handling */
+
+const NSErrorDomain MKErrorDomain = @"org.musickit.MusicKit.errors";
 /* See musickit.h for details */
 
 static void (*errorProc)(NSString *msg) = NULL;
@@ -253,7 +255,7 @@ void MKSetErrorStream(NSMutableData *aStream)
 #define UNKNOWN_ERROR NSLocalizedStringFromTableInBundle(@"unknown error", _MK_ERRTAB, _MKErrorBundle(), "")
 
 // LMS: This should be done with a NSDictionary 
-NSString * _MKGetErrStr(int errCode)
+NSString * _MKGetErrStr(MKErrors errCode)
     /* Returns the error string for the given code or "unknown error" if
        the code is not a MKErrno. The string is not copied. Note that
        some of the strings have printf-style 'arguments' embedded. */
@@ -325,13 +327,13 @@ NSString * _MKGetErrStr(int errCode)
           msg = NSLocalizedStringFromTableInBundle(@"Music Kit: Attempt to put address into argument of unit generator of a different orchestra.", _MK_ERRTAB, _MKErrorBundle(), "This error indicates that an attempt was made to put a DSP address into a unit generator running on a different DSP MKOrchestra.  This error rarely if ever is seen by users.");
 	break;
       case MK_ugArgSpaceMismatchErr:
-          msg = NSLocalizedStringFromTableInBundle(@"Music Kit: Attempt to put %s-space address into %s-space argument %@ of %@.", _MK_ERRTAB, _MKErrorBundle(), "This error indicates that an attempt was made to put a DSP address value with a memory space that does not match the memory space which the DSP unit generator assumes.  The arguments, which must be in the order specified, are the space of the address, the space of the agrument, the name of the argument, and the name of the unit generator.   This error rarely if ever is seen by users.");	
+          msg = NSLocalizedStringFromTableInBundle(@"Music Kit: Attempt to put %s-space address into %s-space argument %@ of %@.", _MK_ERRTAB, _MKErrorBundle(), "This error indicates that an attempt was made to put a DSP address value with a memory space that does not match the memory space which the DSP unit generator assumes.  The arguments, which must be in the order specified, are the space of the address, the space of the agrument, the name of the argument, and the name of the unit generator.   This error rarely if ever is seen by users.");
 	break;
       case MK_ugNonAddrErr:
-          msg = NSLocalizedStringFromTableInBundle(@"Music Kit: Attempt to set address-valued argument %@ of %@ to datum value.", _MK_ERRTAB, _MKErrorBundle(), " This error indicates that an attempt was made to set a DSP unit generator argument to a datum value when that unit generator argument accepts only an address.  The two arguments, which must be in the order indicated, are the name of the argument and the unit generator name.");	
+          msg = NSLocalizedStringFromTableInBundle(@"Music Kit: Attempt to set address-valued argument %@ of %@ to datum value.", _MK_ERRTAB, _MKErrorBundle(), " This error indicates that an attempt was made to set a DSP unit generator argument to a datum value when that unit generator argument accepts only an address.  The two arguments, which must be in the order indicated, are the name of the argument and the unit generator name.");
 	break;
       case MK_ugNonDatumErr:
-          msg = NSLocalizedStringFromTableInBundle(@"Music Kit: Attempt to set argument %@ of %@ to an address.", _MK_ERRTAB, _MKErrorBundle(), "This error indicates that an attempt was made to set a DSP unit generator argument to an address value when that unit generator argument accepts only a datum.  The two arguments, which must be in the order indicated, are the name of the argument and the unit generator name.");	
+          msg = NSLocalizedStringFromTableInBundle(@"Music Kit: Attempt to set argument %@ of %@ to an address.", _MK_ERRTAB, _MKErrorBundle(), "This error indicates that an attempt was made to set a DSP unit generator argument to an address value when that unit generator argument accepts only a datum.  The two arguments, which must be in the order indicated, are the name of the argument and the unit generator name.");
 	break;
 	/* --------- Scorefile language parse errors -------------- */
 	/* These don't have "Scorefile error:" at the beginning because 
@@ -475,7 +477,7 @@ NSString * _MKGetErrStr(int errCode)
           msg = NSLocalizedStringFromTableInBundle(@"Synthpatch Library: Out of wavetable memory at time %.3f. Using sine ROM.", _MK_ERRTAB, _MKErrorBundle(), "This error is a special purpose version of the preceeding error.  It indicates that there is no more wavetable memory at the indicated time and that the DSP sine ROM is being used instead.  The argument is the time at which the memory is not available.");
 	break;
       case MK_spsInvalidPartialsDatabaseKeywordErr:
-          msg = NSLocalizedStringFromTableInBundle(@"Synthpatch Library: Invalid timbre database keyword: %s.", _MK_ERRTAB, _MKErrorBundle(), "This error occurs if a scorefile or applicatin specifies a timbre specifier that is invalid or does not correspond to a known timbre.  The single argument is the timbre specifier.");
+          msg = NSLocalizedStringFromTableInBundle(@"Synthpatch Library: Invalid timbre database keyword: %@.", _MK_ERRTAB, _MKErrorBundle(), "This error occurs if a scorefile or applicatin specifies a timbre specifier that is invalid or does not correspond to a known timbre.  The single argument is the timbre specifier.");
 	break;
       case MK_spsOutOfRangeErr:
           msg = NSLocalizedStringFromTableInBundle(@"Synthpatch Library: %s out of range.", _MK_ERRTAB, _MKErrorBundle(), "This error occurs if a parameter is out of range for the MKSynthPatch. The single argument is the parameter that is out of range.  For example, '...pitch out of range.'");
@@ -534,7 +536,7 @@ void MKError(NSString *msg)
 }
 
 /* Calling sequence like NSLog, but first arg is error code. It used to set errno. */
-void MKErrorCode(int errorCode,...)
+void MKErrorCode(MKErrors errorCode,...)
 {
     NSString *fmt;
     va_list ap;
@@ -809,7 +811,7 @@ NSString *_MKErrorStringFile(void)
 }
 
 
-int _MKFindAppWrapperFile(NSString *fileName, NSString **returnName)
+BOOL _MKFindAppWrapperFile(NSString *fileName, NSString *__autoreleasing*returnName)
 	/* fileName should include extension.
 	 * returnNameBuffer should be of size MAXPATHLEN + 1.
 	 * This function returns 1 and sets returnNameBuffer if successful.
@@ -819,19 +821,18 @@ int _MKFindAppWrapperFile(NSString *fileName, NSString **returnName)
 	NSBundle *bundle = [NSBundle mainBundle];
         NSString *retName;
 	if (!bundle)
-   	   return 0;
+   	   return NO;
         retName = [bundle pathForResource:fileName ofType:@""];
-        returnName = &retName;
-	return (retName != nil);
+        *returnName = retName;
+	return YES;
 }
 
 void MKLoadAllBundlesOneOff(void)
 {
-    static BOOL done = NO;
-    if (!done) {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
         MKLoadAllBundles();
-        done = YES;
-    }
+    });
 }
 
 BOOL MKLoadAllBundles(void)

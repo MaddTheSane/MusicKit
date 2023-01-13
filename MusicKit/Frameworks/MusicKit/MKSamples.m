@@ -199,7 +199,7 @@ id MKGetSamplesClass(void)
     return YES;
 }
 
-- writeScorefileStream:(NSMutableData *)aStream binary:(BOOL)isBinary
+- (BOOL)writeScorefileStream:(NSMutableData *)aStream binary:(BOOL)isBinary
 {
     NSString* tempSoundFile;
     NSFileManager *manager = [NSFileManager defaultManager];
@@ -226,7 +226,7 @@ id MKGetSamplesClass(void)
 	        _MKWriteString(aStream,"/dev/null");
 	    else
                 [aStream appendData:[@"{\"/dev/null\"}" dataUsingEncoding:NSNEXTSTEPStringEncoding]];      /* Not very good */
-	    return nil;
+	    return NO;
 	}
     }
     if (isBinary)
@@ -234,7 +234,7 @@ id MKGetSamplesClass(void)
     else
         [aStream appendData: [[NSString stringWithFormat: @"{\"%@\"}", soundfile] 
                  dataUsingEncoding: NSNEXTSTEPStringEncoding]];
-    return self;
+    return YES;
 }
 
 /* This method is used by the Music Kit to reference the receiver in 
@@ -254,12 +254,12 @@ id MKGetSamplesClass(void)
    rewrite the file.
 
    */
-- writeScorefileStream: (NSMutableData *) aStream
+- (BOOL)writeScorefileStream: (NSMutableData *) aStream
 {
     return [self writeScorefileStream: aStream binary: NO];
 }
 
-- writeBinaryScorefileStream: (NSMutableData *) aStream
+- (BOOL)writeBinaryScorefileStream: (NSMutableData *) aStream
 {
     return [self writeScorefileStream: aStream binary: YES];
 }

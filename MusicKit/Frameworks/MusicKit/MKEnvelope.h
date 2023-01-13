@@ -296,7 +296,7 @@ typedef enum _MKEnvStatus {
   
   Returns <b>nil</b> if the object's y array is NULL.  Otherwise returns the object.
 */
-- writeScorefileStream: (NSMutableData *) aStream; 
+- (BOOL)writeScorefileStream: (NSMutableData *) aStream; 
 
 /*!
   @param  xVal is a double.

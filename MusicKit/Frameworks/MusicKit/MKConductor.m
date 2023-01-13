@@ -1946,22 +1946,31 @@ static double getNextMsgTime(MKConductor *aCond)
             curProc->_onQueue = NO;  // LMS this is neccessary but why?
             switch (curProc->_argCount) {
             case 0:
-                (*curProc->_methodImp)(curProc->_toObject, curProc->_aSelector);
+                {
+                    void (*imp0)(id, SEL) = curProc->_methodImp;
+                    (*imp0)(curProc->_toObject, curProc->_aSelector);
+                }
                 break;
             case 1:
-                (*curProc->_methodImp)(curProc->_toObject, curProc->_aSelector, curProc->_arg1);
-		if (curProc->_retainArg1)
-		    [curProc->_arg1 release];
-		curProc->_arg1 = nil;
+                {
+                    void (*imp1)(id, SEL, id) = curProc->_methodImp;
+                    (*imp1)(curProc->_toObject, curProc->_aSelector, curProc->_arg1);
+                    if (curProc->_retainArg1)
+                        [curProc->_arg1 release];
+                    curProc->_arg1 = nil;
+                }
                 break;
             case 2:
-                (*curProc->_methodImp)(curProc->_toObject, curProc->_aSelector, curProc->_arg1, curProc->_arg2);
-		if (curProc->_retainArg1)
-		    [curProc->_arg1 release];
-		if (curProc->_retainArg2)
-		    [curProc->_arg2 release];
-		curProc->_arg1 = nil;
-		curProc->_arg2 = nil;
+                {
+                    void (*imp2)(id, SEL, id, id) = curProc->_methodImp;
+                    (*imp2)(curProc->_toObject, curProc->_aSelector, curProc->_arg1, curProc->_arg2);
+                    if (curProc->_retainArg1)
+                        [curProc->_arg1 release];
+                    if (curProc->_retainArg2)
+                        [curProc->_arg2 release];
+                    curProc->_arg1 = nil;
+                    curProc->_arg2 = nil;
+                }
                 break;
             }
             // NSLog(@"Returned from method call (conductor doesnt free) %@ sepThreadMK %d\n", 

@@ -39,7 +39,7 @@
 
 - clear 
 {
-    int endPos = [[[msg textStorage] string] length];
+    NSInteger endPos = [[[msg textStorage] string] length];
     [msg replaceCharactersInRange:NSMakeRange(0,endPos) withString:@"\n"];
     return self;
 }
@@ -69,7 +69,7 @@
 
 - (void)addText:(NSString *)theText
 {
-    int endPos = [[msg string] length];
+    NSInteger endPos = [[msg string] length];
     [msg replaceCharactersInRange:NSMakeRange(endPos,0) withString:[NSString stringWithFormat:@"%@\n",theText]];
     endPos++;
     [msg scrollRangeToVisible:NSMakeRange(endPos,0)];

@@ -159,11 +159,11 @@ Modification history:
      Should be invoked via NXReadObject(). 
      See write:. */
 {
+    if (self = [super init]) {
     /* [super initWithCoder:aDecoder]; */ /*sb: unnecessary */
     if ([aDecoder versionForClassName:@"MKPatchTemplate"] == VERSION2) 
         [aDecoder decodeValuesOfObjCTypes:"@@i",&_elementStorage,&_connectionStorage, &_eMemSegments];
     /* from awake (sb) */
-    {
         int i,count;
         MKPatchConnection *conn;
         MKPatchEntry *templ;

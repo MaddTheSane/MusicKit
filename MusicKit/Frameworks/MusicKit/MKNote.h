@@ -105,6 +105,8 @@
 
 @class MKPart;
 @class MKPerformer;
+@class MKEnvelope;
+@class MKWaveTable;
 
 /*!
   @class MKNote
@@ -471,17 +473,17 @@ typedef enum _MKDataType {
   Same as [self initWithTimeTag:MK_ENDOFTIME].
   @see  -<b>init:</b>
 */
-- init;
+- (instancetype)init;
 
-/*!
-  @brief Removes the receiver from its MKPart, if any, and then frees the
-  receiver and its contents.
-
-  The contents of object-valued,
-  envelope-valued and wavetable-valued parameters aren't
-  freed.  
-*/
-- (void) dealloc; 
+///*!
+//  @brief Removes the receiver from its MKPart, if any, and then frees the
+//  receiver and its contents.
+//
+//  The contents of object-valued,
+//  envelope-valued and wavetable-valued parameters aren't
+//  freed.
+//*/
+//- (void) dealloc;
 
 /*! 
   @param  zone is an NSZone.
@@ -491,7 +493,7 @@ typedef enum _MKDataType {
   copied into the new MKNote.  Object-valued parameters are shared by the
   two MKNotes.  The new MKNote's MKPart is set to nil.  
 */
-- copyWithZone: (NSZone *) zone; 
+- (id)copyWithZone: (NSZone *) zone;
 
 /*!
   @brief This method splits a noteDur into a noteOn/noteOff pair, as
@@ -577,6 +579,7 @@ typedef enum _MKDataType {
 */
 - (void) setConductor: (MKConductor *) newConductor; 
 
+@property (nonatomic, assign) MKConductor* conductor;
 /*!
   @param  aPart is an id.
   @return Returns the receiver's old MKPart, if any.
@@ -599,6 +602,8 @@ typedef enum _MKDataType {
   @see -<b>setTimeTag:</b>
 */
 - (double) timeTag; 
+
+@property (readonly) double timeTag;
 
 /*!
   @param  newTimeTag is a double.
@@ -664,7 +669,7 @@ typedef enum _MKDataType {
   @param  aNote is an MKNote instance.
   @return Returns an int.
 */
--(int) compare: (MKNote *) aNote; 
+-(NSComparisonResult) compare: (MKNote *) aNote;
  /* 
   * If the MKNotes are both not in parts or are in different parts, the
   * result is indeterminate.
@@ -689,7 +694,6 @@ typedef enum _MKDataType {
 
 /*!
   @param  newNoteType is a MKNoteType.
-  @return Returns <b>self</b>, or <b>nil</b> if <i>newNoteType</i> isn't a valid note type.
   @brief Sets the MKNote's note type to <i>newNoteType</i>.
  
   The note type can be one of:
@@ -708,7 +712,9 @@ typedef enum _MKDataType {
   
   @see -<b>noteType</b>, -<b>setNoteTag:</b>, -<b>setDur:</b> 
 */
-- setNoteType: (MKNoteType) newNoteType; 
+- (void)setNoteType: (MKNoteType) newNoteType;
+
+@property (nonatomic) MKNoteType noteType;
 
 /*!
   @param  value is a double.
@@ -762,7 +768,6 @@ typedef enum _MKDataType {
 
 /*!
   @param  newTag is an int.
-  @return  Returns <b>self</b>.
   @brief Sets the MKNote's note tag to <i>newTag</i>; if the note type is
   <b>MK_mute</b> it's changed to MK_noteUpdate.
   
@@ -780,15 +785,16 @@ typedef enum _MKDataType {
   
   @see -<b>noteTag</b>, <b>MKNoteTag()</b> 
 */
-- setNoteTag: (int) newTag; 
+- (void)setNoteTag: (int) newTag;
+
+@property (nonatomic) int noteTag;
 
 /*!
-  @return Returns an id.
   @brief Removes the noteTag, if any.
 
   Same as [self setNoteTag:MAXINT].
 */
-- removeNoteTag;
+- (void)removeNoteTag;
 
 /*!
   @param  aName is a NSString.
@@ -805,7 +811,7 @@ typedef enum _MKDataType {
 /*!
   @brief Returns the name that identifies the parameter tagged <i>aTag</i>.
   
-  For example [MKNote parNameForTag: MK_freq] returns "freq".
+  For example [MKNote parNameForTag: MK_freq] returns "frequency".
   If the parameter number given is not a valid parameter number, returns an empty string.
   Note that the string is not copied.
   @param  aTag is an int.
@@ -865,7 +871,7 @@ typedef enum _MKDataType {
   @return Returns <b>self</b>.
   @see +<b>parTagForName:</b>, +<b>parNameForTag:</b>, -<b>parType:</b>, -<b>isParPresent:</b>, -<b>parAsEnvelope:</b>
 */
-- setPar: (int) parameterTag toEnvelope: (id) anEnvelope; 
+- setPar: (int) parameterTag toEnvelope: (MKEnvelope*) anEnvelope;
 
 /*!
   @brief Sets the value of the parameter identified by <i>parameterTag</i> to
@@ -878,7 +884,7 @@ typedef enum _MKDataType {
   @return Returns <b>self</b>.
   @see +<b>parTagForName:</b>, +<b>parNameForTag:</b>, -<b>parType:</b>, -<b>isParPresent:</b>, -<b>parAsWaveTable:</b>
 */
-- setPar: (int) parameterTag toWaveTable: (id) aWaveTable; 
+- setPar: (int) parameterTag toWaveTable: (MKWaveTable*) aWaveTable;
 
 /*!
   @brief Sets the value of the parameter identified by <i>parameterTag</i> to
@@ -922,7 +928,7 @@ typedef enum _MKDataType {
 
   If the parameter isn't present or if its value is an object, 
   returns MK_NODVAL (use the function <b>MKIsNoDVal()</b> to check for MK_NODVAL).
-  You should use the <b>freq</b> method if you're want to retrieve the frequency of
+  You should use the <b>frequency</b> method if you're want to retrieve the frequency of
   the MKNote.
   @param  parameterTag is an int.
   @return Returns a double.
@@ -972,7 +978,7 @@ typedef enum _MKDataType {
   @return Returns an id.
   @see  <b>MKGetNoteParAsEnvelope()</b>, -<b>setPar:toDouble:</b> (etc), -<b>parType:</b>, -<b>isParPresent:</b>
 */
-- parAsEnvelope: (int) parameterTag; 
+- (MKEnvelope*)parAsEnvelope: (int) parameterTag;
 
 /*!
   @brief Returns the MKWaveTable value of the parameter identified by <i>parameterTag</i>.
@@ -981,7 +987,7 @@ typedef enum _MKDataType {
   @param  parameterTag is an int.
   @return Returns an id.
 */
-- parAsWaveTable: (int) parameterTag;
+- (MKWaveTable*)parAsWaveTable: (int) parameterTag;
 
 /*!
   @brief Returns the object value of the parameter identified by <i>parameterTag</i>.
@@ -993,7 +999,7 @@ typedef enum _MKDataType {
   @return Returns an id.
   @see  <b>MKGetNoteParAsObject()</b>, -<b>setPar:toDouble:</b> (etc), -<b>parType:</b>, -<b>isParPresent:</b>
 */
-- parAsObject: (int) parameterTag; 
+- (id)parAsObject: (int) parameterTag;
 
 /*!
   @brief Returns <b>YES</b> if the parameter <i>identified by
@@ -1060,7 +1066,7 @@ typedef enum _MKDataType {
   @return Returns an id.
   @see  +<b>parTagForName:</b>, +<b>parNameForTag:</b>, -<b>isParPresent:</b>, -<b>setPar:toDouble:</b> (etc).
 */
-- removePar: (int) parameterTag; 
+- (void)removePar: (int) parameterTag;
 
 /*!
   @brief Copies <i>aNote</i>'s parameters into the receiving MKNote.
@@ -1093,7 +1099,9 @@ the section entitled Music Tables
   @return Returns a double.
   @see  -<b>keyNum</b>, -<b>setPar:toDouble:</b>
 */
-- (double) freq;
+- (double) frequency;
+
+@property (readonly) double frequency;
 
 /*!
   @brief This method returns the key number of the MKNote.
@@ -1124,7 +1132,7 @@ the section entitled Music Tables
   @param  aStream is a NSMutableData instance.
   @return Returns self.
 */
-- writeScorefileStream: (NSMutableData *) aStream; 
+- (BOOL)writeScorefileStream: (NSMutableData *) aStream; 
 
 /* 
  You never send this message directly.
@@ -1194,7 +1202,7 @@ the section entitled Music Tables
   @brief Allocates and initializes a new MKNote and returns it autoreleased.
   @return Returns a MKNote.
 */
-+ note;
++ (instancetype)note;
 
 /*!
   @brief Allocates and initializes a new MKNote and returns it autoreleased.
@@ -1204,7 +1212,7 @@ the section entitled Music Tables
   @param  aTimeTag is a double in seconds.
   @return Returns a MKNote.
 */
-+ noteWithTimeTag: (double) aTimeTag; 
++ (instancetype)noteWithTimeTag: (double) aTimeTag;
 
 @end
 

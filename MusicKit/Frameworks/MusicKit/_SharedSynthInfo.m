@@ -141,7 +141,7 @@ static id findSharedSynthInfo(id aList,MKOrchMemSegment whichSegment,int howLong
     register _SharedSynthInfo *el;
     unsigned noteIndex;
     BOOL test = 0; /* Initialize it to shut up compiler warning */
-    BOOL isEqualFlag = ((whichSegment == MK_noSegment) ? obj : 
+    int isEqualFlag = ((whichSegment == MK_noSegment) ? obj : 
 			(howLong == 0) ? objSegment : objSegmentLength);
     for (noteIndex = 0; noteIndex < [aList count]; noteIndex++) {
         el = [aList objectAtIndex: noteIndex];

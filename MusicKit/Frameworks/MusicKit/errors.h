@@ -575,6 +575,8 @@ extern NSMutableData *MKErrorStream(void);
 
 #define MK_ERRORBASE 4000    /* 1000 error codes for us start here */
 
+extern const NSErrorDomain MKErrorDomain;
+
 /*!
   @brief This enumeration defines the exceptions that the MusicKit can generate
   via the <b>MKErrorCode</b>() mechanism.
@@ -583,7 +585,7 @@ extern NSMutableData *MKErrorStream(void);
   scorefile errors, MKUnitGenerator library errors and MKSynthPatch
   library errors.
  */
-typedef enum _MKErrno {
+typedef NS_ERROR_ENUM(MKErrorDomain, MKErrors) {
     // <b>GENERAL ERRORS</b>
     /*!	Used as a way of specifying MusicKit errors not otherwise defined. */	
     MK_musicKitErr = MK_ERRORBASE,
@@ -755,7 +757,9 @@ typedef enum _MKErrno {
     MK_highestErr,
     /* Reserved from here until MK_maxErr */
     MK_maxErr = (MK_ERRORBASE + 1000)
-} MKErrno;
+};
+
+typedef enum MKErrors MKErrno;
 
 #define MK_sfNonAsciiErr MK_sfNonScorefileErr /* For backwards compatibility */
 
@@ -765,7 +769,7 @@ typedef enum _MKErrno {
  * need to raise an error with a MusicKit error code, you call MKErrorCode().  
  */
 
-extern void MKErrorCode(int errorCode, ...); 
+extern void MKErrorCode(MKErrors errorCode, ...); 
 /* Calling sequence like printf, but first arg is musickit error code instead
  * of formating info, the second arg is a formating NSString derived from the string in
  * /Local/Library/MusicKit/Languages/<language>.lproj/Localized.strings. 

@@ -22,7 +22,7 @@ Modification history:
 
 #import "errors.h"
 
-extern NSString * _MKGetErrStr(int errCode);
+extern NSString * _MKGetErrStr(MKErrors errCode);
     /* Returns the error string for the given code or "unknown error" if
        the code is not one of the  MKErrno enums. 
        The string is not copied. Note that some of the strings have printf-

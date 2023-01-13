@@ -474,7 +474,7 @@ id _MKSPGetFmSinVibTemplate(_MKSPFMNums *ugs,id oscClass) {
 	  break;
 	case MK_freq:
 	case MK_keyNum:
-	  freq1 = [aNote freq]; // A special method (see <MusicKit/Note.h>)
+	  freq1 = [aNote frequency]; // A special method (see <MusicKit/Note.h>)
 	  setFreqEnv = YES;
 	  break;
 	case MK_freq0:

@@ -32,7 +32,7 @@
  @param  a plugin object that has been loaded into the MusicKit
  @return void.
 */
-+ (void) addPlugin: (id) plugin;
++ (void) addPlugin: (id<MusicKitPlugin>) plugin;
 @end
 
 

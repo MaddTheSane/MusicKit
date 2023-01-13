@@ -212,7 +212,7 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
   @param partName is an NSString instance.
   @return Returns a newly allocated, initialized and autoreleased MKPart.
  */
-+ partWithName: (NSString *) partName;
++ (MKPart *) partWithName: (NSString *) partName;
 
 /*!
   @return Returns <b>self</b>.
@@ -232,6 +232,8 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
   @see -<b>sort</b>
 */
 - (BOOL) isSorted;
+
+@property (readonly, getter=isSorted) BOOL sorted;
 
 /*!
   @return Returns <b>self</b>.
@@ -292,11 +294,6 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
 - init;
 
 /*!
-  @brief Deallocates ivars.
- */
-- (void) dealloc;
-
-/*!
   @return Returns an id.
   @brief Removes and frees the MKPart's MKNotes and its info MKNote.
  
@@ -319,7 +316,7 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
   
   @see -<b>empty</b>, -<b>removeNotes:</b>
 */
-- releaseSelfOnly; 
+- releaseSelfOnly NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
 
 /*!
   @param  firstTimeTag is a double.
@@ -354,7 +351,7 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
   
   @see -<b>addNote:</b>, -<b>addNoteCopies:timeShift:</b>, -<b>removeNote:</b>
 */
-- (MKNote *) addNoteCopy: (MKNote *) aNote;
+- (MKNote *) addNoteCopy: (MKNote *) aNote NS_RETURNS_NOT_RETAINED;
 
 /*!
   @param  aNote is an MKNote.
@@ -396,7 +393,7 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
  
   @see  -<b>addNotes:timeShift:</b>, -<b>shift</b>
 */
-- addNoteCopies: (NSArray *) aNoteList timeShift: (double) shift;
+- addNoteCopies: (NSArray<MKNote*> *) aNoteList timeShift: (double) shift;
 
 /*!
   @param  aNoteList is an NSArray instance.
@@ -413,7 +410,7 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
 
   @see  -<b>addNoteCopies:timeShift:</b>, -<b>shift:</b>
 */
-- addNotes: (NSArray *) aNoteList timeShift: (double) shift; 
+- addNotes: (NSArray<MKNote*> *) aNoteList timeShift: (double) shift;
 
 /*!
   @param  shift is a double.
@@ -463,6 +460,8 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
   @see -<b>noteCount</b>
 */
 - (BOOL) isEmpty; 
+
+@property (readonly, getter=isEmpty) BOOL empty;
 
 /*!
   @param  timeTag is a double.
@@ -658,6 +657,8 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
   @see -<b>infoNote</b>
 */
 - (void) setInfoNote: (MKNote *) aNote;
+
+@property (copy) MKNote *infoNote;
 
 /*!
   @brief Return the name of the receiver.

@@ -71,8 +71,8 @@
 
 #import "ScorePrivate.h"
 
-static NSMutableArray *plugins = nil;
-static NSArray *scoreFileExtensions = nil;
+static NSMutableArray<id<MusicKitPlugin>> *plugins = nil;
+static NSArray<NSString*> *scoreFileExtensions = nil;
 
 @implementation MKScore
 
@@ -89,7 +89,7 @@ static NSArray *scoreFileExtensions = nil;
         return;
     [MKScore setVersion: VERSION2]; //sb: suggested by Stone conversion guide (replaced self)
     _MKCheckInit();
-    scoreFileExtensions = [[NSArray arrayWithObjects: _MK_SCOREFILEEXT, _MK_BINARYSCOREFILEEXT, nil] retain];
+    scoreFileExtensions = [[NSArray alloc] initWithObjects: _MK_SCOREFILEEXT, _MK_BINARYSCOREFILEEXT, nil];
 }
 
 /* Create a new instance and sends [self init]. */
@@ -198,7 +198,6 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
     register id aNote;
     id rtnVal;
     unsigned int readPosition = 0;   // this is the top level.
-    MKPart *(*partAddNote)(id, SEL, MKNote*) = [MKGetPartClass() instanceMethodForSelector: @selector(addNote:)];
     
     p = _MKNewScoreInStruct(stream, self, self->scorefilePrintStream, NO, fileName, &readPosition);
     if (!p)
@@ -213,7 +212,7 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
     while (p->timeTag <= lastTimeTag) {
 	if (aNote) {
 	    _MKNoteShiftTimeTag(aNote, timeShift);
-	    (*partAddNote)(p->part, @selector(addNote:), aNote);
+            [(MKPart*)(p->part) addNote:aNote];
 	}
 	aNote = _MKParseScoreNote(p);/* not retained or autoreleased - so go careful */
 	if ((!aNote) && (p->timeTag > (MK_ENDOFTIME-1)))
@@ -243,14 +242,11 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
 {
     NSData *stream;
     id rtnVal;
-    int i,count;
-    id e = [fileName pathExtension];
+    NSString *e = [fileName pathExtension];
     
     MKLoadAllBundlesOneOff();
-    count=[plugins count];
     if ([[MKScore bundleExtensions] containsObject: e]) {
-	for (i = 0 ; i < count; i++) {
-	    id<MusicKitPlugin> p = [plugins objectAtIndex: i];
+	for (id<MusicKitPlugin> p in plugins) {
 	    if ([[p fileOpeningSuffixes] containsObject: e]) {
 		id s = [p openFileName: fileName forScore: self];
 		
@@ -354,7 +350,7 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
 			   lastTimeTag: (double) lastTimeTag
 {
     BOOL timeBounds = (firstTimeTag != 0) || (lastTimeTag != MK_ENDOFTIME);
-    unsigned numOfParts = [parts count], partIndex;
+    NSInteger numOfParts = [parts count], partIndex;
     NSMutableArray *allNotes = [NSMutableArray arrayWithCapacity: [self noteCount]];
 
     for (partIndex = 0; partIndex < numOfParts; partIndex++) {
@@ -387,37 +383,30 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
 		lastTimeTag: (double) lastTimeTag
 		  timeShift: (double) timeShift
 {
-    unsigned numOfParts = [parts count], partIndex;
-    unsigned noteIndex; 
     NSArray *allNotes = [self notesBetweenFirstTimeTag: firstTimeTag lastTimeTag: lastTimeTag];
-    unsigned numOfNotes = [allNotes count];
 
-    for (partIndex = 0; partIndex < numOfParts; partIndex++) {
-	MKPart *currentPart = [parts objectAtIndex: partIndex];
-
+    for (MKPart *currentPart in parts) {
 	_MKWritePartDecl(currentPart, p, [currentPart infoNote]);
     }
     p->_timeShift = timeShift;
     
-    for (noteIndex = 0; noteIndex < numOfNotes; noteIndex++) {
-	MKNote *currentNote = [allNotes objectAtIndex: noteIndex];
-	
+    for (MKNote *currentNote in allNotes) {
 	_MKWriteNote(currentNote, [currentNote part], p);
     }
 }
 
 /* Same as writeScorefileStream: but only writes notes within specified time bounds. */
-- writeScorefileStream: (NSMutableData *) aStream
-          firstTimeTag: (double) firstTimeTag
-           lastTimeTag: (double) lastTimeTag
-             timeShift: (double) timeShift
-                binary: (BOOL) isBinary
+- (BOOL)writeScorefileStream: (NSMutableData *) aStream
+                firstTimeTag: (double) firstTimeTag
+                 lastTimeTag: (double) lastTimeTag
+                   timeShift: (double) timeShift
+                      binary: (BOOL) isBinary
 {
     _MKScoreOutStruct * p;
     int lowTag, highTag;
 
     if (!aStream)
-	return nil;
+	return NO;
     p = _MKInitScoreOut(aStream, self, info, timeShift, NO, isBinary);
     [self _noteTagRangeLowP: &lowTag highP: &highTag];
     if (lowTag <= highTag) {
@@ -439,14 +428,14 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
                  lastTimeTag: lastTimeTag
 	           timeShift: timeShift];
     _MKFinishScoreOut(p, YES);            /* Doesn't close aStream. */
-    return self;
+    return YES;
 }
 
-- writeScorefile: (NSString *) aFileName
-    firstTimeTag: (double) firstTimeTag
-     lastTimeTag: (double) lastTimeTag
-       timeShift: (double) timeShift
-          binary: (BOOL) isBinary
+- (BOOL)writeScorefile: (NSString *) aFileName
+          firstTimeTag: (double) firstTimeTag
+           lastTimeTag: (double) lastTimeTag
+             timeShift: (double) timeShift
+                binary: (BOOL) isBinary
 {
     NSMutableData *stream = [[NSMutableData alloc] initWithCapacity:0];
     BOOL success;
@@ -461,16 +450,16 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
     [stream release];
     if (!success) {
 	MKErrorCode(MK_cantCloseFileErr, aFileName);
-	return nil;
+	return NO;
     }
     else
-	return self;
+	return YES;
 }
 
-- writeScorefile: (NSString *) aFileName
-    firstTimeTag: (double) firstTimeTag
-     lastTimeTag: (double) lastTimeTag
-       timeShift: (double) timeShift
+- (BOOL)writeScorefile: (NSString *) aFileName
+          firstTimeTag: (double) firstTimeTag
+           lastTimeTag: (double) lastTimeTag
+             timeShift: (double) timeShift
   /* Write scorefile to file with specified name within specified
   bounds. */
 {
@@ -481,10 +470,10 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
                        binary: NO];
 }
 
-- writeScorefileStream: (NSMutableData *) aStream
-          firstTimeTag: (double) firstTimeTag
-           lastTimeTag: (double) lastTimeTag
-             timeShift: (double) timeShift
+- (BOOL)writeScorefileStream: (NSMutableData *) aStream
+                firstTimeTag: (double) firstTimeTag
+                 lastTimeTag: (double) lastTimeTag
+                   timeShift: (double) timeShift
 /* Same as writeScorefileStream: but only writes notes within specified
   time bounds. */
 {
@@ -495,10 +484,10 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
                              binary: NO];
 }
 
-- writeOptimizedScorefile: (NSString *) aFileName
-             firstTimeTag: (double) firstTimeTag
-              lastTimeTag: (double) lastTimeTag
-                timeShift: (double) timeShift
+- (BOOL)writeOptimizedScorefile: (NSString *) aFileName
+                   firstTimeTag: (double) firstTimeTag
+                    lastTimeTag: (double) lastTimeTag
+                      timeShift: (double) timeShift
   /* Write scorefile to file with specified name within specified
   bounds. */
 {
@@ -509,25 +498,25 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
                          binary: YES];
 }
 
-- writeOptimizedScorefileStream: (NSMutableData *) aStream
-                   firstTimeTag: (double) firstTimeTag
-                    lastTimeTag: (double) lastTimeTag
-                      timeShift: (double) timeShift
+- (BOOL)writeOptimizedScorefileStream: (NSMutableData *) aStream
+                         firstTimeTag: (double) firstTimeTag
+                          lastTimeTag: (double) lastTimeTag
+                            timeShift: (double) timeShift
   /* Same as writeScorefileStream: but only writes notes within specified
   time bounds. */
 {
     return [self writeScorefileStream: aStream
-                        firstTimeTag: firstTimeTag
-                        lastTimeTag: lastTimeTag
-                          timeShift: timeShift
-                           binary: YES];
+                         firstTimeTag: firstTimeTag
+                          lastTimeTag: lastTimeTag
+                            timeShift: timeShift
+                               binary: YES];
 }
 
 /* Scorefile writing "convenience methods" ------------------------ */
 
-- writeScorefile: (NSString *) aFileName
-    firstTimeTag: (double) firstTimeTag
-     lastTimeTag: (double) lastTimeTag
+- (BOOL)writeScorefile: (NSString *) aFileName
+          firstTimeTag: (double) firstTimeTag
+           lastTimeTag: (double) lastTimeTag
 {
   return [self writeScorefile: aFileName
                   firstTimeTag: firstTimeTag
@@ -536,7 +525,7 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
                         binary: NO];
 }
 
-- writeScorefileStream: (NSMutableData *) aStream
+- (BOOL)writeScorefileStream: (NSMutableData *) aStream
           firstTimeTag: (double) firstTimeTag
            lastTimeTag: (double) lastTimeTag
 {
@@ -547,7 +536,7 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
                                binary: NO];
 }
 
-- writeScorefile: (NSString *) aFileName
+- (BOOL)writeScorefile: (NSString *) aFileName
 {
     return [self writeScorefile: aFileName
                    firstTimeTag: 0.0
@@ -555,7 +544,7 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
                       timeShift: 0.0];
 }
 
-- writeScorefileStream: (NSMutableData *) aStream
+- (BOOL)writeScorefileStream: (NSMutableData *) aStream
 {
     return [self writeScorefileStream: aStream
                          firstTimeTag: 0.0
@@ -563,7 +552,7 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
                             timeShift: 0.0];
 }
 
-- writeOptimizedScorefile: (NSString *) aFileName
+- (BOOL)writeOptimizedScorefile: (NSString *) aFileName
             firstTimeTag: (double) firstTimeTag
              lastTimeTag: (double) lastTimeTag
 {
@@ -574,7 +563,7 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
                         binary: YES];
 }
 
-- writeOptimizedScorefileStream: (NSMutableData *) aStream
+- (BOOL)writeOptimizedScorefileStream: (NSMutableData *) aStream
                   firstTimeTag: (double) firstTimeTag
                    lastTimeTag: (double) lastTimeTag
 {
@@ -585,7 +574,7 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
                             binary: YES];
 }
 
-- writeOptimizedScorefile: (NSString *) aFileName
+- (BOOL)writeOptimizedScorefile: (NSString *) aFileName
 {
     return [self writeOptimizedScorefile: aFileName
                             firstTimeTag: 0.0
@@ -593,7 +582,7 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
                                timeShift: 0.0];
 }
 
-- writeOptimizedScorefileStream: (NSMutableData *) aStream
+- (BOOL)writeOptimizedScorefileStream: (NSMutableData *) aStream
 {
     return [self writeOptimizedScorefileStream: aStream
                                   firstTimeTag: 0.0
@@ -606,10 +595,9 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
 
 static BOOL midifilesEvaluateTempo = YES;
 
-+setMidifilesEvaluateTempo:(BOOL)yesOrNo
++(void)setMidifilesEvaluateTempo:(BOOL)yesOrNo
 {
   midifilesEvaluateTempo = yesOrNo;
-  return self;
 }
 
 +(BOOL)midifilesEvaluateTempo
@@ -632,11 +620,11 @@ static void putMidi(struct __MKMidiOutStruct *ptr)
 
 static void putSysExcl(struct __MKMidiOutStruct *ptr, NSString *sysExclString)
 {
-    int sysExStrLen = [sysExclString lengthOfBytesUsingEncoding: NSUTF8StringEncoding];
+    NSInteger sysExStrLen = [sysExclString lengthOfBytesUsingEncoding: NSUTF8StringEncoding];
     const char *sysExclStr = [sysExclString UTF8String];
     unsigned char *buffer = (unsigned char *) _MKMalloc(sysExStrLen); /* More than enough */
     unsigned char *bufptr = buffer;
-    int bufferLen;
+    NSInteger bufferLen;
     unsigned char c = _MKGetSysExByte(&sysExclStr);
 
     if (c == MIDI_SYSEXCL)
@@ -680,13 +668,9 @@ static void sendBufferedData(struct __MKMidiOutStruct *ptr)
 
 + (NSArray *) bundleExtensions
 {
-    int i;
-    NSMutableArray *a = [NSMutableArray new];
-    NSObject <MusicKitPlugin> *p;
-    int count = [plugins count];
+    NSMutableArray *a = [[NSMutableArray alloc] init];
 
-    for (i = 0 ; i < count ; i++) {
-        p = [plugins objectAtIndex:i];
+    for (id <MusicKitPlugin>p in plugins) {
         if ([[[p class] protocolVersion] isEqualToString:@"1"]) {
             [a addObjectsFromArray:[p fileOpeningSuffixes]];
             [a addObjectsFromArray:[p fileSavingSuffixes]];
@@ -818,7 +802,7 @@ static void writeNoteToMidifile(_MKMidiOutStruct *p, MKMIDIFileOut *fileStructP,
     MKPart *aPart, *curPart;
     NSArray *notes;
     MKNote *curNote;
-    unsigned partIndex, noteIndex, numOfParts, numOfNotes;
+    NSInteger partIndex, noteIndex, numOfParts, numOfNotes;
     
     NSAssert((INRANGE(MK_tempo) && INRANGE(MK_lyric) &&
 	      INRANGE(MK_cuePoint) && INRANGE(MK_marker) &&
@@ -954,9 +938,9 @@ static void writeNoteToMidifile(_MKMidiOutStruct *p, MKMIDIFileOut *fileStructP,
 
 /* Midi file writing "convenience methods" --------------------------- */
 
-- writeMidifileStream: (NSMutableData *) aStream
-	 firstTimeTag: (double) firstTimeTag
-	  lastTimeTag: (double) lastTimeTag
+- (BOOL)writeMidifileStream: (NSMutableData *) aStream
+               firstTimeTag: (double) firstTimeTag
+                lastTimeTag: (double) lastTimeTag
 {
     return [self writeMidifileStream: aStream
 			firstTimeTag: firstTimeTag
@@ -964,9 +948,9 @@ static void writeNoteToMidifile(_MKMidiOutStruct *p, MKMIDIFileOut *fileStructP,
 			   timeShift: 0.0];
 }
 
-- writeMidifile: (NSString *) aFileName
-   firstTimeTag: (double) firstTimeTag
-    lastTimeTag: (double) lastTimeTag
+- (BOOL)writeMidifile: (NSString *) aFileName
+         firstTimeTag: (double) firstTimeTag
+          lastTimeTag: (double) lastTimeTag
 {
     return [self writeMidifile: aFileName 
 		  firstTimeTag: firstTimeTag
@@ -974,14 +958,14 @@ static void writeNoteToMidifile(_MKMidiOutStruct *p, MKMIDIFileOut *fileStructP,
 		     timeShift: 0.0];
 }
 
-- writeMidifileStream: (NSMutableData *) aStream
+- (BOOL)writeMidifileStream: (NSMutableData *) aStream
 {
     return [self writeMidifileStream: aStream
 			firstTimeTag: 0.0
 			 lastTimeTag: MK_ENDOFTIME];
 }
 
--writeMidifile: (NSString *) aFileName
+-(BOOL)writeMidifile: (NSString *) aFileName
 {
     return [self writeMidifile: aFileName
 		  firstTimeTag: 0.0
@@ -1486,17 +1470,19 @@ outOfLoop:
 /* Manipulating notes. ------------------------------- */
 
 
-/* Sets the stream to be used for Scorefile 'print' statement output. */
-- (void) setScorefilePrintStream: (NSMutableData *) aStream
-{
-    scorefilePrintStream = aStream;
-}
+///* Sets the stream to be used for Scorefile 'print' statement output. */
+//- (void) setScorefilePrintStream: (NSMutableData *) aStream
+//{
+//    scorefilePrintStream = aStream;
+//}
+//
+///* Returns the stream used for Scorefile 'print' statement output. */
+//- (NSMutableData *) scorefilePrintStream
+//{
+//    return scorefilePrintStream;
+//}
 
-/* Returns the stream used for Scorefile 'print' statement output. */
-- (NSMutableData *) scorefilePrintStream
-{
-    return scorefilePrintStream;
-}
+@synthesize scorefilePrintStream;
 
 /* Needed by scorefile parser  TODO should merge with setInfoNote: */
 -_setInfo:aInfo
@@ -1508,17 +1494,19 @@ outOfLoop:
   return self;
 }
 
-/* Sets info, overwriting any previous info. aNote is copied. The old info, if any, is freed. */
-- (void) setInfoNote: (MKNote *) aNote
-{
-    [info release];
-    info = [aNote copy];
-}
+///* Sets info, overwriting any previous info. aNote is copied. The old info, if any, is freed. */
+//- (void) setInfoNote: (MKNote *) aNote
+//{
+//    [info release];
+//    info = [aNote copy];
+//}
+//
+//- (MKNote *) infoNote
+//{
+//    return info;
+//}
 
-- (MKNote *) infoNote
-{
-    return info;
-}
+@synthesize infoNote=info;
 
 /* combine notes into noteDurs for all MKParts */
 - combineNotes
@@ -1621,7 +1609,7 @@ static BOOL isUnarchiving = NO;
 
 @implementation MKScore (PluginSupport)
 
-+ (void) addPlugin: (id) plugin
++ (void) addPlugin: (id<MusicKitPlugin>) plugin
 {
     if (!plugins) {
         plugins = [[NSMutableArray alloc] init];

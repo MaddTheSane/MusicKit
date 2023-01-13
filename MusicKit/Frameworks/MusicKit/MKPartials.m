@@ -467,7 +467,7 @@ return self;
 }
 
 
--writeScorefileStream:(NSMutableData *)aStream
+-(BOOL)writeScorefileStream:(NSMutableData *)aStream
 /* Writes on aStream the following:
 {1.0, 0.3, 0.0}{2.0,.1,0.0}{3.0,.01,0.0}
   Returns nil if ampRatios or freqRatios is NULL, otherwise self. */
@@ -478,7 +478,7 @@ return self;
   NORMALFORM(self);
   if ((freqRatios == NULL) || (ampRatios == NULL)) {
     [aStream appendData:[@"{1.0,0,0}" dataUsingEncoding:NSNEXTSTEPStringEncoding]];
-    return nil;
+    return NO;
   }
   i = 0;
   fRatios = freqRatios;
@@ -500,16 +500,15 @@ return self;
     i++;
 #       endif
   }
-  return self;
+  return YES;
 }
 
 
--setFreqRangeLow:(double)freq1 high:(double)freq2
+-(void)setFreqRangeLow:(double)freq1 high:(double)freq2
   /* Sets the frequency range associated with this timbre. */
 {
   minFreq = freq1;
   maxFreq = freq2;
-  return self;
 }
 
 -(double)maxFreq

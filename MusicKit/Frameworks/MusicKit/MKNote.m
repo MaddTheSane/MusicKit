@@ -471,11 +471,12 @@ static unsigned int nAppBitVects(MKNote *self)
     return part;
 }
 
-- (void) setConductor: (MKConductor *) aConductor
-{
-    conductor = aConductor;
-    // We don't retain because conductor is a weakly referenced instance variable to avoid retain cycles.
-}
+@synthesize conductor;
+//- (void) setConductor: (MKConductor *) aConductor
+//{
+//    conductor = aConductor;
+//    // We don't retain because conductor is a weakly referenced instance variable to avoid retain cycles.
+//}
 
 - (MKConductor *) conductor
 {
@@ -495,14 +496,16 @@ static unsigned int nAppBitVects(MKNote *self)
     return oldPart;
 }
 
-/* TYPE: Timing; Returns the receiver's timeTag.
- * Returns the receiver's timeTag.  If the timeTag isn't set, 
- * returns MK_ENDOFTIME.
- */
-- (double) timeTag
-{ 
-    return timeTag;
-}
+///* TYPE: Timing; Returns the receiver's timeTag.
+// * Returns the receiver's timeTag.  If the timeTag isn't set,
+// * returns MK_ENDOFTIME.
+// */
+//- (double) timeTag
+//{
+//    return timeTag;
+//}
+
+@synthesize timeTag;
 
 /* TYPE: Timing; Sets the receiver's timeTag.
  * Sets the receiver's timeTag to newTimeTag and returns the old 
@@ -635,17 +638,19 @@ NSComparisonResult _MKNoteCompare(const void *el1,const void *el2)
 
 /* NoteType, duration, noteTag ---------------------------------------------- */
 
-- (MKNoteType) noteType
-  /* TYPE: Type; Returns the receiver's noteType.
-   * Returns the receiver's noteType.
-   */
-{
-    return noteType;
-}
+@synthesize noteType;
+
+//- (MKNoteType) noteType
+//  /* TYPE: Type; Returns the receiver's noteType.
+//   * Returns the receiver's noteType.
+//   */
+//{
+//    return noteType;
+//}
 
 #define ISNOTETYPE(_x) ((int)_x >= (int)MK_noteDur && (int)_x <= (int)MK_mute)
 
-- (id) setNoteType: (MKNoteType) newNoteType
+- (void) setNoteType: (MKNoteType) newNoteType
  /* TYPE: Type; Sets the receiver's noteType to newNoteType.
   * Sets the receiver's noteType to newNoteType,
   * which must be one of:
@@ -661,10 +666,10 @@ NSComparisonResult _MKNoteCompare(const void *el1,const void *el2)
 {
     if (ISNOTETYPE(newNoteType)) {
         noteType = newNoteType;
-        return self;
+        return;
     }
     else
-	return nil;
+	return;
 }
 
 -(double) setDur:(double) value
@@ -753,22 +758,23 @@ static double getNoteEndTime(MKNote *aNote)
     return getNoteEndTime(self);
 }
 
-- (int)noteTag
- /* TYPE: Type; Returns the receiver's noteTag.
-  * Return the receiver's noteTag, or MAXINT if it isn't set.
-  */
-{
-    return noteTag;
-}
+//- (int)noteTag
+// /* TYPE: Type; Returns the receiver's noteTag.
+//  * Return the receiver's noteTag, or MAXINT if it isn't set.
+//  */
+//{
+//    return noteTag;
+//}
 
-- removeNoteTag
+@synthesize noteTag;
+
+- (void)removeNoteTag
     /* Same as [self setNoteTag:MAXINT] */
 {
     noteTag = MAXINT;
-    return self;
 }
 
-- setNoteTag:(int)newTag
+- (void)setNoteTag:(int)newTag
  /* TYPE: Type; Sets the receiver's noteTag to newTag.
   * Sets the receiver's noteTag to newTag;
   * if the noteType is MK_mute 
@@ -779,7 +785,6 @@ static double getNoteEndTime(MKNote *aNote)
     noteTag = newTag;
     if (noteType == MK_mute)
       noteType = MK_noteUpdate;
-    return self;
 }
 
 /* Raw setting methods */
@@ -1175,7 +1180,7 @@ BOOL MKIsNoteParPresent(MKNote *aNote,int par)
     return ((_MKParameter *)NSHashGet((NSHashTable *)_parameters, (const void *)dummyPar))->_uType;
 }
 
--removePar:(int)par
+-(void)removePar:(int)par
   /* TYPE: Parameters; Removes par form the receiver.
    * Removes the parameter par from the receiver.
    * Returns the receiver if the parameter was present, otherwise
@@ -1183,13 +1188,12 @@ BOOL MKIsNoteParPresent(MKNote *aNote,int par)
    */
 {
     if (!_MKIsPar(par) || !clearParBit(self,par))
-      return nil;
+      return;
     SETDUMMYPAR(par);
     /* this will also free te parameter structure, and release any objects
      * it references
      */
     NSHashRemove((NSHashTable *) _parameters, (const void *) dummyPar);
-    return self;
 }
 
 - (unsigned) parVector: (unsigned) index
@@ -1282,7 +1286,7 @@ static void copyPars(); /* forward ref */
 }
 #endif
 
-- (double) freq
+- (double) frequency
   /* TYPE: Parameters; Returns the frequency of the receiver.
     * Returns the value of MK_freq, if present.  If not,
     * converts and returns the value of MK_keyNum.
@@ -1389,7 +1393,7 @@ static id writeBinaryNoteAux(MKNote *self, id aPart, _MKScoreOutStruct *p)
     return self;
 }
 
-static id writeNoteAux(MKNote *self,_MKScoreOutStruct *p,
+static BOOL writeNoteAux(MKNote *self,_MKScoreOutStruct *p,
                        NSMutableData *aStream,NSString *partName)
     /* Never invoke this function when writing a binary scorefile */
 {
@@ -1433,10 +1437,10 @@ static id writeNoteAux(MKNote *self,_MKScoreOutStruct *p,
     }
     [aStream appendBytes:") " length:2];
     _MKWriteParameters(self, aStream, p);
-    return self;
+    return YES;
 }
 
-- writeScorefileStream: (NSMutableData *) aStream
+- (BOOL)writeScorefileStream: (NSMutableData *) aStream
   /* TYPE: Display; Displays the receiver in ScoreFile format.
    * Displays, on aStream, the receiver in ScoreFile format.
    * Returns the receiver.
@@ -1682,7 +1686,7 @@ static void copyPars(toObj,fromObj,override)
 {
     _MKParameter aPar;
     int parCount,i;
-    int version;
+    NSInteger version;
     /* First check version */
 
     /*[super initWithCoder:aDecoder];*/ /*sb: unnec */

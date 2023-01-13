@@ -27,7 +27,7 @@
 
 - init;
 
-- (void) buttonPressed: sender;
+- (IBAction) buttonPressed: sender;
 
 - (void) setIcon: (NSImage *) icon;
 

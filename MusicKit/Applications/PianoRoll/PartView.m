@@ -73,7 +73,7 @@
                 if ([theNote noteTag] == MAXINT)  /* no note tag! */
                     break;
             case MK_noteOn:
-                if (MKIsNoDVal([theNote freq])) /* no frequency - not quite kosher */
+                if (MKIsNoDVal([theNote frequency])) /* no frequency - not quite kosher */
                     break;
                 for (k = j+1; k < [thePart noteCount]; k++)
                     if ([[thePart nth:k] noteTag] == [theNote noteTag])

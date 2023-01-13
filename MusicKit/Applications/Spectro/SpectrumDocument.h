@@ -26,7 +26,7 @@
 #import "SignalProcessor.h"
 #import "WaterfallView.h"
 
-@interface SpectrumDocument: NSObject
+@interface SpectrumDocument: NSObject <NSWindowDelegate>
 {
     IBOutlet id spectrumWindow;
     IBOutlet ScrollingSpectrum *scrollSpectrum;
@@ -83,8 +83,8 @@
 }
 
 - init;
-- newSpectrumLocation: (NSPoint *) p;
-- newWaterfallLocation: (NSPoint *) p;
+- (void) newSpectrumLocation: (NSPoint *) p;
+- (void) newWaterfallLocation: (NSPoint *) p;
 - (void) awakeFromNib;
 - (void) setDelegate: (id) anObject;
 - delegate;

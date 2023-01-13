@@ -196,7 +196,7 @@ non-integer resampling is not currently supported.
  @return If the receiver couldn't be written to the stream, returns <b>nil</b>,
  otherwise returns the receiver.
 */
-- writeScorefileStream: (NSMutableData *) aStream;
+- (BOOL)writeScorefileStream: (NSMutableData *) aStream;
  /* 
   * A
   * MKSamples object is written by the name of the soundfile from which its

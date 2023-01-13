@@ -186,8 +186,8 @@ extern void _MKDoubleToFix24Array (double *doubleArr, DSPDatum *fix24Arr, int le
 extern void _MKFix24ToDoubleArray (DSPDatum *fix24Arr, double *doubleArr, int len);
 
 // array duplication
-NSMutableArray *_MKLightweightArrayCopy(NSMutableArray *oldArray);
-NSMutableArray *_MKDeepMutableArrayCopy(NSMutableArray *oldArray);
+NSMutableArray<MKNote*> *_MKLightweightArrayCopy(NSMutableArray *oldArray) NS_RETURNS_RETAINED;
+NSMutableArray<MKNote*> *_MKDeepMutableArrayCopy(NSMutableArray *oldArray) NS_RETURNS_RETAINED;
 
 /* Files */
 /*
@@ -199,7 +199,7 @@ extern NSData *_MKOpenFileStreamForReading(NSString * fileName,
 extern BOOL _MKOpenFileStreamForWriting(NSString * fileName,
                                          NSString *defaultExtension,NSMutableData *theData,BOOL errorMsg);
 
-extern int _MKFindAppWrapperFile(NSString *fileName,NSString **returnNameBuffer);
+extern BOOL _MKFindAppWrapperFile(NSString *fileName,NSString *__autoreleasing*returnNameBuffer);
 
 /* Floating point resoulution */
 #define _MK_VARRESOLUTION (((double)1.0/(double)44000.0)/(double)2.0)
@@ -210,9 +210,9 @@ extern unsigned _MKTraceFlag;
 #define _MKTrace() _MKTraceFlag
 
 /* Memory alloc. These will be replaced with NeXT equiv */
-extern void * _MKMalloc(unsigned size);
-extern char * _MKCalloc(unsigned nelem, unsigned elsize); 
-extern char * _MKRealloc(void *ptr, unsigned size);
+extern void * _MKMalloc(NSUInteger size);
+extern char * _MKCalloc(NSUInteger nelem, NSUInteger elsize);
+extern char * _MKRealloc(void *ptr, NSUInteger size);
 #define  _MK_MALLOC( VAR, TYPE, NUM )				\
    ((VAR) = (TYPE *) _MKMalloc( (unsigned)(NUM)*sizeof(TYPE) )) 
 #define  _MK_REALLOC( VAR, TYPE, NUM )				\

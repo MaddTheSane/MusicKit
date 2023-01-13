@@ -316,7 +316,7 @@ static void removeNote(MKPart *self, MKNote *aNote);
 
 - (BOOL) isEqual:(MKPart *) anObject
 {
-    unsigned noteIndex,count;
+    NSInteger noteIndex,count;
     SEL oaiSel;
     id (*objectAtIndex)(id,SEL,NSUInteger);
     id othernotes;
@@ -333,7 +333,7 @@ static void removeNote(MKPart *self, MKNote *aNote);
     objectAtIndex = [notes methodForSelector: oaiSel];
     
     for (noteIndex = 0 ; noteIndex < count ; noteIndex++) {
-        if (![OBJECTATINDEX(notes,noteIndex) isEqual:OBJECTATINDEX(notes,noteIndex)]) {
+        if (![OBJECTATINDEX(notes,noteIndex) isEqual:OBJECTATINDEX(othernotes,noteIndex)]) {
             return NO;
         }
     }
@@ -395,10 +395,7 @@ static id sortIfNeeded(MKPart *self)
     return nil;
 }
 
-- (BOOL) isSorted
-{
-    return isSorted;
-}
+@synthesize sorted=isSorted;
 
 - sort
     /* If the receiver needs to be sorted, sorts and returns self. Else
@@ -580,33 +577,21 @@ static void removeNote(MKPart *self, MKNote *aNote)
     * Returns the receiver.
     */
 {
-    int noteIndex, alc;
-    double tTag;
-    //    register id element, copyElement;
-    NSZone *zone = NSDefaultMallocZone();
-    IMP selfAddNote;
-    MKNote *element, *copyElement;
-    
     if (noteList == nil)
 	return nil;
-    selfAddNote = [self methodForSelector: @selector(addNote:)];
-#   define SELFADDNOTE(x) (*selfAddNote)(self, @selector(addNote:), (x))
     
-    alc = [noteList count];
-    for (noteIndex = 0; noteIndex < alc; noteIndex++) {
-	element = [noteList objectAtIndex: noteIndex];
-	copyElement = [element copyWithZone: zone];
-	tTag = [element timeTag];
+    for (MKNote *element in noteList) {
+        MKNote *copyElement = [element copy];
+	double tTag = [element timeTag];
 	if (tTag < (MK_ENDOFTIME - 1))
 	    [copyElement setTimeTag: tTag + shift];
-	SELFADDNOTE(copyElement);
+        [self addNote:copyElement];
 	[copyElement release]; /* we're holding extra retain from "copyWithZone" */
     }
-#   undef SELFADDNOTE
     return self;
 }
 
-- addNotes: (NSArray *) noteList timeShift: (double) shift
+- addNotes: (NSArray<MKNote*> *) noteList timeShift: (double) shift
   /* TYPE: Editing
     * noteList should contain only MKNotes.
     * For each MKNote in noteList, removes the MKNote
@@ -639,18 +624,14 @@ static void removeNote(MKPart *self, MKNote *aNote)
 	int noteIndex;
 	int partsIndex, alc, pc;
 	
-	IMP objectAtIndex = [noteList methodForSelector: oaiSel];
-# define OBJECTATINDEX(x)  (*objectAtIndex)(noteList, oaiSel, (x))
-	IMP addPart = [parts methodForSelector:@selector(addObject:)];
+	void (*addPart)(id, SEL, id) = [parts methodForSelector:@selector(addObject:)];
 # define ADDPART(x) (*addPart)(parts, @selector(addObject:), (x))
-	IMP partsIndexOfObjectIdenticalTo = [parts methodForSelector: @selector(indexOfObjectIdenticalTo:)];
+	NSUInteger (*partsIndexOfObjectIdenticalTo)(id, SEL, id) = [parts methodForSelector: @selector(indexOfObjectIdenticalTo:)];
 # define PARTSCONTAINSOBJECT(x) ( (NSUInteger)((*partsIndexOfObjectIdenticalTo)\
 					(parts, @selector(indexOfObjectIdenticalTo:), (x))) != NSNotFound )
 					    
 	suspendCompaction = YES;
-	alc = [noteList count];
-	for (noteIndex = 0; noteIndex < alc; noteIndex++) {
-	    el = OBJECTATINDEX(noteIndex);
+	for (MKNote *el in noteList) {
 	    aPart = [el part];
 	    if (aPart) {
 		if (!PARTSCONTAINSOBJECT(aPart))
@@ -659,9 +640,7 @@ static void removeNote(MKPart *self, MKNote *aNote)
 	    }
 	}
 	suspendCompaction = NO;
-	pc = [parts count];
-	for(partsIndex = 0; partsIndex < pc; partsIndex++) {
-	    elPart = [parts objectAtIndex: partsIndex];
+	for(MKPart *elPart in parts) {
 	    compact(elPart);
 	}
 	[parts release];
@@ -670,21 +649,15 @@ static void removeNote(MKPart *self, MKNote *aNote)
 	double tTag;
 	int noteIndex, alc;
 	IMP selfAddNote = [self methodForSelector:@selector(addNote:)];
-	IMP objectAtIndex = [noteList methodForSelector: oaiSel];
-# define SELFADDNOTE(x) (*selfAddNote)(self, @selector(addNote:), (x))
-	alc = [noteList count];
-	for (noteIndex = 0; noteIndex < alc; noteIndex++) {
-	    el = OBJECTATINDEX(noteIndex);
+	for (MKNote *el in noteList) {
 	    tTag = [el timeTag];
 	    if (tTag < (MK_ENDOFTIME-1))
 		[el setTimeTag:tTag + shift];
 	    /* adding the note also gives it a positive ordertag, thus resetting
 		* the "placeholder" status given it above
 		*/
-	    SELFADDNOTE(el);
+            [self addNote:el];
 	}
-# undef SELFADDNOTE
-# undef OBJECTATINDEX
 # undef ADDPART
 # undef PARTSCONTAINSOBJECT
     }
@@ -720,15 +693,9 @@ static void removeNote(MKPart *self, MKNote *aNote)
   * Implemented in terms of addNotes:timeShift:.
   */
 {
-    NSArray *noteList = _MKLightweightArrayCopy(notes);
-    MKNote  *mkn;
-    SEL oaiSel = @selector(objectAtIndex:);
-    IMP objectAtIndex = [noteList methodForSelector: oaiSel];
-# define OBJECTATINDEX(x)  (*objectAtIndex)(noteList, oaiSel, (x))
-    int noteIndex, numOfNotes = [noteList count];
+    NSArray<MKNote*> *noteList = _MKLightweightArrayCopy(notes);
     
-    for (noteIndex = 0 ; noteIndex < numOfNotes; noteIndex++) {
-	mkn = OBJECTATINDEX(noteIndex);
+    for (MKNote  *mkn in noteList) {
 	[mkn setTimeTag:  [mkn timeTag]  * scale];
 	if ([mkn noteType] == MK_noteDur)
 	    [mkn setDur: [mkn dur] * scale];
@@ -736,7 +703,6 @@ static void removeNote(MKPart *self, MKNote *aNote)
     [noteList release];
     return self;
 }
-# undef OBJECTATINDEX
 
 /* Accessing ------------------------------------------------------------- */
 
@@ -784,15 +750,9 @@ static void removeNote(MKPart *self, MKNote *aNote)
 
 - (BOOL) hasSoundingNotes
 {
-    int  noteIndex, numOfNotes;
     BOOL bFound = FALSE;
-    SEL oaiSel = @selector(objectAtIndex:);
-    IMP objectAtIndex = [notes methodForSelector: oaiSel];
-# define OBJECTATINDEX(x)  (*objectAtIndex)(notes, oaiSel, (x))
     
-    numOfNotes = [notes count];
-    for (noteIndex = 0; noteIndex < numOfNotes; noteIndex++) {
-	MKNote *aNote = OBJECTATINDEX(noteIndex);
+    for (MKNote *aNote in notes) {
 	MKNoteType t = [aNote noteType];
 	if (t == MK_noteDur || t == MK_noteOn) {
 	    bFound = TRUE;
@@ -801,7 +761,6 @@ static void removeNote(MKPart *self, MKNote *aNote)
     }
     return bFound;
 }
-# undef OBJECTATINDEX
 
 
 - (BOOL) isEmpty
@@ -985,21 +944,23 @@ static void removeNote(MKPart *self, MKNote *aNote)
     return [[score retain] autorelease];
 }
 
-- (MKNote *) infoNote
-  /* Returns 'header note', a collection of info associated with each MKPart,
-  which may be used by the App in any way it wants. */
-{
-    return [[info retain] autorelease];
-}
+//- (MKNote *) infoNote
+//  /* Returns 'header note', a collection of info associated with each MKPart,
+//  which may be used by the App in any way it wants. */
+//{
+//    return [[info retain] autorelease];
+//}
+//
+///* Sets 'header note', a collection of info associated with each MKPart,
+//  which may be used by the App in any way it wants. aNote is copied.
+//  The old info, if any, is freed. */
+//- (void) setInfoNote: (MKNote *) aNote
+//{
+//    [info release];
+//    info = [aNote copy];
+//}
 
-/* Sets 'header note', a collection of info associated with each MKPart,
-  which may be used by the App in any way it wants. aNote is copied.
-  The old info, if any, is freed. */
-- (void) setInfoNote: (MKNote *) aNote
-{
-    [info release];
-    info = [aNote copy];
-}
+@synthesize infoNote=info;
 
 - (NSString *) partName
 {
@@ -1058,7 +1019,7 @@ static void removeNote(MKPart *self, MKNote *aNote)
 // for debugging, just return the concatenation of the note descriptions (which have newlines).
 - (NSString *) description
 {
-    int noteIndex, numOfNotes;
+    NSInteger noteIndex, numOfNotes;
     NSMutableString *partDescription = [[NSMutableString alloc] initWithFormat: @"%@ containing MKNotes:\n", [super description]];
     NSArray *noteList = [self notes];
     MKNote *aNote;
@@ -1082,7 +1043,7 @@ static void removeNote(MKPart *self, MKNote *aNote)
     that maps ints to ints. */
 {
     int oldTag;
-    unsigned nc;
+    NSInteger nc;
     MKNote *el;
     NSNumber *newTagNum;
     NSNumber *oldTagNum;

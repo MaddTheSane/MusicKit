@@ -48,6 +48,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
 #import <Foundation/NSObject.h>
 
 @class MKNote;
+@class MKPart;
 
 /*!
   @enum       MKScoreFormat
@@ -59,18 +60,18 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   @constant   MK_PLAYSCORE Binary format version of Scorefile format.
   @constant   MK_MUSICXML  XML based MusicXML format.
  */
- typedef enum {
+ typedef NS_ENUM(int, MKScoreFormat) {
     MK_UNRECOGNIZEDFORMAT,
     MK_MIDIFILE,
     MK_SCOREFILE,
     MK_PLAYSCORE,
     MK_MUSICXML
-} MKScoreFormat;
+};
 
 @interface MKScore: NSObject
 {
     /*! The object's collection of MKParts. */
-    NSMutableArray *parts;
+    NSMutableArray<MKPart*> *parts;
     /*! The stream used by scorefile <b>print</b> statements. */
     NSMutableData *scorefilePrintStream;    
     /*! The object's info MKNote. */
@@ -86,11 +87,6 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   before performing its own initialization. 
 */
 - init;
-
-/*! 
-  @brief Releases the receiver and its contents.
- */
-- (void) dealloc;
 
  /* 
  Removes and releases the MKNotes contained in the receiver's MKParts.
@@ -111,7 +107,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
  
   The file is automatically closed. Returns the receiver or <b>nil</b> if the file couldn't be read.
 */
-- readScorefile: (NSString *) fileName; 
+- (MKScore*)readScorefile: (NSString *) fileName;
 
 /*!
   @param  stream is a NSData instance.
@@ -121,7 +117,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   The file must be open for reading; the sender is responsible for
   closing the file. 
 */
-- readScorefileStream: (NSData *) stream; 
+- (MKScore*)readScorefileStream: (NSData *) stream;
 
 /*!
   @param  fileName is a NSString instance.
@@ -135,7 +131,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
  
  The added MKNotes' timeTags are shifted by <i>timeShift</i> beats.  
 */
-- readScorefile: (NSString *) fileName 
+- (MKScore*)readScorefile: (NSString *) fileName
    firstTimeTag: (double) firstTimeTag
     lastTimeTag: (double) lastTimeTag
       timeShift: (double) timeShift; 
@@ -152,7 +148,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
  
  The added MKNotes' timeTags are shifted by <i>timeShift</i> beats.  
 */
-- readScorefileStream: (NSData *) stream
+- (MKScore*)readScorefileStream: (NSData *) stream
          firstTimeTag: (double) firstTimeTag
           lastTimeTag: (double) lastTimeTag
             timeShift: (double) timeShift; 
@@ -165,7 +161,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
  
  The file is automatically closed.
 */
-- writeScorefile: (NSString *) aFileName; 
+- (BOOL)writeScorefile: (NSString *) aFileName; 
 
 /*!
   @param  aStream is a NSMutableData instance.
@@ -176,7 +172,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   closing the file.  Returns the receiver or <b>nil</b> if the file
   couldn't be written.
 */
-- writeScorefileStream: (NSMutableData *) aStream; 
+- (BOOL)writeScorefileStream: (NSMutableData *) aStream;
 
 /*!
   @param  aFileName is a NSString instance.
@@ -190,10 +186,10 @@ printed by invoking <b>setScorefilePrintStream:</b>.
  
  The written MKNotes' timeTags are shifted by <i>timeShift</i> beats.  
 */
-- writeScorefile: (NSString *) aFileName
-    firstTimeTag: (double) firstTimeTag
-     lastTimeTag: (double) lastTimeTag
-       timeShift: (double) timeShift; 
+- (BOOL)writeScorefile: (NSString *) aFileName
+          firstTimeTag: (double) firstTimeTag
+           lastTimeTag: (double) lastTimeTag
+             timeShift: (double) timeShift;
 
 /*!
   @param  aStream is a NSMutableData instance.
@@ -207,10 +203,10 @@ printed by invoking <b>setScorefilePrintStream:</b>.
  
  The written MKNotes' timeTags are shifted by <i>timeShift</i> beats.  
 */
-- writeScorefileStream: (NSMutableData *) aStream
-          firstTimeTag: (double) firstTimeTag
-           lastTimeTag: (double) lastTimeTag
-             timeShift: (double) timeShift; 
+- (BOOL)writeScorefileStream: (NSMutableData *) aStream
+                firstTimeTag: (double) firstTimeTag
+                 lastTimeTag: (double) lastTimeTag
+                   timeShift: (double) timeShift;
 
 /*!
   @param  aFileName is a NSString instance.
@@ -220,7 +216,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
  
  The file is automatically closed.  
 */
-- writeOptimizedScorefile: (NSString *) aFileName;
+- (BOOL)writeOptimizedScorefile: (NSString *) aFileName;
 
 /*!
   @param  aStream is a NSMutableData instance.
@@ -229,7 +225,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
  
   The file must be open for reading; the sender is responsible for closing the file.  
 */
-- writeOptimizedScorefileStream: (NSMutableData *) aStream;
+- (BOOL)writeOptimizedScorefileStream: (NSMutableData *) aStream;
 
 /*!
   @param  aFileName is a NSString instance.
@@ -243,7 +239,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
  
  The written MKNotes' timeTags are shifted by <i>timeShift</i> beats.  
  */
-- writeOptimizedScorefile: (NSString *) aFileName
+- (BOOL)writeOptimizedScorefile: (NSString *) aFileName
              firstTimeTag: (double) firstTimeTag 
               lastTimeTag: (double) lastTimeTag
                 timeShift: (double) timeShift;
@@ -257,7 +253,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   only those MKNotes with timeTags in the specified range are written
   to the file. 
 */
-- writeOptimizedScorefileStream: (NSMutableData *) aStream 
+- (BOOL)writeOptimizedScorefileStream: (NSMutableData *) aStream
                    firstTimeTag: (double) firstTimeTag 
                     lastTimeTag: (double) lastTimeTag;
 
@@ -273,7 +269,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
 	  are shifted by <i>timeShift</i> beats.  Returns the
 	  receiver or <b>nil</b> if the file couldn't be written.
 */
-- writeOptimizedScorefileStream: (NSMutableData *) aStream 
+- (BOOL)writeOptimizedScorefileStream: (NSMutableData *) aStream 
                    firstTimeTag: (double) firstTimeTag 
                     lastTimeTag: (double) lastTimeTag 
                       timeShift: (double) timeShift; 
@@ -407,7 +403,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   @return Returns an id.
   @brief Write the receiver, as a midifile, to <i>aStream</i>.
 */
-- writeMidifileStream: (NSMutableData *) aStream;
+- (BOOL)writeMidifileStream: (NSMutableData *) aStream;
 
 /*!
   @param  aFileName is a NSString instance.
@@ -426,7 +422,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   If the receiver's info has a title or tempo parameter,
   these are written to the midifile.  
 */
-- writeMidifile: (NSString *) aFileName;
+- (BOOL)writeMidifile: (NSString *) aFileName;
 
 /*!
   @return Returns an unsigned.
@@ -551,8 +547,8 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   the bounds.
   @return Returns an autoreleased NSArray instance.
 */
-- (NSArray *) notesBetweenFirstTimeTag: (double) firstTimeTag
-			   lastTimeTag: (double) lastTimeTag;
+- (NSArray<MKNote*> *) notesBetweenFirstTimeTag: (double) firstTimeTag
+                                    lastTimeTag: (double) lastTimeTag;
 
 /*!
  @brief Combine notes into noteDurs for all MKParts 
@@ -582,6 +578,8 @@ printed by invoking <b>setScorefilePrintStream:</b>.
 */
 - (MKNote *) infoNote;
 
+@property (copy) MKNote *infoNote;
+
 /*!
   @brief Sets the stream used by ScoreFile <b>print</b> statements to <b>aStream</b>.  
   @param  aStream is a NSMutableData instance.
@@ -593,6 +591,8 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   @return Returns a NSMutableData instance.
 */
 - (NSMutableData *) scorefilePrintStream;
+
+@property (assign) NSMutableData *scorefilePrintStream;
 
 /* 
    You never send this message directly.  
@@ -645,7 +645,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   @param  yesOrNo is a BOOL.
   @return Returns an id.
 */
-+ setMidifilesEvaluateTempo: (BOOL) yesOrNo;
++ (void)setMidifilesEvaluateTempo: (BOOL) yesOrNo;
 
 /*!
   @brief Returns the value of the class variable <i>midifilesEvaluateTempo.</i> 
@@ -655,19 +655,25 @@ printed by invoking <b>setScorefilePrintStream:</b>.
 */
 + (BOOL) midifilesEvaluateTempo;
 
+@property (class, readwrite) BOOL midifilesEvaluateTempo;
+
 /*!
   @brief Returns the possible file extensions used in writing and
   reading MIDI files appropriate for the native operating system.
   @return Returns an NSArray of NSStrings.
 */
-+ (NSArray *) midifileExtensions;
++ (NSArray<NSString*> *) midifileExtensions;
+
+@property (class, readonly, copy) NSArray<NSString*> *midifileExtensions;
 
 /*!
   @brief Returns the possible file extensions used in writing and
   reading scorefiles files appropriate for the native operating system.
   @return Returns an NSArray of NSStrings.
 */
-+ (NSArray *) scorefileExtensions;
++ (NSArray<NSString*> *) scorefileExtensions;
+
+@property (class, readonly, copy) NSArray<NSString*> *scorefileExtensions;
 
 /*!
   @brief This method allows overriding the file extensions used in writing and
@@ -681,7 +687,9 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   native operating system.
   @return Returns an NSArray of NSStrings.
 */
-+ (NSArray *) fileExtensions;
++ (NSArray<NSString*> *) fileExtensions;
+
+@property (class, readonly, copy) NSArray<NSString*> *fileExtensions;
 
 /*!
   @brief Returns the possible file extensions supported by any available plugins. 
@@ -690,13 +698,15 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   so query each plugin in turn to see what it supports.
   @return Returns an NSArray of NSStrings.
  */
-+ (NSArray *) bundleExtensions;
++ (NSArray<NSString*> *) bundleExtensions;
+
+@property (class, readonly, copy) NSArray<NSString*> *bundleExtensions;
 
 /*!
   @brief Creates and returns an allocated, initialised and autoreleased MKScore instance.
   @return Returns a newly allocated MKScore instance.
 */
-+ (MKScore *) score;
++ (instancetype) score;
 
 /*!
   @brief Determines the format of the scorefile data.
@@ -721,9 +731,9 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   @param  lastTimeTag is a double.
   @return Returns the receiver or <b>nil</b> if the file couldn't be written.
 */
-- writeScorefile: (NSString *) aFileName 
-    firstTimeTag: (double) firstTimeTag 
-     lastTimeTag: (double) lastTimeTag;
+- (BOOL)writeScorefile: (NSString *) aFileName
+          firstTimeTag: (double) firstTimeTag
+           lastTimeTag: (double) lastTimeTag;
 
 /*!
   @brief The same as <b>writeScorefileStream:</b>, but only those
@@ -734,9 +744,9 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   @param  lastTimeTag is a double.
   @return Returns the receiver or <b>nil</b> if the file couldn't be written.
 */
-- writeScorefileStream: (NSMutableData *) aStream 
-          firstTimeTag: (double) firstTimeTag 
-           lastTimeTag: (double) lastTimeTag;
+- (BOOL)writeScorefileStream: (NSMutableData *) aStream 
+                firstTimeTag: (double) firstTimeTag
+                 lastTimeTag: (double) lastTimeTag;
 
 /*!
   @brief The same as <b>readScorefile:</b>, but only those
@@ -773,9 +783,9 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   @param  lastTimeTag is a double.
   @return Returns the receiver or <b>nil</b> if the file couldn't be written.
 */
-- writeOptimizedScorefile: (NSString *) aFileName 
-             firstTimeTag: (double) firstTimeTag 
-              lastTimeTag: (double) lastTimeTag;
+- (BOOL)writeOptimizedScorefile: (NSString *) aFileName 
+                   firstTimeTag: (double) firstTimeTag
+                    lastTimeTag: (double) lastTimeTag;
 
 /*!
   @brief Reads the midifile <i>aFileName</i> into the receiver.
@@ -818,9 +828,9 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   @param  lastTimeTag is a double.
   @return Returns an id.
 */
-- writeMidifile: (NSString *) aFileName
-   firstTimeTag: (double) firstTimeTag
-    lastTimeTag: (double) lastTimeTag;
+- (BOOL)writeMidifile: (NSString *) aFileName
+         firstTimeTag: (double) firstTimeTag
+          lastTimeTag: (double) lastTimeTag;
 
 /*!
   @brief Write the receiver, as a midifile, to <i>aStream</i>.
@@ -831,9 +841,9 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   @param  lastTimeTag is a double.
   @return Returns an id.
 */
-- writeMidifileStream: (NSMutableData *) aStream 
-         firstTimeTag: (double) firstTimeTag
-          lastTimeTag: (double) lastTimeTag;
+- (BOOL)writeMidifileStream: (NSMutableData *) aStream
+               firstTimeTag: (double) firstTimeTag
+                lastTimeTag: (double) lastTimeTag;
 
 @end
 
