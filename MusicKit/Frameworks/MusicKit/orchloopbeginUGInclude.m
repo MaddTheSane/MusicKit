@@ -22,7 +22,6 @@ Modification history:
   Added Win32 compatibility, CVS logs, SBs changes
 
 */
-#import <MKUnitGenerator.h>
 
 static MKMasterUGStruct _masterUGStruct = {
    0 /* nArgs */,

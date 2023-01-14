@@ -63,6 +63,8 @@ Modification history prior to commit to CVS:
 #import "_error.h"
 #import "OrchestraPrivate.h" // @requires
 #import "_SharedSynthInfo.h"
+#import <Foundation/Foundation.h>
+#import "MKUnitGenerator.h" /* these 2 added by sb */
 
 @implementation MKUnitGenerator:NSObject
 

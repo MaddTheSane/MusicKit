@@ -567,7 +567,7 @@ static void parameterListener(void *audioProcessorInstance, void *inObject, cons
     // NSLog(@"rendering %d channels to audioUnit %p of buffer %d frames length\n", channelCount, audioUnit, bufferLengthInFrames);
     result = AudioUnitRender(audioUnit, &actionFlags, &auTimeStamp, outputBusNumber, bufferLengthInFrames, theAudioData); 
     if(result != noErr) {
-	NSLog(@"Unable to AudioUnitRender at %f, error %ld see AudioUnit/AUComponent.h\n", auTimeStamp.mSampleTime, result);
+        NSLog(@"Unable to AudioUnitRender at %f, error %d see AudioUnit/AUComponent.h\n", auTimeStamp.mSampleTime, (int)result);
 	return NO;
     }
     

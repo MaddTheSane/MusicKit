@@ -54,9 +54,6 @@
   11/5/94/daj -  Changed thread endgame
 */
 
-#import "ConductorPrivate.h"
-#import "_musickit.h"
-#import "_error.h"
 
 #define COND_ERROR NSLocalizedStringFromTableInBundle(@"MKConductor encountered problem.", _MK_ERRTAB, _MKErrorBundle(), "This error occurs if the MusicKit's MKConductor class encounters a Mach error (this should never happen, so this error should never appear--in particular, it should never be seen by the user).")
 

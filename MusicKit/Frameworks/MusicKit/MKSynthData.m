@@ -64,6 +64,7 @@ Modification history:
 #import "OrchestraPrivate.h"
 
 #import "SynthDataPrivate.h"
+#import <Foundation/Foundation.h>
 @implementation MKSynthData
 
 #define ISDATA (orchAddr.memSegment == MK_xData || \

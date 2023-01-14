@@ -67,7 +67,7 @@
 - (void)setYMaxTo:(float)coord;
 - (void)setXSnapTo:(float)coord;
 - (void)setYSnapTo:(float)coord;
-- (void)setStickyAt:(int)point To:(int)state;
+- (void)setStickyAt:(int)point To:(NSControlStateValue)state;
 - (void) setShowSmooth: (BOOL) state;
 - (void) setDrawSegments: (BOOL) state;
 - (void)scaleLimits;

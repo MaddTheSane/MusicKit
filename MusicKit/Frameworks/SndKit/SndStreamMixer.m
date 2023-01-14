@@ -151,7 +151,7 @@
 
 - (int) addClient: (SndStreamClient *) client
 {
-    int  clientCount;
+    NSInteger  clientCount;
     BOOL clientPresent;    
 
     [streamClientsLock lock];

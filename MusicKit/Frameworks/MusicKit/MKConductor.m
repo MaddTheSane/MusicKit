@@ -110,6 +110,11 @@ static BOOL performanceIsPaused = NO; /* YES if the entire performance is
 					 paused. */
 static id classDelegate = nil;  /* Delegate for the whole class. */
 
+#import "ConductorPrivate.h"
+#import "_musickit.h"
+#import "_error.h"
+
+
 @implementation MKConductor
 
 /* METHOD TYPES

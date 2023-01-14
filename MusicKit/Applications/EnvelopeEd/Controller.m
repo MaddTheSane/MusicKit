@@ -68,7 +68,7 @@
 - (void)removeEnvelope:sender
 {
 	NSArray *views;
-	unsigned int lastIndex;
+	NSUInteger lastIndex;
 	
 	if (theEnvelope!=nil) {
 		lastIndex=[[theSplitView subviews] 
@@ -284,7 +284,7 @@
 - (void)setStickyPoint:sender
 {
 	if (theEnvelope!=nil) 
-		[theEnvelope setStickyAt:[thePoint intValue] To:[sender state]]; 
+		[theEnvelope setStickyAt:[thePoint intValue] To:[(NSButton*)sender state]];
 }
 
 - (void) setGraphType: sender

@@ -126,7 +126,7 @@ Modification history prior to commit to CVS:
   09/7/94/daj -  Updated to not use libsys functions.
   10/31/98/lms - Major reorganization for OpenStep conventions, allocation and classes.
 */
-#import <Foundation/NSUserDefaults.h>
+#import <Foundation/Foundation.h>
 
 /* MusicKit include files */
 #import "_musickit.h"
@@ -137,6 +137,7 @@ Modification history prior to commit to CVS:
 #import "_time.h"
 #import "ConductorPrivate.h"
 #import "MidiPrivate.h"
+#import "MKMidi.h" /*sb...*/
 
 @implementation MKMidi
 

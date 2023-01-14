@@ -31,8 +31,6 @@ Modification history:
   11/20/89/daj - Minor change to do lazy garbage collection of synth data. 
   04/21/90/daj - Changes to make compiler happy with -W switches on.
 */
-#import <Foundation/Foundation.h>
-#import "MKUnitGenerator.h" /* these 2 added by sb */
 
 id _MKSetSynthElementSynthPatchLoc(SynthElement *synthEl, unsigned short loc)
     /* Used for cross-ref into MKSynthPatch location. */

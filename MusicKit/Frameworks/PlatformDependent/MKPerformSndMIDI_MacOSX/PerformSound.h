@@ -32,8 +32,8 @@
 #define PERFORM_API 
 
 #include <objc/objc.h> // for BOOL
-#include "SndStruct.h"
-#include "SndFormats.h"
+#import <MKPerformSndMIDI/SndStruct.h>
+#import <MKPerformSndMIDI/SndFormats.h>
 
 #ifdef __cplusplus
 extern "C" {

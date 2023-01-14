@@ -13,7 +13,6 @@
   Portions Copyright (c) 1994 Stanford University
   Portions Copyright (c) 1999-2004 The MusicKit Project.
 */
-#import <Foundation/Foundation.h>
 
 #if _MK_ONLY_ONE_MTC_SUPPORTED
 

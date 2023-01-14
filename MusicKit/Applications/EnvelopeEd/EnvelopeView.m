@@ -1383,7 +1383,7 @@ int token(char *t)
 //-------------------------------------------------------------------
 // setStickyAt:To: sets point to be the sticky point of envelope
  
-- (void) setStickyAt: (int) point To: (int) state
+- (void) setStickyAt: (int) point To: (NSControlStateValue) state
 {
     if (state == 0)
         [theEnvelope setStickPoint: MAXINT];

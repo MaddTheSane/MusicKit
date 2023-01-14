@@ -88,13 +88,6 @@
  6/25/97/daj - Added support for X/P overlaied, Y not overlaid
  */
 
-#ifndef GNUSTEP
-# import <mach/message.h>
-# import <mach/mach_error.h>
-#endif
-#import <MKDSP/dsp_memory_map.h>
-#import <Foundation/NSDate.h>
-#import "MKOrchestra.h" /*these 2 added by sb */
 
 
 #define SOFTREOPEN 0  /* Set to 1 to NOT do a DSPClose/MKInit on re-open. */

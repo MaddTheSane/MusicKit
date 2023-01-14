@@ -48,47 +48,48 @@
    SndKitConfig.h not found when compiling the MusicKit, you haven't
    run ./configure 
  */
-#import "SndKitConfig.h"
+#import <SndKit/SndKitConfig.h>
 
-#import "SndFormat.h"
-#import "SndEndianFunctions.h"
-#import "SndTable.h"
-#import "Snd.h"
-#import "SndPasteboard.h"
-#import "SndFunctions.h"
-#import "SndMuLaw.h"
-#import "SndOnDisk.h"
-#import "SndError.h"
-#import "SndStreamManager.h"
-#import "SndAudioBuffer.h"
-#import "SndStreamClient.h"
-#import "SndStreamRecorder.h"
-#import "SndStreamMixer.h"
-#import "SndStreamInput.h"
-#import "SndAudioProcessorMP3Encoder.h"
-#import "SndMP3.h"
-#import "SndAudioProcessor.h"
-#import "SndAudioProcessorChain.h"
-#import "SndAudioProcessorDelay.h"
-#import "SndAudioProcessorDistortion.h"
-#import "SndAudioProcessorFlanger.h"
-#import "SndAudioProcessorNoiseGate.h"
-#import "SndAudioProcessorReverb.h"
-#import "SndAudioProcessorRecorder.h"
-#import "SndAudioProcessorToneGenerator.h"
-#import "SndAudioProcessorInspector.h"
-#import "SndPerformance.h"
-#import "SndPlayer.h"
-#import "SndAudioFader.h"
-#import "SndBreakpoint.h"
-#import "SndEnvelope.h"
-#import "SndAudioBufferQueue.h"
+#import <SndKit/SndFormat.h>
+#import <SndKit/SndEndianFunctions.h>
+#import <SndKit/SndTable.h>
+#import <SndKit/Snd.h>
+#import <SndKit/SndPasteboard.h>
+#import <SndKit/SndFunctions.h>
+#import <SndKit/SndMuLaw.h>
+#import <SndKit/SndOnDisk.h>
+#import <SndKit/SndError.h>
+#import <SndKit/SndStreamManager.h>
+#import <SndKit/SndAudioBuffer.h>
+#import <SndKit/SndStreamClient.h>
+#import <SndKit/SndStreamRecorder.h>
+#import <SndKit/SndStreamMixer.h>
+#import <SndKit/SndStreamInput.h>
+#import <SndKit/SndAudioProcessorMP3Encoder.h>
+#import <SndKit/SndMP3.h>
+#import <SndKit/SndAudioProcessor.h>
+#import <SndKit/SndAudioProcessorChain.h>
+#import <SndKit/SndAudioProcessorDelay.h>
+#import <SndKit/SndAudioProcessorDistortion.h>
+#import <SndKit/SndAudioProcessorFlanger.h>
+#import <SndKit/SndAudioProcessorNoiseGate.h>
+#import <SndKit/SndAudioProcessorReverb.h>
+#import <SndKit/SndAudioProcessorRecorder.h>
+#import <SndKit/SndAudioProcessorToneGenerator.h>
+#import <SndKit/SndAudioProcessorInspector.h>
+#import <SndKit/SndPerformance.h>
+#import <SndKit/SndPlayer.h>
+#import <SndKit/SndAudioFader.h>
+#import <SndKit/SndBreakpoint.h>
+#import <SndKit/SndEnvelope.h>
+#import <SndKit/SndAudioBufferQueue.h>
 
 // GUI classes, requires AppKit.h
-#import "SndView.h"
-#import "SndMeter.h"
+#import <SndKit/SndView.h>
+#import <SndKit/SndMeter.h>
+#import <SndKit/SndStretchableScroller.h>
 
 #if defined(__APPLE_CC__) // Only Apple defines AudioUnits.
-#import "SndAudioUnitProcessor.h"
-#import "SndAudioUnitController.h"
+#import <SndKit/SndAudioUnitProcessor.h>
+#import <SndKit/SndAudioUnitController.h>
 #endif

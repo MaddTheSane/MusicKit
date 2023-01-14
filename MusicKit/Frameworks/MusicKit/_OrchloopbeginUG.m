@@ -32,6 +32,7 @@ Modification history:
 */
 #import "_musickit.h"
 #import "_OrchloopbeginUG.h"
+#import <MKUnitGenerator.h>
 
 @implementation _OrchloopbeginUG:MKUnitGenerator 
   /* See beg_orcl in dsp/smsrc/beginend.asm.  */ 

@@ -25,14 +25,13 @@
   Portions Copyright (c) 1999-2004, The MusicKit Project.
 */
 #import "MidiRecord.h"
-
-@implementation MidiRecord
-
 #import <AppKit/AppKit.h>
 //#import <MKSynthPatches/MKSynthPatches.h>
 
+@implementation MidiRecord
+
 static void handleMKError(NSString *msg) {
-    if (!NSRunAlertPanel(@"MidiRecord", msg, @"OK", @"Quit", nil, NULL))
+    if (!NSRunCriticalAlertPanel(@"MidiRecord", msg, @"OK", @"Quit", nil, NULL))
 	[NSApp terminate: NSApp];
 }
 
@@ -92,7 +91,7 @@ static void handleMKError(NSString *msg) {
     return self;
 }
 
-- (void) setDriverName: (id) sender
+- (IBAction) setDriverName: (id) sender
 {
     [midiIn close];
     [midiIn release];
@@ -119,7 +118,7 @@ static void handleMKError(NSString *msg) {
     return self;
 }
 
-- (void) go: (id) sender
+- (IBAction) go: (id) sender
   /* This method is invoked when the button is pushed. */ 
 {
     if ([MKConductor inPerformance]) { /* We're already performing */
@@ -132,14 +131,14 @@ static void handleMKError(NSString *msg) {
     } 
 }
 
-- (void) saveAs: (id) sender
+- (IBAction) saveAs: (id) sender
 {
     if (sender != self) {
         if (!savePanel) {
             [savePanel setTitle: @"MidiRecord Save"];
         }
-        [savePanel setRequiredFileType: @"score"];
-        if ([savePanel runModalForDirectory: @"" file: @""])  {
+        [savePanel setAllowedFileTypes: @[@"score"]];
+        if ([savePanel runModal])  {
             if(scoreFilePath != nil)
                 [scoreFilePath release];
             scoreFilePath = [[savePanel filename] retain];
@@ -156,7 +155,7 @@ static void handleMKError(NSString *msg) {
     needsUpdate = NO; 
 }
 
-- (void) save: sender
+- (IBAction) save: sender
 {
     [self saveAs: ([scoreFilePath length] > 0) ? self : nil];
 }

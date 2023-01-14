@@ -146,7 +146,7 @@ static void calcValues(SndMeter *self, float *aveVal, float *peakVal)
    /* Always give up the CPU when playing. */
    if ([self->sound isPlaying])
        return 1;
-   ev = [[self window] nextEventMatchingMask: NSAnyEventMask  
+   ev = [[self window] nextEventMatchingMask: NSEventMaskAny
 	     untilDate: [NSDate date] inMode: NSDefaultRunLoopMode dequeue: NO];
    return ev != nil || self->smFlags.shouldStop;
 }

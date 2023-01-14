@@ -13,7 +13,6 @@
   Portions Copyright (c) 1994 Stanford University
   Portions Copyright (c) 1999-2004, The MusicKit Project.
 */
-#import "MKMidi.h" /*sb...*/
 
 static double mangleTime(MKMidi *self,double driverTime)
 {

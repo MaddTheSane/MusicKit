@@ -17,7 +17,7 @@ Modification history prior to CVS commit:
    8/27/90/daj - Added override of allocFromZone: and copyFromZone:
                  Changed -free to be like [self dealloc]. 
 */
-#import <Foundation/Foundation.h>
+//#import <Foundation/Foundation.h>
 //Foundation/NSZone
 
 +new 

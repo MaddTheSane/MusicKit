@@ -131,6 +131,13 @@
 #import "_time.h"
 #import "PatchTemplatePrivate.h"
 #import "ConductorPrivate.h"
+#ifndef GNUSTEP
+# import <mach/message.h>
+# import <mach/mach_error.h>
+#endif
+#import <MKDSP/dsp_memory_map.h>
+#import <Foundation/NSDate.h>
+#import "MKOrchestra.h" /*these 2 added by sb */
 
 /* FIXME Consider changing patch List and unitGeneratorStack to non-objc linked lists. */
 
