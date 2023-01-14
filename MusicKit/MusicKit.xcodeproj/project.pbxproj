@@ -9048,7 +9048,10 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examples/SignalProcessing/SignalProcessing-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = SignalProcessing;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9078,7 +9081,10 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = "SignalProcessing-Info.plist";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Examples/SignalProcessing/SignalProcessing-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = SignalProcessing;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9107,7 +9113,10 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = "SignalProcessing-Info.plist";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Examples/SignalProcessing/SignalProcessing-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = SignalProcessing;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9369,6 +9378,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "example4-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
@@ -9395,6 +9405,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "example4-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
@@ -9419,6 +9430,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "example4-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
@@ -9562,7 +9574,7 @@
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = 5.6;
+				FRAMEWORK_VERSION = A;
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_PFE_FILE_C_DIALECTS = "objective-c";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -9604,7 +9616,7 @@
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = 5.6;
+				FRAMEWORK_VERSION = A;
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_PFE_FILE_C_DIALECTS = "objective-c";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -9648,7 +9660,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_INSTALLED_NAME = "@executable_path$(/)..$(/)Frameworks$(/)$(PRODUCT_NAME).$(WRAPPER_EXTENSION)$(/)Versions$(/)$(FRAMEWORK_VERSION)$(/)$(PRODUCT_NAME)";
-				FRAMEWORK_VERSION = 5.6;
+				FRAMEWORK_VERSION = A;
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_PFE_FILE_C_DIALECTS = "objective-c";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -9691,7 +9703,7 @@
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = 5.6;
+				FRAMEWORK_VERSION = A;
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_PFE_FILE_C_DIALECTS = "objective-c, objective-c++";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -9732,7 +9744,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = "$(DSTROOT)/$(INSTALL_PATH)";
-				FRAMEWORK_VERSION = 5.6;
+				FRAMEWORK_VERSION = A;
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_PFE_FILE_C_DIALECTS = "objective-c, objective-c++";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -9773,7 +9785,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_INSTALLED_NAME = "@executable_path$(/)..$(/)Frameworks$(/)$(PRODUCT_NAME).$(WRAPPER_EXTENSION)$(/)Versions$(/)$(FRAMEWORK_VERSION)$(/)$(PRODUCT_NAME)";
-				FRAMEWORK_VERSION = 5.6;
+				FRAMEWORK_VERSION = A;
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_PFE_FILE_C_DIALECTS = "objective-c, objective-c++";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -10525,7 +10537,10 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examples/MidiRecord/MidiRecord-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = "MidiRecord-macos";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(USER_APPS_DIR)";
 				MARKETING_VERSION = 5.5.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
@@ -10558,8 +10573,11 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "Examples/MidiRecord/MidiRecord-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = "MidiRecord-macos";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)/MusicKit";
 				MARKETING_VERSION = 5.5.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
@@ -10591,7 +10609,10 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examples/MidiRecord/MidiRecord-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = "MidiRecord-macos";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				MARKETING_VERSION = 5.5.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
@@ -10623,7 +10644,10 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examples/MidiLoop/MidiLoop-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = "MidiLoop-macosx";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(USER_APPS_DIR)";
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
@@ -10655,8 +10679,11 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "Examples/MidiLoop/MidiLoop-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = "MidiLoop-macosx";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)/MusicKit";
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
@@ -10687,7 +10714,10 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examples/MidiLoop/MidiLoop-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = "MidiLoop-macosx";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
@@ -10718,7 +10748,10 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examples/MidiPlay/MidiPlay-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = MidiPlay;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(USER_APPS_DIR)";
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
@@ -10750,8 +10783,11 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "Examples/MidiPlay/MidiPlay-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = MidiPlay;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)/MusicKit";
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
@@ -10782,7 +10818,10 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examples/MidiPlay/MidiPlay-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = MidiPlay;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
@@ -10813,7 +10852,10 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examples/MidiFilePlayback/MidiFilePlayback-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = "MIDIFilePlayback-macosx";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(USER_APPS_DIR)";
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
@@ -10845,8 +10887,11 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "Examples/MidiFilePlayback/MidiFilePlayback-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = "MIDIFilePlayback-macosx";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)/MusicKit";
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
@@ -10877,7 +10922,10 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examples/MidiFilePlayback/MidiFilePlayback-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = "MIDIFilePlayback-macosx";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
@@ -10908,7 +10956,10 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examples/MidiEcho/MidiEcho-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = "MidiEcho-macosx";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(USER_APPS_DIR)";
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
@@ -10940,8 +10991,11 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "Examples/MidiEcho/MidiEcho-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = "MidiEcho-macosx";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)/MusicKit";
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
@@ -10972,7 +11026,10 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examples/MidiEcho/MidiEcho-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = "MidiEcho-macosx";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
@@ -11003,7 +11060,10 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examples/MidiEcho-1-MIDI-Channel/MidiEcho-1-Channel-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = MidiEcho;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(USER_APPS_DIR)";
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
@@ -11035,8 +11095,11 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "Examples/MidiEcho-1-MIDI-Channel/MidiEcho-1-Channel-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = MidiEcho;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)/MusicKit";
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
@@ -11067,7 +11130,10 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examples/MidiEcho-1-MIDI-Channel/MidiEcho-1-Channel-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = MidiEcho;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
@@ -11716,7 +11782,10 @@
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examples/MultipleSoundPlayer/MultipleSoundPlayer-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = "MultipleSoundPlayer-macosx";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(USER_APPS_DIR)";
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
@@ -11750,8 +11819,11 @@
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "Examples/MultipleSoundPlayer/MultipleSoundPlayer-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = "MultipleSoundPlayer-macosx";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)/MusicKit";
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
@@ -11784,7 +11856,10 @@
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examples/MultipleSoundPlayer/MultipleSoundPlayer-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = "MultipleSoundPlayer-macosx";
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
@@ -12000,7 +12075,10 @@
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examples/example3/example3-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = example3.nib;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(USER_APPS_DIR)";
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
@@ -12034,8 +12112,11 @@
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "Examples/example3/example3-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = example3.nib;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)/MusicKit";
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
@@ -12068,7 +12149,10 @@
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examples/example3/example3-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = example3.nib;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
@@ -12172,6 +12256,7 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Applications/Spectro/Spectro-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_NSMainNibFile = Spectro;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(USER_APPS_DIR)";
@@ -12209,6 +12294,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "Applications/Spectro/Spectro-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_NSMainNibFile = Spectro;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)/MusicKit";
@@ -12244,6 +12330,7 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Applications/Spectro/Spectro-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_NSMainNibFile = Spectro;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "@executable_path/../Frameworks";
@@ -12279,6 +12366,7 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Applications/PatchCord/PatchCord-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_NSMainNibFile = PatchCord;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(USER_APPS_DIR)";
@@ -12316,6 +12404,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "Applications/PatchCord/PatchCord-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_NSMainNibFile = PatchCord;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)/MusicKit";
@@ -12351,6 +12440,7 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Applications/PatchCord/PatchCord-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_NSMainNibFile = PatchCord;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "@executable_path/../Frameworks";
@@ -12384,9 +12474,11 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Applications/TwoWaves/TwoWaves-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_NSMainNibFile = TwoWaves;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(USER_APPS_DIR)";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -12422,9 +12514,11 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "Applications/TwoWaves/TwoWaves-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_NSMainNibFile = TwoWaves;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)/MusicKit";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -12458,9 +12552,11 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Applications/TwoWaves/TwoWaves-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_NSMainNibFile = TwoWaves;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -12494,9 +12590,11 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Applications/ScorePlayer/ScorePlayer-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_NSMainNibFile = ScorePlayer;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(USER_APPS_DIR)";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -12532,9 +12630,11 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "Applications/ScorePlayer/ScorePlayer-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_NSMainNibFile = ScorePlayer;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)/MusicKit";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -12568,9 +12668,11 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Applications/ScorePlayer/ScorePlayer-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_NSMainNibFile = ScorePlayer;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -12604,9 +12706,12 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Applications/PianoRoll/PianoRoll-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Piano Roll";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_NSMainNibFile = "PianoRoll-macosx";
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(USER_APPS_DIR)";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -12642,9 +12747,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "Applications/PianoRoll/PianoRoll-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Piano Roll";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_NSMainNibFile = "PianoRoll-macosx";
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)/MusicKit";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -12678,9 +12786,12 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Applications/PianoRoll/PianoRoll-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Piano Roll";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_NSMainNibFile = "PianoRoll-macosx";
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -12714,9 +12825,11 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Applications/EnvelopeEd/EnvelopeEd-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_NSMainNibFile = EnvelopeEd;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(USER_APPS_DIR)";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -12752,9 +12865,11 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				HEADER_SEARCH_PATHS = .;
 				INFOPLIST_FILE = "Applications/EnvelopeEd/EnvelopeEd-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_NSMainNibFile = EnvelopeEd;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)/MusicKit";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -12788,9 +12903,11 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Applications/EnvelopeEd/EnvelopeEd-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.music";
 				INFOPLIST_KEY_NSMainNibFile = EnvelopeEd;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -13026,7 +13143,7 @@
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = 5.6;
+				FRAMEWORK_VERSION = A;
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
@@ -13063,7 +13180,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = "$(DSTROOT)/$(INSTALL_PATH)";
-				FRAMEWORK_VERSION = 5.6;
+				FRAMEWORK_VERSION = A;
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
@@ -13100,7 +13217,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_INSTALLED_NAME = "@executable_path$(/)..$(/)Frameworks$(/)$(PRODUCT_NAME).$(WRAPPER_EXTENSION)$(/)Versions$(/)$(FRAMEWORK_VERSION)$(/)$(PRODUCT_NAME)";
-				FRAMEWORK_VERSION = 5.6;
+				FRAMEWORK_VERSION = A;
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
@@ -13136,7 +13253,7 @@
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = 5.6;
+				FRAMEWORK_VERSION = A;
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
@@ -13178,7 +13295,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = "$(DSTROOT)/$(INSTALL_PATH)";
-				FRAMEWORK_VERSION = 5.6;
+				FRAMEWORK_VERSION = A;
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
@@ -13220,7 +13337,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_INSTALLED_NAME = "@executable_path$(/)..$(/)Frameworks$(/)$(PRODUCT_NAME).$(WRAPPER_EXTENSION)$(/)Versions$(/)$(FRAMEWORK_VERSION)$(/)$(PRODUCT_NAME)";
-				FRAMEWORK_VERSION = 5.6;
+				FRAMEWORK_VERSION = A;
 				GCC_ALTIVEC_EXTENSIONS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
@@ -13390,7 +13507,10 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examples/metronome/metronome-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = metronome;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -13417,7 +13537,10 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examples/metronome/metronome-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = metronome;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -13442,7 +13565,10 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examples/metronome/metronome-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = metronome;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -13470,7 +13596,10 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examples/PlayNote/PlayNote-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = PlayNote;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -13496,7 +13625,10 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examples/PlayNote/PlayNote-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = PlayNote;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -13521,7 +13653,10 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Examples/PlayNote/PlayNote-Info.plist";
+				INFOPLIST_KEY_NSMainNibFile = PlayNote;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -13548,7 +13683,9 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "example5-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -13574,7 +13711,9 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "example5-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -13598,7 +13737,9 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "example5-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INSTALL_PATH = "$(HOME)/Applications";
 				OTHER_LDFLAGS = (
 					"-framework",

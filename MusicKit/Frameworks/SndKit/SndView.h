@@ -294,7 +294,7 @@ enum SndViewStereoMode {
     int		defaultRecordFormat;
     int		defaultRecordChannelCount;
     double	defaultRecordSampleRate;
-    float	defaultRecordSeconds;
+    NSTimeInterval	defaultRecordSeconds;
     /*! A Snd instance holding the sound recorded from an input source. */
     Snd *recordingSound;
     
@@ -325,12 +325,12 @@ enum SndViewStereoMode {
 /*!
   @brief Hides the SndView's cursor.
 */
-- hideCursor;
+- (void)hideCursor;
 
 /*!
   @brief Displays the SndView's cursor.
 */
-- showCursor;
+- (void)showCursor;
 
 /*!
   @return Returns a BOOL.
@@ -352,7 +352,7 @@ enum SndViewStereoMode {
   @param  sender is an id.
   @brief Copies the current selection to the pasteboard.
 */
-- (void) copy: (id) sender;
+- (IBAction) copy: (id) sender;
 
 /*!
   @param  sender is an id.
@@ -362,7 +362,7 @@ enum SndViewStereoMode {
 
   The insertion point is positioned to where the selection used to start.
 */
-- (void) cut: (id) sender;
+- (IBAction) cut: (id) sender;
 
 /*!
   @param  sender is an id.
@@ -371,7 +371,7 @@ enum SndViewStereoMode {
 
   The deletion isn't placed on the pasteboard.
 */
-- (void) delete: (id) sender;
+- (IBAction) delete: (id) sender;
 
 /*!
   @param  sender is an id.
@@ -383,19 +383,21 @@ enum SndViewStereoMode {
   method <b>compatibleWithSound:</b>. If the paste is successful, the
   <b>soundDidChange:</b> message is sent to the delegate.
 */
-- (void) paste: (id) sender;
+- (IBAction) paste: (id) sender;
 
 /*!
   @param  sender is an id.
   @brief Creates a selection over the SndView's entire Snd.
 */
-- (void) selectAll: (id) sender;
+- (IBAction) selectAll: (id) sender;
 
 /*!
   @return Returns an id.
   @brief Returns the SndView's delegate object.
 */
 - (id<SndViewDelegate>)delegate;
+
+@property (assign) id<SndViewDelegate> delegate;
 
 /*!
   @brief Sent to the delegate just after the SndView's sound is played.
@@ -528,8 +530,10 @@ enum SndViewStereoMode {
  */
 - (BOOL) isEntireSoundVisible;
 
-- (float) getDefaultRecordTime;
-- (void) setDefaultRecordTime: (float) seconds;
+@property (readonly, getter=isEntireSoundVisible) BOOL entireSoundVisible;
+
+- (float) getDefaultRecordTime NS_DEPRECATED_WITH_REPLACEMENT_MAC("-defaultRecordTime", 10.0, 10.8);
+@property (nonatomic) NSTimeInterval defaultRecordTime;
 
 /*!
   @brief Not normally messaged directly by a client class, it's default operation is to inform the delegate
@@ -636,6 +640,8 @@ enum SndViewStereoMode {
  */
 - (float) amplitudeZoom;
 
+@property (nonatomic) float amplitudeZoom;
+
 /*!
   @return Returns a float.
   @brief Returns the SndView's reduction factor in the horizontal time axis.
@@ -643,6 +649,8 @@ enum SndViewStereoMode {
    Computed as follows: <tt>reductionFactor = sampleCount / displayUnits</tt>
 */
 - (float) reductionFactor;
+
+@property (nonatomic, readonly) float reductionFactor;
 
 /*!
   @param  reductionFactor is a float.
@@ -733,7 +741,7 @@ enum SndViewStereoMode {
   NSScrollView, autoscaling should be disabled (autoscaling is
   disabled by default).
 */
-- setAutoscale: (BOOL) aFlag;
+- (void) setAutoscale: (BOOL) aFlag;
 
 /*!
   @param  aFlag is a BOOL.
@@ -815,6 +823,8 @@ enum SndViewStereoMode {
   @return Returns a Snd instance.
 */
 - (Snd *) sound;
+
+@property (nonatomic, assign) Snd *sound;
 
 /*!
   @brief Sets the width and height of the SndView's frame.
@@ -898,8 +908,8 @@ enum SndViewStereoMode {
   @param thePasteboard The pasteboard to receive the sound region.
   @param pboardTypes An array of ? sound formats?
  */
-- (BOOL) writeSelectionToPasteboard: (NSPasteboard *) thePasteboard types: (NSArray *) pboardTypes;
-- (BOOL) writeSelectionToPasteboardNoProvide: (NSPasteboard *) thePasteboard types: (NSArray *) pboardTypes;
+- (BOOL) writeSelectionToPasteboard: (NSPasteboard *) thePasteboard types: (NSArray<NSPasteboardType> *) pboardTypes;
+- (BOOL) writeSelectionToPasteboardNoProvide: (NSPasteboard *) thePasteboard types: (NSArray<NSPasteboardType> *) pboardTypes;
 
 - (id) initWithCoder: (NSCoder *) aDecoder;
 - (void) encodeWithCoder: (NSCoder *) aCoder;
@@ -938,6 +948,8 @@ enum SndViewStereoMode {
  */
 - (BOOL) drawsCrosses;
 
+@property BOOL drawsCrosses;
+
 /* see class description for explanation of optimisation thresholds and skips, and peak fractions */
 - (void) setOptThreshold: (int) threshold;
 - (int) getOptThreshold;
@@ -970,6 +982,8 @@ enum SndViewStereoMode {
  */
 - (NSColor *) selectionColor;
 
+@property (nonatomic, copy) NSColor *selectionColor;
+
 /*!
   @brief Sets the background colour.
   @param color An NSColor.
@@ -982,6 +996,8 @@ enum SndViewStereoMode {
  */
 - (NSColor *) backgroundColor;
 
+@property (nonatomic, copy) NSColor *backgroundColor;
+
 /*!
   @brief Sets the foreground colour.
   @param color An NSColor instance.
@@ -993,6 +1009,8 @@ enum SndViewStereoMode {
   @return Returns an NSColor instance.
  */
 - (NSColor *) foregroundColor;
+
+@property (nonatomic, copy) NSColor *foregroundColor;
 
 /*!
   @brief Sets the icon used when dragging selections from the SndView.
@@ -1011,6 +1029,8 @@ enum SndViewStereoMode {
  @return Returns an NSImage instance.
  */
 - (NSImage *) dragIcon;
+
+@property (retain) NSImage *dragIcon;
 
 @end
 

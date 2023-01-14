@@ -105,7 +105,7 @@ OF THIS AGREEMENT.
     svFlags.cursorOn = !svFlags.cursorOn;
 }
 
-- hideCursor
+- (void)hideCursor
 {
     if (cursorFlashTimer) {
 	[cursorFlashTimer invalidate];
@@ -118,11 +118,9 @@ OF THIS AGREEMENT.
 	
 	svFlags.cursorOn = NO;
     }
-    
-    return self;
 }
 
-- showCursor
+- (void)showCursor
 {
     if (!cursorFlashTimer) {
 	if (selectedFrames.length < 1) {
@@ -137,8 +135,6 @@ OF THIS AGREEMENT.
 								repeats: YES] retain];
 	}
     }
-    
-    return self;
 }
 
 - (BOOL) scrollPointToVisible: (const NSPoint) point
@@ -231,10 +227,7 @@ OF THIS AGREEMENT.
 //  NSLog(@"FINAL SELECTION %u, %u\n", selectedFrames.location, selectedFrames.length);
 }
 
-- delegate;
-{
-    return delegate;
-}
+@synthesize delegate;
 
 - (int) displayMode;
 {
@@ -950,10 +943,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     [self setNeedsDisplay: YES];
 }
 
-- (NSColor *) backgroundColor;
-{
-    return backgroundColour;
-}
+@synthesize backgroundColor = backgroundColour;
 
 - (void) setSelectionColor: (NSColor *) color
 {
@@ -963,10 +953,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     [self setNeedsDisplay: YES];
 }
 
-- (NSColor *) selectionColor
-{
-    return selectionColour;
-}
+@synthesize selectionColor = selectionColour;
 
 - (void) setForegroundColor: (NSColor *) color
 {
@@ -975,10 +962,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     [self setNeedsDisplay: YES];
 }
 
-- (NSColor *) foregroundColor
-{
-    return foregroundColour;
-}
+@synthesize foregroundColor = foregroundColour;
 
 - (void) dealloc
 {
@@ -1158,7 +1142,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 	defaultRecordFormat = [aDecoder decodeIntForKey: @"SndView_defaultRecordFormat"];
 	defaultRecordChannelCount = [aDecoder decodeIntForKey: @"SndView_defaultRecordChannelCount"];
 	defaultRecordSampleRate = [aDecoder decodeDoubleForKey: @"SndView_defaultRecordSampleRate"];
-	defaultRecordSeconds = [aDecoder decodeFloatForKey: @"SndView_defaultRecordLength"];
+	defaultRecordSeconds = [aDecoder decodeDoubleForKey: @"SndView_defaultRecordLength"];
 	
 	[dataList release];
 	dataList = [[aDecoder decodeObjectForKey: @"SndView_dataList"] retain];
@@ -1188,6 +1172,8 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 	svFlags.notEditable = b7;
 	svFlags.notOptimizedForSpeed = b8;
 	
+        float tmpSecs;
+        
 	[aDecoder decodeValuesOfObjCTypes: "iiiifiidf", 
 	    &cursorFlashTimer,
 	    &optThreshold,
@@ -1197,7 +1183,8 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 	    &defaultRecordFormat,
 	    &defaultRecordChannelCount,
 	    &defaultRecordSampleRate,
-	    &defaultRecordSeconds];
+	    &tmpSecs];
+        defaultRecordSeconds = tmpSecs;
 	[dataList release];
 	dataList = [[aDecoder decodeObject] retain];
     }
@@ -1238,7 +1225,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 	[aCoder encodeInt: defaultRecordFormat forKey: @"SndView_defaultRecordFormat"];
 	[aCoder encodeInt: defaultRecordChannelCount forKey: @"SndView_defaultRecordChannelCount"];
 	[aCoder encodeDouble: defaultRecordSampleRate forKey: @"SndView_defaultRecordSampleRate"];
-	[aCoder encodeFloat: defaultRecordSeconds forKey: @"SndView_defaultRecordLength"];
+	[aCoder encodeDouble: defaultRecordSeconds forKey: @"SndView_defaultRecordLength"];
 	[aCoder encodeObject: dataList forKey: @"SndView_dataList"];
 	[aCoder encodeFloat: amplitudeZoom forKey: @"SndView_amplitudeZoom"];
     }
@@ -1259,6 +1246,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 	b7 = svFlags.notEditable;
 	b8 = svFlags.notOptimizedForSpeed;
 	[aCoder encodeValuesOfObjCTypes: "cccccccc", &b1, &b2, &b3, &b4, &b5, &b6, &b7, &b8];
+        float tmpFloat = defaultRecordSeconds;
 	[aCoder encodeValuesOfObjCTypes: "iiiifiidf",
 	    &cursorFlashTimer,
 	    &optThreshold,
@@ -1268,7 +1256,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 	    &defaultRecordFormat,
 	    &defaultRecordChannelCount,
 	    &defaultRecordSampleRate,
-	    &defaultRecordSeconds];
+	    &tmpFloat];
 	[aCoder encodeObject: dataList];
 	// [aCoder encodeValuesOfObjCTypes: "f", &amplitudeZoom]; // TODO should be encoded when versioning is managed.
     }
@@ -1337,8 +1325,10 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 
 - (float) getDefaultRecordTime
 {
-    return defaultRecordSeconds;
+    return self.defaultRecordTime;
 }
+
+@synthesize defaultRecordTime=defaultRecordSeconds;
 
 // Return the rectangle in pixels constituting the selected range of frames.
 - (NSRect) selectionRect
@@ -1357,16 +1347,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     return selectionRect;
 }
 
-- (void) setDragIcon: (NSImage *) newDragIcon
-{
-    [dragIcon release];
-    dragIcon = [newDragIcon retain];
-}
-
-- (NSImage *) dragIcon
-{
-    return [[dragIcon retain] autorelease];
-}
+@synthesize dragIcon;
 
 // generate an NSImage from the visible selected region of the view.
 - (NSImage *) dragImageFromSelection
@@ -2096,10 +2077,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
   return;
 }
 
-- (float) reductionFactor
-{
-    return reductionFactor;
-}
+@synthesize reductionFactor;
 
 - (BOOL) setReductionFactor: (float) newReductionFactor
 {
@@ -2258,10 +2236,9 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     return visibleFrame.size.width > 0 ? [self frame].size.width <= visibleFrame.size.width : YES;
 }
 
-- setAutoscale: (BOOL) aFlag
+- (void)setAutoscale: (BOOL) aFlag
 {
     svFlags.autoscale = aFlag;
-    return self;
 }
 
 - (void) setBezeled: (BOOL) aFlag
@@ -2275,12 +2252,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     svFlags.continuousSelectionUpdates = aFlag;
 }
 
-- (void) setDelegate: (id) anObject
-{
-    delegate = anObject;
-}
-
-- (void) setDefaultRecordTime: (float) seconds
+- (void) setDefaultRecordTime: (NSTimeInterval) seconds
 {
     if (seconds <= 0) defaultRecordSeconds = 0.1;
     else defaultRecordSeconds = seconds;
@@ -2364,10 +2336,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     return [self sound];  // basically redundant.
 }
 
-- (Snd *) sound
-{
-    return sound;
-}
+@synthesize sound;
 
 /*sb: complicated business here. If a SndView is not in a proper scrollview, and it is set to (for example)
     auto-resize, I assume that it should autoscale (the reduction factor should change).
@@ -2618,7 +2587,7 @@ LMS: Nowdays we want to rescale to fit the entire sound into the view, regardles
     return YES;
 }
 
-- validRequestorForSendType: (NSString *) typeSent returnType: (NSString *) typeReturned
+- (id)validRequestorForSendType: (NSPasteboardType) typeSent returnType: (NSPasteboardType) typeReturned
 {
     if (([SndPasteboardType isEqualToString: typeSent] || typeSent == NULL) &&
 	([SndPasteboardType isEqualToString: typeReturned] || typeReturned == NULL) ) {
