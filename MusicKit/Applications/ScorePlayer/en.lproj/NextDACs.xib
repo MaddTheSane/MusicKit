@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,7 +34,7 @@
                                 <button fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3">
                                     <rect key="frame" x="185" y="13" width="58" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <buttonCell key="cell" type="check" title="Mute" imagePosition="trailing" alignment="right" inset="2" id="16">
+                                    <buttonCell key="cell" type="check" title="Mute" imagePosition="leading" alignment="justified" inset="2" id="16">
                                         <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" size="12" name="Helvetica"/>
                                     </buttonCell>
@@ -44,9 +45,7 @@
                                 <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4">
                                     <rect key="frame" x="5" y="9" width="171" height="21"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <sliderCell key="cell" continuous="YES" alignment="left" maxValue="1" doubleValue="0.28205129504203796" tickMarkPosition="below" sliderType="linear" id="17">
-                                        <font key="font" size="12" name="Helvetica"/>
-                                    </sliderCell>
+                                    <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" maxValue="1" doubleValue="0.28205129504203796" tickMarkPosition="below" sliderType="linear" id="17"/>
                                     <connections>
                                         <action selector="setNeXTDACVolume:" target="-2" id="11"/>
                                     </connections>

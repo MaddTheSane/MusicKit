@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -88,10 +89,10 @@
                                     </connections>
                                 </matrix>
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9">
-                                    <rect key="frame" x="33" y="30" width="39" height="15"/>
+                                    <rect key="frame" x="31" y="30" width="39" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <textFieldCell key="cell" alignment="center" title="start" id="75">
-                                        <font key="font" size="12" name="Helvetica"/>
+                                    <textFieldCell key="cell" controlSize="small" alignment="right" title="start" id="75">
+                                        <font key="font" metaFont="smallSystem"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
@@ -99,8 +100,8 @@
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="40">
                                     <rect key="frame" x="14" y="8" width="56" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <textFieldCell key="cell" alignment="center" title="duration" id="76">
-                                        <font key="font" size="12" name="Helvetica"/>
+                                    <textFieldCell key="cell" controlSize="small" alignment="right" title="duration" id="76">
+                                        <font key="font" metaFont="smallSystem"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
@@ -108,8 +109,8 @@
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="30">
                                     <rect key="frame" x="77" y="49" width="56" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <textFieldCell key="cell" alignment="center" title="samples" id="77">
-                                        <font key="font" size="12" name="Helvetica"/>
+                                    <textFieldCell key="cell" controlSize="small" alignment="center" title="samples" id="77">
+                                        <font key="font" metaFont="smallSystem"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
@@ -117,15 +118,14 @@
                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="14">
                                     <rect key="frame" x="139" y="49" width="58" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <textFieldCell key="cell" alignment="center" title="seconds" id="78">
-                                        <font key="font" size="12" name="Helvetica"/>
+                                    <textFieldCell key="cell" controlSize="small" alignment="center" title="seconds" id="78">
+                                        <font key="font" metaFont="smallSystem"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
                             </subviews>
                         </view>
-                        <font key="titleFont" size="12" name="Helvetica"/>
                     </box>
                     <box fixedFrame="YES" title="Selection Interval " translatesAutoresizingMaskIntoConstraints="NO" id="26">
                         <rect key="frame" x="20" y="175" width="223" height="82"/>
@@ -141,31 +141,31 @@
                                     <size key="cellSize" width="62" height="21"/>
                                     <size key="intercellSpacing" width="2" height="2"/>
                                     <textFieldCell key="prototype" selectable="YES" editable="YES" state="on" borderStyle="bezel" alignment="right" tag="-1" title="Text" drawsBackground="YES" id="89">
-                                        <font key="font" size="12" name="Helvetica"/>
+                                        <font key="font" metaFont="smallSystem"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                     <cells>
                                         <column>
                                             <textFieldCell selectable="YES" editable="YES" state="on" borderStyle="bezel" alignment="right" drawsBackground="YES" id="19">
-                                                <font key="font" size="12" name="Helvetica"/>
+                                                <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <textFieldCell selectable="YES" editable="YES" state="on" borderStyle="bezel" alignment="right" tag="2" drawsBackground="YES" id="3">
-                                                <font key="font" size="12" name="Helvetica"/>
+                                                <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </column>
                                         <column>
                                             <textFieldCell selectable="YES" editable="YES" state="on" borderStyle="bezel" alignment="right" tag="1" drawsBackground="YES" id="20">
-                                                <font key="font" size="12" name="Helvetica"/>
+                                                <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <textFieldCell selectable="YES" editable="YES" state="on" borderStyle="bezel" alignment="right" tag="3" drawsBackground="YES" id="34">
-                                                <font key="font" size="12" name="Helvetica"/>
+                                                <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -175,45 +175,44 @@
                                         <action selector="selectionMatrixChanged:" target="-2" id="51"/>
                                     </connections>
                                 </matrix>
-                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7">
-                                    <rect key="frame" x="34" y="30" width="39" height="15"/>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7">
+                                    <rect key="frame" x="32" y="30" width="39" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <textFieldCell key="cell" alignment="center" title="start" id="79">
-                                        <font key="font" size="12" name="Helvetica"/>
+                                    <textFieldCell key="cell" controlSize="small" alignment="right" title="start" id="79">
+                                        <font key="font" metaFont="smallSystem"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2">
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2">
                                     <rect key="frame" x="15" y="8" width="56" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <textFieldCell key="cell" alignment="center" title="duration" id="80">
-                                        <font key="font" size="12" name="Helvetica"/>
+                                    <textFieldCell key="cell" controlSize="small" alignment="right" title="duration" id="80">
+                                        <font key="font" metaFont="smallSystem"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="35">
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="35">
                                     <rect key="frame" x="78" y="49" width="56" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <textFieldCell key="cell" alignment="center" title="samples" id="81">
-                                        <font key="font" size="12" name="Helvetica"/>
+                                    <textFieldCell key="cell" controlSize="small" alignment="center" title="samples" id="81">
+                                        <font key="font" metaFont="smallSystem"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="22">
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="22">
                                     <rect key="frame" x="140" y="49" width="58" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <textFieldCell key="cell" alignment="center" title="seconds" id="82">
-                                        <font key="font" size="12" name="Helvetica"/>
+                                    <textFieldCell key="cell" controlSize="small" alignment="center" title="seconds" id="82">
+                                        <font key="font" metaFont="smallSystem"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
                             </subviews>
                         </view>
-                        <font key="titleFont" size="12" name="Helvetica"/>
                     </box>
                     <button fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="39">
                         <rect key="frame" x="181" y="18" width="64" height="71"/>
@@ -280,7 +279,6 @@
                                 </matrix>
                             </subviews>
                         </view>
-                        <font key="titleFont" size="12" name="Helvetica"/>
                     </box>
                     <box fixedFrame="YES" title="Play/Record" translatesAutoresizingMaskIntoConstraints="NO" id="29">
                         <rect key="frame" x="20" y="103" width="223" height="68"/>
@@ -335,7 +333,6 @@
                                 </button>
                             </subviews>
                         </view>
-                        <font key="titleFont" size="12" name="Helvetica"/>
                     </box>
                 </subviews>
             </view>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -196,7 +197,7 @@
                         <rect key="frame" x="141" y="99" width="149" height="29"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" alignment="left" title="ScorePlayer" id="287">
-                            <font key="font" size="24" name="Times-BoldItalic"/>
+                            <font key="font" size="24" name="TimesNewRomanPS-BoldItalicMT"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -205,7 +206,7 @@
                         <rect key="frame" x="107" y="31" width="153" height="14"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" alignment="center" title="Press &quot;Stop&quot; button to abort." id="288">
-                            <font key="font" size="12" name="Times-Roman"/>
+                            <font key="font" size="12" name="TimesNewRomanPSMT"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -219,60 +220,58 @@
                         <rect key="frame" x="13" y="52" width="352" height="26"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Message Text" id="290">
-                            <font key="font" size="16" name="Times-BoldItalic"/>
+                            <font key="font" size="16" name="TimesNewRomanPS-BoldItalicMT"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                 </subviews>
             </view>
+            <point key="canvasLocation" x="14" y="-30"/>
         </window>
         <window title="MIDI Time Code" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="44" userLabel="TimeCodePanel" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="477" y="203" width="315" height="188"/>
+            <rect key="contentRect" x="477" y="203" width="315" height="225"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
             <view key="contentView" id="76">
-                <rect key="frame" x="0.0" y="0.0" width="315" height="188"/>
+                <rect key="frame" x="0.0" y="0.0" width="315" height="225"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="14">
-                        <rect key="frame" x="4" y="148" width="303" height="32"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <buttonCell key="cell" type="push" title="Synchronize to MIDI Time Code" alternateTitle="Disable Time Code Synchronization" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="291">
+                    <button verticalHuggingPriority="750" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="14">
+                        <rect key="frame" x="45" y="178" width="225" height="32"/>
+                        <buttonCell key="cell" type="push" title="Synchronize to MIDI Time Code" alternateTitle="Disable Time Code Synchronization" bezelStyle="rounded" alignment="left" borderStyle="border" inset="2" id="291">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                            <font key="font" size="12" name="Helvetica-Bold"/>
+                            <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
                             <action selector="setTimeCodeSynch:" target="127" id="147"/>
                         </connections>
                     </button>
-                    <box fixedFrame="YES" title="MIDI driver" translatesAutoresizingMaskIntoConstraints="NO" id="34">
-                        <rect key="frame" x="7" y="77" width="297" height="67"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                    <box title="MIDI driver" translatesAutoresizingMaskIntoConstraints="NO" id="34">
+                        <rect key="frame" x="17" y="95" width="285" height="70"/>
                         <view key="contentView" id="oYy-SK-gmd">
-                            <rect key="frame" x="4" y="5" width="289" height="47"/>
+                            <rect key="frame" x="4" y="5" width="277" height="50"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25">
-                                    <rect key="frame" x="23" y="9" width="46" height="39"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                <matrix verticalHuggingPriority="750" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="25">
+                                    <rect key="frame" x="20" y="9" width="63" height="39"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="cellSize" width="46" height="18"/>
+                                    <size key="cellSize" width="63" height="18"/>
                                     <size key="intercellSpacing" width="0.0" height="3"/>
                                     <buttonCell key="prototype" type="radio" title="Radio" imagePosition="leading" alignment="left" inset="2" id="311">
                                         <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                        <font key="font" size="12" name="Helvetica"/>
+                                        <font key="font" metaFont="system"/>
                                     </buttonCell>
                                     <cells>
                                         <column>
                                             <buttonCell type="radio" title="0(A)" imagePosition="leading" alignment="left" state="on" inset="2" id="6">
                                                 <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" size="12" name="Helvetica"/>
+                                                <font key="font" metaFont="system"/>
                                             </buttonCell>
                                             <buttonCell type="radio" title="1(B)" imagePosition="leading" alignment="left" tag="1" inset="2" id="89">
                                                 <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" size="12" name="Helvetica"/>
+                                                <font key="font" metaFont="system"/>
                                             </buttonCell>
                                         </column>
                                     </cells>
@@ -281,19 +280,22 @@
                                     </connections>
                                 </matrix>
                             </subviews>
+                            <constraints>
+                                <constraint firstItem="25" firstAttribute="top" secondItem="oYy-SK-gmd" secondAttribute="top" constant="2" id="DFH-mF-C7Y"/>
+                                <constraint firstItem="25" firstAttribute="leading" secondItem="oYy-SK-gmd" secondAttribute="leading" constant="20" symbolic="YES" id="OgU-JV-wVK"/>
+                                <constraint firstAttribute="bottom" secondItem="25" secondAttribute="bottom" constant="9" id="cO8-1l-kCW"/>
+                            </constraints>
                         </view>
                         <font key="titleFont" size="12" name="Helvetica-Bold"/>
                     </box>
-                    <box fixedFrame="YES" title="Status" translatesAutoresizingMaskIntoConstraints="NO" id="72">
-                        <rect key="frame" x="7" y="19" width="297" height="59"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                    <box title="Status" translatesAutoresizingMaskIntoConstraints="NO" id="72">
+                        <rect key="frame" x="17" y="16" width="285" height="75"/>
                         <view key="contentView" id="Z7D-pG-URe">
-                            <rect key="frame" x="4" y="5" width="289" height="39"/>
+                            <rect key="frame" x="4" y="5" width="277" height="55"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="49">
-                                    <rect key="frame" x="5" y="5" width="267" height="32"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="49">
+                                    <rect key="frame" x="11" y="19" width="255" height="17"/>
                                     <textFieldCell key="cell" lineBreakMode="clipping" state="on" alignment="center" title="Press button above to enable time code" id="307">
                                         <font key="font" size="14" name="Helvetica-Oblique"/>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -301,13 +303,31 @@
                                     </textFieldCell>
                                 </textField>
                             </subviews>
+                            <constraints>
+                                <constraint firstItem="49" firstAttribute="top" secondItem="Z7D-pG-URe" secondAttribute="top" constant="19" id="6NI-1n-h2H"/>
+                                <constraint firstItem="49" firstAttribute="centerX" secondItem="Z7D-pG-URe" secondAttribute="centerX" id="GY2-aJ-8OO"/>
+                                <constraint firstItem="49" firstAttribute="centerY" secondItem="Z7D-pG-URe" secondAttribute="centerY" id="b1s-V1-eGj"/>
+                                <constraint firstItem="49" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Z7D-pG-URe" secondAttribute="leading" constant="13" id="b7L-M7-MQr"/>
+                            </constraints>
                         </view>
                         <font key="titleFont" size="12" name="Helvetica-Bold"/>
                     </box>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="72" firstAttribute="leading" secondItem="76" secondAttribute="leading" constant="20" symbolic="YES" id="0DR-HG-PL2"/>
+                    <constraint firstItem="72" firstAttribute="top" secondItem="34" secondAttribute="bottom" constant="8" symbolic="YES" id="0Qi-va-WfZ"/>
+                    <constraint firstItem="72" firstAttribute="trailing" secondItem="34" secondAttribute="trailing" id="1SI-af-Se0"/>
+                    <constraint firstItem="34" firstAttribute="top" secondItem="14" secondAttribute="bottom" constant="20" symbolic="YES" id="4zR-dU-wl4"/>
+                    <constraint firstAttribute="bottom" secondItem="72" secondAttribute="bottom" constant="20" symbolic="YES" id="Ec9-yy-0U4"/>
+                    <constraint firstItem="14" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="76" secondAttribute="leading" constant="20" symbolic="YES" id="G2C-cY-ZVD"/>
+                    <constraint firstItem="14" firstAttribute="centerX" secondItem="76" secondAttribute="centerX" id="Z3F-rn-nUC"/>
+                    <constraint firstItem="14" firstAttribute="top" secondItem="76" secondAttribute="top" constant="20" symbolic="YES" id="hQU-wv-M4F"/>
+                    <constraint firstItem="72" firstAttribute="leading" secondItem="34" secondAttribute="leading" id="hZr-r7-441"/>
+                </constraints>
             </view>
+            <point key="canvasLocation" x="-122.5" y="-297.5"/>
         </window>
-        <window title="ScorePlayer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="70" userLabel="MainWindow">
+        <window title="ScorePlayer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" appearanceType="aqua" animationBehavior="default" id="70" userLabel="MainWindow">
             <windowStyleMask key="styleMask" titled="YES" miniaturizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="466" y="671" width="300" height="104"/>
@@ -322,10 +342,10 @@
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" image="music" id="297"/>
                     </imageView>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="63">
-                        <rect key="frame" x="170" y="27" width="47" height="15"/>
+                        <rect key="frame" x="158" y="27" width="55" height="15"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" alignment="center" title="Tempo" id="295">
-                            <font key="font" size="12" name="Helvetica"/>
+                            <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -344,7 +364,7 @@
                         <rect key="frame" x="216" y="24" width="45" height="21"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" state="on" borderStyle="bezel" alignment="left" title="60" drawsBackground="YES" id="293">
-                            <font key="font" size="12" name="Helvetica"/>
+                            <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -370,16 +390,17 @@
                         </connections>
                     </button>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="158">
-                        <rect key="frame" x="144" y="-3" width="123" height="11"/>
+                        <rect key="frame" x="144" y="0.0" width="124" height="11"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <textFieldCell key="cell" alignment="center" title="Too fast! Adjusting tempo." id="298">
-                            <font key="font" size="9" name="Helvetica"/>
-                            <color key="textColor" white="0.66666669000000001" alpha="1" colorSpace="calibratedWhite"/>
+                        <textFieldCell key="cell" controlSize="mini" alignment="center" title="Too fast! Adjusting tempo." id="298">
+                            <font key="font" metaFont="miniSystem"/>
+                            <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                 </subviews>
             </view>
+            <point key="canvasLocation" x="-258" y="-579"/>
         </window>
         <window title="ScorePlayer Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="75" userLabel="PreferencesPanel" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
@@ -516,7 +537,7 @@
                         <rect key="frame" x="121" y="97" width="183" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" alignment="left" title="ScorePlayer" id="300">
-                            <font key="font" size="36" name="Times-Roman"/>
+                            <font key="font" size="36" name="TimesNewRomanPSMT"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -525,8 +546,8 @@
                         <rect key="frame" x="119" y="99" width="183" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" alignment="left" title="ScorePlayer" id="299">
-                            <font key="font" size="36" name="Times-Roman"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <font key="font" size="36" name="TimesNewRomanPSMT"/>
+                            <color key="textColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
@@ -539,8 +560,8 @@
                         <rect key="frame" x="15" y="28" width="73" height="14"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" alignment="left" title="Version 5.5.0" id="303">
-                            <font key="font" size="12" name="Times-Roman"/>
-                            <color key="textColor" white="0.33333333999999998" alpha="1" colorSpace="calibratedWhite"/>
+                            <font key="font" size="12" name="TimesNewRomanPSMT"/>
+                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
@@ -548,7 +569,7 @@
                         <rect key="frame" x="121" y="56" width="193" height="18"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" alignment="left" title="by David Jaffe and Julius Smith" id="301">
-                            <font key="font" size="14" name="Times-Roman"/>
+                            <font key="font" size="14" name="TimesNewRomanPSMT"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -557,7 +578,7 @@
                         <rect key="frame" x="121" y="74" width="202" height="24"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" alignment="left" title="MusicKit Scorefile Player" id="302">
-                            <font key="font" size="18" name="Times-Roman"/>
+                            <font key="font" size="18" name="TimesNewRomanPSMT"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -566,13 +587,14 @@
                         <rect key="frame" x="103" y="20" width="229" height="28"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="OpenStep/Cocoa Conversion by Leigh M. Smith and Stephen Brandon" id="305">
-                            <font key="font" size="11" name="Times-Roman"/>
-                            <color key="textColor" red="0.32156864000000002" green="0.32156864000000002" blue="0.32156864000000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <font key="font" size="11" name="TimesNewRomanPSMT"/>
+                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                 </subviews>
             </view>
+            <point key="canvasLocation" x="-540" y="-65"/>
         </window>
         <customObject id="127" userLabel="ScorePlayerController" customClass="ScorePlayerController">
             <connections>

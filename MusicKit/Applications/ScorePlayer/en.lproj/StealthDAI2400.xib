@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,13 +16,12 @@
             <rect key="contentRect" x="614" y="916" width="299" height="62"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
             <view key="contentView" id="5">
-                <rect key="frame" x="0.0" y="0.0" width="299" height="62"/>
+                <rect key="frame" x="0.0" y="0.0" width="299" height="74"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6">
-                        <rect key="frame" x="170" y="36" width="96" height="15"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <buttonCell key="cell" type="check" title="Copy Prohibit" imagePosition="trailing" alignment="right" inset="2" id="13">
+                    <button imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6">
+                        <rect key="frame" x="18" y="38" width="99" height="18"/>
+                        <buttonCell key="cell" type="check" title="Copy Prohibit" imagePosition="leading" inset="2" id="13">
                             <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" size="12" name="Helvetica"/>
                         </buttonCell>
@@ -29,10 +29,9 @@
                             <action selector="setDAI2400CopyProhibit:" target="-2" id="9"/>
                         </connections>
                     </button>
-                    <button fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2">
-                        <rect key="frame" x="170" y="10" width="96" height="15"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <buttonCell key="cell" type="check" title="Emphasis" imagePosition="trailing" alignment="right" inset="2" id="12">
+                    <button imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2">
+                        <rect key="frame" x="18" y="18" width="79" height="18"/>
+                        <buttonCell key="cell" type="check" title="Emphasis" imagePosition="leading" inset="2" id="12">
                             <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" size="12" name="Helvetica"/>
                         </buttonCell>
@@ -41,6 +40,15 @@
                         </connections>
                     </button>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="2" firstAttribute="leading" secondItem="6" secondAttribute="leading" id="B6C-Ow-g0u"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2" secondAttribute="trailing" constant="20" symbolic="YES" id="GUY-gW-h7Z"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6" secondAttribute="trailing" constant="20" symbolic="YES" id="Ib4-an-7E7"/>
+                    <constraint firstItem="2" firstAttribute="top" secondItem="6" secondAttribute="bottom" constant="6" symbolic="YES" id="QVJ-KQ-a4V"/>
+                    <constraint firstItem="6" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="Zw3-U2-xT3"/>
+                    <constraint firstItem="6" firstAttribute="top" secondItem="5" secondAttribute="top" constant="20" symbolic="YES" id="d59-oT-lVZ"/>
+                    <constraint firstAttribute="bottom" secondItem="2" secondAttribute="bottom" constant="20" symbolic="YES" id="mes-k4-CEg"/>
+                </constraints>
             </view>
             <point key="canvasLocation" x="14" y="132"/>
         </window>

@@ -16,17 +16,17 @@
         <window title="Panel" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="40" userLabel="SaveToPanel" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="218" y="342" width="387" height="108"/>
+            <rect key="contentRect" x="218" y="342" width="387" height="107"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
             <view key="contentView" id="49">
-                <rect key="frame" x="0.0" y="0.0" width="387" height="108"/>
+                <rect key="frame" x="0.0" y="0.0" width="387" height="107"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <box fixedFrame="YES" title="Title" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="19">
-                        <rect key="frame" x="-7" y="5" width="413" height="97"/>
+                        <rect key="frame" x="-7" y="5" width="413" height="104"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <view key="contentView" id="ERy-L5-w2g">
-                            <rect key="frame" x="4" y="5" width="405" height="89"/>
+                            <rect key="frame" x="4" y="5" width="405" height="96"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <box fixedFrame="YES" title="Format" translatesAutoresizingMaskIntoConstraints="NO" id="41">
@@ -37,7 +37,7 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5">
-                                                <rect key="frame" x="12" y="7" width="91" height="62"/>
+                                                <rect key="frame" x="10" y="5" width="91" height="62"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <size key="cellSize" width="91" height="18"/>
@@ -52,7 +52,7 @@
                                                             <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" size="12" name="Helvetica"/>
                                                         </buttonCell>
-                                                        <buttonCell type="radio" title="Mu Law" imagePosition="leading" alignment="left" tag="1" inset="2" id="74">
+                                                        <buttonCell type="radio" title="μLaw" imagePosition="leading" alignment="left" tag="1" inset="2" id="74">
                                                             <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                             <font key="font" size="12" name="Helvetica"/>
                                                         </buttonCell>
@@ -145,7 +145,7 @@
                     </box>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="14" y="132"/>
+            <point key="canvasLocation" x="13.5" y="131.5"/>
         </window>
         <menu title="Spectro" systemMenu="main" id="50" userLabel="MainMenu">
             <items>
@@ -459,14 +459,9 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <box fixedFrame="YES" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="24">
+                    <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="24">
                         <rect key="frame" x="0.0" y="37" width="402" height="2"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <view key="contentView" id="Xh1-SJ-poW">
-                            <rect key="frame" x="4" y="2" width="394" height="0.0"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        </view>
-                        <font key="titleFont" size="12" name="Helvetica"/>
                     </box>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7">
                         <rect key="frame" x="79" y="65" width="257" height="18"/>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,38 +16,36 @@
             <rect key="contentRect" x="625" y="900" width="354" height="74"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
             <view key="contentView" id="5">
-                <rect key="frame" x="0.0" y="0.0" width="354" height="74"/>
+                <rect key="frame" x="0.0" y="0.0" width="354" height="101"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <box fixedFrame="YES" title="Digital I/O Mode" translatesAutoresizingMaskIntoConstraints="NO" id="9">
-                        <rect key="frame" x="65" y="10" width="203" height="63"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                    <box title="Digital I/O Mode" translatesAutoresizingMaskIntoConstraints="NO" id="9">
+                        <rect key="frame" x="17" y="16" width="222" height="65"/>
                         <view key="contentView" id="P0K-cu-ckk">
-                            <rect key="frame" x="4" y="5" width="195" height="43"/>
+                            <rect key="frame" x="4" y="5" width="214" height="43"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2">
-                                    <rect key="frame" x="4" y="2" width="189" height="39"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                <matrix verticalHuggingPriority="750" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2">
+                                    <rect key="frame" x="2" y="2" width="210" height="39"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="cellSize" width="189" height="18"/>
+                                    <size key="cellSize" width="210" height="18"/>
                                     <size key="intercellSpacing" width="0.0" height="3"/>
                                     <buttonCell key="prototype" type="radio" title="Radio" imagePosition="leading" alignment="left" inset="2" id="13">
                                         <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                        <font key="font" size="12" name="Helvetica"/>
+                                        <font key="font" metaFont="system"/>
                                     </buttonCell>
                                     <cells>
                                         <column>
                                             <buttonCell type="radio" title="Consumer mode (S/PDIF)" imagePosition="leading" alignment="left" state="on" inset="2" id="3">
                                                 <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" size="12" name="Helvetica"/>
+                                                <font key="font" metaFont="system"/>
                                                 <connections>
                                                     <action selector="setAD64xConsumer:" target="-2" id="10"/>
                                                 </connections>
                                             </buttonCell>
                                             <buttonCell type="radio" title="Professional mode (AES/EBU)" imagePosition="leading" alignment="left" tag="1" inset="2" id="6">
                                                 <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                <font key="font" size="12" name="Helvetica"/>
+                                                <font key="font" metaFont="system"/>
                                                 <connections>
                                                     <action selector="setAD64xProfessional:" target="-2" id="11"/>
                                                 </connections>
@@ -55,12 +54,23 @@
                                     </cells>
                                 </matrix>
                             </subviews>
+                            <constraints>
+                                <constraint firstItem="2" firstAttribute="leading" secondItem="P0K-cu-ckk" secondAttribute="leading" constant="2" id="Ifp-iC-zeG"/>
+                                <constraint firstAttribute="bottom" secondItem="2" secondAttribute="bottom" constant="2" id="MMF-Ux-lS6"/>
+                                <constraint firstItem="2" firstAttribute="top" secondItem="P0K-cu-ckk" secondAttribute="top" constant="2" id="RuI-Ja-FjU"/>
+                                <constraint firstAttribute="trailing" secondItem="2" secondAttribute="trailing" constant="2" id="oSt-ce-FX1"/>
+                            </constraints>
                         </view>
-                        <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                        <font key="titleFont" metaFont="system"/>
                     </box>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="9" secondAttribute="bottom" constant="20" symbolic="YES" id="8su-ad-Msm"/>
+                    <constraint firstItem="9" firstAttribute="leading" secondItem="5" secondAttribute="leading" constant="20" symbolic="YES" id="HYU-BH-Mr2"/>
+                    <constraint firstItem="9" firstAttribute="top" secondItem="5" secondAttribute="top" constant="20" symbolic="YES" id="JsK-1m-xm9"/>
+                </constraints>
             </view>
-            <point key="canvasLocation" x="14" y="132"/>
+            <point key="canvasLocation" x="14" y="131.5"/>
         </window>
     </objects>
 </document>

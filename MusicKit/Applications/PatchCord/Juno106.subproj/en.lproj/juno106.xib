@@ -1,0 +1,692 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="Juno106">
+            <connections>
+                <outlet property="chorus" destination="19" id="143"/>
+                <outlet property="envDirection" destination="68" id="141"/>
+                <outlet property="hpf" destination="46" id="144"/>
+                <outlet property="patchName" destination="66" id="145"/>
+                <outlet property="pulse" destination="44" id="146"/>
+                <outlet property="pwm" destination="85" id="147"/>
+                <outlet property="range" destination="11" id="148"/>
+                <outlet property="saw" destination="24" id="149"/>
+                <outlet property="sliderGroup" destination="9" id="150"/>
+                <outlet property="vca" destination="51" id="142"/>
+                <outlet property="window" destination="64" id="132"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Juno 106 Inspector" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="64" userLabel="JunoWindow">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="121" y="502" width="778" height="217"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+            <view key="contentView" id="90">
+                <rect key="frame" x="0.0" y="0.0" width="778" height="217"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="62">
+                        <rect key="frame" x="10" y="160" width="91" height="22"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="LFO" drawsBackground="YES" id="189">
+                            <font key="font" size="18" name="Helvetica"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.75862068000000005" green="0.075751214999999997" blue="0.16412772" alpha="1" colorSpace="calibratedRGB"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="70">
+                        <rect key="frame" x="610" y="160" width="85" height="22"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="Env" drawsBackground="YES" id="195">
+                            <font key="font" size="18" name="Helvetica"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.75862068000000005" green="0.075751214999999997" blue="0.16412772" alpha="1" colorSpace="calibratedRGB"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="17">
+                        <rect key="frame" x="370" y="160" width="176" height="22"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="VCF" drawsBackground="YES" id="164">
+                            <font key="font" size="18" name="Helvetica"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.75862068000000005" green="0.075751214999999997" blue="0.16412772" alpha="1" colorSpace="calibratedRGB"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="33">
+                        <rect key="frame" x="550" y="160" width="57" height="22"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="VCA" drawsBackground="YES" id="172">
+                            <font key="font" size="18" name="Helvetica"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.75862068000000005" green="0.075751214999999997" blue="0.16412772" alpha="1" colorSpace="calibratedRGB"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="55">
+                        <rect key="frame" x="700" y="160" width="69" height="22"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="Chorus" drawsBackground="YES" id="185">
+                            <font key="font" size="18" name="Helvetica"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.75862068000000005" green="0.075751214999999997" blue="0.16412772" alpha="1" colorSpace="calibratedRGB"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="65">
+                        <rect key="frame" x="8" y="138" width="39" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="Rate" id="191">
+                            <font key="font" size="14" name="Helvetica"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="63">
+                        <rect key="frame" x="42" y="138" width="45" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="Delay" id="190">
+                            <font key="font" size="14" name="Helvetica"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="32">
+                        <rect key="frame" x="320" y="160" width="45" height="22"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="HPF" drawsBackground="YES" id="171">
+                            <font key="font" size="18" name="Helvetica"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.75862068000000005" green="0.075751214999999997" blue="0.16412772" alpha="1" colorSpace="calibratedRGB"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7">
+                        <rect key="frame" x="624" y="138" width="19" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="A" id="161">
+                            <font key="font" size="14" name="Helvetica"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="23">
+                        <rect key="frame" x="642" y="138" width="19" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="D" id="166">
+                            <font key="font" size="14" name="Helvetica"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8">
+                        <rect key="frame" x="660" y="138" width="18" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="S" id="162">
+                            <font key="font" size="14" name="Helvetica"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="88">
+                        <rect key="frame" x="678" y="138" width="19" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="R" id="199">
+                            <font key="font" size="14" name="Helvetica"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="73">
+                        <rect key="frame" x="486" y="138" width="36" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="LFO" id="196">
+                            <font key="font" size="14" name="Helvetica"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="56">
+                        <rect key="frame" x="399" y="137" width="35" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="Res" id="186">
+                            <font key="font" size="14" name="Helvetica"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="48">
+                        <rect key="frame" x="366" y="138" width="38" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="Freq" id="179">
+                            <font key="font" size="14" name="Helvetica"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="30">
+                        <rect key="frame" x="456" y="138" width="34" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="Env" id="170">
+                            <font key="font" size="14" name="Helvetica"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="13">
+                        <rect key="frame" x="570" y="138" width="44" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="Level" id="163">
+                            <font key="font" size="14" name="Helvetica"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="92">
+                        <rect key="frame" x="518" y="138" width="41" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="Kybd" id="200">
+                            <font key="font" size="14" name="Helvetica"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="53">
+                        <rect key="frame" x="330" y="138" width="38" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="Freq" id="183">
+                            <font key="font" size="14" name="Helvetica"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="41">
+                        <rect key="frame" x="282" y="138" width="46" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="Noise" id="175">
+                            <font key="font" size="14" name="Helvetica"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="22">
+                        <rect key="frame" x="247" y="138" width="34" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="Sub" id="165">
+                            <font key="font" size="14" name="Helvetica"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6">
+                        <rect key="frame" x="150" y="138" width="46" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="PWM" id="160">
+                            <font key="font" size="14" name="Helvetica"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="86">
+                        <rect key="frame" x="114" y="138" width="36" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="LFO" id="198">
+                            <font key="font" size="14" name="Helvetica"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="66">
+                        <rect key="frame" x="64" y="189" width="56" height="22"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" state="on" alignment="left" title="Text" id="192">
+                            <font key="font" size="18" name="Helvetica"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="52">
+                        <rect key="frame" x="3" y="189" width="59" height="23"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="right" title="Patch" id="182">
+                            <font key="font" size="18" name="Helvetica-Bold"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <matrix verticalHuggingPriority="750" fixedFrame="YES" mode="track" selectionByRect="NO" allowsEmptySelection="NO" translatesAutoresizingMaskIntoConstraints="NO" id="42">
+                        <rect key="frame" x="618" y="30" width="84" height="16"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <size key="cellSize" width="21" height="16"/>
+                        <size key="intercellSpacing" width="0.0" height="4"/>
+                        <textFieldCell key="prototype" selectable="YES" editable="YES" state="on" alignment="left" title="Text" id="219">
+                            <font key="font" size="9" name="Helvetica"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <cells>
+                            <column>
+                                <textFieldCell selectable="YES" editable="YES" state="on" alignment="right" title="127" id="15">
+                                    <font key="font" size="9" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </column>
+                            <column>
+                                <textFieldCell selectable="YES" editable="YES" state="on" alignment="right" tag="1" title="127" id="77">
+                                    <font key="font" size="9" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </column>
+                            <column>
+                                <textFieldCell selectable="YES" editable="YES" state="on" alignment="right" title="127" id="69">
+                                    <font key="font" size="9" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </column>
+                            <column>
+                                <textFieldCell selectable="YES" editable="YES" state="on" alignment="right" title="127" id="14">
+                                    <font key="font" size="9" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </column>
+                        </cells>
+                    </matrix>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="36">
+                        <rect key="frame" x="598" y="1" width="130" height="32"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <buttonCell key="cell" type="push" title="Envelope Graph" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="173">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                    </button>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="38">
+                        <rect key="frame" x="110" y="189" width="49" height="23"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="MIDI" id="174">
+                            <font key="font" size="18" name="Helvetica-Bold"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="43">
+                        <rect key="frame" x="105" y="160" width="210" height="22"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="DCO" drawsBackground="YES" id="176">
+                            <font key="font" size="18" name="Helvetica"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.75862068000000005" green="0.075751214999999997" blue="0.16412772" alpha="1" colorSpace="calibratedRGB"/>
+                        </textFieldCell>
+                    </textField>
+                    <box fixedFrame="YES" borderType="none" title="Title" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="9">
+                        <rect key="frame" x="14" y="47" width="689" height="81"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="QqO-Jo-1GN">
+                            <rect key="frame" x="0.0" y="0.0" width="689" height="81"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <slider verticalHuggingPriority="750" fixedFrame="YES" tag="10" translatesAutoresizingMaskIntoConstraints="NO" id="29">
+                                    <rect key="frame" x="573" y="5" width="16" height="75"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" tag="10" maxValue="127" doubleValue="64" tickMarkPosition="right" sliderType="linear" id="201"/>
+                                </slider>
+                                <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="83">
+                                    <rect key="frame" x="4" y="4" width="16" height="76"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" maxValue="127" doubleValue="64" tickMarkPosition="right" sliderType="linear" id="202"/>
+                                </slider>
+                                <slider verticalHuggingPriority="750" fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="58">
+                                    <rect key="frame" x="40" y="4" width="16" height="76"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" tag="1" maxValue="127" doubleValue="64" tickMarkPosition="right" sliderType="linear" id="203"/>
+                                </slider>
+                                <slider verticalHuggingPriority="750" fixedFrame="YES" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="35">
+                                    <rect key="frame" x="112" y="4" width="16" height="76"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" tag="2" maxValue="127" doubleValue="64" tickMarkPosition="right" sliderType="linear" id="204"/>
+                                </slider>
+                                <slider verticalHuggingPriority="750" fixedFrame="YES" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="37">
+                                    <rect key="frame" x="148" y="4" width="16" height="76"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" tag="3" maxValue="127" doubleValue="64" tickMarkPosition="right" sliderType="linear" id="205"/>
+                                </slider>
+                                <slider verticalHuggingPriority="750" fixedFrame="YES" tag="15" translatesAutoresizingMaskIntoConstraints="NO" id="16">
+                                    <rect key="frame" x="244" y="4" width="16" height="76"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" tag="15" maxValue="127" doubleValue="64" tickMarkPosition="right" sliderType="linear" id="206"/>
+                                </slider>
+                                <slider verticalHuggingPriority="750" fixedFrame="YES" tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="93">
+                                    <rect key="frame" x="286" y="4" width="16" height="76"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" tag="4" maxValue="127" doubleValue="64" tickMarkPosition="right" sliderType="linear" id="207"/>
+                                </slider>
+                                <slider verticalHuggingPriority="750" fixedFrame="YES" tag="5" translatesAutoresizingMaskIntoConstraints="NO" id="71">
+                                    <rect key="frame" x="364" y="4" width="16" height="76"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" tag="5" maxValue="127" doubleValue="64" tickMarkPosition="right" sliderType="linear" id="208"/>
+                                </slider>
+                                <slider verticalHuggingPriority="750" fixedFrame="YES" tag="6" translatesAutoresizingMaskIntoConstraints="NO" id="25">
+                                    <rect key="frame" x="394" y="4" width="16" height="76"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" tag="6" maxValue="127" doubleValue="64" tickMarkPosition="right" sliderType="linear" id="209"/>
+                                </slider>
+                                <slider verticalHuggingPriority="750" fixedFrame="YES" tag="11" translatesAutoresizingMaskIntoConstraints="NO" id="4">
+                                    <rect key="frame" x="610" y="4" width="16" height="76"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" tag="11" maxValue="127" doubleValue="64" tickMarkPosition="right" sliderType="linear" id="210"/>
+                                </slider>
+                                <slider verticalHuggingPriority="750" fixedFrame="YES" tag="12" translatesAutoresizingMaskIntoConstraints="NO" id="80">
+                                    <rect key="frame" x="628" y="4" width="16" height="76"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" tag="12" maxValue="127" doubleValue="64" tickMarkPosition="right" sliderType="linear" id="211"/>
+                                </slider>
+                                <slider verticalHuggingPriority="750" fixedFrame="YES" tag="13" translatesAutoresizingMaskIntoConstraints="NO" id="59">
+                                    <rect key="frame" x="646" y="4" width="16" height="76"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" tag="13" maxValue="127" doubleValue="64" tickMarkPosition="right" sliderType="linear" id="212"/>
+                                </slider>
+                                <slider verticalHuggingPriority="750" fixedFrame="YES" tag="14" translatesAutoresizingMaskIntoConstraints="NO" id="87">
+                                    <rect key="frame" x="664" y="4" width="16" height="76"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" tag="14" maxValue="127" doubleValue="64" tickMarkPosition="right" sliderType="linear" id="213"/>
+                                </slider>
+                                <slider verticalHuggingPriority="750" fixedFrame="YES" tag="7" translatesAutoresizingMaskIntoConstraints="NO" id="27">
+                                    <rect key="frame" x="454" y="4" width="16" height="76"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" tag="7" maxValue="127" doubleValue="64" tickMarkPosition="right" sliderType="linear" id="214"/>
+                                </slider>
+                                <slider verticalHuggingPriority="750" fixedFrame="YES" tag="8" translatesAutoresizingMaskIntoConstraints="NO" id="84">
+                                    <rect key="frame" x="483" y="4" width="16" height="76"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" tag="8" maxValue="127" doubleValue="64" tickMarkPosition="right" sliderType="linear" id="215"/>
+                                </slider>
+                                <slider verticalHuggingPriority="750" fixedFrame="YES" tag="9" translatesAutoresizingMaskIntoConstraints="NO" id="5">
+                                    <rect key="frame" x="514" y="4" width="16" height="76"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" tag="9" maxValue="127" doubleValue="64" tickMarkPosition="right" sliderType="linear" id="216"/>
+                                </slider>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica"/>
+                    </box>
+                    <matrix verticalHuggingPriority="750" fixedFrame="YES" tag="120" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11">
+                        <rect key="frame" x="80" y="57" width="38" height="48"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <size key="cellSize" width="38" height="14"/>
+                        <size key="intercellSpacing" width="0.0" height="3"/>
+                        <buttonCell key="prototype" type="radio" title="Radio" imagePosition="leading" alignment="left" controlSize="small" inset="2" id="217">
+                            <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="smallSystem"/>
+                        </buttonCell>
+                        <cells>
+                            <column>
+                                <buttonCell type="radio" title="  4'" imagePosition="leading" alignment="left" controlSize="small" state="on" tag="4" inset="2" id="94">
+                                    <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                                <buttonCell type="radio" title="  8'" imagePosition="leading" alignment="left" controlSize="small" tag="2" inset="2" id="79">
+                                    <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                                <buttonCell type="radio" title="16'" imagePosition="leading" alignment="left" controlSize="small" tag="1" inset="2" id="75">
+                                    <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                            </column>
+                        </cells>
+                        <connections>
+                            <action selector="updateRangeAndChorus:" target="-2" id="155"/>
+                        </connections>
+                    </matrix>
+                    <matrix verticalHuggingPriority="750" fixedFrame="YES" tag="31" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19">
+                        <rect key="frame" x="708" y="83" width="54" height="30"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <size key="cellSize" width="18" height="30"/>
+                        <size key="intercellSpacing" width="0.0" height="3"/>
+                        <buttonCell key="prototype" type="radio" title="Radio" imagePosition="leading" alignment="left" inset="2" id="218">
+                            <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" size="12" name="Helvetica"/>
+                        </buttonCell>
+                        <cells>
+                            <column>
+                                <buttonCell type="radio" imagePosition="below" alignment="center" tag="32" inset="2" id="96">
+                                    <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" size="12" name="Helvetica"/>
+                                </buttonCell>
+                            </column>
+                            <column>
+                                <buttonCell type="radio" title="I" imagePosition="below" alignment="center" state="on" tag="64" inset="2" id="89">
+                                    <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" size="12" name="Helvetica"/>
+                                </buttonCell>
+                            </column>
+                            <column>
+                                <buttonCell type="radio" title="II" imagePosition="below" alignment="center" inset="2" id="81">
+                                    <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" size="12" name="Helvetica"/>
+                                </buttonCell>
+                            </column>
+                        </cells>
+                        <connections>
+                            <action selector="updateRangeAndChorus:" target="-2" id="151"/>
+                        </connections>
+                    </matrix>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="60">
+                        <rect key="frame" x="75" y="108" width="53" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="Range" id="188">
+                            <font key="font" size="14" name="Helvetica"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="49">
+                        <rect key="frame" x="423" y="103" width="42" height="24"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <buttonCell key="cell" type="bevel" title="Cell" image="JunoEnvelope" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="180">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                            <font key="font" metaFont="cellTitle"/>
+                        </buttonCell>
+                    </button>
+                    <button fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="28">
+                        <rect key="frame" x="426" y="49" width="38" height="24"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <buttonCell key="cell" type="bevel" title="Cell" image="JunoEnvelopeI" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="169">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                            <font key="font" metaFont="cellTitle"/>
+                        </buttonCell>
+                    </button>
+                    <button fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="67">
+                        <rect key="frame" x="212" y="102" width="24" height="24"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <buttonCell key="cell" type="bevel" title="Cell" image="PWM" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="193">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                            <font key="font" metaFont="cellTitle"/>
+                        </buttonCell>
+                    </button>
+                    <button fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="54">
+                        <rect key="frame" x="236" y="102" width="21" height="24"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <buttonCell key="cell" type="bevel" title="Cell" image="Ramp" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="184">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                            <font key="font" metaFont="cellTitle"/>
+                        </buttonCell>
+                    </button>
+                    <button fixedFrame="YES" tag="4104" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="44">
+                        <rect key="frame" x="215" y="78" width="19" height="24"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <buttonCell key="cell" type="radio" title="Cell" imagePosition="only" alignment="center" tag="4104" inset="2" id="177">
+                            <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="cellTitle"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="updateSwitches:" target="-2" id="156"/>
+                        </connections>
+                    </button>
+                    <button fixedFrame="YES" tag="4112" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="24">
+                        <rect key="frame" x="236" y="78" width="21" height="24"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <buttonCell key="cell" type="radio" title="Cell" imagePosition="only" alignment="center" tag="4112" inset="2" id="167">
+                            <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="cellTitle"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="updateSwitches:" target="-2" id="157"/>
+                        </connections>
+                    </button>
+                    <button fixedFrame="YES" tag="4353" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="85">
+                        <rect key="frame" x="180" y="72" width="34" height="58"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <buttonCell key="cell" type="bevel" title="LFO" image="JunoSwitchUp" imagePosition="below" alignment="center" alternateImage="JunoSwitchDown" tag="4353" imageScaling="proportionallyDown" inset="2" id="197">
+                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                            <font key="font" size="12" name="Helvetica"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="updateSwitches:" target="-2" id="154"/>
+                        </connections>
+                    </button>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="57">
+                        <rect key="frame" x="180" y="51" width="34" height="15"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="Man" id="187">
+                            <font key="font" size="12" name="Helvetica"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <button fixedFrame="YES" tag="4354" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="68">
+                        <rect key="frame" x="435" y="73" width="16" height="32"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <buttonCell key="cell" type="bevel" title="Cell" image="JunoSwitchUp" imagePosition="only" alignment="center" alternateImage="JunoSwitchDown" tag="4354" imageScaling="proportionallyDown" inset="2" id="194">
+                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="cellTitle"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="updateSwitches:" target="-2" id="153"/>
+                        </connections>
+                    </button>
+                    <button fixedFrame="YES" tag="4356" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="51">
+                        <rect key="frame" x="553" y="70" width="31" height="58"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <buttonCell key="cell" type="bevel" title="Env" image="JunoSwitchUp" imagePosition="below" alignment="center" alternateImage="JunoSwitchDown" tag="4356" inset="2" id="181">
+                            <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                            <font key="font" size="12" name="Helvetica"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="updateSwitches:" target="-2" id="152"/>
+                        </connections>
+                    </button>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="26">
+                        <rect key="frame" x="545" y="51" width="45" height="15"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="Gate" id="168">
+                            <font key="font" size="12" name="Helvetica"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <box fixedFrame="YES" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="3">
+                        <rect key="frame" x="75" y="48" width="2" height="80"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="kvu-8C-4UV">
+                            <rect key="frame" x="1" y="5" width="0.0" height="72"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica"/>
+                    </box>
+                    <box fixedFrame="YES" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="21">
+                        <rect key="frame" x="11" y="50" width="2" height="80"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="9Ef-aD-GPt">
+                            <rect key="frame" x="1" y="5" width="0.0" height="72"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica"/>
+                    </box>
+                    <box fixedFrame="YES" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="76">
+                        <rect key="frame" x="613" y="50" width="2" height="80"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="pbT-sT-tlW">
+                            <rect key="frame" x="1" y="5" width="0.0" height="72"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica"/>
+                    </box>
+                    <box fixedFrame="YES" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="34">
+                        <rect key="frame" x="704" y="50" width="2" height="80"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="DUt-b3-0ef">
+                            <rect key="frame" x="1" y="5" width="0.0" height="72"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica"/>
+                    </box>
+                    <box fixedFrame="YES" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="78">
+                        <rect key="frame" x="326" y="49" width="2" height="80"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="lWu-y2-Uj7">
+                            <rect key="frame" x="1" y="5" width="0.0" height="72"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica"/>
+                    </box>
+                    <box fixedFrame="YES" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="72">
+                        <rect key="frame" x="366" y="48" width="2" height="80"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="5Ot-yO-edb">
+                            <rect key="frame" x="1" y="5" width="0.0" height="72"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica"/>
+                    </box>
+                    <box fixedFrame="YES" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="12">
+                        <rect key="frame" x="549" y="49" width="2" height="80"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="yKw-xK-2kb">
+                            <rect key="frame" x="1" y="5" width="0.0" height="72"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica"/>
+                    </box>
+                    <box fixedFrame="YES" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="91">
+                        <rect key="frame" x="766" y="50" width="2" height="80"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="9lr-NF-t19">
+                            <rect key="frame" x="1" y="5" width="0.0" height="72"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica"/>
+                    </box>
+                    <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="46">
+                        <rect key="frame" x="340" y="51" width="16" height="76"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <sliderCell key="cell" alignment="left" maxValue="3" doubleValue="1" tickMarkPosition="right" sliderType="linear" id="178">
+                            <font key="font" size="12" name="Helvetica"/>
+                        </sliderCell>
+                    </slider>
+                </subviews>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="158"/>
+            </connections>
+            <point key="canvasLocation" x="-136" y="110.5"/>
+        </window>
+    </objects>
+    <resources>
+        <image name="JunoEnvelope" width="35" height="16"/>
+        <image name="JunoEnvelopeI" width="35" height="16"/>
+        <image name="JunoSwitchDown" width="16" height="32"/>
+        <image name="JunoSwitchUp" width="16" height="32"/>
+        <image name="PWM" width="16" height="16"/>
+        <image name="Ramp" width="16" height="16"/>
+    </resources>
+</document>

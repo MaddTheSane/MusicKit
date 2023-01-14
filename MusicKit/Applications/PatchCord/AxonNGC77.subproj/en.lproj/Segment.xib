@@ -38,7 +38,7 @@
                         </popUpButtonCell>
                     </popUpButton>
                     <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="16">
-                        <rect key="frame" x="73" y="244" width="43" height="21"/>
+                        <rect key="frame" x="74" y="244" width="43" height="21"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" borderStyle="bezel" alignment="left" title="Text" drawsBackground="YES" id="45">
                             <font key="font" metaFont="cellTitle"/>
@@ -50,7 +50,7 @@
                         <rect key="frame" x="69" y="283" width="53" height="21"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" state="on" borderStyle="bezel" alignment="left" title="Text" drawsBackground="YES" id="46">
-                            <font key="font" metaFont="cellTitle"/>
+                            <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -71,8 +71,8 @@
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="62" translatesAutoresizingMaskIntoConstraints="NO" id="21">
                         <rect key="frame" x="114" y="247" width="66" height="13"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <textFieldCell key="cell" alignment="right" title="Pan Spread" id="50">
-                            <font key="font" size="10" name="Helvetica"/>
+                        <textFieldCell key="cell" controlSize="mini" alignment="right" title="Pan Spread" id="50">
+                            <font key="font" metaFont="miniSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -80,8 +80,8 @@
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="48" translatesAutoresizingMaskIntoConstraints="NO" id="22">
                         <rect key="frame" x="113" y="209" width="52" height="26"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <textFieldCell key="cell" alignment="right" title="Pan Position" id="51">
-                            <font key="font" size="10" name="Helvetica"/>
+                        <textFieldCell key="cell" controlSize="mini" alignment="right" title="Pan Position" id="51">
+                            <font key="font" metaFont="miniSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -89,8 +89,8 @@
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="66" translatesAutoresizingMaskIntoConstraints="NO" id="23">
                         <rect key="frame" x="2" y="278" width="70" height="26"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <textFieldCell key="cell" alignment="center" title="Program" id="52">
-                            <font key="font" metaFont="cellTitle"/>
+                        <textFieldCell key="cell" lineBreakMode="truncatingTail" alignment="center" title="Program" id="52">
+                            <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -99,7 +99,7 @@
                         <rect key="frame" x="125" y="278" width="71" height="23"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" alignment="center" title="Quantize" id="53">
-                            <font key="font" metaFont="cellTitle"/>
+                            <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -108,7 +108,7 @@
                         <rect key="frame" x="160" y="47" width="58" height="23"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" alignment="center" title="Volume" id="54">
-                            <font key="font" metaFont="cellTitle"/>
+                            <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -117,25 +117,25 @@
                         <rect key="frame" x="214" y="47" width="54" height="23"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" alignment="center" title="Reverb" id="55">
-                            <font key="font" metaFont="cellTitle"/>
+                            <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="68" translatesAutoresizingMaskIntoConstraints="NO" id="27">
-                        <rect key="frame" x="0.0" y="248" width="72" height="13"/>
+                        <rect key="frame" x="-1" y="248" width="72" height="13"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <textFieldCell key="cell" alignment="right" title="Transpose" id="56">
-                            <font key="font" size="10" name="Helvetica"/>
+                        <textFieldCell key="cell" controlSize="mini" lineBreakMode="truncatingTail" alignment="right" title="Transpose" id="56">
+                            <font key="font" metaFont="miniSystem"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="66" translatesAutoresizingMaskIntoConstraints="NO" id="29">
-                        <rect key="frame" x="104" y="36" width="70" height="41"/>
+                        <rect key="frame" x="104" y="29" width="70" height="41"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" alignment="center" title="Trigger Level" id="58">
-                            <font key="font" metaFont="cellTitle"/>
+                            <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -147,17 +147,6 @@
                             <font key="font" metaFont="cellTitle"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="132" translatesAutoresizingMaskIntoConstraints="NO" id="31">
-                        <rect key="frame" x="-31" y="203" width="136" height="31"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <textFieldCell key="cell" alignment="center" id="60">
-                            <font key="font" size="10" name="Helvetica"/>
-                            <string key="title">Pick Controller
-</string>
-                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="88" translatesAutoresizingMaskIntoConstraints="NO" id="32">
@@ -194,6 +183,15 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" maxValue="1" doubleValue="0.25" tickMarkPosition="below" sliderType="linear" id="43"/>
                     </slider>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="132" translatesAutoresizingMaskIntoConstraints="NO" id="31">
+                        <rect key="frame" x="-2" y="219" width="74" height="16"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" controlSize="mini" lineBreakMode="truncatingTail" alignment="center" title="Pick Controller" id="60">
+                            <font key="font" metaFont="miniSystem"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
                 </subviews>
             </view>
             <connections>

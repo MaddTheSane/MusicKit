@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="NSApplication"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Multiple Sound Playback" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="21" userLabel="FileChoiceWindow">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="420" y="573" width="411" height="151"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+            <view key="contentView" id="2">
+                <rect key="frame" x="0.0" y="0.0" width="411" height="151"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button verticalHuggingPriority="750" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="124">
+                        <rect key="frame" x="338" y="104" width="60" height="32"/>
+                        <buttonCell key="cell" type="push" title="Play" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="174">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="playSound:" target="132" id="135"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="131">
+                        <rect key="frame" x="13" y="104" width="154" height="32"/>
+                        <buttonCell key="cell" type="push" title="Choose Sound Files" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="175">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="chooseSoundFile:" target="132" id="148"/>
+                        </connections>
+                    </button>
+                    <scrollView horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="167">
+                        <rect key="frame" x="-1" y="-1" width="413" height="92"/>
+                        <clipView key="contentView" id="CgA-xf-fNP">
+                            <rect key="frame" x="1" y="1" width="411" height="90"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="182" id="170">
+                                    <rect key="frame" x="0.0" y="0.0" width="411" height="62"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <size key="intercellSpacing" width="3" height="2"/>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                    <tableColumns>
+                                        <tableColumn width="324" minWidth="40" maxWidth="1000" id="168">
+                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
+                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" white="0.33333299" alpha="1" colorSpace="calibratedWhite"/>
+                                            </tableHeaderCell>
+                                            <textFieldCell key="dataCell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" alignment="left" id="180">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </textFieldCell>
+                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                        </tableColumn>
+                                    </tableColumns>
+                                </tableView>
+                            </subviews>
+                        </clipView>
+                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="181">
+                            <rect key="frame" x="-100" y="-100" width="350" height="15"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="183">
+                            <rect key="frame" x="396" y="29" width="16" height="62"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <tableHeaderView key="headerView" wantsLayer="YES" id="182">
+                            <rect key="frame" x="0.0" y="0.0" width="411" height="28"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </tableHeaderView>
+                    </scrollView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="124" firstAttribute="top" secondItem="2" secondAttribute="top" constant="20" symbolic="YES" id="2So-5Z-DzQ"/>
+                    <constraint firstItem="167" firstAttribute="top" secondItem="124" secondAttribute="bottom" constant="20" symbolic="YES" id="7oa-qN-gJu"/>
+                    <constraint firstItem="131" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="20" symbolic="YES" id="8na-Nv-dAq"/>
+                    <constraint firstAttribute="bottom" secondItem="167" secondAttribute="bottom" constant="-1" id="Pwh-7E-0pQ"/>
+                    <constraint firstItem="167" firstAttribute="leading" secondItem="2" secondAttribute="leading" constant="-1" id="cuy-vW-8A7"/>
+                    <constraint firstItem="124" firstAttribute="firstBaseline" secondItem="131" secondAttribute="firstBaseline" id="kcF-9h-rOQ"/>
+                    <constraint firstAttribute="trailing" secondItem="124" secondAttribute="trailing" constant="20" symbolic="YES" id="rXA-FK-Uo7"/>
+                    <constraint firstAttribute="trailing" secondItem="167" secondAttribute="trailing" constant="-1" id="tgn-cw-VIC"/>
+                    <constraint firstItem="131" firstAttribute="top" secondItem="2" secondAttribute="top" constant="20" symbolic="YES" id="uXV-8h-9Od"/>
+                </constraints>
+            </view>
+            <point key="canvasLocation" x="-136" y="111"/>
+        </window>
+        <menu title="MultipleSoundPlayer-macos" systemMenu="main" id="29" userLabel="MainMenu">
+            <items>
+                <menuItem title="Application" id="154">
+                    <menu key="submenu" title="Application" systemMenu="apple" id="149">
+                        <items>
+                            <menuItem title="About MultipleSoundPlayer" id="150">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="153">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Preferences…" keyEquivalent="," id="162"/>
+                            <menuItem isSeparatorItem="YES" id="151">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Services" id="160">
+                                <menu key="submenu" title="Services" systemMenu="services" id="158"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="159">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Hide MultipleSoundPlayer" keyEquivalent="h" id="152">
+                                <connections>
+                                    <action selector="hide:" target="-1" id="166"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Hide Others" keyEquivalent="h" id="157">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="hideOtherApplications:" target="-1" id="165"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Show All" id="161">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="unhideAllApplications:" target="-1" id="164"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="156">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Quit MultipleSoundPlayer" keyEquivalent="q" id="155">
+                                <connections>
+                                    <action selector="terminate:" target="-1" id="163"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="File" id="83">
+                    <menu key="submenu" title="File" id="81">
+                        <items>
+                            <menuItem title="New" keyEquivalent="n" id="82"/>
+                            <menuItem title="Open..." keyEquivalent="o" id="72"/>
+                            <menuItem isSeparatorItem="YES" id="79">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Close" id="73">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Save" keyEquivalent="s" id="75"/>
+                            <menuItem title="Save As..." keyEquivalent="S" id="80"/>
+                            <menuItem title="Revert" keyEquivalent="u" id="112"/>
+                            <menuItem isSeparatorItem="YES" id="74">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Page Setup..." keyEquivalent="P" id="77">
+                                <connections>
+                                    <action selector="runPageLayout:" target="-1" id="87"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Print..." keyEquivalent="p" id="78">
+                                <connections>
+                                    <action selector="print:" target="-1" id="86"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Edit" id="15">
+                    <menu key="submenu" title="Edit" id="13">
+                        <items>
+                            <menuItem title="Undo" keyEquivalent="z" id="115">
+                                <connections>
+                                    <action selector="undo:" target="-1" id="118"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Redo" keyEquivalent="Z" id="116">
+                                <connections>
+                                    <action selector="redo:" target="-1" id="119"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="117">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Cut" keyEquivalent="x" id="22">
+                                <connections>
+                                    <action selector="cut:" target="-1" id="30"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Copy" keyEquivalent="c" id="4">
+                                <connections>
+                                    <action selector="copy:" target="-1" id="31"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Paste" keyEquivalent="v" id="8">
+                                <connections>
+                                    <action selector="paste:" target="-1" id="32"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Clear" id="90">
+                                <connections>
+                                    <action selector="clear:" target="-1" id="91"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Select All" keyEquivalent="a" id="11">
+                                <connections>
+                                    <action selector="selectAll:" target="-1" id="33"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="88">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Preferences..." id="89"/>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Window" id="19">
+                    <menu key="submenu" title="Window" systemMenu="window" id="24">
+                        <items>
+                            <menuItem title="Close Window" keyEquivalent="w" id="20">
+                                <connections>
+                                    <action selector="performClose:" target="-1" id="38"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Zoom Window" id="120">
+                                <connections>
+                                    <action selector="performZoom:" target="-1" id="123"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Minimize Window" keyEquivalent="m" id="23">
+                                <connections>
+                                    <action selector="performMiniaturize:" target="-1" id="37"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="92">
+                                <modifierMask key="keyEquivalentModifierMask" command="YES"/>
+                            </menuItem>
+                            <menuItem title="Arrange in Front" id="5">
+                                <connections>
+                                    <action selector="arrangeInFront:" target="-1" id="39"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Help" id="103">
+                    <menu key="submenu" title="Help" id="106">
+                        <items>
+                            <menuItem title="MyApp Help" keyEquivalent="a" id="111">
+                                <connections>
+                                    <action selector="showHelp:" target="-1" id="122"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+            </items>
+        </menu>
+        <customObject id="132" userLabel="SoundPlayerController" customClass="SoundPlayerController">
+            <connections>
+                <outlet property="playButton" destination="124" id="146"/>
+                <outlet property="soundFileNameTableView" destination="170" id="172"/>
+            </connections>
+        </customObject>
+        <window title="About Multiple Sound Player" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="139" userLabel="AboutWindow">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="167" y="740" width="317" height="168"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+            <view key="contentView" id="140">
+                <rect key="frame" x="0.0" y="0.0" width="317" height="168"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="141">
+                        <rect key="frame" x="33" y="120" width="251" height="28"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Multiple Sound Player" id="176">
+                            <font key="font" metaFont="systemBold" size="24"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="142">
+                        <rect key="frame" x="86" y="91" width="146" height="21"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="A SndKit example" id="177">
+                            <font key="font" metaFont="system" size="18"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="143">
+                        <rect key="frame" x="35" y="20" width="247" height="34"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="34" id="MJe-kr-UrR"/>
+                            <constraint firstAttribute="width" constant="243" id="zrN-vX-M5E"/>
+                        </constraints>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="By Leigh M. Smith &lt;leigh@tomandandy.com&gt;" id="178">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="144">
+                        <rect key="frame" x="94" y="67" width="129" height="14"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="http://www.musickit.org" id="179">
+                            <font key="font" metaFont="smallSystem"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="144" firstAttribute="top" secondItem="142" secondAttribute="bottom" constant="10" id="0OF-He-bre"/>
+                    <constraint firstItem="142" firstAttribute="top" secondItem="141" secondAttribute="bottom" constant="8" symbolic="YES" id="362-cs-Vy5"/>
+                    <constraint firstItem="141" firstAttribute="centerX" secondItem="140" secondAttribute="centerX" id="9u2-pc-hZM"/>
+                    <constraint firstItem="143" firstAttribute="top" secondItem="144" secondAttribute="bottom" constant="13" id="LYy-0p-pN0"/>
+                    <constraint firstItem="141" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="140" secondAttribute="leading" constant="20" symbolic="YES" id="QN2-VO-xre"/>
+                    <constraint firstAttribute="bottom" secondItem="143" secondAttribute="bottom" constant="20" symbolic="YES" id="TvJ-Am-NcU"/>
+                    <constraint firstItem="144" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="140" secondAttribute="leading" constant="20" symbolic="YES" id="a1u-rV-N8D"/>
+                    <constraint firstItem="142" firstAttribute="centerX" secondItem="140" secondAttribute="centerX" id="d3S-Jd-j60"/>
+                    <constraint firstItem="143" firstAttribute="centerX" secondItem="140" secondAttribute="centerX" id="gO5-TZ-6x8"/>
+                    <constraint firstItem="141" firstAttribute="top" secondItem="140" secondAttribute="top" constant="20" symbolic="YES" id="kM7-HG-Lwt"/>
+                    <constraint firstItem="142" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="140" secondAttribute="leading" constant="20" symbolic="YES" id="oGs-pt-4VO"/>
+                    <constraint firstItem="144" firstAttribute="centerX" secondItem="140" secondAttribute="centerX" id="xGs-kg-aOe"/>
+                </constraints>
+            </view>
+            <point key="canvasLocation" x="-211.5" y="-166"/>
+        </window>
+    </objects>
+</document>

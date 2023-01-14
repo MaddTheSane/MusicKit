@@ -419,10 +419,10 @@
 		D828F9E00780CCDF00215EB9 /* PlayScore.m in Sources */ = {isa = PBXBuildFile; fileRef = D828F9D60780CCDE00215EB9 /* PlayScore.m */; };
 		D828F9E20780CCDF00215EB9 /* TadPole.m in Sources */ = {isa = PBXBuildFile; fileRef = D828F9D80780CCDF00215EB9 /* TadPole.m */; };
 		D828F9E60780CD0600215EB9 /* PianoRoll_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D828F9E50780CD0600215EB9 /* PianoRoll_main.m */; };
-		D828F9F70780CD4A00215EB9 /* Help.nib in Resources */ = {isa = PBXBuildFile; fileRef = D828F9EF0780CD4A00215EB9 /* Help.nib */; };
-		D828F9F80780CD4A00215EB9 /* Info.nib in Resources */ = {isa = PBXBuildFile; fileRef = D828F9F10780CD4A00215EB9 /* Info.nib */; };
-		D828F9F90780CD4A00215EB9 /* PianoRoll.nib in Resources */ = {isa = PBXBuildFile; fileRef = D828F9F30780CD4A00215EB9 /* PianoRoll.nib */; };
-		D828F9FA0780CD4A00215EB9 /* Score.nib in Resources */ = {isa = PBXBuildFile; fileRef = D828F9F50780CD4A00215EB9 /* Score.nib */; };
+		D828F9F70780CD4A00215EB9 /* Help.xib in Resources */ = {isa = PBXBuildFile; fileRef = D828F9EF0780CD4A00215EB9 /* Help.xib */; };
+		D828F9F80780CD4A00215EB9 /* Info.xib in Resources */ = {isa = PBXBuildFile; fileRef = D828F9F10780CD4A00215EB9 /* Info.xib */; };
+		D828F9F90780CD4A00215EB9 /* PianoRoll.xib in Resources */ = {isa = PBXBuildFile; fileRef = D828F9F30780CD4A00215EB9 /* PianoRoll.xib */; };
+		D828F9FA0780CD4A00215EB9 /* Score.xib in Resources */ = {isa = PBXBuildFile; fileRef = D828F9F50780CD4A00215EB9 /* Score.xib */; };
 		D828FA050780CDEF00215EB9 /* PianoRoll.icns in Resources */ = {isa = PBXBuildFile; fileRef = D828FA030780CDEF00215EB9 /* PianoRoll.icns */; };
 		D828FA060780CDEF00215EB9 /* PianoRoll.tiff in Resources */ = {isa = PBXBuildFile; fileRef = D828FA040780CDEF00215EB9 /* PianoRoll.tiff */; };
 		D828FA410780CFD200215EB9 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
@@ -446,7 +446,7 @@
 		D837ABA406C80F8C00A6CFEB /* JunoSwitchUp.tiff in Resources */ = {isa = PBXBuildFile; fileRef = D837AB9B06C80F8B00A6CFEB /* JunoSwitchUp.tiff */; };
 		D837ABA506C80F8C00A6CFEB /* PWM.tiff in Resources */ = {isa = PBXBuildFile; fileRef = D837AB9C06C80F8C00A6CFEB /* PWM.tiff */; };
 		D837ABA606C80F8C00A6CFEB /* Ramp.tiff in Resources */ = {isa = PBXBuildFile; fileRef = D837AB9D06C80F8C00A6CFEB /* Ramp.tiff */; };
-		D837ABAB06C80FA500A6CFEB /* juno106.nib in Resources */ = {isa = PBXBuildFile; fileRef = D837ABA906C80FA500A6CFEB /* juno106.nib */; };
+		D837ABAB06C80FA500A6CFEB /* juno106.xib in Resources */ = {isa = PBXBuildFile; fileRef = D837ABA906C80FA500A6CFEB /* juno106.xib */; };
 		D837ABB906C8102B00A6CFEB /* AxonNGC77.h in Headers */ = {isa = PBXBuildFile; fileRef = D837ABB406C8102B00A6CFEB /* AxonNGC77.h */; };
 		D837ABBA06C8102B00A6CFEB /* AxonNGC77.m in Sources */ = {isa = PBXBuildFile; fileRef = D837ABB506C8102B00A6CFEB /* AxonNGC77.m */; };
 		D837ABBB06C8102B00A6CFEB /* GuitarFretboardView.h in Headers */ = {isa = PBXBuildFile; fileRef = D837ABB606C8102B00A6CFEB /* GuitarFretboardView.h */; };
@@ -454,11 +454,11 @@
 		D837ABBD06C8102B00A6CFEB /* Segment.h in Headers */ = {isa = PBXBuildFile; fileRef = D837ABB806C8102B00A6CFEB /* Segment.h */; };
 		D837ABCA06C8104F00A6CFEB /* AxonNGC77.xib in Resources */ = {isa = PBXBuildFile; fileRef = D837ABC606C8104F00A6CFEB /* AxonNGC77.xib */; };
 		D837ABCB06C8104F00A6CFEB /* Segment.xib in Resources */ = {isa = PBXBuildFile; fileRef = D837ABC806C8104F00A6CFEB /* Segment.xib */; };
-		D837AC4706C8199300A6CFEB /* quadraverb.nib in Resources */ = {isa = PBXBuildFile; fileRef = D837AC4506C8199300A6CFEB /* quadraverb.nib */; };
+		D837AC4706C8199300A6CFEB /* quadraverb.xib in Resources */ = {isa = PBXBuildFile; fileRef = D837AC4506C8199300A6CFEB /* quadraverb.xib */; };
 		D837AC4B06C819AA00A6CFEB /* QVFrontPanel.tiff in Resources */ = {isa = PBXBuildFile; fileRef = D837AC4A06C819AA00A6CFEB /* QVFrontPanel.tiff */; };
 		D837AC5006C819C200A6CFEB /* QuadraverbGT.h in Headers */ = {isa = PBXBuildFile; fileRef = D837AC4E06C819C200A6CFEB /* QuadraverbGT.h */; };
 		D837AC5106C819C200A6CFEB /* QuadraverbGT.m in Sources */ = {isa = PBXBuildFile; fileRef = D837AC4F06C819C200A6CFEB /* QuadraverbGT.m */; };
-		D837AC6506C81A9300A6CFEB /* ProphetVS.nib in Resources */ = {isa = PBXBuildFile; fileRef = D837AC6306C81A9300A6CFEB /* ProphetVS.nib */; };
+		D837AC6506C81A9300A6CFEB /* ProphetVS.xib in Resources */ = {isa = PBXBuildFile; fileRef = D837AC6306C81A9300A6CFEB /* ProphetVS.xib */; };
 		D837AC6A06C81AAC00A6CFEB /* ProphetVS.h in Headers */ = {isa = PBXBuildFile; fileRef = D837AC6806C81AAC00A6CFEB /* ProphetVS.h */; };
 		D837AC6B06C81AAC00A6CFEB /* ProphetVS.m in Sources */ = {isa = PBXBuildFile; fileRef = D837AC6906C81AAC00A6CFEB /* ProphetVS.m */; };
 		D83CADFB0FEA2CB20000CF19 /* MusicKit_Help.css in CopyFiles */ = {isa = PBXBuildFile; fileRef = D8743ED80FC7EF3F007B3313 /* MusicKit_Help.css */; };
@@ -497,8 +497,8 @@
 		D84E1E6A05B5E4C5002B493F /* MidiEcho_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D84E1E6405B5E4C5002B493F /* MidiEcho_main.m */; };
 		D84E1E6B05B5E4C5002B493F /* MidiEcho.h in Headers */ = {isa = PBXBuildFile; fileRef = D84E1E6505B5E4C5002B493F /* MidiEcho.h */; };
 		D84E1E6C05B5E4C5002B493F /* MidiEcho.m in Sources */ = {isa = PBXBuildFile; fileRef = D84E1E6605B5E4C5002B493F /* MidiEcho.m */; };
-		D84E1F5C05B5E4FC002B493F /* Info.nib in Resources */ = {isa = PBXBuildFile; fileRef = D84E1F5805B5E4FC002B493F /* Info.nib */; };
-		D84E1F5D05B5E4FC002B493F /* MidiEcho.nib in Resources */ = {isa = PBXBuildFile; fileRef = D84E1F5A05B5E4FC002B493F /* MidiEcho.nib */; };
+		D84E1F5C05B5E4FC002B493F /* Info.xib in Resources */ = {isa = PBXBuildFile; fileRef = D84E1F5805B5E4FC002B493F /* Info.xib */; };
+		D84E1F5D05B5E4FC002B493F /* MidiEcho.xib in Resources */ = {isa = PBXBuildFile; fileRef = D84E1F5A05B5E4FC002B493F /* MidiEcho.xib */; };
 		D84E1FAF05B5E5EC002B493F /* EchoFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = D84E1FA905B5E5EC002B493F /* EchoFilter.h */; };
 		D84E1FB005B5E5EC002B493F /* EchoFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = D84E1FAA05B5E5EC002B493F /* EchoFilter.m */; };
 		D84E1FB105B5E5EC002B493F /* MidiEcho-1-MIDI-Channel_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D84E1FAB05B5E5EC002B493F /* MidiEcho-1-MIDI-Channel_main.m */; };
@@ -612,7 +612,7 @@
 		D8684F60081CA74700926058 /* MelodicGenerator.h in Resources */ = {isa = PBXBuildFile; fileRef = D8684F5E081CA74700926058 /* MelodicGenerator.h */; };
 		D8684F61081CA74700926058 /* MelodicGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = D8684F5F081CA74700926058 /* MelodicGenerator.m */; };
 		D8684F65081CA75E00926058 /* example3_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8684F64081CA75E00926058 /* example3_main.m */; };
-		D8684F6A081CA77400926058 /* example3.nib in Resources */ = {isa = PBXBuildFile; fileRef = D8684F68081CA77400926058 /* example3.nib */; };
+		D8684F6A081CA77400926058 /* example3.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8684F68081CA77400926058 /* example3.xib */; };
 		D8684FED081CB7EB00926058 /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D8684FEE081CB7EB00926058 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D8684FEF081CB7EB00926058 /* MKDSP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FED7105A10EAF0024FD88 /* MKDSP.framework */; };
@@ -625,26 +625,26 @@
 		D86B0ACD09F6CAA2003B4720 /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D86B0ACE09F6CAA2003B4720 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D86B0ACF09F6CAA2003B4720 /* MKDSP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FED7105A10EAF0024FD88 /* MKDSP.framework */; };
-		D86CBB8507ADAE9A00CB06E4 /* MidiEcho.nib in Resources */ = {isa = PBXBuildFile; fileRef = D86CBB8307ADAE9A00CB06E4 /* MidiEcho.nib */; };
-		D86CBB8C07ADAF6100CB06E4 /* Info.nib in Resources */ = {isa = PBXBuildFile; fileRef = D86CBB8A07ADAF6100CB06E4 /* Info.nib */; };
+		D86CBB8507ADAE9A00CB06E4 /* MidiEcho.xib in Resources */ = {isa = PBXBuildFile; fileRef = D86CBB8307ADAE9A00CB06E4 /* MidiEcho.xib */; };
+		D86CBB8C07ADAF6100CB06E4 /* Info.xib in Resources */ = {isa = PBXBuildFile; fileRef = D86CBB8A07ADAF6100CB06E4 /* Info.xib */; };
 		D86CBBBC07ADB89A00CB06E4 /* convertscore.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = D8708B5205B312E00074C18D /* convertscore.1 */; };
 		D86CBBC607ADB8D100CB06E4 /* playscore.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = D8708BA005B314B70074C18D /* playscore.1 */; };
-		D86CBE1807AF1AD800CB06E4 /* MidiPlay.nib in Resources */ = {isa = PBXBuildFile; fileRef = D86CBE1607AF1AD800CB06E4 /* MidiPlay.nib */; };
-		D86CBE1D07AF1AF900CB06E4 /* Info.nib in Resources */ = {isa = PBXBuildFile; fileRef = D86CBE1B07AF1AF900CB06E4 /* Info.nib */; };
-		D86CC06B07AFF5EE00CB06E4 /* Info.nib in Resources */ = {isa = PBXBuildFile; fileRef = D86CC06907AFF5EE00CB06E4 /* Info.nib */; };
-		D86CC07007AFF65600CB06E4 /* MidiLoop.nib in Resources */ = {isa = PBXBuildFile; fileRef = D86CC06E07AFF65600CB06E4 /* MidiLoop.nib */; };
+		D86CBE1807AF1AD800CB06E4 /* MidiPlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = D86CBE1607AF1AD800CB06E4 /* MidiPlay.xib */; };
+		D86CBE1D07AF1AF900CB06E4 /* Info.xib in Resources */ = {isa = PBXBuildFile; fileRef = D86CBE1B07AF1AF900CB06E4 /* Info.xib */; };
+		D86CC06B07AFF5EE00CB06E4 /* Info.xib in Resources */ = {isa = PBXBuildFile; fileRef = D86CC06907AFF5EE00CB06E4 /* Info.xib */; };
+		D86CC07007AFF65600CB06E4 /* MidiLoop.xib in Resources */ = {isa = PBXBuildFile; fileRef = D86CC06E07AFF65600CB06E4 /* MidiLoop.xib */; };
 		D86D23C106F22BA4003565CB /* Controller.h in Resources */ = {isa = PBXBuildFile; fileRef = D86D23BF06F22BA4003565CB /* Controller.h */; };
 		D86D23C206F22BA4003565CB /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = D86D23C006F22BA4003565CB /* Controller.m */; };
 		D86D23C606F22BC0003565CB /* TwoWaves_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D86D23C506F22BC0003565CB /* TwoWaves_main.m */; };
-		D86D23CB06F22BD7003565CB /* TwoWaves.nib in Resources */ = {isa = PBXBuildFile; fileRef = D86D23C906F22BD7003565CB /* TwoWaves.nib */; };
+		D86D23CB06F22BD7003565CB /* TwoWaves.xib in Resources */ = {isa = PBXBuildFile; fileRef = D86D23C906F22BD7003565CB /* TwoWaves.xib */; };
 		D8708B5705B313050074C18D /* convertscore_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8708B5605B313050074C18D /* convertscore_main.m */; };
 		D8708B7105B313B70074C18D /* scorefile2stella_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8708B7005B313B70074C18D /* scorefile2stella_main.m */; };
 		D8708BA505B314DC0074C18D /* playscore_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8708BA405B314DC0074C18D /* playscore_main.m */; };
 		D8708F5E05B49A9E0074C18D /* MidiRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = D8708F5C05B49A9E0074C18D /* MidiRecord.h */; };
 		D8708F5F05B49A9E0074C18D /* MidiRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = D8708F5D05B49A9E0074C18D /* MidiRecord.m */; };
 		D8708F6505B49AB30074C18D /* MidiRecord_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8708F6405B49AB30074C18D /* MidiRecord_main.m */; };
-		D8708F6D05B49AD30074C18D /* Info.nib in Resources */ = {isa = PBXBuildFile; fileRef = D8708F6905B49AD30074C18D /* Info.nib */; };
-		D8708F6E05B49AD30074C18D /* MidiRecord.nib in Resources */ = {isa = PBXBuildFile; fileRef = D8708F6B05B49AD30074C18D /* MidiRecord.nib */; };
+		D8708F6D05B49AD30074C18D /* Info.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8708F6905B49AD30074C18D /* Info.xib */; };
+		D8708F6E05B49AD30074C18D /* MidiRecord.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8708F6B05B49AD30074C18D /* MidiRecord.xib */; };
 		D870921305B5DA9A0074C18D /* MidiLoop.icns in Resources */ = {isa = PBXBuildFile; fileRef = D870921205B5DA9A0074C18D /* MidiLoop.icns */; };
 		D870922A05B5DB110074C18D /* MidiLoop_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D870922905B5DB110074C18D /* MidiLoop_main.m */; };
 		D870923005B5DB320074C18D /* MidiLoop.h in Headers */ = {isa = PBXBuildFile; fileRef = D870922E05B5DB320074C18D /* MidiLoop.h */; };
@@ -658,7 +658,7 @@
 		D870944E05B5E0460074C18D /* MIDIFileController.h in Headers */ = {isa = PBXBuildFile; fileRef = D870944A05B5E0460074C18D /* MIDIFileController.h */; };
 		D870944F05B5E0460074C18D /* MIDIFileController.m in Sources */ = {isa = PBXBuildFile; fileRef = D870944B05B5E0460074C18D /* MIDIFileController.m */; };
 		D870945005B5E0460074C18D /* MIDIFilePlayback_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D870944C05B5E0460074C18D /* MIDIFilePlayback_main.m */; };
-		D870946C05B5E1100074C18D /* MIDIFilePlayback.nib in Resources */ = {isa = PBXBuildFile; fileRef = D870946A05B5E1100074C18D /* MIDIFilePlayback.nib */; };
+		D870946C05B5E1100074C18D /* MIDIFilePlayback.xib in Resources */ = {isa = PBXBuildFile; fileRef = D870946A05B5E1100074C18D /* MIDIFilePlayback.xib */; };
 		D8743EDD0FC7EF6F007B3313 /* MusicKit_Help.css in CopyFiles */ = {isa = PBXBuildFile; fileRef = D8743ED80FC7EF3F007B3313 /* MusicKit_Help.css */; };
 		D879C3C705A2B4B6005DB251 /* SndViewP.h in Headers */ = {isa = PBXBuildFile; fileRef = D879C3C505A2B4B6005DB251 /* SndViewP.h */; };
 		D879C3D405A2B4E1005DB251 /* SndViewP.nib in Resources */ = {isa = PBXBuildFile; fileRef = D879C3D205A2B4E0005DB251 /* SndViewP.nib */; };
@@ -668,8 +668,8 @@
 		D87BF78B0F097C740078AD51 /* InterfaceBuilderKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D87BF78A0F097C740078AD51 /* InterfaceBuilderKit.framework */; };
 		D87BF8100F0985530078AD51 /* SndViewIBPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = D87BF80F0F0985530078AD51 /* SndViewIBPlugin.m */; };
 		D87BF81B0F0985E40078AD51 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D87BF8150F0985E40078AD51 /* InfoPlist.strings */; };
-		D87BF81C0F0985E40078AD51 /* SndViewIBPluginInspector.nib in Resources */ = {isa = PBXBuildFile; fileRef = D87BF8170F0985E40078AD51 /* SndViewIBPluginInspector.nib */; };
-		D87BF81D0F0985E40078AD51 /* SndViewIBPluginLibrary.nib in Resources */ = {isa = PBXBuildFile; fileRef = D87BF8190F0985E40078AD51 /* SndViewIBPluginLibrary.nib */; };
+		D87BF81C0F0985E40078AD51 /* SndViewIBPluginInspector.xib in Resources */ = {isa = PBXBuildFile; fileRef = D87BF8170F0985E40078AD51 /* SndViewIBPluginInspector.xib */; };
+		D87BF81D0F0985E40078AD51 /* SndViewIBPluginLibrary.xib in Resources */ = {isa = PBXBuildFile; fileRef = D87BF8190F0985E40078AD51 /* SndViewIBPluginLibrary.xib */; };
 		D88032AD0FF17F4E00182A0C /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D88032AE0FF17F4E00182A0C /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D88032AF0FF17F4E00182A0C /* MKDSP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FED7105A10EAF0024FD88 /* MKDSP.framework */; };
@@ -712,10 +712,10 @@
 		D88C506106C7E4C900D33D99 /* UnhandledSynth.h in Headers */ = {isa = PBXBuildFile; fileRef = D88C504F06C7E4C900D33D99 /* UnhandledSynth.h */; };
 		D88C506206C7E4C900D33D99 /* UnhandledSynth.m in Sources */ = {isa = PBXBuildFile; fileRef = D88C505006C7E4C900D33D99 /* UnhandledSynth.m */; };
 		D88C507E06C7E4F000D33D99 /* PatchCord_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D88C507D06C7E4F000D33D99 /* PatchCord_main.m */; };
-		D88C50C206C7E9E900D33D99 /* PatchBank.nib in Resources */ = {isa = PBXBuildFile; fileRef = D88C50B806C7E9E900D33D99 /* PatchBank.nib */; };
-		D88C50C306C7E9E900D33D99 /* Document.nib in Resources */ = {isa = PBXBuildFile; fileRef = D88C50BA06C7E9E900D33D99 /* Document.nib */; };
-		D88C50C506C7E9E900D33D99 /* PatchCord.nib in Resources */ = {isa = PBXBuildFile; fileRef = D88C50BE06C7E9E900D33D99 /* PatchCord.nib */; };
-		D88C50C606C7E9E900D33D99 /* UnhandledSynth.nib in Resources */ = {isa = PBXBuildFile; fileRef = D88C50C006C7E9E900D33D99 /* UnhandledSynth.nib */; };
+		D88C50C206C7E9E900D33D99 /* PatchBank.xib in Resources */ = {isa = PBXBuildFile; fileRef = D88C50B806C7E9E900D33D99 /* PatchBank.xib */; };
+		D88C50C306C7E9E900D33D99 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = D88C50BA06C7E9E900D33D99 /* Document.xib */; };
+		D88C50C506C7E9E900D33D99 /* PatchCord.xib in Resources */ = {isa = PBXBuildFile; fileRef = D88C50BE06C7E9E900D33D99 /* PatchCord.xib */; };
+		D88C50C606C7E9E900D33D99 /* UnhandledSynth.xib in Resources */ = {isa = PBXBuildFile; fileRef = D88C50C006C7E9E900D33D99 /* UnhandledSynth.xib */; };
 		D88C50DF06C7EA2000D33D99 /* PatchCord.tiff in Resources */ = {isa = PBXBuildFile; fileRef = D88C50DD06C7EA2000D33D99 /* PatchCord.tiff */; };
 		D88C50E006C7EA2000D33D99 /* pc_Doc_File.tiff in Resources */ = {isa = PBXBuildFile; fileRef = D88C50DE06C7EA2000D33D99 /* pc_Doc_File.tiff */; };
 		D88FE2BC05A0F8430024FD88 /* Snd.h in Headers */ = {isa = PBXBuildFile; fileRef = D88FE28D05A0F8430024FD88 /* Snd.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -801,7 +801,7 @@
 		D88FE35605A0FCC00024FD88 /* SndFormat.h in Headers */ = {isa = PBXBuildFile; fileRef = D88FE35505A0FCC00024FD88 /* SndFormat.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D88FE37B05A0FEB80024FD88 /* denormals.h in Headers */ = {isa = PBXBuildFile; fileRef = D88FE37105A0FEB80024FD88 /* denormals.h */; };
 		D88FE38005A0FEB80024FD88 /* tuning.h in Headers */ = {isa = PBXBuildFile; fileRef = D88FE37605A0FEB80024FD88 /* tuning.h */; };
-		D88FE38705A0FF940024FD88 /* SndAudioProcessorInspector.nib in Resources */ = {isa = PBXBuildFile; fileRef = D88FE38505A0FF940024FD88 /* SndAudioProcessorInspector.nib */; };
+		D88FE38705A0FF940024FD88 /* SndAudioProcessorInspector.xib in Resources */ = {isa = PBXBuildFile; fileRef = D88FE38505A0FF940024FD88 /* SndAudioProcessorInspector.xib */; };
 		D88FE39B05A101690024FD88 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FE39605A101690024FD88 /* AppKit.framework */; };
 		D88FE39C05A101690024FD88 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FE39705A101690024FD88 /* ApplicationServices.framework */; };
 		D88FE39D05A101690024FD88 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FE39805A101690024FD88 /* Foundation.framework */; };
@@ -918,7 +918,7 @@
 		D8C6E3420ACC4AC4004978A9 /* music.tiff in Resources */ = {isa = PBXBuildFile; fileRef = D8C6E3410ACC4AC4004978A9 /* music.tiff */; };
 		D8CFD26C0B5D6743003AB3C3 /* metronome_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CFD2690B5D6743003AB3C3 /* metronome_main.m */; };
 		D8CFD26D0B5D6743003AB3C3 /* Metronome.m in Sources */ = {isa = PBXBuildFile; fileRef = D8CFD26B0B5D6743003AB3C3 /* Metronome.m */; };
-		D8CFD27B0B5D67DD003AB3C3 /* metronome.nib in Resources */ = {isa = PBXBuildFile; fileRef = D8CFD2700B5D67DD003AB3C3 /* metronome.nib */; };
+		D8CFD27B0B5D67DD003AB3C3 /* metronome.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8CFD2700B5D67DD003AB3C3 /* metronome.xib */; };
 		D8D1B6AE0812496D00D9156A /* playscorefilemidi.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D1B6AD0812496D00D9156A /* playscorefilemidi.m */; };
 		D8D1B72E08124ED000D9156A /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D8D1B72F08124ED000D9156A /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
@@ -928,8 +928,8 @@
 		D8D2A3DA0FA905E2008DBF68 /* ExampApp.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D2A3D60FA905E2008DBF68 /* ExampApp.m */; };
 		D8D2A3DB0FA905E2008DBF68 /* PlayNote_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D2A3D70FA905E2008DBF68 /* PlayNote_main.m */; };
 		D8D2A3DC0FA905E2008DBF68 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = D8D2A3D80FA905E2008DBF68 /* README.txt */; };
-		D8D2A3E30FA9062D008DBF68 /* Info.nib in Resources */ = {isa = PBXBuildFile; fileRef = D8D2A3DF0FA9062D008DBF68 /* Info.nib */; };
-		D8D2A3E40FA9062D008DBF68 /* PlayNote.nib in Resources */ = {isa = PBXBuildFile; fileRef = D8D2A3E10FA9062D008DBF68 /* PlayNote.nib */; };
+		D8D2A3E30FA9062D008DBF68 /* Info.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8D2A3DF0FA9062D008DBF68 /* Info.xib */; };
+		D8D2A3E40FA9062D008DBF68 /* PlayNote.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8D2A3E10FA9062D008DBF68 /* PlayNote.xib */; };
 		D8D3D95905A0E5B200CAD810 /* SndFormats.h in Headers */ = {isa = PBXBuildFile; fileRef = D81D7E40059FA8ED00BCE725 /* SndFormats.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8D3D95A05A0E5B200CAD810 /* SndStruct.h in Headers */ = {isa = PBXBuildFile; fileRef = D81D7E41059FA8ED00BCE725 /* SndStruct.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D8D3D95C05A0E5BD00CAD810 /* PerformMIDI.h in Headers */ = {isa = PBXBuildFile; fileRef = D81D7E3C059FA8ED00BCE725 /* PerformMIDI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -947,7 +947,7 @@
 		D8E1DE0607CA79950018F8F3 /* MultipleSoundPlayer_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E1DE0507CA79950018F8F3 /* MultipleSoundPlayer_main.m */; };
 		D8E1DE1107CA7A880018F8F3 /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D8E1DE1207CA7A880018F8F3 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
-		D8E1DE4507CAC0290018F8F3 /* MultipleSoundPlayer.nib in Resources */ = {isa = PBXBuildFile; fileRef = D8E1DE4307CAC0290018F8F3 /* MultipleSoundPlayer.nib */; };
+		D8E1DE4507CAC0290018F8F3 /* MultipleSoundPlayer.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8E1DE4307CAC0290018F8F3 /* MultipleSoundPlayer.xib */; };
 		D8E31F100FA7A1680049DC04 /* _exportedPrivateMusickit.h in Headers */ = {isa = PBXBuildFile; fileRef = D8E31F0D0FA7A1680049DC04 /* _exportedPrivateMusickit.h */; };
 		D8E31F110FA7A1680049DC04 /* _unitGeneratorInclude.h in Headers */ = {isa = PBXBuildFile; fileRef = D8E31F0E0FA7A1680049DC04 /* _unitGeneratorInclude.h */; };
 		D8E31F120FA7A1680049DC04 /* timings.h in Headers */ = {isa = PBXBuildFile; fileRef = D8E31F0F0FA7A1680049DC04 /* timings.h */; };
@@ -962,15 +962,15 @@
 		D8E8D5E80784645800AAE755 /* cross.tiff in Resources */ = {isa = PBXBuildFile; fileRef = D8E8D5E10784645800AAE755 /* cross.tiff */; };
 		D8E8D5E90784645800AAE755 /* crossfill.tiff in Resources */ = {isa = PBXBuildFile; fileRef = D8E8D5E20784645800AAE755 /* crossfill.tiff */; };
 		D8E8D5EA0784645800AAE755 /* EnvelopeEd.tiff in Resources */ = {isa = PBXBuildFile; fileRef = D8E8D5E30784645800AAE755 /* EnvelopeEd.tiff */; };
-		D8E8D5F10784649E00AAE755 /* EnvelopeEd.nib in Resources */ = {isa = PBXBuildFile; fileRef = D8E8D5ED0784649E00AAE755 /* EnvelopeEd.nib */; };
-		D8E8D5F20784649E00AAE755 /* Info.nib in Resources */ = {isa = PBXBuildFile; fileRef = D8E8D5EF0784649E00AAE755 /* Info.nib */; };
+		D8E8D5F10784649E00AAE755 /* EnvelopeEd.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8E8D5ED0784649E00AAE755 /* EnvelopeEd.xib */; };
+		D8E8D5F20784649E00AAE755 /* Info.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8E8D5EF0784649E00AAE755 /* Info.xib */; };
 		D8E8D5F70784653B00AAE755 /* EnvelopeEd.icns in Resources */ = {isa = PBXBuildFile; fileRef = D8E8D5F60784653B00AAE755 /* EnvelopeEd.icns */; };
 		D8E8D5F8078465A500AAE755 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
 		D8FD86B609F65F87001E01B4 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
 		D8FD874009F666F0001E01B4 /* example5_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FD873D09F666F0001E01B4 /* example5_main.m */; };
 		D8FD874109F666F0001E01B4 /* MyCustomObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FD873F09F666F0001E01B4 /* MyCustomObject.m */; };
-		D8FD874409F6670F001E01B4 /* example5.nib in Resources */ = {isa = PBXBuildFile; fileRef = D8FD874209F6670F001E01B4 /* example5.nib */; };
-		D8FD875309F68B9A001E01B4 /* example4.nib in Resources */ = {isa = PBXBuildFile; fileRef = D8FD875109F68B9A001E01B4 /* example4.nib */; };
+		D8FD874409F6670F001E01B4 /* example5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8FD874209F6670F001E01B4 /* example5.xib */; };
+		D8FD875309F68B9A001E01B4 /* example4.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8FD875109F68B9A001E01B4 /* example4.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1504,21 +1504,21 @@
 		428998C310359CF0005FEC40 /* WhatChildIsThis.score */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WhatChildIsThis.score; sourceTree = "<group>"; };
 		428998C410359CF0005FEC40 /* WTC1.score */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WTC1.score; sourceTree = "<group>"; };
 		556A3CF329722006007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/EnvelopeEd.sgml; sourceTree = "<group>"; };
-		556A3CF429722006007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/EnvelopeEd.nib; sourceTree = "<group>"; };
-		556A3CF529722006007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/Info.nib; sourceTree = "<group>"; };
-		556A3CF629722006007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/Document.nib; sourceTree = "<group>"; };
-		556A3CF729722006007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/PatchBank.nib; sourceTree = "<group>"; };
-		556A3CF829722006007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/PatchCord.nib; sourceTree = "<group>"; };
-		556A3CF929722006007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/UnhandledSynth.nib; sourceTree = "<group>"; };
-		556A3CFA29722007007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/juno106.nib; sourceTree = "<group>"; };
+		556A3CF429722006007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EnvelopeEd.xib; sourceTree = "<group>"; };
+		556A3CF529722006007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Info.xib; sourceTree = "<group>"; };
+		556A3CF629722006007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Document.xib; sourceTree = "<group>"; };
+		556A3CF729722006007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PatchBank.xib; sourceTree = "<group>"; };
+		556A3CF829722006007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PatchCord.xib; sourceTree = "<group>"; };
+		556A3CF929722006007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/UnhandledSynth.xib; sourceTree = "<group>"; };
+		556A3CFA29722007007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/juno106.xib; sourceTree = "<group>"; };
 		556A3CFB29722007007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AxonNGC77.xib; sourceTree = "<group>"; };
 		556A3CFC29722007007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Segment.xib; sourceTree = "<group>"; };
-		556A3CFD29722007007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/ProphetVS.nib; sourceTree = "<group>"; };
-		556A3CFE29722007007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/quadraverb.nib; sourceTree = "<group>"; };
-		556A3CFF29722007007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = "en.lproj/Help-macosx.nib"; sourceTree = "<group>"; };
-		556A3D0029722007007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = "en.lproj/Info-macosx.nib"; sourceTree = "<group>"; };
-		556A3D0129722007007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = "en.lproj/PianoRoll-macosx.nib"; sourceTree = "<group>"; };
-		556A3D0229722007007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/Score.nib; sourceTree = "<group>"; };
+		556A3CFD29722007007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ProphetVS.xib; sourceTree = "<group>"; };
+		556A3CFE29722007007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/quadraverb.xib; sourceTree = "<group>"; };
+		556A3CFF29722007007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/Help-macosx.xib"; sourceTree = "<group>"; };
+		556A3D0029722007007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/Info-macosx.xib"; sourceTree = "<group>"; };
+		556A3D0129722007007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/PianoRoll-macosx.xib"; sourceTree = "<group>"; };
+		556A3D0229722007007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Score.xib; sourceTree = "<group>"; };
 		556A3D0329722008007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ScorePlayer.strings; sourceTree = "<group>"; };
 		556A3D0429722008007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/ScorePlayer.sgml; sourceTree = "<group>"; };
 		556A3D0529722008007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ErrorLog.xib; sourceTree = "<group>"; };
@@ -1533,30 +1533,30 @@
 		556A3D0E29722009007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/soundDocument.xib; sourceTree = "<group>"; };
 		556A3D0F29722009007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/soundInfo.xib; sourceTree = "<group>"; };
 		556A3D1029722009007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/spectrum.xib; sourceTree = "<group>"; };
-		556A3D1129722009007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/TwoWaves.nib; sourceTree = "<group>"; };
-		556A3D1229722009007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = "en.lproj/Info-macosx.nib"; sourceTree = "<group>"; };
-		556A3D132972200A007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = "en.lproj/MidiEcho-macosx.nib"; sourceTree = "<group>"; };
-		556A3D142972200A007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/Info.nib; sourceTree = "<group>"; };
-		556A3D152972200A007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/MidiEcho.nib; sourceTree = "<group>"; };
-		556A3D162972200A007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = "en.lproj/MIDIFilePlayback-macosx.nib"; sourceTree = "<group>"; };
-		556A3D172972200A007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = "en.lproj/Info-macosx.nib"; sourceTree = "<group>"; };
-		556A3D182972200A007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = "en.lproj/MidiLoop-macosx.nib"; sourceTree = "<group>"; };
-		556A3D192972200A007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/Info.nib; sourceTree = "<group>"; };
-		556A3D1A2972200B007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/MidiPlay.nib; sourceTree = "<group>"; };
-		556A3D1B2972200B007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = "en.lproj/Info-macos.nib"; sourceTree = "<group>"; };
-		556A3D1C2972200B007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = "en.lproj/MidiRecord-macos.nib"; sourceTree = "<group>"; };
-		556A3D1D2972200B007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/metronome.nib; sourceTree = "<group>"; };
-		556A3D1E2972200B007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = Examples/PlayNote/en.lproj/Info.nib; sourceTree = "<group>"; };
-		556A3D1F2972200B007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = Examples/PlayNote/en.lproj/PlayNote.nib; sourceTree = "<group>"; };
-		556A3D202972200B007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/example3.nib; sourceTree = "<group>"; };
-		556A3D212972200B007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/example4.nib; sourceTree = "<group>"; };
-		556A3D222972200C007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/example5.nib; sourceTree = "<group>"; };
-		556A3D232972200C007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = "en.lproj/MultipleSoundPlayer-macosx.nib"; sourceTree = "<group>"; };
+		556A3D1129722009007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/TwoWaves.xib; sourceTree = "<group>"; };
+		556A3D1229722009007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/Info-macosx.xib"; sourceTree = "<group>"; };
+		556A3D132972200A007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/MidiEcho-macosx.xib"; sourceTree = "<group>"; };
+		556A3D142972200A007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Info.xib; sourceTree = "<group>"; };
+		556A3D152972200A007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MidiEcho.xib; sourceTree = "<group>"; };
+		556A3D162972200A007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/MIDIFilePlayback-macosx.xib"; sourceTree = "<group>"; };
+		556A3D172972200A007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/Info-macosx.xib"; sourceTree = "<group>"; };
+		556A3D182972200A007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/MidiLoop-macosx.xib"; sourceTree = "<group>"; };
+		556A3D192972200A007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Info.xib; sourceTree = "<group>"; };
+		556A3D1A2972200B007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MidiPlay.xib; sourceTree = "<group>"; };
+		556A3D1B2972200B007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/Info-macos.xib"; sourceTree = "<group>"; };
+		556A3D1C2972200B007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/MidiRecord-macos.xib"; sourceTree = "<group>"; };
+		556A3D1D2972200B007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/metronome.xib; sourceTree = "<group>"; };
+		556A3D1E2972200B007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Info.xib; sourceTree = "<group>"; };
+		556A3D1F2972200B007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/PlayNote.xib; sourceTree = "<group>"; };
+		556A3D202972200B007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/example3.xib; sourceTree = "<group>"; };
+		556A3D212972200B007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/example4.xib; sourceTree = "<group>"; };
+		556A3D222972200C007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/example5.xib; sourceTree = "<group>"; };
+		556A3D232972200C007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/MultipleSoundPlayer-macosx.xib"; sourceTree = "<group>"; };
 		556A3D242972200C007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SignalProcessing.xib; sourceTree = "<group>"; };
-		556A3D252972200C007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/SndAudioProcessorInspector.nib; sourceTree = "<group>"; };
+		556A3D252972200C007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SndAudioProcessorInspector.xib; sourceTree = "<group>"; };
 		556A3D262972200C007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/SndViewP.nib; sourceTree = "<group>"; };
-		556A3D272972200C007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/SndViewIBPluginInspector.nib; sourceTree = "<group>"; };
-		556A3D282972200C007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = en; path = en.lproj/SndViewIBPluginLibrary.nib; sourceTree = "<group>"; };
+		556A3D272972200C007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SndViewIBPluginInspector.xib; sourceTree = "<group>"; };
+		556A3D282972200C007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SndViewIBPluginLibrary.xib; sourceTree = "<group>"; };
 		556A3D292972200D007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		556A3D2B29722665007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localized.strings; sourceTree = "<group>"; };
 		D80032570819F0C600E47C6C /* MidiEcho.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = MidiEcho.icns; sourceTree = "<group>"; };
@@ -3188,15 +3188,15 @@
 		D828F9A50780C3EA00215EB9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				D85E74810AD00B460078D3B5 /* stop.tiff */,
+				D880FE3F0780AF2200FD03CC /* Midi.icns */,
+				D8C6E3410ACC4AC4004978A9 /* music.tiff */,
 				D828F9AC0780C46700215EB9 /* play.tiff */,
 				D828F9AD0780C46700215EB9 /* playH.tiff */,
-				D8C6E3410ACC4AC4004978A9 /* music.tiff */,
-				D880FE3F0780AF2200FD03CC /* Midi.icns */,
 				D880FE400780AF2200FD03CC /* PlayScore.icns */,
 				D880FE410780AF2200FD03CC /* Score.icns */,
 				D880FE420780AF2200FD03CC /* ScorePlayerApp.icns */,
 				D880FE430780AF2200FD03CC /* Sound.icns */,
+				D85E74810AD00B460078D3B5 /* stop.tiff */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -3204,15 +3204,15 @@
 		D828F9B40780C4FC00215EB9 /* Help */ = {
 			isa = PBXGroup;
 			children = (
-				D828F9B70780C52400215EB9 /* ScorePlayer.sgml */,
+				D8379A830FEE8C6E00E7B708 /* icon16x16.png */,
 				D8BC47280FC7FDF0007D61A5 /* Midi.gif */,
 				D8BC47290FC7FDF0007D61A5 /* play.gif */,
 				D8BC472A0FC7FDF0007D61A5 /* PlayScore.gif */,
 				D8BC472B0FC7FDF0007D61A5 /* Score.gif */,
+				D828F9B70780C52400215EB9 /* ScorePlayer.sgml */,
 				D8BC472C0FC7FDF0007D61A5 /* ScorePlayerApp.gif */,
 				D8BC472D0FC7FDF0007D61A5 /* Sound.gif */,
 				D8BC472E0FC7FDF0007D61A5 /* tempo.gif */,
-				D8379A830FEE8C6E00E7B708 /* icon16x16.png */,
 			);
 			path = Help;
 			sourceTree = "<group>";
@@ -3220,10 +3220,10 @@
 		D828F9E90780CD0E00215EB9 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				D828F9EF0780CD4A00215EB9 /* Help.nib */,
-				D828F9F10780CD4A00215EB9 /* Info.nib */,
-				D828F9F30780CD4A00215EB9 /* PianoRoll.nib */,
-				D828F9F50780CD4A00215EB9 /* Score.nib */,
+				D828F9EF0780CD4A00215EB9 /* Help.xib */,
+				D828F9F10780CD4A00215EB9 /* Info.xib */,
+				D828F9F30780CD4A00215EB9 /* PianoRoll.xib */,
+				D828F9F50780CD4A00215EB9 /* Score.xib */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -3340,7 +3340,7 @@
 		D82AC3AF05A0F63D00780F57 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				D88FE38505A0FF940024FD88 /* SndAudioProcessorInspector.nib */,
+				D88FE38505A0FF940024FD88 /* SndAudioProcessorInspector.xib */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -3376,7 +3376,7 @@
 		D837AB8F06C80F6000A6CFEB /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				D837ABA906C80FA500A6CFEB /* juno106.nib */,
+				D837ABA906C80FA500A6CFEB /* juno106.xib */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -3475,7 +3475,7 @@
 		D837AC4206C8197600A6CFEB /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				D837AC4506C8199300A6CFEB /* quadraverb.nib */,
+				D837AC4506C8199300A6CFEB /* quadraverb.xib */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -3511,7 +3511,7 @@
 		D837AC5D06C81A6A00A6CFEB /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				D837AC6306C81A9300A6CFEB /* ProphetVS.nib */,
+				D837AC6306C81A9300A6CFEB /* ProphetVS.xib */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -3668,8 +3668,8 @@
 		D84E1E5105B5E452002B493F /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				D84E1F5805B5E4FC002B493F /* Info.nib */,
-				D84E1F5A05B5E4FC002B493F /* MidiEcho.nib */,
+				D84E1F5805B5E4FC002B493F /* Info.xib */,
+				D84E1F5A05B5E4FC002B493F /* MidiEcho.xib */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -3701,8 +3701,8 @@
 		D84E1F6E05B5E566002B493F /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				D86CBB8A07ADAF6100CB06E4 /* Info.nib */,
-				D86CBB8307ADAE9A00CB06E4 /* MidiEcho.nib */,
+				D86CBB8A07ADAF6100CB06E4 /* Info.xib */,
+				D86CBB8307ADAE9A00CB06E4 /* MidiEcho.xib */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -3880,8 +3880,8 @@
 		D85755D00FA9045300E5B905 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				D8D2A3DF0FA9062D008DBF68 /* Info.nib */,
-				D8D2A3E10FA9062D008DBF68 /* PlayNote.nib */,
+				D8D2A3DF0FA9062D008DBF68 /* Info.xib */,
+				D8D2A3E10FA9062D008DBF68 /* PlayNote.xib */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -4201,7 +4201,7 @@
 		D8684F58081CA6D900926058 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				D8684F68081CA77400926058 /* example3.nib */,
+				D8684F68081CA77400926058 /* example3.xib */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -4254,8 +4254,8 @@
 		D86986AE0ED9CA8600E90F3F /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				D87BF8170F0985E40078AD51 /* SndViewIBPluginInspector.nib */,
-				D87BF8190F0985E40078AD51 /* SndViewIBPluginLibrary.nib */,
+				D87BF8170F0985E40078AD51 /* SndViewIBPluginInspector.xib */,
+				D87BF8190F0985E40078AD51 /* SndViewIBPluginLibrary.xib */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -4332,7 +4332,7 @@
 		D86D23CE06F22BE8003565CB /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				D86D23C906F22BD7003565CB /* TwoWaves.nib */,
+				D86D23C906F22BD7003565CB /* TwoWaves.xib */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -4789,8 +4789,8 @@
 		D8708F3E05B49A110074C18D /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				D8708F6905B49AD30074C18D /* Info.nib */,
-				D8708F6B05B49AD30074C18D /* MidiRecord.nib */,
+				D8708F6905B49AD30074C18D /* Info.xib */,
+				D8708F6B05B49AD30074C18D /* MidiRecord.xib */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -4823,8 +4823,8 @@
 		D87091EC05B5D99D0074C18D /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				D86CC06E07AFF65600CB06E4 /* MidiLoop.nib */,
-				D86CC06907AFF5EE00CB06E4 /* Info.nib */,
+				D86CC06907AFF5EE00CB06E4 /* Info.xib */,
+				D86CC06E07AFF65600CB06E4 /* MidiLoop.xib */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -4876,8 +4876,8 @@
 		D870937A05B5DCA00074C18D /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				D86CBE1B07AF1AF900CB06E4 /* Info.nib */,
-				D86CBE1607AF1AD800CB06E4 /* MidiPlay.nib */,
+				D86CBE1B07AF1AF900CB06E4 /* Info.xib */,
+				D86CBE1607AF1AD800CB06E4 /* MidiPlay.xib */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -4894,7 +4894,7 @@
 		D870942205B5DF760074C18D /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				D870946A05B5E1100074C18D /* MIDIFilePlayback.nib */,
+				D870946A05B5E1100074C18D /* MIDIFilePlayback.xib */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -5209,10 +5209,10 @@
 		D88C508506C7E89000D33D99 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				D88C50B806C7E9E900D33D99 /* PatchBank.nib */,
-				D88C50BA06C7E9E900D33D99 /* Document.nib */,
-				D88C50BE06C7E9E900D33D99 /* PatchCord.nib */,
-				D88C50C006C7E9E900D33D99 /* UnhandledSynth.nib */,
+				D88C50B806C7E9E900D33D99 /* PatchBank.xib */,
+				D88C50BA06C7E9E900D33D99 /* Document.xib */,
+				D88C50BE06C7E9E900D33D99 /* PatchCord.xib */,
+				D88C50C006C7E9E900D33D99 /* UnhandledSynth.xib */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -5438,7 +5438,7 @@
 		D8A1DC3A09F64FA90094B3F5 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				D8FD875109F68B9A001E01B4 /* example4.nib */,
+				D8FD875109F68B9A001E01B4 /* example4.xib */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -5571,7 +5571,7 @@
 		D8CFD2260B5D6678003AB3C3 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				D8CFD2700B5D67DD003AB3C3 /* metronome.nib */,
+				D8CFD2700B5D67DD003AB3C3 /* metronome.xib */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -5791,7 +5791,7 @@
 		D8E1DE0907CA79BF0018F8F3 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				D8E1DE4307CAC0290018F8F3 /* MultipleSoundPlayer.nib */,
+				D8E1DE4307CAC0290018F8F3 /* MultipleSoundPlayer.xib */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -5807,8 +5807,8 @@
 		D8E8D5D70784642600AAE755 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				D8E8D5ED0784649E00AAE755 /* EnvelopeEd.nib */,
-				D8E8D5EF0784649E00AAE755 /* Info.nib */,
+				D8E8D5ED0784649E00AAE755 /* EnvelopeEd.xib */,
+				D8E8D5EF0784649E00AAE755 /* Info.xib */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -5857,7 +5857,7 @@
 		D8FD872F09F66642001E01B4 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				D8FD874209F6670F001E01B4 /* example5.nib */,
+				D8FD874209F6670F001E01B4 /* example5.xib */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -7172,10 +7172,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D828F9F70780CD4A00215EB9 /* Help.nib in Resources */,
-				D828F9F80780CD4A00215EB9 /* Info.nib in Resources */,
-				D828F9F90780CD4A00215EB9 /* PianoRoll.nib in Resources */,
-				D828F9FA0780CD4A00215EB9 /* Score.nib in Resources */,
+				D828F9F70780CD4A00215EB9 /* Help.xib in Resources */,
+				D828F9F80780CD4A00215EB9 /* Info.xib in Resources */,
+				D828F9F90780CD4A00215EB9 /* PianoRoll.xib in Resources */,
+				D828F9FA0780CD4A00215EB9 /* Score.xib in Resources */,
 				D828FA050780CDEF00215EB9 /* PianoRoll.icns in Resources */,
 				D828FA060780CDEF00215EB9 /* PianoRoll.tiff in Resources */,
 			);
@@ -7192,8 +7192,8 @@
 				D8E8D5E80784645800AAE755 /* cross.tiff in Resources */,
 				D8E8D5E90784645800AAE755 /* crossfill.tiff in Resources */,
 				D8E8D5EA0784645800AAE755 /* EnvelopeEd.tiff in Resources */,
-				D8E8D5F10784649E00AAE755 /* EnvelopeEd.nib in Resources */,
-				D8E8D5F20784649E00AAE755 /* Info.nib in Resources */,
+				D8E8D5F10784649E00AAE755 /* EnvelopeEd.xib in Resources */,
+				D8E8D5F20784649E00AAE755 /* Info.xib in Resources */,
 				D8E8D5F70784653B00AAE755 /* EnvelopeEd.icns in Resources */,
 				D8379AA30FEEC3DD00E7B708 /* icon16x16.png in Resources */,
 			);
@@ -7203,7 +7203,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D88FE38705A0FF940024FD88 /* SndAudioProcessorInspector.nib in Resources */,
+				D88FE38705A0FF940024FD88 /* SndAudioProcessorInspector.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7226,8 +7226,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D84E1F5C05B5E4FC002B493F /* Info.nib in Resources */,
-				D84E1F5D05B5E4FC002B493F /* MidiEcho.nib in Resources */,
+				D84E1F5C05B5E4FC002B493F /* Info.xib in Resources */,
+				D84E1F5D05B5E4FC002B493F /* MidiEcho.xib in Resources */,
 				D80032580819F0C600E47C6C /* MidiEcho.icns in Resources */,
 				D815897B0F90964D00E38A7D /* david.tiff in Resources */,
 			);
@@ -7237,8 +7237,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D86CBB8507ADAE9A00CB06E4 /* MidiEcho.nib in Resources */,
-				D86CBB8C07ADAF6100CB06E4 /* Info.nib in Resources */,
+				D86CBB8507ADAE9A00CB06E4 /* MidiEcho.xib in Resources */,
+				D86CBB8C07ADAF6100CB06E4 /* Info.xib in Resources */,
 				D815897C0F90964D00E38A7D /* david.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -7305,7 +7305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8684F60081CA74700926058 /* MelodicGenerator.h in Resources */,
-				D8684F6A081CA77400926058 /* example3.nib in Resources */,
+				D8684F6A081CA77400926058 /* example3.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7314,8 +7314,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D87BF81B0F0985E40078AD51 /* InfoPlist.strings in Resources */,
-				D87BF81C0F0985E40078AD51 /* SndViewIBPluginInspector.nib in Resources */,
-				D87BF81D0F0985E40078AD51 /* SndViewIBPluginLibrary.nib in Resources */,
+				D87BF81C0F0985E40078AD51 /* SndViewIBPluginInspector.xib in Resources */,
+				D87BF81D0F0985E40078AD51 /* SndViewIBPluginLibrary.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7324,7 +7324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D86D23C106F22BA4003565CB /* Controller.h in Resources */,
-				D86D23CB06F22BD7003565CB /* TwoWaves.nib in Resources */,
+				D86D23CB06F22BD7003565CB /* TwoWaves.xib in Resources */,
 				D8831D380AE6D50500201B3D /* TwoWaves.icns in Resources */,
 				D8831D390AE6D50500201B3D /* TwoWaves.tiff in Resources */,
 			);
@@ -7334,8 +7334,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8708F6D05B49AD30074C18D /* Info.nib in Resources */,
-				D8708F6E05B49AD30074C18D /* MidiRecord.nib in Resources */,
+				D8708F6D05B49AD30074C18D /* Info.xib in Resources */,
+				D8708F6E05B49AD30074C18D /* MidiRecord.xib in Resources */,
 				D815897F0F90964D00E38A7D /* david.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -7345,8 +7345,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D870921305B5DA9A0074C18D /* MidiLoop.icns in Resources */,
-				D86CC06B07AFF5EE00CB06E4 /* Info.nib in Resources */,
-				D86CC07007AFF65600CB06E4 /* MidiLoop.nib in Resources */,
+				D86CC06B07AFF5EE00CB06E4 /* Info.xib in Resources */,
+				D86CC07007AFF65600CB06E4 /* MidiLoop.xib in Resources */,
 				D815897E0F90964D00E38A7D /* david.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -7355,8 +7355,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D86CBE1807AF1AD800CB06E4 /* MidiPlay.nib in Resources */,
-				D86CBE1D07AF1AF900CB06E4 /* Info.nib in Resources */,
+				D86CBE1807AF1AD800CB06E4 /* MidiPlay.xib in Resources */,
+				D86CBE1D07AF1AF900CB06E4 /* Info.xib in Resources */,
 				D815897D0F90964D00E38A7D /* david.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -7366,7 +7366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D870944D05B5E0460074C18D /* midi.tiff in Resources */,
-				D870946C05B5E1100074C18D /* MIDIFilePlayback.nib in Resources */,
+				D870946C05B5E1100074C18D /* MIDIFilePlayback.xib in Resources */,
 				D800325D0819F52E00E47C6C /* midi.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -7385,10 +7385,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D88C50C206C7E9E900D33D99 /* PatchBank.nib in Resources */,
-				D88C50C306C7E9E900D33D99 /* Document.nib in Resources */,
-				D88C50C506C7E9E900D33D99 /* PatchCord.nib in Resources */,
-				D88C50C606C7E9E900D33D99 /* UnhandledSynth.nib in Resources */,
+				D88C50C206C7E9E900D33D99 /* PatchBank.xib in Resources */,
+				D88C50C306C7E9E900D33D99 /* Document.xib in Resources */,
+				D88C50C506C7E9E900D33D99 /* PatchCord.xib in Resources */,
+				D88C50C606C7E9E900D33D99 /* UnhandledSynth.xib in Resources */,
 				D88C50DF06C7EA2000D33D99 /* PatchCord.tiff in Resources */,
 				D88C50E006C7EA2000D33D99 /* pc_Doc_File.tiff in Resources */,
 				D837AB9E06C80F8C00A6CFEB /* 24bitJunoSwitchDown.tiff in Resources */,
@@ -7400,12 +7400,12 @@
 				D837ABA406C80F8C00A6CFEB /* JunoSwitchUp.tiff in Resources */,
 				D837ABA506C80F8C00A6CFEB /* PWM.tiff in Resources */,
 				D837ABA606C80F8C00A6CFEB /* Ramp.tiff in Resources */,
-				D837ABAB06C80FA500A6CFEB /* juno106.nib in Resources */,
+				D837ABAB06C80FA500A6CFEB /* juno106.xib in Resources */,
 				D837ABCA06C8104F00A6CFEB /* AxonNGC77.xib in Resources */,
 				D837ABCB06C8104F00A6CFEB /* Segment.xib in Resources */,
-				D837AC4706C8199300A6CFEB /* quadraverb.nib in Resources */,
+				D837AC4706C8199300A6CFEB /* quadraverb.xib in Resources */,
 				D837AC4B06C819AA00A6CFEB /* QVFrontPanel.tiff in Resources */,
-				D837AC6506C81A9300A6CFEB /* ProphetVS.nib in Resources */,
+				D837AC6506C81A9300A6CFEB /* ProphetVS.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7420,7 +7420,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8FD875309F68B9A001E01B4 /* example4.nib in Resources */,
+				D8FD875309F68B9A001E01B4 /* example4.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7435,7 +7435,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8CFD27B0B5D67DD003AB3C3 /* metronome.nib in Resources */,
+				D8CFD27B0B5D67DD003AB3C3 /* metronome.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7445,8 +7445,8 @@
 			files = (
 				D8D2A3D90FA905E2008DBF68 /* dkeislar.tiff in Resources */,
 				D8D2A3DC0FA905E2008DBF68 /* README.txt in Resources */,
-				D8D2A3E30FA9062D008DBF68 /* Info.nib in Resources */,
-				D8D2A3E40FA9062D008DBF68 /* PlayNote.nib in Resources */,
+				D8D2A3E30FA9062D008DBF68 /* Info.xib in Resources */,
+				D8D2A3E40FA9062D008DBF68 /* PlayNote.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7454,7 +7454,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8E1DE4507CAC0290018F8F3 /* MultipleSoundPlayer.nib in Resources */,
+				D8E1DE4507CAC0290018F8F3 /* MultipleSoundPlayer.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7462,7 +7462,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8FD874409F6670F001E01B4 /* example5.nib in Resources */,
+				D8FD874409F6670F001E01B4 /* example5.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8463,44 +8463,44 @@
 			name = ScorePlayer.sgml;
 			sourceTree = "<group>";
 		};
-		D828F9EF0780CD4A00215EB9 /* Help.nib */ = {
+		D828F9EF0780CD4A00215EB9 /* Help.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3CFF29722007007FFAA7 /* en */,
 			);
-			name = Help.nib;
+			name = Help.xib;
 			sourceTree = "<group>";
 		};
-		D828F9F10780CD4A00215EB9 /* Info.nib */ = {
+		D828F9F10780CD4A00215EB9 /* Info.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D0029722007007FFAA7 /* en */,
 			);
-			name = Info.nib;
+			name = Info.xib;
 			sourceTree = "<group>";
 		};
-		D828F9F30780CD4A00215EB9 /* PianoRoll.nib */ = {
+		D828F9F30780CD4A00215EB9 /* PianoRoll.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D0129722007007FFAA7 /* en */,
 			);
-			name = PianoRoll.nib;
+			name = PianoRoll.xib;
 			sourceTree = "<group>";
 		};
-		D828F9F50780CD4A00215EB9 /* Score.nib */ = {
+		D828F9F50780CD4A00215EB9 /* Score.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D0229722007007FFAA7 /* en */,
 			);
-			name = Score.nib;
+			name = Score.xib;
 			sourceTree = "<group>";
 		};
-		D837ABA906C80FA500A6CFEB /* juno106.nib */ = {
+		D837ABA906C80FA500A6CFEB /* juno106.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3CFA29722007007FFAA7 /* en */,
 			);
-			name = juno106.nib;
+			name = juno106.xib;
 			sourceTree = "<group>";
 		};
 		D837ABC606C8104F00A6CFEB /* AxonNGC77.xib */ = {
@@ -8519,20 +8519,20 @@
 			name = Segment.xib;
 			sourceTree = "<group>";
 		};
-		D837AC4506C8199300A6CFEB /* quadraverb.nib */ = {
+		D837AC4506C8199300A6CFEB /* quadraverb.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3CFE29722007007FFAA7 /* en */,
 			);
-			name = quadraverb.nib;
+			name = quadraverb.xib;
 			sourceTree = "<group>";
 		};
-		D837AC6306C81A9300A6CFEB /* ProphetVS.nib */ = {
+		D837AC6306C81A9300A6CFEB /* ProphetVS.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3CFD29722007007FFAA7 /* en */,
 			);
-			name = ProphetVS.nib;
+			name = ProphetVS.xib;
 			sourceTree = "<group>";
 		};
 		D83CAE1A0FEAE43C0000CF19 /* EnvelopeEd.sgml */ = {
@@ -8551,20 +8551,20 @@
 			name = SignalProcessing.xib;
 			sourceTree = "<group>";
 		};
-		D84E1F5805B5E4FC002B493F /* Info.nib */ = {
+		D84E1F5805B5E4FC002B493F /* Info.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D1229722009007FFAA7 /* en */,
 			);
-			name = Info.nib;
+			name = Info.xib;
 			sourceTree = "<group>";
 		};
-		D84E1F5A05B5E4FC002B493F /* MidiEcho.nib */ = {
+		D84E1F5A05B5E4FC002B493F /* MidiEcho.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D132972200A007FFAA7 /* en */,
 			);
-			name = MidiEcho.nib;
+			name = MidiEcho.xib;
 			sourceTree = "<group>";
 		};
 		D85A3021061F3A820065380E /* SpectroHelp.sgml */ = {
@@ -8583,92 +8583,92 @@
 			name = ScorePlayer.strings;
 			sourceTree = "<group>";
 		};
-		D8684F68081CA77400926058 /* example3.nib */ = {
+		D8684F68081CA77400926058 /* example3.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D202972200B007FFAA7 /* en */,
 			);
-			name = example3.nib;
+			name = example3.xib;
 			sourceTree = "<group>";
 		};
-		D86CBB8307ADAE9A00CB06E4 /* MidiEcho.nib */ = {
+		D86CBB8307ADAE9A00CB06E4 /* MidiEcho.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D152972200A007FFAA7 /* en */,
 			);
-			name = MidiEcho.nib;
+			name = MidiEcho.xib;
 			sourceTree = "<group>";
 		};
-		D86CBB8A07ADAF6100CB06E4 /* Info.nib */ = {
+		D86CBB8A07ADAF6100CB06E4 /* Info.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D142972200A007FFAA7 /* en */,
 			);
-			name = Info.nib;
+			name = Info.xib;
 			sourceTree = "<group>";
 		};
-		D86CBE1607AF1AD800CB06E4 /* MidiPlay.nib */ = {
+		D86CBE1607AF1AD800CB06E4 /* MidiPlay.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D1A2972200B007FFAA7 /* en */,
 			);
-			name = MidiPlay.nib;
+			name = MidiPlay.xib;
 			sourceTree = "<group>";
 		};
-		D86CBE1B07AF1AF900CB06E4 /* Info.nib */ = {
+		D86CBE1B07AF1AF900CB06E4 /* Info.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D192972200A007FFAA7 /* en */,
 			);
-			name = Info.nib;
+			name = Info.xib;
 			sourceTree = "<group>";
 		};
-		D86CC06907AFF5EE00CB06E4 /* Info.nib */ = {
+		D86CC06907AFF5EE00CB06E4 /* Info.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D172972200A007FFAA7 /* en */,
 			);
-			name = Info.nib;
+			name = Info.xib;
 			sourceTree = "<group>";
 		};
-		D86CC06E07AFF65600CB06E4 /* MidiLoop.nib */ = {
+		D86CC06E07AFF65600CB06E4 /* MidiLoop.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D182972200A007FFAA7 /* en */,
 			);
-			name = MidiLoop.nib;
+			name = MidiLoop.xib;
 			sourceTree = "<group>";
 		};
-		D86D23C906F22BD7003565CB /* TwoWaves.nib */ = {
+		D86D23C906F22BD7003565CB /* TwoWaves.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D1129722009007FFAA7 /* en */,
 			);
-			name = TwoWaves.nib;
+			name = TwoWaves.xib;
 			sourceTree = "<group>";
 		};
-		D8708F6905B49AD30074C18D /* Info.nib */ = {
+		D8708F6905B49AD30074C18D /* Info.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D1B2972200B007FFAA7 /* en */,
 			);
-			name = Info.nib;
+			name = Info.xib;
 			sourceTree = "<group>";
 		};
-		D8708F6B05B49AD30074C18D /* MidiRecord.nib */ = {
+		D8708F6B05B49AD30074C18D /* MidiRecord.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D1C2972200B007FFAA7 /* en */,
 			);
-			name = MidiRecord.nib;
+			name = MidiRecord.xib;
 			sourceTree = "<group>";
 		};
-		D870946A05B5E1100074C18D /* MIDIFilePlayback.nib */ = {
+		D870946A05B5E1100074C18D /* MIDIFilePlayback.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D162972200A007FFAA7 /* en */,
 			);
-			name = MIDIFilePlayback.nib;
+			name = MIDIFilePlayback.xib;
 			sourceTree = "<group>";
 		};
 		D879C3D205A2B4E0005DB251 /* SndViewP.nib */ = {
@@ -8687,126 +8687,124 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		D87BF8170F0985E40078AD51 /* SndViewIBPluginInspector.nib */ = {
+		D87BF8170F0985E40078AD51 /* SndViewIBPluginInspector.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D272972200C007FFAA7 /* en */,
 			);
-			name = SndViewIBPluginInspector.nib;
+			name = SndViewIBPluginInspector.xib;
 			sourceTree = "<group>";
 		};
-		D87BF8190F0985E40078AD51 /* SndViewIBPluginLibrary.nib */ = {
+		D87BF8190F0985E40078AD51 /* SndViewIBPluginLibrary.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D282972200C007FFAA7 /* en */,
 			);
-			name = SndViewIBPluginLibrary.nib;
+			name = SndViewIBPluginLibrary.xib;
 			sourceTree = "<group>";
 		};
-		D88C50B806C7E9E900D33D99 /* PatchBank.nib */ = {
+		D88C50B806C7E9E900D33D99 /* PatchBank.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3CF729722006007FFAA7 /* en */,
 			);
-			name = PatchBank.nib;
+			name = PatchBank.xib;
 			sourceTree = "<group>";
 		};
-		D88C50BA06C7E9E900D33D99 /* Document.nib */ = {
+		D88C50BA06C7E9E900D33D99 /* Document.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3CF629722006007FFAA7 /* en */,
 			);
-			name = Document.nib;
+			name = Document.xib;
 			sourceTree = "<group>";
 		};
-		D88C50BE06C7E9E900D33D99 /* PatchCord.nib */ = {
+		D88C50BE06C7E9E900D33D99 /* PatchCord.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3CF829722006007FFAA7 /* en */,
 			);
-			name = PatchCord.nib;
+			name = PatchCord.xib;
 			sourceTree = "<group>";
 		};
-		D88C50C006C7E9E900D33D99 /* UnhandledSynth.nib */ = {
+		D88C50C006C7E9E900D33D99 /* UnhandledSynth.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3CF929722006007FFAA7 /* en */,
 			);
-			name = UnhandledSynth.nib;
+			name = UnhandledSynth.xib;
 			sourceTree = "<group>";
 		};
-		D88FE38505A0FF940024FD88 /* SndAudioProcessorInspector.nib */ = {
+		D88FE38505A0FF940024FD88 /* SndAudioProcessorInspector.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D252972200C007FFAA7 /* en */,
 			);
-			name = SndAudioProcessorInspector.nib;
+			name = SndAudioProcessorInspector.xib;
 			sourceTree = "<group>";
 		};
-		D8CFD2700B5D67DD003AB3C3 /* metronome.nib */ = {
+		D8CFD2700B5D67DD003AB3C3 /* metronome.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D1D2972200B007FFAA7 /* en */,
 			);
-			name = metronome.nib;
+			name = metronome.xib;
 			sourceTree = "<group>";
 		};
-		D8D2A3DF0FA9062D008DBF68 /* Info.nib */ = {
+		D8D2A3DF0FA9062D008DBF68 /* Info.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D1E2972200B007FFAA7 /* en */,
 			);
-			name = Info.nib;
-			path = ../..;
+			name = Info.xib;
 			sourceTree = "<group>";
 		};
-		D8D2A3E10FA9062D008DBF68 /* PlayNote.nib */ = {
+		D8D2A3E10FA9062D008DBF68 /* PlayNote.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D1F2972200B007FFAA7 /* en */,
 			);
-			name = PlayNote.nib;
-			path = ../..;
+			name = PlayNote.xib;
 			sourceTree = "<group>";
 		};
-		D8E1DE4307CAC0290018F8F3 /* MultipleSoundPlayer.nib */ = {
+		D8E1DE4307CAC0290018F8F3 /* MultipleSoundPlayer.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D232972200C007FFAA7 /* en */,
 			);
-			name = MultipleSoundPlayer.nib;
+			name = MultipleSoundPlayer.xib;
 			sourceTree = "<group>";
 		};
-		D8E8D5ED0784649E00AAE755 /* EnvelopeEd.nib */ = {
+		D8E8D5ED0784649E00AAE755 /* EnvelopeEd.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3CF429722006007FFAA7 /* en */,
 			);
-			name = EnvelopeEd.nib;
+			name = EnvelopeEd.xib;
 			sourceTree = "<group>";
 		};
-		D8E8D5EF0784649E00AAE755 /* Info.nib */ = {
+		D8E8D5EF0784649E00AAE755 /* Info.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3CF529722006007FFAA7 /* en */,
 			);
-			name = Info.nib;
+			name = Info.xib;
 			sourceTree = "<group>";
 		};
-		D8FD874209F6670F001E01B4 /* example5.nib */ = {
+		D8FD874209F6670F001E01B4 /* example5.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D222972200C007FFAA7 /* en */,
 			);
-			name = example5.nib;
+			name = example5.xib;
 			sourceTree = "<group>";
 		};
-		D8FD875109F68B9A001E01B4 /* example4.nib */ = {
+		D8FD875109F68B9A001E01B4 /* example4.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D212972200B007FFAA7 /* en */,
 			);
-			name = example4.nib;
+			name = example4.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
