@@ -49,6 +49,7 @@ static const char *s_err_fn = DSP_ERRORS_FILE;
 #endif
 
 #include <time.h>
+#include <sys/errno.h>
 /* #include <sys/time.h> */
 /* extern char *ctime(); */
 /* extern long time(); */
@@ -274,7 +275,6 @@ int _DSPErrorV(int errorcode,char *fmt,...)
 {
     va_list args;
 
-    extern int errno;
 /*    extern int sys_nerr; */
 /*    extern char *sys_errlist[]; */
 
@@ -321,9 +321,7 @@ int _DSPError1(
     int errorcode,
     char *msg,
     char *arg)
-{   
-    extern int errno;
-
+{
 #if 0
     /* This unfortunately introduces a cycle in libdsp.
      * It should only be used when needed badly.
@@ -423,8 +421,7 @@ int _DSPMachError(
 
 /* ERR */
 
-void _DSPErr(msg)
-char *msg;
+void _DSPErr(char *msg)
 {   
     fprintf(stderr,"\n\n\t\t\toops!\n\n%s\n*** Aborting\n^C\n", msg);
     exit(1);

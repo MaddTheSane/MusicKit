@@ -587,7 +587,7 @@ MKMIDIFileOut *MKMIDIFileBeginWriting(NSMutableData *midiStream, int level, NSSt
     p->midiStream = midiStream;
     if ((!writeChunkType(p,"MThd")) || (!writeLong(p,6)) ||
 	!writeShort(p,lev) || !writeShort(p,ntracks) || !writeShort(p,div))
-      return endOfStream;
+      return NULL;
     p->division = div;
     p->currentTrack = -1;
 //    p->timeScale = 60000000.0 / (double)(p->division * p->quantaSize);

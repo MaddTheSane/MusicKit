@@ -20,8 +20,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SndAudioBuffer.h"
-#import "SndAudioProcessorChain.h"
+#import <SndKit/SndAudioBuffer.h>
+#import <SndKit/SndAudioProcessorChain.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 

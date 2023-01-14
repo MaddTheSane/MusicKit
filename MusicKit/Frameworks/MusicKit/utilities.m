@@ -688,9 +688,8 @@ BOOL _MKInheritsFrom(id aFactObj,id superObj)
 
 
 char * 
-_MKMakeStr(str)
-    char *str;
-    /* Make a string and copy str into it. Returns 
+_MKMakeStr(char *str)
+    /* Make a string and copy str into it. Returns
        the new string. */
 {
     char *rtnVal;
@@ -702,8 +701,7 @@ _MKMakeStr(str)
 }
 
 char *
-_MKMakeStrcat(str1,str2)
-    char *str1,*str2;
+_MKMakeStrcat(char *str1,char *str2)
     /* Makes a new string with str1 followed by str2. */
 {
     char *rtnVal;
@@ -716,9 +714,7 @@ _MKMakeStrcat(str1,str2)
 }
 
 char *
-_MKMakeSubstr(str,startChar,endChar)
-    char *str;
-    int startChar,endChar;
+_MKMakeSubstr(char *str,int startChar,int endChar)
     /* Makes a new string consisting of a substring from the startChar'th
        character to the endChar'th character. If endChar is greater than
        the length of str, end at the end of the string. */
@@ -743,9 +739,7 @@ _MKMakeSubstr(str,startChar,endChar)
 }
 
 char *
-_MKMakeStrRealloc(str, newStrPtr)
-    char *str;
-    char **newStrPtr;
+_MKMakeStrRealloc(char *str, char **newStrPtr)
     /* Assumes newStrPtr is already a valid string and does
        a REALLOC. Returns the new string and sets **newStrPtr
        to that string. */

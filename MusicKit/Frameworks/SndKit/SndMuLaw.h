@@ -35,7 +35,7 @@
    SndKitConfig.h not found when compiling the MusicKit, you haven't
    run ./configure 
 */
-#include "SndKitConfig.h"
+#include <SndKit/SndKitConfig.h>
 
 #define MINLIN -32768
 #define MAXLIN 32767

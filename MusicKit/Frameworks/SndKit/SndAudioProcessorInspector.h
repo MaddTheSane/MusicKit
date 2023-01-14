@@ -24,8 +24,8 @@
 // since GNUstep appkit.h seems to leave this out...
 #import <AppKit/NSDocumentController.h>
 
-#import "SndAudioProcessor.h"
-#import "SndStreamArchitectureView.h"
+#import <SndKit/SndAudioProcessor.h>
+#import <SndKit/SndStreamArchitectureView.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 

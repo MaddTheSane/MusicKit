@@ -138,6 +138,7 @@
 #import <MKDSP/dsp_memory_map.h>
 #import <Foundation/NSDate.h>
 #import "MKOrchestra.h" /*these 2 added by sb */
+#import "SynthInstrumentPrivate.h"
 
 /* FIXME Consider changing patch List and unitGeneratorStack to non-objc linked lists. */
 
@@ -366,13 +367,13 @@ static dataMemBlockStruct *freeDataMemBlock(dataMemBlockStruct *block)
     return NULL;
 }
 
-static id allocUG(); /* Forward refs. */
-static void givePatchMem();
-static void giveDataMem();
-static DSPAddress getPatchMem();
-static DSPAddress getDataMem();
-static DSPAddress getPELoop();
-static BOOL givePELoop();
+static id allocUG(register MKOrchestra *self,id factObj,id beforeObj,id afterObj); /* Forward refs. */
+static void givePatchMem(MKOrchestra *self,MKOrchMemSegment segment,DSPAddress addr);
+static void giveDataMem(MKOrchestra *self,MKOrchMemSegment segment, int addr);
+static DSPAddress getPatchMem(MKOrchestra *self,MKOrchMemSegment segment);
+static DSPAddress getDataMem(MKOrchestra *self,MKOrchMemSegment segment,int size);
+static DSPAddress getPELoop(MKOrchestra *self,int size);
+static BOOL givePELoop(MKOrchestra *self,int freedPEAddr);
 
 // TODO should become an NSArray
 static id *patchTemplates = NULL; /* Array of PatchTemplates */
@@ -1523,7 +1524,7 @@ Now disabled.
 
 
 static BOOL popResoAndSetLooper(MKOrchestra *self);
-static BOOL popReso();
+static BOOL popReso(MKOrchestra *self);
 
 #define TWO_TO_24   ((double) 16777216.0)
 #define TWO_TO_48   (TWO_TO_24 * TWO_TO_24)
@@ -1569,7 +1570,7 @@ static void freeUGs(MKOrchestra *self)
     
     if ([self->unitGeneratorStack count]) { /*sb: was lastObject */ 
 	id obj;
-	int i,count = [self->unitGeneratorStack count];
+	NSInteger i,count = [self->unitGeneratorStack count];
 	for (i=0; i<count; i++)
             [[self->unitGeneratorStack objectAtIndex: i] mkdealloc]; /*sb: changed to mkdealloc */
 	
@@ -2611,8 +2612,7 @@ static BOOL popResoAndSetLooper(MKOrchestra *self)
     return resetLooper;
 }
 
-static BOOL popReso(self)
-MKOrchestra *self;
+static BOOL popReso(MKOrchestra *self)
 /* Frees up resources on top of DSP memory unitGeneratorStack. This is ordinarily invoked
 automatically by the orchestra instance. Returns YES if something is
 freed.
@@ -2763,8 +2763,8 @@ Returns YES if compaction was accomplished.
     The actual moving of the DSP code and argument values is done
     by the MKUnitGenerator function _MKMoveUGCodeAndArgs(). */
     
-    unsigned int i;
-    unsigned n = [self->unitGeneratorStack count];
+    NSUInteger i;
+    NSUInteger n = [self->unitGeneratorStack count];
     id el; 
     
     /* check first here to avoid copying List */
@@ -2934,10 +2934,7 @@ static BOOL compactResourceStack(MKOrchestra *self)
 #endif
 
 
-static void giveDataMem(self,segment,addr)
-MKOrchestra *self;
-MKOrchMemSegment segment; /* Needed in non-overlaid case. */
-int addr;
+static void giveDataMem(MKOrchestra *self,MKOrchMemSegment segment /* Needed in non-overlaid case. */, int addr)
 {
     /* These are the primitives for managing external memory. Since
     pe memory must be kept contiguous, we allocate pe memory from
@@ -3099,10 +3096,7 @@ static DSPAddress getModulusDataMem(MKOrchestra *self,
 }    
 #endif
 
-static void givePatchMem(self,segment,addr)
-MKOrchestra *self;
-MKOrchMemSegment segment;
-DSPAddress addr;
+static void givePatchMem(MKOrchestra *self,MKOrchMemSegment segment,DSPAddress addr)
 {
     /* Give Patchpoint. Forwards call to giveDataMem if necesary. */
     DSPAddress *sigs;
@@ -3125,9 +3119,7 @@ DSPAddress addr;
 	}
 }
 
-static DSPAddress getPatchMem(self,segment)
-MKOrchestra *self;
-MKOrchMemSegment segment;
+static DSPAddress getPatchMem(MKOrchestra *self,MKOrchMemSegment segment)
 {
     /* Get Patchpoint. Forwards call to giveDataMem if necesary. */
 #   define SIGS ((segment == MK_xPatch) ? self->_xPatch : self->_yPatch)
@@ -3145,9 +3137,7 @@ return getDataMem(self,(segment == MK_xPatch) ? MK_xData : MK_yData,
 		  DSPMK_NTICK);                /* Off chip Patchpoint */
 }
 
-static DSPAddress getPELoop(self,size)
-MKOrchestra *self;
-int size;
+static DSPAddress getPELoop(MKOrchestra *self,int size)
 {
     /* Adjust boundary between PELOOP and PSUBR/XDATA/YDATA memory by adding 
     size. */
@@ -3182,9 +3172,7 @@ int size;
 	    Get it? */
 }
 
-static BOOL givePELoop(self,freedPEAddr)
-MKOrchestra *self;
-int freedPEAddr;
+static BOOL givePELoop(MKOrchestra *self,int freedPEAddr)
 {
     /* Adjust boundary between PE and XDATA/YDATA memory by subtracting 
     size. freedPEAddr is the relocation of the peLoop being returned 
@@ -3458,9 +3446,7 @@ int allocErr;
 }
 
 static id 
-allocUG(self,factObj,beforeObj,afterObj)
-register MKOrchestra *self;
-id factObj,beforeObj,afterObj;
+allocUG(register MKOrchestra *self,id factObj,id beforeObj,id afterObj)
 {
     /* Self is the orchestra instance. FactObj is the factory of the
     unit generator requested. beforeObj and afterObj, if specified,
@@ -3635,10 +3621,9 @@ id factObj,beforeObj,afterObj;
 static id abortNotificationDelegate = nil;
 static BOOL notificationSent = NO;
 
-+ setAbortNotification: aDelegate
++ (void)setAbortNotification: aDelegate
 {
     abortNotificationDelegate = aDelegate;
-    return self;
 }
 
 @end

@@ -86,7 +86,7 @@ Modification history prior to committal to CVS:
 /* Creation, copying, deleting------------------------------------------ */
 
 
-static id setPar(); /* forward refs */
+static id setPar(MKNote *self, int parNum, void *value, MKDataType type); /* forward refs */
 
 #define setObjPar(_self,_parameter,_value,_type) \
   setPar(_self,_parameter,_value, _type)
@@ -97,7 +97,7 @@ static id setPar(); /* forward refs */
 #define setStringPar(_self,_parameter,_value) \
   setPar(_self,_parameter, _value, MK_string)
 
-static BOOL isParPresent(); /* forward ref */
+static BOOL isParPresent(MKNote *aNote, unsigned aPar); /* forward ref */
 
 #define DEFAULTPARSSETSIZE 5
 
@@ -1226,7 +1226,7 @@ BOOL MKIsNoteParPresent(MKNote *aNote,int par)
     return MK_MKPARBITVECTS + nAppBitVects(self);
 }
 
-static void copyPars(); /* forward ref */
+static void copyPars(MKNote *toObj,MKNote *fromObj,BOOL override); /* forward ref */
 
 -copyParsFrom: (MKNote *) aNote
   /* TYPE: Copying; Copies parameters and dur (if any) from aNote to receiver.
@@ -1456,7 +1456,7 @@ id _MKWriteNote2(MKNote *self, id aPart, _MKScoreOutStruct *p)
 
     if (p->_binary)
         return writeBinaryNoteAux(self, aPart, p);
-    return writeNoteAux(self, p, p->_stream, _MKNameTableGetObjectName(p->_nameTable, aPart, &tmp));
+    return writeNoteAux(self, p, p->_stream, _MKNameTableGetObjectName(p->_nameTable, aPart, &tmp)) ? self : nil;
 }
 
 /* Assorted C functions ----------------------------------------- */
@@ -1617,10 +1617,7 @@ static id setPar(MKNote *self, int parNum, void *value, MKDataType type)
 
 static void addParameter(MKNote *self,_MKParameter *aPar); /* Forward decl */
 
-static void copyPars(toObj,fromObj,override)
-    MKNote *toObj;
-    MKNote *fromObj;
-    BOOL override;
+static void copyPars(MKNote *toObj,MKNote *fromObj,BOOL override)
 {
     /* Copies parameters from fromObj to toObj. If override
        is YES, the value from fromObj takes parameter. Otherwise, the

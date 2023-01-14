@@ -43,7 +43,7 @@ OF THIS AGREEMENT.
  */
 // #define DO_TIMING
 
-#define MOVE_MASK (NSLeftMouseUpMask | NSLeftMouseDraggedMask)
+#define MOVE_MASK (NSEventMaskLeftMouseUp | NSEventMaskLeftMouseDragged)
 
 #if defined(NeXT)
 #define PlatformSoundPasteboardType @"NXSoundPboardType"
@@ -71,7 +71,7 @@ OF THIS AGREEMENT.
 // Tried NSCompositeDestinationIn, NSCompositePlusLighter, NSCompositeDestinationOver
 // TODO to try: NSCompositeDestinationOut, NSCompositeClear
 // This works well if the background is slightly transparent and either light or dark.
-#define SELECTION_DRAWING_COMPOSITE NSCompositeDestinationAtop
+#define SELECTION_DRAWING_COMPOSITE NSCompositingOperationDestinationAtop
 
 @implementation SndView
 
@@ -92,7 +92,7 @@ OF THIS AGREEMENT.
     if(svFlags.cursorOn) {
 	if([self lockFocusIfCanDraw]) {
 	    [selectionColour set];
-	    NSRectFillUsingOperation(cursorRect, NSCompositeCopy);  // overwrite with cursor since we restore it on next phase of duty cycle.
+	    NSRectFillUsingOperation(cursorRect, NSCompositingOperationCopy);  // overwrite with cursor since we restore it on next phase of duty cycle.
 	    NSHighlightRect(cursorRect);
 	    [self unlockFocus];	
 	}
@@ -204,7 +204,9 @@ OF THIS AGREEMENT.
     [[self window] enableFlushWindow];
     */
 
-    [self tellDelegate: @selector(soundDidChange:)];
+    if ([delegate respondsToSelector:@selector(soundDidChange:)]) {
+        [delegate soundDidChange:self];
+    }
 }
 
 - (void) paste: (id) sender;
@@ -1537,7 +1539,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
      */
     
     /* if the Control key isn't down, show normal behavior */
-    // if (!(theEvent->flags & NSControlKeyMask)) {
+    // if (!(theEvent->flags & NSEventModifierFlagControl)) {
     // return [super mouseDown:theEvent];
     // }
     
@@ -1566,7 +1568,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     currentSelectionRect = [self selectionRect];
     
     // Check to append to the region selected if shift key pressed.
-    if (!([theEvent modifierFlags] & NSShiftKeyMask)) {
+    if (!([theEvent modifierFlags] & NSEventModifierFlagShift)) {
 	// Shift key not pressed, starting a new selection.
         realStartFrame = realEndFrame = -1; /* we don't need to remember the old selection */
 	
@@ -1639,7 +1641,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     /***************************************/
     // iterate through mouse events until the left mouse button is released.
 	
-    while ([currentEvent type] != NSLeftMouseUp) {
+    while ([currentEvent type] != NSEventTypeLeftMouseUp) {
 	NSPoint mouseLocation;
 	NSRect visibleRect;
 	NSPoint selPoint; // starting point for a dragged selection.
@@ -1820,21 +1822,21 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 					  dequeue: NO]) {
 	    
 	    /* no mouseMoved or mouseUp event immediately available, so take mouseMoved, mouseUp, or timer */
-	    currentEvent = [[self window] nextEventMatchingMask: MOVE_MASK | NSPeriodicMask];
+	    currentEvent = [[self window] nextEventMatchingMask: MOVE_MASK | NSEventMaskPeriodic];
 	}
 	else { /* get the mouseMoved or mouseUp event in the queue */
 	    currentEvent = [[self window] nextEventMatchingMask: MOVE_MASK];
 	}
 
 	/* if a timer event, mouse location isn't valid, so we'll set it */
-	if ([currentEvent type] == NSPeriodic) {
+	if ([currentEvent type] == NSEventTypePeriodic) {
 	    timerMouseLocation = mouseLocation;
 	    useTimerLocation = YES;
 	}
 	else {
 	    useTimerLocation = NO;
 	}
-    } /* while ([currentEvent type] != NSLeftMouseUp) */     // loops until dragging stops (mouse up).
+    } /* while ([currentEvent type] != NSEventTypeLeftMouseUp) */     // loops until dragging stops (mouse up).
 
     /*************************************/
     /******** END MAIN MOUSE LOOP ********/
@@ -2422,14 +2424,13 @@ LMS: Nowdays we want to rescale to fit the entire sound into the view, regardles
     return;
 }
 
-- didPlay: sender duringPerformance: (SndPerformance *) performance
+- (void)didPlay: sender duringPerformance: (SndPerformance *) performance
 {
 //  NSLog(@"did play\n");
     [self tellDelegate: @selector(didPlay:duringPerformance:) duringPerformance: performance];
-    return self;
 }
 
-- didRecord: sender
+- (void)didRecord: sender
 {
     // [[self window] disableFlushWindow];
     // [self hideCursor]; /* maybe isn't on, but just in case */
@@ -2471,13 +2472,11 @@ LMS: Nowdays we want to rescale to fit the entire sound into the view, regardles
         [self scaleToFit];
         [self setNeedsDisplay: YES];
     }
-    return self;
 }
 
-- hadError: sender
+- (void)hadError: sender
 {
     NSLog(@"SndView HAD ERROR %d: %@\n", [sender processingError], SndSoundError([sender processingError]));
-	return self;
 }
 
 - (BOOL) readSelectionFromPasteboard: (NSPasteboard *) pboard

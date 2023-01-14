@@ -140,7 +140,7 @@ MKConductor *clockCond = nil;   /* clock time Conductor. */
 #define VERSION3 3
 
 static NSMutableArray *allConductors = nil; /* An array of all conductors. */
-static void condInit();    /* Forward decl */
+static void condInit(void);    /* Forward decl */
 
 + (void) initialize
 {
@@ -156,7 +156,7 @@ static void condInit();    /* Forward decl */
 
 #import "separateThread.m"
 
-static MKMsgStruct *evalSpecialQueue();
+static MKMsgStruct *evalSpecialQueue(MKMsgStruct *queue, MKMsgStruct **queueEnd);
 
 /*
  LMS these are SB's notes, perhaps redundant:
@@ -423,7 +423,7 @@ static void setTime(double newTime)
    This function adjustTime() attempts to serve this need. It will set
    the conductors clockTime to either the current system time or the current clockTime.
    The current value of clockTime is set. */
-void adjustTime()
+void adjustTime(void)
 {
     double time;
 //    time = getTime() - startTime;
@@ -599,9 +599,8 @@ static MKMsgStruct *allocSp()
     return sp;
 }
 
-static void freeSp(sp)
-    MKMsgStruct * sp;
-    /* If cache isn't full, cache sp, else free it. 
+static void freeSp(MKMsgStruct * sp)
+    /* If cache isn't full, cache sp, else free it.
        Be careful not to freeSp the same sp twice! */
 {
     if (spCachePtr < SPCACHESIZE) 
@@ -1371,7 +1370,7 @@ withDelay: (double) deltaT
    ownership of the MKMsgStruct and should not NX_FREE it.
    */
 
-static void freeSp();
+static void freeSp(MKMsgStruct * sp);
 
 MKMsgStruct *MKCancelMsgRequest(MKMsgStruct *aMsgStructPtr)
     /* Cancels MKScheduleMsgRequest() request and frees the structure. 

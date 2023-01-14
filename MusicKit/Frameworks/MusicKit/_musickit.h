@@ -84,14 +84,14 @@ extern _MK_GLOBAL _MKClassLoaded _MKSamplesClass;
 extern _MK_GLOBAL _MKClassLoaded _MKPartialsClass;
 extern _MK_GLOBAL _MKClassLoaded _MKConductorClass;
 
-extern Class _MKCheckClassNote() ;
-extern Class _MKCheckClassMidi() ;
-extern Class _MKCheckClassOrchestra() ;
-extern Class _MKCheckClassWaveTable() ;
-extern Class _MKCheckClassEnvelope() ;
-extern Class _MKCheckClassSamples();
-extern Class _MKCheckClassPartials();
-extern Class _MKCheckClassConductor();
+extern Class _MKCheckClassNote(void);
+extern Class _MKCheckClassMidi(void);
+extern Class _MKCheckClassOrchestra(void);
+extern Class _MKCheckClassWaveTable(void);
+extern Class _MKCheckClassEnvelope(void);
+extern Class _MKCheckClassSamples(void);
+extern Class _MKCheckClassPartials(void);
+extern Class _MKCheckClassConductor(void);
 
 #define _MKClassNote() \
   ((_MKNoteClass.alreadyChecked) ? _MKNoteClass.aClass : \
@@ -157,7 +157,7 @@ extern BOOL _MKInheritsFrom(id aFactObj,id superObj);
 #define MK_SCOREMAGIC ((int)0x2e706c61)  // ".pla"
 
 /* Initialization of musickit */
-extern void _MKCheckInit();
+extern void _MKCheckInit(void);
 
 /* The following finds the class or nil if its not there. */
 /*sb: this is the proper OpenStep way, as far as I know */
@@ -166,10 +166,10 @@ extern void _MKCheckInit();
 // #define _MK_FINDCLASS(_x) ([Object findClass:_x])
 
 /* String functions */
-char *_MKMakeStr();
-char *_MKMakeStrcat();
-char *_MKMakeSubstr();
-char *_MKMakeStrRealloc();
+char *_MKMakeStr(char *str);
+char *_MKMakeStrcat(char *str1,char *str2);
+char *_MKMakeSubstr(char *str,int startChar,int endChar);
+char *_MKMakeStrRealloc(char *str, char **newStrPtr);
 
 /* Conversion */
 extern double _MKStringToDouble(NSString * sVal);

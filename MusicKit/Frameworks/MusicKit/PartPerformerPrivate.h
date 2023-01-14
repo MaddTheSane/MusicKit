@@ -19,7 +19,7 @@ Modification history:
 #import "MKPartPerformer.h"
 
 /* Takes 2 args. Should be converted into a prototype. */
-extern void _MKSetScorePerformerOfPartPerformer();
+extern void _MKSetScorePerformerOfPartPerformer(MKPartPerformer *aPP, id aSP);
 
 
 

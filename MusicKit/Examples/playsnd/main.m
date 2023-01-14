@@ -118,7 +118,7 @@ BOOL playsnd_init_shoutcast(NSString *shoutcastServerAddress, int shoutcastPortN
 #endif
 }
 
-BOOL playsnd_close_shoutcast()
+BOOL playsnd_close_shoutcast(void)
 {
 #if HAVE_LIBMP3LAME && HAVE_LIBSHOUT
     [mp3enc disconnectFromShoutcastServer];

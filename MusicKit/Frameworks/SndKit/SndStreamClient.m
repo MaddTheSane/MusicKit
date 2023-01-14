@@ -517,7 +517,7 @@ enum {
 
 #ifdef SET_THREAD_PRIORITY
 #if defined(__APPLE__)
-int get_bus_speed()
+int get_bus_speed(void)
 {
     int managementInformationBase[2]; // Management Information Base
     unsigned int mibLength;

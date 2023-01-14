@@ -19,7 +19,7 @@
 #ifndef __SNDKIT_SNDAUDIOPROCESSORFLANGER_H__
 #define __SNDKIT_SNDAUDIOPROCESSORFLANGER_H__
 
-#import "SndAudioProcessor.h"
+#import <SndKit/SndAudioProcessor.h>
 
 /*!
  @brief SndFlangerParam Parameter keys

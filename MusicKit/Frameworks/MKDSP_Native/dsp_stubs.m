@@ -552,13 +552,13 @@ int DSPWriteValue(int value, DSPMemorySpace space, int addr)
 return 0;
 }
 
-int _DSPRelocate()
+int _DSPRelocate(void)
 {
 return 0;
 }
 
 
-int _DSPRelocateUser()
+int _DSPRelocateUser(void)
 {
 return 0;
 }

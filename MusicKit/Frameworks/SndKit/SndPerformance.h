@@ -16,9 +16,9 @@
 #define __SND_PERFORMANCE_H__
 
 #import <Foundation/Foundation.h>
-#import "Snd.h"
-#import "SndAudioBuffer.h"
-#import "SndAudioProcessorChain.h"
+#import <SndKit/Snd.h>
+#import <SndKit/SndAudioBuffer.h>
+#import <SndKit/SndAudioProcessorChain.h>
 
 /*!
 @class SndPerformance
@@ -31,7 +31,7 @@
   of a sound to be signal processed, including volume fading, panning etc using the audio
   processor chain "postFader" SndAudioFader.
 */
-@interface SndPerformance : NSObject
+@interface SndPerformance : NSObject <NSCopying>
 {
     /*! The sound being performed. */
     Snd    *snd;

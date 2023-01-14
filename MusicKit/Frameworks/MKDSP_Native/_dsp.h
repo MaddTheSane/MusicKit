@@ -63,6 +63,7 @@
 
 #import <math.h>
 #import <ctype.h>
+#import <stdlib.h>
 
 extern int DSPDefaultTimeLimit;
 
@@ -95,9 +96,6 @@ extern int DSPDefaultTimeLimit;
 
 /*** FIXME: Flush in 1.1 ***/
 #define _DSP_UNTIMED NULL		/* time-stamp NULL means "now" */
-
-/*** SYSTEM TYPE DECLARATIONS NEEDED BY MACROS HEREIN ***/
-extern char *getenv();
 
 /*** PRIVATE GLOBAL VARIABLES ***/	/* defined in DSPGlobals.c */
 extern int _DSPTrace;

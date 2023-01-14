@@ -48,7 +48,7 @@ int main (int argc, const char *argv[])
         time = (double) sampNum / (double) ([snd samplingRate]);
         if (-minAmp > maxAmp)
 	    maxAmp = -minAmp;
-        NSLog(@"Maxamp is %f at time %f (%s).\n", maxAmp, time, inFile);
+        NSLog(@"Maxamp is %hd at time %f (%@).\n", maxAmp, time, inFile);
 	[snd release];
     }
     [pool release];

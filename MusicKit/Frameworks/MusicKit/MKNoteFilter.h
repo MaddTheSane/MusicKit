@@ -30,7 +30,7 @@
 #ifndef __MK_NoteFilter_H___
 #define __MK_NoteFilter_H___
 
-#import "MKInstrument.h"
+#import <MusicKit/MKInstrument.h>
 
 @interface MKNoteFilter : MKInstrument
 {

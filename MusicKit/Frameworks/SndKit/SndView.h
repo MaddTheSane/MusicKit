@@ -213,9 +213,11 @@ NSScrollView.
 
 #import <AppKit/AppKit.h>
 
-#import "SndDisplayDataList.h"
-#import "SndDisplayData.h"
-#import "Snd.h"
+#import <SndKit/SndDisplayDataList.h>
+#import <SndKit/SndDisplayData.h>
+#import <SndKit/Snd.h>
+
+@protocol SndViewDelegate;
 
 enum SndViewStereoMode {
     SNDVIEW_LEFTONLY = 0,
@@ -237,7 +239,7 @@ enum SndViewStereoMode {
     /*! The region of the sound currently held on the pasteboard. */
     Snd		*pasteboardSound;
     /*! delegate receiving notification of SndView state changes. */
-    id 		delegate;
+    id<SndViewDelegate> delegate;
     /*! The region of the sound (in frames) selected (and displayed highlighted) for copy/paste/drag operations. */
     NSRange	selectedFrames;
     /*! The form of display, either SND_SOUNDVIEW_MINMAX or SND_SOUNDVIEW_WAVE */
@@ -393,7 +395,7 @@ enum SndViewStereoMode {
   @return Returns an id.
   @brief Returns the SndView's delegate object.
 */
-- delegate;
+- (id<SndViewDelegate>)delegate;
 
 /*!
   @brief Sent to the delegate just after the SndView's sound is played.
@@ -404,7 +406,7 @@ enum SndViewStereoMode {
  @param  sender is an id.
  @param  performance is a SndPerformance.
 */
-- didPlay: (id) sender duringPerformance: (SndPerformance *) performance;
+- (void)didPlay: (id) sender duringPerformance: (SndPerformance *) performance;
 
 /*!
   @brief Sent to the delegate just after the SndView's sound is recorded into.
@@ -414,7 +416,7 @@ enum SndViewStereoMode {
   object; you never invoke this method directly.
  @param  sender is an id.
 */
-- didRecord: (id) sender;
+- (void)didRecord: (id) sender;
 
 /*!
   @return Returns an int.
@@ -461,7 +463,7 @@ enum SndViewStereoMode {
    Used to redirect delegate messages from the SndView's Snd object; you never invoke this method directly.
   @param  sender is an id.
 */
-- hadError: (id) sender;
+- (void)hadError: (id) sender;
 
 /*!
   @brief Initializes the SndView, fitting the object within the rectangle given by <i>frameRect</i>. 
@@ -758,7 +760,7 @@ enum SndViewStereoMode {
   
    The delegate is sent messages when the user changes or acts on the selection.
 */
-- (void) setDelegate: (id) anObject;
+- (void) setDelegate: (id<SndViewDelegate>) anObject;
 
 /*!
   @param  aMode is an int.
@@ -1009,6 +1011,29 @@ enum SndViewStereoMode {
  @return Returns an NSImage instance.
  */
 - (NSImage *) dragIcon;
+
+@end
+
+@protocol SndViewDelegate <NSObject>
+@optional
+
+/* Sent to the delegate when the SndView's selection changes.
+ */
+- (void) selectionChanged: (SndView*) sender;
+
+/* Sent to the delegate when the SndView's sound data is edited.
+ */
+- (void) soundDidChange: (SndView*) sender;
+
+- (void) didRecord:(SndView*) sender;
+
+- (void) hadError: (SndView*) sender;
+
+- (void) willFree:(SndView*) sender;
+
+- (void) didPlay: (SndView*) sender duringPerformance: (SndPerformance *) performance;
+
+- (void) willPlay:(SndView*) sender duringPerformance: (SndPerformance *) performance;
 
 @end
 

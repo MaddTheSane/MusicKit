@@ -142,7 +142,7 @@ static void eventListener(void *controller, AudioUnitCarbonView inView,
     // Nowdays returning the audioUnitUIView alone and not really dealing with the window would be better,
     // but at least we create a default window.
     cocoaAUWindow = [[NSWindow alloc] initWithContentRect: [audioUnitUIView bounds]
-						styleMask: NSTitledWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask | NSResizableWindowMask
+						styleMask: NSWindowStyleMaskTitled | NSWindowStyleMaskClosable | NSWindowStyleMaskMiniaturizable | NSWindowStyleMaskResizable
 						  backing: NSBackingStoreBuffered
 						    defer: YES];
     

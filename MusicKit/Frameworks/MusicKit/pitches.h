@@ -20,8 +20,8 @@
 #ifndef __MK_pitches_H___
 #define __MK_pitches_H___
 
-#import "keynums.h"
-#import "MKTuningSystem.h"
+#import <MusicKit/keynums.h>
+#import <MusicKit/MKTuningSystem.h>
 
 #ifndef PITCHES_H
 #define PITCHES_H

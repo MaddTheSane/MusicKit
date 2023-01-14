@@ -24,7 +24,7 @@
 #define __SNDKIT_SNDAUDIOPROCESSORREVERB_H__
 
 #import <Foundation/Foundation.h>
-#import "SndAudioProcessor.h"
+#import <SndKit/SndAudioProcessor.h>
 
 @class SndReverbCombFilter;
 @class SndReverbAllpassFilter;

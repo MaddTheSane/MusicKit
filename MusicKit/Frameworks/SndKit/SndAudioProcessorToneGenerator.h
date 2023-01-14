@@ -18,7 +18,7 @@
 #define __SNDKIT_SNDAUDIOPROCESSORTONEGENERATOR_H__
 
 #import <Foundation/Foundation.h>
-#import "SndAudioProcessor.h"
+#import <SndKit/SndAudioProcessor.h>
 
 /*!
  @brief SndToneGenParam Parameter keys

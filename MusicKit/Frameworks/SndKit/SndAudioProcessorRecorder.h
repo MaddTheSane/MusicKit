@@ -24,10 +24,10 @@
    SndKitConfig.h not found when compiling the MusicKit, you haven't
    run ./configure 
 */
-#import "SndKitConfig.h"
+#import <SndKit/SndKitConfig.h>
 
 #import <Foundation/Foundation.h>
-#import "SndAudioProcessor.h"
+#import <SndKit/SndAudioProcessor.h>
 
 #if HAVE_LIBSNDFILE
 # import <sndfile.h>

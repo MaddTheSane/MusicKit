@@ -156,9 +156,9 @@ See <b>Administration/MidiHardwareInfo.rtf</b> for using MIDI on NeXT hardware.
 
 #import <Foundation/NSObject.h>
 #import <MKPerformSndMIDI/PerformMIDI.h>
-#import "MKDeviceStatus.h"
-#import "params.h"
-#import "_midi.h"  // for _MKMidiInStruct and _MKMidiOutStruct definitions
+#import <MusicKit/MKDeviceStatus.h>
+#import <MusicKit/params.h>
+#import <MusicKit/_midi.h>  // for _MKMidiInStruct and _MKMidiOutStruct definitions
 
 /* sbrandon: 10/05/2001
  * get around the fact that GNUstep does not have NSMach ports, but does respond to -machPort

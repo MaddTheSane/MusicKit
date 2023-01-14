@@ -94,12 +94,12 @@
 /******************** DELEGATE MESSAGES FOR NSTableView ******************/
 - (id) tableView: (NSTableView *) aTableView
 objectValueForTableColumn: (NSTableColumn *) aTableColumn
-	     row: (int) rowIndex
+	     row: (NSInteger) rowIndex
 {	
     return [filesToPlay objectAtIndex:rowIndex];
 }
 
-- (int) numberOfRowsInTableView: (NSTableView *) aTableView
+- (NSInteger) numberOfRowsInTableView: (NSTableView *) aTableView
 {
     return [filesToPlay count];
 }

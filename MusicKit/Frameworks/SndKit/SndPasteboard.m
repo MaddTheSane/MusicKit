@@ -20,7 +20,7 @@
 #include <AppKit/NSPasteboard.h>
 #include <AppKit/NSApplication.h>
 
-NSString *SndPasteboardType = @"SndPasteboardType";
+NSString *const SndPasteboardType = @"SndPasteboardType";
 
 @implementation Snd(Pasteboard)
 

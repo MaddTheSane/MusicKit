@@ -118,8 +118,8 @@ void setupMTC(void);
 void resetMTCTime(void);
 BOOL weGotMTC(void);
 BOOL mtcEndOfTime(void);
-void adjustTime();
-BOOL checkForEndOfTime();
+void adjustTime(void);
+BOOL checkForEndOfTime(void);
 void repositionCond(MKConductor *cond, double nextMsgTime);
 double beatToClock(MKConductor *self, double newBeat);
 

@@ -5,7 +5,7 @@
  * Author: Julius O. Smith III
  */
 
-#include "MKDSPDefines.h"
+#include <MKDSP/MKDSPDefines.h>
 
 MKDSP_API int DSPFix24ToInt(DSPFix24 ival);
 

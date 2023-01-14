@@ -36,17 +36,17 @@
 #import "_MKParameter.h"
 #import "tokens.h"
 
-@interface _ScorefileVar : NSObject
+@interface _ScorefileVar : NSObject <NSCopying>
 {
     _MKToken token;
     _MKParameter *myParameter;          /* Used internally to store value. */
-    BOOL (*preDaemon)();
+    BOOL (*preDaemon)(id varObject, _MKToken newValueType, void *ptrToNewValue);
     /* preDaemon is an optional function of three arguments:
        id varObject; _MKToken newValueType; and char *ptrToNewValue;
        It is called before the value is set and is used to filter bad values.
        It returns YES if the value should be set or NO if it should not be set.
        */
-    void (*postDaemon)();
+    void (*postDaemon)(id ScorefileVarObject);
     /* postDaemon is an optional function of one arguments:
        id ScorefileVarObject;
        It is called after the value has been set.
@@ -71,9 +71,9 @@ extern int _MKSetStringSFVar(_ScorefileVar *sfVar, NSString *strval);
 extern int _MKSetEnvSFVar(_ScorefileVar *sfVar, id envelope);
 extern int _MKSetWaveSFVar(_ScorefileVar *sfVar, id waveTable);
 extern int _MKSetObjSFVar(_ScorefileVar *sfVar, id anObj);
-extern id _MKSetScorefileVarPreDaemon();
-extern id _MKSetScorefileVarPostDaemon();
+extern id _MKSetScorefileVarPreDaemon(_ScorefileVar *self,BOOL (*funPtr)(id varObject, _MKToken newValueType, void *ptrToNewValue));
+extern id _MKSetScorefileVarPostDaemon(_ScorefileVar *self,void (*funPtr)(id ScorefileVarObject));
 extern id _MKSetReadOnlySFVar(_ScorefileVar *sfVar, BOOL yesOrNo);
-void _MKSFSetPrintfunc();
+void _MKSFSetPrintfunc(void) UNAVAILABLE_ATTRIBUTE;
 
 #endif

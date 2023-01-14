@@ -123,7 +123,7 @@ Creation of a MKFilePerformer's MKNoteSender(s) is a subclass responsibility.
 
 #import <Foundation/Foundation.h>
 
-#import "MKPerformer.h"
+#import <MusicKit/MKPerformer.h>
 
 @interface MKFilePerformer : MKPerformer
 {

@@ -7,7 +7,7 @@
 
 /* Control functions are also in DSPObject.h */
 
-#include "MKDSPDefines.h"
+#include <MKDSP/MKDSPDefines.h>
 
 /********************** READING/WRITING DSP HOST FLAGS ***********************/
 

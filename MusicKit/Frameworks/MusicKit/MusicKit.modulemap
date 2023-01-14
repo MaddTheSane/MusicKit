@@ -1,0 +1,11 @@
+framework module MusicKit {
+    umbrella header "MusicKit.h"
+    
+    export *
+    module * { export * }
+    
+    explicit module "pitches" {
+        header "pitches.h"
+        export *
+    }
+}

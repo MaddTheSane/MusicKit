@@ -83,6 +83,8 @@ Modification history:
 #import <string.h>
 #import <stdlib.h>
 #import <ctype.h>
+#import "PartialsPrivate.h"
+#import "MKTimbre.h"
 
 @implementation MKTimbre
 
@@ -245,8 +247,8 @@ static MKWaveTable *waveTableForIndex(MKTimbre *timbre,
 				    int index)
     /* The index here is 0-based! */
 {
-    NSMutableArray *list = timbre->waveTables;
-    int count = [list count];
+    NSMutableArray<MKWaveTable*> *list = timbre->waveTables;
+    NSInteger count = [list count];
     if (!timbre->waveTables)
 	return nil;
     if (index < 0) 
@@ -264,7 +266,7 @@ static MKWaveTable *waveTableForFreq(MKTimbre *timbre,
 //    unsigned int freqStorage = 0;
     NSMutableArray *list;
 //    double *d;
-    int count, i;
+    NSInteger count, i;
     if (!timbre->freqs || !timbre->waveTables)
 	return nil;
     list = timbre->waveTables;
@@ -317,11 +319,6 @@ static MKWaveTable *waveTableForFreq(MKTimbre *timbre,
     newObj->waveTables = [waveTables copyWithZone:zone];
     newObj->timbreName = @"";
     return newObj;
-}
-
--copy
-{
-    return [self copyWithZone:[self zone]];
 }
 
 -init
@@ -484,10 +481,7 @@ description:"d"];
     return [[freqs objectAtIndex:index] doubleValue];
 }
 
--(NSString *)timbreName
-{
-    return timbreName;
-}
+@synthesize timbreName;
 
 -(NSMutableArray *)waveTables
     /* The contents of this object should not be changed by the caller. 

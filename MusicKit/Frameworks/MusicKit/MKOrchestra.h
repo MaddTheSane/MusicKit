@@ -326,9 +326,9 @@ release notes for the latest information on supported drivers.
 
 #import <Foundation/Foundation.h>
 #import <SndKit/SndKit.h>
-#import "orch.h"
-#import "MKDeviceStatus.h"
-#import "MKSynthData.h"
+#import <MusicKit/orch.h>
+#import <MusicKit/MKDeviceStatus.h>
+#import <MusicKit/MKSynthData.h>
 
 /*!
   @file MKOrchestra.h
@@ -883,7 +883,7 @@ extern void MKSetPreemptDuration(double seconds);
 */
 - (char) fastResponse;
 
-+ setAbortNotification:aDelegate;
++ (void)setAbortNotification:aDelegate;
 
 /*!
   @brief Sets the offset, in seconds, that's added to the timestamps of
@@ -1594,7 +1594,7 @@ extern void MKSetPreemptDuration(double seconds);
 */
 - (BOOL) prefersAlternativeSamplingRate;
 
-+ setAbortNotification: aDelegate;
++ (void)setAbortNotification: aDelegate;
 
 /*!
   @brief Resets serialSoundOut, hostSoundOut, serialPortDevice, etc. to

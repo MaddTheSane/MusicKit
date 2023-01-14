@@ -786,7 +786,7 @@ static double getUntempo(float tempoVal)
                     synthPatchCount, voices, synthPatchName, MKGetObjectName(aPart)];
 		
                 [errorLog addText: errMsg];
-		if (!NSRunAlertPanel(STR_SCOREPLAYER, errMsg, STR_CONTINUE, STR_CANCEL, NULL))
+		if (!NSRunAlertPanel(STR_SCOREPLAYER, @"%@", STR_CONTINUE, STR_CANCEL, NULL, errMsg))
 		    return;
 	    }
 	}
@@ -842,7 +842,7 @@ static double getUntempo(float tempoVal)
     [[NSUserDefaults standardUserDefaults] registerDefaults: scorePlayerDefaults];
 }
 
-static void abortNow();
+static void abortNow(void);
 
 - orchestraDidAbort: whichOrch
     /* This is received by the appkit thread */

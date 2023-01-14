@@ -18,8 +18,8 @@
 #define __SNDKIT_SNDAUDIOPROCESSORMP3ENCODER_H__
 
 #import <Foundation/Foundation.h>
-#import "SndAudioProcessor.h"
-#import "SndKitConfig.h"
+#import <SndKit/SndAudioProcessor.h>
+#import <SndKit/SndKitConfig.h>
 
 #if HAVE_LIBMP3LAME && HAVE_LIBSHOUT
 

@@ -147,7 +147,7 @@ classes.
 
 #import <Foundation/NSData.h> /*sb for NSData */
 #import <Foundation/NSObject.h>
-#import "orch.h"
+#import <MusicKit/orch.h>
 
 /* It's actually either MKUnitGenerator or MKSynthData, but this makes compiler happy */
 #define SynthElement MKUnitGenerator 
@@ -173,7 +173,7 @@ typedef struct _MKUGArgStruct {
     int type;
 } MKUGArgStruct;
 
-#import "dspwrap.h"
+#import <MusicKit/dspwrap.h>
 
 @interface MKUnitGenerator : NSObject
 {

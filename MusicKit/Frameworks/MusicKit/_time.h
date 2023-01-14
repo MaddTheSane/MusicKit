@@ -17,7 +17,7 @@ Modification history:
 
 /* Time offsets and conversions */
 extern void _MKSetConductedPerformance(BOOL yesOrNo,id conductorClass);
-extern double _MKLastTime();
+extern double _MKLastTime(void);
 extern double _MKAdjustTime(double newTime);
 extern double _MKTime();      /* Gets clock time, before deltaT added. */ 
 extern double _MKDeltaTTime();/* Gets clock time, after deltaT is added. */

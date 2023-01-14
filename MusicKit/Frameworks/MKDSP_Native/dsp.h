@@ -10,7 +10,12 @@
 #ifndef DSP_H
 #define DSP_H
 
-#include "MKDSPDefines.h"
+#include <sys/param.h>
+#if __OBJC__
+#include <Foundation/NSObjCRuntime.h>
+#endif
+
+#include <MKDSP/MKDSPDefines.h>
 
 #define DSP_SYS_VER_C 65
 #define DSP_SYS_REV_C 41
@@ -24,7 +29,7 @@
 #define DSP_CLOCK_RATE (25.0E6) /* DSP clock frequency */
 #define DSP_CLOCK_PERIOD (40.0E-9) /* Cycle time in seconds. */
 
-#import "dsp_types.h"
+#import <MKDSP/dsp_types.h>
 
 /****************************** Masks **************************************/
 
@@ -133,7 +138,7 @@
 #define DSP_HC_KERNEL_ACK		 (0x2A>>1) /* Kernel acknowledge */
 #define DSP_HC_SYS_CALL			 (0x2C>>1) /* cf <nextdev/snd_dsp.h> */
 
-#import "dsp_messages.h"
+#import <MKDSP/dsp_messages.h>
 
 #define DSP_MESSAGE_OPCODE(x) (((x)>>16)&0xFF)
 #define DSP_MESSAGE_SIGNED_DATUM(x) \
@@ -154,9 +159,9 @@
 /* Make alloca() safe */
 
 /**** Include files ****/
-#include "dsp_structs.h"		/* DSP struct declarations */
-#include "dsp_errno.h"		/* Error codes for DSP C functions */
-#include "libdsp.h"		/* Function prototypes for libdsp functions */
+#include <MKDSP/dsp_structs.h>		/* DSP struct declarations */
+#include <MKDSP/dsp_errno.h>		/* Error codes for DSP C functions */
+#include <MKDSP/libdsp.h>		/* Function prototypes for libdsp functions */
 
 #if defined(WIN32) && !defined(__MINGW32__)
 // Stephen Brandon: MINGW32 has winsock.h imported anyway and it conflicts
@@ -240,12 +245,12 @@ MKDSP_API DSPTimeStamp DSPMKTimeStamp0; /* Tick-synchronized, untimed */
 #define DSP_ERRORS_FILE "/tmp/dsperrors"
 #define DSP_WHO_FILE "/tmp/dsp.who"
 
-MKDSP_API const char *DSPGetDSPDirectory();	/* as above or $DSP if $DSP set */
-MKDSP_API char *DSPGetSystemDirectory();	/* /u/l/l/monitor|$DSP/monitor */
-MKDSP_API char *DSPGetImgDirectory();	/* /u/l/l/dsp/img or $DSP/img */
-MKDSP_API char *DSPGetAPDirectory();	/* /u/l/l/dsp/imgap or $DSP/imgap */
-MKDSP_API char *DSPGetMusicDirectory();	/* DSP_MUSIC_DIRECTORY */
-MKDSP_API char *DSPGetLocalBinDirectory(); /* /usr/bin or $DSP/bin */
+MKDSP_API const char *DSPGetDSPDirectory(void);	/* as above or $DSP if $DSP set */
+MKDSP_API char *DSPGetSystemDirectory(void);	/* /u/l/l/monitor|$DSP/monitor */
+MKDSP_API char *DSPGetImgDirectory(void);	/* /u/l/l/dsp/img or $DSP/img */
+MKDSP_API char *DSPGetAPDirectory(void);	/* /u/l/l/dsp/imgap or $DSP/imgap */
+MKDSP_API char *DSPGetMusicDirectory(void);	/* DSP_MUSIC_DIRECTORY */
+MKDSP_API char *DSPGetLocalBinDirectory(void); /* /usr/bin or $DSP/bin */
 
 /* 
    Convert Y-space address in DSP "XY memory partition" 

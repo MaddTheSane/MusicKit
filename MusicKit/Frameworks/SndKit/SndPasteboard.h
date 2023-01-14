@@ -15,13 +15,14 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#import "Snd.h"
+#import <AppKit/AppKit.h>
+#import <SndKit/Snd.h>
 
 #ifndef USE_NEXTSTEP_SOUND_IO
 /* Define this for compatibility */
 #define NXSoundPboard SndPasteboardType
 
-extern NSString *SndPasteboardType;
+extern const NSPasteboardType SndPasteboardType;
 #import <AppKit/NSPasteboard.h>
 #endif
 

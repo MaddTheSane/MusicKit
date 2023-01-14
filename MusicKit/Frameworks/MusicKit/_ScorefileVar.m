@@ -225,9 +225,7 @@ _MKParameter *_MKSFVarGetParameter(_ScorefileVar *self)
     return self->myParameter;
 }
 
-id _MKSetScorefileVarPreDaemon(self,funPtr)
-    _ScorefileVar *self;
-    BOOL (*funPtr)();
+id _MKSetScorefileVarPreDaemon(_ScorefileVar *self,BOOL (*funPtr)(id varObject, _MKToken newValueType, void *ptrToNewValue))
     /* Assign the function pointed to by funPtr to be used before
        the receiver's value is set. funPtr is a function of three arguments: 
        id ScorefileVarObject; 
@@ -242,9 +240,7 @@ id _MKSetScorefileVarPreDaemon(self,funPtr)
     return self;
 }
 
-id _MKSetScorefileVarPostDaemon(self,funPtr)
-    _ScorefileVar *self;
-    void (*funPtr)();
+id _MKSetScorefileVarPostDaemon(_ScorefileVar *self,void (*funPtr)(id ScorefileVarObject))
     /* Assign the function pointed to by funPtr to be used after
        the receiver's value is set. funPtr is a function of one argument:
        id ScorefileVarObject;  It is called after the value has been set and returns
@@ -265,12 +261,19 @@ id _MKSetScorefileVarPostDaemon(self,funPtr)
     return rtnVal;
 }
 
-- writeScorefileStream: (NSMutableData *) aStream
+- (id)copyWithZone:(NSZone *)zone
+{
+    _ScorefileVar *copied = [[_ScorefileVar alloc] init];
+    copied->myParameter = _MKCopyParameter(myParameter);
+    return copied;
+}
+
+- (BOOL)writeScorefileStream: (NSMutableData *) aStream
     /* Writes <ScorefileVarName> = <value>. */
 {	
     [aStream appendData: [[NSString stringWithFormat: @"%@ = ", s] dataUsingEncoding: NSNEXTSTEPStringEncoding]];
     _MKParWriteValueOn(myParameter, aStream, NULL);
-    return self;
+    return YES;
 }
 
 - (void) dealloc

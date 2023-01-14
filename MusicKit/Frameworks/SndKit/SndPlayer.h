@@ -19,8 +19,8 @@
 #define __SND_PLAYER_H__
 
 #import <Foundation/Foundation.h>
-#import "SndStreamClient.h"
-#import "SndPerformance.h"
+#import <SndKit/SndStreamClient.h>
+#import <SndKit/SndPerformance.h>
 
 /*!
 @class SndPlayer

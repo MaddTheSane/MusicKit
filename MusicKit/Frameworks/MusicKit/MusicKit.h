@@ -14,7 +14,7 @@
 */
 
 #ifdef __cplusplus
-extern "Objective-C" {
+extern "C" {
 #endif
 
 #ifndef MUSICKIT_H
@@ -33,50 +33,52 @@ extern "Objective-C" {
 #endif
 
  /* Music Kit include files */
-#import "noDVal.h"              /* Type double utilities */
-#import "errors.h"              /* Error codes, debug flags and functions. */
-#import "names.h"               /* Various name tables */
-#import "midiTranslation.h"     /* Note<->MIDI translation */
-#import "classFuncs.h"          /* Stand-in classes */
-#import "midi_spec.h"		/* standard MIDI definitions */
-#import "fastFFT.h"
+#import <MusicKit/noDVal.h>              /* Type double utilities */
+#import <MusicKit/errors.h>              /* Error codes, debug flags and functions. */
+#import <MusicKit/names.h>               /* Various name tables */
+#import <MusicKit/midiTranslation.h>     /* Note<->MIDI translation */
+#import <MusicKit/classFuncs.h>          /* Stand-in classes */
+#import <MusicKit/midi_spec.h>		/* standard MIDI definitions */
+#import <MusicKit/fastFFT.h>
 
 /* Music Kit classes. */
-#import "MKConductor.h"
-#import "MKEnvelope.h"
-#import "MKFilePerformer.h"
-#import "MKFileWriter.h"
-#import "MKInstrument.h"
-#import "MKMidi.h"
-#import "MKMixerInstrument.h"
-#import "MKNote.h"
-#import "MKNoteFilter.h"
-#import "MKNoteReceiver.h"
-#import "MKNoteSender.h"
-#import "MKMTCPerformer.h"
-#import "MKOrchestra.h"
-#import "MKPart.h"
-#import "MKPartPerformer.h"
-#import "MKPartRecorder.h"
-#import "MKPatchTemplate.h"
-#import "MKPartials.h"
-#import "MKPerformer.h"
-#import "MKPlugin.h"
-#import "MKTimbre.h"
-#import "MKSamplePlayerInstrument.h"
-#import "MKSamples.h"
-#import "MKScore.h"
-#import "MKScorePerformer.h"
-#import "MKScoreRecorder.h"
-#import "MKScorefileObject.h"
-#import "MKScorefilePerformer.h"
-#import "MKScorefileWriter.h"
-#import "MKSynthData.h"
-#import "MKSynthInstrument.h"
-#import "MKSynthPatch.h"
-#import "MKTuningSystem.h"
-#import "MKUnitGenerator.h"
-#import "MKWaveTable.h"
+#import <MusicKit/MKConductor.h>
+#import <MusicKit/MKEnvelope.h>
+#import <MusicKit/MKFilePerformer.h>
+#import <MusicKit/MKFileWriter.h>
+#import <MusicKit/MKInstrument.h>
+#import <MusicKit/MKMidi.h>
+#import <MusicKit/MKMixerInstrument.h>
+#import <MusicKit/MKNote.h>
+#import <MusicKit/MKNoteFilter.h>
+#import <MusicKit/MKNoteReceiver.h>
+#import <MusicKit/MKNoteSender.h>
+#import <MusicKit/MKMTCPerformer.h>
+#import <MusicKit/MKOrchestra.h>
+#import <MusicKit/MKPart.h>
+#import <MusicKit/MKPartPerformer.h>
+#import <MusicKit/MKPartRecorder.h>
+#import <MusicKit/MKPatchTemplate.h>
+#import <MusicKit/MKPartials.h>
+#import <MusicKit/MKPerformer.h>
+#import <MusicKit/MKPlugin.h>
+#import <MusicKit/MKTimbre.h>
+#import <MusicKit/MKSamplePlayerInstrument.h>
+#import <MusicKit/MKSamples.h>
+#import <MusicKit/MKScore.h>
+#import <MusicKit/MKScorePerformer.h>
+#import <MusicKit/MKScoreRecorder.h>
+#import <MusicKit/MKScorefileObject.h>
+#import <MusicKit/MKScorefilePerformer.h>
+#import <MusicKit/MKScorefileWriter.h>
+#import <MusicKit/MKSynthData.h>
+#import <MusicKit/MKSynthInstrument.h>
+#import <MusicKit/MKSynthPatch.h>
+#import <MusicKit/MKTuningSystem.h>
+#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKit/MKWaveTable.h>
+#import <MusicKit/MKPatchConnection.h>
+#import <MusicKit/MKPatchEntry.h>
 
 #endif /* MUSICKIT_H */
 

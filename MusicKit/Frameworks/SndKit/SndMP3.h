@@ -19,12 +19,12 @@
 #ifndef __SND_MP3_H__
 #define __SND_MP3_H__
 
-#import "SndKitConfig.h"
+#import <SndKit/SndKitConfig.h>
 
 #if HAVE_HIP_DECODE_INIT
 
 #import <Foundation/Foundation.h>
-#import "Snd.h"
+#import <SndKit/Snd.h>
 #import <lame/lame.h>
 
 /*!

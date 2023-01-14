@@ -59,7 +59,7 @@ or MKNoteReceiver) during a performance involving a MKScorefileWriter.
 #ifndef __MK_ScorefileWriter_H___
 #define __MK_ScorefileWriter_H___
 
-#import "MKFileWriter.h"
+#import <MusicKit/MKFileWriter.h>
 
 @interface MKScorefileWriter : MKFileWriter
 {

@@ -56,8 +56,8 @@ MKPartPerformer is activated at time 1, the first note will sound at time 3.
 #ifndef __MK_PartPerformer_H___
 #define __MK_PartPerformer_H___
 
-#import "MKPerformer.h"
-#import "MKScorePerformer.h"
+#import <MusicKit/MKPerformer.h>
+#import <MusicKit/MKScorePerformer.h>
 
 @interface MKPartPerformer : MKPerformer
 {

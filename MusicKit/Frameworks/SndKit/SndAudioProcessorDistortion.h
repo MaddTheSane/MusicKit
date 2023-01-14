@@ -18,7 +18,7 @@
 #define __SNDKIT_SNDAUDIOPROCESSORDISTORTION_H__
 
 #import <Foundation/Foundation.h>
-#import "SndAudioProcessor.h"
+#import <SndKit/SndAudioProcessor.h>
 
 /*!
  @brief SndDistortionParam  Parameter keys

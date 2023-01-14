@@ -36,16 +36,16 @@
  * (See DSPError.h for error log enabling functions.)
  */
 
-#import "DSPControl.h"
-#import "DSPMessage.h"
-#import "DSPTransfer.h"
-#import "DSPStructMisc.h"
-#import "DSPConversion.h"
-#import "DSPObject.h"
-#import "DSPSymbols.h"
-#import "DSPError.h"
+#import <MKDSP/DSPControl.h>
+#import <MKDSP/DSPMessage.h>
+#import <MKDSP/DSPTransfer.h>
+#import <MKDSP/DSPStructMisc.h>
+#import <MKDSP/DSPConversion.h>
+#import <MKDSP/DSPObject.h>
+#import <MKDSP/DSPSymbols.h>
+#import <MKDSP/DSPError.h>
 
-#include "MKDSPDefines.h"
+#include <MKDSP/MKDSPDefines.h>
 
 /* ============================= DSPLoad.c ================================= */
 

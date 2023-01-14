@@ -17,9 +17,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SndAudioBuffer.h"
-#import "SndStreamClient.h"
-#import "SndAudioProcessorChain.h"
+#import <SndKit/SndAudioBuffer.h>
+#import <SndKit/SndStreamClient.h>
+#import <SndKit/SndAudioProcessorChain.h>
 
 /*!
   @class SndStreamMixer

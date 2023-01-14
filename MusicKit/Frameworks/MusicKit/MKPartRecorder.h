@@ -54,8 +54,8 @@ to create a group of them for you.
 #ifndef __MK_PartRecorder_H___
 #define __MK_PartRecorder_H___
 
-#import "MKInstrument.h"
-#import "timeunits.h"
+#import <MusicKit/MKInstrument.h>
+#import <MusicKit/timeunits.h>
 
 @interface MKPartRecorder : MKInstrument
 {

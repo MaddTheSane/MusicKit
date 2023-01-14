@@ -98,14 +98,16 @@ method  to retrieve the database and then archiving that object.
 
 #import <Foundation/Foundation.h>
 
-@interface MKTimbre : NSObject
+@class MKWaveTable;
+
+@interface MKTimbre : NSObject <NSCoding>
 {
     /*! Name of this timbre */
     NSString *timbreName;
     /*! Array object of frequencies */
     NSMutableArray *freqs;
     /*! Array object of MKWaveTables */
-    NSMutableArray *waveTables;
+    NSMutableArray<MKWaveTable*> *waveTables;
 }
 
 /*! @def MK_MAXTIMBRENAMELEN Maximum length of the name of a MKTimbre object. */
@@ -116,7 +118,7 @@ method  to retrieve the database and then archiving that object.
   @param  name is an NSString.
   @return Returns an id.
 */
-+ newTimbre: (NSString *) name;
++ (instancetype)newTimbre: (NSString *) name;
 
 /*!
   @brief Initialize timbre to be a new anonymous timbre.
@@ -221,13 +223,15 @@ method  to retrieve the database and then archiving that object.
 */
 - (NSString *) timbreName;
 
+@property (readonly, copy) NSString *timbreName;
+
 /*!
   @brief Returns <i>waveTables</i> object.
 
   The NSMutableArray is not copied and should not be altered.
   @return Returns an NSMutableArray.
 */
-- (NSMutableArray *) waveTables;
+- (NSMutableArray<MKWaveTable*> *) waveTables;
 
 /*!
   @brief Returns <i>freqs</i>.

@@ -116,13 +116,13 @@
 //	ePoint = [self convertPoint:ePoint fromView:nil];
         ePoint = [theEvent locationInWindow];
 	while (loop) {
-		nEvent = [[self window] nextEventMatchingMask:(NSLeftMouseUpMask |			NSLeftMouseDraggedMask)];
+		nEvent = [[self window] nextEventMatchingMask:(NSEventMaskLeftMouseUp |			NSEventMaskLeftMouseDragged)];
 		thePoint.x = [nEvent locationInWindow].x;
 		thePoint.y = [nEvent locationInWindow].y;
 		thePoint = [self convertPoint:thePoint fromView:nil];
 		inside = NSMouseInRect(thePoint , [self bounds] , [self isFlipped]);
 		switch ([nEvent type]) {
-		case NSLeftMouseUp:
+		case NSEventTypeLeftMouseUp:
 			loop = NO;
 			if (!wasdragged && wasSelected) {
 				[sender unHighlight];
@@ -137,7 +137,7 @@
 				}
 			}
 			break;
-		case NSLeftMouseDragged:
+		case NSEventTypeLeftMouseDragged:
 			wasdragged = YES;
 			for (i = 0; i < [selectedList count]; i++) {
                         theTad = [selectedList objectAtIndex:i];

@@ -45,7 +45,7 @@ extern id MKOrchestraClasses(void);
 extern void _MKOrchResetPreviousLosingTemplate(MKOrchestra *self);
 extern id _MKFreeMem(MKOrchestra *self, MKOrchAddrStruct *mem);
 extern int _MKAddTemplate(id aNewTemplate);
-extern FILE *_MKGetOrchSimulator();
+extern FILE *_MKGetOrchSimulator(MKOrchestra *orch);
 extern DSPFix48 *_MKCurSample(MKOrchestra *orch);
 extern void _MKOrchAddSynthIns(id anIns);
 extern void _MKOrchRemoveSynthIns(id anIns);

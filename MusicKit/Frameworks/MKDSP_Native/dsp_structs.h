@@ -26,8 +26,8 @@
 
 #import <stdio.h>
 
-#include "MKDSPDefines.h"
-#import "dsp_types.h"
+#include <MKDSP/MKDSPDefines.h>
+#import <MKDSP/dsp_types.h>
 
 typedef enum _DSPSectionType {DSP_Global=0,DSP_System,DSP_User,
 	DSP_NSectionTypes} DSPSectionType;

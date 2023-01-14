@@ -16,7 +16,7 @@
 #import <sys/errno.h>
 #endif
 
-extern int errno;
+//extern int errno;
 
 #define DSP_EWARNING 0		/* used to print warning and continue */
 

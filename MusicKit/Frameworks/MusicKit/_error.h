@@ -27,7 +27,7 @@ extern NSString * _MKGetErrStr(MKErrors errCode);
        the code is not one of the  MKErrno enums. 
        The string is not copied. Note that some of the strings have printf-
        style 'arguments' embeded. Thus care must be taken in writeing them. */
-extern char *_MKErrBuf();
+//extern char *_MKErrBuf();
 
 
 #endif

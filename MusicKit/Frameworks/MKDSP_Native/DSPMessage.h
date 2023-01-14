@@ -5,7 +5,7 @@
  * Author: Julius O. Smith III
  */
 
-#include "MKDSPDefines.h"
+#include <MKDSP/MKDSPDefines.h>
 
 /******************************** DSP MESSAGES *******************************/
 

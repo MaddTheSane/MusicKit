@@ -19,9 +19,9 @@
 #define __SNDAUDIOBUFFER_H__
 
 #import <Foundation/Foundation.h>
-#import "Snd.h"
-#import "SndFunctions.h"
-#import "SndFormat.h"
+#import <SndKit/Snd.h>
+#import <SndKit/SndFunctions.h>
+#import <SndKit/SndFormat.h>
 
 // Describes each speakerConfiguration index
 typedef enum {

@@ -23,15 +23,15 @@ MKDSP_API int _DSPReloc(DSPDataRecord *data, DSPFixup *fixups,
  * _DSPRelocate. 
  */
 
-MKDSP_API int _DSPRelocate();
-MKDSP_API int _DSPRelocateUser();
+MKDSP_API int _DSPRelocate(void);
+MKDSP_API int _DSPRelocateUser(void);
 
 /* ============================= DSPControl.c ============================== */
-MKDSP_API int _DSPCheckMappedMode();
-MKDSP_API int _DSPEnterMappedMode();
-MKDSP_API int _DSPEnterMappedModeNoCheck();
-MKDSP_API int _DSPEnterMappedModeNoPing();
-MKDSP_API int _DSPExitMappedMode();
+MKDSP_API int _DSPCheckMappedMode(void);
+MKDSP_API int _DSPEnterMappedMode(void);
+MKDSP_API int _DSPEnterMappedModeNoCheck(void);
+MKDSP_API int _DSPEnterMappedModeNoPing(void);
+MKDSP_API int _DSPExitMappedMode(void);
 MKDSP_API int _DSPReadSSI();
 MKDSP_API int _DSPSetSCISCR();
 MKDSP_API int _DSPSetSCISCCR();
@@ -69,40 +69,41 @@ MKDSP_API char *_DSPContiguousMalloc(unsigned size);
  *	memory.	 Calls realloc as necessary to extend the block.
  */
 
+struct _strarr;
 
 /* ============================ _DSPUtilities.c ============================ */
-MKDSP_API void _DSPErr();
-MKDSP_API char *_DSPFirstReadableFile(char *fn,...);
-MKDSP_API char *_DSPGetBody();
-MKDSP_API char _DSPGetField();
-MKDSP_API int _DSPGetFilter();
-MKDSP_API float _DSPGetFloatStr();
-MKDSP_API char *_DSPGetHead();
-MKDSP_API void _DSPGetInputFile();
-MKDSP_API void _DSPGetInputOutputFiles();
-MKDSP_API int _DSPGetIntStr();
-MKDSP_API char *_DSPGetLineStr();
-MKDSP_API void _DSPGetOutputFile();
-MKDSP_API char *_DSPGetSN();
-MKDSP_API char *_DSPGetTail();
-MKDSP_API char *_DSPGetTokStr();
-MKDSP_API int _DSPInInt();
-MKDSP_API int _DSPIndexS();
-MKDSP_API char *_DSPIntToChar();
-MKDSP_API int *_DSPMakeArray();
-MKDSP_API FILE *_DSPMyFopen();
-MKDSP_API char *_DSPPadStr();
-MKDSP_API void _DSPParseName();
-MKDSP_API void _DSPPutFilter();
-MKDSP_API char *_DSPRemoveHead();
-MKDSP_API char *_DSPRemoveTail();
-MKDSP_API int _DSPSaveMatD();
-MKDSP_API int _DSPSezYes();
-MKDSP_API char *_DSPSkipToWhite();
-MKDSP_API char *_DSPSkipWhite();
-MKDSP_API DSP_BOOL _DSPGetFile();
-MKDSP_API DSPLocationCounter _DSPGetMemStr();
-MKDSP_API DSP_BOOL _DSPNotBlank();
+MKDSP_API void _DSPErr(char *msg);
+MKDSP_API char *_DSPFirstReadableFile(char *fn, ...);
+MKDSP_API char *_DSPGetBody(char *fn);
+MKDSP_API char _DSPGetField(FILE *infile, char *string, char *tklist, int lstr);
+MKDSP_API int _DSPGetFilter(char *name, char *dname, int ncmax, int*nic, int*noc, float*ic, float*oc);
+MKDSP_API float _DSPGetFloatStr(char **s);
+MKDSP_API char *_DSPGetHead(char *fn);
+MKDSP_API void _DSPGetInputFile(FILE **ipp, char *din);
+MKDSP_API void _DSPGetInputOutputFiles(FILE **ipp, FILE **opp, char *din, char *don);
+MKDSP_API int _DSPGetIntStr(char **s);
+MKDSP_API char *_DSPGetLineStr(char **s);
+MKDSP_API void _DSPGetOutputFile(FILE **opp, char *don);
+MKDSP_API char *_DSPGetSN(char *g, int ng);
+MKDSP_API char *_DSPGetTail(char *fn);
+MKDSP_API char *_DSPGetTokStr(char **s);
+MKDSP_API int _DSPInInt(int def, char *name);
+MKDSP_API int _DSPIndexS(struct _strarr *stra, register char *str, int nstr);
+MKDSP_API char *_DSPIntToChar(int i);
+MKDSP_API int *_DSPMakeArray(int size);
+MKDSP_API FILE *_DSPMyFopen(char *fn, char *mode);
+MKDSP_API char *_DSPPadStr(char *s, int n);
+MKDSP_API void _DSPParseName(char *name, char *dname);
+MKDSP_API void _DSPPutFilter(char *name, char *dname, int ni, int no, float *ic, float *oc);
+MKDSP_API char *_DSPRemoveHead(char *fn);
+MKDSP_API char *_DSPRemoveTail(char *fn);
+MKDSP_API int _DSPSaveMatD(int mrows, int ncols, int imagf, char *name, double rpart[], double ipart[], FILE *fp);
+MKDSP_API int _DSPSezYes(void);
+MKDSP_API char *_DSPSkipToWhite(char *s);
+MKDSP_API char *_DSPSkipWhite(char *s);
+MKDSP_API DSP_BOOL _DSPGetFile(FILE **fpp, char *mode, char *name, char *dname);
+MKDSP_API DSPLocationCounter _DSPGetMemStr(char **s, char *type);
+MKDSP_API DSP_BOOL _DSPNotBlank(char *s);
 
 /* ============================ DSPConversion.c ============================ */
 

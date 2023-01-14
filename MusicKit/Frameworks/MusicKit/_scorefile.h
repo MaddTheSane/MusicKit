@@ -77,7 +77,7 @@ extern BOOL _MKParseScoreHeaderStmt(_MKScoreInStruct *scorefileRPtr);
 extern id _MKParseScoreNote(_MKScoreInStruct * scorefileRPtr);
 extern _MKScoreInStruct *_MKFinishScoreIn(_MKScoreInStruct *scorefileRPtr);
 
-extern const char *_MKTranstab(); /* defined in parseScore.m */
+extern const char *_MKTranstab(void); /* defined in parseScore.m */
 
 /* functions for writing binary scorefiles */
 extern void _MKWriteIntPar(NSMutableData *aStream,int anInt);

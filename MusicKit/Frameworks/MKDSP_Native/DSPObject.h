@@ -31,9 +31,9 @@
  */
  
 #import <stdio.h>
-#import "MKDSPDefines.h"
-#import "dsp_types.h"
-#import "dsp_structs.h"
+#import <MKDSP/MKDSPDefines.h>
+#import <MKDSP/dsp_types.h>
+#import <MKDSP/dsp_structs.h>
 
 #ifndef GNUSTEP
 #define MKMDPORT mach_port_t

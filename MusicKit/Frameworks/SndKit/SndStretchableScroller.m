@@ -97,7 +97,7 @@
 	
 	//    NSLog(@"On stretch handles\n");
 	while (keepOn) {
-	    theEvent = [[self window] nextEventMatchingMask: NSLeftMouseUpMask | NSLeftMouseDraggedMask];
+	    theEvent = [[self window] nextEventMatchingMask: NSEventMaskLeftMouseUp | NSEventMaskLeftMouseDragged];
 	    mouseLoc = [self convertPoint: [theEvent locationInWindow] fromView: nil];
 	    
 	    if (mouseLoc.x > slotRect.origin.x + slotRect.size.width)
@@ -106,7 +106,7 @@
 		mouseLoc.x = slotRect.origin.x;
 	    
 	    switch ([theEvent type]) {
-	    case NSLeftMouseDragged: 
+	    case NSEventTypeLeftMouseDragged: 
 		{
 		    float  newValue, newProp;
 		    float  dx = mouseLoc.x - mouseLocation.x;
@@ -128,7 +128,7 @@
 		    }
 		}
 		break;
-	    case NSLeftMouseUp:
+	    case NSEventTypeLeftMouseUp:
 		keepOn = NO;
 		break;
 	    default:

@@ -134,9 +134,9 @@ You can examine the updates and controllerTable with the method
 
 /*@}*/
 
-#import "MKInstrument.h"
-#import "MKNote.h"
-#import "MKSynthPatch.h"
+#import <MusicKit/MKInstrument.h>
+#import <MusicKit/MKNote.h>
+#import <MusicKit/MKSynthPatch.h>
 
 @interface MKSynthInstrument : MKInstrument
 {

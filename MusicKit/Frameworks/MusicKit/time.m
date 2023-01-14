@@ -56,7 +56,7 @@ static double deltaT = 0;
 static BOOL   conductedPerformance    = NO;
 static BOOL   wasConductedPerformance = NO;
 static id     cond = nil;
-static double (*getTimeImp)() = NULL;
+static double (*getTimeImp)(id, SEL) = NULL;
 
 void _MKSetConductedPerformance(BOOL yesOrNo,id conductorClass)
     /* Called by the Conductor to set when there's a conducted performance.
@@ -69,10 +69,10 @@ void _MKSetConductedPerformance(BOOL yesOrNo,id conductorClass)
     }
     conductedPerformance = yesOrNo;
     cond = conductorClass;
-    getTimeImp = (double (*)())[conductorClass methodForSelector:@selector(timeInSeconds)];
+    getTimeImp = (double (*)(id, SEL))[conductorClass methodForSelector:@selector(timeInSeconds)];
 }
 
-double _MKLastTime()
+double _MKLastTime(void)
 {
     /* Here we need to be careful because time may already have been
        reset, so we have to use the special method _getLastTime. */

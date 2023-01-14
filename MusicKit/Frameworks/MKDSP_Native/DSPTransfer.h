@@ -68,7 +68,7 @@
 
 /****************** READING/WRITING HOST-INTERFACE REGISTERS *****************/
 
-#include "MKDSPDefines.h"
+#include <MKDSP/MKDSPDefines.h>
 
 MKDSP_API int DSPReadRegs(unsigned int *regsP);
 /* 

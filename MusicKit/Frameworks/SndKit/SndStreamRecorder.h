@@ -16,7 +16,7 @@
 #define __SNDSTREAMRECORDER_H__
 
 #import <Foundation/Foundation.h>
-#import "SndStreamClient.h"
+#import <SndKit/SndStreamClient.h>
 
 @class SndAudioBuffer;
 @class SndAudioProcessorRecorder;

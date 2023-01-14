@@ -63,7 +63,7 @@ configure the MIDI instrument).
 
 #import <Foundation/NSObject.h>
 
-#import "keynums.h"
+#import <MusicKit/keynums.h>
 
 @interface MKTuningSystem : NSObject
 {

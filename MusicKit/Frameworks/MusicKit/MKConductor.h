@@ -1496,7 +1496,7 @@ Appendix entitled MIDI Time Code in the MusicKit
 
 @end
 
-#import "MKConductorDelegate.h"
+#import <MusicKit/MKConductorDelegate.h>
 
 #ifdef __cplusplus
 }

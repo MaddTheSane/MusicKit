@@ -48,7 +48,7 @@
 #define __SND_H__
 
 #import <Foundation/Foundation.h>
-#import "SndFormat.h"
+#import <SndKit/SndFormat.h>
 
 @class SndPlayer;
 @class SndPerformance;

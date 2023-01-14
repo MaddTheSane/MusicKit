@@ -33,7 +33,7 @@
 #define LTGRAY [NSColor lightGrayColor] /* was LTGRAY (2.0/3.0) */
 #define TRANSP 2.0
 
-#define DRAG_MASK (NSLeftMouseUpMask|NSLeftMouseDraggedMask)
+#define DRAG_MASK (NSEventMaskLeftMouseUp|NSEventMaskLeftMouseDragged)
 
 //===================================================================
 // Envelope auxiliar routines and macros
@@ -42,7 +42,7 @@
 //-------------------------------------------------------------------
 // Draw a knob in the display
 
-#define DRAWKNOB(x,y) NSRectFillUsingOperation(NSMakeRect(x-KNOBSIZE/2,y-KNOBSIZE/2,KNOBSIZE, KNOBSIZE),NSCompositeSourceOver)
+#define DRAWKNOB(x,y) NSRectFillUsingOperation(NSMakeRect(x-KNOBSIZE/2,y-KNOBSIZE/2,KNOBSIZE, KNOBSIZE),NSCompositingOperationSourceOver)
 
 //-------------------------------------------------------------------
 // Translate from x/y envelope values to display pixel coordinates
@@ -110,7 +110,7 @@ void allocateTemp(int size)
 
 // Free allocated memory
 
-void freeTemp()
+void freeTemp(void)
 {
     if (temp!=NULL) {
         free(temp->x);
@@ -170,7 +170,7 @@ void allocateDraw(int size)
 
 // Free allocated memory
 
-void freeDraw()
+void freeDraw(void)
 {
     if (draw!=NULL) {
         free(draw->x);
@@ -713,7 +713,7 @@ void freeDraw()
     p.x = pixToX(ep.x);
     p.y = pixToY(ep.y);                                    // convert from pixels to x/y
     hitpt = [self hitKnobAt: p border: KNOBSIZE/2];        // see if it is a breakpoint    
-    if ([event modifierFlags] & NSShiftKeyMask) {        // with shift key down...
+    if ([event modifierFlags] & NSEventModifierFlagShift) {        // with shift key down...
         if (hitpt >= 0) {
             if ([self removePoint: hitpt] > 0)           // hit --> remove point
                 hitpt = -1;
@@ -721,7 +721,7 @@ void freeDraw()
         else 
 	    hitpt = [self addPoint: p];                   // no hit --> add point
     }
-    if (([event modifierFlags] & NSAlternateKeyMask) && (hitpt >= 0)) {   // hit plus alternate...
+    if (([event modifierFlags] & NSEventModifierFlagOption) && (hitpt >= 0)) {   // hit plus alternate...
         if (stickyPoint==hitpt)
             [theEnvelope setStickPoint: MAXINT];                
         else
@@ -738,9 +738,9 @@ void freeDraw()
         [self lockFocus];
         [theFilledCross push];                           // use cursor = cross+knob
         [self eraseSelectedKnob];
-        while ([event type] != NSLeftMouseUp) {
+        while ([event type] != NSEventTypeLeftMouseUp) {
             ep = [self convertPoint: [event locationInWindow] fromView: nil];
-            if ([event type] == NSLeftMouseDragged) {
+            if ([event type] == NSEventTypeLeftMouseDragged) {
                 p.x = pixToX(ep.x);
                 p.y = pixToY(ep.y);
                 [self movePoint: hitpt to: p];

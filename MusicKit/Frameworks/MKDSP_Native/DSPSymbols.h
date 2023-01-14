@@ -2,7 +2,7 @@
 #define __MK_DSPSymbols_H___
 /* Copyright 1988-1992, NeXT Inc.  All rights reserved. */
 
-#import "dsp_structs.h"
+#import <MKDSP/dsp_structs.h>
 
 int DSPSetCurrentSymbolTable(int theIndex);
 /* 

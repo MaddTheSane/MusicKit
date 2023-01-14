@@ -162,7 +162,7 @@ MKConductor's time base.
 */
 #ifndef __MK_MTCPerformer_H___
 #define __MK_MTCPerformer_H___
-#import "MKPerformer.h"
+#import <MusicKit/MKPerformer.h>
 
 /*!
   @brief Midi Time Code Constants

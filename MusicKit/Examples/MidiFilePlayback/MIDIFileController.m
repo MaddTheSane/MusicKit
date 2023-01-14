@@ -257,7 +257,7 @@
 
 - (void) setMIDIFilename: (id) sender
 {
-    int result;
+    NSInteger result;
     NSArray *fileTypes = [NSArray arrayWithObjects: @"midi", @"mid", @"", nil];
     NSOpenPanel *oPanel = [NSOpenPanel openPanel];
 
@@ -267,7 +267,7 @@
     result = [oPanel runModal];
     if (result == NSOKButton) {
         NSArray *URLsToOpen = [oPanel URLs];
-        int fileIndex, count = [URLsToOpen count];
+        NSInteger fileIndex, count = [URLsToOpen count];
         
         for (fileIndex = 0; fileIndex < count; fileIndex++) {
             midiPathName = [[URLsToOpen objectAtIndex: fileIndex] path];

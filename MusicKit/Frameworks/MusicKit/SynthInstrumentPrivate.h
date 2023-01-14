@@ -14,10 +14,11 @@
 
 #import "MKSynthInstrument.h"
 
-@interface MKSynthInstrument(Private)
+@interface MKSynthInstrument()
 
 -_repositionInActiveList:synthPatch template:patchTemplate;
 -_deallocSynthPatch:aSynthPatch template:aTemplate tag:(int)noteTag;
+-_disconnectOnOrch:anOrch;
 
 @end
 

@@ -377,8 +377,8 @@ static id adjustRunningPatch(MKSynthInstrument *self,int newNoteTag,id aNote,
 
     if (MKIsTraced(MK_TRACESYNTHINS) ||
 	MKIsTraced(MK_TRACEPREEMPT))
-      NSLog(@"MKSynthInstrument preempts patch %d at time %f for tag %@.\n",
-	      (int)*currentPatch,MKGetTime(), tagStr(newNoteTag));
+        NSLog(@"MKSynthInstrument preempts patch %lu at time %f for tag %@.\n",
+	      (uintptr_t)*currentPatch,MKGetTime(), tagStr(newNoteTag));
     *phraseStatus = MK_phraseOnPreempt;
     return self;
 }
@@ -1034,10 +1034,7 @@ static void deallocRunningVoices(MKSynthInstrument *self,id orch)
     return self;
 }
 
-@end
-
-
-@implementation MKSynthInstrument(Private)
+#pragma mark - Private
 
 -_repositionInActiveList:synthPatch template:patchTemplate
   /* -activeSynthPatches used to list patches in the order of their noteOns.

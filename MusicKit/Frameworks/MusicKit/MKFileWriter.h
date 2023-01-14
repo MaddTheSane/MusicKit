@@ -79,8 +79,8 @@ returned by <b>initializeFile</b> and <b>finishFile</b> are ignored.
 
 #import <Foundation/Foundation.h>
 
-#import "MKInstrument.h"
-#import "timeunits.h"
+#import <MusicKit/MKInstrument.h>
+#import <MusicKit/timeunits.h>
 
 @interface MKFileWriter : MKInstrument
 {

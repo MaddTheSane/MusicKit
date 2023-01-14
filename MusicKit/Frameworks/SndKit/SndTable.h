@@ -13,7 +13,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #import <Foundation/Foundation.h>
-#import "Snd.h"
+#import <SndKit/Snd.h>
 
 @interface SndTable : NSObject {
   NSMutableDictionary *nameTable;

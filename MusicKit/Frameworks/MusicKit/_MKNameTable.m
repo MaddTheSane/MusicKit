@@ -301,7 +301,7 @@ local tables used for parsing. */
 static _MKNameTable *globalParseNameTable;
 static _MKNameTable *mkNameTable = nil;
 
-void _MKPrintGlobalNameTables()
+void _MKPrintGlobalNameTables(void)
 {
   NSLog(@"globalParseNameTable symbols:\n%@\n", NSStringFromMapTable(globalParseNameTable->symbols));
   NSLog(@"globalParseNameTable types:\n%@\n", NSStringFromMapTable(globalParseNameTable->types));

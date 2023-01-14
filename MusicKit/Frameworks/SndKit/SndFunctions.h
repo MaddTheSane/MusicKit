@@ -53,13 +53,13 @@
    SndKitConfig.h not found when compiling the MusicKit, you haven't
    run ./configure 
 */
-#import "SndKitConfig.h"
-#import "SndFormat.h"
+#import <SndKit/SndKitConfig.h>
+#import <SndKit/SndFormat.h>
 
 #import <Foundation/Foundation.h>
 
-#import "SndError.h"
-#import "SndEndianFunctions.h"
+#import <SndKit/SndError.h>
+#import <SndKit/SndEndianFunctions.h>
 
 #if HAVE_LIBSNDFILE
 # import <sndfile.h> /* for libsndfile SNDFILE declaration */

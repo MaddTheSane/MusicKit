@@ -24,7 +24,8 @@
 
  */
 
-#import "MusicKit.h"
+#import <Foundation/Foundation.h>
+#import <MusicKit/MKScore.h>
 
 @protocol MusicKitPlugin <NSObject>
 + (NSString *) protocolVersion;

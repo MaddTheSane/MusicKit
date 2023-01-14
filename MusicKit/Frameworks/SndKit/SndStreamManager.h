@@ -19,7 +19,7 @@
 #define __SNDSTREAMMANAGER_H__
 
 #import <Foundation/Foundation.h>
-#import "SndFormat.h"
+#import <SndKit/SndFormat.h>
 
 @class SndAudioBuffer;
 @class SndStreamClient;

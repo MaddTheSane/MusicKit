@@ -282,7 +282,7 @@ extern int _DSPMKStartWriteDataNoThread(void);
 
 extern int _DSPForceIdle(void);
 
-extern int _DSPOwnershipIsJoint();
+extern int _DSPOwnershipIsJoint(void);
 /*
  * Returns TRUE if DSP owner port is held by more than one task.
  */

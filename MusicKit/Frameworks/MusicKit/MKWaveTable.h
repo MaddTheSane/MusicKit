@@ -76,7 +76,7 @@ fillTableLength:scale:.
 
 #import <Foundation/NSObject.h>
 //sb:
-#import "dsp_types.h" /* for DSPDatum */
+#import <MusicKit/dsp_types.h> /* for DSPDatum */
 
 @interface MKWaveTable : NSObject <NSCopying>
 {

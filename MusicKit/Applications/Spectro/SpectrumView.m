@@ -192,7 +192,7 @@
     [cursorPath stroke];
 }
 
-#define MOVE_MASK NSLeftMouseUpMask|NSLeftMouseDraggedMask
+#define MOVE_MASK NSEventMaskLeftMouseUp|NSEventMaskLeftMouseDragged
 
 - (BOOL)acceptsFirstMouse:(NSEvent *)theEvent
 {
@@ -228,7 +228,7 @@
                 [delegate cursorMoved:self];
         }
         event = [[self window] nextEventMatchingMask:MOVE_MASK];
-    } while ([event type] != NSLeftMouseUp);
+    } while ([event type] != NSEventTypeLeftMouseUp);
 
 //  [[self window] setEventMask:oldMask];
     [[self window] setAcceptsMouseMovedEvents:NO];

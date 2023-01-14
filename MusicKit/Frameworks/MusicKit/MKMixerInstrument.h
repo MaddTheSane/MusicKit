@@ -41,7 +41,7 @@
 */
 #ifndef __MK_MixerInstrument_H___
 #define __MK_MixerInstrument_H___
-#import "MKInstrument.h"
+#import <MusicKit/MKInstrument.h>
 #import <SndKit/SndKit.h>
 
 @interface MKMixerInstrument: MKInstrument

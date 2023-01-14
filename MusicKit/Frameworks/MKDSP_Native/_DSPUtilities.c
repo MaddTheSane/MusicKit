@@ -30,6 +30,7 @@ Modification history:
 #include "_dsp.h"
 #include <stdarg.h>
 #include <stdio.h>
+#include <unistd.h>
 
 /* Mostly filename stuff */
 
@@ -46,11 +47,8 @@ Modification history:
 
 // #define FILTER_FILES  // LMS compiles in Filter I/O to files
 
-extern int isatty();
 
-static int usererr(code,msg)
-    int code;
-    char *msg;
+static int usererr(int code,char *msg)
 {
     fprintf(stderr,"\t %s\n\t (user error code = %d)\n\n",msg,code);
     perror("(Last UNIX-recorded error)");
@@ -65,8 +63,7 @@ static int usererr(code,msg)
 
 /* _DSPGETBODY */
 
-char *_DSPGetBody(fn)
-char *fn;
+char *_DSPGetBody(char *fn)
 {
     char *s1 = _DSPRemoveHead(fn);
     char *s2;
@@ -84,8 +81,7 @@ char *fn;
 
 /* _DSPGETFIELD */
 
-char _DSPGetField(infile, string, tklist,lstr)
-FILE *infile; char *string, *tklist; int lstr; 
+char _DSPGetField(FILE *infile, char *string, char *tklist, int lstr)
 {   int nstr; 
     DSP_BOOL leading, comment; 
     char c;
@@ -131,8 +127,7 @@ FILE *infile; char *string, *tklist; int lstr;
 
 /* get a file for input or output */
 
-DSP_BOOL _DSPGetFile(fpp, mode, name, dname)
-    FILE **fpp; char *mode, *name, *dname;
+DSP_BOOL _DSPGetFile(FILE **fpp, char *mode, char *name, char *dname)
 {
     DSP_BOOL exists;
     
@@ -206,8 +201,8 @@ DSP_BOOL _DSPGetFile(fpp, mode, name, dname)
 
 /* #include "dsp/_dsputilities.h" */
 
-float _DSPGetFloatStr(s)		/* get float from string */
-    char **s;			/* input string is chopped to float++ */
+float _DSPGetFloatStr(char **s)		/* get float from string */
+    			/* input string is chopped to float++ */
 {
     float f;
     char *p,*t;
@@ -251,8 +246,7 @@ typedef struct _strarr { char string[_DSP_MAX_CMD]; } strarr;
 
 #ifdef FILTER_FILES
 /* ========================================================= */
-int _DSPGetFilter(name,dname,ncmax,nic,noc,ic,oc)
-char *name, *dname; int ncmax, *nic, *noc; float *ic, *oc;
+int _DSPGetFilter(char *name,char *dname,int ncmax,int*nic,int*noc,float*ic,float*oc)
 {
     strarr cmds[NCMDS];
     FILE *Ffile;
@@ -324,8 +318,8 @@ again:	icmd=_DSPIndexS(cmds,cmd,NCMDS);
 /* _DSPGETHEAD */
 
 char *
-_DSPGetHead(fn) /* return pointer to string equal to fn up to and  */
-char *fn;		/* including the last '/'.			   */ 
+_DSPGetHead(char *fn) /* return pointer to string equal to fn up to and  */
+		/* including the last '/'.			   */
 {
   /* Returns NULL or a malloc'ed string */
     char *h,*e,*o;
@@ -351,8 +345,7 @@ char *fn;		/* including the last '/'.			   */
 
 /* _DSPGETINPUTFILE */
 
-void _DSPGetInputFile(ipp,din)
-FILE **ipp; char *din;
+void _DSPGetInputFile(FILE **ipp,char *din)
 {
     char iname[_DSP_MAX_NAME];
     iname[0] = '\0';		/* Force _DSPGetFile to prompt for filenames */
@@ -380,8 +373,8 @@ FILE **ipp; char *din;
 
 /* #include "dsp/_dsputilities.h" */
 
-int _DSPGetIntStr(s)		/* get integer or _DSP_NOT_AN_INT from string */
-    char **s;			/* input string is chopped to int++ */
+int _DSPGetIntStr(char **s)		/* get integer or _DSP_NOT_AN_INT from string */
+    			/* input string is chopped to int++ */
 {
     int i;
     char *p,*t;
@@ -408,9 +401,7 @@ int _DSPGetIntStr(s)		/* get integer or _DSP_NOT_AN_INT from string */
 
 /* _DSPGETINPUTOUTPUTFILES */
 
-void _DSPGetInputOutputFiles(ipp,opp,din,don)
-FILE **ipp, **opp;
-char *din, *don;
+void _DSPGetInputOutputFiles(FILE **ipp,FILE **opp,char *din,char *don)
 {
     _DSPGetInputFile(ipp,din);
     _DSPGetOutputFile(opp,don);
@@ -423,8 +414,8 @@ char *din, *don;
 
 /* #include "dsp/_dsputilities.h" */
 
-char *_DSPGetLineStr(s)		/* get line from string, including '\n' */
-    char **s;			/* input string is chopped to line++ */
+char *_DSPGetLineStr(char **s)		/* get line from string, including '\n' */
+    			/* input string is chopped to line++ */
 {
     char *p,*t;
     p = t = *s;			/* ptr to 1st char */
@@ -445,8 +436,7 @@ char *_DSPGetLineStr(s)		/* get line from string, including '\n' */
 
 /* _DSPGETOUTPUTFILE */
 
-void _DSPGetOutputFile(opp,don)
-FILE **opp; char *don;
+void _DSPGetOutputFile(FILE **opp,char *don)
 {
     char oname[_DSP_MAX_NAME];
     oname[0] = '\0';	/* Force _DSPGetFile to prompt for filenames */
@@ -470,8 +460,8 @@ FILE **opp; char *don;
 /* _DSPGETSN */
 
 char *
-_DSPGetSN(g,ng) /* get string up to \n from /dev/tty */
-char *g; int ng;	/* At most ng chars are read */
+_DSPGetSN(char *g,int ng) /* get string up to \n from /dev/tty */
+	/* At most ng chars are read */
 {
 #define MAXC 100
 
@@ -526,8 +516,8 @@ char *_DSPGetTail(char *fn)
 
 /* #include "dsp/_dsputilities.h" */
 
-char *_DSPGetTokStr(s)		/* get token or NULL from string */
-    char **s;			/* input string is chopped to token++ */
+char *_DSPGetTokStr(char **s)		/* get token or NULL from string */
+    			/* input string is chopped to token++ */
 {
     char *p,*t;
     if (!s || !*s || !**s) return NULL;
@@ -560,10 +550,7 @@ char *_DSPGetTokStr(s)		/* get token or NULL from string */
 
 #define NOTFOUND	-1
 
-int _DSPIndexS(stra, str, nstr)
-strarr *stra;
-register char *str;
-int nstr;
+int _DSPIndexS(strarr *stra, register char *str, int nstr)
 {
     register int i, lstr; 
     int nhits, ihit=0;
@@ -594,8 +581,7 @@ int nstr;
 
 /* _DSPININT */
 
-int _DSPInInt(def, name)
-int def; char *name;
+int _DSPInInt(int def, char *name)
 {
     int val; 
     char *line;
@@ -626,8 +612,7 @@ int def; char *name;
 /* _DSPMAKEARRAY */
 
 int *
-_DSPMakeArray(size)
-int size;
+_DSPMakeArray(int size)
 {
     int *b;
     b=(int *)malloc(size);
@@ -642,8 +627,7 @@ int size;
 
 /* #include "dsp/_dsputilities.h" */
 
-FILE *_DSPMyFopen(fn,mode)
-    char *fn, *mode;
+FILE *_DSPMyFopen(char *fn,char *mode)
 {
     FILE *fp;
     fp = fopen(fn,mode);
@@ -660,8 +644,8 @@ FILE *_DSPMyFopen(fn,mode)
 
 /* #include "dsp/_dsputilities.h" */
 
-DSP_BOOL _DSPNotBlank(s)		/* test string for whitespace only */
-    char *s;			/* input string */
+DSP_BOOL _DSPNotBlank(char *s)		/* test string for whitespace only */
+    			/* input string */
 {
     return *_DSPSkipWhite(s)!='\0';
 }
@@ -671,11 +655,12 @@ DSP_BOOL _DSPNotBlank(s)		/* test string for whitespace only */
 /*########################### _DSPPadStr.c ###########################*/
 /* _DSPPADSTR */
 
-char *_DSPMakeStr();		/* this lib */
+char *_DSPMakeStr(int size,
+                  char *init);		/* this lib */
 
-char *_DSPPadStr(s,n)  /* pad string to fixed width, right-filled with blanks */
-    char *s;			/* input string */
-    int n;			/* desired minimum width */
+char *_DSPPadStr(char *s,int n)  /* pad string to fixed width, right-filled with blanks */
+    			/* input string */
+    			/* desired minimum width */
 {
     char *p;
     int i;
@@ -708,8 +693,7 @@ char *_DSPPadStr(s,n)  /* pad string to fixed width, right-filled with blanks */
  * by carriage return.
  */
 
-void _DSPParseName(name, dname) 
-char *name, *dname;		
+void _DSPParseName(char *name, char *dname)
 {
     char *nhead, *nbody, *ntail, *dhead, *dbody, *dtail;
     char *ohead, *obody, *otail; 
@@ -772,9 +756,7 @@ char *name, *dname;
 
 /* _DSPPUTFILTER */
 
-void _DSPPutFilter(name, dname, ni, no, ic, oc)
-char *name, *dname; int ni, no;
-float *ic, *oc;
+void _DSPPutFilter(char *name, char *dname, int ni, int no, float *ic, float *oc)
 {
     FILE *fp;
     int i;
@@ -820,8 +802,8 @@ float *ic, *oc;
 /* _DSPREMOVEHEAD */
 
 char *
-_DSPRemoveHead(fn)	/* return pointer to string equal to fn after	*/
-char *fn;		/* the last '/'. If there is no '/',		*/ 
+_DSPRemoveHead(char *fn)	/* return pointer to string equal to fn after	*/
+		/* the last '/'. If there is no '/',		*/
 {			/* return the whole string			*/
   /* Returns NULL or a malloc'ed string */
     char *h,*e,*o;
@@ -852,8 +834,8 @@ char *fn;		/* the last '/'. If there is no '/',		*/
 /* _DSPREMOVETAIL */
 
 char *
-_DSPRemoveTail(fn)  /* return pointer to string equal to fn up to 1st "." */
-char *fn;	   /* The '.' is not appended to the string.		 */
+_DSPRemoveTail(char *fn)  /* return pointer to string equal to fn up to 1st "." */
+	   /* The '.' is not appended to the string.		 */
 {		   /*  If there is no "." return the whole string	 */
     char *m,*head;
     char *s;
@@ -875,11 +857,7 @@ char *fn;	   /* The '.' is not appended to the string.		 */
 /*########################### _DSPSaveMatD.c ###########################*/
 /* _DSPSaveMatD.c - Save double matrix in matlab binary ".mat" format */
 
-int _DSPSaveMatD(mrows,ncols,imagf,name,rpart,ipart,fp)
-	int mrows,ncols,imagf;
-	char *name;
-	double rpart[],ipart[];
-	FILE *fp;
+int _DSPSaveMatD(int mrows, int ncols, int imagf, char *name, double rpart[], double ipart[], FILE *fp)
 {
 	int wtflg;
 /* 
@@ -934,8 +912,8 @@ int _DSPSaveMatD(mrows,ncols,imagf,name,rpart,ipart,fp)
 	  usererr(wtflg=1,
 		  DSPCat("savemat: could not write header of file:",name));
 /* Write name */
-	if (trace > 4) fprintf(stderr,"\t matrix name is %s = %o\n",
-			       name, (unsigned int)name);
+    if (trace > 4) fprintf(stderr,"\t matrix name is %s = %zo\n",
+			       name, (size_t)name);
 /*   nw = fwrite(name,sizeof(*name),nl+1,fp);
  *	if (nw != nl+1) usererr(wtflg=1,"savemat: could not write name");
  */
@@ -981,8 +959,8 @@ int _DSPSezYes()
 /*########################### _DSPSkipToWhite.c ###########################*/
 /* _DSPSKIPTOWHITE */
 
-char *_DSPSkipToWhite(s)		/* skip to first white space */
-    char *s;			/* input string */
+char *_DSPSkipToWhite(char *s)		/* skip to first white space */
+    			/* input string */
 {
     while(*s!='\t'&&*s!=' '&&*s!='\n'&&*s) s++;
     return s;
@@ -993,8 +971,8 @@ char *_DSPSkipToWhite(s)		/* skip to first white space */
 /*########################### _DSPSkipWhite.c ###########################*/
 /* _DSPSKIPWHITE */
 
-char *_DSPSkipWhite(s)		/* skip past white space */
-    char *s;			/* input string */
+char *_DSPSkipWhite(char *s)		/* skip past white space */
+    			/* input string */
 {
     while((*s=='\t'||*s==' '||*s=='\n')&&*s) s++;
     return s;
@@ -1016,7 +994,6 @@ char *_DSPFirstReadableFile(char *fn,...)  {
     char* nfn;			/* next name to try */
     int nExts;
     int i;
-    extern int access();
 
     va_start(ap,fn);
 
@@ -1062,9 +1039,9 @@ char *_DSPFirstReadableFile(char *fn,...)  {
 /* _DSPGetMemStr.c */
 /*#################### _DSPGetMemStr.c ######################*/
 
-DSPLocationCounter _DSPGetMemStr(s,type) /* get DSP memory type from string or DSP_LC_N */
-    char **s;		/* input string is lopped */
-    char *type;		/* "A" for absolute section, "R" for relative */
+DSPLocationCounter _DSPGetMemStr(char **s,char *type) /* get DSP memory type from string or DSP_LC_N */
+    		/* input string is lopped */
+    		/* "A" for absolute section, "R" for relative */
 {
     char *t,*saveT;
     int space,ctr=0;

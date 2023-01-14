@@ -16,7 +16,7 @@
 #define __SNDENVELOPE_H__
 
 #import <Foundation/Foundation.h>
-#import "SndBreakpoint.h"
+#import <SndKit/SndBreakpoint.h>
 
 #define BP_NOT_FOUND (-1)
 

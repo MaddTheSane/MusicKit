@@ -18,7 +18,7 @@ Modification history:
 #import "MKPartRecorder.h"
 
 /* Takes 2 args. Should be converted into a prototype. */
-extern void _MKSetScoreRecorderOfPartRecorder();
+extern void _MKSetScoreRecorderOfPartRecorder(MKPartRecorder *aPR, id aSR);
 
 
 

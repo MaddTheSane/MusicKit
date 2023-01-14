@@ -32,12 +32,12 @@
 	return tadList;
 }
 
-- (void)newDoc:sender
+- (IBAction)newDoc:sender
 {
      
 }
 
-- (void)openDoc:sender
+- (IBAction)openDoc:sender
 {
 	NSArray *fileTypes = [NSArray arrayWithObjects: @"score", @"playscore", nil];
         NSString *errorMsg = @"Can't find scorefile ";
@@ -52,7 +52,7 @@
 		return;
 	aScore = [[MKScore alloc] init];
 	if (![aScore readScorefile:[openPanel filename]]) {
-		NSRunAlertPanel(@"PianoRoll", [errorMsg stringByAppendingString: [openPanel filename]], @"OK", nil, nil);
+		NSRunAlertPanel(@"PianoRoll", @"%@", @"OK", nil, nil, [errorMsg stringByAppendingString: [openPanel filename]]);
 		return;
 	}
 	if ([[aScore parts] count] == 0) {
@@ -66,7 +66,7 @@
 	[docList addObject:newDoc]; 
 }
 
-- (void)saveDocAs:sender
+- (IBAction)saveDocAs:sender
 {
         MKScore *aScore;
 	
@@ -82,7 +82,7 @@
 	[aScore writeScorefile:[savePanel filename]]; 
 }
 
-- (void)play:sender 
+- (IBAction)play:sender
 {
 	MKScore *aScore;
 	
@@ -93,13 +93,13 @@
 	} 
 }
 
-- (void)stopPlay:sender
+- (IBAction)stopPlay:sender
 {
 	[scorePlayer stop];
 }
 
 
-- (void)saveDoc:sender
+- (IBAction)saveDoc:sender
 {
 	Document *aDoc;
 	
@@ -109,7 +109,7 @@
 	[[aDoc whatScore] writeScorefile:[aDoc name]];
 }
 
-- (void)closeDoc:sender
+- (IBAction)closeDoc:sender
 {
 	id aDoc;
 	
@@ -120,14 +120,14 @@
 	[[aDoc whatScore] release];
 }
 
-- (void) showInfo: sender
+- (IBAction) showInfo: sender
 {
     if (!infoPanel) /* or some reason the info panel does not load as simply "Info" */
 	    [NSBundle loadNibNamed: @"Info-macosx" owner: self];
     [infoPanel makeKeyAndOrderFront: self]; 
 }
 
-- (void) showHelp: sender
+- (IBAction) showHelp: sender
 {
     if (!helpPanel)
 	    [NSBundle loadNibNamed: @"Help-macosx" owner: self];

@@ -15,7 +15,7 @@
 #import <Foundation/Foundation.h>
 //#import <SndKit/SndKit.h>
 // TODO while not within the SndKit framework.
-#import "SndAudioProcessor.h"
+#import <SndKit/SndAudioProcessor.h>
 #import <AudioUnit/AudioUnit.h>
 
 /*!
