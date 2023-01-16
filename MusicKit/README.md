@@ -1192,6 +1192,11 @@ SineGen
 
 :   Interactively adjust the frequency of a sine wave.
 
+To Do {#todo}
+=====
+* *Modernize!* A lot of the code still follows coding conventions from NeXTStep, which don't fit too well with Swift.
+* Error handling: `NSError` was introduced in Mac OS X 10.2, well after MusicKit was written. As such, a lot of error handling is done by exceptions (which Swift does not like) or through `errno`.
+        
 What works? {#works}
 ===========
 
