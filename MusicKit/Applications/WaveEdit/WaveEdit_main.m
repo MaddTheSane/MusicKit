@@ -4,12 +4,6 @@
 
 #import <appkit/appkit.h>
 
-void main(int argc, char *argv[]) {
-
-    [Application new];
-    if ([NXApp loadNibSection:"WaveEdit.nib" owner:NXApp withNames:NO])
-	    [NXApp run];
-	    
-    [NXApp free];
-    exit(0);
+int main(int argc, const char *argv[]) {
+	return NSApplicationMain(argc, argv);
 }

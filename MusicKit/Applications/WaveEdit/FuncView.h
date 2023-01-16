@@ -99,12 +99,12 @@
 // This method double the current ratio (size of FuncTable / size of the View);
 // It doesn't do anything if the FuncView object is not used in a scrollView.
 
--zoomIn:sender;
+-(IBAction)zoomIn:sender;
 
 // This method halves the current ratio (size of FuncTable / size of the View);
 // It doesn't do anything if the FuncView object is not used in a scrollView.
 
--zoomOut:sender;
+-(IBAction)zoomOut:sender;
 
 // Use this method to make the FuncView object editable (flag = YES) or not (flag = NO) 
 // The default mode is editable;

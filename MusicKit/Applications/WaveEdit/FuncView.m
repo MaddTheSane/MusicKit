@@ -8,7 +8,7 @@
 #define over(X) ratio * ((int) ceil((X)/ratio))
 #define BORDER 12.
 
-#import <appkit/timer.h>
+#import <Foundation/NSTimer.h>
 
 @implementation FuncView
 
@@ -43,25 +43,25 @@
 
 -setScrollView:anObject
 {
-    if([anObject class] != [ScrollView class]) return self;
+    if([anObject class] != [NSScrollView class]) return self;
     scrollable = YES;
     scrollView = anObject;
     [self removeFromSuperview];
-    [scrollView setDocView:self];
-    [scrollView setHorizScrollerRequired:YES];
-    [scrollView setBorderType:NX_LINE];
+    [scrollView setDocumentView:self];
+    [scrollView setHasHorizontalScroller:YES];
+    [scrollView setBorderType:NSLineBorder];
     [scrollView display];
     return self;
 }
     
 
 
-- drawSelf:(NXRect *) rect : (int) rectCount
+- drawSelf:(NSRect *) rect : (int) rectCount
 {
     int i;
 
     NXRectClip(&clip);    
-    NXEraseRect(rect);
+    NSEraseRect(rect);
     PSsetgray(NX_BLACK);
     
     if(displayMode == CONTINUOUS || ratio == 1)

@@ -1,7 +1,7 @@
 #import "Wave.h"
-#import <musickit/musickit.h> 
-#import <musickit/unitgenerators/unitgenerators.h> 
-#import <musickit/synthpatches/Wave1vi.h>
+#import <MusicKit/MusicKit.h>
+//#import <MKUnitGenerators/MKUnitGenerators.h>
+//#import <musickit/synthpatches/Wave1vi.h>
 
 #define LOG10 2.3025
 #define MAXVALUE 0.9
@@ -14,7 +14,7 @@
     return self;
 }
 
-#define SEND_DSP_CMDS() [Orchestra flushTimedMessages] 
+#define SEND_DSP_CMDS() [MKOrchestra flushTimedMessages]
 /* This is a noop if sound is off (the DSP is closed.) */
 
 - stopSound
@@ -37,14 +37,14 @@
      */
     if ([anOrch deviceStatus] != MK_devClosed) /* Should never happen */
       return self;
-    anOrch = [Orchestra new];
+    anOrch = [MKOrchestra new];
     [anOrch setSamplingRate:44100];
     [anOrch setFastResponse:YES];	
     [anOrch setTimed:NO];
     if (![anOrch open]) {
-	NXRunAlertPanel("WaveDraw","Can't open DSP."
-			"Some other application must be using it.",
-			"OK",NULL,NULL);
+	NSRunAlertPanel(@"WaveDraw",@"Can't open DSP."
+			@"Some other application must be using it.",
+			@"OK",NULL,NULL);
 	return nil;
     }
     
@@ -84,16 +84,15 @@
     pvibFrq = 4.5;
     pvib = .01;
     rvib = .008;
-    aNote = [[Note alloc] init];
+    aNote = [[MKNote alloc] init];
     [self sine:self];
     return self;
 }
 
-- mouseDown:(NXEvent *) anEvent
+- (void)mouseDown:(NSEvent *) anEvent
 {
     [fftView storeCurrent:self];
     [super mouseDown:anEvent];
-    return self;
 }
 
 - sawTooth:sender

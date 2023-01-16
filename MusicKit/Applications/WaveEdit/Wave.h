@@ -7,10 +7,12 @@
 #import "FFTControl.h"
 #import <appkit/appkit.h>	
 
+@class MKOrchestra;
+
 @interface Wave:FuncView
 {
     id fftView;
-    id anOrch;
+	MKOrchestra *anOrch;
     id aSP;
     id tableLook;	        /* Lookup Table*/
     id aNote;

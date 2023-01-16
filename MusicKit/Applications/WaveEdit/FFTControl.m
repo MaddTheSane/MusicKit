@@ -480,9 +480,8 @@ static id savePanel = nil;
 	[savePanel setAccessoryView:accessoryView];
     }
     if (!useDefault || !strlen(outputFilePath)) {
-	[savePanel setRequiredFileType:"score"];
-	[NXApp setAutoupdate:NO];
-	flag = [savePanel runModalForDirectory:outputFileDir file:outputFileName]; 
+	[savePanel setRequiredFileType:@"score"];
+	flag = [savePanel runModalForDirectory:outputFileDir file:outputFileName];
 	if (!flag)
 	  return self;
 	strcpy(outputFilePath,[savePanel filename]);
@@ -492,7 +491,7 @@ static id savePanel = nil;
       return nil;
     fp = fopen(outputFilePath,"w");
     if (!fp) {
-	NXRunAlertPanel("WaveEdit","Can't open file %s.","OK",NULL,NULL,
+	NSRunAlertPanel(@"WaveEdit",@"Can't open file %s.",@"OK",NULL,NULL,
 			outputFilePath);
 	outputFilePath[0] = '\0';
 	free(s);
@@ -504,7 +503,6 @@ static id savePanel = nil;
 	    s);
     fclose(fp);
     free(s);
-    [NXApp setAutoupdate:YES];
     return self;
 }
 
@@ -611,7 +609,7 @@ static char *getNum(char *p,char *pEnd,float *rtn)
     [pboard readType:NXAsciiPboardType data:&data length:&length];
     l = dataLength/2;
     if (!length)
-      NXBeep();
+      NSBeep();
     p = data;
     pEnd = data + length;
     p = eatWhiteSpace(p,pEnd);
