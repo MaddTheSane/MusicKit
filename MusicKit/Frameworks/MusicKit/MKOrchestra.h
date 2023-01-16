@@ -883,8 +883,6 @@ extern void MKSetPreemptDuration(double seconds);
 */
 - (char) fastResponse;
 
-+ (void)setAbortNotification:aDelegate;
-
 /*!
   @brief Sets the offset, in seconds, that's added to the timestamps of
   commands sent to the receiver's DSP.

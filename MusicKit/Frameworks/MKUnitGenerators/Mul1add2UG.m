@@ -10,7 +10,7 @@ Modification history:
 #import <MusicKit/MusicKit.h>
 #import "Mul1add2UG.h"
 #import "_unitGeneratorInclude.h"
-@implementation Mul1add2UG:MKUnitGenerator
+@implementation Mul1add2UG
 { /* Instance variables go here */
 }
 

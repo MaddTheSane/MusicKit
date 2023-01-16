@@ -114,13 +114,13 @@ movements, then insert it into the SndAudioProcessorChain later.
 @interface SndAudioFader : SndAudioProcessor
 {
   /*! Class object used in initialising new envelopes*/  
-  id     envClass; 
+  Class     envClass;
   /*! */  
-  id     <SndEnveloping, NSObject> ampEnv;
+  id     <SndEnveloping> ampEnv;
   /*! */  
   float  staticAmp;
   /*! */  
-  id     <SndEnveloping,NSObject> balanceEnv;
+  id     <SndEnveloping> balanceEnv;
   /*! */  
   float  staticBalance;
 
@@ -158,7 +158,7 @@ movements, then insert it into the SndAudioProcessorChain later.
     All future envelope objects created by SndAudioFader will use the new class.
     @param aClass The alternative class to set.
 */
-+ (void) setEnvelopeClass: (id) aClass;
++ (void) setEnvelopeClass: (Class) aClass;
 
 /*!
   @brief Returns the class of the internal envelope objects.
@@ -167,7 +167,9 @@ movements, then insert it into the SndAudioProcessorChain later.
   envelopes directly, but returns the stored class object used for creating future envelopes.
   @return &lt;SndEnveloping&gt; (a class conforming to the SndEnveloping protocol)
 */
-+ (id) envelopeClass;
++ (Class) envelopeClass;
+
+@property (class, assign) Class envelopeClass;
 
 /*!
     @brief Sets the class object used for the internal amplitude and balance envelopes.
@@ -180,7 +182,7 @@ movements, then insert it into the SndAudioProcessorChain later.
     @param aClass The alternative class to set.
     @return void
 */
-- (void) setEnvelopeClass: (id) aClass;
+- (void) setEnvelopeClass: (Class) aClass;
 
 /*!
   @brief Returns the class of the internal envelope objects.
@@ -189,7 +191,9 @@ movements, then insert it into the SndAudioProcessorChain later.
   envelopes directly, but returns the stored class object used for creating future envelopes.
   @return instance&lt;SndEnveloping&gt; (a class conforming to the SndEnveloping protocol)
 */
-- (id) envelopeClass;
+- (Class) envelopeClass;
+
+@property (nonatomic, assign) Class envelopeClass;
 
 /*
  * "instantaneous" getting and setting; applies from start of buffer
@@ -211,7 +215,7 @@ movements, then insert it into the SndAudioProcessorChain later.
     @param clear If TRUE, discard any future scheduled balance events.
     @return Returns self.
 */
-- setBalance: (float) newBalance clearingEnvelope: (BOOL) clear;
+- (void) setBalance: (float) newBalance clearingEnvelope: (BOOL) clear;
 
 /*!
     @brief Returns the balance value as of the start of the currently running, or next buffer.
@@ -231,7 +235,7 @@ movements, then insert it into the SndAudioProcessorChain later.
     @param clear If TRUE, discard any future scheduled amp events.
     @return self
 */
-- setAmp: (float) amp clearingEnvelope:(BOOL)clear;
+- (void) setAmp: (float) amp clearingEnvelope:(BOOL)clear;
 
 /*!
     @brief Returns the amplitude value of all channels as of the start of the currently running, or next buffer.
@@ -254,7 +258,7 @@ movements, then insert it into the SndAudioProcessorChain later.
   @param atTime (double) the time at which to insert the new balance value
   @return self
 */
-- setBalance:(float)balance atTime:(double)atTime;
+- (void) setBalance:(float)balance atTime:(NSTimeInterval)atTime;
 
 /*!
     @brief Returns the scheduled balance value for the given time.
@@ -277,7 +281,7 @@ movements, then insert it into the SndAudioProcessorChain later.
   @param atTime (double) the time at which to insert the new amp value
   @return self
 */
-- setAmp: (float) amp atTime: (double) atTime;
+- (void) setAmp: (float) amp atTime: (NSTimeInterval) atTime;
 
 /*!
     @brief Returns the scheduled amp value for the given time.
@@ -286,7 +290,7 @@ movements, then insert it into the SndAudioProcessorChain later.
     @param atTime (double) the time for which to return the amp value
     @return float any valid amplitude multiplier (usually 0.0 to 1.0)
 */
-- (float) getAmpAtTime: (double) atTime;
+- (float) getAmpAtTime: (NSTimeInterval) atTime;
 
 /*!
   @brief Creates an amplitude ramp for a given time in the future.
@@ -303,8 +307,8 @@ movements, then insert it into the SndAudioProcessorChain later.
 */
 - (BOOL) rampAmpFrom:(float)startRampLevel
                   to:(float)endRampLevel
-           startTime:(double)startRampTime
-             endTime:(double)endRampTime;
+           startTime:(NSTimeInterval)startRampTime
+             endTime:(NSTimeInterval)endRampTime;
 
 /*!
     @brief Creates a balance ramp for a given time in the future.
@@ -323,8 +327,8 @@ movements, then insert it into the SndAudioProcessorChain later.
 */
 - (BOOL) rampBalanceFrom:(float)startRampLevel
                       to:(float)endRampLevel
-               startTime:(double)startRampTime
-                 endTime:(double)endRampTime;
+               startTime:(NSTimeInterval)startRampTime
+                 endTime:(NSTimeInterval)endRampTime;
 
 /*!
   @brief Retrieve the value of the indexed parameter.

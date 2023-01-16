@@ -18,7 +18,7 @@
 #define M_PI            3.14159265358979323846  /* pi */
 #endif
 
-static id ENVCLASS=nil;
+static Class ENVCLASS=nil;
 
 static SEL bpBeforeOrEqualSel;
 static SEL bpAfterSel;
@@ -43,19 +43,19 @@ static SEL xForBpSel;
 @implementation SndAudioFader
 
 /* forward decl */
-static float lookupEnvForX(SndAudioFader *saf, id <SndEnveloping, NSObject> anEnvelope, double theX);
+static float lookupEnvForX(SndAudioFader *saf, id <SndEnveloping> anEnvelope, double theX);
 
-+ (void)setEnvelopeClass:(id)aClass
++ (void)setEnvelopeClass:(Class)aClass
 {
   ENVCLASS = aClass;
 }
 
-+ (id) envelopeClass
++ (Class) envelopeClass
 {
   return ENVCLASS;
 }
 
-- (void) setEnvelopeClass: (id) aClass
+- (void) setEnvelopeClass: (Class) aClass
 {
   envClass = aClass;
   bpBeforeOrEqual = (BpBeforeOrEqualIMP) [envClass instanceMethodForSelector: bpBeforeOrEqualSel];
@@ -66,10 +66,7 @@ static float lookupEnvForX(SndAudioFader *saf, id <SndEnveloping, NSObject> anEn
   xForBp = (XForBpIMP) [envClass instanceMethodForSelector: xForBpSel];
 }
 
-- (id) envelopeClass
-{
-  return envClass;
-}
+@synthesize envelopeClass=envClass;
 
 + (void) initialize
 {
@@ -87,7 +84,7 @@ static float lookupEnvForX(SndAudioFader *saf, id <SndEnveloping, NSObject> anEn
 }
 
 // initWithParamCount:name: is the designated initializer for SndAudioProcessor.
-- initWithParamCount: (const int) paramCount name: (NSString *) faderName
+- initWithParamCount: (NSInteger) paramCount name: (NSString *) faderName
 {
     self = [super initWithParamCount: faderNumParams name: @"Fader"];
     if (self) {
@@ -107,7 +104,7 @@ static float lookupEnvForX(SndAudioFader *saf, id <SndEnveloping, NSObject> anEn
 /*
  * "instantaneous" getting and setting; applies from start of buffer
  */
-- setBalance: (float) balance clearingEnvelope: (BOOL) clear
+- (void) setBalance: (float) balance clearingEnvelope: (BOOL) clear
 {
   double nowTime;
   if (clear) {
@@ -118,7 +115,7 @@ static float lookupEnvForX(SndAudioFader *saf, id <SndEnveloping, NSObject> anEn
       [balanceEnvLock unlock];
     }
     staticBalance = balance;
-    return self;
+    return;
   }
   /* if there's an envelope there, keep it and insert new value */
   if (balanceEnv) {
@@ -126,7 +123,6 @@ static float lookupEnvForX(SndAudioFader *saf, id <SndEnveloping, NSObject> anEn
     [self setBalance: balance atTime: nowTime];
   }
   staticBalance = balance;
-  return self;
 }
 
 - (float) getBalance
@@ -143,7 +139,7 @@ static float lookupEnvForX(SndAudioFader *saf, id <SndEnveloping, NSObject> anEn
   return yVal;
 }
 
-- setAmp: (float) amp clearingEnvelope: (BOOL) clear
+- (void) setAmp: (float) amp clearingEnvelope: (BOOL) clear
 {
   double nowTime;
   if (clear) {
@@ -154,7 +150,7 @@ static float lookupEnvForX(SndAudioFader *saf, id <SndEnveloping, NSObject> anEn
     }
     [ampEnvLock unlock];
     staticAmp = amp;
-    return self;
+    return;
   }
   /* if there's an envelope there, keep it and insert new value */
   if (ampEnv) {
@@ -162,7 +158,6 @@ static float lookupEnvForX(SndAudioFader *saf, id <SndEnveloping, NSObject> anEn
     [self setAmp: amp atTime: nowTime];
   }
   staticAmp = amp;
-  return self;
 }
 
 - (float) getAmp
@@ -368,7 +363,7 @@ BOOL middleOfMovement(SndAudioFader *saf, double xVal, id <SndEnveloping,NSObjec
   }
 }
 
-- setBalance: (float) balance atTime: (double) atTime
+- (void) setBalance: (float) balance atTime: (double) atTime
 {
   [balanceEnvLock lock];
   if (!balanceEnv) {
@@ -379,7 +374,6 @@ BOOL middleOfMovement(SndAudioFader *saf, double xVal, id <SndEnveloping,NSObjec
                              yVal:balance
                              xVal:atTime];
   [balanceEnvLock unlock];
-  return self;
 }
 
 - (float) getBalanceAtTime: (double) atTime
@@ -392,7 +386,7 @@ BOOL middleOfMovement(SndAudioFader *saf, double xVal, id <SndEnveloping,NSObjec
   return yVal;
 }
 
-- setAmp: (float) amp atTime: (double) atTime
+- (void) setAmp: (float) amp atTime: (double) atTime
 {
   [ampEnvLock lock];
   if (!ampEnv) {
@@ -402,7 +396,6 @@ BOOL middleOfMovement(SndAudioFader *saf, double xVal, id <SndEnveloping,NSObjec
                              yVal:amp
                              xVal:atTime];
   [ampEnvLock unlock];
-  return self;
 }
 
 - (float) getAmpAtTime: (double) atTime
@@ -472,7 +465,7 @@ BOOL middleOfMovement(SndAudioFader *saf, double xVal, id <SndEnveloping,NSObjec
     }
 }
 
-static float lookupEnvForX(SndAudioFader *saf, id <SndEnveloping, NSObject> anEnvelope, double theX)
+static float lookupEnvForX(SndAudioFader *saf, id <SndEnveloping> anEnvelope, double theX)
 {
   //    int prevBreakpoint = [anEnvelope breakpointIndexBeforeOrEqualToX:theX];
   int prevBreakpoint = saf->bpBeforeOrEqual(anEnvelope,bpBeforeOrEqualSel,theX);

@@ -154,8 +154,8 @@ static NSMutableArray *fxClassesArray = nil;
 
 - (NSString *) description
 {
-    return [NSString stringWithFormat: @"%@ %@ %@ params:%i",
-	[super description], name, active ? @"(active)" : @"(inactive)", numParams];
+    return [NSString stringWithFormat: @"%@ %@ %@ params:%li",
+            [super description], name, active ? @"(active)" : @"(inactive)", (long)numParams];
 }
 
 ////////////////////////////////////////////////////////////////////////////////

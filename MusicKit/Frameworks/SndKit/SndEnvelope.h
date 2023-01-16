@@ -64,7 +64,7 @@
   as they need to allow for BP_NOT_FOUND, which can returned by
   the -breakpointIndex... methods as an error value.
 */
-@protocol SndEnveloping
+@protocol SndEnveloping <NSObject>
 
 //- (double)lookupYForXAsymptotic:(double)xVal;
 

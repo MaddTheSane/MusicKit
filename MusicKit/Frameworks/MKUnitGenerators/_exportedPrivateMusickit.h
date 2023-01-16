@@ -53,10 +53,10 @@ extern _MKClassLoaded _MKSamplesClass;
 extern _MKClassLoaded _MKPartialsClass;
 extern _MKClassLoaded _MKConductorClass;
 
-extern id _MKCheckClassEnvelope() ;
-extern id _MKCheckClassConductor();
-extern id _MKCheckClassSamples();
-extern id _MKCheckClassPartials();
+extern id _MKCheckClassEnvelope(void) ;
+extern id _MKCheckClassConductor(void);
+extern id _MKCheckClassSamples(void);
+extern id _MKCheckClassPartials(void);
 
 #define _MKClassSamples() \
   ((_MKSamplesClass.alreadyChecked) ? _MKSamplesClass.aClass : \
@@ -82,7 +82,7 @@ extern void _MKEndUGBlock(void);
 extern void _MKOrchTrace(id orch,int typeOfInfo,char * fmt, ...);
 extern unsigned _MKTraceFlag;
 #define _MKTrace() _MKTraceFlag
-extern FILE *_MKGetOrchSimulator();
+extern FILE *_MKGetOrchSimulator(MKOrchestra *orch);
 #define _MK_ORCHTRACE(_orch,_debugFlag) \
   ((_MKTraceFlag & _debugFlag) || (_MKGetOrchSimulator(_orch)))
 

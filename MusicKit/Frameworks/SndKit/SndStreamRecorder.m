@@ -94,7 +94,7 @@
     if ([recorder isRecording]) {
 	SndAudioBuffer *inBuffer = [self synthInputBuffer];  
 	if ([recorder framesRecorded] == 0) {
-	    if (delegate != nil && [delegate respondsToSelector: @selector(didStartRecording)]) 
+            if ([delegate respondsToSelector: @selector(didStartRecording:)]) 
 		[delegate didStartRecording: self];
 	}
 	[recorder processReplacingInputBuffer: inBuffer outputBuffer: nil];

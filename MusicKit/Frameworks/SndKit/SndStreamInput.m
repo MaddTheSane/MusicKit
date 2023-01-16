@@ -106,7 +106,7 @@
 
 	// This probably is only ever true once, at the first run, not on each record.
 	if ([self synthesisTime] == 0) {
-	    if (delegate != nil && [delegate respondsToSelector: @selector(didStartReceivingInput)]) 
+            if ([delegate respondsToSelector: @selector(didStartReceivingInput:)]) 
 		[delegate didStartReceivingInput: self];
 	}
 	if(wholeInputBufferRange.length > outputBufferRange.length) {
