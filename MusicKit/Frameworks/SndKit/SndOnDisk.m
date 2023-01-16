@@ -76,9 +76,9 @@
 // readSoundfile:startFrame:frameCount:
 ////////////////////////////////////////////////////////////////////////////////
 
-- (int) readSoundfile: (NSString *) filename startFrame: (int) startFrame frameCount: (int) frameCount
+- (SndError) readSoundfile: (NSString *) filename startFrame: (int) startFrame frameCount: (int) frameCount
 {
-    int err = SND_ERR_NONE;
+    SndError err = SND_ERR_NONE;
     NSDictionary *fileAttributeDictionary;
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
@@ -118,7 +118,7 @@
 // readSoundfile:
 ////////////////////////////////////////////////////////////////////////////////
 
-- (int) readSoundfile: (NSString*) filename
+- (SndError) readSoundfile: (NSString*) filename
 {
     if (theFileName)
 	[theFileName release];
@@ -284,25 +284,21 @@ BOOL subRangeIsInsideSuperRange(NSRange subR, NSRange superR)
     return [ab autorelease];
 }
 
-- (NSString*) filename
-{
-    return [[theFileName retain] autorelease];
-}
+@synthesize filename=theFileName;
 
 ////////////////////////////////////////////////////////////////////////////////
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-- requestNextBufferWithRange: (NSRange) range
+- (void)requestNextBufferWithRange: (NSRange) range
 {
     SndOnDiskAudioBufferServerJob *aJob;
     aJob = [SndOnDiskAudioBufferServerJob alloc];
     [aJob initWithSndOnDisk: self bufferRange: range];
     [[SndOnDiskAudioBufferServer defaultServer] addJob: aJob];
-    return self;
 }
 
-- receiveRequestedBuffer: (SndAudioBuffer*) aBuffer
+- (void)receiveRequestedBuffer: (SndAudioBuffer*) aBuffer
 {
     [readAheadLock lock];
     if (readAheadBuffer != nil)
@@ -312,7 +308,6 @@ BOOL subRangeIsInsideSuperRange(NSRange subR, NSRange superR)
 #if SERVER_DEBUG              
     NSLog(@"Received Buffer with range: [%i, %i]",readAheadRange.location, readAheadRange.length);
 #endif      
-    return self;
 }
 
 @end
@@ -330,7 +325,10 @@ static SndOnDiskAudioBufferServer *defaultServer = nil;
 
 + (void) initialize
 {
-    defaultServer = [SndOnDiskAudioBufferServer new];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        defaultServer = [SndOnDiskAudioBufferServer new];
+    });
 }
 
 + defaultServer
@@ -341,9 +339,9 @@ static SndOnDiskAudioBufferServer *defaultServer = nil;
 + (SndAudioBuffer *) readRange: (NSRange) range ofSoundFile: (NSString*) theFileName
 {
     Snd *soundChunk = [[Snd alloc] init];
-    int err = [soundChunk readSoundfile: theFileName 
-							 startFrame: range.location
-			                 frameCount: range.length];
+    SndError err = [soundChunk readSoundfile: theFileName
+                                  startFrame: range.location
+                                  frameCount: range.length];
     
     if (err == SND_ERR_NONE) {
 		NSRange wholeSound = { 0, range.length };
@@ -398,14 +396,15 @@ static SndOnDiskAudioBufferServer *defaultServer = nil;
     unsigned long lengthInSampleFrames = [snd lengthInSampleFrames];
     SndAudioBuffer *aBuffer = nil;
     
-    if (r.location + r.length > [snd lengthInSampleFrames])
-		r.length = lengthInSampleFrames - r.location;
+    if (r.location + r.length > [snd lengthInSampleFrames]) {
+	r.length = lengthInSampleFrames - r.location;
+    }
     
     aBuffer = [SndOnDiskAudioBufferServer readRange: [aJob range]
-									  ofSoundFile: [snd filename]];
+					ofSoundFile: [snd filename]];
     
     if ([aBuffer lengthInSampleFrames] < requestedLength)
-		[aBuffer setLengthInSampleFrames: requestedLength];
+	[aBuffer setLengthInSampleFrames: requestedLength];
     
     [snd receiveRequestedBuffer: aBuffer];
     [aJob release];
@@ -449,7 +448,7 @@ static SndOnDiskAudioBufferServer *defaultServer = nil;
 
 @implementation SndOnDiskAudioBufferServerJob 
 
-- initWithSndOnDisk: (SndOnDisk*) sndExpt bufferRange: (NSRange) range
+- (id)initWithSndOnDisk: (SndOnDisk*) sndExpt bufferRange: (NSRange) range
 {
     self = [super init];
     if (self) {
@@ -469,9 +468,9 @@ static SndOnDiskAudioBufferServer *defaultServer = nil;
     [super dealloc];
 }
 
-- (SndOnDisk *) snd            { return [[clientSndOnDisk retain] autorelease]; }
-- (NSRange) range           { return audioBufferRange; }
-- (SndAudioBuffer *) buffer  { return [[audioBuffer retain] autorelease]; }
+@synthesize snd=clientSndOnDisk;
+@synthesize range=audioBufferRange;
+@synthesize buffer=audioBuffer;
 
 @end
 

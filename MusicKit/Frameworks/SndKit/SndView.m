@@ -532,23 +532,23 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 {
     SndDisplayData *currentCacheObject;	
     /* for working through caching: */
-    int cacheIndex;
-    int currStartPoint = startX;
+    NSInteger cacheIndex;
+    NSInteger currStartPoint = startX;
     
     // Main cache loop
     while (currStartPoint <= endX) {
-	int nextCache;
-	int localMax;
-	int leadsOnFrom;
+	NSInteger nextCache;
+	NSInteger localMax;
+	NSInteger leadsOnFrom;
 	
 	/* following returns leadsOnFrom == YES iff cacheIndex == -1 && (currStartPoint - 1) is in previous cache */
 	cacheIndex = [dataList findObjectContaining: currStartPoint
 					       next: &nextCache 
 					leadsOnFrom: &leadsOnFrom];
 	
-	if (cacheIndex != -1) { // Copy the dataList cached pixel data into the current cache
+	if (cacheIndex != NSNotFound) { // Copy the dataList cached pixel data into the current cache
 	    // int frameIndex;
-	    int numToMove, cachedStart;
+	    NSInteger numToMove, cachedStart;
 	    float *maxVals, *minVals;
 	    
 	    // NSLog(@"Using cached data %d\n", cacheIndex);
@@ -575,7 +575,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 	}
 	else {
 	    // NSLog(@"couldn't find cached data at currStartPoint %d, endX = %d\n", currStartPoint, endX);
-	    if (nextCache != -1) {
+	    if (nextCache != NSNotFound) {
 		localMax = [[(NSMutableArray *) dataList objectAtIndex: nextCache] startPixel] - 1;
 		if (localMax > endX)
 		    localMax = endX;
@@ -595,13 +595,13 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 	    // Increase currStartPoint
 	    // Continue...
 
-	    if (leadsOnFrom != -1) { /* we have calculated a new region which exactly appends an existing cache */
+	    if (leadsOnFrom != NSNotFound) { /* we have calculated a new region which exactly appends an existing cache */
 		SndDisplayData *cacheToExtend = (SndDisplayData *) [(NSMutableArray *) dataList objectAtIndex: leadsOnFrom];
 		
-		[cacheToExtend addPixelDataMax: &cacheMaxArray[currStartPoint - startX]
-					   min: &cacheMinArray[currStartPoint - startX]
-					 count: localMax - currStartPoint + 1
-					  from: [cacheToExtend endPixel] + 1];
+                [cacheToExtend addPixelDataToMax: &cacheMaxArray[currStartPoint - startX]
+                                           toMin: &cacheMinArray[currStartPoint - startX]
+                                           count: localMax - currStartPoint + 1
+                                       fromIndex: [cacheToExtend endPixel] + 1];
 		// NSLog(@"adding to cache: from %d count %d\n", [cacheToExtend endPixel] + 1, localMax - currStartPoint + 1);
 	    }
 	    else {
@@ -610,7 +610,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 		[newCache setPixelDataMax: &cacheMaxArray[currStartPoint - startX]
 				      min: &cacheMinArray[currStartPoint - startX]
 				    count: localMax - currStartPoint + 1
-				    start: (int) currStartPoint];
+				    start: currStartPoint];
 		[(NSMutableArray *) dataList addObject: newCache];
 		[dataList sort];
 		// NSLog(@"setting new cache: start %d count %d\n", currStartPoint, localMax - currStartPoint + 1);
@@ -618,7 +618,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 	    /* now see if we should join up to following cache */
 	    cacheIndex = [dataList findObjectContaining: localMax + 1 next: &nextCache leadsOnFrom: &leadsOnFrom];
 	    if (cacheIndex != -1 && leadsOnFrom != -1) {
-		[[(NSMutableArray *) dataList objectAtIndex: leadsOnFrom] addDataFrom: [(NSMutableArray *) dataList objectAtIndex:cacheIndex]];
+                [[(NSMutableArray *) dataList objectAtIndex: leadsOnFrom] addDataFromDisplayData: [(NSMutableArray *) dataList objectAtIndex:cacheIndex]];
 		[(NSMutableArray *) dataList removeObjectAtIndex: cacheIndex];
 		// NSLog(@"Compacted %d with %d. Now %d caches\n", leadsOnFrom, cacheIndex,[dataList count]);
 	    }

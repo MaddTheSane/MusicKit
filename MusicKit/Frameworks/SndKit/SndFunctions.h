@@ -174,7 +174,7 @@ SNDKIT_API int SndWriteSampleData(SNDFILE *sfp, void *soundData, SndFormat sound
   @param dataFormat
   @return
  */
-SNDKIT_API int SndSwapBigEndianSoundToHost(void *dest,
+SNDKIT_API SndError SndSwapBigEndianSoundToHost(void *dest,
 					   void *src,
                                            int sampleCount,
                                            int channelCount,
@@ -194,7 +194,7 @@ SNDKIT_API int SndSwapBigEndianSoundToHost(void *dest,
   @param dataFormat
   @return 
  */
-SNDKIT_API int SndSwapHostToBigEndianSound(void *dest,
+SNDKIT_API SndError SndSwapHostToBigEndianSound(void *dest,
                                   void *src,
                                    int sampleCount,
                                    int channelCount,

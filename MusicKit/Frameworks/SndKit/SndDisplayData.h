@@ -41,9 +41,9 @@ OF THIS AGREEMENT.
 @interface SndDisplayData:NSObject
 {
 /*! */  
-	int pixelCount;
+	NSInteger pixelCount;
 /*! */  
-	int startPixel;
+	NSInteger startPixel;
 /*!  */  
 	float *maxArray;
 /*!  */  
@@ -51,49 +51,65 @@ OF THIS AGREEMENT.
 }
 /*!
  */
-- (int) pixelCount;
+@property (readonly) NSInteger pixelCount;
 /*!
  */
-- (int)startPixel;
+@property (readonly) NSInteger startPixel;
 /*!
  */
-- (int) endPixel;
+@property (nonatomic, readonly) NSInteger endPixel;
 /*!
  */
-- (float*) pixelDataMax;
+@property (readonly) float* pixelDataMax NS_RETURNS_INNER_POINTER;
 /*!
  */
-- (float*) pixelDataMin;
+@property (readonly) float* pixelDataMin NS_RETURNS_INNER_POINTER;
 
 /*!
  */
-- setPixelDataMax:(float *)data min:(float *)data2 count:(int)count start:(int)start;
+- (BOOL)setPixelDataMax:(float *)data min:(float *)data2 count:(NSInteger)count start:(NSInteger)start;
 /*!
  */
-- setPixelDataMax:(float *)data count:(int)count start:(int)start;
+- (BOOL)setPixelDataMax:(float *)data count:(NSInteger)count start:(NSInteger)start;
 /*!
  */
-- setPixelDataMin:(float *)data count:(int)count start:(int)start;
+- (BOOL)setPixelDataMin:(float *)data count:(NSInteger)count start:(NSInteger)start;
 
 /*!
  */
-- addPixelDataMax:(float *)data min:(float *)data2 count:(int)count from:(int)from;
+- (BOOL)addPixelDataToMax:(float *)data toMin:(float *)data2 count:(NSInteger)count fromIndex:(NSInteger)from;
 /*!
  */
-- addPixelDataMax:(float *)data count:(int)count from:(int)from;
+- (BOOL)addPixelDataToMax:(float *)data count:(NSInteger)count fromIndex:(NSInteger)from;
 /*!
  */
-- addPixelDataMin:(float *)data count:(int)count from:(int)from;
+- (BOOL)addPixelDataToMin:(float *)data count:(NSInteger)count fromIndex:(NSInteger)from;
 
 /*!
  */
-- addDataFrom:(SndDisplayData *)anObject;
+- (BOOL)addDataFromDisplayData:(SndDisplayData *)anObject;
 /*!
  */
-- (BOOL)truncateToLastPixel:(int)pixel;
+- (BOOL)truncateToLastPixel:(NSInteger)pixel;
 /*!
  */
-- (BOOL)truncateToFirstPixel:(int)pixel;
+- (BOOL)truncateToFirstPixel:(NSInteger)pixel;
+@end
+
+@interface SndDisplayData (Deprecated)
+/*!
+ */
+- addPixelDataMax:(float *)data min:(float *)data2 count:(int)count from:(int)from NS_DEPRECATED_WITH_REPLACEMENT_MAC("-addPixelDataToMax:toMin:count:fromIndex:", 10.0, 10.8);
+/*!
+ */
+- addPixelDataMax:(float *)data count:(int)count from:(int)from NS_DEPRECATED_WITH_REPLACEMENT_MAC("-addPixelDataToMax:count:fromIndex:", 10.0, 10.8);
+/*!
+ */
+- addPixelDataMin:(float *)data count:(int)count from:(int)from NS_DEPRECATED_WITH_REPLACEMENT_MAC("addPixelDataToMin:count:fromIndex:", 10.0, 10.8);
+/*!
+ */
+- (id)addDataFrom:(SndDisplayData *)anObject NS_DEPRECATED_WITH_REPLACEMENT_MAC("-addDataFromDisplayData:", 10.0, 10.8);
+
 @end
 
 #endif

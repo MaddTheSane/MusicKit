@@ -150,7 +150,7 @@
     return [soundBuffers count] > 1;
 }
 
-- (int) deleteSamplesInRange: (NSRange) frameRange
+- (SndError) deleteSamplesInRange: (NSRange) frameRange
 {
     NSUInteger soundBufferIndex;
     SndAudioBuffer *audioBuffer;
@@ -236,7 +236,7 @@
     return SND_ERR_NONE;
 }
 
-- (int) deleteSamples
+- (SndError) deleteSamples
 {
     NSRange entireSound = { 0, [self lengthInSampleFrames] };
     

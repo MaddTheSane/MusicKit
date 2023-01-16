@@ -25,6 +25,8 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
+@protocol SndAudioProcessorParameterDelegate;
+
 /*!
   @class SndAudioProcessor
   @brief A VST-like audio FX processing module base class.
@@ -33,7 +35,7 @@
 */
 @interface SndAudioProcessor : NSObject {
     /*! Number of parameters in the audio processor */
-    int numParams;
+    NSInteger numParams;
     /*! The SndAudioProcessorChain hosting this processor */
     SndAudioProcessorChain *audioProcessorChain;
     /*! */    
@@ -41,7 +43,7 @@
     /*! Indicates the processor instance will perform the processing. */
     BOOL  active;
     /*! Delegate object informed when a parameters value is changed. */
-    id parameterDelegate;
+    id<SndAudioProcessorParameterDelegate> parameterDelegate;
 }
 
 /*!
@@ -76,7 +78,7 @@
   To come
  @return  Returns a freshly initialized, autoreleased SndAudioProcessor
 */
-+ audioProcessor;
++ (SndAudioProcessor *)audioProcessor;
 
 /*!
   @brief Returns an autoreleased instance of a SndProcessor subclass named <I>processorName</I>.
@@ -90,7 +92,7 @@
   @brief   Initialization method
   @return     Returns <B>self</B>.
  */
-- init;
+- (instancetype)init;
 
 /*!
   @brief   Initialization method
@@ -98,7 +100,7 @@
   @param      name Name of sound audio processor.
   @return     Returns <B>self</B>.
 */
-- initWithParamCount: (const int) count name: (NSString *) name;
+- (instancetype)initWithParamCount: (NSInteger) count name: (NSString *) name;
 
 /*!
   @brief   Initialization using a dictionary of parameters.
@@ -106,22 +108,22 @@
   @param      name Name of the SndAudioProcessor to initialise.
   @return     Returns <B>self</B>.
  */
-- initWithParameterDictionary: (NSDictionary *) paramDictionary name: (NSString *) name;
+- (instancetype)initWithParameterDictionary: (NSDictionary *) paramDictionary name: (NSString *) name;
 
 /*!
   @brief    Message sent when host determines the SndAudioProcessor should reinitialize
   its processing state. Eg, a delay processor would zero its z-buffers.
   @return      self
 */
-- reset;
+- (void) reset;
 
-- (void) setNumParams: (const int) c;
+- (void) setNumParams: (NSInteger) c;
 
 /*!
   @brief   Gets the number of parameters
   @return     number of parameters
 */
-- (int) paramCount;
+- (NSInteger) paramCount;
 
 /*!
   @brief   Gets the value of the indexed parameter. 
@@ -206,6 +208,8 @@
 */
 - (SndAudioProcessorChain *) audioProcessorChain;
 
+@property (assign) SndAudioProcessorChain *audioProcessorChain;
+
 /*!
   @brief   Processor activity status query method
   @return     Returns TRUE if the processor is active, ie whether the host processor 
@@ -218,7 +222,9 @@
   @param      b TRUE if the processor is to be made active.
   @return     self
 */
-- setActive: (const BOOL) b;
+- (void)setActive: (BOOL) b;
+
+@property (getter=isActive) BOOL active;
 
 /*!
   @brief   Assigns the SndAudioProcessor instance a new name.
@@ -226,7 +232,7 @@
   
   
 */
-- setName: (NSString *) aName;
+- (void)setName: (NSString *) aName;
 
 /*!
   @brief   Returns the name of the audio processor.
@@ -235,6 +241,8 @@
   The name may or may not be unique to each instance of a SndAudioProcessor.
 */
 - (NSString *) name;
+
+@property (copy) NSString *name;
 
 /*!
   @brief   Returns an NSDictionary holding all parameters of a SndAudioProcessor instance.
@@ -280,16 +288,18 @@
   The message -parameter:ofAudioProcessor:didChangeTo: is sent to the delegate when a parameter changes.
   @param delegate An object to receive notification that a parameter changed value.
  */
-- (void) setParameterDelegate: (id) delegate;
+- (void) setParameterDelegate: (id<SndAudioProcessorParameterDelegate>) delegate;
 
 /*!
  @return Returns the current parameter delegate. 
  */
-- (id) parameterDelegate;
+- (id<SndAudioProcessorParameterDelegate>) parameterDelegate;
+
+@property (assign) id<SndAudioProcessorParameterDelegate> parameterDelegate;
 
 @end
 
-@protocol SndAudioProcessorParameterDelegate
+@protocol SndAudioProcessorParameterDelegate <NSObject>
 
 - (void) parameter: (unsigned int) parameter 
   ofAudioProcessor: (SndAudioProcessor *) processor

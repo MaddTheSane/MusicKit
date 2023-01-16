@@ -218,21 +218,21 @@
 	return nil;
     
     [soundData getBytes: &magic range: NSMakeRange(0, AU_FORMAT_INT_LENGTH)]; /* first integer */
-    magic = NSSwapBigLongToHost(magic);
+    magic = CFSwapInt32BigToHost(magic);
     
     if (magic != SND_MAGIC)     // Verify we do have a .au/.snd file.
 	return nil;
     	
     [soundData getBytes: &dataLocation range: NSMakeRange(AU_FORMAT_INT_LENGTH * 1, AU_FORMAT_INT_LENGTH)]; /* second integer */
-    dataLocation = NSSwapBigLongToHost(dataLocation);
+    dataLocation = CFSwapInt32BigToHost(dataLocation);
     [soundData getBytes: &dataSize range: NSMakeRange(AU_FORMAT_INT_LENGTH * 2, AU_FORMAT_INT_LENGTH)]; /* third integer */
-    dataSize = NSSwapBigLongToHost(dataSize);
+    dataSize = CFSwapInt32BigToHost(dataSize);
     [soundData getBytes: &dataFormat range: NSMakeRange(AU_FORMAT_INT_LENGTH * 3, AU_FORMAT_INT_LENGTH)]; /* fourth integer */
-    soundFormat.dataFormat = NSSwapBigLongToHost(dataFormat);
+    soundFormat.dataFormat = CFSwapInt32BigToHost(dataFormat);
     [soundData getBytes: &sampleRate range: NSMakeRange(AU_FORMAT_INT_LENGTH * 4, AU_FORMAT_INT_LENGTH)]; /* fifth integer */
-    soundFormat.sampleRate = NSSwapBigLongToHost(sampleRate);
+    soundFormat.sampleRate = CFSwapInt32BigToHost(sampleRate);
     [soundData getBytes: &channelCount range: NSMakeRange(AU_FORMAT_INT_LENGTH * 5, AU_FORMAT_INT_LENGTH)]; /* sixth integer */
-    soundFormat.channelCount = NSSwapBigLongToHost(channelCount);
+    soundFormat.channelCount = CFSwapInt32BigToHost(channelCount);
     soundFormat.frameCount = SndBytesToFrames(dataSize, channelCount, dataFormat);
 
     infoStringLength = dataLocation - (AU_FORMAT_INT_LENGTH * 6); // gap between the header and data location is the info string.
@@ -242,8 +242,7 @@
 			       userInfo: nil] raise];
     [soundData getBytes: infoUTF8String range: NSMakeRange(AU_FORMAT_INT_LENGTH * 6, infoStringLength)];
     infoUTF8String[infoStringLength] = '\0'; // terminate the string
-    [info release];
-    info = [[NSString stringWithUTF8String: infoUTF8String] retain];
+    self.info = [NSString stringWithUTF8String: infoUTF8String];
     free(infoUTF8String);
     
     if((soundDataBytes = malloc(dataSize)) == NULL) {
@@ -311,7 +310,7 @@
     return SndFormatName([self dataFormat], NO);
 }
 
-// TODO at the moment we ignore the dataFormat, only writing AU format.
+// TODO: at the moment we ignore the dataFormat, only writing AU format.
 // Eventually we need to replace this with file writing routines.
 - (NSData *) dataEncodedAsFormat: (NSString *) dataFormat
 {
@@ -403,6 +402,9 @@
 
 - (id) initWithCoder: (NSCoder *) aDecoder
 {
+    if (!(self = [super init])) {
+        return nil;
+    }
     if ([aDecoder allowsKeyedCoding]) {
 	[self setDelegate: [aDecoder decodeObjectForKey: @"delegate"]];
 	[self setName: [aDecoder decodeObjectForKey: @"Name"]];
@@ -421,7 +423,7 @@
 	char *infoString;
 	unsigned char *soundBytes;
 	
-	delegate = [[aDecoder decodeObject] retain];
+	delegate = [aDecoder decodeObject];
 	name = [[aDecoder decodeObject] retain];
 	
 	[aDecoder decodeValuesOfObjCTypes: "iiiiii", &magic, &dataLocation, &dataSize,
@@ -450,7 +452,7 @@
 	soundBuffers = [[NSMutableArray arrayWithObject: [SndAudioBuffer audioBufferWithFormat: &soundFormat data: soundBytes]] retain];
 	free(soundBytes);
     }
-    return SND_ERR_NONE;
+    return self;
 }
 
 - awakeAfterUsingCoder: (NSCoder *) aDecoder
@@ -459,40 +461,33 @@
     return self; /* what to do here??? Doesn't seem to be anything pressing... */
 }
 
-- (NSString *) name
-{
-    return name;
-}
+@synthesize name;
 
-/* this needs to interface with an object-wide name table
- * to identify sounds by name. At the moment multiple sound
- * objects may share the same name, which is not right.
- * Second Thoughts: many sounds MAY share the same name, as
- * they do not have to register with the central name table.
- * The central name table though can only register one sound
- * with any unique name.
- */
-- setName: (NSString *) theName
-{
-    if (name) {
-        [name release];
-        name = nil;
-    }
-    if (!theName) return self;
-    if (![theName length]) return self;
-    name = [theName copy];
-    return self;
-}
+//- (NSString *) name
+//{
+//    return name;
+//}
+//
+///* this needs to interface with an object-wide name table
+// * to identify sounds by name. At the moment multiple sound
+// * objects may share the same name, which is not right.
+// * Second Thoughts: many sounds MAY share the same name, as
+// * they do not have to register with the central name table.
+// * The central name table though can only register one sound
+// * with any unique name.
+// */
+//- (void)setName: (NSString *) theName
+//{
+//    if (name) {
+//        [name release];
+//        name = nil;
+//    }
+//    if (!theName) return;
+//    if (![theName length]) return;
+//    name = [theName copy];
+//}
 
-- delegate
-{
-    return delegate;
-}
-
-- (void) setDelegate: (id) anObject
-{
-    delegate = anObject;
-}
+@synthesize delegate;
 
 - (double) samplingRate
 {
@@ -515,16 +510,7 @@
     return soundFormat.channelCount;
 }
 
-- (NSString *) info
-{
-    return [[info retain] autorelease];
-}
-
-- (void) setInfo: (NSString *) newInfoString
-{
-    [info release];
-    info = [newInfoString copy];
-}
+@synthesize info;
 
 - (BOOL) isEmpty
 {
@@ -567,9 +553,9 @@
     return NO;
 }
 
-- (int) convertToSampleFormat: (SndSampleFormat) toFormat
-		 samplingRate: (double) toRate
-		 channelCount: (int) toChannelCount
+- (SndError) convertToSampleFormat: (SndSampleFormat) toFormat
+                      samplingRate: (double) toRate
+                      channelCount: (int) toChannelCount
 {
     NSUInteger soundBufferIndex;
     double stretchFactor = toRate / [self samplingRate];
@@ -604,7 +590,7 @@
     return SND_ERR_NONE;
 }
 
-- (int) convertToSampleFormat: (SndSampleFormat) aFormat
+- (SndError) convertToSampleFormat: (SndSampleFormat) aFormat
 {
     return [self convertToSampleFormat: aFormat
                     samplingRate: soundFormat.sampleRate
@@ -630,7 +616,7 @@
 }
 
 
-- (int) convertToNativeFormat
+- (SndError) convertToNativeFormat
 {
     SndFormat nativeFormat = [Snd nativeFormat];
 
@@ -695,10 +681,7 @@
 	       ([self samplingRate] == [buff samplingRate]);
 }
 
-- (SndFormat) format
-{
-    return soundFormat;
-}
+@synthesize format=soundFormat;
 
 // retrieve a sound value at the given frame, for a specified channel, or average over all channels.
 // channelNumber is 0 - channelCount to retrieve a single channel, channelCount to average all channels
@@ -775,7 +758,7 @@
 #endif
 }
 
-- (int) processingError
+- (SndError) processingError
 {
     return currentError;
 }
@@ -813,15 +796,7 @@
     [self tellDelegate: NSSelectorFromString(theMessage) duringPerformance: performance];
 }
 
-- (void) setConversionQuality: (SndConversionQuality) quality
-{
-    conversionQuality = quality;
-}
-
-- (SndConversionQuality) conversionQuality
-{
-    return conversionQuality;
-}
+@synthesize conversionQuality;
 
 - (void) normalise
 {

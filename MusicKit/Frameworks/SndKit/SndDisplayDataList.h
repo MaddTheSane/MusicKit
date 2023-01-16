@@ -31,6 +31,8 @@ CONDITIONS OF THIS AGREEMENT.
 
 #import <AppKit/AppKit.h>
 
+@class SndDisplayData;
+
 /*!
 @class SndDisplayDataList
 @brief Maintain a sorted list of cached display data for SndViews
@@ -42,11 +44,10 @@ CONDITIONS OF THIS AGREEMENT.
   sort routine, and a method to return the underlying data object
   holding the data for a given pixel.
 */
-
 @interface SndDisplayDataList: NSObject
 {
   /*! */
-    NSMutableArray *embeddedArray;
+    NSMutableArray<SndDisplayData*> *embeddedArray;
 }
 
 /*!
@@ -57,7 +58,7 @@ CONDITIONS OF THIS AGREEMENT.
   Elements may be discontiguous.
   INTERNAL USE ONLY.
 */
-- sort;
+- (void)sort;
 
 /*!
   @return Returns the index of the object containing the given pixel, or -1 if the
@@ -71,9 +72,9 @@ CONDITIONS OF THIS AGREEMENT.
   Elements may be discontiguous.
   INTERNAL USE ONLY.
 */
-- (int) findObjectContaining: (int)   pixel 
-	                next: (int *) next 
-	         leadsOnFrom: (int *) leadsOnFrom;
+- (NSInteger) findObjectContaining: (NSInteger)   pixel
+                              next: (NSInteger *) next
+                       leadsOnFrom: (NSInteger *) leadsOnFrom;
 @end
 
 #endif

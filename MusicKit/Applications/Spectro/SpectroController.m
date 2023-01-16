@@ -12,7 +12,7 @@
 
 NSString *colorToString(NSColor *color)
 {
-    float r, g, b;
+    CGFloat r, g, b;
 
     [[color colorUsingColorSpaceName: NSCalibratedRGBColorSpace] getRed: &r green: &g blue: &b alpha: NULL];
     return [NSString stringWithFormat:@"%f:%f:%f:", r, g, b];
@@ -132,10 +132,6 @@ NSColor *stringToColor(NSString *buffer)
     counter = count;
     return self;
 }
-
-@end
-
-@implementation SpectroController(ApplicationDelegate)
 
 - (void) applicationDidFinishLaunching: (NSNotification *) notification
 {

@@ -139,13 +139,13 @@ static void calcValues(SndMeter *self, float *aveVal, float *peakVal)
     }
 }
 
-- (int) shouldBreak
+- (BOOL) shouldBreak
 {
    NSEvent *ev;
 
    /* Always give up the CPU when playing. */
    if ([self->sound isPlaying])
-       return 1;
+       return YES;
    ev = [[self window] nextEventMatchingMask: NSEventMaskAny
 	     untilDate: [NSDate date] inMode: NSDefaultRunLoopMode dequeue: NO];
    return ev != nil || self->smFlags.shouldStop;
@@ -214,64 +214,51 @@ static void calcValues(SndMeter *self, float *aveVal, float *peakVal)
 {
     [super initWithFrame: frameRect];
     holdTime = 0.7; // in seconds
-    [self setBackgroundColor: [NSColor darkGrayColor]];
-    [self setForegroundColor: [NSColor lightGrayColor]];
-    [self setPeakColor: [NSColor whiteColor]];
+    [self setBackgroundColor: [NSColor controlColor]];
+    if (@available(macOS 10.14, *)) {
+        [self setForegroundColor: [NSColor controlAccentColor]];
+    } else {
+        [self setForegroundColor: [NSColor colorForControlTint:NSColor.currentControlTint]];
+    }
+    [self setPeakColor: [NSColor systemRedColor]];
     smFlags.bezeled = YES;
     smFlags.displayPeakValue = YES;
     return self;
 }
 
-- (float) floatValue { return currentValue; }
-- (float) peakValue { return currentPeak; }
-- (float) minValue { return minValue; }
-- (float) maxValue { return maxValue; }
+@synthesize floatValue=currentValue;
+@synthesize peakValue=currentPeak;
+@synthesize minValue;
+@synthesize maxValue;
 
-- (void) setHoldTime: (float) seconds 
-{ 
-    holdTime = seconds;
-}
-
-- (float) holdTime 
-{
-    return holdTime;
-}
+@synthesize holdTime;
 
 - (void) setBackgroundColor: (NSColor *) color;
 {
     [backgroundColor autorelease];
-    backgroundColor = [color copyWithZone: [self zone]];
+    backgroundColor = [color copy];
     [self setNeedsDisplay: YES];
 }
 
-- (NSColor *) backgroundColor
-{
-    return backgroundColor;
-}
+@synthesize backgroundColor;
 
 - (void) setForegroundColor: (NSColor *) color;
 {
     [foregroundColor autorelease];
-    foregroundColor = [color copyWithZone: [self zone]];
+    foregroundColor = [color copy];
     [self setNeedsDisplay: YES];
 }
 
-- (NSColor *) foregroundColor;
-{
-    return foregroundColor;
-}
+@synthesize foregroundColor;
 
 - (void) setPeakColor: (NSColor *) color;
 {
     [peakColor autorelease];
-    peakColor = [color copyWithZone: [self zone]];
+    peakColor = [color copy];
     [self setNeedsDisplay: YES];
 }
 
-- (NSColor *) peakColor;
-{
-    return peakColor;
-}
+@synthesize peakColor;
 
 - (void) setDisplayPeak: (BOOL) yesOrNo
 {
@@ -283,16 +270,7 @@ static void calcValues(SndMeter *self, float *aveVal, float *peakVal)
     return smFlags.displayPeakValue;
 }
 
-- (Snd *) sound 
-{
-    return [[sound retain] autorelease]; 
-}
-
-- (void) setSound: (Snd *) aSound 
-{
-    [sound release];
-    sound = [aSound retain];
-}
+@synthesize sound;
 
 - (void)run: (id) sender
 {
@@ -309,10 +287,11 @@ static void calcValues(SndMeter *self, float *aveVal, float *peakVal)
 	} else
 	    minValue = maxValue = aveVal = peakVal = 0.0;
 	[self setFloatValue:peakVal];
-	[self lockFocus];
-	[self drawCurrentValue];
-	[self unlockFocus];
-	[[self window] flushWindow];
+        self.needsDisplay = YES;
+//	[self lockFocus];
+//	[self drawCurrentValue];
+//	[self unlockFocus];
+//	[[self window] flushWindow];
 //	PSWait();
 //	_timedEntry = (void *) _NSSKAddTimedEntry(0.05, 
 //		    (_NSSKTimedEntryProc)animate_self, self,NSBaseThreshhold);
@@ -380,10 +359,10 @@ static void calcValues(SndMeter *self, float *aveVal, float *peakVal)
 
 - (void) drawCurrentValue
 {
-    float valueOffset, peakOffset;
+    CGFloat valueOffset, peakOffset;
     NSRect bounds = [self bounds];
-    float displayValue = prepareValueForDisplay(self, smoothValue(self, currentValue));
-    float displayPeak = prepareValueForDisplay(self, currentPeak);
+    CGFloat displayValue = prepareValueForDisplay(self, smoothValue(self, currentValue));
+    CGFloat displayPeak = prepareValueForDisplay(self, currentPeak);
     // float x, y, w, h;
     NSRect meterRect;
 
@@ -442,33 +421,69 @@ static void calcValues(SndMeter *self, float *aveVal, float *peakVal)
 - (void) encodeWithCoder: (NSCoder *) stream
 {
     [super encodeWithCoder:stream];
-    [stream encodeValuesOfObjCTypes:"@fffff@@@s",&sound,&currentValue,
-    			&currentPeak, &minValue, &maxValue,
-			&holdTime, &backgroundColor, &foregroundColor, &peakColor,
-			&smFlags];
-
+    if (stream.allowsKeyedCoding) {
+        [stream encodeConditionalObject:sound forKey:@"sound"];
+        [stream encodeFloat:currentValue forKey:@"currentValue"];
+        [stream encodeFloat:currentPeak forKey:@"currentPeak"];
+        [stream encodeFloat:minValue forKey:@"minValue"];
+        [stream encodeFloat:maxValue forKey:@"maxValue"];
+        [stream encodeDouble:holdTime forKey:@"holdTime"];
+        [stream encodeObject:backgroundColor forKey:@"backgroundColor"];
+        [stream encodeObject:foregroundColor forKey:@"foregroundColor"];
+        [stream encodeObject:peakColor forKey:@"peakColor"];
+        unsigned short tmp = *((unsigned short*)&(smFlags));
+        [stream encodeInt:tmp forKey:@"smFlags"];
+    } else {
+        float tmpTime = holdTime;
+        [stream encodeValuesOfObjCTypes:"@fffff@@@s",&sound,&currentValue,
+         &currentPeak, &minValue, &maxValue,
+         &tmpTime, &backgroundColor, &foregroundColor, &peakColor,
+         &smFlags];
+    }
 }
 
 - (id) initWithCoder: (NSCoder *) stream
 {
-    int version;
-    
     self = [super initWithCoder:stream];
-    version = [stream versionForClassName:@"SndMeter"];
-    if (version == 0) {
-	float backgroundGray, foregroundGray, peakGray;
-	[stream decodeValuesOfObjCTypes:"@ffffffffs",&sound,&currentValue,
-			    &currentPeak, &minValue, &maxValue,
-			    &holdTime, &backgroundGray, &foregroundGray,&peakGray,
-			    &smFlags];
-	[self setBackgroundColor:[NSColor colorWithCalibratedWhite:backgroundGray alpha:1.0]];
-	[self setForegroundColor:[NSColor colorWithCalibratedWhite:foregroundGray alpha:1.0]];
-	[self setPeakColor:[NSColor colorWithCalibratedWhite:peakGray alpha:1.0]];
-    } else if (version >= 1) {
-	[stream decodeValuesOfObjCTypes:"@fffff@@@s",&sound,&currentValue,
-			    &currentPeak, &minValue, &maxValue,
-			    &holdTime, &backgroundColor, &foregroundColor, &peakColor,
-			    &smFlags];
+    if (stream.allowsKeyedCoding) {
+        sound = [stream decodeObjectOfClass:[Snd class] forKey:@"sound"];
+        currentValue = [stream decodeFloatForKey:@"currentValue"];
+        currentPeak = [stream decodeFloatForKey:@"currentPeak"];
+        minValue = [stream decodeFloatForKey:@"minValue"];
+        maxValue = [stream decodeFloatForKey:@"maxValue"];
+        holdTime = [stream decodeDoubleForKey:@"holdTime"];
+        backgroundColor = [[stream decodeObjectOfClass:[NSColor class] forKey:@"backgroundColor"] retain];
+        foregroundColor = [[stream decodeObjectOfClass:[NSColor class] forKey:@"foregroundColor"] retain];
+        peakColor = [[stream decodeObjectOfClass:[NSColor class] forKey:@"peakColor"] retain];
+        unsigned short tmpSmFlags = [stream decodeIntForKey:@"smFlags"];
+        *((unsigned short*)&(smFlags)) = tmpSmFlags;
+    } else {
+        NSInteger version;
+        
+        version = [stream versionForClassName:@"SndMeter"];
+        if (version == 0) {
+            float tmpTime;
+            float backgroundGray, foregroundGray, peakGray;
+            [stream decodeValuesOfObjCTypes:"@ffffffffs",&sound,&currentValue,
+             &currentPeak, &minValue, &maxValue,
+             &tmpTime, &backgroundGray, &foregroundGray,&peakGray,
+             &smFlags];
+            holdTime = tmpTime;
+            [self setBackgroundColor:[NSColor colorWithCalibratedWhite:backgroundGray alpha:1.0]];
+            [self setForegroundColor:[NSColor colorWithCalibratedWhite:foregroundGray alpha:1.0]];
+            [self setPeakColor:[NSColor colorWithCalibratedWhite:peakGray alpha:1.0]];
+        } else if (version >= 1) {
+            float tmpTime;
+            [stream decodeValuesOfObjCTypes:"@fffff@@@s",&sound,&currentValue,
+             &currentPeak, &minValue, &maxValue,
+             &tmpTime, &backgroundColor, &foregroundColor, &peakColor,
+             &smFlags];
+            holdTime = tmpTime;
+            [sound retain];
+            [backgroundColor retain];
+            [foregroundColor retain];
+            [peakColor retain];
+        }
     }
     smFlags.running = NO;
     _valTime = _peakTime = currentSample = 0;

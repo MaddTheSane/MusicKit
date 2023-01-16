@@ -49,11 +49,13 @@
 
 #import <Foundation/Foundation.h>
 #import <SndKit/SndFormat.h>
+#import <SndKit/SndError.h>
 
 @class SndPlayer;
 @class SndPerformance;
 @class SndAudioBuffer;
 @class SndAudioProcessorChain;
+@protocol SndDelegate;
 
 /*!
   @enum       SndConversionQuality
@@ -64,11 +66,11 @@
   @constant   SndConvertHighQuality High quality conversion. Uses bandlimited interpolation, using a
               large filter. Relatively slow.
  */
-typedef enum {
+typedef NS_ENUM(int, SndConversionQuality) {
     SndConvertLowQuality = 0,
     SndConvertMediumQuality = 1,
     SndConvertHighQuality  = 2
-} SndConversionQuality;
+};
 
 
 /*!
@@ -134,7 +136,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
 
 */
 
-@interface Snd : NSObject
+@interface Snd : NSObject <NSCopying>
 {
  @protected
     /*! An array of SndAudioBuffers, the number of elements will depend on the fragmentation. */
@@ -151,12 +153,12 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
     /*! The name of the sound, typically less verbose than the info string which can be descriptive. */
     NSString *name;
     /*! The code of the most recently occurring error. Zero if no error. */
-    int currentError;
+    SndError currentError;
     /*! Determines quality of sampling rate conversion - see quality defines */
     SndConversionQuality conversionQuality;	 
 
     /*! An array of all active AND pending performances of this Snd */
-    NSMutableArray *performancesArray;
+    NSMutableArray<SndPerformance*> *performancesArray;
     /*! An NSLock to protect the performancesArray when playing. */
     NSLock *performancesArrayLock;
 
@@ -349,19 +351,22 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   @param  theName is a NSString instance.
   @return Returns a BOOL.
 */
-- setName: (NSString *) theName;
+- (void)setName: (NSString *) theName;
 
+@property (copy) NSString *name;
 /*!
   @return Returns an id.
   @brief Returns the Snd's delegate.
 */
-- delegate;
+- (id<SndDelegate>)delegate;
 
 /*!
   @param  anObject is an id.
   @brief Sets the Snd's delegate to <i>anObject</i>.
 */
-- (void) setDelegate: (id) anObject;
+- (void) setDelegate: (id<SndDelegate>) anObject;
+
+@property (assign) id<SndDelegate> delegate;
 
 /*!
   @return Returns a double.
@@ -406,6 +411,8 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
  */
 - (void) setInfo: (NSString *) newInfoString;
 
+@property (copy) NSString *info;
+
 /*!
   @return Returns a BOOL.
   @brief Returns <b>YES</b> if the Snd doesn't contain any sound data,
@@ -417,12 +424,16 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
 */
 - (BOOL) isEmpty;
 
+@property (readonly, getter=isEmpty) BOOL empty;
+
 /*!
   @return Returns a BOOL.
   @brief Returns <b>YES</b> if the Snd's format indicates that it can be
               edited, otherwise returns <b>NO</b>.
 */
 - (BOOL) isEditable;
+
+@property (readonly, getter=isEditable) BOOL editable;
 
 /*!
   @param  aSound is an id.
@@ -453,7 +464,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   <LI>CODEC mu-law to and from linear formats.</LI>
   </UL>
  */
-- (int) convertToSampleFormat: (SndSampleFormat) newFormat
+- (SndError) convertToSampleFormat: (SndSampleFormat) newFormat
 	   samplingRate: (double) newRate
 	   channelCount: (int) newChannelCount;
 
@@ -465,7 +476,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
 
   An error code is returned.  
 */
-- (int) convertToSampleFormat: (SndSampleFormat) newFormat;
+- (SndError) convertToSampleFormat: (SndSampleFormat) newFormat;
 
 /*!
   @brief Returns the native format (sampling rate, resolution and channels) used by the sound
@@ -508,7 +519,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
 
   This should result in the fastest playback, avoiding any on the fly conversions. 
  */
-- (int) convertToNativeFormat;
+- (SndError) convertToNativeFormat;
 
 /*!
   @param  zone is an NSZone.
@@ -585,6 +596,8 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
  */
 - (SndFormat) format;
 
+@property (readonly) SndFormat format;
+
 /*!
   @brief Returns a string describing the data format in a textual description.
   @brief Returns a NSString instance.
@@ -597,7 +610,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
 
   The sound error codes are listed in &ldquo;Types and Constants.&rdquo;
 */
-- (int) processingError;
+- (SndError) processingError;
 
 /*!
   @return Returns an id.
@@ -662,12 +675,14 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
 */
 - (SndConversionQuality) conversionQuality;
 
+@property SndConversionQuality conversionQuality;
+
 /*!
   @brief Initialises a Snd instance from the provided SndAudioBuffer.
   @param aBuffer the SndAudioBuffer object from which to copy the data
   @return self
  */
-- initWithAudioBuffer: (SndAudioBuffer *) aBuffer;
+- (instancetype)initWithAudioBuffer: (SndAudioBuffer *) aBuffer;
 
 /*!
   @brief Normalises the amplitude of the entire sound.
@@ -697,7 +712,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   derived from those formats supported by the underlying libsndfile library.
  @return Returns an NSArray of NSStrings of file extensions.
  */
-+ (NSArray *) soundFileExtensions;
++ (NSArray<NSString*> *) soundFileExtensions;
 
 /*!
   @param path A file path
@@ -731,7 +746,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   TODO it would be preferable to have readSoundfile: (NSString *) fromRange: (NSRange). 
   However we need a mechanism to indicate infinity for the length in order to signal to read to EOF.
  */
-- (int) readSoundfile: (NSString *) filename
+- (SndError) readSoundfile: (NSString *) filename
 	   startFrame: (unsigned long) startFrame
 	   frameCount: (long) frameCount;
 
@@ -742,7 +757,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
 
   The Snd loses its current name, if any. 
  */
-- (int) readSoundfile: (NSString *) filename;
+- (SndError) readSoundfile: (NSString *) filename;
 
 /*!
   @brief Writes the Snd's contents (its sample format and sound data) to the sound file <i>filename</i> in
@@ -756,7 +771,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
          than it is held in (e.g SND_FORMAT_FLOAT).
   @return Returns SND_ERR_NONE if the writing went correctly, otherwise an error value.
  */
-- (int) writeSoundfile: (NSString *) filename
+- (SndError) writeSoundfile: (NSString *) filename
 	    fileFormat: (NSString *) fileFormat
 	    dataFormat: (SndSampleFormat) fileDataFormat;
 
@@ -769,7 +784,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   one of the encodings returned by +soundFileExtensions. Use writeSoundfile:fileFormat:dataFormat: to
   write a filename without an extension. An error code is returned.
  */
-- (int) writeSoundfile: (NSString *) filename;
+- (SndError) writeSoundfile: (NSString *) filename;
 
 @end
 
@@ -787,7 +802,9 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   @brief Mutes and unmutes the sound output level of all playing sounds if <i>aFlag</i> is YES or
               NO, respectively.  
  */
-+ setMute: (BOOL) aFlag;
++ (void)setMute: (BOOL) aFlag;
+
+@property (class, getter=isMuted, setter=setMute:) BOOL muted;
 
 /*!
   @return Returns an int.
@@ -799,7 +816,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   playing or recording when <b>waitUntilStopped</b> is invoked, it
   returns SND_ERROR_NONE.
  */
-- (int) waitUntilStopped;
+- (SndError) waitUntilStopped;
 
 /*!
   @brief Stop the given playback of the sound at some future time, specified in seconds.
@@ -823,7 +840,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   If the Snd was recording, the <b>didRecord:</b> message is sent to the delegate; if
   playing, <b>didPlay:duringPerformance:</b> is sent. An error code is returned.
  */
-- (int) stop;
+- (SndError) stop;
 
 /*!
   @param  sender is an id.
@@ -838,7 +855,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   @return Returns an integer error code.
   @brief Pauses the Snd during recording or playback.
  */
-- (int) pause;
+- (SndError) pause;
 
 /*!
   @param  sender is an id.
@@ -850,7 +867,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   @return Returns an integer error code.
   @brief Resumes the paused Snd's activity.
  */
-- (int) resume;
+- (SndError) resume;
 
 /*!
   @return Returns a BOOL.
@@ -1029,7 +1046,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   Mainly for use by SndPlayer.
   @return     self.
 */
-- (int) performanceCount;
+- (NSInteger) performanceCount;
 
 /*!
   @brief   Sets the default behaviour whether to loop during play.
@@ -1042,6 +1059,8 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   @return     Returns whether the default behaviour is to loop during play.
  */
 - (BOOL) loopWhenPlaying;
+
+@property BOOL loopWhenPlaying;
 
 /*!
   @brief   Sets the sample to stop playing at.
@@ -1057,6 +1076,8 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   @return     Returns the sample index to start playing at.
  */
 - (long) loopStartIndex;
+
+@property long loopStartIndex;
 
 /*!
   @brief   Sets the sample at which the performance loops back to the start index (set using setLoopStartIndex:).
@@ -1074,6 +1095,8 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   @return     Returns the sample index ending the loop.
  */
 - (long) loopEndIndex;
+
+@property long loopEndIndex;
 
 // We declare this because it is used by the SndEditing category.
 - (void) adjustLoopsAfterAdding: (BOOL) adding 
@@ -1118,7 +1141,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
 
   The Snd must be editable. An error code is returned.
  */
-- (int) deleteSamples;
+- (SndError) deleteSamples;
 
 /*!
   @param  frameRange is an NSRange giving the range of frames to delete.
@@ -1129,7 +1152,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
 
   The Snd must be editable and may become fragmented.
  */
-- (int) deleteSamplesInRange: (NSRange) frameRange;
+- (SndError) deleteSamplesInRange: (NSRange) frameRange;
 
 /*!
   @param  aSound is an id.
@@ -1280,44 +1303,45 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   @brief Returns an NSArray of SndAudioBuffers comprising the Snd. The array is stored in temporal order.
   @return An autoreleased NSArray of SndAudioBuffers.
  */
-- (NSArray *) audioBuffers;
+- (NSArray<SndAudioBuffer*> *) audioBuffers;
 
 @end
 
-@interface SndDelegate : NSObject
+@protocol SndDelegate <NSObject>
+@optional
 
 /*!
   @param  sender is an id.
   @brief Sent to the delegate when the Snd begins to record.
 */
-- willRecord: sender;
+- (void)willRecord:(Snd*)sender;
 
 /*!
   @param  sender is an id.
   @brief Sent to the delegate when the Snd stops recording.
 */
-- didRecord:  sender;
+- (void)didRecord:(Snd*)sender;
 
 /*!
   @param  sender is an id.
   @brief Sent to the delegate if an error occurs during recording or
               playback.
 */
-- hadError:   sender;
+- (void)hadError:(Snd*)sender;
 
 /*!
   @param  sender is an id.
   @param  performance is a SndPerformance instance.
   @brief Sent to the delegate when the Snd begins to play.
 */
-- willPlay:   sender duringPerformance: (SndPerformance *) performance;
+- (void)willPlay:(Snd*)sender duringPerformance: (SndPerformance *) performance;
 
 /*!
   @param  sender is an id.
   @param  performance is a SndPerformance instance.
   @brief Sent to the delegate when the Snd stops playing.
 */
-- didPlay:    sender duringPerformance: (SndPerformance *) performance;
+- (void)didPlay:(Snd*)sender duringPerformance: (SndPerformance *) performance;
 
 @end
 

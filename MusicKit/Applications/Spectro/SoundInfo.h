@@ -1,31 +1,22 @@
 #import <Foundation/Foundation.h>
 #import <SndKit/SndKit.h>
 
-@interface SoundInfo: NSObject
+@interface SoundInfo: NSObject <NSWindowDelegate>
 {
-    id	siSize;
-    id	siFrames;
-    id	siFormat;
-    id	siTime;
-    id	siRate;
-    id	siPanel;
-    id	siChannels;
+    IBOutlet NSTextField    *siSize;
+    IBOutlet NSTextField    *siFrames;
+    IBOutlet NSTextField    *siFormat;
+    IBOutlet NSTextField    *siTime;
+    IBOutlet NSTextField    *siRate;
+    IBOutlet NSPanel	    *siPanel;
+    IBOutlet NSTextField    *siChannels;
     int ssize;
     Snd *sndhdr;
 }
 
 - init;
-- displaySound: (Snd *) sound title: (NSString *) title;
-- setSoundHeader: (Snd *) sound;
+- (void) displaySound: (Snd *) sound title: (NSString *) title;
+@property (retain) Snd *soundHeader;
 - (void) display: (NSString *) title;
-- (BOOL) windowShouldClose: (id) sender;
-
-- setSiPanel: anObject;
-- setSiSize: anObject;
-- setSiFrames: anObject;
-- setSiFormat: anObject;
-- setSiTime: anObject;
-- setSiRate: anObject;
-- setSiChannels: anObject;
 
 @end

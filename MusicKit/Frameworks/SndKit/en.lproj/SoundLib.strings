@@ -1,0 +1,47 @@
+/* 
+  SoundLib.strings
+  MusicKit
+
+  Created by C.W. Betts on 1/14/23.
+  Copyright © 2023 MusicKit Project. All rights reserved.
+*/
+
+"Unknown error" = "Unknown error";
+"Bad start time error" = "Bad start time error";
+"Bad duration error" = "Bad duration error";
+"Information string too large" = "Information string too large";
+"Cannot abort operation" = "Cannot abort operation";
+"Hardware resources already in use" = "Hardware resources already in use";
+"Timeout" = "Timeout";
+"Cannot access hardware resources" = "Cannot access hardware resources";
+"Bad tag" = "Bad tag";
+"Aborted" = "Aborted";
+"Data underrun" = "Data underrun";
+"Cannot configure" = "Cannot configure";
+"Bad configuration" = "Bad configuration";
+"Mach kernel error" = "Mach kernel error";
+"Bad memory space in dsp load image" = "Bad memory space in dsp load image";
+"Cannot edit sound" = "Cannot edit sound";
+"Cannot find sound" = "Cannot find sound";
+"Not playing sound" = "Not playing sound";
+"Not implemented" = "Not implemented";
+"Already playing sound" = "Already playing sound";
+"Cannot play sound" = "Cannot play sound";
+"Not recording sound" = "Not recording sound";
+"Already recording sound" = "Already recording sound";
+"Cannot record sound" = "Cannot record sound";
+"Access not reserved" = "Access not reserved";
+"Cannot reserve access" = "Cannot reserve access";
+"Cannot copy" = "Cannot copy";
+"Cannot free memory" = "Cannot free memory";
+"Cannot allocate memory" = "Cannot allocate memory";
+"Cannot read file" = "Cannot read file";
+"Cannot write file" = "Cannot write file";
+"Cannot open file" = "Cannot open file";
+"Bad file name" = "Bad file name";
+"Bad size" = "Bad size";
+"Bad channel count" = "Bad channel count";
+"Bad sampling rate" = "Bad sampling rate";
+"Bad data format" = "Bad data format";
+"Not a sound" = "Not a sound";
+"No error" = "No error";

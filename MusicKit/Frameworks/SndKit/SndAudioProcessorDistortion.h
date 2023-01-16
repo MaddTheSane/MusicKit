@@ -69,56 +69,28 @@ enum {
   
   @return
 */
-- (void)  setBoostRange: (const float) fBoostRange;
+@property (nonatomic) float boostAmount;
 /*!
   @brief
   
   
   @return
 */
-- (void)  setBoostAmount: (const float) fBoostAmount;
+@property (nonatomic) float boostRange;
 /*!
   @brief
   
   
   @return
 */
-- (void)  setKnee: (const float) fKnee;
+@property (nonatomic) float knee;
 /*!
   @brief
   
   
   @return
 */
-- (void)  setHardness: (const float) fHard;
-/*!
-  @brief
-  
-  
-  @return
-*/
-- (float) boostAmount;
-/*!
-  @brief
-  
-  
-  @return
-*/
-- (float) boostRange;
-/*!
-  @brief
-  
-  
-  @return
-*/
-- (float) knee;
-/*!
-  @brief
-  
-  
-  @return
-*/
-- (float) hardness;
+@property (nonatomic) float hardness;
 
 @end
 

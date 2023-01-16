@@ -46,7 +46,9 @@
 #import <Foundation/Foundation.h>
 #import "SndError.h"
 
-static id soundBundle = nil;
+const NSErrorDomain SndErrorDomain = @"org.musickit.SndKit.Errors";
+
+static NSBundle *soundBundle = nil;
 
 /*
  * Localizable strings.
@@ -219,14 +221,14 @@ NSLocalizedStringFromTableInBundle(@"Bad duration error", @"SoundLib", soundBund
                                    @"SndError message")
 
 
-NSString *SndSoundError(int err)
+NSString *SndSoundError(SndError err)
 {
     /*
      * Tell string localize routines where .strings file is.
      */
     if (!soundBundle)
-	soundBundle = [[NSBundle alloc]
-	    initWithPath:@"/System/Library/CoreServices/Resources"];
+	soundBundle = [[NSBundle
+                        bundleWithIdentifier:@"org.musickit.SndKit"] retain];
 
     switch (err) {
     case SND_ERR_NONE:			//	0

@@ -22,25 +22,25 @@ static NSMutableDictionary *namedComponents = nil;
 // General routine to retrieve a device property, performing error checking.
 static BOOL getAudioUnitProperty(AudioUnit au, AudioUnitPropertyID propertyType, AudioUnitScope scope, AudioUnitElement element, void *buffer, int maxBufferSize)
 {
-    ComponentResult AUstatus;
+    OSStatus AUstatus;
     UInt32 propertySize;
     Boolean propertyWritable;
     
     AUstatus = AudioUnitGetPropertyInfo(au, propertyType, scope, element, &propertySize, &propertyWritable);
-    if (AUstatus) {
-        NSLog(@"getDeviceProperty AudioDeviceGetPropertyInfo property %4s: %d\n", (char *) propertyType, AUstatus);
+    if (AUstatus != noErr) {
+        NSLog(@"getDeviceProperty AudioDeviceGetPropertyInfo property %4s: %d\n", (char *)&propertyType, AUstatus);
         return FALSE;
     }
     
     if(propertySize > maxBufferSize) {
         NSLog(@"getAudioUnitProperty property %4s: size %d larger than available buffer size %d\n",
-	      (char *) propertyType, propertySize, maxBufferSize);
+	      (char *)&propertyType, propertySize, maxBufferSize);
         return FALSE;
     }
     
     AUstatus = AudioUnitGetProperty(au, propertyType, scope, element, buffer, &propertySize);
-    if (AUstatus) {
-        NSLog(@"getAudioUnitProperty AudioUnitGetProperty %4s: %d\n", (char *) propertyType, AUstatus);
+    if (AUstatus != noErr) {
+        NSLog(@"getAudioUnitProperty AudioUnitGetProperty %4s: %d\n", (char *)&propertyType, AUstatus);
         return FALSE;
     }
     
@@ -49,25 +49,16 @@ static BOOL getAudioUnitProperty(AudioUnit au, AudioUnitPropertyID propertyType,
 
 // Retrieves the text describing the AudioUnit as described by it's component.
 // This takes the form of "Manufacturer: Audio Unit Name"
-+ (NSString *) getComponentDescription: (Component) theComponent
++ (NSString *) getComponentDescription: (AudioComponent) theComponent
 {
     NSString *componentDescription;
-    Handle componentInfoHandle = NewHandle(4);
-    ComponentDescription mCompDesc;
-    OSStatus err = GetComponentInfo(theComponent, &mCompDesc, componentInfoHandle, 0, 0);
+    CFStringRef cfComponentDescription;
+    OSStatus err = AudioComponentCopyName(theComponent, &cfComponentDescription);
     
     if (err) 
 	return nil;
     
-    HLock(componentInfoHandle);
-    char *componentDescriptionPtr = *componentInfoHandle;
-    int len = *componentDescriptionPtr++;
-    
-    componentDescriptionPtr[len] = 0;
-    
-    componentDescription = [NSString stringWithUTF8String: componentDescriptionPtr];
-    
-    DisposeHandle(componentInfoHandle);
+    componentDescription = CFBridgingRelease(cfComponentDescription);
     
     return componentDescription;
 }
@@ -82,8 +73,8 @@ static BOOL getAudioUnitProperty(AudioUnit au, AudioUnitPropertyID propertyType,
 + (NSArray *) availableAudioProcessors
 {
     NSMutableArray *audioUnitNameArray;
-    ComponentDescription desc;
-    Component theAUComponent;
+    AudioComponentDescription desc;
+    AudioComponent theAUComponent;
 #if 0
     // Get the superclasses list for merging.
     NSArray *audioProcessorNames = [super availableAudioProcessors];
@@ -97,21 +88,21 @@ static BOOL getAudioUnitProperty(AudioUnit au, AudioUnitPropertyID propertyType,
 
     // NSLog(@"Found %ld Effect Audio Units\n", CountComponents(&desc));
 
-    theAUComponent = FindNextComponent(NULL, &desc);
+    theAUComponent = AudioComponentFindNext(NULL, &desc);
     
     if(namedComponents != nil) {
 	[namedComponents release];
     }
-    namedComponents = [[NSMutableDictionary dictionaryWithCapacity: CountComponents(&desc)] retain];
-    audioUnitNameArray = [NSMutableArray arrayWithCapacity: CountComponents(&desc)];
+    namedComponents = [[NSMutableDictionary dictionaryWithCapacity: AudioComponentCount(&desc)] retain];
+    audioUnitNameArray = [NSMutableArray arrayWithCapacity: AudioComponentCount(&desc)];
     
     while (theAUComponent != NULL) {
 	// now we need to get the information on the found component
-        ComponentDescription found;
+        AudioComponentDescription found;
 	NSString *componentDescription;
 	NSArray *componentFields;
 	
-        GetComponentInfo(theAUComponent, &found, 0, 0, 0);
+        AudioComponentGetDescription(theAUComponent, &found);
 
 #if 0
         NSLog(@"%4.4s - ", (char *) &(found.componentType));
@@ -127,7 +118,7 @@ static BOOL getAudioUnitProperty(AudioUnit au, AudioUnitPropertyID propertyType,
 					             nil];
 	[namedComponents setObject: componentFields forKey: componentDescription];
 
-        theAUComponent = FindNextComponent(theAUComponent, &desc);
+        theAUComponent = AudioComponentFindNext(theAUComponent, &desc);
     }
 
 #if 0
@@ -412,16 +403,16 @@ static void parameterListener(void *audioProcessorInstance, void *inObject, cons
 	NSLog(@"Setting kAudioUnitProperty_StreamFormat result %d\n", result);
 }
 
-- initWithParamCount: (const int) count name: (NSString *) audioUnitName
+- initWithParamCount: (NSInteger) count name: (NSString *) audioUnitName
 {
-    Component auComp;
+    AudioComponent auComp;
     OSErr result;
     AURenderCallbackStruct auRenderCallback;
     
     self = [super initWithParamCount: count name: audioUnitName];
 
     if (self != nil) {
-	ComponentDescription desc;
+	AudioComponentDescription desc;
 	AudioStreamBasicDescription auFormatDescription;
 	// Run through the list of audio units [SndAudioUnitProcessor availableAudioUnits] cached into class ivar.
 	NSArray *componentArray = [namedComponents valueForKey: audioUnitName];
@@ -442,13 +433,13 @@ static void parameterListener(void *audioProcessorInstance, void *inObject, cons
 	//NSLog(@"initialising %4.4s - %4.4s - %4.4s\n", 
 	//      (char *) &(desc.componentType), (char *) &(desc.componentSubType), (char *) &(desc.componentManufacturer));
 
-	auComp = FindNextComponent(NULL, &desc);
+	auComp = AudioComponentFindNext(NULL, &desc);
 	if (auComp == NULL) {
 	    NSLog(@"didn't find the component\n");
 	    return nil;
 	}
 	
-	if ((result = OpenAComponent(auComp, &audioUnit)) != 0) {
+	if ((result = AudioComponentInstanceNew(auComp, &audioUnit)) != noErr) {
 	    NSLog(@"Error: %d opening AudioUnit\n", result);
 	    return nil;
 	}
@@ -460,7 +451,7 @@ static void parameterListener(void *audioProcessorInstance, void *inObject, cons
 	// the unit, and so forth. Once a unit is initialized it is basically in a
 	// state in which it can be largely expected to do work.
 	
-	if ((result = AudioUnitInitialize(audioUnit)) != 0) {
+	if ((result = AudioUnitInitialize(audioUnit)) != noErr) {
 	    NSLog(@"Error: %d initialising AudioUnit\n", result);
 	    return nil;
 	}
@@ -501,7 +492,7 @@ static void parameterListener(void *audioProcessorInstance, void *inObject, cons
 			      inputBusNumber,
 			      &auRenderCallback,
 			      sizeof(auRenderCallback));
-	if(result != 0)
+	if(result != noErr)
 	    NSLog(@"Setting kAudioUnitProperty_SetRenderCallback result %d\n", result);
 	
 	[self discoverParameters];
@@ -513,7 +504,7 @@ static void parameterListener(void *audioProcessorInstance, void *inObject, cons
 - (void) dealloc
 { 
     // When we're finished with it
-    CloseComponent(audioUnit);
+    AudioComponentInstanceDispose(audioUnit);
     audioUnit = 0;
     if(parameterIDList != NULL)
 	free(parameterIDList);

@@ -24,6 +24,7 @@
 @class SndAudioArchViewObject;
 @class SndStreamClient;
 @class SndAudioProcessorChain;
+@protocol SndStreamArchitectureViewDelegate;
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -44,7 +45,7 @@
 /*! */ 
   NSTimer *timer;
 /*! */ 
-  NSMutableArray *displayObjectsArray;
+  NSMutableArray<SndAudioArchViewObject*> *displayObjectsArray;
 /*! */ 
   NSMutableAttributedString *msg;
 /*! currentSndArchObject */ 
@@ -52,7 +53,7 @@
 /*! objectArrayLock */ 
   NSLock *objectArrayLock;
 /*! */ 
-  id      delegate;
+  id<SndStreamArchitectureViewDelegate> delegate;
 }
 
 /*!
@@ -62,7 +63,7 @@
   @param      timer
   @return     self
 */
-- update: (NSTimer *) timer;
+- (void)update: (NSTimer *) timer;
 
 /*!
   @brief   To come
@@ -72,7 +73,7 @@
   @param      rect
   @return     self
 */
-- drawStreamClient: (SndStreamClient *) client inRect: (NSRect) rect;
+- (void)drawStreamClient: (SndStreamClient *) client inRect: (NSRect) rect;
 
 /*!
   @brief   To come
@@ -81,7 +82,7 @@
   @param      rect
   @return     self
 */
-- drawMixerInRect: (NSRect) rect;
+- (void)drawMixerInRect: (NSRect) rect;
 
 /*!
   @brief   To come
@@ -90,7 +91,7 @@
   @param      rect
   @return     self
 */
-- drawStreamManagerInRect: (NSRect) rect;
+- (void)drawStreamManagerInRect: (NSRect) rect;
 
 /*!
   @brief   To come
@@ -100,7 +101,7 @@
   @param      rect
   @return     self
 */
-- drawAudioProcessorChain: (SndAudioProcessorChain *) apc inRect: (NSRect) rect;
+- (void)drawAudioProcessorChain: (SndAudioProcessorChain *) apc inRect: (NSRect) rect;
 
 /*!
   @brief   To come  
@@ -108,7 +109,7 @@
   @param      aColor
   @return     self
 */
-- drawRect: (NSRect) aRect withColor: (NSColor *) aColor;
+- (void)drawRect: (NSRect) aRect withColor: (NSColor *) aColor;
 
 /*!
   @brief   To come  
@@ -118,16 +119,8 @@
 
 /*!
   @brief   To come
-  @param      delegate
-  @return     self
 */
-- (void) setDelegate: (id) delegate;
-
-/*!
-  @brief   To come
-  @return     A delegate id.
-*/
-- (id) delegate;
+@property (retain) id<SndStreamArchitectureViewDelegate> delegate;
 
 /*!
   @brief   To come  
@@ -139,17 +132,18 @@
   @brief   Clears the currently selected audio architecture object to nil.
   @return     self.
 */
-- clearCurrentlySelectedAudioArchObject;
+- (void)clearCurrentlySelectedAudioArchObject;
 
 @end
 
 ////////////////////////////////////////////////////////////////////////////////
-// Simple informal delegate protocol
+// Simple delegate protocol
 ////////////////////////////////////////////////////////////////////////////////
 
 /*! @protocol SndStreamArchitectureViewDelegateProtocol
 */
-@protocol SndStreamArchitectureViewDelegateProtocol
+@protocol SndStreamArchitectureViewDelegate <NSObject>
+@optional
 /*!
   @brief   sent to delegate when an on-screen audio object (mixer, processor
   manager, client) is clicked by the user.

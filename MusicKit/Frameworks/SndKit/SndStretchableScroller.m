@@ -34,10 +34,12 @@
     
     [super drawKnob];
     
+    //TODO: update to work without arrows.
+    
     { // Draw left arrow
-	NSPoint p1 = {knobRect.origin.x + OFFSET_FROM_ORIGIN_X, knobRect.origin.y + knobRect.size.height / 2};
-	NSPoint p2 = {knobRect.origin.x + STRETCH_HANDLE_SIZE, knobRect.origin.y + knobRect.size.height - OFFSET_FROM_ORIGIN_Y};
-	NSPoint p3 = {knobRect.origin.x + STRETCH_HANDLE_SIZE, knobRect.origin.y + OFFSET_FROM_ORIGIN_Y};
+	NSPoint p1 = NSMakePoint(knobRect.origin.x + OFFSET_FROM_ORIGIN_X, knobRect.origin.y + knobRect.size.height / 2);
+	NSPoint p2 = NSMakePoint(knobRect.origin.x + STRETCH_HANDLE_SIZE, knobRect.origin.y + knobRect.size.height - OFFSET_FROM_ORIGIN_Y);
+	NSPoint p3 = NSMakePoint(knobRect.origin.x + STRETCH_HANDLE_SIZE, knobRect.origin.y + OFFSET_FROM_ORIGIN_Y);
 	
 	if (stretchingLeftKnob)
 	    [[NSColor whiteColor] set];
@@ -48,9 +50,9 @@
 	[NSBezierPath strokeLineFromPoint: p3 toPoint: p1];
     }
     { // Draw right arrow
-	NSPoint p1 = {knobRect.origin.x + knobRect.size.width - OFFSET_FROM_ORIGIN_X, knobRect.origin.y + knobRect.size.height / 2};
-	NSPoint p2 = {knobRect.origin.x + knobRect.size.width - STRETCH_HANDLE_SIZE, knobRect.origin.y + knobRect.size.height - OFFSET_FROM_ORIGIN_Y};
-	NSPoint p3 = {knobRect.origin.x + knobRect.size.width - STRETCH_HANDLE_SIZE, knobRect.origin.y + OFFSET_FROM_ORIGIN_Y};
+	NSPoint p1 = NSMakePoint(knobRect.origin.x + knobRect.size.width - OFFSET_FROM_ORIGIN_X, knobRect.origin.y + knobRect.size.height / 2);
+	NSPoint p2 = NSMakePoint(knobRect.origin.x + knobRect.size.width - STRETCH_HANDLE_SIZE, knobRect.origin.y + knobRect.size.height - OFFSET_FROM_ORIGIN_Y);
+	NSPoint p3 = NSMakePoint(knobRect.origin.x + knobRect.size.width - STRETCH_HANDLE_SIZE, knobRect.origin.y + OFFSET_FROM_ORIGIN_Y);
 	if (stretchingRightKnob)
 	    [[NSColor whiteColor] set];
 	else
@@ -61,7 +63,7 @@
     }
 }
 
-- (void) modifySndViewScale: (float) newProportion
+- (void) modifySndViewScale: (CGFloat) newProportion
 {
     SndView *sndView = [[[self target] contentView] documentView];
 
@@ -77,7 +79,7 @@
 {
     NSRect knobRect = [self rectForPart: NSScrollerKnob];
     NSPoint mouseLocation = [self convertPoint: [theEvent locationInWindow] fromView: nil];
-    float distanceFromLeftEdge, distanceFromRightEdge;
+    CGFloat distanceFromLeftEdge, distanceFromRightEdge;
     
     // NSLog(@"knobRect = %f, %f, %f, %f   mouse: %f, %f\n", knobRect.origin.x, knobRect.origin.y, knobRect.size.width, knobRect.size.height, mouseLocation.x, mouseLocation.y);
     // NSLog(@"theEvent = %@\n", theEvent);
@@ -108,8 +110,8 @@
 	    switch ([theEvent type]) {
 	    case NSEventTypeLeftMouseDragged: 
 		{
-		    float  newValue, newProp;
-		    float  dx = mouseLoc.x - mouseLocation.x;
+		    CGFloat  newValue, newProp;
+                    CGFloat  dx = mouseLoc.x - mouseLocation.x;
 		    NSRect r = knobRect;
 		    
 		    r.size.width += (stretchingLeftKnob ? -dx : dx);
@@ -118,12 +120,8 @@
 		    newValue = (r.origin.x - slotRect.origin.x) / (slotRect.size.width - r.size.width);
 		    newProp  = r.size.width / slotRect.size.width;
 		    if(newProp >= MIN_PROPORTION) {
-#if !defined(MAC_OS_X_VERSION_10_5) || (MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_5)
-			[self setFloatValue: newValue knobProportion: newProp];
-#else
 			[self setKnobProportion: newProp];
 			[self setFloatValue: newValue];
-#endif
 			[self modifySndViewScale: newProp];
 		    }
 		}

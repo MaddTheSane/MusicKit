@@ -87,11 +87,11 @@
 	objectArrayLock = [[NSLock alloc] init];
 	
 	currentSndArchObject = nil;
-	timer = [NSTimer scheduledTimerWithTimeInterval: 1
-											 target: self
-										   selector: @selector(update:)
-										   userInfo: nil
-											repeats: TRUE];
+	timer = [[NSTimer scheduledTimerWithTimeInterval: 1
+                                                  target: self
+                                                selector: @selector(update:)
+                                                userInfo: nil
+                                                 repeats: TRUE] retain];
 	
 	if (displayObjectsArray != nil)
 		[displayObjectsArray removeAllObjects];
@@ -112,6 +112,8 @@
 	if (currentSndArchObject != nil)
 		[currentSndArchObject release];
 	[objectArrayLock release];
+    [timer invalidate];
+    [timer release];
 	
 	[super dealloc];
 }
@@ -120,10 +122,9 @@
 // update:
 ////////////////////////////////////////////////////////////////////////////////
 
-- update: (NSTimer*) timer
+- (void)update: (NSTimer*) timer
 {
 	[self setNeedsDisplay: TRUE];
-	return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -151,7 +152,7 @@
 		[self drawMixerInRect: xr];
 		{
 			id theSndArchObj = [[SndStreamManager defaultStreamManager] mixer];
-			id theDisplayObj = [[SndAudioArchViewObject alloc] initWithRect: xr andSndAudioArchObject: theSndArchObj];
+                    SndAudioArchViewObject *theDisplayObj = [[SndAudioArchViewObject alloc] initWithRect: xr andSndAudioArchObject: theSndArchObj];
 			[displayObjectsArray addObject: theDisplayObj];
 		}
 		
@@ -160,7 +161,7 @@
 		[self drawStreamManagerInRect: mr];
 		{
 			id theSndArchObj = [SndStreamManager defaultStreamManager];
-			id theDisplayObj = [[SndAudioArchViewObject alloc] initWithRect: mr andSndAudioArchObject: theSndArchObj];
+                    SndAudioArchViewObject *theDisplayObj = [[SndAudioArchViewObject alloc] initWithRect: mr andSndAudioArchObject: theSndArchObj];
 			[displayObjectsArray addObject: theDisplayObj];
 		}
 		
@@ -176,7 +177,7 @@
 				cr.origin.y    = rect.size.height * 5 / 7;
 				{
 					id theSndArchObj = [mixer clientAtIndex: i];
-					id theDisplayObj = [[SndAudioArchViewObject alloc] initWithRect: cr andSndAudioArchObject: theSndArchObj];
+                                    SndAudioArchViewObject *theDisplayObj = [[SndAudioArchViewObject alloc] initWithRect: cr andSndAudioArchObject: theSndArchObj];
 					[self drawStreamClient: theSndArchObj inRect: cr];
 					[displayObjectsArray addObject: theDisplayObj];
 				}
@@ -196,9 +197,9 @@
 				{
 					NSPoint p = {5,10};
 					if (currentSndArchObject == nil)
-						[msg initWithString: @"Ready"];
+						[msg setAttributedString:[[[NSAttributedString alloc] initWithString:@"Ready"] autorelease]];
 					else
-						[msg initWithString: [currentSndArchObject description]];
+                                            [msg setAttributedString:[[[NSAttributedString alloc] initWithString:[currentSndArchObject description]] autorelease]];
 					[msg drawAtPoint: p];
 				}
 			}
@@ -211,66 +212,61 @@
 // drawStreamClient:atOrigin:
 ////////////////////////////////////////////////////////////////////////////////
 
-- drawStreamClient: (SndStreamClient*) client inRect: (NSRect) rect
+- (void)drawStreamClient: (SndStreamClient*) client inRect: (NSRect) rect
 {
 	NSMutableAttributedString *s = [[NSMutableAttributedString alloc] initWithString: [client clientName]];
-	NSRange r = {0, [s length]};
+	NSRange r = NSMakeRange(0, [s length]);
 	NSRect  aRect = rect;
-	NSColor *clr = (currentSndArchObject == client ? [NSColor redColor] : [NSColor blackColor]);
+	NSColor *clr = (currentSndArchObject == client ? [NSColor systemRedColor] : [NSColor labelColor]);
 	
 	[self drawRect: rect withColor: clr];
-	[s setAlignment: NSCenterTextAlignment range: r];
+    [s setAlignment: NSTextAlignmentCenter range: r];
 	[s drawInRect: rect];
 	aRect.origin.x += rect.size.width + 10;
 	[self drawAudioProcessorChain: [client audioProcessorChain] inRect: aRect];
-	
-	return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // drawRootNodeAtOrigin:
 ////////////////////////////////////////////////////////////////////////////////
 
-- drawMixerInRect: (NSRect) rect
+- (void)drawMixerInRect: (NSRect) rect
 {
 	NSMutableAttributedString *s     = [[NSMutableAttributedString alloc] initWithString: @"Mixer"];
 	NSRange                    r     = {0, [s length]};
 	SndStreamMixer            *mixer = [[SndStreamManager defaultStreamManager] mixer];
 	SndAudioProcessorChain    *apc   = [mixer audioProcessorChain];
 	NSRect                     aRect = rect;
-	NSColor *clr = (currentSndArchObject == mixer ? [NSColor redColor] : [NSColor blackColor]);
+	NSColor *clr = (currentSndArchObject == mixer ? [NSColor systemRedColor] : [NSColor labelColor]);
 	
 	[self drawRect: rect withColor: clr];
-	[s setAlignment: NSCenterTextAlignment range: r];
+    [s setAlignment: NSTextAlignmentCenter range: r];
 	[s drawInRect: rect];
 	aRect.origin.x += rect.size.width + 10;
 	[self drawAudioProcessorChain: apc inRect: aRect];
-	
-	return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // drawRootNodeAtOrigin:
 ////////////////////////////////////////////////////////////////////////////////
 
-- drawStreamManagerInRect: (NSRect) rect
+- (void)drawStreamManagerInRect: (NSRect) rect
 {
 	NSMutableAttributedString *s = [[NSMutableAttributedString alloc] initWithString: @"Manager"];
 	NSRange r = {0, [s length]};
 	NSColor *clr = (currentSndArchObject == [SndStreamManager defaultStreamManager] ?
-					[NSColor redColor] : [NSColor blackColor]);
+					[NSColor systemRedColor] : [NSColor labelColor]);
 	
 	[self drawRect: rect withColor: clr];
-	[s setAlignment: NSCenterTextAlignment range: r];
+    [s setAlignment: NSTextAlignmentCenter range: r];
 	[s drawInRect: rect];
-	return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // drawAudioProcessorChain:inRect:
 ////////////////////////////////////////////////////////////////////////////////
 
-- drawAudioProcessorChain: (SndAudioProcessorChain*) apc inRect: (NSRect) rect
+- (void)drawAudioProcessorChain: (SndAudioProcessorChain*) apc inRect: (NSRect) rect
 {
 	int c = [apc processorCount], i;
 	for (i = 0; i < c; i++) {
@@ -290,17 +286,16 @@
 		}
 		[self drawRect: theProcRect withColor: clr];
 		[name addAttribute: NSForegroundColorAttributeName value: textClr range: r];
-		[name setAlignment: NSCenterTextAlignment range: r];
+            [name setAlignment: NSTextAlignmentCenter range: r];
 		[name drawInRect: theProcRect];
 	}
-	return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // drawRect:withColor:
 ////////////////////////////////////////////////////////////////////////////////
 
-- drawRect: (NSRect) aRect withColor: (NSColor*) aColor
+- (void)drawRect: (NSRect) aRect withColor: (NSColor*) aColor
 {
 	NSBezierPath *userPath  = [NSBezierPath bezierPath]; // user path for drawing segments
 	NSPoint p1 = aRect.origin;
@@ -316,7 +311,6 @@
 	p1.y = aRect.origin.y;
 	[userPath lineToPoint: p1];
 	[userPath stroke];
-	return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -325,7 +319,7 @@
 
 - (void) mouseUp: (NSEvent*) theEvent
 {
-	int i, c;
+	NSInteger i, c;
 	NSPoint mouseLoc = [self convertPoint:[theEvent locationInWindow] fromView:nil];
 	
 	[objectArrayLock lock];
@@ -347,25 +341,7 @@
 	[self setNeedsDisplay: TRUE];  
 }
 
-/////////////////////////////////////////////////////////////////////////////////
-// setDelegate:
-////////////////////////////////////////////////////////////////////////////////
-
-- (void) setDelegate: (id) d
-{
-	if (delegate)
-		[delegate release];
-	delegate = [d retain];
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// delegate
-////////////////////////////////////////////////////////////////////////////////
-
-- (id) delegate
-{
-	return delegate;
-}
+@synthesize delegate;
 
 ////////////////////////////////////////////////////////////////////////////////
 // currentlySelectedAudioArchObject
@@ -376,12 +352,11 @@
 	return [[currentSndArchObject retain] autorelease];
 }
 
-- clearCurrentlySelectedAudioArchObject
+- (void)clearCurrentlySelectedAudioArchObject
 {
 	if (currentSndArchObject != nil)
 		[currentSndArchObject release];
 	currentSndArchObject = nil;
-	return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

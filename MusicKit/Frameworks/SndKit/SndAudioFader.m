@@ -256,7 +256,7 @@ BOOL middleOfMovement(SndAudioFader *saf, double xVal, id <SndEnveloping,NSObjec
       [theEnv insertXValue: endRampTime
                     yValue: endPrecedingRampLevel
                      flags: SND_FADER_ATTACH_RAMP_RIGHT
-              atBreakpoint: index1 + dissectsAtStart ? 2 : 1];
+              atBreakpoint: index1 + (dissectsAtStart ? 2 : 1)];
     }
   }
   // finally, put in new ramp.

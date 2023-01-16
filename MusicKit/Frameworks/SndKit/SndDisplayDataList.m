@@ -38,17 +38,6 @@ CONDITIONS OF THIS AGREEMENT.
 
 @implementation SndDisplayDataList
 
-static NSInteger pixelCompare(id x, id y, void *context)
-{
-    int first  = [(SndDisplayData *) x startPixel];
-    int second = [(SndDisplayData *) y startPixel];
-    if (first < second)
-        return NSOrderedAscending;
-    if (first == second)
-        return NSOrderedSame;
-    return NSOrderedDescending;
-}
-
 - init
 {
     self = [super init];
@@ -86,19 +75,26 @@ static NSInteger pixelCompare(id x, id y, void *context)
     return sig;
 }
 
-- sort
+- (void)sort
 {
-    [embeddedArray sortedArrayUsingFunction: pixelCompare context: NULL];
-    return self;
+    [embeddedArray sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull x, id  _Nonnull y) {
+        NSInteger first  = [(SndDisplayData *) x startPixel];
+        NSInteger second = [(SndDisplayData *) y startPixel];
+        if (first < second)
+            return NSOrderedAscending;
+        if (first == second)
+            return NSOrderedSame;
+        return NSOrderedDescending;
+    }];
 }
 
-- (int) findObjectContaining: (int) pixel
-			next: (int *) next
-		 leadsOnFrom: (int *) leadsOnFrom
+- (NSInteger) findObjectContaining: (NSInteger) pixel
+                              next: (NSInteger *) next
+                       leadsOnFrom: (NSInteger *) leadsOnFrom
 {
-    int i;
-    int theStart;
-    int numElements = [embeddedArray count];
+    NSInteger i;
+    NSInteger theStart;
+    NSInteger numElements = [embeddedArray count];
 
     [self sort];
     for (i = 0; i < numElements; i++) {
@@ -109,40 +105,40 @@ static NSInteger pixelCompare(id x, id y, void *context)
                 if ([[embeddedArray objectAtIndex: i - 1] endPixel] == pixel - 1)
                     *leadsOnFrom = i - 1;
                 else
-                    *leadsOnFrom = -1;
+                    *leadsOnFrom = NSNotFound;
             }
             else
-                *leadsOnFrom = -1;
-            return -1; /* passed it without finding it */
+                *leadsOnFrom = NSNotFound;
+            return NSNotFound; /* passed it without finding it */
         }
         if (theStart == pixel) {
             if (i == numElements - 1)
-                *next = -1;
+                *next = NSNotFound;
             else
                 *next = i+1;
             if (i > 0) {
                 if ([[embeddedArray objectAtIndex: i - 1] endPixel] == pixel - 1)
                     *leadsOnFrom = i-1;
                 else
-                    *leadsOnFrom = -1;
+                    *leadsOnFrom = NSNotFound;
             }
             else
-                *leadsOnFrom = -1;
+                *leadsOnFrom = NSNotFound;
             return i; /* found it, bang on target */
         }
         if ([[embeddedArray objectAtIndex: i] endPixel] >= pixel) { /* cache spans this pixel */
             if (i == numElements - 1)
-                *next = -1;
+                *next = NSNotFound;
             else
                 *next = i+1;
             if (i > 0) {
                 if ([[embeddedArray objectAtIndex: i - 1] endPixel] == [[embeddedArray objectAtIndex: i] startPixel] - 1)
                     *leadsOnFrom = i - 1;
                 else
-                    *leadsOnFrom = -1;
+                    *leadsOnFrom = NSNotFound;
             }
             else
-                *leadsOnFrom = -1;
+                *leadsOnFrom = NSNotFound;
             return i; /* found it */
         }
     }
@@ -150,12 +146,12 @@ static NSInteger pixelCompare(id x, id y, void *context)
         if ([[embeddedArray objectAtIndex: numElements - 1] endPixel] == pixel - 1)
             *leadsOnFrom = numElements - 1;
         else
-            *leadsOnFrom = -1;
+            *leadsOnFrom = NSNotFound;
     }
     else
-        *leadsOnFrom = -1;
-    *next = -1;
-    return -1; /* went through all caches and it's not there */
+        *leadsOnFrom = NSNotFound;
+    *next = NSNotFound;
+    return NSNotFound; /* went through all caches and it's not there */
 }
 
 - (id) initWithCoder: (NSCoder *) aDecoder
@@ -168,7 +164,7 @@ static NSInteger pixelCompare(id x, id y, void *context)
 	embeddedArray = [[aDecoder decodeObjectForKey: @"SndDisplayDataList_embeddedArray"] retain];
     }
     else {
-	int v = [aDecoder versionForClassName: @"SndDisplayDataList"];
+	NSInteger v = [aDecoder versionForClassName: @"SndDisplayDataList"];
 	if (v == 0) {
 	    [embeddedArray release];
 	    embeddedArray = [[aDecoder decodeObject] retain];

@@ -162,24 +162,15 @@
   m_fBoost       = 1.0f + m_fBoostRange*m_fBoostAmount;
 }
 
-- (void) setKnee: (const float) fKnee
-{
-  m_fKnee = fKnee;
-}
-
-- (void) setHardness: (const float) fHard
-{
-  m_fHardness = fHard;
-}
+@synthesize knee=m_fKnee;
+@synthesize hardness=m_fHardness;
 
 //////////////////////////////////////////////////////////////////////////////
 // micro accessors
 //////////////////////////////////////////////////////////////////////////////
 
-- (float) boostAmount { return m_fBoostAmount; };
-- (float) boostRange  { return m_fBoostRange;  };
-- (float) knee        { return m_fKnee;        };
-- (float) hardness    { return m_fHardness;    };
+@synthesize boostAmount=m_fBoostAmount;
+@synthesize boostRange=m_fBoostRange;
 
 //////////////////////////////////////////////////////////////////////////////
 

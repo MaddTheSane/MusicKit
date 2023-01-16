@@ -70,7 +70,7 @@ static NSMutableArray *fxClassesArray = nil;
 // audioProcessor
 ////////////////////////////////////////////////////////////////////////////////
 
-+ audioProcessor
++ (SndAudioProcessor *)audioProcessor
 {
     return [[SndAudioProcessor new] autorelease];
 }
@@ -83,7 +83,7 @@ static NSMutableArray *fxClassesArray = nil;
     return [processor autorelease];
 }
 
-- initWithParamCount: (const int) count name: (NSString *) s
+- initWithParamCount: (NSInteger) count name: (NSString *) s
 {
     self = [super init];
     if (self) {
@@ -162,7 +162,7 @@ static NSMutableArray *fxClassesArray = nil;
 // setNumParams
 ////////////////////////////////////////////////////////////////////////////////
 
-- (void) setNumParams: (const int) c
+- (void) setNumParams: (NSInteger) c
 {
   numParams = c;
 }
@@ -171,16 +171,15 @@ static NSMutableArray *fxClassesArray = nil;
 // reset
 ////////////////////////////////////////////////////////////////////////////////
 
-- reset
+- (void) reset
 {
-  return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // paramCount
 ////////////////////////////////////////////////////////////////////////////////
 
-- (int) paramCount
+- (NSInteger) paramCount
 {
   return numParams;
 }
@@ -279,55 +278,14 @@ static NSMutableArray *fxClassesArray = nil;
   return FALSE;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// setAudioProcessorChain
-////////////////////////////////////////////////////////////////////////////////
-
-- (void) setAudioProcessorChain: (SndAudioProcessorChain *) inChain
-{
-  audioProcessorChain = inChain; /* non retained back pointer */
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// audioProcessorChain
-////////////////////////////////////////////////////////////////////////////////
-
-- (SndAudioProcessorChain *) audioProcessorChain
-{
-  return [[audioProcessorChain retain] autorelease];
-}
+@synthesize audioProcessorChain;
 
 ////////////////////////////////////////////////////////////////////////////////
 // isActive
 ////////////////////////////////////////////////////////////////////////////////
 
-- (BOOL) isActive
-{
-  return active;
-}
-
-- setActive: (const BOOL) b
-{
-  active = b;
-  return self;
-}
-
-//////////////////////////////////////////////////////////////////////////////
-// name
-//////////////////////////////////////////////////////////////////////////////
-
-- setName: (NSString *) aName
-{
-  if (name != nil)
-    [name release];
-  name = [aName retain];
-  return self;
-}
-
-- (NSString *) name
-{
-  return [[name retain] autorelease];
-}
+@synthesize active;
+@synthesize name;
 
 ////////////////////////////////////////////////////////////////////////////////
 // paramDictionary
@@ -391,15 +349,6 @@ static NSMutableArray *fxClassesArray = nil;
 
 ////////////////////////////////////////////////////////////////////////////////
 
-
-- (void) setParameterDelegate: (id) delegate;
-{
-    parameterDelegate = delegate; // TODO Should be retained?
-}
-
-- (id) parameterDelegate
-{
-    return parameterDelegate;
-}
+@synthesize parameterDelegate;
 
 @end

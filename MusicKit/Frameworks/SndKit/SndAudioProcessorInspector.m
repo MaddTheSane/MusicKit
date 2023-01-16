@@ -90,7 +90,7 @@ static SndAudioProcessorInspector* defaultInspector = nil;
 	    
 	    {
 		NSArray *fxClassesArray = [SndAudioProcessor fxClasses];
-		int i, c = [fxClassesArray count];
+		NSInteger i, c = [fxClassesArray count];
 		
 		[fxChooser removeAllItems];
 		for (i = 0; i < c; i++) {
@@ -129,7 +129,7 @@ static SndAudioProcessorInspector* defaultInspector = nil;
 // setAudioProcessor:
 ////////////////////////////////////////////////////////////////////////////////
 
-- setAudioProcessor: (SndAudioProcessor *) anAudProc
+- (void)setAudioProcessor: (SndAudioProcessor *) anAudProc
 {
     NSIndexSet *indexes = [NSIndexSet indexSetWithIndex: 0];
     
@@ -144,31 +144,28 @@ static SndAudioProcessorInspector* defaultInspector = nil;
     
     [parameterTableView reloadData];
     [processorActive setIntValue: [theAudProc isActive]];
-    return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // onProcessorActive:
 ////////////////////////////////////////////////////////////////////////////////
 
-- onProcessorActive: (id) sender
+- (IBAction)onProcessorActive: (id) sender
 {
   [theAudProc setActive: [sender intValue]];
-  return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // onParameterValueSlider:
 ////////////////////////////////////////////////////////////////////////////////
 
-- onParameterValueSlider: (id) sender
+- (IBAction)onParameterValueSlider: (id) sender
 {
-  int r = [parameterTableView selectedRow];
+  NSInteger r = [parameterTableView selectedRow];
   [theAudProc setParam: r toValue: [sender doubleValue]];
   [parameterValueSilder setDoubleValue: [theAudProc paramValue: r]];
 
   [parameterTableView reloadData];
-  return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -178,7 +175,7 @@ static SndAudioProcessorInspector* defaultInspector = nil;
 - (void)tableView:(NSTableView*)tableView didClickTableColumn:(NSTableColumn *)tableColumn
 {
   if (theAudProc != nil) {
-    int row = [tableView selectedRow];
+    NSInteger row = [tableView selectedRow];
     [parameterValueSilder setFloatValue: [theAudProc paramValue: row]];
     [parameterValueSilder setNeedsDisplay: YES];
   }
@@ -188,15 +185,14 @@ static SndAudioProcessorInspector* defaultInspector = nil;
 // parameterTableAction:
 ////////////////////////////////////////////////////////////////////////////////
 
-- parameterTableAction: (id) sender
+- (void)parameterTableAction: (id) sender
 {
-  int r = [parameterTableView clickedRow];
+  NSInteger r = [parameterTableView clickedRow];
 //  printf("row: %i\n",r);
   if (theAudProc != nil) {
     [parameterValueSilder setFloatValue:  [theAudProc paramValue: r]];
     [parameterValueSilder setNeedsDisplay: YES];
   }
-  return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -263,7 +259,7 @@ static SndAudioProcessorInspector* defaultInspector = nil;
 // onAddFxButton:
 ////////////////////////////////////////////////////////////////////////////////
 
-- onAddFxButton: (id) sender
+- (IBAction)onAddFxButton: (id) sender
 {
   id currentObj = [sndArchView currentlySelectedAudioArchObject];
   
@@ -273,14 +269,13 @@ static SndAudioProcessorInspector* defaultInspector = nil;
     SndAudioProcessor *newFX = [[fxClass alloc] init];
     [[currentObj audioProcessorChain] addAudioProcessor: newFX];
   }
-  return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // onDelFxButton:
 ////////////////////////////////////////////////////////////////////////////////
 
-- onDelFxButton: (id) sender
+- (IBAction)onDelFxButton: (id) sender
 {
   id currentObj = [sndArchView currentlySelectedAudioArchObject];
   if ([currentObj isKindOfClass: [SndAudioProcessor class]]) {
@@ -288,7 +283,6 @@ static SndAudioProcessorInspector* defaultInspector = nil;
     [sndArchView clearCurrentlySelectedAudioArchObject];
     [apc removeAudioProcessor: currentObj];
   }
-  return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

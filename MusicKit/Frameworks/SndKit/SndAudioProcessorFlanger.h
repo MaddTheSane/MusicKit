@@ -103,84 +103,42 @@ enum {
   
   @return
 */
-- (void) setRate: (const float) f;
+@property (nonatomic) float rate;
 /*!
   @brief
   
   
   @return
 */
-- (void) setMin: (const float) f;
+@property (nonatomic) float min;
 /*!
   @brief
   
   
   @return
 */
-- (void) setMax: (const float) f;
+@property (nonatomic) float max;
 /*!
   @brief
   
   
   @return
 */
-- (void) setSwap: (const float) f;
+@property (nonatomic) float swap;
 /*!
   @brief
   
   
   @return
 */
-- (void) setPhase: (const float) f;
+@property (nonatomic) float phase;
 /*!
   @brief
   
   
   @return
 */
-- (void) setFeedback: (const float) f;
-/*!
-  @brief
-  
-  
-  @return
-*/
-- (float) rate;
-/*!
-  @brief
-  
-  
-  @return
-*/
-- (float) min;
-/*!
-  @brief
-  
-  
-  @return
-*/
-- (float) max;
-/*!
-  @brief
-  
-  
-  @return
-*/
-- (float) swap;
-/*!
-  @brief
-  
-  
-  @return
-*/
-- (float) phase;
-/*!
-  @brief
-  
-  
-  @return
-*/
-- (float) feedback;
+@property (nonatomic) float feedback;
 
 @end
 

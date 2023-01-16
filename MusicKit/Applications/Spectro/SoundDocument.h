@@ -19,11 +19,7 @@
 #import "SpectrumDocument.h"
 #import "ScrollingSound.h"
 
-#if !defined(MAC_OS_X_VERSION_10_6) || (MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_6)
-@interface SoundDocument: NSDocument
-#else
-@interface SoundDocument: NSDocument <NSWindowDelegate>
-#endif
+@interface SoundDocument: NSDocument <NSWindowDelegate, SndDelegate, SndViewDelegate>
 {
     IBOutlet NSButton *playButton;
     IBOutlet NSButton *recordButton;
@@ -101,28 +97,8 @@
 
 @end
 
-@interface SoundDocument(ScrollingSoundDelegate)
+@interface SoundDocument(/*ScrollingSoundDelegate*/)
 
 - displayChanged: sender;
-
-@end
-
-@interface SoundDocument(SoundDelegate)
-
-- (void) didPlay: (Snd *) sender duringPerformance: (SndPerformance *) performance;
-- didRecord: sender;
-- hadError: sender;
-- selectionChanged: sender;
-- soundDidChange: sender;
-
-@end
-
-@interface SoundDocument(WindowDelegate)
-
-- (void) windowDidBecomeMain: (NSNotification *) notification;
-- (void) windowDidResignMain: (NSNotification *) notification;
-- (void) windowDidMiniaturize: (NSNotification *) notification;
-- (void) windowDidResize: (NSNotification *) notification;
-- (BOOL) windowWillClose: (id) sender;
 
 @end

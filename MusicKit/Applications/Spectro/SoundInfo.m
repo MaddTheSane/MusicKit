@@ -13,32 +13,27 @@
 
 - init
 {
-    [super init];
+    self = [super init];
     [NSBundle loadNibNamed:@"soundInfo.nib" owner:self];
     ssize = 0;
     return self;
 }
 
-- displaySound: (Snd *) sound title: (NSString *) title
+- (void) displaySound: (Snd *) sound title: (NSString *) title
 {
-    sndhdr = [sound retain];
+    self.soundHeader = [sound retain];
     [self display:title];
-    return self;
 }
 
-- setSoundHeader: (Snd *) sound
-{
-    sndhdr = [sound retain];
-    return self;
-}
+@synthesize soundHeader=sndhdr;
 
 - (void) display: (NSString *) title
 {
     int hours, minutes;
-    float seconds;
+    NSTimeInterval seconds;
     
     [siPanel setTitle: title];
-    [siSize setIntValue: [sndhdr dataSize]];
+    [siSize setIntegerValue: [sndhdr dataSize]];
     [siRate setIntValue: [sndhdr samplingRate]];
     [siChannels setIntValue: [sndhdr channelCount]];
     [siFormat setStringValue: [sndhdr formatDescription]];
@@ -50,60 +45,6 @@
     [siTime setStringValue: [NSString stringWithFormat: @"%02d:%02d:%05.2f", hours, minutes, seconds]];
     [siPanel makeKeyAndOrderFront: self];
     [NSApp runModalForWindow: siPanel];
-}
-
-- setSiPanel:anObject
-{
-    siPanel = anObject;
-    [siPanel setDelegate:self];
-    return self;
-}
-- setSiSize:anObject
-{
-    siSize = anObject;
-    [siSize setSelectable:NO];
-    [siSize setEditable:NO];
-    return self;
-}
-
-- setSiFrames:anObject
-{
-    siFrames = anObject;
-    [siFrames setSelectable:NO];
-    [siFrames setEditable:NO];
-    return self;
-}
-
-- setSiFormat:anObject
-{
-    siFormat = anObject;
-    [siFormat setSelectable:NO];
-    [siFormat setEditable:NO];
-    return self;
-}
-
-- setSiTime:anObject
-{
-    siTime = anObject;
-    [siTime setSelectable:NO];
-    [siTime setEditable:NO];
-    return self;
-}
-
-- setSiRate:anObject
-{
-    siRate = anObject;
-    [siRate setSelectable:NO];
-    [siRate setEditable:NO];
-    return self;
-}
-
-- setSiChannels:anObject
-{
-    siChannels = anObject;
-    [siChannels setSelectable:NO];
-    [siChannels setEditable:NO];
-    return self;
 }
 
 - (BOOL) windowShouldClose: (id) sender

@@ -39,11 +39,7 @@
   styled" float params in the range [0, 1]. TODO This should be changed to utilize
   the newer NSValue styled parameter API.
 */
-#if !defined(MAC_OS_X_VERSION_10_6) || (MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_6)
-@interface SndAudioProcessorInspector : NSObject {
-#else
-@interface SndAudioProcessorInspector : NSObject <NSTableViewDataSource> {
-#endif
+@interface SndAudioProcessorInspector : NSObject <NSTableViewDataSource, NSTableViewDelegate, SndStreamArchitectureViewDelegate> {
     
   IBOutlet NSTableView *parameterTableView;
   IBOutlet NSSlider *parameterValueSilder;
@@ -65,7 +61,7 @@
   
   @return     id to the default SndAudioProcessorInspector.
 */
-+ defaultAudioProcessorInspector;
++ (instancetype)defaultAudioProcessorInspector;
 
 /*!
   @brief
@@ -73,7 +69,7 @@
   @param      anAudProc
   @return     self
 */
-- initWithAudioProcessor: (SndAudioProcessor*) anAudProc;
+- (instancetype)initWithAudioProcessor: (SndAudioProcessor*) anAudProc;
 
 /*!
   @brief Assign an SndAudioProcessor instance for inspection.
@@ -81,7 +77,7 @@
   @param      anAudProc
   @return
 */
-- setAudioProcessor: (SndAudioProcessor*) anAudProc;
+- (void)setAudioProcessor: (SndAudioProcessor*) anAudProc;
 
 /*!
   @brief Action method called when the processor is set active.
@@ -89,7 +85,7 @@
   @param      sender
   @return
 */
-- onProcessorActive: (id) sender;
+- (IBAction)onProcessorActive: (id) sender;
 
 /*!
   @brief
@@ -97,7 +93,7 @@
   @param      sender
   @return
 */
-- onParameterValueSlider: (id) sender;
+- (IBAction)onParameterValueSlider: (id) sender;
 
 /*!
   @brief
@@ -105,7 +101,7 @@
   @param      sender
   @return
 */
-- parameterTableAction: (id) sender;
+- (IBAction)parameterTableAction: (id) sender;
     
 /*!
   @brief   Adds an SndAudioProcessor of the Chooser's  currently selected type
@@ -115,7 +111,7 @@
   @param      sender sender's id.
   @return     self
 */
-- onAddFxButton: (id) sender;
+- (IBAction)onAddFxButton: (id) sender;
 
 /*!
   @brief   Respose method for the Delete button.
@@ -126,7 +122,7 @@
   @param      sender sender's id.
   @return     self
 */
-- onDelFxButton: (id) sender;
+- (IBAction)onDelFxButton: (id) sender;
 
 @end
 

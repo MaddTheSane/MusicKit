@@ -52,17 +52,17 @@
 - (void) dealloc;
 - (unsigned char*) data;
 - (int) dataSize;
-- (int) readSoundfile:(NSString *)filename startFrame: (int) startFrame frameCount: (int) frameCount;
-- (int) readSoundfile: (NSString*) filename;
+- (SndError) readSoundfile:(NSString *)filename startFrame: (int) startFrame frameCount: (int) frameCount;
+- (SndError) readSoundfile: (NSString*) filename;
 - (SndAudioBuffer*) audioBufferForSamplesInRange: (NSRange) playRegion;
 - (long) fillAudioBuffer: (SndAudioBuffer *) buff
 	        toLength: (long) fillLength
           samplesInRange: (NSRange) sndSampleReadRange;
 
-- (NSString*) filename;
+@property (readonly, copy) NSString *filename;
 
-- requestNextBufferWithRange: (NSRange) range;
-- receiveRequestedBuffer: (SndAudioBuffer*) aBuffer;
+- (void)requestNextBufferWithRange: (NSRange) range;
+- (void)receiveRequestedBuffer: (SndAudioBuffer*) aBuffer;
 
 @end
 
@@ -73,9 +73,9 @@
 }
 
 - initWithSndOnDisk: (SndOnDisk*) sndExpt bufferRange: (NSRange) range;
-- (SndOnDisk*) snd;
-- (NSRange) range;
-- (SndAudioBuffer*) buffer;
+@property (readonly, retain) SndOnDisk *snd;
+@property (readonly) NSRange range;
+@property (readonly, retain) SndAudioBuffer *buffer;
 
 @end
 
@@ -87,7 +87,8 @@
 }
 
 + (void) initialize;
-+ defaultServer;
++ (SndOnDiskAudioBufferServer*)defaultServer;
+@property (class, readonly, retain) SndOnDiskAudioBufferServer *defaultServer;
 + (SndAudioBuffer*) readRange: (NSRange) range ofSoundFile: (NSString*) theFileName;
 - addJob: (SndOnDiskAudioBufferServerJob*) aJob;
 - (void) serverThread;

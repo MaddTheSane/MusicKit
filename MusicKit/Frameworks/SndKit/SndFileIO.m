@@ -131,7 +131,7 @@
 {
     NSArray *exts = [[self class] soundFileExtensions];
     NSString *ext  = [path pathExtension];
-    int extensionIndex, extensionCount = [exts count];
+    NSInteger extensionIndex, extensionCount = [exts count];
     
     for (extensionIndex = 0; extensionIndex < extensionCount; extensionIndex++) {
 	NSString *anExt = [exts objectAtIndex: extensionIndex];
@@ -213,7 +213,7 @@
 
 // TODO it would be preferable to have readSoundfile: (NSString *) fromRange: (NSRange) 
 // However we need a mechanism to indicate infinity for the length in order to signal to read to EOF.
-- (int) readSoundfile: (NSString *) path
+- (SndError) readSoundfile: (NSString *) path
 	   startFrame: (unsigned long) startFrame
 	   frameCount: (long) frameCount // must be signed for -1 = read to EOF marker.
 {
@@ -338,7 +338,7 @@
 #endif
 }
 
-- (int) readSoundfile: (NSString *) filename
+- (SndError) readSoundfile: (NSString *) filename
 {
     NSDictionary *fileAttributeDictionary;
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -402,7 +402,7 @@ int SndWriteSampleData(SNDFILE *sfp, void *soundData, SndFormat soundDataFormat)
 }
 
 // The underlying sound file writing library (libsndfile) will look after endian issues.
-- (int) writeSoundfile: (NSString *) path
+- (SndError) writeSoundfile: (NSString *) path
 	    fileFormat: (NSString *) fileFormat
 	    dataFormat: (SndSampleFormat) fileDataFormat
 {
@@ -468,7 +468,7 @@ int SndWriteSampleData(SNDFILE *sfp, void *soundData, SndFormat soundDataFormat)
 // Set the output format from the format of the sound itself, which
 // nowdays will typically be float since all buffers will read that way. 
 // Any other desired format requires converting the Snd.
-- (int) writeSoundfile: (NSString *) filename
+- (SndError) writeSoundfile: (NSString *) filename
 {
     // compaction ideally should not be necessary, but libsndfile  requires it for now
     [self compactSamples]; 

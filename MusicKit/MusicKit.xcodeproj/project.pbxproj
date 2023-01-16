@@ -175,6 +175,7 @@
 		556A3D2A29722665007FFAA7 /* Localized.strings in Resources */ = {isa = PBXBuildFile; fileRef = 556A3D2C29722665007FFAA7 /* Localized.strings */; };
 		556A3D2E2972AB82007FFAA7 /* MKPerformSndMIDI.h in Headers */ = {isa = PBXBuildFile; fileRef = 556A3D2D2972AB82007FFAA7 /* MKPerformSndMIDI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		556A3D382972B1B3007FFAA7 /* MKDSP.h in Headers */ = {isa = PBXBuildFile; fileRef = 556A3D372972B1B3007FFAA7 /* MKDSP.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		55A2A8C62973D69C00BCC536 /* SoundLib.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55A2A8C82973D69C00BCC536 /* SoundLib.strings */; };
 		D8001DE30762D2F700508A26 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
 		D8001FE00762D3B100508A26 /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D8001FE10762D3B100508A26 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
@@ -1592,6 +1593,7 @@
 		556A3D2D2972AB82007FFAA7 /* MKPerformSndMIDI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKPerformSndMIDI.h; sourceTree = "<group>"; };
 		556A3D372972B1B3007FFAA7 /* MKDSP.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKDSP.h; sourceTree = "<group>"; };
 		556A3D39297343D0007FFAA7 /* MusicKit.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = MusicKit.modulemap; sourceTree = "<group>"; };
+		55A2A8C72973D69C00BCC536 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SoundLib.strings; sourceTree = "<group>"; };
 		D80032570819F0C600E47C6C /* MidiEcho.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = MidiEcho.icns; sourceTree = "<group>"; };
 		D800325C0819F52E00E47C6C /* midi.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = midi.icns; sourceTree = "<group>"; };
 		D80151BF0FA64B24002FB882 /* playpart */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = playpart; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2128,7 +2130,7 @@
 		D88FE29B05A0F8430024FD88 /* SndAudioProcessorDistortion.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SndAudioProcessorDistortion.h; sourceTree = "<group>"; };
 		D88FE29C05A0F8430024FD88 /* SndAudioProcessorDistortion.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SndAudioProcessorDistortion.m; sourceTree = "<group>"; };
 		D88FE29D05A0F8430024FD88 /* SndAudioProcessorFlanger.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SndAudioProcessorFlanger.h; sourceTree = "<group>"; };
-		D88FE29E05A0F8430024FD88 /* SndAudioProcessorFlanger.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SndAudioProcessorFlanger.m; sourceTree = "<group>"; };
+		D88FE29E05A0F8430024FD88 /* SndAudioProcessorFlanger.m */ = {isa = PBXFileReference; fileEncoding = 30; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = SndAudioProcessorFlanger.m; sourceTree = "<group>"; tabWidth = 2; };
 		D88FE29F05A0F8430024FD88 /* SndAudioProcessorInspector.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SndAudioProcessorInspector.h; sourceTree = "<group>"; };
 		D88FE2A005A0F8430024FD88 /* SndAudioProcessorInspector.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SndAudioProcessorInspector.m; sourceTree = "<group>"; };
 		D88FE2A105A0F8430024FD88 /* SndAudioProcessorMP3Encoder.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SndAudioProcessorMP3Encoder.h; sourceTree = "<group>"; };
@@ -2145,7 +2147,7 @@
 		D88FE2AC05A0F8430024FD88 /* SndBreakpoint.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SndBreakpoint.m; sourceTree = "<group>"; };
 		D88FE2AF05A0F8430024FD88 /* SndConvert.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SndConvert.m; sourceTree = "<group>"; };
 		D88FE2B005A0F8430024FD88 /* SndDisplayData.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SndDisplayData.h; sourceTree = "<group>"; };
-		D88FE2B105A0F8430024FD88 /* SndDisplayData.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SndDisplayData.m; sourceTree = "<group>"; };
+		D88FE2B105A0F8430024FD88 /* SndDisplayData.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SndDisplayData.m; sourceTree = "<group>"; usesTabs = 1; };
 		D88FE2B205A0F8430024FD88 /* SndDisplayDataList.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SndDisplayDataList.h; sourceTree = "<group>"; };
 		D88FE2B305A0F8430024FD88 /* SndDisplayDataList.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SndDisplayDataList.m; sourceTree = "<group>"; };
 		D88FE2B405A0F8430024FD88 /* SndEndianFunctions.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = SndEndianFunctions.c; sourceTree = "<group>"; };
@@ -2155,7 +2157,7 @@
 		D88FE2B805A0F8430024FD88 /* SndError.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SndError.h; sourceTree = "<group>"; };
 		D88FE2B905A0F8430024FD88 /* SndError.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SndError.m; sourceTree = "<group>"; };
 		D88FE2BA05A0F8430024FD88 /* SndOnDisk.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SndOnDisk.h; sourceTree = "<group>"; };
-		D88FE2BB05A0F8430024FD88 /* SndOnDisk.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SndOnDisk.m; sourceTree = "<group>"; };
+		D88FE2BB05A0F8430024FD88 /* SndOnDisk.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SndOnDisk.m; sourceTree = "<group>"; usesTabs = 1; };
 		D88FE30505A0F9E40024FD88 /* SndMeter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SndMeter.h; sourceTree = "<group>"; };
 		D88FE30605A0F9E40024FD88 /* SndMeter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SndMeter.m; sourceTree = "<group>"; };
 		D88FE30705A0F9E40024FD88 /* SndMP3.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SndMP3.h; sourceTree = "<group>"; };
@@ -3283,6 +3285,7 @@
 			isa = PBXGroup;
 			children = (
 				D82AC3BA05A0F6DA00780F57 /* SndKit-Info.plist */,
+				55A2A8C82973D69C00BCC536 /* SoundLib.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -5323,11 +5326,11 @@
 		D88FE35905A0FCE80024FD88 /* FreeVerb */ = {
 			isa = PBXGroup;
 			children = (
+				D88FE37105A0FEB80024FD88 /* denormals.h */,
 				D8227E710F8B343100681ED5 /* SndReverbAllpassFilter.h */,
 				D8227E720F8B343100681ED5 /* SndReverbAllpassFilter.m */,
 				D8227E730F8B343100681ED5 /* SndReverbCombFilter.h */,
 				D8227E740F8B343100681ED5 /* SndReverbCombFilter.m */,
-				D88FE37105A0FEB80024FD88 /* denormals.h */,
 				D88FE37605A0FEB80024FD88 /* tuning.h */,
 			);
 			name = FreeVerb;
@@ -5347,10 +5350,10 @@
 				D88FE29B05A0F8430024FD88 /* SndAudioProcessorDistortion.h */,
 				D88FE29C05A0F8430024FD88 /* SndAudioProcessorDistortion.m */,
 				D88FE29D05A0F8430024FD88 /* SndAudioProcessorFlanger.h */,
+				D88FE29E05A0F8430024FD88 /* SndAudioProcessorFlanger.m */,
 				D88FE2A105A0F8430024FD88 /* SndAudioProcessorMP3Encoder.h */,
 				D88FE2A205A0F8430024FD88 /* SndAudioProcessorMP3Encoder.m */,
 				D88FE2A305A0F8430024FD88 /* SndAudioProcessorNoiseGate.h */,
-				D88FE29E05A0F8430024FD88 /* SndAudioProcessorFlanger.m */,
 				D88FE2A405A0F8430024FD88 /* SndAudioProcessorNoiseGate.m */,
 				D88FE2A505A0F8430024FD88 /* SndAudioProcessorRecorder.h */,
 				D88FE2A605A0F8430024FD88 /* SndAudioProcessorRecorder.m */,
@@ -7245,6 +7248,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55A2A8C62973D69C00BCC536 /* SoundLib.strings in Resources */,
 				D88FE38705A0FF940024FD88 /* SndAudioProcessorInspector.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -8515,6 +8519,14 @@
 				556A3D2B29722665007FFAA7 /* en */,
 			);
 			name = Localized.strings;
+			sourceTree = "<group>";
+		};
+		55A2A8C82973D69C00BCC536 /* SoundLib.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55A2A8C72973D69C00BCC536 /* en */,
+			);
+			name = SoundLib.strings;
 			sourceTree = "<group>";
 		};
 		D828F9B70780C52400215EB9 /* ScorePlayer.sgml */ = {

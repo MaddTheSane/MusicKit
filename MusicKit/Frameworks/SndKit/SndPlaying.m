@@ -59,10 +59,9 @@
     return SNDIsMuted();
 }
 
-+ setMute: (BOOL) aFlag
++ (void)setMute: (BOOL) aFlag
 {
     SNDSetMute(aFlag);
-    return self;
 }
 
 // TODO See if we can make this use self playInFuture so all use of looping
@@ -154,7 +153,7 @@
     return [performance playIndex];
 }
 
-- (int) waitUntilStopped
+- (SndError) waitUntilStopped
 {
     return SND_ERR_NOT_IMPLEMENTED;
 }
@@ -184,7 +183,7 @@
     [self stopInFuture: 0.0];
 }
 
-- (int) stop
+- (SndError) stop
 {
     [self stop: self];
     return SND_ERR_NONE;
@@ -198,7 +197,7 @@
     return self;
 }
 
-- (int) pause
+- (SndError) pause
 {
     [self pause: self];
     return SND_ERR_NONE;
@@ -212,7 +211,7 @@
     return self;
 }
 
-- (int) resume;
+- (SndError) resume;
 {
     [self resume:self];
     return SND_ERR_NONE;
@@ -269,7 +268,7 @@
     return self;
 }
 
-- (int) performanceCount
+- (NSInteger) performanceCount
 {
     return [performancesArray count];
 }
@@ -307,11 +306,9 @@
 - (BOOL) isPlaying
 {
     // if any performances are currently playing, return YES.
-    int performanceIndex;
-    int performanceCount = [performancesArray count];
     
-    for(performanceIndex = 0; performanceIndex < performanceCount; performanceIndex++) {
-	if([[performancesArray objectAtIndex: performanceIndex] isPlaying])
+    for(SndPerformance *perform in performancesArray) {
+	if([perform isPlaying])
 	    return YES;
     }
     // 

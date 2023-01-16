@@ -55,13 +55,13 @@
 
 - newSoundLocation: (NSPoint *) p
 {
-    int count = [[NSApp delegate] documentCount];
+    int count = [(SpectroController*)[NSApp delegate] documentCount];
     int cnt = (count > 3) ? count - 4 : count;
     
     p->x += (20.0 * count);
     p->y -= (25.0 * cnt);
     count = (count > 6) ? 0 : count + 1;
-    [[NSApp delegate] setCounter: count];
+    [(SpectroController*)[NSApp delegate] setCounter: count];
     return self;
 }
 
@@ -154,7 +154,7 @@
     [self setButtons];
 
     mySoundView = [scrollSound soundView];
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey: @"DisplayType"] floatValue] < 1.0)
+    if ([[NSUserDefaults standardUserDefaults] floatForKey: @"DisplayType"] < 1.0)
 	[mySoundView setDisplayMode: SND_SOUNDVIEW_WAVE];
     else
 	[mySoundView setDisplayMode: SND_SOUNDVIEW_MINMAX];
@@ -521,19 +521,11 @@
 	return NO;
 }
 
-@end
-
-@implementation SoundDocument(ScrollingSoundDelegate)
-
 - displayChanged:sender
 {
     [self showDisplayTimes];
     return self;
 }
-
-@end
-
-@implementation SoundDocument(SoundDelegate)
 
 - (void) didPlay: (Snd *) soundThatPlayed duringPerformance: (SndPerformance *) endingPerformance
 {
@@ -544,19 +536,18 @@
     [pauseButton setState: 0];    
 }
 
-- didRecord: sender
+- (void)didRecord: sender
 {
     [playButton setState: 0];
     [playButton setEnabled: YES];
     [recordButton setState: 0];
     [recordButton setEnabled: YES];
     [pauseButton setState: 0];
-    return self;
 }
 
-- hadError: sender
+- (void)hadError: sender
 {
-    int err = [[sender soundBeingProcessed] processingError];
+    SndError err = [[sender soundBeingProcessed] processingError];
     NSBundle *mainB = [NSBundle mainBundle];
     if ([playButton state]) 
         NSRunAlertPanel(
@@ -571,10 +562,9 @@
 			[mainB localizedStringForKey: @"OK" value: @"OK" table: nil],
 			nil, nil);
     [self stop: self];
-    return self;
 }
 
-- selectionChanged: sender
+- (void)selectionChanged: sender
 {	
     if (fresh) { /* covers copy-new-paste situation */
 	fresh = NO; /* must do first to avoid infinite recursion */
@@ -583,20 +573,14 @@
     [self showSelectionTimes];
     [mySpectrumDocument disableWFSlider];
     [mySpectrumDocument setTotalFrames];
-    return self;
 }
 
-- soundDidChange:sender
+- (void)soundDidChange:sender
 {
     [self touch];
     [[self sound] compactSamples];
     [mySpectrumDocument soundChanged];
-    return self;
 }
-
-@end
-
-@implementation SoundDocument(WindowDelegate)
 
 - (void) windowDidBecomeMain: (NSNotification *) notification
 {
@@ -634,11 +618,10 @@
 	[self zoomAll: self];
 }
 
-- (BOOL) windowWillClose: (id) sender
+- (void) windowWillClose:(NSNotification *)notification
 {
     [[self windowForSheet] setDelegate: nil];
     [mySpectrumDocument closeWindows];
-    return YES;
 }
 
 @end

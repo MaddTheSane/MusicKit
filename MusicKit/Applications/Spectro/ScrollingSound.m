@@ -21,7 +21,7 @@
 - initWithFrame:(NSRect)theFrame
 {
 	NSRect tempRect = theFrame;
-	id theSoundView;
+	NSView *theSoundView;
 	int borderType = NSBezelBorder;
     
 	(tempRect.size) = [NSScrollView contentSizeForFrameSize:(theFrame.size) hasHorizontalScroller:YES hasVerticalScroller:NO borderType:borderType];

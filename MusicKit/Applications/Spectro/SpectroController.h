@@ -19,7 +19,7 @@
 NSString *colorToString(NSColor  *color);
 NSColor  *stringToColor(NSString *buf);
 
-@interface SpectroController: NSObject
+@interface SpectroController: NSObject <NSApplicationDelegate>
 {
     id currentDocument;
     IBOutlet id infoPanel;
@@ -40,12 +40,5 @@ NSColor  *stringToColor(NSString *buf);
 - showPreferences: sender;
 - (int) documentCount;
 - setCounter: (int) count;
-
-@end
-
-@interface SpectroController(ApplicationDelegate)
-
-- (void) applicationDidFinishLaunching: (NSNotification *) notification;
-- (void) applicationDidHide: (NSNotification *) notification;
 
 @end

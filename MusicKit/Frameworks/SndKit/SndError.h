@@ -41,7 +41,12 @@
 #ifndef __SNDKIT_SNDERROR_H__
 #define __SNDKIT_SNDERROR_H__
 
+#import <Foundation/Foundation.h>
+
 #if !defined(SND_ERR_NOT_SOUND)
+
+extern const NSErrorDomain SndErrorDomain;
+
 /*!
  @enum SndError
   @constant SND_ERR_NONE              No error - all is well		          
@@ -84,7 +89,7 @@
   @constant SND_ERR_BAD_DURATION      Description forthcoming
   @constant SND_ERR_UNKNOWN           Unknown error.
 */
-typedef enum {
+typedef NS_ERROR_ENUM(SndErrorDomain, SndError) {
     SND_ERR_NONE		          = 0,
     SND_ERR_NOT_SOUND		      = 1,
     SND_ERR_BAD_FORMAT		    = 2,
@@ -124,7 +129,7 @@ typedef enum {
     SND_ERR_BAD_STARTTIME     = 36,
     SND_ERR_BAD_DURATION      = 37,
     SND_ERR_UNKNOWN           = 32767
-} SndError;
+};
 #endif
 
 /*!
@@ -133,6 +138,6 @@ typedef enum {
   @param err The reported error number
   @return An NSString that describes the given error code.
  */
-NSString *SndSoundError(int err);
+extern NSString *SndSoundError(SndError err);
 
 #endif

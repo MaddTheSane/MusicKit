@@ -51,6 +51,8 @@
 #ifndef __SNDFORMATS__
 #define __SNDFORMATS__
 
+#import <Foundation/NSObjCRuntime.h>
+
 /*!
   @enum       SndSampleFormat
   @brief   Various sound sample data formats
@@ -88,7 +90,7 @@
   @constant   SND_FORMAT_AC3  Dolby AC3 A/52 encoding.
   @constant   SND_FORMAT_VORBIS  Ogg/Vorbis compressed format.
  */
-typedef enum {
+typedef NS_ENUM(int, SndSampleFormat) {
     SND_FORMAT_UNSPECIFIED           = 0,
     SND_FORMAT_MULAW_8               = 1, /* u-law encoding */
     SND_FORMAT_LINEAR_8              = 2, /* Linear 8 bits */
@@ -122,6 +124,6 @@ typedef enum {
     SND_FORMAT_AAC                   = 31, /* MPEG-4 Advanced Audio Coder */
     SND_FORMAT_AC3                   = 32, /* Dolby AC3 A/52 encoding */
     SND_FORMAT_VORBIS                = 33, /* Ogg/Vorbis compressed format */
-} SndSampleFormat;
+};
 
 #endif

@@ -181,7 +181,7 @@ short SndiMulaw(unsigned char mulawValue)
     return (short) SndMuLawToLinear(mulawValue);
 }
 
-int SndSwapBigEndianSoundToHost(void *dest, void *src, int sampleCount, int channelCount, SndSampleFormat dataFormat)
+SndError SndSwapBigEndianSoundToHost(void *dest, void *src, int sampleCount, int channelCount, SndSampleFormat dataFormat)
 {
 #ifdef __BIG_ENDIAN__
     return SND_ERR_NONE;
@@ -215,7 +215,7 @@ int SndSwapBigEndianSoundToHost(void *dest, void *src, int sampleCount, int chan
 #endif
 }
 
-int SndSwapHostToBigEndianSound(void *dest, void *src, int sampleCount, int channelCount, SndSampleFormat dataFormat)
+SndError SndSwapHostToBigEndianSound(void *dest, void *src, int sampleCount, int channelCount, SndSampleFormat dataFormat)
 {
 #ifdef __BIG_ENDIAN__
     return SND_ERR_NONE;

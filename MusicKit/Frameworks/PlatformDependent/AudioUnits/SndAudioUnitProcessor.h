@@ -58,7 +58,8 @@
   for loading.
   @return Returns an autoreleased NSArray of NSStrings of audio processors.
  */
-+ (NSArray *) availableAudioProcessors;
++ (NSArray<NSString*> *) availableAudioProcessors;
+@property (class, readonly, copy) NSArray<NSString*> *availableAudioProcessors;
 
 /*!
   @brief Returns an autoreleased instance of a SndAudioProcessor subclass named <I>processorName</I>.
@@ -81,7 +82,7 @@
              are the overseer of multiple available AudioUnits, each one is loaded and instantiated as a
              SndAudioUnitProcessor instance.
  */
-- initWithParamCount: (const int) count name: (NSString *) audioUnitName;
+- (instancetype)initWithParamCount: (NSInteger) count name: (NSString *) audioUnitName;
 
 /*!
   @brief Process the given audio buffer through the AudioUnit.

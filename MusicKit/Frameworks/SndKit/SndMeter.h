@@ -70,7 +70,7 @@ and <b>maxValue</b>. All SndMeter amplitude levels are normalized to
 fit between 0.0 (inaudible) and 1.0 (maximum amplitude).
 */
 
-@interface SndMeter: NSView
+@interface SndMeter: NSView <NSCoding>
 {
     Snd *sound;
     int currentSample;
@@ -78,16 +78,16 @@ fit between 0.0 (inaudible) and 1.0 (maximum amplitude).
     float currentPeak;
     float minValue;
     float maxValue;
-    float holdTime;
+    NSTimeInterval holdTime;
     NSColor *backgroundColor;
     NSColor *foregroundColor;
     NSColor *peakColor;
-    struct {
-      unsigned int running:1;
-      unsigned int bezeled:1;
-      unsigned int shouldStop:1;
-      unsigned int displayPeakValue:1;
-      unsigned int _reservedFlags:12;
+    struct SndMeterFlags {
+      unsigned short running:1;
+      unsigned short bezeled:1;
+      unsigned short shouldStop:1;
+      unsigned short displayPeakValue:1;
+      unsigned short _reservedFlags:12;
     } smFlags;
     void *_timedEntry;
     int _valTime;
@@ -132,9 +132,6 @@ fit between 0.0 (inaudible) and 1.0 (maximum amplitude).
 */
 - (id) initWithFrame: (NSRect) frameRect;
 
-- (id) initWithCoder: (NSCoder *) aStream;
-- (void) encodeWithCoder: (NSCoder *) aStream;
-
 /*!
   @brief  Returns the SndMeter's hold time - the amount of time during
   which a peak amplitude is detected and displayed by the peak bubble - in seconds.
@@ -142,7 +139,7 @@ fit between 0.0 (inaudible) and 1.0 (maximum amplitude).
   The default is 0.7 seconds.
   @return Returns a float.
 */
-- (float) holdTime;
+- (NSTimeInterval) holdTime;
 
 /*!
   @brief Sets the SndMeter's peak value hold time in seconds.
@@ -150,14 +147,15 @@ fit between 0.0 (inaudible) and 1.0 (maximum amplitude).
   This is the amount of time during which peak amplitudes are detected and held by
   the peak bubble.
   @param  seconds is a float.
-  @return Returns an id.
 */
-- (void) setHoldTime: (float) seconds;
+- (void) setHoldTime: (NSTimeInterval) seconds;
+
+@property NSTimeInterval holdTime;
 
 /*!
   @brief  Sets the SndMeter's background color.
 
-  The default is NSColor's <b>darkGrayColor</b>.
+  The default is NSColor's <b>controlColor</b>.
   @param  aColor is a NSColor instance.
 */
 - (void) setBackgroundColor: (NSColor *) aColor;
@@ -165,10 +163,12 @@ fit between 0.0 (inaudible) and 1.0 (maximum amplitude).
 /*!
   @brief  Returns the SndMeter's background color.
 
-  The default background color is NSColor's <b>darkGrayColor</b>.
+  The default background color is NSColor's <b>controlColor</b>.
   @return Returns a NSColor instance.
 */
 - (NSColor *) backgroundColor;
+
+@property (nonatomic, copy) NSColor *backgroundColor;
 
 /*!
   @brief  Sets the SndMeter's running bar color.
@@ -186,10 +186,12 @@ fit between 0.0 (inaudible) and 1.0 (maximum amplitude).
 */
 - (NSColor *) foregroundColor;
 
+@property (nonatomic, copy) NSColor *foregroundColor;
+
 /*!
   @brief Sets the SndMeter's peak bubble color.
 
-  The default is NSColor's <b>whiteColor</b>.
+  The default is NSColor's <b>systemRedColor</b>.
   @param  aColor is a NSColor instance.
 */
 - (void) setPeakColor: (NSColor *) aColor;
@@ -197,10 +199,12 @@ fit between 0.0 (inaudible) and 1.0 (maximum amplitude).
 /*!
   @brief  Returns the SndMeter's peak bubble gray.
 
-  The default is NSColor's <b>whiteColor</b>.
+  The default is NSColor's <b>systemRedColor</b>.
   @return Returns a NSColor instance.
 */
 - (NSColor *) peakColor;
+
+@property (nonatomic, copy) NSColor *peakColor;
 
 /*!
   @brief Enable or disable the display of the SndMeter's peak bubble.
@@ -212,6 +216,8 @@ fit between 0.0 (inaudible) and 1.0 (maximum amplitude).
   @return Returns YES or NO indicating if the peak bubble will be displayed.
  */
 - (BOOL) isDisplayingPeak;
+
+@property (nonatomic, getter=isDisplayingPeak, setter=setDisplayPeak:) BOOL displayingPeak;
 
 /*!
   @brief Returns the Snd object that the SndMeter is metering.
@@ -225,6 +231,8 @@ fit between 0.0 (inaudible) and 1.0 (maximum amplitude).
 */
 - (void) setSound: (Snd *) aSound;
 
+@property (retain) Snd *sound;
+
 /*!
   @brief  Starts the SndMeter running.
 
@@ -234,7 +242,7 @@ fit between 0.0 (inaudible) and 1.0 (maximum amplitude).
   doesn't trigger any activity in the Snd.
   @param  sender is an id.
 */
-- (void) run: (id) sender;
+- (IBAction) run: (id) sender;
 
 /*!
   @brief  Stops the SndMeter's metering activity.
@@ -243,7 +251,7 @@ fit between 0.0 (inaudible) and 1.0 (maximum amplitude).
   - it doesn't trigger any activity in the Snd.
   @param  sender is an id.
 */
-- (void) stop: (id) sender;
+- (IBAction) stop: (id) sender;
 
 /*!
   @brief  Returns YES if the SndMeter is currently running; otherwise, returns NO.
@@ -252,6 +260,8 @@ fit between 0.0 (inaudible) and 1.0 (maximum amplitude).
   @return Returns a BOOL.
 */
 - (BOOL) isRunning;
+
+@property (nonatomic, readonly, getter=isRunning) BOOL running;
 
 /*!
   @brief Returns YES (the default) if the SndMeter has a border; otherwise, returns NO.
@@ -269,6 +279,8 @@ fit between 0.0 (inaudible) and 1.0 (maximum amplitude).
   @param  aFlag is a BOOL.
 */
 - (void) setBezeled: (BOOL) aFlag;
+
+@property (nonatomic, getter=isBezeled) BOOL bezeled;
 
 /*!
   @brief  Sets the current running value to <i>aValue</i>.
@@ -290,6 +302,8 @@ fit between 0.0 (inaudible) and 1.0 (maximum amplitude).
 */
 - (float) floatValue;
 
+@property (nonatomic) float floatValue;
+
 /*!
   @brief  Returns the most recently detected peak value as a floating-point
   number between 0.0 and 1.0.
@@ -298,6 +312,8 @@ fit between 0.0 (inaudible) and 1.0 (maximum amplitude).
   @return Returns a float.
 */
 - (float) peakValue;
+
+@property (readonly) float peakValue;
 
 /*!
   @brief  Returns the minimum running value so far.
@@ -309,6 +325,8 @@ fit between 0.0 (inaudible) and 1.0 (maximum amplitude).
 */
 - (float) minValue;
 
+@property (readonly) float minValue;
+
 /*!
   @brief  Returns the maximum running value so far.
 
@@ -318,6 +336,8 @@ fit between 0.0 (inaudible) and 1.0 (maximum amplitude).
   @return Returns a float.
 */
 - (float) maxValue;
+
+@property (readonly) float maxValue;
 
 /*!
   @brief  Draws all the components of the SndMeter (frame, running bar, and

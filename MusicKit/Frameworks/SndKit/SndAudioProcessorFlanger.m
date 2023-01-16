@@ -260,11 +260,11 @@
 // setActive:
 //////////////////////////////////////////////////////////////////////////////
 
-- setActive: (const BOOL) b
+- (void)setActive: (BOOL) b
 {
   memset(m_pfBuff[0], 0, sizeof(float) * m_liBuffSize);
   memset(m_pfBuff[1], 0, sizeof(float) * m_liBuffSize);
-  return [super setActive: b];
+  [super setActive: b];
 }
 
 //////////////////////////////////////////////////////////////////////////////
