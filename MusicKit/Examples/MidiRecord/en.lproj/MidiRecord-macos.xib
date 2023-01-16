@@ -117,7 +117,7 @@
             <rect key="contentRect" x="280" y="559" width="336" height="165"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
             <view key="contentView" misplaced="YES" id="8">
-                <rect key="frame" x="0.0" y="0.0" width="336" height="148"/>
+                <rect key="frame" x="0.0" y="0.0" width="336" height="165"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button verticalHuggingPriority="750" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4">
