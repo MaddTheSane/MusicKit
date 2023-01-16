@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXApplicationTarget section */
@@ -252,11 +252,10 @@
 			isa = PBXGroup;
 			children = (
 				024133C50044ABF8CFED3B96 /* Classes */,
-				024133D20044ABF8CFED3B96 /* Headers */,
 				024133DF0044ABF8CFED3B96 /* Other Sources */,
 				024133E70044ABF8CFED3B96 /* Interfaces */,
 				024133F20044ABF8CFED3B96 /* Images */,
-				024133F40044ABF8CFED3B96 /* External Frameworks and Libraries */,
+				024133F40044ABF8CFED3B96 /* Frameworks */,
 				024133F80044ABF8CFED3B96 /* Products */,
 			);
 			name = edsnd;
@@ -265,39 +264,32 @@
 		024133C50044ABF8CFED3B96 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				024133D30044ABF8CFED3B96 /* Animator.h */,
 				024133C60044ABF8CFED3B96 /* Animator.m */,
+				024133D40044ABF8CFED3B96 /* EdsndApp.h */,
 				024133C70044ABF8CFED3B96 /* EdsndApp.m */,
+				024133D50044ABF8CFED3B96 /* EdSoundView.h */,
 				024133C80044ABF8CFED3B96 /* EdSoundView.m */,
+				024133D60044ABF8CFED3B96 /* Envelope.h */,
 				024133C90044ABF8CFED3B96 /* Envelope.m */,
+				024133D70044ABF8CFED3B96 /* EnvelopeView.h */,
 				024133CA0044ABF8CFED3B96 /* EnvelopeView.m */,
+				024133D80044ABF8CFED3B96 /* FFT.h */,
 				024133CB0044ABF8CFED3B96 /* FFT.m */,
+				024133D90044ABF8CFED3B96 /* FFTView.h */,
 				024133CC0044ABF8CFED3B96 /* FFTView.m */,
+				024133DA0044ABF8CFED3B96 /* ScrollingSound.h */,
 				024133CD0044ABF8CFED3B96 /* ScrollingSound.m */,
+				024133DB0044ABF8CFED3B96 /* SoundDocument.h */,
 				024133CE0044ABF8CFED3B96 /* SoundDocument.m */,
+				024133DC0044ABF8CFED3B96 /* SpectrumView.h */,
 				024133CF0044ABF8CFED3B96 /* SpectrumView.m */,
+				024133DD0044ABF8CFED3B96 /* Stopwatch.h */,
 				024133D00044ABF8CFED3B96 /* Stopwatch.m */,
+				024133DE0044ABF8CFED3B96 /* UpPanel.h */,
 				024133D10044ABF8CFED3B96 /* UpPanel.m */,
 			);
 			name = Classes;
-			sourceTree = "<group>";
-		};
-		024133D20044ABF8CFED3B96 /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-				024133D30044ABF8CFED3B96 /* Animator.h */,
-				024133D40044ABF8CFED3B96 /* EdsndApp.h */,
-				024133D50044ABF8CFED3B96 /* EdSoundView.h */,
-				024133D60044ABF8CFED3B96 /* Envelope.h */,
-				024133D70044ABF8CFED3B96 /* EnvelopeView.h */,
-				024133D80044ABF8CFED3B96 /* FFT.h */,
-				024133D90044ABF8CFED3B96 /* FFTView.h */,
-				024133DA0044ABF8CFED3B96 /* ScrollingSound.h */,
-				024133DB0044ABF8CFED3B96 /* SoundDocument.h */,
-				024133DC0044ABF8CFED3B96 /* SpectrumView.h */,
-				024133DD0044ABF8CFED3B96 /* Stopwatch.h */,
-				024133DE0044ABF8CFED3B96 /* UpPanel.h */,
-			);
-			name = Headers;
 			sourceTree = "<group>";
 		};
 		024133DF0044ABF8CFED3B96 /* Other Sources */ = {
@@ -334,11 +326,11 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
-		024133F40044ABF8CFED3B96 /* External Frameworks and Libraries */ = {
+		024133F40044ABF8CFED3B96 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			name = "External Frameworks and Libraries";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		024133F80044ABF8CFED3B96 /* Products */ = {
@@ -396,9 +388,17 @@
 /* Begin PBXProject section */
 		024133C30044ABF8CFED3B96 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = D8A8B97718429E8D00E7D082 /* Build configuration list for PBXProject "edsnd" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+				Base,
+				English,
+			);
 			mainGroup = 024133C40044ABF8CFED3B96 /* edsnd */;
 			productRefGroup = 024133F80044ABF8CFED3B96 /* Products */;
 			projectDirPath = "";

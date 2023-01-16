@@ -185,6 +185,12 @@
 		55A2A8D62975150F00BCC536 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A2A8D52975150F00BCC536 /* Media.xcassets */; };
 		55A2A8D82975175500BCC536 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A2A8D72975175500BCC536 /* Media.xcassets */; };
 		55A2A8DA29751AB100BCC536 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A2A8D929751AB100BCC536 /* Media.xcassets */; };
+		55A2A8DB29751DC900BCC536 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FE39605A101690024FD88 /* AppKit.framework */; };
+		55A2A8DC29751DCA00BCC536 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FE39605A101690024FD88 /* AppKit.framework */; };
+		55A2A8DD29751DCB00BCC536 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FE39605A101690024FD88 /* AppKit.framework */; };
+		55A2A8DE29751DCC00BCC536 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FE39605A101690024FD88 /* AppKit.framework */; };
+		55A2A8DF29751DCD00BCC536 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FE39605A101690024FD88 /* AppKit.framework */; };
+		55A2A8E029751DCE00BCC536 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FE39605A101690024FD88 /* AppKit.framework */; };
 		D8001DE30762D2F700508A26 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
 		D8001FE00762D3B100508A26 /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D8001FE10762D3B100508A26 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
@@ -983,6 +989,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = D84395E8059FAA450054BEEE;
 			remoteInfo = "MKPerformSndMIDI (Framework)";
+		};
+		55A2A8E52975293000BCC536 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D8DB4E4C059FA05500624233 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D85F905107DFE7D4009DC57B;
+			remoteInfo = "MKUnitGenerators (Framework)";
 		};
 		D80151B00FA64A37002FB882 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -2360,6 +2373,7 @@
 			files = (
 				D847900307A8B01700F7C83A /* MKPerformSndMIDI.framework in Frameworks */,
 				D847900407A8B01700F7C83A /* SndKit.framework in Frameworks */,
+				55A2A8DF29751DCD00BCC536 /* AppKit.framework in Frameworks */,
 				D847900507A8B01700F7C83A /* MKDSP.framework in Frameworks */,
 				D828FA410780CFD200215EB9 /* MusicKit.framework in Frameworks */,
 			);
@@ -2371,6 +2385,7 @@
 			files = (
 				D847900607A8B06100F7C83A /* MKPerformSndMIDI.framework in Frameworks */,
 				D847900707A8B06100F7C83A /* SndKit.framework in Frameworks */,
+				55A2A8E029751DCE00BCC536 /* AppKit.framework in Frameworks */,
 				D847900807A8B06100F7C83A /* MKDSP.framework in Frameworks */,
 				D8E8D5F8078465A500AAE755 /* MusicKit.framework in Frameworks */,
 			);
@@ -2502,6 +2517,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55A2A8DB29751DC900BCC536 /* AppKit.framework in Frameworks */,
 				D80DA5C60764E1E70052DFAF /* MKPerformSndMIDI.framework in Frameworks */,
 				D80DA5C70764E1E70052DFAF /* SndKit.framework in Frameworks */,
 			);
@@ -2513,6 +2529,7 @@
 			files = (
 				D847900107A8AFD700F7C83A /* MKPerformSndMIDI.framework in Frameworks */,
 				D847900207A8AFD700F7C83A /* MKDSP.framework in Frameworks */,
+				55A2A8DE29751DCC00BCC536 /* AppKit.framework in Frameworks */,
 				D880FD0D0780882F00FD03CC /* SndKit.framework in Frameworks */,
 				D880FCC7077FEAD000FD03CC /* MusicKit.framework in Frameworks */,
 			);
@@ -2564,6 +2581,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55A2A8DD29751DCB00BCC536 /* AppKit.framework in Frameworks */,
 				D80DA5C80764E3D00052DFAF /* MKPerformSndMIDI.framework in Frameworks */,
 				D80DA5C90764E3D00052DFAF /* SndKit.framework in Frameworks */,
 			);
@@ -2674,6 +2692,7 @@
 			files = (
 				D847902007A8BDB400F7C83A /* MKPerformSndMIDI.framework in Frameworks */,
 				D847902107A8BDB400F7C83A /* SndKit.framework in Frameworks */,
+				55A2A8DC29751DCA00BCC536 /* AppKit.framework in Frameworks */,
 				D847902207A8BDB400F7C83A /* MKDSP.framework in Frameworks */,
 				D847902307A8BDB400F7C83A /* MusicKit.framework in Frameworks */,
 			);
@@ -6922,6 +6941,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				55A2A8E62975293000BCC536 /* PBXTargetDependency */,
 			);
 			name = "MKSynthPatches (Framework)";
 			productName = MKSynthPatches;
@@ -8070,6 +8090,11 @@
 			isa = PBXTargetDependency;
 			target = D84395E8059FAA450054BEEE /* MKPerformSndMIDI (Framework) */;
 			targetProxy = 556A3D352972AEA6007FFAA7 /* PBXContainerItemProxy */;
+		};
+		55A2A8E62975293000BCC536 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D85F905107DFE7D4009DC57B /* MKUnitGenerators (Framework) */;
+			targetProxy = 55A2A8E52975293000BCC536 /* PBXContainerItemProxy */;
 		};
 		D80151B10FA64A37002FB882 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -12131,12 +12156,6 @@
 				INSTALL_PATH = "$(USER_APPS_DIR)";
 				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.Spectro;
 				PRODUCT_NAME = Spectro;
@@ -12171,12 +12190,6 @@
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)/MusicKit";
 				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.Spectro;
 				PRODUCT_NAME = Spectro;
@@ -12209,12 +12222,6 @@
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.Spectro;
 				PRODUCT_NAME = Spectro;
@@ -12246,12 +12253,6 @@
 				INSTALL_PATH = "$(USER_APPS_DIR)";
 				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.PatchCord;
 				PRODUCT_NAME = PatchCord;
@@ -12285,12 +12286,6 @@
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)/MusicKit";
 				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.PatchCord;
 				PRODUCT_NAME = PatchCord;
@@ -12322,12 +12317,6 @@
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.PatchCord;
 				PRODUCT_NAME = PatchCord;
@@ -12358,12 +12347,6 @@
 				INSTALL_PATH = "$(USER_APPS_DIR)";
 				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.TwoWaves;
 				PRODUCT_NAME = TwoWaves;
@@ -12400,12 +12383,6 @@
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)/MusicKit";
 				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.TwoWaves;
 				PRODUCT_NAME = TwoWaves;
@@ -12440,12 +12417,6 @@
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.TwoWaves;
 				PRODUCT_NAME = TwoWaves;
@@ -12481,12 +12452,6 @@
 				INSTALL_PATH = "$(USER_APPS_DIR)";
 				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.ScorePlayer;
 				PRODUCT_NAME = ScorePlayer;
@@ -12524,12 +12489,6 @@
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)/MusicKit";
 				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.ScorePlayer;
 				PRODUCT_NAME = ScorePlayer;
@@ -12565,12 +12524,6 @@
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.ScorePlayer;
 				PRODUCT_NAME = ScorePlayer;
@@ -12606,12 +12559,6 @@
 				INSTALL_PATH = "$(USER_APPS_DIR)";
 				MARKETING_VERSION = 1.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.PianoRoll;
 				PRODUCT_NAME = PianoRoll;
@@ -12649,12 +12596,6 @@
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)/MusicKit";
 				MARKETING_VERSION = 1.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.PianoRoll;
 				PRODUCT_NAME = PianoRoll;
@@ -12690,12 +12631,6 @@
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				MARKETING_VERSION = 1.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.PianoRoll;
 				PRODUCT_NAME = PianoRoll;
@@ -12731,12 +12666,6 @@
 				INSTALL_PATH = "$(USER_APPS_DIR)";
 				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.EnvelopeEd;
 				PRODUCT_NAME = EnvelopeEd;
@@ -12774,12 +12703,6 @@
 				INSTALL_PATH = "$(LOCAL_APPS_DIR)/MusicKit";
 				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.EnvelopeEd;
 				PRODUCT_NAME = EnvelopeEd;
@@ -12815,12 +12738,6 @@
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				MARKETING_VERSION = 5.6.0;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.EnvelopeEd;
 				PRODUCT_NAME = EnvelopeEd;

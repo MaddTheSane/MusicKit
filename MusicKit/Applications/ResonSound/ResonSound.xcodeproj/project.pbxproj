@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXApplicationTarget section */
@@ -98,7 +98,7 @@
 		D853732C04055D9100DC8C05 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		D853732E04055DAB00DC8C05 /* MusicKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MusicKit.framework; path = /Local/Library/Frameworks/MusicKit.framework; sourceTree = "<absolute>"; };
 		D8A8B84918429C3700E7D082 /* Info-Reson__Application___Upgraded_.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Reson__Application___Upgraded_.plist"; sourceTree = "<group>"; };
-		D8A8B84A18429C3700E7D082 /* Reson.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Reson.app; path = build/Development/Reson.app; sourceTree = "<group>"; };
+		D8A8B84A18429C3700E7D082 /* Reson.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reson.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,9 +265,17 @@
 /* Begin PBXProject section */
 		0348D9CB00711DEDCFED3B96 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = D8A8B82F18429C0400E7D082 /* Build configuration list for PBXProject "ResonSound" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+				Base,
+				English,
+			);
 			mainGroup = 0348D9CC00711DEDCFED3B96 /* Reson */;
 			productRefGroup = 0348D9E700711DEDCFED3B96 /* Products */;
 			projectDirPath = "";
@@ -362,25 +370,23 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		D8A8B82918429C0400E7D082 /* Development */ = {
+		D8A8B82918429C0400E7D082 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				SDKROOT = macosx;
 			};
-			name = Development;
+			name = Debug;
 		};
-		D8A8B82A18429C0400E7D082 /* Deployment */ = {
+		D8A8B82A18429C0400E7D082 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				SDKROOT = macosx;
 			};
-			name = Deployment;
+			name = Release;
 		};
-		D8A8B82B18429C0400E7D082 /* Default */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Default;
-		};
-		D8A8B82C18429C0400E7D082 /* Development */ = {
+		D8A8B82C18429C0400E7D082 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
@@ -403,9 +409,9 @@
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = YES;
 			};
-			name = Development;
+			name = Debug;
 		};
-		D8A8B82D18429C0400E7D082 /* Deployment */ = {
+		D8A8B82D18429C0400E7D082 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
@@ -425,28 +431,9 @@
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
-			name = Deployment;
+			name = Release;
 		};
-		D8A8B82E18429C0400E7D082 /* Default */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = /Local/Library/Frameworks;
-				INSTALL_PATH = "$(HOME)/Apps";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = Reson;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-				WRAPPER_EXTENSION = app;
-			};
-			name = Default;
-		};
-		D8A8B84618429C3700E7D082 /* Development */ = {
+		D8A8B84618429C3700E7D082 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
@@ -471,9 +458,9 @@
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = YES;
 			};
-			name = Development;
+			name = Debug;
 		};
-		D8A8B84718429C3700E7D082 /* Deployment */ = {
+		D8A8B84718429C3700E7D082 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
@@ -495,28 +482,7 @@
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
-			name = Deployment;
-		};
-		D8A8B84818429C3700E7D082 /* Default */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = /Local/Library/Frameworks;
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INFOPLIST_FILE = "Info-Reson__Application___Upgraded_.plist";
-				INSTALL_PATH = "$(HOME)/Apps";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = Reson;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-				WRAPPER_EXTENSION = app;
-			};
-			name = Default;
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -524,32 +490,29 @@
 		D8A8B82F18429C0400E7D082 /* Build configuration list for PBXProject "ResonSound" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D8A8B82918429C0400E7D082 /* Development */,
-				D8A8B82A18429C0400E7D082 /* Deployment */,
-				D8A8B82B18429C0400E7D082 /* Default */,
+				D8A8B82918429C0400E7D082 /* Debug */,
+				D8A8B82A18429C0400E7D082 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Release;
 		};
 		D8A8B83018429C0400E7D082 /* Build configuration list for PBXApplicationTarget "Reson (Application)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D8A8B82C18429C0400E7D082 /* Development */,
-				D8A8B82D18429C0400E7D082 /* Deployment */,
-				D8A8B82E18429C0400E7D082 /* Default */,
+				D8A8B82C18429C0400E7D082 /* Debug */,
+				D8A8B82D18429C0400E7D082 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Release;
 		};
 		D8A8B84518429C3700E7D082 /* Build configuration list for PBXNativeTarget "Reson (Application) (Upgraded)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D8A8B84618429C3700E7D082 /* Development */,
-				D8A8B84718429C3700E7D082 /* Deployment */,
-				D8A8B84818429C3700E7D082 /* Default */,
+				D8A8B84618429C3700E7D082 /* Debug */,
+				D8A8B84718429C3700E7D082 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

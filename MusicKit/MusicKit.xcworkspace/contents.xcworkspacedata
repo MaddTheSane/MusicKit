@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:MusicKit.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Plugins/MusicXML/MusicXML.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Applications/edsnd/edsnd.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Applications/WaveEdit/WaveEdit.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Applications/ResoLab/ResoLab.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Applications/ResonSound/ResonSound.xcodeproj">
+   </FileRef>
+</Workspace>

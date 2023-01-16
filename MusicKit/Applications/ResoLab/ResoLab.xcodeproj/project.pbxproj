@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 42;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXApplicationTarget section */
@@ -129,7 +129,7 @@
 		0348D9AB0071186ECFED3B96 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		0348D9AE0071186ECFED3B96 /* ResoLab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = ResoLab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8A8B96718429E4A00E7D082 /* Info-ResoLab__Application___Upgraded_.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-ResoLab__Application___Upgraded_.plist"; sourceTree = "<group>"; };
-		D8A8B96818429E4A00E7D082 /* ResoLab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = ResoLab.app; path = build/Development/ResoLab.app; sourceTree = "<group>"; };
+		D8A8B96818429E4A00E7D082 /* ResoLab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ResoLab.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -307,9 +307,17 @@
 /* Begin PBXProject section */
 		0348D98D0071186ECFED3B96 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+			};
 			buildConfigurationList = D8A8B94318429E4000E7D082 /* Build configuration list for PBXProject "ResoLab" */;
-			compatibilityVersion = "Xcode 2.4";
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+				Base,
+				English,
+			);
 			mainGroup = 0348D98E0071186ECFED3B96 /* ResoLab */;
 			productRefGroup = 0348D9AD0071186ECFED3B96 /* Products */;
 			projectDirPath = "";
@@ -400,25 +408,23 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		D8A8B93D18429E3F00E7D082 /* Development */ = {
+		D8A8B93D18429E3F00E7D082 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				SDKROOT = macosx;
 			};
-			name = Development;
+			name = Debug;
 		};
-		D8A8B93E18429E3F00E7D082 /* Deployment */ = {
+		D8A8B93E18429E3F00E7D082 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				SDKROOT = macosx;
 			};
-			name = Deployment;
+			name = Release;
 		};
-		D8A8B93F18429E3F00E7D082 /* Default */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-			};
-			name = Default;
-		};
-		D8A8B94018429E3F00E7D082 /* Development */ = {
+		D8A8B94018429E3F00E7D082 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
@@ -444,9 +450,9 @@
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = YES;
 			};
-			name = Development;
+			name = Debug;
 		};
-		D8A8B94118429E3F00E7D082 /* Deployment */ = {
+		D8A8B94118429E3F00E7D082 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
@@ -469,31 +475,9 @@
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
-			name = Deployment;
+			name = Release;
 		};
-		D8A8B94218429E3F00E7D082 /* Default */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(LOCAL_LIBRARY_DIR)/Frameworks",
-					/Network/Servers/whiteley/lauren/Local/Library/Frameworks,
-				);
-				INSTALL_PATH = "$(HOME)/Apps";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ResoLab;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-				WRAPPER_EXTENSION = app;
-			};
-			name = Default;
-		};
-		D8A8B96418429E4A00E7D082 /* Development */ = {
+		D8A8B96418429E4A00E7D082 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
@@ -522,9 +506,9 @@
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = YES;
 			};
-			name = Development;
+			name = Debug;
 		};
-		D8A8B96518429E4A00E7D082 /* Deployment */ = {
+		D8A8B96518429E4A00E7D082 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
@@ -550,32 +534,7 @@
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};
-			name = Deployment;
-		};
-		D8A8B96618429E4A00E7D082 /* Default */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
-					/Network/Servers/whiteley/lauren/Local/Library/Frameworks,
-				);
-				FRAMEWORK_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\\\"$(LOCAL_LIBRARY_DIR)/Frameworks\\\"";
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				INFOPLIST_FILE = "Info-ResoLab__Application___Upgraded_.plist";
-				INSTALL_PATH = "$(HOME)/Apps";
-				OTHER_CFLAGS = "";
-				OTHER_LDFLAGS = "";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ResoLab;
-				SECTORDER_FLAGS = "";
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-				WRAPPER_EXTENSION = app;
-			};
-			name = Default;
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -583,32 +542,29 @@
 		D8A8B94318429E4000E7D082 /* Build configuration list for PBXProject "ResoLab" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D8A8B93D18429E3F00E7D082 /* Development */,
-				D8A8B93E18429E3F00E7D082 /* Deployment */,
-				D8A8B93F18429E3F00E7D082 /* Default */,
+				D8A8B93D18429E3F00E7D082 /* Debug */,
+				D8A8B93E18429E3F00E7D082 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Release;
 		};
 		D8A8B94418429E4000E7D082 /* Build configuration list for PBXApplicationTarget "ResoLab (Application)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D8A8B94018429E3F00E7D082 /* Development */,
-				D8A8B94118429E3F00E7D082 /* Deployment */,
-				D8A8B94218429E3F00E7D082 /* Default */,
+				D8A8B94018429E3F00E7D082 /* Debug */,
+				D8A8B94118429E3F00E7D082 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Release;
 		};
 		D8A8B96318429E4A00E7D082 /* Build configuration list for PBXNativeTarget "ResoLab (Application) (Upgraded)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D8A8B96418429E4A00E7D082 /* Development */,
-				D8A8B96518429E4A00E7D082 /* Deployment */,
-				D8A8B96618429E4A00E7D082 /* Default */,
+				D8A8B96418429E4A00E7D082 /* Debug */,
+				D8A8B96518429E4A00E7D082 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Default;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
