@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment version="1050" identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
+            <connections>
+                <outlet property="delegate" destination="116" id="146"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <window title="Reson" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="7" userLabel="MainWindow">
+            <windowStyleMask key="styleMask" titled="YES" miniaturizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="244" y="333" width="851" height="362"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+            <view key="contentView" id="87">
+                <rect key="frame" x="0.0" y="0.0" width="851" height="362"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <box fixedFrame="YES" title="Resonance Pitch" translatesAutoresizingMaskIntoConstraints="NO" id="58">
+                        <rect key="frame" x="103" y="142" width="178" height="212"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="BZS-fb-z1X">
+                            <rect key="frame" x="4" y="5" width="170" height="192"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <form verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="17">
+                                    <rect key="frame" x="109" y="5" width="60" height="189"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <size key="cellSize" width="60" height="21"/>
+                                    <size key="intercellSpacing" width="1" height="3"/>
+                                    <formCell key="prototype" controlSize="small" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="164">
+                                        <font key="font" metaFont="smallSystem"/>
+                                        <font key="titleFont" metaFont="smallSystem"/>
+                                    </formCell>
+                                    <cells>
+                                        <column>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" stringValue="C2" id="89">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" stringValue="G2" id="68">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" title=" " stringValue="C3" id="110">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" title=" " stringValue="E3" id="85">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" title=" " stringValue="G3" id="37">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" title="   " stringValue="C4" id="59">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" title=" " stringValue="E4" id="38">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" title="  " stringValue="G4" id="22">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                        </column>
+                                    </cells>
+                                </form>
+                                <matrix verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="117">
+                                    <rect key="frame" x="5" y="7" width="114" height="184"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <size key="cellSize" width="114" height="16"/>
+                                    <size key="intercellSpacing" width="4" height="8"/>
+                                    <sliderCell key="prototype" controlSize="small" continuous="YES" alignment="left" maxValue="1" doubleValue="0.28205129504203796" tickMarkPosition="below" sliderType="linear" id="165"/>
+                                    <cells>
+                                        <column>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" maxValue="1" doubleValue="0.28205129504203796" tickMarkPosition="below" sliderType="linear" id="29"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" tag="1" maxValue="1" doubleValue="0.30000001192092896" tickMarkPosition="below" sliderType="linear" id="31"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" tag="2" maxValue="1" doubleValue="0.34999999403953552" tickMarkPosition="below" sliderType="linear" id="82"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" tag="3" maxValue="1" doubleValue="0.40000000596046448" tickMarkPosition="below" sliderType="linear" id="124"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" tag="4" maxValue="1" doubleValue="0.44999998807907104" tickMarkPosition="below" sliderType="linear" id="107"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" tag="5" maxValue="1" doubleValue="0.5" tickMarkPosition="below" sliderType="linear" id="95"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" tag="6" maxValue="1" doubleValue="0.55000001192092896" tickMarkPosition="below" sliderType="linear" id="83"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" maxValue="1" doubleValue="0.60000002384185791" tickMarkPosition="below" sliderType="linear" id="97"/>
+                                        </column>
+                                    </cells>
+                                    <connections>
+                                        <action selector="setFreqFromSlider:" target="116" id="133"/>
+                                    </connections>
+                                </matrix>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                    </box>
+                    <box fixedFrame="YES" title="Resonance Gain" translatesAutoresizingMaskIntoConstraints="NO" id="11">
+                        <rect key="frame" x="290" y="142" width="178" height="212"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="LXu-J3-KtB">
+                            <rect key="frame" x="4" y="5" width="170" height="192"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <form verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="109">
+                                    <rect key="frame" x="109" y="5" width="60" height="189"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <size key="cellSize" width="60" height="21"/>
+                                    <size key="intercellSpacing" width="1" height="3"/>
+                                    <formCell key="prototype" controlSize="small" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="159">
+                                        <font key="font" metaFont="smallSystem"/>
+                                        <font key="titleFont" metaFont="smallSystem"/>
+                                    </formCell>
+                                    <cells>
+                                        <column>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" stringValue=".9" id="62">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" stringValue=".9" id="113">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" title=" " stringValue=".9" id="61">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" title=" " stringValue=".9" id="48">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" title=" " stringValue=".9" id="47">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" title="   " stringValue=".9" id="102">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" title=" " stringValue=".9" id="91">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" title="  " stringValue=".9" id="111">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                        </column>
+                                    </cells>
+                                </form>
+                                <matrix verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="46">
+                                    <rect key="frame" x="5" y="7" width="114" height="184"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <size key="cellSize" width="114" height="16"/>
+                                    <size key="intercellSpacing" width="4" height="8"/>
+                                    <sliderCell key="prototype" controlSize="small" continuous="YES" alignment="left" maxValue="1" doubleValue="0.89999997615814209" tickMarkPosition="below" sliderType="linear" id="160"/>
+                                    <cells>
+                                        <column>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" maxValue="1" doubleValue="0.89999997615814209" tickMarkPosition="below" sliderType="linear" id="123"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" tag="1" maxValue="1" doubleValue="0.89999997615814209" tickMarkPosition="below" sliderType="linear" id="25"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" tag="2" maxValue="1" doubleValue="0.89999997615814209" tickMarkPosition="below" sliderType="linear" id="81"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" tag="3" maxValue="1" doubleValue="0.89999997615814209" tickMarkPosition="below" sliderType="linear" id="56"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" tag="4" maxValue="1" doubleValue="0.89999997615814209" tickMarkPosition="below" sliderType="linear" id="32"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" tag="5" maxValue="1" doubleValue="0.89999997615814209" tickMarkPosition="below" sliderType="linear" id="94"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" tag="6" maxValue="1" doubleValue="0.89999997615814209" tickMarkPosition="below" sliderType="linear" id="80"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" maxValue="1" doubleValue="0.89999997615814209" tickMarkPosition="below" sliderType="linear" id="64"/>
+                                        </column>
+                                    </cells>
+                                    <connections>
+                                        <action selector="setResGainFromSlider:" target="116" id="145"/>
+                                    </connections>
+                                </matrix>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                    </box>
+                    <box fixedFrame="YES" title="Left/Right Panning" translatesAutoresizingMaskIntoConstraints="NO" id="41">
+                        <rect key="frame" x="476" y="142" width="178" height="212"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="hiv-A3-hVR">
+                            <rect key="frame" x="4" y="5" width="170" height="192"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <form verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9">
+                                    <rect key="frame" x="109" y="5" width="60" height="189"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <size key="cellSize" width="60" height="21"/>
+                                    <size key="intercellSpacing" width="1" height="3"/>
+                                    <formCell key="prototype" controlSize="small" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="161">
+                                        <font key="font" metaFont="smallSystem"/>
+                                        <font key="titleFont" metaFont="smallSystem"/>
+                                    </formCell>
+                                    <cells>
+                                        <column>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" stringValue="-45" id="114">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" stringValue="0" id="106">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" title=" " stringValue="0" id="24">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" title=" " stringValue="0" id="12">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" title=" " stringValue="45" id="3">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" title="   " stringValue="0" id="78">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" title=" " stringValue="0" id="63">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" title="  " stringValue="0" id="75">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                        </column>
+                                    </cells>
+                                </form>
+                                <matrix verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="16">
+                                    <rect key="frame" x="5" y="7" width="114" height="184"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <size key="cellSize" width="114" height="16"/>
+                                    <size key="intercellSpacing" width="4" height="8"/>
+                                    <sliderCell key="prototype" controlSize="small" continuous="YES" alignment="left" maxValue="1" doubleValue="0.5" tickMarkPosition="below" sliderType="linear" id="162"/>
+                                    <cells>
+                                        <column>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" maxValue="1" tickMarkPosition="below" sliderType="linear" id="96"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" tag="1" maxValue="1" doubleValue="0.5" tickMarkPosition="below" sliderType="linear" id="92"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" tag="2" maxValue="1" doubleValue="0.5" tickMarkPosition="below" sliderType="linear" id="79"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" tag="3" maxValue="1" doubleValue="0.5" tickMarkPosition="below" sliderType="linear" id="27"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" tag="4" maxValue="1" doubleValue="1" tickMarkPosition="below" sliderType="linear" id="4"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" tag="5" maxValue="1" doubleValue="0.5" tickMarkPosition="below" sliderType="linear" id="30"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" tag="6" maxValue="1" doubleValue="0.5" tickMarkPosition="below" sliderType="linear" id="15"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" maxValue="1" doubleValue="0.5" tickMarkPosition="below" sliderType="linear" id="126"/>
+                                        </column>
+                                    </cells>
+                                    <connections>
+                                        <action selector="setPanFromSlider:" target="116" id="137"/>
+                                    </connections>
+                                </matrix>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                    </box>
+                    <box fixedFrame="YES" title="Loudness" translatesAutoresizingMaskIntoConstraints="NO" id="100">
+                        <rect key="frame" x="664" y="142" width="178" height="212"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="ybW-ID-UtT">
+                            <rect key="frame" x="4" y="5" width="170" height="192"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <form verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5">
+                                    <rect key="frame" x="109" y="5" width="60" height="189"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <size key="cellSize" width="60" height="21"/>
+                                    <size key="intercellSpacing" width="1" height="3"/>
+                                    <formCell key="prototype" controlSize="small" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="167">
+                                        <font key="font" metaFont="smallSystem"/>
+                                        <font key="titleFont" metaFont="smallSystem"/>
+                                    </formCell>
+                                    <cells>
+                                        <column>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" stringValue=".8" id="13">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" stringValue="0" id="2">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" title=" " stringValue="0" id="115">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" title=" " stringValue="0" id="101">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" title=" " stringValue=".8" id="90">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" title="   " stringValue="0" id="77">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" title=" " stringValue="0" id="88">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                            <formCell controlSize="small" selectable="YES" borderStyle="bezel" alignment="left" title="  " stringValue="0" id="51">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
+                                            </formCell>
+                                        </column>
+                                    </cells>
+                                </form>
+                                <matrix verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14">
+                                    <rect key="frame" x="5" y="7" width="114" height="184"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <size key="cellSize" width="114" height="16"/>
+                                    <size key="intercellSpacing" width="4" height="8"/>
+                                    <sliderCell key="prototype" controlSize="small" continuous="YES" alignment="left" maxValue="1" tickMarkPosition="below" sliderType="linear" id="168"/>
+                                    <cells>
+                                        <column>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" maxValue="1" doubleValue="0.80000001192092896" tickMarkPosition="below" sliderType="linear" id="71"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" tag="1" maxValue="1" tickMarkPosition="below" sliderType="linear" id="54"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" tag="2" maxValue="1" tickMarkPosition="below" sliderType="linear" id="39"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" tag="3" maxValue="1" tickMarkPosition="below" sliderType="linear" id="45"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" tag="4" maxValue="1" doubleValue="0.80000001192092896" tickMarkPosition="below" sliderType="linear" id="34"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" tag="5" maxValue="1" tickMarkPosition="below" sliderType="linear" id="6"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" tag="6" maxValue="1" tickMarkPosition="below" sliderType="linear" id="120"/>
+                                            <sliderCell controlSize="small" continuous="YES" alignment="left" maxValue="1" tickMarkPosition="below" sliderType="linear" id="104"/>
+                                        </column>
+                                    </cells>
+                                    <connections>
+                                        <action selector="setAmpFromSlider:" target="116" id="138"/>
+                                    </connections>
+                                </matrix>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                    </box>
+                    <matrix verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43">
+                        <rect key="frame" x="60" y="148" width="45" height="188"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <size key="cellSize" width="45" height="20"/>
+                        <size key="intercellSpacing" width="4" height="4"/>
+                        <textFieldCell key="prototype" alignment="center" title="1" id="158">
+                            <font key="font" size="18" name="Helvetica"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <cells>
+                            <column>
+                                <textFieldCell alignment="center" title="1" id="125">
+                                    <font key="font" size="16" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <textFieldCell alignment="center" tag="1" title="2" id="112">
+                                    <font key="font" size="16" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <textFieldCell alignment="center" tag="2" title="3" id="57">
+                                    <font key="font" size="16" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <textFieldCell alignment="center" tag="3" title="4" id="72">
+                                    <font key="font" size="16" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <textFieldCell alignment="center" tag="4" title="5" id="69">
+                                    <font key="font" size="16" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <textFieldCell alignment="center" tag="5" title="6" id="98">
+                                    <font key="font" size="16" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <textFieldCell alignment="center" tag="6" title="7" id="108">
+                                    <font key="font" size="16" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <textFieldCell alignment="center" tag="7" title="8" id="105">
+                                    <font key="font" size="16" name="Helvetica"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </column>
+                        </cells>
+                    </matrix>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="76">
+                        <rect key="frame" x="11" y="81" width="245" height="46"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <buttonCell key="cell" type="push" title="Play" alternateTitle="Stop playing" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="155">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                            <font key="font" size="12" name="Helvetica-Bold"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="runFrom:" target="116" id="136"/>
+                        </connections>
+                    </button>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="99">
+                        <rect key="frame" x="-5" y="265" width="79" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" id="156">
+                            <font key="font" size="18" name="Helvetica"/>
+                            <string key="title">Left
+Source </string>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="74">
+                        <rect key="frame" x="-5" y="184" width="79" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" id="154">
+                            <font key="font" size="18" name="Helvetica"/>
+                            <string key="title">Right
+Source </string>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <box fixedFrame="YES" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="44">
+                        <rect key="frame" x="4" y="242" width="837" height="2"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="aiF-xm-ZUl">
+                            <rect key="frame" x="4" y="2" width="829" height="0.0"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica"/>
+                    </box>
+                    <box fixedFrame="YES" title="Sound Output" translatesAutoresizingMaskIntoConstraints="NO" id="49">
+                        <rect key="frame" x="268" y="69" width="248" height="67"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="aZ0-9U-GEd">
+                            <rect key="frame" x="4" y="5" width="240" height="47"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="122">
+                                    <rect key="frame" x="6" y="13" width="238" height="33"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <size key="cellSize" width="238" height="15"/>
+                                    <size key="intercellSpacing" width="0.0" height="3"/>
+                                    <buttonCell key="prototype" type="radio" title="Radio" imagePosition="leading" alignment="left" inset="2" id="163">
+                                        <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <cells>
+                                        <column>
+                                            <buttonCell type="radio" title="NeXT Built-In Sound Hardware" imagePosition="leading" alignment="left" state="on" inset="2" id="8">
+                                                <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <buttonCell type="radio" title="DSP Serial Port Device" imagePosition="leading" alignment="left" tag="1" inset="2" id="40">
+                                                <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                        </column>
+                                    </cells>
+                                </matrix>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                    </box>
+                    <box fixedFrame="YES" title="DSP Serial Port Device" translatesAutoresizingMaskIntoConstraints="NO" id="84">
+                        <rect key="frame" x="521" y="11" width="319" height="125"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="O4y-6w-kUz">
+                            <rect key="frame" x="4" y="5" width="311" height="105"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53">
+                                    <rect key="frame" x="4" y="8" width="311" height="99"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <size key="cellSize" width="311" height="15"/>
+                                    <size key="intercellSpacing" width="0.0" height="6"/>
+                                    <buttonCell key="prototype" type="radio" title="Radio" imagePosition="leading" alignment="left" inset="2" id="166">
+                                        <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <cells>
+                                        <column>
+                                            <buttonCell type="radio" title="Other" imagePosition="leading" alignment="left" state="on" inset="2" id="60">
+                                                <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <buttonCell type="radio" title="Ariel ProPort (ADC and DAC)" imagePosition="leading" alignment="left" tag="1" inset="2" id="10">
+                                                <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <buttonCell type="radio" title="Stealth DAI2400 (DAT Interface)" imagePosition="leading" alignment="left" tag="2" inset="2" id="36">
+                                                <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <buttonCell type="radio" title="Singular Solutions AD64x (ADC and DAT Interface)" imagePosition="leading" alignment="left" tag="3" inset="2" id="20">
+                                                <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <buttonCell type="radio" title="Ariel Digital Mic, Metaresearch Digital Ears, etc." imagePosition="leading" alignment="left" tag="4" inset="2" id="42">
+                                                <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                        </column>
+                                    </cells>
+                                </matrix>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                    </box>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="26">
+                        <rect key="frame" x="58" y="7" width="304" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="This space for rent" id="153">
+                            <font key="font" size="18" name="Helvetica-Oblique"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="151">
+                        <rect key="frame" x="-2" y="311" width="56" height="51"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="Reson" id="157"/>
+                    </imageView>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="-136.5" y="110"/>
+        </window>
+        <menu title="Reson" systemMenu="main" id="18" userLabel="MainMenu">
+            <items>
+                <menuItem title="Info..." id="70">
+                    <connections>
+                        <action selector="showInfoPanel:" target="116" id="148"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Edit" id="33">
+                    <menu key="submenu" title="Edit" id="23">
+                        <items>
+                            <menuItem title="Cut" keyEquivalent="x" id="52">
+                                <connections>
+                                    <action selector="cut:" target="-1" id="127"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Copy" keyEquivalent="c" id="35">
+                                <connections>
+                                    <action selector="copy:" target="-1" id="128"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Paste" keyEquivalent="v" id="55">
+                                <connections>
+                                    <action selector="paste:" target="-1" id="129"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Select All" keyEquivalent="a" id="103">
+                                <connections>
+                                    <action selector="selectAll:" target="-1" id="130"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Help..." id="86">
+                    <connections>
+                        <action selector="help:" target="116" id="147"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Hide" keyEquivalent="h" id="93">
+                    <connections>
+                        <action selector="hide:" target="-2" id="132"/>
+                    </connections>
+                </menuItem>
+                <menuItem title="Quit" keyEquivalent="q" id="50">
+                    <connections>
+                        <action selector="terminate:" target="-2" id="131"/>
+                    </connections>
+                </menuItem>
+            </items>
+        </menu>
+        <customObject id="116" userLabel="ResonController" customClass="ResonController">
+            <connections>
+                <outlet property="ampFieldBank" destination="5" id="139"/>
+                <outlet property="ampSliderBank" destination="14" id="144"/>
+                <outlet property="freqFieldBank" destination="17" id="135"/>
+                <outlet property="freqSliderBank" destination="117" id="134"/>
+                <outlet property="inputDevice" destination="53" id="150"/>
+                <outlet property="outputDevice" destination="122" id="149"/>
+                <outlet property="panFieldBank" destination="9" id="141"/>
+                <outlet property="panSliderBank" destination="16" id="143"/>
+                <outlet property="resGainFieldBank" destination="109" id="140"/>
+                <outlet property="resGainSliderBank" destination="46" id="142"/>
+            </connections>
+        </customObject>
+    </objects>
+    <resources>
+        <image name="Reson" width="128" height="128"/>
+    </resources>
+</document>

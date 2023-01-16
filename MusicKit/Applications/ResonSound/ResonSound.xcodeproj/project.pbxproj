@@ -64,8 +64,8 @@
 /* Begin PBXBuildFile section */
 		0348D9EA00711DEDCFED3B96 /* ResonController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0348D9D100711DEDCFED3B96 /* ResonController.h */; };
 		0348D9EB00711DEDCFED3B96 /* ResonSound.h in Headers */ = {isa = PBXBuildFile; fileRef = 0348D9D200711DEDCFED3B96 /* ResonSound.h */; };
-		0348D9ED00711DEDCFED3B96 /* Info.nib in Resources */ = {isa = PBXBuildFile; fileRef = 0348D9D600711DEDCFED3B96 /* Info.nib */; };
-		0348D9EE00711DEDCFED3B96 /* Reson.nib in Resources */ = {isa = PBXBuildFile; fileRef = 0348D9D800711DEDCFED3B96 /* Reson.nib */; };
+		0348D9ED00711DEDCFED3B96 /* Info.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0348D9D600711DEDCFED3B96 /* Info.xib */; };
+		0348D9EE00711DEDCFED3B96 /* Reson.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0348D9D800711DEDCFED3B96 /* Reson.xib */; };
 		0348D9EF00711DEDCFED3B96 /* Reson.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 0348D9DB00711DEDCFED3B96 /* Reson.tiff */; };
 		0348D9F200711DEDCFED3B96 /* ResonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0348D9CE00711DEDCFED3B96 /* ResonController.m */; settings = {ATTRIBUTES = (); }; };
 		0348D9F300711DEDCFED3B96 /* ResonSound.m in Sources */ = {isa = PBXBuildFile; fileRef = 0348D9CF00711DEDCFED3B96 /* ResonSound.m */; settings = {ATTRIBUTES = (); }; };
@@ -74,8 +74,8 @@
 		D853732F04055DAB00DC8C05 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D853732E04055DAB00DC8C05 /* MusicKit.framework */; };
 		D8A8B83718429C3700E7D082 /* ResonController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0348D9D100711DEDCFED3B96 /* ResonController.h */; };
 		D8A8B83818429C3700E7D082 /* ResonSound.h in Headers */ = {isa = PBXBuildFile; fileRef = 0348D9D200711DEDCFED3B96 /* ResonSound.h */; };
-		D8A8B83A18429C3700E7D082 /* Info.nib in Resources */ = {isa = PBXBuildFile; fileRef = 0348D9D600711DEDCFED3B96 /* Info.nib */; };
-		D8A8B83B18429C3700E7D082 /* Reson.nib in Resources */ = {isa = PBXBuildFile; fileRef = 0348D9D800711DEDCFED3B96 /* Reson.nib */; };
+		D8A8B83A18429C3700E7D082 /* Info.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0348D9D600711DEDCFED3B96 /* Info.xib */; };
+		D8A8B83B18429C3700E7D082 /* Reson.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0348D9D800711DEDCFED3B96 /* Reson.xib */; };
 		D8A8B83C18429C3700E7D082 /* Reson.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 0348D9DB00711DEDCFED3B96 /* Reson.tiff */; };
 		D8A8B83E18429C3700E7D082 /* ResonController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0348D9CE00711DEDCFED3B96 /* ResonController.m */; settings = {ATTRIBUTES = (); }; };
 		D8A8B83F18429C3700E7D082 /* ResonSound.m in Sources */ = {isa = PBXBuildFile; fileRef = 0348D9CF00711DEDCFED3B96 /* ResonSound.m */; settings = {ATTRIBUTES = (); }; };
@@ -90,8 +90,8 @@
 		0348D9D100711DEDCFED3B96 /* ResonController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ResonController.h; sourceTree = "<group>"; };
 		0348D9D200711DEDCFED3B96 /* ResonSound.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ResonSound.h; sourceTree = "<group>"; };
 		0348D9D400711DEDCFED3B96 /* Reson_main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Reson_main.m; sourceTree = "<group>"; };
-		0348D9D700711DEDCFED3B96 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Info.nib; sourceTree = "<group>"; };
-		0348D9D900711DEDCFED3B96 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/Reson.nib; sourceTree = "<group>"; };
+		0348D9D700711DEDCFED3B96 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Info.xib; sourceTree = "<group>"; };
+		0348D9D900711DEDCFED3B96 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Reson.xib; sourceTree = "<group>"; };
 		0348D9DB00711DEDCFED3B96 /* Reson.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Reson.tiff; sourceTree = "<group>"; };
 		0348D9DF00711DEDCFED3B96 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		0348D9E800711DEDCFED3B96 /* Reson.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; path = Reson.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -169,8 +169,8 @@
 		0348D9D500711DEDCFED3B96 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				0348D9D600711DEDCFED3B96 /* Info.nib */,
-				0348D9D800711DEDCFED3B96 /* Reson.nib */,
+				0348D9D600711DEDCFED3B96 /* Info.xib */,
+				0348D9D800711DEDCFED3B96 /* Reson.xib */,
 			);
 			name = Interfaces;
 			sourceTree = "<group>";
@@ -292,8 +292,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0348D9ED00711DEDCFED3B96 /* Info.nib in Resources */,
-				0348D9EE00711DEDCFED3B96 /* Reson.nib in Resources */,
+				0348D9ED00711DEDCFED3B96 /* Info.xib in Resources */,
+				0348D9EE00711DEDCFED3B96 /* Reson.xib in Resources */,
 				0348D9EF00711DEDCFED3B96 /* Reson.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -302,8 +302,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8A8B83A18429C3700E7D082 /* Info.nib in Resources */,
-				D8A8B83B18429C3700E7D082 /* Reson.nib in Resources */,
+				D8A8B83A18429C3700E7D082 /* Info.xib in Resources */,
+				D8A8B83B18429C3700E7D082 /* Reson.xib in Resources */,
 				D8A8B83C18429C3700E7D082 /* Reson.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,20 +351,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		0348D9D600711DEDCFED3B96 /* Info.nib */ = {
+		0348D9D600711DEDCFED3B96 /* Info.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				0348D9D700711DEDCFED3B96 /* English */,
 			);
-			name = Info.nib;
+			name = Info.xib;
 			sourceTree = "<group>";
 		};
-		0348D9D800711DEDCFED3B96 /* Reson.nib */ = {
+		0348D9D800711DEDCFED3B96 /* Reson.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				0348D9D900711DEDCFED3B96 /* English */,
 			);
-			name = Reson.nib;
+			name = Reson.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
