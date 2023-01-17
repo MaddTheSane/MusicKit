@@ -48,9 +48,11 @@ Modification history:
 #import <ctype.h>
 #import <sys/file.h>
 #import <MKDSP/dsp.h>
+#include <unistd.h>
+#include <stdbool.h>
 
 /* private functions from libdsp */
-extern int _DSPError();
+extern int _DSPError(int, char*);
 extern int _DSPTrace;
 
 /* Same as DSP_MALLOC in _dsp.h */
@@ -183,15 +185,12 @@ static int	computeRunTime(DSPDataRecord *progData, DSPAddress progAddress,
     return numCycles;
 }
 
-static char isLocalSymbol(symbolPtr)
-DSPSymbol *symbolPtr;
+static char isLocalSymbol(DSPSymbol *symbolPtr)
 {
     return symbolPtr->type[0] == 'L';
 }
 
-static int computeGlobalSymCount(symbolsPtr,nSymbols)
-    DSPSymbol *symbolsPtr;
-    int nSymbols;
+static int computeGlobalSymCount(DSPSymbol *symbolsPtr,int nSymbols)
 {
     int i;
     int count = 0;
@@ -203,8 +202,7 @@ static int computeGlobalSymCount(symbolsPtr,nSymbols)
     return count;
 }	
 
-static int nWds(dataRecPtr)
-    DSPDataRecord *dataRecPtr;
+static int nWds(DSPDataRecord *dataRecPtr)
 {
     if (!dataRecPtr)
       return 0;
@@ -212,9 +210,7 @@ static int nWds(dataRecPtr)
 }
 
 static void 
-  writeLeafUGStruct(dataArr,fp)
-    DSPDataRecord **dataArr;
-    FILE *fp;
+  writeLeafUGStruct(DSPDataRecord **dataArr,FILE *fp)
 {
     fprintf(fp,"\n"
 "static MKLeafUGStruct _leafUGStruct = {\n"
@@ -236,9 +232,7 @@ static void
 	nWds(dataArr[(int)DSP_LC_XH]),nWds(dataArr[(int)DSP_LC_YH]));
 }  
 
-static void writeData(dataRecPtr,fp)
-    DSPDataRecord *dataRecPtr;
-    FILE *fp;
+static void writeData(DSPDataRecord *dataRecPtr,FILE *fp)
 {
     int isP = 0;
     int i;
@@ -283,11 +277,7 @@ static void writeData(dataRecPtr,fp)
 	      DSPLCNames[(int)dataRecPtr->locationCounter]);
 }
 
-static void writeFixups(fixupsPtr,fp,nFixups,fixupLC)
-    DSPFixup *fixupsPtr;
-    FILE *fp;
-    int nFixups;
-    int fixupLC;
+static void writeFixups(DSPFixup *fixupsPtr,FILE *fp,int nFixups,int fixupLC)
 {
     int i;
     char firstOne = TRUE;
@@ -307,13 +297,12 @@ static void writeFixups(fixupsPtr,fp,nFixups,fixupLC)
     fprintf(fp,"\n   };\n");
 }	
 
-static char *upCase(s) 
-    char *s;
+static char *upCase(char *s)
 {
     /* Return upper case copy of s */
     char *rtn;
     char *sp;
-    int len = strlen(s)+1;
+    size_t len = strlen(s)+1;
     MY_MALLOC(rtn, char, len);
     for (sp = rtn; *sp; sp++,s++)
       if (islower(*s)) 
@@ -342,11 +331,7 @@ static char *argName(char *s)
     return rtn;
 }
 
-static void writeArgSpace(symbolPtr,fp,nSymbols,commaNeeded)
-    DSPSymbol *symbolPtr;
-    FILE *fp;
-    int nSymbols;
-    char *commaNeeded;
+static void writeArgSpace(DSPSymbol *symbolPtr,FILE *fp,int nSymbols,char *commaNeeded)
 {
     int i;
     register DSPSymbol *sp = symbolPtr;
@@ -363,10 +348,7 @@ static void writeArgSpace(symbolPtr,fp,nSymbols,commaNeeded)
     }
 }
 
-static void writeArgSpaces(symbolArr,symbolSizeArr,fp)
-    DSPSymbol **symbolArr;
-    int *symbolSizeArr;
-    FILE *fp;
+static void writeArgSpaces(DSPSymbol **symbolArr,int *symbolSizeArr,FILE *fp)
 {
     DSPSymbol *sp;
     char commaNeeded = 0;
@@ -384,9 +366,7 @@ static void writeArgSpaces(symbolArr,symbolSizeArr,fp)
     return;
 }
     
-static void writeDataInits(dataRecPtr,fp)
-    DSPDataRecord *dataRecPtr;
-    FILE *fp;
+static void writeDataInits(DSPDataRecord *dataRecPtr,FILE *fp)
 {
     fprintf(fp,"\
    _dataRec%s.data = _data%s;\n",
@@ -395,9 +375,7 @@ static void writeDataInits(dataRecPtr,fp)
 }
     
 static
-  char *stripTail(srcStr,delimiter)
-char *srcStr;
-char delimiter;
+  char *stripTail(char *srcStr,char delimiter)
 /* Peels off last extension and delimiter. */
 {
     char *s,*rtnStr;
@@ -480,9 +458,7 @@ static void writeLeafUGInitFunc(
     fprintf(fp,"}\n");
 }
 
-static void writeMasterStruct(nxtPtr,fp)
-    DSPLoadSpec *nxtPtr;
-    FILE *fp;
+static void writeMasterStruct(DSPLoadSpec *nxtPtr,FILE *fp)
 {
     int i;
     DSPSection *sect = nxtPtr->userSection;
@@ -499,10 +475,7 @@ static void writeMasterStruct(nxtPtr,fp)
     fprintf(fp,"} /* fixupCount */\n};\n");
 }  
 
-static void writeSymbols(symbolsPtr,fp,nSymbols)
-    DSPSymbol *symbolsPtr;
-    FILE *fp;
-    int nSymbols;
+static void writeSymbols(DSPSymbol *symbolsPtr,FILE *fp,int nSymbols)
   /* Writes symbols but omits 4th character from 'type' field, since it
      is written out to Master file and the master cannot specify memory
      space. */
@@ -530,11 +503,7 @@ static void writeSymbols(symbolsPtr,fp,nSymbols)
 }	
 
 
-static void writeSymbolUnionInits(symbolsPtr,fp,nSymbols,lc)
-    DSPSymbol *symbolsPtr;
-    FILE *fp;
-    int nSymbols;
-    DSPLocationCounter lc;
+static void writeSymbolUnionInits(DSPSymbol *symbolsPtr,FILE *fp,int nSymbols,DSPLocationCounter lc)
 {
     int i;
     DSPSymbol *sp = symbolsPtr;
@@ -553,11 +522,7 @@ static void writeSymbolUnionInits(symbolsPtr,fp,nSymbols,lc)
       }
 }	
 
-static void writeArgSymbolRefs(symbolsPtr,fp,nSymbols,lc)
-    DSPSymbol *symbolsPtr;
-    FILE *fp;
-    int nSymbols;
-    DSPLocationCounter lc;
+static void writeArgSymbolRefs(DSPSymbol *symbolsPtr,FILE *fp,int nSymbols,DSPLocationCounter lc)
 {
     int i;
     DSPSymbol *sp = symbolsPtr;
@@ -586,7 +551,7 @@ static char *methodDeclString;
 static void writeOneDefaultMethod(DSPSymbol *sp, FILE *fp)
 {
     char *arg = argName(sp->name); /* copied */
-    extern char *_DSPCopyStr(char *arg);
+    extern char *_DSPCopyStr(const char *arg);
     char *Arg = _DSPCopyStr(arg);
     int isAddress;
     char *argType;
@@ -786,11 +751,7 @@ static void writeEnum(DSPSymbol **symbolArr, int *symbolSizeArr, FILE *fp)
     fprintf(fp," };\n");
 }
 
-static void writeArgInitAux(symbolPtr,fp,nSymbols,space)
-    DSPSymbol *symbolPtr;
-    FILE *fp;
-    int nSymbols;
-    char *space;
+static void writeArgInitAux(DSPSymbol *symbolPtr,FILE *fp,int nSymbols,char *space)
 {
     int i;
     DSPSymbol *sp = symbolPtr;
@@ -800,10 +761,7 @@ static void writeArgInitAux(symbolPtr,fp,nSymbols,space)
 	      argName(sp->name),space,i);
 }
 
-static void writeArgInits(symbolArr,symbolSizeArr,fp)
-    DSPSymbol **symbolArr;
-    int *symbolSizeArr;
-    FILE *fp;
+static void writeArgInits(DSPSymbol **symbolArr,int *symbolSizeArr,FILE *fp)
 {
     DSPSymbol *sp;
     int startVal;
@@ -817,9 +775,7 @@ static void writeArgInits(symbolArr,symbolSizeArr,fp)
 				      symbolSizeArr[(int)DSP_LC_L],"L");
 }
 
-static void writeUGMasterInit(nxtPtr,fp)
-    DSPLoadSpec *nxtPtr;
-    FILE *fp;
+static void writeUGMasterInit(DSPLoadSpec *nxtPtr,FILE *fp)
 {
     int i;
     DSPSection *sp = nxtPtr->userSection;
@@ -842,17 +798,13 @@ static void writeUGMasterInit(nxtPtr,fp)
       fprintf(fp,"   _masterUGStruct.argSymbols = _argSymbols;\n");
 }
 
-static void writeUGMasterGetPtr(fp)
-    FILE *fp;
+static void writeUGMasterGetPtr(FILE *fp)
 {
     fprintf(fp,"\n"
 "+(MKMasterUGStruct *)masterUGPtr { return &_masterUGStruct; }\n");
 }
 
-static void writeUGMasterInitFunc(nxtPtr,fileName,fp)
-    DSPLoadSpec *nxtPtr;
-    char *fileName;
-    FILE *fp;
+static void writeUGMasterInitFunc(DSPLoadSpec *nxtPtr,char *fileName,FILE *fp)
 {
     int i,j;
     DSPSection *sp = nxtPtr->userSection;
@@ -864,10 +816,7 @@ static void writeUGMasterInitFunc(nxtPtr,fileName,fp)
    fprintf(fp,"}\n");
 }
 
-static char *writeUGMasterHeader(nxtPtr,fileName,fp)
-    DSPLoadSpec *nxtPtr;
-    char *fileName;
-    FILE *fp;
+static char *writeUGMasterHeader(DSPLoadSpec *nxtPtr,char *fileName,FILE *fp)
 {
     char *objName;
     char *macroName;
@@ -878,14 +827,11 @@ static char *writeUGMasterHeader(nxtPtr,fileName,fp)
     if (isupper(macroName[0]))
       macroName[0] = tolower(macroName[0]);
     fprintf(fp,includeMsg,macroName,objName);
-    fprintf(fp,"#import <MK/UnitGenerator.h>\n");
+    fprintf(fp,"#import <MusicKit/UnitGenerator.h>\n");
     return objName;
 }
 
-static void writeUGMasterStub(nxtPtr,fileName,fp)
-    DSPLoadSpec *nxtPtr;
-    char *fileName;
-    FILE *fp;
+static void writeUGMasterStub(DSPLoadSpec *nxtPtr,char *fileName,FILE *fp)
     /* Writes a stub file for Master ug. */
 {
     FILE *headerFp;
@@ -911,7 +857,7 @@ static void writeUGMasterStub(nxtPtr,fileName,fp)
     fprintf(fp,"\
 #import \"%s.h\"\n"
 "\n"
-"@implementation %s:UnitGenerator\n"
+"@implementation %s\n"
 "{\n"
 "	/* Instance variables go here */\n"
 "}\n"
@@ -955,10 +901,7 @@ static void writeUGMasterStub(nxtPtr,fileName,fp)
 	}
 }
 
-static char *writeUGMasterDecls(nxtPtr,fileName,fp)
-    DSPLoadSpec *nxtPtr;
-    char *fileName;
-    FILE *fp;
+static char *writeUGMasterDecls(DSPLoadSpec *nxtPtr,char *fileName,FILE *fp)
     /* Writes an include file for unit generator master objects. */
 {
     char *objName = writeUGMasterHeader(nxtPtr,fileName,fp);
@@ -967,20 +910,13 @@ static char *writeUGMasterDecls(nxtPtr,fileName,fp)
     return objName;
 }
 
-static void writeUGMasterInclude(nxtPtr,fileName,fp)
-    DSPLoadSpec *nxtPtr;
-    char *fileName;
-    FILE *fp;
+static void writeUGMasterInclude(DSPLoadSpec *nxtPtr,char *fileName,FILE *fp)
     /* Writes an include file for unit generator master objects. */
 {
     writeUGMasterInitFunc(nxtPtr,writeUGMasterDecls(nxtPtr,fileName,fp),fp);
 }
 
-static void  writeUGLeafClass(nxtPtr,fileName,fp,isMaster)
-    DSPLoadSpec *nxtPtr;
-    char *fileName;
-    FILE *fp;
-    char isMaster;
+static void  writeUGLeafClass(DSPLoadSpec *nxtPtr,char *fileName,FILE *fp,bool isMaster)
 {
     /* 
     */

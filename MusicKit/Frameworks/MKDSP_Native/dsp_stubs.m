@@ -302,6 +302,11 @@ return 0;
 }
 
 
+ DSPSection *DSPGetUserSection(DSPLoadSpec *dspStruct)
+{
+return NULL;
+}
+
  int DSPMKAwaitEndOfTime(DSPFix48 *aTimeStampP)
 {
 return 0;
@@ -610,4 +615,88 @@ int DSPSetHostMessageMode(void)
 return 0;
 }
 
+int _DSPSetSCISCR(int scr)
+{
+return 0;
+}
 
+int _DSPSetSCISCCR(int sccr)
+{
+return 0;
+}
+
+int _DSPSetSSICRA(int cra)
+{
+return 0;
+}
+
+int _DSPSetSSICRB(int crb)
+{
+return 0;
+}
+
+int _DSPSetStartTimed(DSPFix48 *aTimeStampP, int startAddress)
+{
+return 0;
+}
+
+int _DSPSineTest(int nbufs)
+{
+return 0;
+}
+
+int _DSPStartTimed(DSPFix48 *aTimeStampP)
+{
+return 0;
+}
+
+char *_DSPFGetRecord(FILE *lnkfp)
+{
+return NULL;
+}
+
+int _DSPGetIntHexStr6(char **s)
+{
+return 0;
+}
+
+int _DSPLnkRead(DSPLoadSpec **dspptr,char *lnkfn,int sys)
+{
+return 0;
+}
+
+int _DSPGetRelIntHexStr(char **rpp,DSPDataRecord *dr,int refno)
+{
+return 0;
+}
+
+char *_DSPUniqueName(char *stub)
+{
+return NULL;
+}
+
+void DSPSymbolPrint(DSPSymbol sym)
+{
+}
+
+void DSPDataRecordPrint(DSPDataRecord *dr)
+{
+}
+
+void DSPSectionPrint(DSPSection *section)
+{
+}
+
+void DSPLoadSpecPrint(DSPLoadSpec *dsp)
+{
+}
+
+int DSPSetMKSystemFiles(void)
+{
+return 0;
+}
+
+int DSPSetAPSystemFiles(void)
+{
+return 0;
+}

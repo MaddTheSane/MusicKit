@@ -101,7 +101,7 @@ char *_DSPReCat(
 
 /* #include "dsp/_dsp.h" */
 
-char *_DSPCopyStr(char *s)
+char *_DSPCopyStr(const char *s)
 {
     char *c;
     c = malloc(strlen(s)+1);

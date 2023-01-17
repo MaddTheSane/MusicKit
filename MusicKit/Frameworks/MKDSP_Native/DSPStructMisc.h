@@ -25,14 +25,14 @@ MKDSP_API void DSPLoadSpecInit(DSPLoadSpec *dsp);
  */
 
 
-/**************************** PRINTING FUNCTIONS *****************************/
+#pragma mark PRINTING FUNCTIONS
 
 MKDSP_API void DSPSymbolPrint(DSPSymbol sym);
 MKDSP_API void DSPDataRecordPrint(DSPDataRecord *dr);
 MKDSP_API void DSPSectionPrint(DSPSection *section);
 MKDSP_API void DSPLoadSpecPrint(DSPLoadSpec *dsp);
 
-/****************************** ARCHIVING FUNCTIONS **************************/
+#pragma mark ARCHIVING FUNCTIONS
 
 MKDSP_API int DSPDataRecordWrite(DSPDataRecord *dr, FILE *fp);
 MKDSP_API int DSPSymbolWrite(DSPSymbol sym, FILE *fp);

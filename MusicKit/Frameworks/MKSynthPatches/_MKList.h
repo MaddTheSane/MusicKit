@@ -24,8 +24,7 @@
 {
     id *theList;
 }
--(void)init;
--(void)dealloc;
+-(id)init;
 -(id)objectAtIndex:(int)indx;
 -(id *)baseAddress;
 

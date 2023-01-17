@@ -34,14 +34,14 @@ Modification history
 #include <sys/file.h>
 #include <MKDSP/dsp.h>
 #include <ctype.h>
+#include <unistd.h>
 
 #define USAGE "dsploadwrap [-{relative,absolute}] [-{ug,ap}] [-system] [-bootstrap]  [-simulator] [-argtemplate <string>] [-start <address>] [-trace <n>] [-prefixAP <string> [-stackable]] <filename(s)>"
 
 #define  NX_MALLOC( VAR, TYPE, NUM ) \
  ((VAR) = (TYPE *) malloc( (unsigned)(NUM)*sizeof(TYPE) )) 
 
-extern int access();            /* ? Not in <sys/file.h> as man says */
-extern int writeUG();		/* from writeUG.c */
+extern int writeUG(DSPLoadSpec *nxtPtr, char *fileName, FILE *fp, int mode);		/* from writeUG.c */
 extern int DSPWriteC(
     DSPLoadSpec *dsp,
     char *cfn,			/* name of file open on cfp */
@@ -54,19 +54,19 @@ extern int DSPWriteC(
     int stackable);		/* TRUE for "Load", FALSE for "LoadGo" */
 
 /* private functions from libdsp */
-extern char *_DSPCopyStr();
-extern FILE *_DSPMyFopen();
-extern int _DSPError1();
-extern char *_DSPToLowerStr();
-extern int _DSPErr();
-extern int _DSPGetIntStr();
-extern char *_DSPGetBody();
-extern char *_DSPGetTail();
-extern int _DSPLnkRead();
-extern int _DSPRelocateUser();
-extern int _DSPRelocate();
-extern char *_DSPGetTokStr();
-extern char *_DSPToUpperStr();
+extern char *_DSPCopyStr(const char *s);
+extern FILE *_DSPMyFopen(const char *fn, const char *mode);
+extern int _DSPError1(int errorcode, char *msg, char *arg);
+extern char *_DSPToLowerStr(char*);
+extern int _DSPErr(char *msg);
+extern int _DSPGetIntStr(char **s);
+extern char *_DSPGetBody(char*);
+extern char *_DSPGetTail(char*);
+extern int _DSPLnkRead(DSPLoadSpec **dspptr,char *lnkfn,int sys);
+extern int _DSPRelocateUser(void);
+extern int _DSPRelocate(void);
+extern char *_DSPGetTokStr(char **s);
+extern char *_DSPToUpperStr(char *s);
 extern void _DSPInitDefaults(void);
 extern int DSPAddMappedDSP(void *hostInterfaceAddress, const char *name);
 
@@ -75,8 +75,7 @@ extern int _DSPTrace;
 
 #define DSP_TRACE_DSPLOADWRAP 16
 
-char *getlastname(c)	/* return identifier after last '_'.  NO COPY */
-    char *c;
+char *getlastname(char *c)	/* return identifier after last '_'.  NO COPY */
 {    
     char *p;
     p = c+strlen(c)-1; /* point to last char */
@@ -85,8 +84,7 @@ char *getlastname(c)	/* return identifier after last '_'.  NO COPY */
     return(p);
 }
 
-char *rmvlastname(c)	/* remove string after and including last '_' */
-    char *c;
+char *rmvlastname(char *c)	/* remove string after and including last '_' */
 {    
     char *s;
     char *p;
@@ -97,13 +95,12 @@ char *rmvlastname(c)	/* remove string after and including last '_' */
     return(s);
 }
 
-static char *makeUGFileName(fileRoot,type)
-    char *fileRoot;
-    int type; /* 1 == leaf, 2 == master include, 3 == master stub */ 
+static char *makeUGFileName(const char *fileRoot,int type /* 1 == leaf, 2 == master include, 3 == master stub */)
     /* Makes leaf file class name */
 {
-    int i,len;
-    char *rtn,*s1,*s;
+    size_t i,len;
+    char *rtn,*s;
+    const char *s1;
     len = strlen(fileRoot);
     if (type != 2)
       NX_MALLOC(rtn,char,len+1+2-1+2); /* + \0 - _ + UG + .m */
@@ -179,22 +176,21 @@ static void writeUGMasterClasses(char *lnkfb,int writeMode,DSPLoadSpec *dsp)
     }
 }
     
-void main(argc,argv) 
-    int argc; char *argv[]; 
+int main(int argc, const char *argv[])
 {
     int iarg,i,j,nbad,errorcode,count,nSpaceArgs;
-    char 
+    const char
       *lnkfn,			/* input link file name <*/
       *cfn,			/* output c file name (USER) */
       *hfn,			/* output h file name (USER) */
-      *leafUGFileName,		/* output m file name (UG) */
+      *leafUGFileName=NULL,	/* output m file name (UG) */
       *symfn,			/* output symbol table file name */
       *simfn,			/* output simulator file name */
       *lnkfe,			/* lnkfn extension */
       *lnkfb,			/* lnkfn body (filename extension removed) */
       *prefixAP=NULL,		/* prefix to replace "DSPAP" for AP calls */
       *ugargstr=NULL;		/* unit-generator arg template (dspwrap) */
-    typedef enum _DSPSrcType 
+    typedef enum _DSPSrcType
       {NOST=0,			/* not specified */
 	 UG,			/* unit generator main .lnk file (dspwrap) */
 	 AP,			/* array processor main .lnk file (dspwrap) */
@@ -292,11 +288,13 @@ void main(argc,argv)
 	if (!lnkfn) break;
 	lnkfb = _DSPGetBody(lnkfn);
 	lnkfe = _DSPGetTail(lnkfn);
-	if (asmtype==NOAT)
-	  if (strcmp(lnkfe,".lod")==0) 
-	    asmtype = LOD;
-	  else
-	    asmtype = LNK;
+        if (asmtype==NOAT) {
+            if (strcmp(lnkfe,".lod")==0) {
+                asmtype = LOD;
+            } else {
+                asmtype = LNK;
+            }
+        }
 
 	if (srctype==UG) {
 	    cfn = NULL;

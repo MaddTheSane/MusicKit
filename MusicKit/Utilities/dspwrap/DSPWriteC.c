@@ -21,8 +21,8 @@ Modification history:
 #include <MKDSP/dsp.h>
 
 /* private functions from libdsp */
-extern char *_DSPRemoveTail();
-extern int _DSPErr();
+extern char *_DSPRemoveTail(char*);
+extern int _DSPErr(char *msg);
 
 /************ ROUTINES IN COMMON WITH _DSPWriteUG.C (MERGE LATER) *************/
 #define INT(_x) ((int)_x)
@@ -33,15 +33,12 @@ extern int _DSPErr();
 
 static int globalSymCount[DSP_LC_Num];
 
-static char isLocalSymbol(symbolPtr)
-DSPSymbol *symbolPtr;
+static char isLocalSymbol(DSPSymbol *symbolPtr)
 {
     return symbolPtr->type[0] == 'L';
 }
 
-static int computeGlobalSymCount(symbolsPtr,nSymbols)
-    DSPSymbol *symbolsPtr;
-    int nSymbols;
+static int computeGlobalSymCount(DSPSymbol *symbolsPtr,int nSymbols)
 {
     int i;
     int count = 0;
@@ -54,8 +51,7 @@ static int computeGlobalSymCount(symbolsPtr,nSymbols)
 }	
 
 /********** End routines in common with _DSPWriteUG.c (merge later) ***********/
-int countGlobalSymbols(user) 
-    DSPSection *user;
+int countGlobalSymbols(DSPSection *user)
 {
     int i,count=0;
     FOREACHLC(i) 
@@ -78,7 +74,6 @@ int DSPWriteC(
 {
     DSPSection *user;
     int ec,nargs;
-    char *getenv();
     char *dspfile,*dspstruct;
     char *initloadgofunc,*cfb;
 

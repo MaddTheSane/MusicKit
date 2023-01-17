@@ -264,6 +264,6 @@
 
 #define MK_OSCFREQSCALE 256.0 /* Used by Oscg and Oscgaf */
 
-#endif UNITGENERATORS_H
+#endif //UNITGENERATORS_H
 
 #endif

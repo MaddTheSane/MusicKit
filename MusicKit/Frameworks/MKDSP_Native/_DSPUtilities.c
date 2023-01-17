@@ -627,7 +627,7 @@ _DSPMakeArray(int size)
 
 /* #include "dsp/_dsputilities.h" */
 
-FILE *_DSPMyFopen(char *fn,char *mode)
+FILE *_DSPMyFopen(const char *fn, const char *mode)
 {
     FILE *fp;
     fp = fopen(fn,mode);

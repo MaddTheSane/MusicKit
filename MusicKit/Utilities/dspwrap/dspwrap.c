@@ -75,29 +75,30 @@ TO DO
 
 #define USAGE "dspwrap [-{ug,ap}] [-no{Doc,Link,C}] [-o<path>] [-trace <n>] [-xonly] [-local <path>] [-dsploadwrapDir <path>] [-macroDir <path>] [-prefixAPcalls <string> [-stackable]] <filename(s)>"
 
-#import <libc.h>
+#include <libc.h>
 #import <MKDSP/dsp.h>
-#import <stdio.h>
-#import <strings.h>
-#import <sys/file.h>
+#include <stdio.h>
+#include <strings.h>
+#include <sys/file.h>
+#include <unistd.h>
 
 #define MAXARGS 100             /* maximum number of unit generator args */
 #define MAX_LINE 256		/* max chars per line on input (via fgets) */
 
 /* private functions from libdsp */
-extern char *_DSPToLowerStr();
-extern char *_DSPCopyStr();
-extern int _DSPGetIntStr();
-extern char *_DSPGetBody();
-extern char *_DSPGetTail();
-extern FILE *_DSPMyFopen();
-extern char *_DSPGetTokStr();
-extern char *_DSPPadStr();
-extern char *_DSPSkipWhite();
-extern int _DSPNotBlank();
-extern char *_DSPRemoveTail();
-extern char *_DSPMakeStr();
-extern char *_DSPCVS();
+extern char *_DSPToLowerStr(char*);
+extern char *_DSPCopyStr(const char*);
+extern int _DSPGetIntStr(char**);
+extern char *_DSPGetBody(char*);
+extern char *_DSPGetTail(char*);
+extern FILE *_DSPMyFopen(char*,char*);
+extern char *_DSPGetTokStr(char**);
+extern char *_DSPPadStr(char*,int);
+extern char *_DSPSkipWhite(char*);
+extern int _DSPNotBlank(char*);
+extern char *_DSPRemoveTail(char*);
+extern char *_DSPMakeStr(int,char*);
+extern char *_DSPCVS(int);
 extern void _DSPInitDefaults(void);
 extern int DSPAddMappedDSP(void *hostInterfaceAddress, const char *name);
 
@@ -105,10 +106,10 @@ extern int DSPAddMappedDSP(void *hostInterfaceAddress, const char *name);
 extern int _DSPTrace;
 
 /* left-over undeclared tidbits */
-extern int access();            /* ? Not in <sys/file.h> as man says */
-extern int setlinebuf();        /* ? Not in <stdio.h> as man says */
-extern int unlink();            /* ? */
-extern int symlink();           /* ? */
+//extern int access();            /* ? Not in <sys/file.h> as man says */
+//extern int setlinebuf();        /* ? Not in <stdio.h> as man says */
+//extern int unlink();            /* ? */
+//extern int symlink();           /* ? */
 
 /* remedial define's (for compiling with pre-dsp-18 libdsp's) */
 #ifndef DSP_SYS_REV_C
@@ -118,6 +119,7 @@ extern int symlink();           /* ? */
 #endif
 
 /* Also see the DSP include directory used in the system() command below */
+//TODO: update?
 #define MANDIR "/usr/next/man/man7/" /* manual directory */
 #define CATDIR "/usr/next/man/cat7/" /* manual directory */
 #define APSUBDIR "/ap/"         /* subpath for ap documentation (NULL ok) */
@@ -132,10 +134,9 @@ typedef enum _macrotypecode {UG=0,AP,ODD,NONE} macrotypecode;
 typedef enum _argcode 
 	{dsp24=0,prefix,instance,dspace,literal,address,input,output} argcode;
 
-char *stripzero(c)              /* strip trailing zero from UG arg name */
-    char *c;
-{    
-    int n;
+char *stripzero(char *c)              /* strip trailing zero from UG arg name */
+{
+    size_t n;
     n = strlen(c);
     if (c[n-1]!='0') {
 	if (_DSPTrace)
@@ -145,10 +146,7 @@ char *stripzero(c)              /* strip trailing zero from UG arg name */
     return(c);
 }
 
-char *my_fgets(s, n, stream)
-    char *s;
-    int n;
-    FILE *stream;
+char *my_fgets(char *s, int n, FILE *stream)
 {
     char *r;
     do {
@@ -157,7 +155,7 @@ char *my_fgets(s, n, stream)
     return r;
 }
 
-extern int dspasm();            /* defined below */
+static int dspasm(char *asmfn,macrotypecode macrotype);            /* defined below */
 
 /*** Global variables (set in main and used by dspasm() below) ***/
 char  *local_dir;               /* local include directory, if any */
@@ -165,8 +163,7 @@ char  *local_macro_dir;         /* local macro directory, if any */
 int do_local = FALSE;           /* use local include files */
 int do_local_macro = FALSE;     /* use local macro files */
 
-void main(argc,argv) 
-    int argc; char *argv[]; 
+int main(int argc,char *argv[])
 {
     int iarg,i,j,ndspaceargs,nmargs,nugargs,nspaces,icase,ncases,nbad,errorcode;
     char 
@@ -183,15 +180,15 @@ void main(argc,argv)
       *ugargstr,                /* unit-generator argument string */
       *ugargnames,              /* unit-generator ptr-argument names */
       *local_dlw_dir;           /* local dsploadwrap directory, if any */
-    FILE *asmfp,*masmfp,*olsfp,*mlsfp,*fundocfp,*manpfp;
-    char *tok,*c,*lineptr,*progname=argv[0];
+    FILE *asmfp,*masmfp,*olsfp=NULL,*mlsfp,*fundocfp=NULL,*manpfp;
+    char *tok,*c=NULL,*lineptr,*progname=argv[0];
     char *opath=DSPCat(DSPGetDSPDirectory(),"/man/");
     char *apsubdir=APSUBDIR,*ugsubdir=UGSUBDIR;
     char *dspRoot = NULL;       /* DSP environment variable (-e option) */
-    char *fundoc_nametok;       /* macro name for function doc */
-    char *prefixAP = NULL;        /* prefix for AP function calls */
-    char *fundoc_ols;           /* one-line summary for function doc */
-    char *fundoc_description;   /* description section for function doc */
+    char *fundoc_nametok = NULL;/* macro name for function doc */
+    char *prefixAP = NULL;      /* prefix for AP function calls */
+    char *fundoc_ols = NULL;    /* one-line summary for function doc */
+    char *fundoc_description=NULL;/* description section for function doc */
     char linebuf[MAX_LINE];        /* input line buffer */
     macrotypecode macrotype = NONE;
     argcode argtype[MAXARGS];   /* UG argument descriptor */
@@ -274,7 +271,7 @@ void main(argc,argv)
 
     if(argc == 0){
         printf("\nUsage:\t\t%s *.asm\n\n",USAGE);
-        exit(1);
+        return EXIT_FAILURE;
     }
 
     if (!do_lnk) 
@@ -331,25 +328,28 @@ void main(argc,argv)
             fundoc_nametok = DSPCat("", nametok);
             nametok = _DSPPadStr(nametok,15);  /* pad string to fixed width */
             /* advance to "(UG macro)" or "(AP macro)" */
-            if (macrotype==NONE)
-              if (*_DSPSkipWhite(lineptr)=='(') {
-                  _DSPToLowerStr(typetok=_DSPGetTokStr(&lineptr));
-                  if (strcmp(typetok,"ug")==0) {
-                      macrotype = UG;
-                      printf(" Macro type assumed is UG.\n");
-                  }
-                  else if (strcmp(typetok,"ap")==0) {
-                      macrotype = AP;
-                      printf(" Macro type assumed is AP.\n");
-                  }
-                  else printf(
-                      " *** unknown macro type specified in \"%s\" ***\n",c);
-              }
-              else {
-                  macrotype = UG;       /* "(xx macro)" is optional */
-                  printf(" No macro type specification.\n");
-                  printf(" Macro type assumed is UG.\n");
-              }
+            if (macrotype==NONE) {
+                if (*_DSPSkipWhite(lineptr)=='(') {
+                    _DSPToLowerStr(typetok=_DSPGetTokStr(&lineptr));
+                    if (strcmp(typetok,"ug")==0) {
+                        macrotype = UG;
+                        printf(" Macro type assumed is UG.\n");
+                    }
+                    else if (strcmp(typetok,"ap")==0) {
+                        macrotype = AP;
+                        printf(" Macro type assumed is AP.\n");
+                    }
+                    else {
+                        printf(
+                               " *** unknown macro type specified in \"%s\" ***\n",c);
+                    }
+                }
+                else {
+                    macrotype = UG;       /* "(xx macro)" is optional */
+                    printf(" No macro type specification.\n");
+                    printf(" Macro type assumed is UG.\n");
+                }
+            }
 
    /*** At this point, the macro type is known to be either AP or UG ***/
 
@@ -369,8 +369,8 @@ void main(argc,argv)
                         macrotype==AP?"ARRAY PROCESSING":"UNIT GENERATOR");
             }
             if (do_ols) {
-                fprintf(olsfp,nametok); /* output UG macro name */
-                fprintf(olsfp,lineptr); /* output one-line summary */
+                fprintf(olsfp, "%s", nametok); /* output UG macro name */
+                fprintf(olsfp, "%s", lineptr); /* output one-line summary */
             }
         }
 
@@ -380,7 +380,7 @@ void main(argc,argv)
             if ((manpfp=_DSPMyFopen(manpfn,"w"))==NULL) continue;
             else printf(" Writing man page:\t%s\n",manpfn);
             fprintf(manpfp,"NAME\n");
-            fprintf(manpfp,linebuf+3);/* output 1line summary to man page */
+            fprintf(manpfp, "%s", linebuf+3);/* output 1line summary to man page */
         }
 
         if (macrotype==AP) do_spaces=FALSE; /* only use x array memory */
@@ -390,9 +390,9 @@ void main(argc,argv)
                 && (strncmp(linebuf,";;",2)==0)
                 && (strncmp(linebuf,";;  DESCRIPTION",15)!=0) ) 
             if (do_man)
-              fprintf(manpfp,linebuf+(strlen(linebuf)>3?3:2)); /* man page */
+              fprintf(manpfp, "%s", linebuf+(strlen(linebuf)>3?3:2)); /* man page */
         if (do_man)
-            fprintf(manpfp,(linebuf+(strlen(linebuf)>3?3:2)));
+            fprintf(manpfp, "%s", (linebuf+(strlen(linebuf)>3?3:2)));
             
         /* Gather description for function doc */
         if (do_fundoc && macrotype == AP) {
@@ -403,10 +403,10 @@ void main(argc,argv)
                   fundoc_description = DSPCat(fundoc_description,
                                        DSPCat("  ",linebuf+2));
                   if (do_man)
-                    fprintf(manpfp,(linebuf+(strlen(linebuf)>3?3:2)));
+                    fprintf(manpfp, "%s", (linebuf+(strlen(linebuf)>3?3:2)));
             }
             if (do_man)
-                fprintf(manpfp,(linebuf+(strlen(linebuf)>3?3:2)));
+                fprintf(manpfp, "%s", (linebuf+(strlen(linebuf)>3?3:2)));
         }
 
         /* Write function documentation */
@@ -542,7 +542,7 @@ nodwai:         printf(" \";;  DSPWRAP ARGUMENT INFO\" field missing.\n");
                     && (strncmp(linebuf,";;",2)==0)
                     && (strncmp(linebuf,";;  DSPWRAP C SYNTAX",20)!=0) )
               if (do_man)
-                fprintf(manpfp,(linebuf+(strlen(linebuf)>3?3:2))); /* manpage */
+                fprintf(manpfp, "%s", (linebuf+(strlen(linebuf)>3?3:2))); /* manpage */
             if (strncmp(linebuf,";;  DSP",7)!=0)
                 printf(" \";;  DSPWRAP C SYNTAX\" field missing.\n");
             else { /* output calling sequence summary */
@@ -551,7 +551,7 @@ nodwai:         printf(" \";;  DSPWRAP ARGUMENT INFO\" field missing.\n");
                         && (strncmp(linebuf,";;",2)==0)
                         && _DSPNotBlank(linebuf+2) ) {
                   if (do_mls)
-                      fprintf(mlsfp,(linebuf+8)); /* calling-seq summary */
+                      fprintf(mlsfp, "%s", (linebuf+8)); /* calling-seq summary */
                   if (do_fundoc)
                       fprintf(fundocfp,"        %s", (linebuf+8));
                   }
@@ -586,7 +586,7 @@ nodwai:         printf(" \";;  DSPWRAP ARGUMENT INFO\" field missing.\n");
                     continue;   /* to avoid extra blank line */
                 }
 
-                fprintf(manpfp,linebuf+(strlen(linebuf)>3?3:2));
+                fprintf(manpfp, "%s", linebuf+(strlen(linebuf)>3?3:2));
             }
             if (macrotype==AP) /* Look for .doc file and append it */
               if ((docfp=fopen(DSPCat(_DSPRemoveTail(asmfn),".doc"),"r"))!=NULL) {
@@ -841,15 +841,13 @@ NO_MESSAGES\t set 1\t\t\t ; omit configuration printout\n\
     if (nbad>0) 
       printf(" Number of input files aborted by errors = %d\n",nbad);
 
-    exit(nbad? 1: 0);
+    return nbad ? EXIT_FAILURE : EXIT_SUCCESS;
 }
 
 /* ================================================================ */
 
 /* DSPASM */
-int dspasm(asmfn,macrotype)
-    char *asmfn;
-    macrotypecode macrotype;
+int dspasm(char *asmfn,macrotypecode macrotype)
 {
     char *asmfb,*lnkfn,*lstfn, *asmStr;
 
@@ -895,8 +893,7 @@ int dspasm(asmfn,macrotype)
     return errorcode;
 }
 
-int linksysdoc(manpfn)
-    char *manpfn;               /* filename of man page to be installed */
+int linksysdoc(char *manpfn /* filename of man page to be installed */)
 {
     char *manpfnnp;             /* man page filename, no path */
     char *sysmanpfn;            /* system man page filename */

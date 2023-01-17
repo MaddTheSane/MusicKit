@@ -2,14 +2,15 @@
 
 @implementation _MKList
 
--(void)init
+-(id)init
 {
+    self = [super init];
 	int i;
 	theList = (id *)malloc(6 * sizeof(id));
 	for (i=0;i<6;i++) {
 		theList[i] = nil;
 	}
-	[super init];
+    return self;
 }
 -(id)objectAtIndex:(int)indx
 {

@@ -33,24 +33,24 @@ MKDSP_API int _DSPEnterMappedModeNoCheck(void);
 MKDSP_API int _DSPEnterMappedModeNoPing(void);
 MKDSP_API int _DSPExitMappedMode(void);
 MKDSP_API int _DSPReadSSI();
-MKDSP_API int _DSPSetSCISCR();
-MKDSP_API int _DSPSetSCISCCR();
-MKDSP_API int _DSPSetSSICRA();
-MKDSP_API int _DSPSetSSICRB();
-MKDSP_API int _DSPSetStartTimed();
+MKDSP_API int _DSPSetSCISCR(int scr);
+MKDSP_API int _DSPSetSCISCCR(int sccr);
+MKDSP_API int _DSPSetSSICRA(int cra);
+MKDSP_API int _DSPSetSSICRB(int crb);
+MKDSP_API int _DSPSetStartTimed(DSPFix48 *aTimeStampP, int startAddress);
 MKDSP_API int _DSPSetTime();
 MKDSP_API int _DSPSetTimeFromInts();
-MKDSP_API int _DSPSineTest();
-MKDSP_API int _DSPStartTimed();
+MKDSP_API int _DSPSineTest(int nbufs);
+MKDSP_API int _DSPStartTimed(DSPFix48 *aTimeStampP);
 MKDSP_API DSPDatum _DSPGetValue();
 
 /* ============================= DSPReadFile.c ============================= */
-MKDSP_API char *_DSPFGetRecord();
-MKDSP_API int _DSPGetIntHexStr6();
-MKDSP_API int _DSPLnkRead();
+MKDSP_API char *_DSPFGetRecord(FILE *lnkfp);
+MKDSP_API int _DSPGetIntHexStr6(char **s);
+MKDSP_API int _DSPLnkRead(DSPLoadSpec **dspptr,char *lnkfn,int sys);
 MKDSP_API char *_DSPAddSymbol();
-MKDSP_API int _DSPGetRelIntHexStr();
-MKDSP_API char *_DSPUniqueName();
+MKDSP_API int _DSPGetRelIntHexStr(char **rpp,DSPDataRecord *dr,int refno);
+MKDSP_API char *_DSPUniqueName(char *stub);
 
 /* ============================ DSPStructMisc.c ============================ */
 
@@ -91,7 +91,7 @@ MKDSP_API int _DSPInInt(int def, char *name);
 MKDSP_API int _DSPIndexS(struct _strarr *stra, register char *str, int nstr);
 MKDSP_API char *_DSPIntToChar(int i);
 MKDSP_API int *_DSPMakeArray(int size);
-MKDSP_API FILE *_DSPMyFopen(char *fn, char *mode);
+MKDSP_API FILE *_DSPMyFopen(const char *fn, const char *mode);
 MKDSP_API char *_DSPPadStr(char *s, int n);
 MKDSP_API void _DSPParseName(char *name, char *dname);
 MKDSP_API void _DSPPutFilter(char *name, char *dname, int ni, int no, float *ic, float *oc);
@@ -252,7 +252,7 @@ MKDSP_API char *_DSPReCat(
  */
 
 
-MKDSP_API char *_DSPCopyStr(char *s);
+MKDSP_API char *_DSPCopyStr(const char *s);
 /*
  * Copy string s into freshly malloc'd storage.
  */
