@@ -146,7 +146,7 @@ static void midiOutNodeNoteDur(midiOutNode *node, id aNoteDur, id msgReceiver)
 
     [node->noteDurOff release];
     node->noteDurOff = [[aNoteDur _noteOffForNoteDur] retain];      
-    time = [cond timeInBeats] + [aNoteDur dur]; 
+    time = [cond timeInBeats] + [aNoteDur duration];
     /* Always do beat time here. When the note eventually happens, it will
        be written in beats or seconds depending on how the caller of 
        _MKMidiOut passes the time. */

@@ -105,7 +105,7 @@ static double ranNum()
 			keyNum = l + BASE_KEY_NUM;
 	} while (keyNum == -1);
 	aNote = [[MKNote alloc] init];
-	[aNote setDur:rhythm];
+	[aNote setDuration:rhythm];
 	[aNote setTimeTag:time];
 	time += rhythm;
 	[aNote setPar:MK_keyNum toInt:keyNum];

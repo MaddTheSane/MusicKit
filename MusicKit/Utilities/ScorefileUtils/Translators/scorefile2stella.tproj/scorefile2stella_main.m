@@ -230,7 +230,7 @@ static void writeNotes(MKPart *aPart, unsigned modes)
 		if ([aNote noteTag] != MAXINT)
 		  fprintf(fp," :tag %4d", [aNote noteTag]);
 		if (nt == MK_noteDur)
-			fprintf(fp," :duration %f", [aNote dur]);
+			fprintf(fp," :duration %f", [aNote duration]);
 		else
 			fprintf(fp," :type '%s", noteTypeNames[nt-MK_noteDur]);
 		writeParameters(aNote, modes);

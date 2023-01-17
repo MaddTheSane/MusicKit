@@ -83,7 +83,7 @@ double _MKDurForTimeUnit(id aNoteDur,MKTimeUnit timeUnit)
      type MK_noteDur, returns 0. */
 {
       id aCond;
-      double dur = [aNoteDur dur];
+      double dur = [aNoteDur duration];
       if ([aNoteDur noteType] != MK_noteDur)
           return 0;
       if (timeUnit != MK_second)

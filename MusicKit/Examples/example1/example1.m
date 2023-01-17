@@ -19,7 +19,7 @@ int main (int argc, const char *argv[])
     aNote = [[MKNote alloc] init];
     [aNote setPar: MK_freq toDouble: 440.0];
     [aNote setTimeTag: 1.0];
-    [aNote setDur: 1.0];
+    [aNote setDuration: 1.0];
     [aScore addPart: aPart];
     [aPart addNote: aNote];           /* Doesn't copy note */
     /* XXX */

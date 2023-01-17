@@ -2,7 +2,7 @@
 
 #import "MyObject.h"
 #import <MusicKit/MusicKit.h>
-//#import <MusicKit/MKSynthPatches/Pluck.h>
+#import <MKSynthPatches/Pluck.h>
 #import <AppKit/AppKit.h>
 
 @implementation MyObject
@@ -121,7 +121,7 @@ static double ranNum()
 			keyNum = l + BASE_KEY_NUM;
 	} while (keyNum == -1);
 	aNote = [[MKNote alloc] init];
-	[aNote setDur:rhythm];
+	[aNote setDuration:rhythm];
 	[aNote setTimeTag:time];
 	time += rhythm;
 	[aNote setPar:MK_keyNum toInt:keyNum];

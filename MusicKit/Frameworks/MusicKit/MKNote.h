@@ -286,7 +286,7 @@ corresponds, conceptually, to the time during a performance that the
 MKNote is performed.  Time tags are set through the
 <b>setTimeTag:</b> method.  The other timing attribute is the MKNote's
 duration, a value that indicates how long the MKNote will endure once
-it has been struck. It's set through <b>setDur:</b>. A single MKNote
+it has been struck. It's set through <b>setDuration:</b>. A single MKNote
 can have only one time tag and one duration.  Keep in mind, however,
 that not all MKNotes need a time tag and a duration.  For example, if
 you realize a MKNote by sending it directly to an MKInstrument, then
@@ -390,7 +390,7 @@ retrieve the MKNote class with <b>MKGetNoteClass()</b>.
 /*!
   @brief This enumeration defines the types of MKNote objects.  The types are as follows.
  */
-typedef enum _MKNoteType {
+typedef NS_ENUM(int, MKNoteType) {
     /*! A MKNote with a duration. Can have a noteTag. */
     MK_noteDur = 257,
     /*! The start of a musical note. Must have a noteTag. */
@@ -401,12 +401,12 @@ typedef enum _MKNoteType {
     MK_noteUpdate,
     /*! A MKNote that makes no sound.  May not have a noteTag. */
     MK_mute
-} MKNoteType;
+};
 
 /*!
   @brief This enumeration defines the types of parameters in MKNote objects. 
 */
-typedef enum _MKDataType {
+typedef NS_ENUM(int, MKDataType) {
     /*! Invalid type. */
     MK_noType = ((int)MK_sysReset + 1),
     /*! C Double value. */
@@ -421,9 +421,9 @@ typedef enum _MKDataType {
     MK_envelope, 
     /*! MKWaveTable object value.  Object must implement MKWaveTable protocol. */
     MK_waveTable
-} MKDataType;
+};
 
-@interface MKNote: NSObject <NSCopying>
+@interface MKNote: NSObject <NSCopying, NSCoding>
 {
 /*! The MKNote's noteType. */
     MKNoteType noteType;
@@ -457,7 +457,7 @@ typedef enum _MKDataType {
   Subclasses should send [super initWithTimeTag:aTimeTag] if it overrides 
   this method. 
 */ 
-- initWithTimeTag:(double) aTimeTag;
+- (instancetype)initWithTimeTag:(double) aTimeTag;
 
 /*!
   @return Returns <b>self</b>.
@@ -526,7 +526,7 @@ typedef enum _MKDataType {
   @param  aNoteOff is an id *.
   @return Returns an id.
  */
-- split: (id *) aNoteOn : (id *) aNoteOff; 
+- (id)split: (id *) aNoteOn : (id *) aNoteOff;
 
 /*!
   @return Returns an MKPerformer instance.
@@ -685,10 +685,10 @@ typedef enum _MKDataType {
   character of the MKNote, whether it represents an entire musical
   note (or event), the beginning, middle, or end of a note, or no note
   (no sound). A newly created MKNote is a mute.  A MKNote's note type
-  can be set through <b>setNoteType:</b>, although <b>setDur:</b> and
+  can be set through <b>setNoteType:</b>, although <b>setDuration:</b> and
   <b>setNoteTag:</b> may also change it as a side effect.
   
-  @see  -<b>setNoteType:</b>, -<b>setDur:</b>, -<b>setNoteTag:</b>
+  @see  -<b>setNoteType:</b>, -<b>setDuration:</b>, -<b>setNoteTag:</b>
 */
 - (MKNoteType) noteType; 
 
@@ -706,11 +706,11 @@ typedef enum _MKDataType {
   <li>	MK_mute; makes no sound.</li>
   </ul>
   
-  You should keep in mind that the <b>setDur:</b> method
+  You should keep in mind that the <b>setDuration:</b> method
   automatically sets a MKNote's note type to MK_noteDur;
   <b>setNoteTag:</b> changes mutes into noteUpdates.
   
-  @see -<b>noteType</b>, -<b>setNoteTag:</b>, -<b>setDur:</b> 
+  @see -<b>noteType</b>, -<b>setNoteTag:</b>, -<b>setDuration:</b> 
 */
 - (void)setNoteType: (MKNoteType) newNoteType;
 
@@ -727,9 +727,9 @@ typedef enum _MKDataType {
   function <b>MKIsNoDVal()</b> to check for MK_NODVAL); otherwise
   returns <i>value</i>.
   
-  @see  -<b>dur</b>, -<b>conductor</b>
+  @see  -<b>duration</b>, -<b>conductor</b>
 */
-- (double) setDur: (double) value;
+- (double) setDuration: (double) value;
 
 /*!
   @return Returns a double.
@@ -738,15 +738,15 @@ typedef enum _MKDataType {
   MK_NODVAL).
 
   This method always returns MK_NODVAL for noteOn,
-  noteOff and noteUpdate MKNotes.  It returns a valid dur (if one has
+  noteOff and noteUpdate MKNotes.  It returns a valid duration (if one has
   been set) for noteDur MKNotes.  For mute MKNotes, it returns a valid
   value if the MKNote has an <b>MK_restDur</b> parameter, otherwise it
   returns MK_NODVAL.  This allows you to specify rests with
   durations.
   
-  @see  -<b>setDur:</b>
+  @see  -<b>setDuration:</b>
 */
-- (double) dur; 
+- (double) duration;
 
 /*!
   @brief Returns the receiver's old end time (duration + timeTag) and sets duration 
@@ -832,7 +832,7 @@ typedef enum _MKDataType {
   @return Returns self.
   @see +<b>parTagForName:</b>, +<b>parNameForTag:</b>, -<b>parType:</b>, -<b>isParPresent:</b>, -<b>parAsDouble:</b> 
 */
-- setPar: (int) parameterTag toDouble: (double) aDouble; 
+- (id)setPar: (int) parameterTag toDouble: (double) aDouble;
 
 /*!
   @brief Sets the value of the parameter identified by <i>parameterTag</i> to
@@ -845,7 +845,7 @@ typedef enum _MKDataType {
   @return Returns <b>self</b>.
   @see +<b>parTagForName:</b>, +<b>parNameForTag:</b>, -<b>parType:</b>, -<b>isParPresent:</b>, -<b>parAsInteger:</b> 
 */
-- setPar: (int) parameterTag toInt: (int) anInteger; 
+- (id)setPar: (int) parameterTag toInt: (int) anInteger;
 
 /*!
   @brief Sets the value of the parameter identified by <i>parameterTag</i> to
@@ -858,7 +858,7 @@ typedef enum _MKDataType {
   @return Returns <b>self</b>.
   @see +<b>parTagForName:</b>, +<b>parNameForTag:</b>, -<b>parType:</b>, -<b>isParPresent:</b>, -<b>parAsString:</b>
 */
-- setPar: (int) parameterTag toString: (NSString *) aString; 
+- (id)setPar: (int) parameterTag toString: (NSString *) aString;
 
 /*!
   @brief Sets the value of the parameter identified by <i>parameterTag</i> to
@@ -871,7 +871,7 @@ typedef enum _MKDataType {
   @return Returns <b>self</b>.
   @see +<b>parTagForName:</b>, +<b>parNameForTag:</b>, -<b>parType:</b>, -<b>isParPresent:</b>, -<b>parAsEnvelope:</b>
 */
-- setPar: (int) parameterTag toEnvelope: (MKEnvelope*) anEnvelope;
+- (id)setPar: (int) parameterTag toEnvelope: (MKEnvelope*) anEnvelope;
 
 /*!
   @brief Sets the value of the parameter identified by <i>parameterTag</i> to
@@ -884,7 +884,7 @@ typedef enum _MKDataType {
   @return Returns <b>self</b>.
   @see +<b>parTagForName:</b>, +<b>parNameForTag:</b>, -<b>parType:</b>, -<b>isParPresent:</b>, -<b>parAsWaveTable:</b>
 */
-- setPar: (int) parameterTag toWaveTable: (MKWaveTable*) aWaveTable;
+- (id)setPar: (int) parameterTag toWaveTable: (MKWaveTable*) aWaveTable;
 
 /*!
   @brief Sets the value of the parameter identified by <i>parameterTag</i> to
@@ -920,7 +920,7 @@ typedef enum _MKDataType {
   @return Returns <b>self</b>.
   @see +<b>parTagForName:</b>, +<b>parNameForTag:</b>, -<b>parType:</b>, -<b>isParPresent:</b>, -<b>parAsObject:</b> 
 */
-- setPar: (int) parameterTag toObject: (id) anObject; 
+- (id)setPar: (int) parameterTag toObject: (id) anObject;
 
 /*!
   @brief Returns a <b>double</b> value converted from the value of the

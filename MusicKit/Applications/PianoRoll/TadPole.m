@@ -26,7 +26,7 @@
     [super init];
     if (!bNote)
         aRect = NSMakeRect([aNote timeTag]*bscale, log([aNote frequency])*fscale, 
-            [aNote dur]*bscale, 6.0);
+            [aNote duration]*bscale, 6.0);
     else
         aRect = NSMakeRect([aNote timeTag]*bscale, log([aNote frequency])*fscale, 
             ([bNote timeTag] - [aNote timeTag])*bscale, 6.0);

@@ -272,7 +272,7 @@ static long secondsToFrames(Snd *s, double time)
     [newSound setLoopWhenPlaying: looping];
     
     // Assign the last sample processed.
-    noteDuration = [thisNote dur];
+    noteDuration = [thisNote duration];
     if (!MKIsNoDVal(noteDuration) && noteDuration != 0) {
 	unsigned int noteDurationInFrames = secondsToFrames(newSound, noteDuration) + [newSoundFileSamples currentSample];
 	unsigned int lastLocation = looping ? noteDurationInFrames : MIN([newSound lengthInSampleFrames], noteDurationInFrames);

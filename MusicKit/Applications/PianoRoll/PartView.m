@@ -40,8 +40,8 @@
         for (j = 0; j < [thePart noteCount]; j++) {
             theNote = [thePart nth:j];
             if ([theNote noteType] == MK_noteDur) {
-                if ([theNote timeTag] + [theNote dur] > scoreDuration)
-                    scoreDuration = [theNote timeTag] + [theNote dur];
+                if ([theNote timeTag] + [theNote duration] > scoreDuration)
+                    scoreDuration = [theNote timeTag] + [theNote duration];
             }
             else if ([theNote timeTag] > scoreDuration)
                 scoreDuration = [theNote timeTag];

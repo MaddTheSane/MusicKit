@@ -732,7 +732,7 @@ id _MKSynthPatchNoteDur(MKSynthPatch *synthP,id aNoteDur,BOOL noTag)
     if (synthP->_noteDurMsgPtr) 
         [synthP->_noteDurMsgPtr->_arg1 release];
     noteDurOff = [aNoteDur _noteOffForNoteDur];      
-    time = [cond timeInBeats] + [aNoteDur dur];
+    time = [cond timeInBeats] + [aNoteDur duration];
     if (noTag) {
         aSel = @selector(noteOff:);
         msgReceiver = synthP;

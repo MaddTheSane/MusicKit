@@ -132,7 +132,7 @@ static void removeNote(MKPart *self, MKNote *aNote);
 		    switch ([aNote noteType]) {           /* Ok. What is it? */
 			case MK_noteOff:
 			    removeNote(self, aNote);           /* Remove aNote from us by tagging as _MKMakePlaceHolder */
-			    [noteOn setDur: ([aNote timeTag] - [noteOn timeTag])];
+			    [noteOn setDuration: ([aNote timeTag] - [noteOn timeTag])];
 			    [noteOn _unionWith: aNote];        /* Ah... love. */
 			    /* No break; here */
 			case MK_noteOn:                     /* We don't search on     */
@@ -698,7 +698,7 @@ static void removeNote(MKPart *self, MKNote *aNote)
     for (MKNote  *mkn in noteList) {
 	[mkn setTimeTag:  [mkn timeTag]  * scale];
 	if ([mkn noteType] == MK_noteDur)
-	    [mkn setDur: [mkn dur] * scale];
+	    [mkn setDuration: [mkn duration] * scale];
     }
     [noteList release];
     return self;

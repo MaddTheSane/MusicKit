@@ -170,7 +170,7 @@
     
 
     if ([aNote noteType] == MK_noteDur) {
-      duration  = [aNote dur] * factor;
+      duration  = [aNote duration] * factor;
     }
     
 //    fprintf(stderr,"[MKSampler] Note timeTag:%f clientTime:%f\n",[aNote timeTag],[[SndStreamManager defaultStreamManager] nowTime]);

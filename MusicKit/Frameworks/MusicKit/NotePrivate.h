@@ -33,7 +33,7 @@ extern void _MKNoteAddParameter(id aNote, _MKParameter *aPar);
 extern void _MKNoteSetMatchTimeTag(id aNote, BOOL yesOrNo);
 extern void _MKNoteShiftTimeTag(MKNote *aNote, double timeShift);
 
-@interface MKNote(Private)
+@interface MKNote(/*Private*/)
 
 -_unionWith:aNote;
 -_splitNoteDurNoCopy;

@@ -53,7 +53,7 @@ static char *ranTimbre(double freq)
 
 int computeNotes(void)
 {
-    double freqBase,curTime;
+    double freqBase,curTime=0;
     id ampEnvelope, freqEnvelope;
     int i,j;
     MKPartPerformer *aPartPerformer;
@@ -94,7 +94,7 @@ int computeNotes(void)
 	for (j = 0; j < NOTES_PER_ITERATION; j++) {
 	    curTime += DUR;
 	    aNote = [[MKNote alloc] initWithTimeTag: curTime];
-	    [aNote setDur: NOTES_PER_ITERATION * DUR]; 
+	    [aNote setDuration: NOTES_PER_ITERATION * DUR];
 	    [aNote setPar: MK_velocity toInt: j * 5 + 50];
 	    /* Ascending whole tone scales */
 	    [aNote setPar: MK_freq toDouble: freqBase * pow(2.0, j / 6.0)];

@@ -555,7 +555,7 @@ static unsigned int nAppBitVects(MKNote *self)
 			[self retain]; /* ensure we don't get dealloced when removed from array */
             newTimeTag = MIN(MAX(newTimeTag,0.0), endTime);
             [aPart removeNote:self];
-            [self setDur: endTime - newTimeTag];
+            [self setDuration: endTime - newTimeTag];
             timeTag = newTimeTag;
             [aPart addNote:self];
 			[self release];
@@ -672,7 +672,7 @@ NSComparisonResult _MKNoteCompare(const void *el1,const void *el2)
 	return;
 }
 
--(double) setDur:(double) value
+-(double) setDuration:(double) value
   /* TYPE: Timing; Sets the receiver's duration to value.
    * Sets the receiver's duration to value beats
    * and sets its 
@@ -707,7 +707,7 @@ static double getNoteDur(MKNote *aNote)
     return MK_NODVAL;
 }
 
--(double)dur
+-(double)duration
   /* TYPE: Timing; Returns the receiver's duration.
    * Returns the receiver's duration, or MK_NODVAL if
    * it isn't set or if the receiver noteType isn't MK_noteDur.
@@ -726,7 +726,7 @@ static double getNoteDur(MKNote *aNote)
     case MK_noteDur: {
         double oldEndTime = getNoteEndTime(self);
         if (newEndTime > timeTag) {
-            [self setDur: newEndTime - timeTag];
+            [self setDuration: newEndTime - timeTag];
         }
         return oldEndTime;
     }
@@ -1367,7 +1367,7 @@ static id writeBinaryNoteAux(MKNote *self, id aPart, _MKScoreOutStruct *p)
 {
     NSMutableData *aStream = p->_stream;
     _MKWriteShort(aStream, _MK_partInstance);
-    _MKWriteShort(aStream, (int) NSMapGet(p->_binaryIndecies, aPart));
+    _MKWriteShort(aStream, (ssize_t) NSMapGet(p->_binaryIndecies, aPart));
     switch (self->noteType) {
       case MK_noteDur: {
           double dur = ((p->_ownerIsNoteRecorder) ? 
@@ -1891,11 +1891,6 @@ int MKNextParameter(MKNote *aNote, NSHashEnumerator *aState)
     return [NSString stringWithFormat: @"%@ at %lf: %s(%@) %@ %@\n%@\n",
         [super description], timeTag, _MKTokName(noteType), durAndNoteTagString, partString, performerString, paramString];
 }
-
-@end
-
-
-@implementation MKNote(Private)
 
 -_unionWith:aNote
     /* Copies parameters from aNote to the receiver. For 

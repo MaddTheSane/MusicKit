@@ -164,7 +164,7 @@ void _MKSetScoreRecorderOfPartRecorder(MKPartRecorder *aPR, id aSR)
     aNote = [aNote copyWithZone: NSDefaultMallocZone()];
     [aNote setTimeTag: _MKTimeTagForTimeUnit(aNote, timeUnit, compensatesDeltaT)];
     if ([aNote noteType] == MK_noteDur) 
-        [aNote setDur: _MKDurForTimeUnit(aNote, timeUnit)];
+        [aNote setDuration: _MKDurForTimeUnit(aNote, timeUnit)];
     [part addNote: aNote];
     return self;
 }
