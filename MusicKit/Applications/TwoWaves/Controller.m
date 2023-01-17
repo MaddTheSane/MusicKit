@@ -38,7 +38,7 @@ static BOOL clipping = NO;
 
 - (void) applicationDidFinishLaunching: (NSNotification *) notification
 {
-    float redFact;
+    CGFloat redFact;
     NSRect theFrame;
     
     theFrame = [soundView1 frame];
@@ -236,20 +236,18 @@ void doCalc(int type, short *pointer, float theFreq, float theAmp)
 }
 
 /* 3 seconds */
-- playA: sender
+- (IBAction)playA: sender
 {
     [[self singleSound: sender] play];
-    return self;
 }
 
 /* 3 seconds */
-- playB: sender
+- (IBAction)playB: sender
 {
     [[self singleSound: sender] play];
-    return self;
 }
 
-- play: sender
+- (IBAction)play: sender
 {
     short *pointer;
     int i;
@@ -328,10 +326,9 @@ void doCalc(int type, short *pointer, float theFreq, float theAmp)
     */
 
     [newSound play];
-    return self;
 }
 
-- updateNums:sender
+- (IBAction)updateNums:sender
 {
     double a = pow(10.0, (double) [freqSlide1 floatValue]);
     double b = pow(10.0, (double) [freqSlide2 floatValue]);
@@ -355,10 +352,9 @@ void doCalc(int type, short *pointer, float theFreq, float theAmp)
     [self calcSound3];
     [soundView3 invalidateCacheStartPixel:0 end:-1];
     [soundView3 display];
-    return self;
 }
 
-- updateSliders:sender
+- (IBAction)updateSliders:sender
 {
     somethingChanged = YES;
     [freqSlide1 setFloatValue:log10([freqNum1 floatValue])];
@@ -378,10 +374,9 @@ void doCalc(int type, short *pointer, float theFreq, float theAmp)
     [self calcSound3];
     [soundView3 invalidateCacheStartPixel:0 end:-1];
     [soundView3 display];
-    return self;
 }
 
-- waveChanged:sender
+- (IBAction)waveChanged:sender
 {
     somethingChanged = YES;
     if (sender == waveType1) {
@@ -399,13 +394,11 @@ void doCalc(int type, short *pointer, float theFreq, float theAmp)
     [self calcSound3];
     [soundView3 invalidateCacheStartPixel:0 end:-1];
     [soundView3 display];
-    return self;
 }
 
-- changeLength:sender
+- (IBAction)changeLength:sender
 {
     somethingChanged = YES;
-    return self;
 }
 
 - recalc

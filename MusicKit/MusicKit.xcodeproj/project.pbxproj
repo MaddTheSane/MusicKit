@@ -200,6 +200,10 @@
 		55A2A92029761E2300BCC536 /* _DSPMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 55A2A91F29761E2300BCC536 /* _DSPMessage.h */; };
 		55A2A921297621AC00BCC536 /* dsploadwrap.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55A2A901297610EB00BCC536 /* dsploadwrap.1 */; };
 		55A2A922297621B400BCC536 /* dspwrap.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 55A2A8FA297610EA00BCC536 /* dspwrap.1 */; };
+		55A2A92A2976239900BCC536 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A2A9292976239900BCC536 /* AppDelegate.swift */; };
+		55A2A92C2976239A00BCC536 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A2A92B2976239A00BCC536 /* Assets.xcassets */; };
+		55A2A92F2976239A00BCC536 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55A2A92D2976239A00BCC536 /* MainMenu.xib */; };
+		55A2A9352976245300BCC536 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A2A8D12975105100BCC536 /* Media.xcassets */; };
 		D8001DE30762D2F700508A26 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
 		D8001FE00762D3B100508A26 /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D8001FE10762D3B100508A26 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
@@ -640,7 +644,6 @@
 		D86CBE1D07AF1AF900CB06E4 /* Info.xib in Resources */ = {isa = PBXBuildFile; fileRef = D86CBE1B07AF1AF900CB06E4 /* Info.xib */; };
 		D86CC06B07AFF5EE00CB06E4 /* Info.xib in Resources */ = {isa = PBXBuildFile; fileRef = D86CC06907AFF5EE00CB06E4 /* Info.xib */; };
 		D86CC07007AFF65600CB06E4 /* MidiLoop.xib in Resources */ = {isa = PBXBuildFile; fileRef = D86CC06E07AFF65600CB06E4 /* MidiLoop.xib */; };
-		D86D23C106F22BA4003565CB /* Controller.h in Resources */ = {isa = PBXBuildFile; fileRef = D86D23BF06F22BA4003565CB /* Controller.h */; };
 		D86D23C206F22BA4003565CB /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = D86D23C006F22BA4003565CB /* Controller.m */; };
 		D86D23C606F22BC0003565CB /* TwoWaves_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D86D23C506F22BC0003565CB /* TwoWaves_main.m */; };
 		D86D23CB06F22BD7003565CB /* TwoWaves.xib in Resources */ = {isa = PBXBuildFile; fileRef = D86D23C906F22BD7003565CB /* TwoWaves.xib */; };
@@ -1019,6 +1022,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = D88FED7005A10EAF0024FD88;
 			remoteInfo = "MKDSP (Framework)";
+		};
+		55A2A9362976249D00BCC536 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D8DB4E4C059FA05500624233 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D82AC3B805A0F6DA00780F57;
+			remoteInfo = "SndKit (Framework)";
 		};
 		D80151B00FA64A37002FB882 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1640,6 +1650,11 @@
 		55A2A903297610EB00BCC536 /* dspwrap_bug.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = dspwrap_bug.asm; sourceTree = "<group>"; };
 		55A2A91A297617C400BCC536 /* dsploadwrap */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = dsploadwrap; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A2A91F29761E2300BCC536 /* _DSPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DSPMessage.h; sourceTree = "<group>"; };
+		55A2A9272976239700BCC536 /* TwoWavesSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwoWavesSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		55A2A9292976239900BCC536 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		55A2A92B2976239A00BCC536 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		55A2A92E2976239A00BCC536 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		55A2A9302976239A00BCC536 /* TwoWavesSwift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TwoWavesSwift.entitlements; sourceTree = "<group>"; };
 		D80032570819F0C600E47C6C /* MidiEcho.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = MidiEcho.icns; sourceTree = "<group>"; };
 		D800325C0819F52E00E47C6C /* midi.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = midi.icns; sourceTree = "<group>"; };
 		D80151BF0FA64B24002FB882 /* playpart */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = playpart; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2406,6 +2421,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		55A2A9242976239600BCC536 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D80151BD0FA64B24002FB882 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -2951,6 +2973,19 @@
 			);
 			path = dspwrap;
 			sourceTree = "<group>";
+		};
+		55A2A9282976239900BCC536 /* TwoWavesSwift */ = {
+			isa = PBXGroup;
+			children = (
+				55A2A9292976239900BCC536 /* AppDelegate.swift */,
+				55A2A92B2976239A00BCC536 /* Assets.xcassets */,
+				55A2A92D2976239A00BCC536 /* MainMenu.xib */,
+				55A2A9302976239A00BCC536 /* TwoWavesSwift.entitlements */,
+			);
+			path = TwoWavesSwift;
+			sourceTree = "<group>";
+			tabWidth = 4;
+			usesTabs = 1;
 		};
 		D80032540819F07700E47C6C /* Images */ = {
 			isa = PBXGroup;
@@ -3664,6 +3699,7 @@
 				D84905D111E5039E00D7AAC8 /* SignalProcessing.app */,
 				55A2A8F1297610CB00BCC536 /* dspwrap */,
 				55A2A91A297617C400BCC536 /* dsploadwrap */,
+				55A2A9272976239700BCC536 /* TwoWavesSwift.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -5692,6 +5728,7 @@
 		D8DB4E5E059FA0C900624233 /* Applications */ = {
 			isa = PBXGroup;
 			children = (
+				55A2A9282976239900BCC536 /* TwoWavesSwift */,
 				D86D239D06F2293A003565CB /* TwoWaves */,
 				D8AE7A6A061A1636009D0112 /* Spectro */,
 				D85E27DC06FA0B8800385C32 /* ScorePlayer */,
@@ -6413,6 +6450,24 @@
 			productName = dspwrap;
 			productReference = 55A2A91A297617C400BCC536 /* dsploadwrap */;
 			productType = "com.apple.product-type.tool";
+		};
+		55A2A9262976239600BCC536 /* TwoWavesSwift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55A2A9312976239A00BCC536 /* Build configuration list for PBXNativeTarget "TwoWavesSwift" */;
+			buildPhases = (
+				55A2A9232976239600BCC536 /* Sources */,
+				55A2A9242976239600BCC536 /* Frameworks */,
+				55A2A9252976239600BCC536 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				55A2A9372976249D00BCC536 /* PBXTargetDependency */,
+			);
+			name = TwoWavesSwift;
+			productName = TwoWavesSwift;
+			productReference = 55A2A9272976239700BCC536 /* TwoWavesSwift.app */;
+			productType = "com.apple.product-type.application";
 		};
 		D80151BE0FA64B24002FB882 /* playpart */ = {
 			isa = PBXNativeTarget;
@@ -7190,6 +7245,7 @@
 		D8DB4E4C059FA05500624233 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				ORGANIZATIONNAME = "MusicKit Project";
 				TargetAttributes = {
@@ -7200,6 +7256,10 @@
 					55A2A90D297617C400BCC536 = {
 						ProvisioningStyle = Automatic;
 					};
+					55A2A9262976239600BCC536 = {
+						CreatedOnToolsVersion = 14.2;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = D8B44FEA099617E500B5C3A4 /* Build configuration list for PBXProject "MusicKit" */;
@@ -7208,6 +7268,7 @@
 			hasScannedForEncodings = 1;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = D8DB4E48059FA05500624233;
 			productRefGroup = D84395EA059FAA450054BEEE /* Products */;
@@ -7255,23 +7316,34 @@
 				D886C3D40FA64809000AC7C4 /* playscorefile2 */,
 				D80151BE0FA64B24002FB882 /* playpart */,
 				D8A1DC0109F64B3E0094B3F5 /* mixscorefiles */,
+				55A2A8F0297610CB00BCC536 /* dspwrap */,
+				55A2A90D297617C400BCC536 /* dsploadwrap */,
 				D8E1DDF907CA78B40018F8F3 /* MultipleSoundPlayer */,
 				D84905D011E5039E00D7AAC8 /* SignalProcessing */,
 				D85A2F49061F347D0065380E /* Spectro (Application) */,
 				D88C502806C7E37100D33D99 /* PatchCord (Application) */,
 				D86D23B406F229E6003565CB /* TwoWaves (Application) */,
+				55A2A9262976239600BCC536 /* TwoWavesSwift */,
 				D85E27F306FA0C0100385C32 /* ScorePlayer (Application) */,
 				D828F9C80780CC1E00215EB9 /* PianoRoll (Application) */,
 				D828FA590780D1F400215EB9 /* EnvelopeEd (Application) */,
 				D8CFD2480B5D66DF003AB3C3 /* Metronome */,
 				D8D2A3C60FA90537008DBF68 /* PlayNote */,
-				55A2A8F0297610CB00BCC536 /* dspwrap */,
-				55A2A90D297617C400BCC536 /* dsploadwrap */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		55A2A9252976239600BCC536 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55A2A92C2976239A00BCC536 /* Assets.xcassets in Resources */,
+				55A2A9352976245300BCC536 /* Media.xcassets in Resources */,
+				55A2A92F2976239A00BCC536 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D825564605A211B400B0192B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -7407,7 +7479,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				55A2A8D22975105100BCC536 /* Media.xcassets in Resources */,
-				D86D23C106F22BA4003565CB /* Controller.h in Resources */,
 				D86D23CB06F22BD7003565CB /* TwoWaves.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -7655,6 +7726,14 @@
 				55A2A911297617C400BCC536 /* writeUG.c in Sources */,
 				55A2A91C2976180100BCC536 /* DSPWriteC.c in Sources */,
 				55A2A91B297617DA00BCC536 /* dsploadwrap.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		55A2A9232976239600BCC536 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55A2A92A2976239900BCC536 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8265,6 +8344,11 @@
 			target = D88FED7005A10EAF0024FD88 /* MKDSP (Framework) */;
 			targetProxy = 55A2A90F297617C400BCC536 /* PBXContainerItemProxy */;
 		};
+		55A2A9372976249D00BCC536 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D82AC3B805A0F6DA00780F57 /* SndKit (Framework) */;
+			targetProxy = 55A2A9362976249D00BCC536 /* PBXContainerItemProxy */;
+		};
 		D80151B10FA64A37002FB882 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = D886C3D40FA64809000AC7C4 /* playscorefile2 */;
@@ -8575,6 +8659,14 @@
 				55A2A8C72973D69C00BCC536 /* en */,
 			);
 			name = SoundLib.strings;
+			sourceTree = "<group>";
+		};
+		55A2A92D2976239A00BCC536 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55A2A92E2976239A00BCC536 /* Base */,
+			);
+			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 		D828F9B70780C52400215EB9 /* ScorePlayer.sgml */ = {
@@ -9127,6 +9219,98 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Embedded;
+		};
+		55A2A9322976239A00BCC536 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = TwoWaves;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = Applications/TwoWavesSwift/TwoWavesSwift.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 MusicKit Project. All rights reserved.";
+				INFOPLIST_KEY_NSMainNibFile = MainMenu;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.musickit.TwoWavesSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		55A2A9332976239A00BCC536 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = TwoWaves;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = Applications/TwoWavesSwift/TwoWavesSwift.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 MusicKit Project. All rights reserved.";
+				INFOPLIST_KEY_NSMainNibFile = MainMenu;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.musickit.TwoWavesSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		55A2A9342976239A00BCC536 /* Embedded */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = TwoWaves;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_ENTITLEMENTS = Applications/TwoWavesSwift/TwoWavesSwift.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 MusicKit Project. All rights reserved.";
+				INFOPLIST_KEY_NSMainNibFile = MainMenu;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.musickit.TwoWavesSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Embedded;
 		};
@@ -13515,12 +13699,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -13528,12 +13716,15 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -13542,13 +13733,15 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LIBRARY_SEARCH_PATHS = /sw/lib;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				SDKROOT = macosx;
@@ -13561,12 +13754,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -13574,23 +13771,28 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_MODEL_TUNING = "";
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				SDKROOT = macosx;
@@ -13602,12 +13804,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -13615,22 +13821,27 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
 				SDKROOT = macosx;
 				USER_HEADER_SEARCH_PATHS = "$(inherited) /usr/local/include";
@@ -13926,6 +14137,16 @@
 				55A2A917297617C400BCC536 /* Debug */,
 				55A2A918297617C400BCC536 /* Release */,
 				55A2A919297617C400BCC536 /* Embedded */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		55A2A9312976239A00BCC536 /* Build configuration list for PBXNativeTarget "TwoWavesSwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55A2A9322976239A00BCC536 /* Debug */,
+				55A2A9332976239A00BCC536 /* Release */,
+				55A2A9342976239A00BCC536 /* Embedded */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

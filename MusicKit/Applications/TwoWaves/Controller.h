@@ -19,7 +19,7 @@
     IBOutlet NSMatrix *waveType1;
     IBOutlet NSMatrix *waveType2;
     IBOutlet NSTextView *mesgBox;
-    id  sLength;
+    IBOutlet id  sLength;
     
     Snd * theSound1;
     Snd * theSound2;
@@ -31,17 +31,17 @@
     BOOL somethingChanged;
 }
 
-- play:sender;
-- playA:sender;
-- playB:sender;
+- (IBAction)play:sender;
+- (IBAction)playA:sender;
+- (IBAction)playB:sender;
 
-- updateNums:sender;
-- updateSliders:sender;
-- waveChanged:sender;
+- (IBAction)updateNums:sender;
+- (IBAction)updateSliders:sender;
+- (IBAction)waveChanged:sender;
 - recalc;
 - calcSound1;
 - calcSound2;
 - calcSound3;
-- changeLength:sender;
+- (IBAction)changeLength:sender;
 
 @end

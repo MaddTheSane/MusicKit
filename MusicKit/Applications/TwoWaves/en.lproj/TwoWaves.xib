@@ -511,6 +511,9 @@
                                                         <formCell selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Sound Length:" stringValue="3" id="46">
                                                             <font key="font" size="12" name="Helvetica"/>
                                                             <font key="titleFont" size="12" name="Helvetica"/>
+                                                            <connections>
+                                                                <action selector="changeLength:" target="19" id="SNf-wy-Clm"/>
+                                                            </connections>
                                                         </formCell>
                                                     </column>
                                                 </cells>
@@ -554,7 +557,7 @@
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="play:" target="40" id="139"/>
+                                                    <action selector="playA:" target="19" id="D1p-NH-5tE"/>
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="88">
@@ -565,7 +568,7 @@
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="play:" target="45" id="140"/>
+                                                    <action selector="playB:" target="19" id="NwR-Vc-dOF"/>
                                                 </connections>
                                             </button>
                                         </subviews>
