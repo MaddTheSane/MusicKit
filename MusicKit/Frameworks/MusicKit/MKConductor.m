@@ -885,6 +885,7 @@ static void evalAfterQueues()
     else if (timedEntry != NOTIMEDENTRY) {
         [timedEntry invalidate];
         [timedEntry release];
+        timedEntry = nil;
     }
     if (!separateThread)
         resetPriority();

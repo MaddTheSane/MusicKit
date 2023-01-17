@@ -90,9 +90,9 @@ static BOOL clipping = NO;
     [soundView1 invalidateCacheStartPixel: 0 end: -1];
     [soundView2 invalidateCacheStartPixel: 0 end: -1];
     [soundView3 invalidateCacheStartPixel: 0 end: -1];
-    [soundView1 display];
-    [soundView2 display];
-    [soundView3 display];
+    [soundView1 setNeedsDisplay:YES];
+    [soundView2 setNeedsDisplay:YES];
+    [soundView3 setNeedsDisplay:YES];
     somethingChanged = YES;
 }
 

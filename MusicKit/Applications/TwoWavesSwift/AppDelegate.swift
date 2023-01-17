@@ -100,7 +100,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	@IBOutlet var volumeSlide2: NSSlider!
 	@IBOutlet var messageBox: NSTextView!
 	@IBOutlet var soundLength: NSTextField!
+	var somethingChanged = true
 
+	var theSound1 = Snd(format: .linear16, channelCount: 1, frames: UInt(SAMPLING_RATE * SECONDS), samplingRate: SAMPLING_RATE)
+	var theSound2 = Snd(format: .linear16, channelCount: 1, frames: UInt(SAMPLING_RATE * SECONDS), samplingRate: SAMPLING_RATE)
+	var theSound3 = Snd(format: .linear16, channelCount: 1, frames: UInt(SAMPLING_RATE * SECONDS), samplingRate: SAMPLING_RATE)
+	var newSound = Snd()
+	
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		// Insert code here to initialize your application
 	}
@@ -115,6 +121,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	@IBAction func play(_ sender: Any) {
 		
+		
+		
+		somethingChanged = false
+
 	}
 	
 	@IBAction func playA(_ sender: Any) {
@@ -138,6 +148,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 
 	@IBAction func changeLength(_ sender: Any) {
-		
+		somethingChanged = true
 	}
 }

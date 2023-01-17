@@ -232,7 +232,7 @@ enum SndViewStereoMode {
 #define NX_SOUNDVIEW_MINMAX SND_SOUNDVIEW_MINMAX
 #define NX_SOUNDVIEW_WAVE SND_SOUNDVIEW_WAVE
 
-@interface SndView: NSView <NSCoding>
+@interface SndView: NSView <NSCoding, NSDraggingSource, NSPasteboardTypeOwner>
 {
     /*! The sound to display. */
     Snd       	*sound;
@@ -305,7 +305,7 @@ enum SndViewStereoMode {
     NSRange     previousSelectedFrames;
 
     int		lastPasteCount;
-    int		lastCopyCount;
+    NSInteger	lastCopyCount;
     BOOL 	notProvidedData;
     BOOL	noSelectionDraw;
     BOOL	firstDraw; // flag indicating lack of initialisation within drawRect:
@@ -474,19 +474,21 @@ enum SndViewStereoMode {
   @param  frameRect is a NSRect.
   @return Returns <b>self</b>.
 */
-- initWithFrame: (NSRect) frameRect;
+- (instancetype)initWithFrame: (NSRect) frameRect;
 
 /*!
   @return Returns a BOOL.
   @brief Returns YES if the SndView is in autoscaling mode, otherwise returns NO.
 */
 - (BOOL) isAutoScale;
+@property (nonatomic, getter=isAutoScale) BOOL autoScale;
 
 /*!
   @return Returns a BOOL.
   @brief Returns YES if the SndView has a bezeled border, otherwise returns NO (the default).
 */
 - (BOOL) isBezeled;
+@property (nonatomic, getter=isBezeled) BOOL bezeled;
 
 /*!
   @return Returns a BOOL.
@@ -495,12 +497,14 @@ enum SndViewStereoMode {
    The default is NO.
 */
 - (BOOL) isContinuousSelectionUpdates;
+@property (nonatomic, getter=isContinuousSelectionUpdates) BOOL continuousSelectionUpdates;
 
 /*!
   @return Returns a BOOL.
   @brief Returns YES if the SndView's sound data can be edited.
 */
 - (BOOL) isEditable;
+@property (nonatomic, getter=isEditable) BOOL editable;
 
 /*!
   @return Returns a BOOL.
@@ -509,6 +513,7 @@ enum SndViewStereoMode {
    The mouse has no effect in a disabled SndView. By default, a SndView is enabled.
 */
 - (BOOL) isEnabled;
+@property (nonatomic, getter=isEnabled) BOOL enabled;
 
 /*!
   @return Returns a BOOL.
@@ -517,19 +522,20 @@ enum SndViewStereoMode {
    SndViews are optimized by default.
 */
 - (BOOL) isOptimizedForSpeed;
+@property (nonatomic, getter=isOptimizedForSpeed) BOOL optimizedForSpeed;
 
 /*!
   @return Returns a BOOL.
   @brief Returns YES if the SndView's sound data can be played without first being converted.
 */
 - (BOOL) isPlayable;
+@property (readonly, getter=isPlayable) BOOL playable;
 
 /*!
   @return Returns a BOOL
   @brief Returns YES if the receiver is displaying the entire sound within the visible rectangle of it's enclosing scrollview.
  */
 - (BOOL) isEntireSoundVisible;
-
 @property (readonly, getter=isEntireSoundVisible) BOOL entireSoundVisible;
 
 - (float) getDefaultRecordTime NS_DEPRECATED_WITH_REPLACEMENT_MAC("-defaultRecordTime", 10.0, 10.8);
@@ -564,7 +570,7 @@ enum SndViewStereoMode {
   Currently, the <i>type</i> argument must be &ldquo;SndPasteboardType&rdquo;,
   the pasteboard type that represents sound data.
 */
-- (void) pasteboard: (NSPasteboard *) thePasteboard provideDataForType: (NSString *) pboardType;
+- (void) pasteboard: (NSPasteboard *) thePasteboard provideDataForType: (NSPasteboardType) pboardType;
 
 /*!
   @brief Pauses the current playback or recording session by invoking Snd's <b>pause:</b> method.

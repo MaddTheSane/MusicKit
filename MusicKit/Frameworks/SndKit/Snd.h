@@ -67,9 +67,9 @@
               large filter. Relatively slow.
  */
 typedef NS_ENUM(int, SndConversionQuality) {
-    SndConvertLowQuality = 0,
-    SndConvertMediumQuality = 1,
-    SndConvertHighQuality  = 2
+    SndConversionQualityLow = 0,
+    SndConversionQualityMedium = 1,
+    SndConversionQualityHigh  = 2
 };
 
 
@@ -184,7 +184,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
  * --------------- Factory Methods
  */
 
-+ soundNamed: (NSString *) aName;
++ (instancetype)soundNamed: (NSString *) aName;
 
 /*!
   @param  aName is a NSString instance.
@@ -205,7 +205,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
    where <b>~</b> represents the user's home directory.
    If the Snd eludes the search, <b>nil</b> is returned.
 */
-+ findSoundFor: (NSString *) aName;
++ (instancetype)findSoundFor: (NSString *) aName;
 
 /*!
   @brief
@@ -213,7 +213,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   @param  	  aSnd
   @return
 */
-+ addName: (NSString *) name sound: (Snd *) aSnd;
++ (instancetype)addName: (NSString *) name sound: (Snd *) aSnd;
 
 /*!
   @brief
@@ -221,7 +221,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   @param      filename
   @return
 */
-+ addName: (NSString *) name fromSoundfile: (NSString *) filename;
++ (instancetype)addName: (NSString *) name fromSoundfile: (NSString *) filename;
 
 /*!
   @brief
@@ -229,7 +229,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   @param  	  sectionName
   @return
 */
-+ addName: (NSString *) name fromSection: (NSString *) sectionName;
++ (instancetype)addName: (NSString *) name fromSection: (NSString *) sectionName;
 
 /*!
   @brief
@@ -237,7 +237,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   @param  	  aBundle
   @return
 */
-+ addName: (NSString *) aName fromBundle: (NSBundle *) aBundle;
++ (instancetype)addName: (NSString *) aName fromBundle: (NSBundle *) aBundle;
 
 /*!
   @brief
@@ -262,7 +262,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
               the sound file <i>filename</i>.
   @see	+<b>alloc</b> (NSObject), +<b>allocWithZone:</b> (NSObject)
 */
-- initFromSoundfile: (NSString *) filename;
+- (instancetype)initFromSoundfile: (NSString *) filename;
 
 /*!
   @param  url is a NSURL instance.
@@ -276,7 +276,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
 
   @see	<b>initFromSoundfile:</b>, +<b>alloc</b> (NSObject), +<b>allocWithZone:</b> (NSObject)
   */
-- initFromSoundURL: (NSURL *) url;
+- (instancetype)initFromSoundURL: (NSURL *) url;
 
 /*!
   @brief Initialise a Snd instance with silence of given format and length.
@@ -286,10 +286,10 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   @param  samplingRate is a double.
   @return Returns self.
 */
-- initWithFormat: (SndSampleFormat) format
-    channelCount: (int) channels
-          frames: (unsigned long) frames
-    samplingRate: (float) samplingRate;
+- (instancetype)initWithFormat: (SndSampleFormat) format
+                  channelCount: (int) channels
+                        frames: (unsigned long) frames
+                  samplingRate: (float) samplingRate;
 
 /*!
   @brief Initialise a Snd instance using a NSData instance which holds audio data in Sun/NeXT .au format.
@@ -301,7 +301,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   @param soundData An NSData instance containing preceding sound format data followed by PCM audio data, in Sun/NeXT .au format.
   @return Returns self if the sound was read successfully, nil otherwise.
  */
-- initWithData: (NSData *) soundData;
+- (instancetype)initWithData: (NSData *) soundData;
 
 /*!
   @brief  The swapBigEndianToHostFormat method swaps the byte order of the receiver if it
@@ -1344,5 +1344,14 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
 - (void)didPlay:(Snd*)sender duringPerformance: (SndPerformance *) performance;
 
 @end
+
+#define DeprecatedEnum(type, oldname, newval) \
+static const type oldname NS_DEPRECATED_WITH_REPLACEMENT_MAC( #newval , 10.0, 10.8) = newval
+
+DeprecatedEnum(SndConversionQuality, SndConvertLowQuality, SndConversionQualityLow);
+DeprecatedEnum(SndConversionQuality, SndConvertMediumQuality, SndConversionQualityMedium);
+DeprecatedEnum(SndConversionQuality, SndConvertHighQuality, SndConversionQualityHigh);
+
+#undef DeprecatedEnum
 
 #endif

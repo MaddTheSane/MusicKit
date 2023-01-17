@@ -40,10 +40,11 @@
 
 #define PEEKTIME(pq) (pq)->_timeOfMsg
 
-typedef enum _backgroundThreadAction {
+typedef NS_ENUM(int, BackgroundThreadAction) {
     exitThread,
     pauseThread
-} backgroundThreadAction;
+};
+typedef enum BackgroundThreadAction backgroundThreadAction;
 
 extern void _MKLock(void) ;
     /* Waits for MusicKit to become available for messaging. */

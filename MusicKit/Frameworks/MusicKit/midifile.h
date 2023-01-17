@@ -33,7 +33,7 @@ Modification history before CVS repository commital.
 
 #define MKMIDI_DEFAULTQUANTASIZE (1000)
 
-typedef enum MKMIDIMetaEvent {
+typedef NS_ENUM(int, MKMIDIMetaEvent) {
     /* In all of the metaevents, data[0] is the metaevent itself. */
     MKMIDI_sequenceNumber = 0,
     /*
@@ -70,7 +70,8 @@ typedef enum MKMIDIMetaEvent {
     /* data is a single int, where 1-byte fields are nn dd cc bb */
     MKMIDI_keySig
     /*  data is a single short, where 1-byte fields are sf mi  */
-} MKMIDIMetaevent;
+};
+typedef enum MKMIDIMetaEvent MKMIDIMetaevent;
 
 typedef struct _midiFileInStruct {
     double tempo;       /* in quarter notes per minute */

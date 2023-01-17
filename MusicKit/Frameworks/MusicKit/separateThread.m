@@ -276,7 +276,7 @@ static BOOL notInMusicKitThread(void)
 }
 
 /* Destroys the timed entry. */
-static void removeTimedEntry(int arg)
+static void removeTimedEntry(BackgroundThreadAction arg)
 {
     switch (arg) {
     case pauseThread:

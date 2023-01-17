@@ -2102,10 +2102,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 	amplitudeZoom = newAmplitudeZoom;
 }
 
-- (float) amplitudeZoom
-{
-    return amplitudeZoom;
-}
+@synthesize amplitudeZoom;
 
 - (void) scaleTo: (float) scaleRatio
 {	
@@ -2445,7 +2442,7 @@ LMS: Nowdays we want to rescale to fit the entire sound into the view, regardles
 
 - (void)hadError: sender
 {
-    NSLog(@"SndView HAD ERROR %d: %@\n", [sender processingError], SndSoundError([sender processingError]));
+    NSLog(@"SndView HAD ERROR %ld: %@\n", (long)[sender processingError], SndSoundError([sender processingError]));
 }
 
 - (BOOL) readSelectionFromPasteboard: (NSPasteboard *) pboard
@@ -2614,6 +2611,11 @@ LMS: Nowdays we want to rescale to fit the entire sound into the view, regardles
 
 // To prevent modifiers from altering the mask
 - (BOOL) ignoreModifierKeysWhileDragging
+{
+   return YES;
+}
+
+- (BOOL) ignoreModifierKeysForDraggingSession:(NSDraggingSession *)session
 {
    return YES;
 }

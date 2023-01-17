@@ -91,39 +91,110 @@
   @constant   SND_FORMAT_VORBIS  Ogg/Vorbis compressed format.
  */
 typedef NS_ENUM(int, SndSampleFormat) {
-    SND_FORMAT_UNSPECIFIED           = 0,
-    SND_FORMAT_MULAW_8               = 1, /* u-law encoding */
-    SND_FORMAT_LINEAR_8              = 2, /* Linear 8 bits */
-    SND_FORMAT_LINEAR_16             = 3, /* Linear 16 bits */
-    SND_FORMAT_LINEAR_24             = 4, /* Linear 24 bits */
-    SND_FORMAT_LINEAR_32             = 5, /* Linear 32 bits */
-    SND_FORMAT_FLOAT                 = 6, /* IEEE Floating Point 32 bits */
-    SND_FORMAT_DOUBLE                = 7, /* Floating Point 64 bits, could even be IEEE 80 bit Floating Point */
-    SND_FORMAT_INDIRECT              = 8, /* Fragmented */
-    SND_FORMAT_NESTED                = 9,
-    SND_FORMAT_DSP_CORE              = 10,
-    SND_FORMAT_DSP_DATA_8            = 11,
-    SND_FORMAT_DSP_DATA_16           = 12,
-    SND_FORMAT_DSP_DATA_24           = 13,
-    SND_FORMAT_DSP_DATA_32           = 14,
-    SND_FORMAT_DISPLAY               = 16,
-    SND_FORMAT_MULAW_SQUELCH         = 17,
-    SND_FORMAT_EMPHASIZED            = 18,
-    SND_FORMAT_COMPRESSED            = 19, /* Julius O. Smith III's SoundKit compressed format */
-    SND_FORMAT_COMPRESSED_EMPHASIZED = 20, /* Julius O. Smith III's SoundKit compressed format */
-    SND_FORMAT_DSP_COMMANDS          = 21, /* MC56001 DSP instruction opcodes */
-    SND_FORMAT_DSP_COMMANDS_SAMPLES  = 22, /* audio data in a format suitable for MC56001 DSP use? */
-    SND_FORMAT_ADPCM_G721            = 23, /* GSM compressed format */
-    SND_FORMAT_ADPCM_G722            = 24, /* GSM compressed format */
-    SND_FORMAT_ADPCM_G723_3          = 25, /* GSM compressed format */
-    SND_FORMAT_ADPCM_G723_5          = 26, /* GSM compressed format */
-    SND_FORMAT_ALAW_8                = 27, /* a-law encoding */
-    SND_FORMAT_AES                   = 28, /* a format specified by the Audio Engineering Society? */
-    SND_FORMAT_DELTA_MULAW_8	     = 29,
-    SND_FORMAT_MP3                   = 30, /* MPEG-1 Layer 3 audio format */
-    SND_FORMAT_AAC                   = 31, /* MPEG-4 Advanced Audio Coder */
-    SND_FORMAT_AC3                   = 32, /* Dolby AC3 A/52 encoding */
-    SND_FORMAT_VORBIS                = 33, /* Ogg/Vorbis compressed format */
+    SndSampleFormatUnspecified = 0,
+    ///u-law encoding
+    SndSampleFormatMulaw8 = 1,
+    ///Linear 8 bits
+    SndSampleFormatLinear8 = 2,
+    ///Linear 16 bits
+    SndSampleFormatLinear16 = 3,
+    ///Linear 24 bits
+    SndSampleFormatLinear24 = 4,
+    ///Linear 32 bits
+    SndSampleFormatLinear32 = 5,
+    ///IEEE Floating Point 32 bits
+    SndSampleFormatFloat = 6,
+    ///Floating Point 64 bits, could even be IEEE 80 bit Floating Point
+    SndSampleFormatDouble = 7,
+    ///Fragmented
+    SndSampleFormatIndirect = 8,
+
+    SndSampleFormatNested = 9,
+
+    SndSampleFormatDspCore = 10,
+
+    SndSampleFormatDspData8 = 11,
+
+    SndSampleFormatDspData16 = 12,
+
+    SndSampleFormatDspData24 = 13,
+
+    SndSampleFormatDspData32 = 14,
+
+    SndSampleFormatDisplay = 16,
+
+    SndSampleFormatMulawSquelch = 17,
+
+    SndSampleFormatEmphasized = 18,
+    ///Julius O. Smith III's SoundKit compressed format
+    SndSampleFormatCompressed = 19,
+    ///Julius O. Smith III's SoundKit compressed format
+    SndSampleFormatCompressedEmphasized = 20,
+    ///MC56001 DSP instruction opcodes
+    SndSampleFormatDspCommands = 21,
+    ///audio data in a format suitable for MC56001 DSP use?
+    SndSampleFormatDspCommandsSamples = 22,
+    ///GSM compressed format
+    SndSampleFormatAdpcmG721 = 23,
+    ///GSM compressed format
+    SndSampleFormatAdpcmG722 = 24,
+    ///GSM compressed format
+    SndSampleFormatAdpcmG723_3 = 25,
+    ///GSM compressed format
+    SndSampleFormatAdpcmG723_5 = 26,
+    ///a-law encoding
+    SndSampleFormatAlaw8 = 27,
+    ///a format specified by the Audio Engineering Society?
+    SndSampleFormatAes = 28,
+
+    SndSampleFormatDeltaMulaw8 = 29,
+    ///MPEG-1 Layer 3 audio format
+    SndSampleFormatMp3 = 30,
+    ///MPEG-4 Advanced Audio Coder
+    SndSampleFormatAac = 31,
+    ///Dolby AC3 A/52 encoding
+    SndSampleFormatAc3 = 32,
+    ///Ogg/Vorbis compressed format
+    SndSampleFormatVorbis = 33,
 };
+
+#define DeprecatedEnum(type, oldname, newval) \
+static const type oldname NS_DEPRECATED_WITH_REPLACEMENT_MAC( #newval , 10.0, 10.8) = newval
+
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_UNSPECIFIED, SndSampleFormatUnspecified);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_MULAW_8, SndSampleFormatMulaw8);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_LINEAR_8, SndSampleFormatLinear8);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_LINEAR_16, SndSampleFormatLinear16);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_LINEAR_24, SndSampleFormatLinear24);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_LINEAR_32, SndSampleFormatLinear32);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_FLOAT, SndSampleFormatFloat);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_DOUBLE, SndSampleFormatDouble);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_INDIRECT, SndSampleFormatIndirect);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_NESTED, SndSampleFormatNested);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_DSP_CORE, SndSampleFormatDspCore);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_DSP_DATA_8, SndSampleFormatDspData8);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_DSP_DATA_16, SndSampleFormatDspData16);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_DSP_DATA_24, SndSampleFormatDspData24);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_DSP_DATA_32, SndSampleFormatDspData32);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_DISPLAY, SndSampleFormatDisplay);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_MULAW_SQUELCH, SndSampleFormatMulawSquelch);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_EMPHASIZED, SndSampleFormatEmphasized);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_COMPRESSED, SndSampleFormatCompressed);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_COMPRESSED_EMPHASIZED, SndSampleFormatCompressedEmphasized);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_DSP_COMMANDS, SndSampleFormatDspCommands);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_DSP_COMMANDS_SAMPLES, SndSampleFormatDspCommandsSamples);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_ADPCM_G721, SndSampleFormatAdpcmG721);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_ADPCM_G722, SndSampleFormatAdpcmG722);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_ADPCM_G723_3, SndSampleFormatAdpcmG723_3);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_ADPCM_G723_5, SndSampleFormatAdpcmG723_5);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_ALAW_8, SndSampleFormatAlaw8);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_AES, SndSampleFormatAes);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_DELTA_MULAW_8, SndSampleFormatDeltaMulaw8);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_MP3, SndSampleFormatMp3);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_AAC, SndSampleFormatAac);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_AC3, SndSampleFormatAc3);
+DeprecatedEnum(SndSampleFormat, SND_FORMAT_VORBIS, SndSampleFormatVorbis);
+
+#undef DeprecatedEnum
 
 #endif
