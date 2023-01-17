@@ -20,6 +20,7 @@
                 <outlet property="frequencySlide1" destination="vTU-VO-IYn" id="kpj-Ts-Sah"/>
                 <outlet property="frequencySlide2" destination="w8P-gt-eiv" id="3qy-6h-CBY"/>
                 <outlet property="messageBox" destination="ArC-NB-WQd" id="OYr-Jp-TqQ"/>
+                <outlet property="soundLength" destination="rqq-13-s5x" id="IQl-c1-rmn"/>
                 <outlet property="soundView1" destination="VNp-15-cAt" id="N1m-vz-2DU"/>
                 <outlet property="soundView2" destination="fXn-8g-ra5" id="g6x-AW-hbo"/>
                 <outlet property="soundView3" destination="B9c-vg-OjK" id="6eT-hx-W0U"/>
@@ -920,7 +921,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                <size key="minSize" width="366" height="75"/>
+                                                <size key="minSize" width="367" height="75"/>
                                                 <size key="maxSize" width="376" height="10000000"/>
                                                 <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             </textView>

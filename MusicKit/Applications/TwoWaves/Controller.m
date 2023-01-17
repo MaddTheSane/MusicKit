@@ -342,16 +342,16 @@ void doCalc(int type, short *pointer, float theFreq, float theAmp)
     if (sender == volSlide1 || sender == freqSlide1) {
         [self calcSound1];
         [soundView1 invalidateCacheStartPixel:0 end:-1];
-        [soundView1 display];
+        [soundView1 setNeedsDisplay:YES];
     }
     else if (sender == volSlide2 || sender == freqSlide2) {
         [self calcSound2];
         [soundView2 invalidateCacheStartPixel:0 end:-1];
-        [soundView2 display];
+        [soundView2 setNeedsDisplay:YES];
     }
     [self calcSound3];
     [soundView3 invalidateCacheStartPixel:0 end:-1];
-    [soundView3 display];
+    [soundView3 setNeedsDisplay:YES];
 }
 
 - (IBAction)updateSliders:sender
@@ -364,16 +364,16 @@ void doCalc(int type, short *pointer, float theFreq, float theAmp)
     if ([sender selectedCell] == volNum1 || [sender selectedCell] == freqNum1) {
         [self calcSound1];
         [soundView1 invalidateCacheStartPixel:0 end:-1];
-        [soundView1 display];
+        [soundView1 setNeedsDisplay:YES];
     }
     else if ([sender selectedCell] == volNum2 || [sender selectedCell] == freqNum2) {
         [self calcSound2];
         [soundView2 invalidateCacheStartPixel:0 end:-1];
-        [soundView2 display];
+        [soundView2 setNeedsDisplay:YES];
     }
     [self calcSound3];
     [soundView3 invalidateCacheStartPixel:0 end:-1];
-    [soundView3 display];
+    [soundView3 setNeedsDisplay:YES];
 }
 
 - (IBAction)waveChanged:sender
@@ -383,17 +383,17 @@ void doCalc(int type, short *pointer, float theFreq, float theAmp)
 	type1 = [sender selectedRow];
 	[self calcSound1];
 	[soundView1 invalidateCacheStartPixel:0 end:-1];
-	[soundView1 display];
+	[soundView1 setNeedsDisplay:YES];
     }
     if (sender == waveType2) {
 	type2 = [sender selectedRow];
 	[self calcSound2];
 	[soundView2 invalidateCacheStartPixel:0 end:-1];
-	[soundView2 display];
+	[soundView2 setNeedsDisplay:YES];
     }		
     [self calcSound3];
     [soundView3 invalidateCacheStartPixel:0 end:-1];
-    [soundView3 display];
+    [soundView3 setNeedsDisplay:YES];
 }
 
 - (IBAction)changeLength:sender

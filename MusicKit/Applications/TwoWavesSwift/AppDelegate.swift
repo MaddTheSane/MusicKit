@@ -99,6 +99,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	@IBOutlet var volumeSlide1: NSSlider!
 	@IBOutlet var volumeSlide2: NSSlider!
 	@IBOutlet var messageBox: NSTextView!
+	@IBOutlet var soundLength: NSTextField!
 
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		// Insert code here to initialize your application
@@ -139,6 +140,4 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	@IBAction func changeLength(_ sender: Any) {
 		
 	}
-
 }
-
