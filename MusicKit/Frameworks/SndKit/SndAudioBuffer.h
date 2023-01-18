@@ -214,9 +214,8 @@ typedef enum {
  
   Audio buffers must be the same format.
   @param    audioBufferToCopyFrom The audio buffer instance to copy the data from.
-  @return   Returns self.
 */
-- copyDataFromBuffer: (SndAudioBuffer *) audioBufferToCopyFrom;
+- (void)copyDataFromBuffer: (SndAudioBuffer *) audioBufferToCopyFrom;
 
 /*!
   @brief   Copies bytes from the void * array given.
@@ -226,9 +225,8 @@ typedef enum {
   @param      count The number of bytes to copy from the array.
   @param      format A SndFormat containing valid channelCount,
               samplingRate and dataFormat variables.
-  @return     Returns self.
 */
-- copyBytes: (void *) bytes count: (unsigned int) count format: (SndFormat) format;
+- (void)copyBytes: (void *) bytes count: (unsigned int) count format: (SndFormat) format;
 
 /*!
   @brief   Copies bytes from the void * array given into a sub region of the buffer.
@@ -238,9 +236,8 @@ typedef enum {
   @param      range The start location and number of bytes to copy from the array.
   @param      format A SndFormat containing valid channelCount,
               samplingRate and dataFormat variables.
-  @return     Returns self.
  */
-- copyBytes: (void *) bytes intoRange: (NSRange) range format: (SndFormat) format;
+- (void)copyBytes: (void *) bytes intoRange: (NSRange) range format: (SndFormat) format;
 
 /*!
   @brief   Copies from the start of the given buffer into a sub region of the receiving buffer.
@@ -248,9 +245,8 @@ typedef enum {
   Grows the internal NSMutableData object as necessary
   @param      sourceBuffer The audio buffer to copy from.
   @param      rangeInSamples The start location and number of samples to copy to the receiving buffer.
-  @return     Returns self.
  */
-- copyFromBuffer: (SndAudioBuffer *) sourceBuffer intoRange: (NSRange) rangeInSamples;
+- (void)copyFromBuffer: (SndAudioBuffer *) sourceBuffer intoRange: (NSRange) rangeInSamples;
 
 /*!
   @brief   Copies from the given region of the given buffer into a sub region of the receiving buffer.
@@ -309,7 +305,7 @@ typedef enum {
   @brief   Returns the length of the audio buffer in seconds.
   @return     Duration in seconds (as determined by format sampling rate).
 */
-- (double) duration;
+- (NSTimeInterval) duration;
 
 /*!
   @brief   Returns the sampling rate of the audio buffer in Hertz.
@@ -355,17 +351,15 @@ typedef enum {
 
 /*!
     @brief   Sets buffer data to zero. Silence.
-    @return     Returns self.
 */
-- zero;
+- (void)zero;
 
 /*!
   @brief   Zeros (silences) a given range of frames.
  
   The range must be between 0 and the buffers frame length.
-  @return     Returns self.
  */
-- zeroFrameRange: (NSRange) frameRange;
+- (void)zeroFrameRange: (NSRange) frameRange;
  
 /*!
     @brief   Returns the size of a sample frame in bytes.

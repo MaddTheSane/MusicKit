@@ -37,25 +37,26 @@ enum {
 
   To come
 */
-@protocol SndStreamClientDelegate
+@protocol SndStreamClientDelegate <NSObject>
+@optional
 
 /*!
   @brief Message sent when the client was not ready to accept the next input buffer.
   @param sender The instance of SndStreamClient sending the message.
 */
-- inputBufferSkipped: (id) sender;
+- (void)inputBufferSkipped: (id) sender;
 
 /*!
   @brief Message sent when the client was not ready to provide the next outputBuffer.
   @param sender The instance of SndStreamClient sending the message.
 */
-- outputBufferSkipped: (id) sender;
+- (void)outputBufferSkipped: (id) sender;
 
 /*!
   @brief Message sent after each buffer has been processed. This is expensive.
   @param sender The instance of SndStreamClient sending the message.
  */
-- didProcessStreamBuffer: (id) sender;
+- (void)didProcessStreamBuffer: (id) sender;
 
 @end
 
@@ -120,7 +121,7 @@ enum {
     /*! The stream clients manager. */
     SndStreamManager *manager;
     /*! The delegate to receive messages from the client. */
-    id         delegate;    
+    id<SndStreamClientDelegate> delegate;
     /*! The clients sense of time as used by subclasses for synthesis. */
     double     clientNowTime;
     /*! The last time received from the calling SndStreamManager.
@@ -401,42 +402,46 @@ enum {
  */
 - (void) setAudioProcessorChain: (SndAudioProcessorChain *) newAudioProcessorChain;
 
+@property (retain) SndAudioProcessorChain *audioProcessorChain;
+
 /*!
   @brief   Sets the client's delegate object
   @param      d
   @return     Returns self.
 */
-- (void) setDelegate: (id) d;
+- (void) setDelegate: (id<SndStreamClientDelegate>) d;
 
 /*!
   @brief   Accessor method to the delegate member.
   @return     The stream client's delegate object
 */
-- (id) delegate;
+- (id<SndStreamClientDelegate>) delegate;
+
+@property (nonatomic, assign) id<SndStreamClientDelegate> delegate;
 
 /*!
   @return    Returns the number of buffers in the input queue.
 */
-- (int) inputBufferCount;
+- (NSInteger) inputBufferCount;
 
 /*!
   @return    Returns the number of buffers in the output queue.
 */
-- (int) outputBufferCount;
+- (NSInteger) outputBufferCount;
 
 /*!
   @brief Sets the input buffer queue length (only when client is NOT active)  
   @param    n Number of buffers
   @return   TRUE if all is well, FALSE if input buffer length could not be set. 
 */
-- (BOOL) setInputBufferCount: (int) n;
+- (BOOL) setInputBufferCount: (NSInteger) n;
 
 /*!
   @brief Sets the output buffer queue length (only when client is NOT active)  
   @param    n Number of buffers
   @return   TRUE if all is well, FALSE if output buffer length could not be set.  
 */
-- (BOOL) setOutputBufferCount: (int) n;
+- (BOOL) setOutputBufferCount: (NSInteger) n;
 
 /*!
   @brief  Calculates the stream latency of the client 
@@ -444,7 +449,7 @@ enum {
   Number of buffers in queue times buffer duration.
   @return    Returns latency, in seconds. 
 */
-- (double) outputLatencyInSeconds;
+- (NSTimeInterval) outputLatencyInSeconds;
 
 /*!
   @brief  Calculates the stream latency of the client
@@ -484,16 +489,23 @@ enum {
   Useful for identifying clients, especially when debugging - several SndStreamClient 
   warning and error messages will display the name of the client reporting the error.
   @param     name The client's name.
-  @return    Returns self.
 */
-- setClientName: (NSString *) name;
+- (void)setClientName: (NSString *) name;
+
+/*!
+  @brief  The client's name
+  
+  Useful for identifying clients, especially when debugging - several \c SndStreamClient
+  warning and error messages will display the name of the client reporting the error.
+*/
+@property (copy) NSString *clientName;
 
 /*!
   @brief To come
   @param anAudioBuffer the audio buffer to process
   @param t nowTime
  */
-- offlineProcessBuffer: (SndAudioBuffer *) anAudioBuffer nowTime: (double) t;
+- (void)offlineProcessBuffer: (SndAudioBuffer *) anAudioBuffer nowTime: (double) t;
 
 @end
 

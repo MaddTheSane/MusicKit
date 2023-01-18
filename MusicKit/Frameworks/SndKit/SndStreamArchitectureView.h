@@ -61,7 +61,6 @@
   
   To come
   @param      timer
-  @return     self
 */
 - (void)update: (NSTimer *) timer;
 
@@ -71,7 +70,6 @@
   For internal use only
   @param      client
   @param      rect
-  @return     self
 */
 - (void)drawStreamClient: (SndStreamClient *) client inRect: (NSRect) rect;
 
@@ -80,7 +78,6 @@
   
   For internal use only
   @param      rect
-  @return     self
 */
 - (void)drawMixerInRect: (NSRect) rect;
 
@@ -89,7 +86,6 @@
   
   For internal use only
   @param      rect
-  @return     self
 */
 - (void)drawStreamManagerInRect: (NSRect) rect;
 
@@ -99,7 +95,6 @@
   For internal use only
   @param      apc
   @param      rect
-  @return     self
 */
 - (void)drawAudioProcessorChain: (SndAudioProcessorChain *) apc inRect: (NSRect) rect;
 
@@ -107,7 +102,6 @@
   @brief   To come  
   @param      aRect
   @param      aColor
-  @return     self
 */
 - (void)drawRect: (NSRect) aRect withColor: (NSColor *) aColor;
 
@@ -130,7 +124,6 @@
 
 /*!
   @brief   Clears the currently selected audio architecture object to nil.
-  @return     self.
 */
 - (void)clearCurrentlySelectedAudioArchObject;
 

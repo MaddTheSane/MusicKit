@@ -114,6 +114,7 @@
 	[objectArrayLock release];
     [timer invalidate];
     [timer release];
+    [delegate release];
 	
 	[super dealloc];
 }

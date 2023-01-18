@@ -51,7 +51,7 @@
 - init;
 - (void) dealloc;
 - (unsigned char*) data;
-- (int) dataSize;
+- (long) dataSize;
 - (SndError) readSoundfile:(NSString *)filename startFrame: (int) startFrame frameCount: (int) frameCount;
 - (SndError) readSoundfile: (NSString*) filename;
 - (SndAudioBuffer*) audioBufferForSamplesInRange: (NSRange) playRegion;

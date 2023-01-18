@@ -212,7 +212,7 @@ static void calcValues(SndMeter *self, float *aveVal, float *peakVal)
 
 - (id) initWithFrame: (NSRect) frameRect
 {
-    [super initWithFrame: frameRect];
+    self = [super initWithFrame: frameRect];
     holdTime = 0.7; // in seconds
     [self setBackgroundColor: [NSColor controlColor]];
     if (@available(macOS 10.14, *)) {

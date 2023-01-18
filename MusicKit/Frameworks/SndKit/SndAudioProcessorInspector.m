@@ -42,7 +42,7 @@ static SndAudioProcessorInspector* defaultInspector = nil;
 // defaultAudioProcessorInspector
 ////////////////////////////////////////////////////////////////////////////////
 
-+ defaultAudioProcessorInspector
++ (id)defaultAudioProcessorInspector
 {
     if (defaultInspector == nil) {
 	// Force registration of all known SndAudioProcessor classes
@@ -268,6 +268,7 @@ static SndAudioProcessorInspector* defaultInspector = nil;
     id fxClass = [[SndAudioProcessor fxClasses] objectAtIndex: [fxChooser indexOfSelectedItem]];
     SndAudioProcessor *newFX = [[fxClass alloc] init];
     [[currentObj audioProcessorChain] addAudioProcessor: newFX];
+    [newFX release];
   }
 }
 

@@ -45,9 +45,9 @@ static SndPlayer *defaultSndPlayer;
 + (SndPlayer *) defaultSndPlayer
 {
     if (defaultSndPlayer == nil) {
-        defaultSndPlayer = [SndPlayer new];
+        defaultSndPlayer = [[SndPlayer alloc] init];
     }
-    return [[defaultSndPlayer retain] autorelease];
+    return defaultSndPlayer;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

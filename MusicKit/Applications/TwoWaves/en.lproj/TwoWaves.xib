@@ -557,7 +557,7 @@
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="playA:" target="19" id="D1p-NH-5tE"/>
+                                                    <action selector="play:" target="40" id="jly-be-xca"/>
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="88">
@@ -568,7 +568,7 @@
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="playB:" target="19" id="NwR-Vc-dOF"/>
+                                                    <action selector="play:" target="45" id="mqH-1W-DiJ"/>
                                                 </connections>
                                             </button>
                                         </subviews>

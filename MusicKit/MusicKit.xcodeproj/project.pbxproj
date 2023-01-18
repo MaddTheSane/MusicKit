@@ -1983,7 +1983,7 @@
 		D85A2F66061F34E80065380E /* WaterfallView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = WaterfallView.h; sourceTree = "<group>"; };
 		D85A2F67061F34E80065380E /* WaterfallView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = WaterfallView.m; sourceTree = "<group>"; };
 		D85A2F98061F353C0065380E /* Spectro_main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Spectro_main.m; sourceTree = "<group>"; };
-		D85C2F8806308A2900E6397B /* SndEditing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SndEditing.m; sourceTree = "<group>"; };
+		D85C2F8806308A2900E6397B /* SndEditing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SndEditing.m; sourceTree = "<group>"; usesTabs = 1; };
 		D85E27F406FA0C0100385C32 /* ScorePlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScorePlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D85E27F606FA0C0300385C32 /* ScorePlayer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ScorePlayer-Info.plist"; sourceTree = "<group>"; };
 		D85E27FB06FA0D0800385C32 /* ScorePlayer_main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ScorePlayer_main.m; sourceTree = "<group>"; };
@@ -2169,7 +2169,7 @@
 		D88FE29D05A0F8430024FD88 /* SndAudioProcessorFlanger.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SndAudioProcessorFlanger.h; sourceTree = "<group>"; };
 		D88FE29E05A0F8430024FD88 /* SndAudioProcessorFlanger.m */ = {isa = PBXFileReference; fileEncoding = 30; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = SndAudioProcessorFlanger.m; sourceTree = "<group>"; tabWidth = 2; };
 		D88FE29F05A0F8430024FD88 /* SndAudioProcessorInspector.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SndAudioProcessorInspector.h; sourceTree = "<group>"; };
-		D88FE2A005A0F8430024FD88 /* SndAudioProcessorInspector.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SndAudioProcessorInspector.m; sourceTree = "<group>"; };
+		D88FE2A005A0F8430024FD88 /* SndAudioProcessorInspector.m */ = {isa = PBXFileReference; fileEncoding = 30; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = SndAudioProcessorInspector.m; sourceTree = "<group>"; };
 		D88FE2A105A0F8430024FD88 /* SndAudioProcessorMP3Encoder.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SndAudioProcessorMP3Encoder.h; sourceTree = "<group>"; };
 		D88FE2A205A0F8430024FD88 /* SndAudioProcessorMP3Encoder.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SndAudioProcessorMP3Encoder.m; sourceTree = "<group>"; };
 		D88FE2A305A0F8430024FD88 /* SndAudioProcessorNoiseGate.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SndAudioProcessorNoiseGate.h; sourceTree = "<group>"; };
@@ -5729,6 +5729,7 @@
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
+			usesTabs = 1;
 		};
 		D8DB4E5E059FA0C900624233 /* Applications */ = {
 			isa = PBXGroup;
@@ -13717,7 +13718,7 @@
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -13772,7 +13773,7 @@
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -13822,7 +13823,7 @@
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;

@@ -445,7 +445,7 @@ PERFORM_API MKMDReturn
 /*!
   @function MKMDHandleReply
   @brief Manage the received message and  call the appropriate reply function from those supplied.
-  @param msg The message reply to be handled.
+  @param userData The message reply to be handled.
   @param funcs The functions handling received data, exceptions, alarms, and queue reports.
   @return Returns MKMD_SUCCESS if on correct completion, otherwise an error code.
 */
@@ -531,7 +531,7 @@ PERFORM_API MKMDReturn
 /*!
   @function MKMDGetAvailableDrivers
   @brief Return the names of available drivers.
-  @param input Indicates whether the drivers listed are for input or output. 
+  @param inputDrivers Indicates whether the drivers listed are for input or output. 
   These may differ for devices which provide only output or only input.
   @param selectedDriver Receives the default driver index.
   @return Returns a list of strings giving driver names and available ports,

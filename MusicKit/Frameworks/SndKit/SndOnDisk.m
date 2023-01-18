@@ -29,6 +29,8 @@
 #define HAS_DATA 1
 #define HAS_NO_DATA  2
 
+#warning This still has some NeXT-isms that don't work on macOS!
+
 @implementation SndOnDisk
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -58,6 +60,7 @@
     readAheadBuffer = nil;
     [readAheadLock release];
     readAheadLock = nil;
+    [theFileName release];
     [super dealloc];
 }
 
@@ -67,7 +70,7 @@
     return NULL;
 }
 
-- (int) dataSize
+- (long) dataSize
 {
     return 0;
 }
@@ -293,8 +296,7 @@ BOOL subRangeIsInsideSuperRange(NSRange subR, NSRange superR)
 - (void)requestNextBufferWithRange: (NSRange) range
 {
     SndOnDiskAudioBufferServerJob *aJob;
-    aJob = [SndOnDiskAudioBufferServerJob alloc];
-    [aJob initWithSndOnDisk: self bufferRange: range];
+    aJob = [[SndOnDiskAudioBufferServerJob alloc] initWithSndOnDisk: self bufferRange: range];
     [[SndOnDiskAudioBufferServer defaultServer] addJob: aJob];
 }
 

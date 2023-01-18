@@ -111,11 +111,11 @@ static SndStreamManager *defaultStreamManager = nil;
 
 + (SndStreamManager *) defaultStreamManager
 {
-    return [[defaultStreamManager retain] autorelease];
+    return defaultStreamManager;
 }
 
-+ streamManagerOnDeviceForInput: (NSString *) inputDeviceName 
-		deviceForOutput: (NSString *) outputDeviceName 
++ (instancetype)streamManagerOnDeviceForInput: (NSString *) inputDeviceName
+			      deviceForOutput: (NSString *) outputDeviceName 
 {
     return [[[SndStreamManager alloc] initOnDeviceForInput: inputDeviceName
 					   deviceForOutput: outputDeviceName] autorelease];
@@ -176,7 +176,7 @@ static SndStreamManager *defaultStreamManager = nil;
 
 - initOnDeviceForInput: (NSString *) inputDeviceName deviceForOutput: (NSString *) outputDeviceName 
 {
-    if([self init]) {
+    if(self = [self init]) {
 	NSArray *outputNames  = [SndStreamManager driverNamesForOutput: YES];
 	NSArray *inputNames = [SndStreamManager driverNamesForOutput: NO];
 
@@ -409,7 +409,7 @@ static SndStreamManager *defaultStreamManager = nil;
 	    // a while to go through.
 	    [bgdm_threadLock unlockWithCondition: bgdm_sem];
 	    while (1) {
-		int count;
+		NSInteger count;
 
 		[delegateMessageArrayLock lock];
 		count = [delegateMessageArray count];

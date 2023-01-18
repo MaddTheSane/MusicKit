@@ -75,7 +75,7 @@
   To come
   @return     A freshly initialized and autoreleased SndPlayer
 */
-+ player;
++ (instancetype)player;
 /*!
   @brief   Factory method
   
@@ -83,20 +83,12 @@
   @return     The default SndPlayer object
 */
 + (SndPlayer*) defaultSndPlayer;
+@property (class, readonly, retain) SndPlayer *defaultSndPlayer;
 /*!
   @brief   Initializer
   @return     Self.
 */
-- init;
-/*!
-  @brief Destructor
-*/
-- (void) dealloc;
-/*!
-  @brief Produces a brief description of the SndPlayer.
-  @return   NSString containing a brief description of the object
-*/
-- (NSString *) description;
+- (instancetype)init;
 /*!
   @brief   Begin playing a Snd instance immediately.
   @param      s The sound to start playing

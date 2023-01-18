@@ -156,7 +156,7 @@ CONDITIONS OF THIS AGREEMENT.
 
 - (id) initWithCoder: (NSCoder *) aDecoder
 {
-    SndDisplayDataList *newSelf = [self init];
+    self = [self init];
     
     // Check if decoding a newer keyed coding archive
     if([aDecoder allowsKeyedCoding]) {
@@ -170,7 +170,7 @@ CONDITIONS OF THIS AGREEMENT.
 	    embeddedArray = [[aDecoder decodeObject] retain];
 	}	
     }
-    return newSelf;
+    return self;
 }
 
 - (void) encodeWithCoder: (NSCoder *) aCoder

@@ -93,6 +93,7 @@ OF THIS AGREEMENT.
 	if([self lockFocusIfCanDraw]) {
 	    [selectionColour set];
 	    NSRectFillUsingOperation(cursorRect, NSCompositingOperationCopy);  // overwrite with cursor since we restore it on next phase of duty cycle.
+	    //TODO: use a modern replacement?
 	    NSHighlightRect(cursorRect);
 	    [self unlockFocus];	
 	}
@@ -200,9 +201,7 @@ OF THIS AGREEMENT.
     [[self window] enableFlushWindow];
     */
 
-    if ([delegate respondsToSelector:@selector(soundDidChange:)]) {
-        [delegate soundDidChange:self];
-    }
+    [self tellDelegate: @selector(soundDidChange:)];
 }
 
 - (void) paste: (id) sender;
@@ -265,32 +264,32 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     for(sampleIndex = sampleNumber; sampleIndex < sampleNumber + averageOverChannels; sampleIndex++) {
 	// TODO: move this into a SndAudioBuffer method.
 	switch (sampleDataFormat) {
-	    case SND_FORMAT_LINEAR_8:
+            case SndSampleFormatLinear8:
 		theValue += ((char *) pcmData)[sampleIndex];
 		break;
-	    case SND_FORMAT_MULAW_8:
+            case SndSampleFormatMulaw8:
 		theValue += SndMuLawToLinear(((char *) pcmData)[sampleIndex]);
 		break;
-	    case SND_FORMAT_EMPHASIZED:
-	    case SND_FORMAT_COMPRESSED:
-	    case SND_FORMAT_COMPRESSED_EMPHASIZED:
-	    case SND_FORMAT_DSP_DATA_16:
-	    case SND_FORMAT_LINEAR_16:
+            case SndSampleFormatEmphasized:
+            case SndSampleFormatCompressed:
+            case SndSampleFormatCompressedEmphasized:
+            case SndSampleFormatDspData16:
+            case SndSampleFormatLinear16:
 		theValue += ((short *) pcmData)[sampleIndex];
 		break;
-	    case SND_FORMAT_LINEAR_24:
-	    case SND_FORMAT_DSP_DATA_24:
+            case SndSampleFormatLinear24:
+            case SndSampleFormatDspData24:
 		// theValue = ((short *) pcmData)[frameNumber];
 		theValue += *((int *) ((char *) pcmData + sampleIndex * 3)) >> 8;
 		break;
-	    case SND_FORMAT_LINEAR_32:
-	    case SND_FORMAT_DSP_DATA_32:
+            case SndSampleFormatLinear32:
+            case SndSampleFormatDspData32:
 		theValue += ((int *) pcmData)[sampleIndex];
 		break;
-	    case SND_FORMAT_FLOAT:
+            case SndSampleFormatFloat:
 		theValue += ((float *) pcmData)[sampleIndex];
 		break;
-	    case SND_FORMAT_DOUBLE:
+            case SndSampleFormatDouble:
 		theValue += ((double *) pcmData)[sampleIndex];
 		break;
 	    default: /* just in case */
@@ -354,7 +353,9 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 			  start: end + 1];
         [(NSMutableArray *) dataList insertObject: newObj atIndex: i + 1];
         [theObj truncateToLastPixel: start - 1];
+	[newObj release];
     }
+    [self setNeedsDisplay:YES];
     return YES;
 }
 
@@ -608,6 +609,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 				    count: localMax - currStartPoint + 1
 				    start: currStartPoint];
 		[(NSMutableArray *) dataList addObject: newCache];
+		[newCache release];
 		[dataList sort];
 		// NSLog(@"setting new cache: start %d count %d\n", currStartPoint, localMax - currStartPoint + 1);
 	    }
@@ -707,7 +709,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     int pixelIndex;
     NSBezierPath *soundPath = [NSBezierPath bezierPath];
 
-    if (displayMode == SND_SOUNDVIEW_WAVE) {
+    if (displayMode == SndViewDisplayModeWave) {
 	float maxY1 = maximumPixels[0] * ampScaler + amplitudeDisplayHeight;
 	float minY1 = minimumPixels[0] * ampScaler + amplitudeDisplayHeight;
 	
@@ -895,7 +897,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 	endX = NSMaxX(drawWithinRectangle);
 	
 	/* we need to draw a line from last pixel */
-	if (displayMode == SND_SOUNDVIEW_MINMAX && endX < NSMaxX([self frame]))
+	if (displayMode == SndViewDisplayModeMinMax && endX < NSMaxX([self frame]))
 	    endX++;
 
 	// retrieve pixel data from cache.
@@ -990,8 +992,10 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     validPasteboardReturnTypes = nil;
     if (dataList) {
         [(NSMutableArray *) dataList removeAllObjects];
-        [(NSMutableArray *) dataList release];
+        [dataList release];
     }
+    [dragIcon release];
+    [selectionColour release];
     [super dealloc];
 }
 
@@ -1057,7 +1061,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     // foregroundColour = [[NSColor blueColor] retain];//black
     foregroundColour = [[NSColor colorWithCalibratedRed: 0.6 green: 0.25 blue: 1.0 alpha: 0.7] retain];
     
-    displayMode = SND_SOUNDVIEW_MINMAX;
+    displayMode = SndViewDisplayModeMinMax;
     selectedFrames = NSMakeRange(0, 0);
     reductionFactor = 4.0; /* bogus */
     amplitudeZoom = 1.0; // Not bogus!
@@ -1076,7 +1080,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     peakFraction = TENPERCENT;
     stereoMode = SNDVIEW_STEREOMODE;
     
-    defaultRecordFormat = SND_FORMAT_MULAW_8;
+    defaultRecordFormat = SndSampleFormatMulaw8;
     defaultRecordChannelCount = 1;
     defaultRecordSampleRate = SND_RATE_CODEC;
     defaultRecordSeconds = DEFAULT_RECORD_SECONDS;
@@ -1088,7 +1092,6 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     firstDraw = YES;
     
     selectedFrames.location = selectedFrames.length = 0;
-    [self allocateGState]; // attempt speed increase!    
 }
 
 - initWithFrame: (NSRect) frameRect
@@ -1109,8 +1112,8 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     if([aDecoder allowsKeyedCoding]) {
 	sound = [[aDecoder decodeObjectForKey: @"SndView_sound"] retain];
 	delegate = [[aDecoder decodeObjectForKey: @"SndView_delegate"] retain];
-	selectedFrames.location = [aDecoder decodeIntForKey: @"SndView_selectionRangeLocation"];
-	selectedFrames.length = [aDecoder decodeIntForKey: @"SndView_selectionRangeLength"];
+	selectedFrames.location = [aDecoder decodeIntegerForKey: @"SndView_selectionRangeLocation"];
+	selectedFrames.length = [aDecoder decodeIntegerForKey: @"SndView_selectionRangeLength"];
 	displayMode = [aDecoder decodeIntForKey: @"SndView_displayMode"];
 	reductionFactor = [aDecoder decodeFloatForKey: @"SndView_reductionFactor"];
 	[backgroundColour release];
@@ -1195,8 +1198,8 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     if([aCoder allowsKeyedCoding]) {
 	[aCoder encodeObject: sound forKey: @"SndView_sound"];
 	[aCoder encodeConditionalObject: delegate forKey: @"SndView_delegate"];
-	[aCoder encodeInt: selectedFrames.location forKey: @"SndView_selectionRangeLocation"];
-	[aCoder encodeInt: selectedFrames.length forKey: @"SndView_selectionRangeLength"];
+	[aCoder encodeInteger: selectedFrames.location forKey: @"SndView_selectionRangeLocation"];
+	[aCoder encodeInteger: selectedFrames.length forKey: @"SndView_selectionRangeLength"];
 	[aCoder encodeInt: displayMode forKey: @"SndView_displayMode"];
 	[aCoder encodeFloat: reductionFactor forKey: @"SndView_reductionFactor"];
 	[aCoder encodeObject: backgroundColour forKey: @"SndView_backgroundColour"];
@@ -1257,6 +1260,8 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 	// [aCoder encodeValuesOfObjCTypes: "f", &amplitudeZoom]; // TODO: should be encoded when versioning is managed.
     }
 }
+
+@dynamic autoScale;
 
 - (BOOL) isAutoScale
 {
@@ -1371,7 +1376,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     BOOL isInside = [self mouse: mouseLocation inRect: [self bounds]];
     
     if(isInside) {
-	NSPasteboard *pboard = [NSPasteboard pasteboardWithName: NSDragPboard];
+	NSPasteboard *pboard = [NSPasteboard pasteboardWithName: NSPasteboardNameDrag];
 	
 	// Write data to the pasteboard
 	if ([self writeSelectionToPasteboardNoProvide: pboard types: nil]) {
@@ -1491,8 +1496,8 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     BOOL scrolled = NO;
     BOOL timer = NO;
     BOOL forwardDirection;
-    float dx = 0; // change in x coordinate from each drag
-    NSRect previousSelectedRegionRect;
+    CGFloat dx = 0; // change in x coordinate from each drag
+    NSRect previousSelectedRegionRect = NSZeroRect;
     // The selection rectangle, adjusted by the dragging.
     NSRect draggedSelectionRect = [self selectionRect];
     NSRect currentSelectionRect;
@@ -1500,10 +1505,10 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     NSEvent *currentEvent;
     
     NSPoint mouseDownLocation;
-    float oldx = 0;
-    int hilightStartPixel = -1, hilightEndPixel = -1; /* which pixels are currently highlighted */
-    int realStartFrame = selectedFrames.location;
-    int realEndFrame = NSMaxRange(selectedFrames) - 1;
+    CGFloat oldx = 0;
+    NSInteger hilightStartPixel = -1, hilightEndPixel = -1; /* which pixels are currently highlighted */
+    NSInteger realStartFrame = selectedFrames.location;
+    NSInteger realEndFrame = NSMaxRange(selectedFrames) - 1;
     BOOL clickedWithinPreviousSelection = NO;
     
     /* in order to preserve the start and end points of a selection when
@@ -2549,7 +2554,7 @@ LMS: Nowdays we want to rescale to fit the entire sound into the view, regardles
 	return NO;
 }
 
-- (BOOL) writeSelectionToPasteboardNoProvide: (NSPasteboard *) thePasteboard types: (NSArray *) pboardTypes
+- (BOOL) writeSelectionToPasteboardNoProvide: (NSPasteboard *) thePasteboard types: (NSArray<NSPasteboardType> *) pboardTypes
 {
     if (selectedFrames.length < 1) 
 	return NO;
@@ -2603,6 +2608,11 @@ LMS: Nowdays we want to rescale to fit the entire sound into the view, regardles
 {
     // NSLog(@"draggingSourceOperationMaskForLocal: isLocal %d\n", isLocal);
     return isLocal ? NSDragOperationGeneric | NSDragOperationMove | NSDragOperationCopy : NSDragOperationCopy;
+}
+
+- (NSDragOperation)draggingSession:(NSDraggingSession *)session sourceOperationMaskForDraggingContext:(NSDraggingContext)context
+{
+    return context == NSDraggingContextWithinApplication ? NSDragOperationGeneric | NSDragOperationMove | NSDragOperationCopy : NSDragOperationCopy;
 }
 
 // To prevent modifiers from altering the mask

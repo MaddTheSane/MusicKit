@@ -720,7 +720,7 @@
                                                 <rect key="frame" x="66" y="7" width="887" height="124"/>
                                                 <clipView key="contentView" autoresizesSubviews="NO" id="j3a-nP-nfj">
                                                     <rect key="frame" x="1" y="1" width="885" height="122"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <customView id="VNp-15-cAt" customClass="SndView">
                                                             <rect key="frame" x="0.0" y="0.0" width="788" height="120"/>
@@ -833,7 +833,7 @@
                                     <rect key="frame" x="72" y="2" width="780" height="123"/>
                                     <clipView key="contentView" id="6dH-EN-glN">
                                         <rect key="frame" x="1" y="1" width="778" height="121"/>
-                                        <autoresizingMask key="autoresizingMask"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <customView id="B9c-vg-OjK" customClass="SndView">
                                                 <rect key="frame" x="0.0" y="0.0" width="777" height="121"/>
@@ -933,7 +933,7 @@
                                     <rect key="frame" x="73" y="136" width="785" height="125"/>
                                     <clipView key="contentView" id="ak2-Jt-pBX">
                                         <rect key="frame" x="1" y="1" width="783" height="123"/>
-                                        <autoresizingMask key="autoresizingMask"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <customView id="fXn-8g-ra5" customClass="SndView">
                                                 <rect key="frame" x="0.0" y="0.0" width="782" height="123"/>
@@ -983,7 +983,7 @@
                                     <rect key="frame" x="398" y="80" width="360" height="75"/>
                                     <clipView key="contentView" drawsBackground="NO" id="dPe-yR-mdK">
                                         <rect key="frame" x="0.0" y="0.0" width="360" height="75"/>
-                                        <autoresizingMask key="autoresizingMask"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <textView wantsLayer="YES" editable="NO" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" usesRuler="YES" spellingCorrection="YES" smartInsertDelete="YES" id="ArC-NB-WQd">
                                                 <rect key="frame" x="0.0" y="0.0" width="359" height="75"/>
@@ -1081,7 +1081,7 @@
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="playA:" target="Voe-Tx-rLC" id="1be-j0-sS1"/>
+                                                    <action selector="play:" target="VNp-15-cAt" id="hDz-VD-bcp"/>
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vDd-zP-J5X">
@@ -1091,7 +1091,7 @@
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="playB:" target="Voe-Tx-rLC" id="0FU-TD-iXT"/>
+                                                    <action selector="play:" target="fXn-8g-ra5" id="xYu-nh-DJO"/>
                                                 </connections>
                                             </button>
                                         </subviews>

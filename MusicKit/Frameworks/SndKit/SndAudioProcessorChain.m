@@ -35,9 +35,9 @@
 
 - init
 {
-    [super init];
+    self = [super init];
     if (audioProcessorArray == nil)
-        audioProcessorArray = [[NSMutableArray arrayWithCapacity: 2] retain];
+        audioProcessorArray = [[NSMutableArray alloc] initWithCapacity: 2];
     bypassProcessing = FALSE;
     nowTime = 0.0;
     postFader = [[SndAudioFader alloc] init];
@@ -170,7 +170,7 @@
 
 - processBuffer: (SndAudioBuffer *) buff forTime: (double) t
 {
-    int audioProcessorIndex, audioProcessorCount = [audioProcessorArray count];
+    NSInteger audioProcessorIndex, audioProcessorCount = [audioProcessorArray count];
     if (bypassProcessing)
         return self;
 

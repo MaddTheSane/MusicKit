@@ -82,7 +82,6 @@
   @brief Class initialization method
   
   Creates the default stream manager
-  @return void.
 */
 + (void) initialize;
 
@@ -95,6 +94,8 @@
 */
 + (SndStreamManager *) defaultStreamManager;
 
+@property (class, readonly, retain) SndStreamManager *defaultStreamManager;
+
 /*!
   @brief Creates and returns an autoreleased instance with the specified devices for output and input.
  
@@ -103,7 +104,7 @@
   @param inputDeviceName Name of the device to stream audio from.
   @param outputDeviceName Name of the device to stream audio to.
 */
-+ streamManagerOnDeviceForInput: (NSString *) inputDeviceName 
++ (instancetype)streamManagerOnDeviceForInput: (NSString *) inputDeviceName
 		deviceForOutput: (NSString *) outputDeviceName;
 
 /*!

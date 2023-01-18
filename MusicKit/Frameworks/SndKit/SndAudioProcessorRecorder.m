@@ -48,7 +48,7 @@
     if(self != nil) {
 	startTriggerThreshold = 0.002f;
 	isRecording = NO;
-	fileFormat.dataFormat = SND_FORMAT_LINEAR_16; // default format
+	fileFormat.dataFormat = SndSampleFormatLinear16; // default format
 	fileFormat.channelCount = 2; // Stereo 
 	fileFormat.sampleRate = 44100.0; // CD audio.
 
@@ -460,7 +460,7 @@
 #if SNDAUDIOPROCRECORDER_DEBUG > 1
     NSLog(@"SndAudioProcessorRecorder -processReplacing: Entering...\n");
 #endif
-    if([inB dataFormat] != SND_FORMAT_FLOAT)
+    if([inB dataFormat] != SndSampleFormatFloat)
 	NSLog(@"SndAudioProcessorRecorder -processReplacing: unimplemented format %d!\n", [inB dataFormat]);
     if (stopSignal) {
 #if SNDAUDIOPROCRECORDER_DEBUG > 1

@@ -5,15 +5,15 @@
 
 @interface Controller: NSObject
 {
-    IBOutlet NSTextField *freqNum1;
-    IBOutlet NSTextField *freqNum2;
+    IBOutlet NSTextFieldCell *freqNum1;
+    IBOutlet NSTextFieldCell *freqNum2;
     IBOutlet NSSlider *freqSlide1;
     IBOutlet NSSlider *freqSlide2;
     IBOutlet SndView *soundView1;
     IBOutlet SndView *soundView2;
     IBOutlet SndView *soundView3;
-    IBOutlet NSTextField *volNum1;
-    IBOutlet NSTextField *volNum2;
+    IBOutlet NSTextFieldCell *volNum1;
+    IBOutlet NSTextFieldCell *volNum2;
     IBOutlet NSSlider *volSlide1;
     IBOutlet NSSlider *volSlide2;
     IBOutlet NSMatrix *waveType1;

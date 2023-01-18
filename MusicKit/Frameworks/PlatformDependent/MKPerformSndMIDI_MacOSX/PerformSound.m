@@ -603,7 +603,7 @@ static AudioDeviceID *getDeviceIDs(BOOL forOutputDevices, unsigned int *numOfDev
     // Loop through the devices and check their input or output status.
     for(deviceIDIndex = 0; deviceIDIndex < allDevicesCount; deviceIDIndex++) {
 	BOOL interleavedChannels;
-	int numberOfStreams;
+	int numberOfStreams = 0;
 	
 	getStreamChannelConfiguration(allDeviceIDs[deviceIDIndex], forOutputDevices, &interleavedChannels, &numberOfStreams);
 	
@@ -783,7 +783,7 @@ static BOOL getAudioStreamsToVend(AudioDeviceID deviceID,
 
 static long getBufferSize(AudioDeviceID deviceID, BOOL forOutputDevice)
 {
-    long currentBufferSizeInBytes;
+    UInt32 currentBufferSizeInBytes=0;
     int numberOfStreams = forOutputDevice ? outputNumberOfStreams : inputNumberOfStreams;
     BOOL notInterleaved = (forOutputDevice && !outputInterleavedChannels) || (!forOutputDevice && !inputInterleavedChannels);
     
@@ -1200,7 +1200,7 @@ PERFORM_API void SNDStreamNativeFormat(SNDStreamBuffer *streamFormat, BOOL isOut
     }
     
     // The bytes per frame is implicitly set by the dataFormat value.
-    streamFormat->dataFormat   = SND_FORMAT_FLOAT;
+    streamFormat->dataFormat   = SndSampleFormatFloat;
     streamFormat->sampleRate   = streamBasicDescription->mSampleRate;
     // if it's a non-interleaved set of mono CoreAudio streams, count those, otherwise count the number of interleaved channels per frame.
     streamFormat->channelCount = interleavedChannels ? streamBasicDescription->mChannelsPerFrame : numberOfStreams;

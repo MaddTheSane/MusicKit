@@ -111,21 +111,10 @@ enum {
 // clientName
 ////////////////////////////////////////////////////////////////////////////////
 
-- (NSString *) clientName
-{
-    return clientName;
-}
-
-- setClientName: (NSString *) name
-{
-    if (clientName != nil)
-	[clientName release];
-    clientName = [name retain];
-    return self;
-}
+@synthesize clientName;
 
 /* Frees buffer memory. For internal use only. */
-- freeBufferMem
+- (void)freeBufferMem
 {
     [outputQueue freeBuffers];
     [synthOutputBuffer release];
@@ -134,8 +123,6 @@ enum {
     [inputQueue freeBuffers];
     [synthInputBuffer release];
     synthInputBuffer = nil;
-    
-    return self;
 }
 
 #if SNDSTREAMCLIENT_DEBUG_DEALLOC
@@ -341,7 +328,7 @@ enum {
     }
 }
 
-- offlineProcessBuffer: (SndAudioBuffer *) anAudioBuffer nowTime: (double) t
+- (void)offlineProcessBuffer: (SndAudioBuffer *) anAudioBuffer nowTime: (double) t
 {
     SndAudioBuffer *tempBuffer = synthOutputBuffer;
     
@@ -350,7 +337,6 @@ enum {
     [self processBuffers];
     [processorChain processBuffer: anAudioBuffer forTime: clientNowTime];
     synthOutputBuffer = tempBuffer;
-    return self;
 }
 
 // Retire exposedOutputBuffer to the pending section of the queue, expose the next processed buffer.
@@ -653,11 +639,10 @@ static void inline setThreadPriority()
 #if SNDSTREAMCLIENT_DEBUG_SYNTHTHREAD                  
     NSLog(@"SYNTH THREAD: (%@) starting processing thread\n", [NSThread currentThread]);
 #endif
-    while (active) {
-	NSAutoreleasePool *innerPool = [NSAutoreleasePool new];
-	
+    while (active) @autoreleasepool {
 	if (generatesOutput) {
-	    synthOutputBuffer = [[[outputQueue popNextPendingBuffer] retain] zero];
+	    synthOutputBuffer = [[outputQueue popNextPendingBuffer] retain];
+	    [synthOutputBuffer zero];
         }
         if (needsInput) {
 	    synthInputBuffer = [[inputQueue popNextPendingBuffer] retain];
@@ -669,12 +654,10 @@ static void inline setThreadPriority()
 #if SNDSTREAMCLIENT_DEBUG_SYNTHTHREAD
         NSLog(@"[%@] SYNTH THREAD: ... LOCKED\n", clientName);
 #endif
-        {
-	    NSAutoreleasePool *innerPool2 = [NSAutoreleasePool new];
+	@autoreleasepool {
 	    
 	    // processBuffers in the sub-class should fill or modify synthOutputBuffer and/or retrieve synthInputBuffer.
 	    [self processBuffers];
-	    [innerPool2 release];
         }
 #if SNDSTREAMCLIENT_DEBUG_SYNTHTHREAD
         NSLog(@"[%@] SYNTH THREAD: ... done processBuffers\n", clientName);
@@ -706,7 +689,6 @@ static void inline setThreadPriority()
 	    [inputQueue addProcessedBuffer: synthInputBuffer];
 	    [synthInputBuffer release];
         }
-        [innerPool release];
     }
     [managerConnectionLock unlockWithCondition: SC_disconnecting];
     [managerConnectionLock lockWhenCondition: SC_disconnected];
@@ -866,47 +848,35 @@ static void inline setThreadPriority()
 // audioProcessorChain
 ////////////////////////////////////////////////////////////////////////////////
 
-- (SndAudioProcessorChain *) audioProcessorChain
-{
-    return [[processorChain retain] autorelease];
-}
-
-- (void) setAudioProcessorChain: (SndAudioProcessorChain *) newAudioProcessorChain
-{
-    [processorChain release];
-    processorChain = [newAudioProcessorChain retain];
-}
+@synthesize audioProcessorChain=processorChain;
 
 ////////////////////////////////////////////////////////////////////////////////
 // delegate mutator/accessor methods
 ////////////////////////////////////////////////////////////////////////////////
 
-- (void) setDelegate: (id) theNewDelegate
+- (void) setDelegate: (id<SndStreamClientDelegate>) theNewDelegate
 {
   delegate = theNewDelegate;
   delegateRespondsToOutputBufferSkipSelector = ( delegate != nil && 
-      [delegate respondsToSelector: @selector(outputBufferSkipped)] );
+						[delegate respondsToSelector: @selector(outputBufferSkipped:)] );
   delegateRespondsToInputBufferSkipSelector  = ( delegate != nil &&
-      [delegate respondsToSelector: @selector(inputBufferSkipped)] );
+						[delegate respondsToSelector: @selector(inputBufferSkipped:)] );
   delegateRespondsToDidProcessBufferSelector  = ( delegate != nil &&
-	[delegate respondsToSelector: @selector(didProcessStreamBuffer)] );
+						 [delegate respondsToSelector: @selector(didProcessStreamBuffer:)] );
 }
 
-- (id) delegate
-{
-    return delegate;
-}
+@synthesize delegate;
 
 ////////////////////////////////////////////////////////////////////////////////
 // input/output buffer queue length accessors
 ////////////////////////////////////////////////////////////////////////////////
 
-- (int) inputBufferCount
+- (NSInteger) inputBufferCount
 {
     return [inputQueue bufferCount];
 }
 
-- (int) outputBufferCount
+- (NSInteger) outputBufferCount
 {
     return [outputQueue bufferCount];
 }
@@ -915,22 +885,24 @@ static void inline setThreadPriority()
 // input/output buffer queue length mutators
 ////////////////////////////////////////////////////////////////////////////////
 
-- (BOOL) setInputBufferCount: (int) n
+- (BOOL) setInputBufferCount: (NSInteger) n
 {
     if (active)
 	return FALSE;
     if (n < 2)
 	return FALSE;
+    //FIXME: WE SHOULDN'T BE CALLING INIT HERE!!!
     [inputQueue initQueueWithLength: n];
     return TRUE;
 }
 
-- (BOOL) setOutputBufferCount: (int) n
+- (BOOL) setOutputBufferCount: (NSInteger) n
 {
     if (active)
 	return FALSE;
     if (n < 2)
 	return FALSE;
+    //FIXME: WE SHOULDN'T BE CALLING INIT HERE!!!
     [outputQueue initQueueWithLength: n];
     return TRUE;
 }

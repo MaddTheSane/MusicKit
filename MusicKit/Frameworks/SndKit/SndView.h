@@ -240,7 +240,7 @@ DeprecatedEnum(SndViewDisplayMode, SND_SOUNDVIEW_WAVE, SndViewDisplayModeWave);
 #define NX_SOUNDVIEW_MINMAX SND_SOUNDVIEW_MINMAX
 #define NX_SOUNDVIEW_WAVE SND_SOUNDVIEW_WAVE
 
-@interface SndView: NSView <NSCoding, NSDraggingSource, NSPasteboardTypeOwner>
+@interface SndView: NSView <NSCoding, NSDraggingSource, NSPasteboardTypeOwner, SndDelegate>
 {
     /*! The sound to display. */
     Snd       	*sound;
@@ -597,14 +597,14 @@ DeprecatedEnum(SndViewDisplayMode, SND_SOUNDVIEW_WAVE, SndViewDisplayModeWave);
   done playing.
   @param  sender is an id.
 */
-- (void) play: (id) sender;
+- (IBAction) play: (id) sender;
 
 /*!
   @param  sender is an id.
   @brief Resumes the current playback or recording session by invoking
               Snd's <b>resume:</b> method.
 */
-- (void) resume: (id) sender;
+- (IBAction) resume: (id) sender;
 
 /*!
   @param  sender is an id.
@@ -616,13 +616,13 @@ DeprecatedEnum(SndViewDisplayMode, SND_SOUNDVIEW_WAVE, SndViewDisplayModeWave);
   recording has completed. Recorded data is always taken from the
   CODEC microphone input.
 */
-- (void) record: (id) sender;
+- (IBAction) record: (id) sender;
 
 /*!
   @param  sender is an id.
   @brief Stops the SndView's current recording or playback.
 */
-- (void) stop: (id) sender;
+- (IBAction) stop: (id) sender;
 
 /*!
   @param  thePasteboard is a NSPasteboard instance.

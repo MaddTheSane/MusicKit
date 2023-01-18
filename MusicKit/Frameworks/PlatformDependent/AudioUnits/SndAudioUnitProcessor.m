@@ -585,6 +585,7 @@ static void parameterListener(void *audioProcessorInstance, void *inObject, cons
     result = AudioUnitRender(audioUnit, &actionFlags, &auTimeStamp, outputBusNumber, bufferLengthInFrames, theAudioData); 
     if(result != noErr) {
         NSLog(@"Unable to AudioUnitRender at %f, error %d see AudioUnit/AUComponent.h\n", auTimeStamp.mSampleTime, (int)result);
+	free(theAudioData);
 	return NO;
     }
     
@@ -608,6 +609,7 @@ static void parameterListener(void *audioProcessorInstance, void *inObject, cons
     }
     else {
 	NSLog(@"unimplemented interleaved audio unit!\n");
+	free(theAudioData);
 	return NO;
     }
     

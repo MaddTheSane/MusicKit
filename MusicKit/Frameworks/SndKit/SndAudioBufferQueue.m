@@ -30,7 +30,7 @@ enum {
 // audioBufferQueueWithLength:
 ////////////////////////////////////////////////////////////////////////////////
 
-+ audioBufferQueueWithLength: (int) n
++ (instancetype)audioBufferQueueWithLength: (NSInteger) n
 {
     return [[[self alloc] initQueueWithLength: n] autorelease];
 }
@@ -39,17 +39,16 @@ enum {
 // init
 ////////////////////////////////////////////////////////////////////////////////
 
-- init
+- (instancetype)init
 {
-    self = [self initQueueWithLength: 4];
-    return self;
+    return [self initQueueWithLength: 4];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // initQueueWithLength:
 ////////////////////////////////////////////////////////////////////////////////
 
-- initQueueWithLength: (int) n
+- (instancetype)initQueueWithLength: (NSInteger) n
 {
     self = [super init];
     if(self != nil) {
@@ -57,8 +56,8 @@ enum {
 	if (pendingBuffersLock == nil) {
 	    pendingBuffersLock   = [[NSConditionLock alloc] initWithCondition: ABQ_noData];
 	    processedBuffersLock = [[NSConditionLock alloc] initWithCondition: ABQ_noData];
-	    pendingBuffers       = [[NSMutableArray arrayWithCapacity: numBuffers] retain];
-	    processedBuffers     = [[NSMutableArray arrayWithCapacity: numBuffers] retain];
+	    pendingBuffers       = [[NSMutableArray alloc] initWithCapacity: numBuffers];
+	    processedBuffers     = [[NSMutableArray alloc] initWithCapacity: numBuffers];
 	    
 	    [processedBuffersLock lock];
 	    [processedBuffersLock unlockWithCondition: ABQ_noData];
@@ -102,10 +101,10 @@ enum {
 
 - (NSString*) description
 {
-    return [NSString stringWithFormat: @"%@ numBuffers:%i currently pending:%i, max pending:%i currently processed:%i max processed:%i",
-		     [super description], numBuffers, 
-		     (unsigned int) [pendingBuffers count], maximumPendingBuffers,
-		     (unsigned int) [processedBuffers count], maximumProcessedBuffers];
+    return [NSString stringWithFormat: @"%@ numBuffers:%lu currently pending:%lu, max pending:%lu currently processed:%lu max processed:%lu",
+	    [super description], (unsigned long)numBuffers,
+	    (unsigned long) [pendingBuffers count], (unsigned long)maximumPendingBuffers,
+	    (unsigned long) [processedBuffers count], (unsigned long)maximumProcessedBuffers];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -157,7 +156,7 @@ enum {
 // addPendingBuffer:
 ////////////////////////////////////////////////////////////////////////////////
 
-- addPendingBuffer: (SndAudioBuffer*) audioBuffer
+- (void)addPendingBuffer: (SndAudioBuffer*) audioBuffer
 {
     if (audioBuffer == nil)
 	NSLog(@"SndAudioBufferQueue::addPendingBuffer - audioBuffer is nil!");
@@ -171,14 +170,13 @@ enum {
 	    maximumPendingBuffers = [pendingBuffers count];
 	[pendingBuffersLock unlockWithCondition: ABQ_hasData];
     }
-    return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // addProcessedBuffer:
 ////////////////////////////////////////////////////////////////////////////////
 
-- addProcessedBuffer: (SndAudioBuffer*) audioBuffer
+- (void)addProcessedBuffer: (SndAudioBuffer*) audioBuffer
 {
     if (audioBuffer == nil)
 	NSLog(@"SndAudioBufferQueue::addProcessedBuffer - audioBuffer is nil!");
@@ -192,7 +190,6 @@ enum {
 	    maximumProcessedBuffers = [processedBuffers count];
 	[processedBuffersLock unlockWithCondition: ABQ_hasData];
     }
-    return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -201,7 +198,7 @@ enum {
 
 - (void) cancelProcessedBuffers
 {
-    int numOfProcessedBuffers, bufferIndex;
+    NSInteger numOfProcessedBuffers, bufferIndex;
     
     [processedBuffersLock lock];
     numOfProcessedBuffers = [processedBuffers count];
@@ -222,7 +219,7 @@ enum {
 // pendingBuffersCount
 ////////////////////////////////////////////////////////////////////////////////
 
-- (int) pendingBuffersCount
+- (NSInteger) pendingBuffersCount
 {
     return [pendingBuffers count];
 }
@@ -231,7 +228,7 @@ enum {
 // processedBuffersCount
 ////////////////////////////////////////////////////////////////////////////////
 
-- (int) processedBuffersCount
+- (NSInteger) processedBuffersCount
 {
     return [processedBuffers count];
 }
@@ -240,7 +237,7 @@ enum {
 // bufferCount
 ////////////////////////////////////////////////////////////////////////////////
 
-- (int) bufferCount
+- (NSInteger) bufferCount
 {
     return numBuffers;
 }
@@ -265,11 +262,10 @@ enum {
 // freeBuffers
 ////////////////////////////////////////////////////////////////////////////////
 
-- freeBuffers
+- (void)freeBuffers
 {
     [pendingBuffers   removeAllObjects];
     [processedBuffers removeAllObjects];
-    return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -284,25 +280,25 @@ enum {
     }
     switch (type) {
 	case audioBufferQueue_typeInput: {
-	    int processedBufferIndex;
+	    NSInteger processedBufferIndex;
 	    
 	    [pendingBuffersLock lock];
 	    [pendingBuffersLock unlockWithCondition: ABQ_noData];
 	    [processedBuffersLock lock];
 	    for (processedBufferIndex = 0; processedBufferIndex < numBuffers; processedBufferIndex++)
-		[processedBuffers addObject: [buff copy]];
+		[processedBuffers addObject: [[buff copy] autorelease]];
 	    [processedBuffersLock unlockWithCondition: ABQ_hasData];
 	}
 	break;
 	    
 	case audioBufferQueue_typeOutput: {
-	    int pendingBufferIndex;
+	    NSInteger pendingBufferIndex;
 	    
 	    [processedBuffersLock lock];
 	    [processedBuffersLock unlockWithCondition: ABQ_noData];
 	    [pendingBuffersLock lock];
 	    for (pendingBufferIndex = 0; pendingBufferIndex < numBuffers; pendingBufferIndex++)
-		[pendingBuffers addObject: [buff copy]];
+		[pendingBuffers addObject: [[buff copy] autorelease]];
 	    [pendingBuffersLock unlockWithCondition: ABQ_hasData];
 	}
 	break;

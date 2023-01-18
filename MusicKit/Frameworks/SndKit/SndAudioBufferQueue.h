@@ -46,11 +46,11 @@ typedef enum {
     /*! Lock for thread safety around processed buffers array */
     NSConditionLock *processedBuffersLock;
     /*! Total number of buffers in the queue, both pending and processed */
-    unsigned int numBuffers;
+    NSUInteger numBuffers;
     /*! Maximum number of buffers ever stored in pending queue */
-    unsigned int maximumPendingBuffers;
+    NSUInteger maximumPendingBuffers;
     /*! Maximum number of buffers ever stored in process queue */
-    unsigned int maximumProcessedBuffers;
+    NSUInteger maximumProcessedBuffers;
 }
 
 /*!
@@ -60,11 +60,9 @@ typedef enum {
   Creates a fresh new SndAudioBufferQueue, sets the eventual number of buffers to <em>numberOfBuffers</em>.
   @return     An autoreleased SndAudioBufferQueue instance.
 */
-+ audioBufferQueueWithLength: (int) numberOfBuffers;
++ (instancetype)audioBufferQueueWithLength: (NSInteger) numberOfBuffers;
 
-- init;
-- (void) dealloc;
-- (NSString*) description;
+- (instancetype)init;
 
 /*!
   @brief   Initializes queue for operation with a total of pending+processed buffers.
@@ -76,7 +74,7 @@ typedef enum {
   @param      numberOfBuffers Number of buffers.
   @return     Returns self.
 */
-- initQueueWithLength: (int) numberOfBuffers;
+- (instancetype)initQueueWithLength: (NSInteger) numberOfBuffers;
 
 /*!
   @brief Returns the next buffer that is yet to be processed.
@@ -109,16 +107,14 @@ typedef enum {
 /*!
   @brief Adds buffer to the pending queue.
   @param audioBuffer Buffer to be added
-  @return Returns self.
 */
-- addPendingBuffer: (SndAudioBuffer*) audioBuffer;
+- (void)addPendingBuffer: (SndAudioBuffer*) audioBuffer;
 
 /*!
   @brief Adds a buffer to the processed queue.
   @param audioBuffer Buffer to be added
-  @return Returns self.
 */
-- addProcessedBuffer: (SndAudioBuffer*) audioBuffer;
+- (void)addProcessedBuffer: (SndAudioBuffer*) audioBuffer;
 
 /*!
   @brief Moves all processed buffers onto the pending queue.
@@ -128,18 +124,17 @@ typedef enum {
 /*!
   @return Number of buffers in the pending queue
 */
-- (int) pendingBuffersCount;
+- (NSInteger) pendingBuffersCount;
 
 /*!
   @return Number of buffers in the processed queue
 */
-- (int) processedBuffersCount;
+- (NSInteger) processedBuffersCount;
 
 /*!
   @brief   Frees the SndAudioBuffers within the queues.
-  @return     Returns self
 */
-- freeBuffers;
+- (void)freeBuffers;
 
 /*!
   @brief   Primes the SndAudioBufferQueue for streaming
@@ -160,7 +155,7 @@ typedef enum {
   @brief Returns the total number of buffers being shuffled about betwixt pending and processed queues.
   @return Number of buffers in queues
 */
-- (int) bufferCount;
+- (NSInteger) bufferCount;
 
 @end
 

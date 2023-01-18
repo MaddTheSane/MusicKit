@@ -18,7 +18,7 @@
 
 - initWithX:(double)x y:(float)y flags:(int)f
 {
-    [super init];
+    self = [super init];
     flags = f;
     xVal = x;
     yVal = y;
@@ -27,7 +27,7 @@
 
 - init
 {
-    [super init];
+    self = [super init];
     flags = 0;
     xVal = 0;
     yVal = 0;

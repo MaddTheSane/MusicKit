@@ -146,23 +146,23 @@ static int readData(
 		int sampleIndex = *beginFromFrame * nChans + channelIndex;
 		
 		switch(inDataFormat) {
-		case SND_FORMAT_LINEAR_8:
+		case SndSampleFormatLinear8:
 		    *(shiftedOutPtrs[channelIndex]++) = ((signed char *)inData)[sampleIndex] << 8;
 		    break;
-		case SND_FORMAT_MULAW_8:
+		case SndSampleFormatMulaw8:
 		    *(shiftedOutPtrs[channelIndex]++) = SndMuLawToLinear(((unsigned char *)inData)[sampleIndex]);
 		    break;
-		case SND_FORMAT_LINEAR_32:
+		case SndSampleFormatLinear32:
 		    *(shiftedOutPtrs[channelIndex]++) = (SND_HWORD)(((signed int *)inData)[sampleIndex] >> 16);
 		    break;
-		case SND_FORMAT_FLOAT:
+		case SndSampleFormatFloat:
 		    *(shiftedOutPtrs[channelIndex]++) = (SND_HWORD)(((float *)inData)[sampleIndex] * MAX_HWORD);
 		    break;
-		case SND_FORMAT_DOUBLE:
+		case SndSampleFormatDouble:
 		    *(shiftedOutPtrs[channelIndex]++) = (SND_HWORD)(((double *)inData)[sampleIndex] * MAX_HWORD);
 		    break;
 		default:
-		case SND_FORMAT_LINEAR_16:
+		case SndSampleFormatLinear16:
 		    *(shiftedOutPtrs[channelIndex]++) = ((SND_HWORD *)inData)[sampleIndex];
 		    break;
 		}

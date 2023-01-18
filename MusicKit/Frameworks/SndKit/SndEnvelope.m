@@ -35,7 +35,7 @@ static GetXValIMP    getXVal;
 
 - init
 {
-    [super init];
+    self = [super init];
     breakpoints = [[NSMutableArray alloc] init];
     return self;
 }

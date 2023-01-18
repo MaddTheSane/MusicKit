@@ -267,7 +267,7 @@
 - init
 {
     // Default format typical for modern hardware.
-    return [self initWithDataFormat: SND_FORMAT_LINEAR_16
+    return [self initWithDataFormat: SndSampleFormatLinear16
 		       channelCount: 2
 		       samplingRate: 44100.0
 			 frameCount: 0];
@@ -290,7 +290,7 @@
 
 - (NSString *) description
 {
-    float sampleMin, sampleMax;
+    float sampleMin=0, sampleMax=0;
     
     [self findMin: &sampleMin max: &sampleMax];
     return [NSString stringWithFormat: @"%@ (%@) (min: %.3f, max: %.3f)",
@@ -301,26 +301,24 @@
 // zeroFrameRange:
 ////////////////////////////////////////////////////////////////////////////////
 
-- zeroFrameRange: (NSRange) frameRange
+- (void)zeroFrameRange: (NSRange) frameRange
 {
     int frameSize = [self frameSizeInBytes];
     
     // TODO: this assumes all bytes per sample need to be set to zero to create a zero valued sample.
     memset([data mutableBytes] + frameRange.location * frameSize, 0, frameRange.length * frameSize);
-    return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // zero
 ////////////////////////////////////////////////////////////////////////////////
 
-- zero
+- (void)zero
 {
     // We could be more conservative and call zeroFrameRange, but in the interests of efficiency of calculating
     // the range, we just blank the whole thing. This will only be inefficient if the lengthInSampleFrames is
     // less than the data length.
     memset([data mutableBytes], 0, [data length]);
-    return self;
 }
 
     
@@ -421,7 +419,7 @@
     }
     out += startFrame * selfNumChannels; // use selfNumChannels since we may have changed the channel count.
     // TODO: we need a universal vector mixer for all destination sample formats.
-    if(selfDataFormat == SND_FORMAT_FLOAT) {
+    if(selfDataFormat == SndSampleFormatFloat) {
 #if defined(__APPLE_CC__) // || (__i386__ && __GNUC__)
 	// NSLog(@"vectors in %p, out %p, lengthInSamples %d", in, out, lengthInSamples);
 	vDSP_vadd(in, 1, out, 1, out, 1, lengthInSamples);
@@ -498,7 +496,7 @@
 // copyDataFromBuffer:
 ////////////////////////////////////////////////////////////////////////////////
 
-- copyDataFromBuffer: (SndAudioBuffer *) from
+- (void)copyDataFromBuffer: (SndAudioBuffer *) from
 {
     if (from != nil) {
         if ([self hasSameFormatAsBuffer: from])
@@ -510,37 +508,35 @@
     }
     else
         NSLog(@"SndAudioBuffer -copyDataFromBuffer: ERR: param 'from' is nil!");
-    return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // copyBytes:intoRange:format:
 ////////////////////////////////////////////////////////////////////////////////
 
-- copyBytes: (void *) bytes intoRange: (NSRange) bytesRange format: (SndFormat) newFormat
+- (void)copyBytes: (void *) bytes intoRange: (NSRange) bytesRange format: (SndFormat) newFormat
 {
     long originalFrameCount = format.frameCount;
     long lastFrameLocation;
     
     if (!bytes) {
 	NSLog(@"AudioBuffer::copyBytes:intoRange:format: ERR: param 'from' is nil!");
-	return nil;
+	return;
     }
     [data replaceBytesInRange: bytesRange withBytes: (const void *) bytes];
     format = newFormat;
     // Can extend the frame count.
     lastFrameLocation = (bytesRange.location + bytesRange.length) / [self frameSizeInBytes];
     format.frameCount = MAX(lastFrameLocation, originalFrameCount);
-    return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // copyBytes:count:format:
 ////////////////////////////////////////////////////////////////////////////////
 
-- copyBytes: (void *) bytes count: (unsigned int) count format: (SndFormat) newFormat
+- (void)copyBytes: (void *) bytes count: (unsigned int) count format: (SndFormat) newFormat
 {
-    return [self copyBytes: bytes intoRange: NSMakeRange(0, count) format: newFormat];
+    [self copyBytes: bytes intoRange: NSMakeRange(0, count) format: newFormat];
 }
 
 // This is pretty kludgy, it only really works for SND_FORMAT_LINEAR_16 to SND_FORMAT_FLOAT conversions. It should
@@ -588,7 +584,7 @@
 	
 	
 	switch ([self dataFormat]) {
-	    case SND_FORMAT_FLOAT: {
+	    case SndSampleFormatFloat: {
 		// Our buffer is in an array of floats, numOfChannelsInBuffer per frame.
 		// TODO: we should rewrite this to manipulate the audio data as array of bytes until we need to actually do the conversion.
 		// This is preferable to having duplicated code with just a couple of changes for type definitions and arithmetic.
@@ -632,7 +628,7 @@
 // copyFromBuffer:intoRange:
 ////////////////////////////////////////////////////////////////////////////////
 
-- copyFromBuffer: (SndAudioBuffer *) fromBuffer intoRange: (NSRange) rangeInFrames
+- (void)copyFromBuffer: (SndAudioBuffer *) fromBuffer intoRange: (NSRange) rangeInFrames
 {
 #if 0
     return [self copyFromBuffer: fromBuffer
@@ -647,9 +643,8 @@
 	
 	rangeInBytes.location = rangeInFrames.location * frameSize;
 	rangeInBytes.length = rangeInFrames.length * frameSize;
-	return [self copyBytes: [fromBuffer bytes] intoRange: rangeInBytes format: format];
+	[self copyBytes: [fromBuffer bytes] intoRange: rangeInBytes format: format];
     }
-    return nil;
 #endif
 }
 
@@ -726,7 +721,7 @@
 #if defined(__APPLE_CC__)  // || (__i386__ && __GNUC__)
     // vector implementation
     switch(format.dataFormat) {
-	case SND_FORMAT_FLOAT: {
+	case SndSampleFormatFloat: {
 	    const vFloat *samplePtr = (vFloat *) [data bytes];
 	    int32_t maxIndex = vIsmax(samplesInBuffer, samplePtr);
 	    int32_t minIndex = vIsmin(samplesInBuffer, samplePtr);
@@ -785,9 +780,9 @@
 
 - (float) findMaximumMagnitudeAt: (unsigned long *) sampleIndex
 {
-    float minAmp, maxAmp;
+    float minAmp = 0, maxAmp = 0;
     unsigned long minLocation, maxLocation;
-    float absMinAmp, absMaxAmp;
+    float absMinAmp=0, absMaxAmp=0;
     
     [self findMin: &minAmp at: &minLocation max: &maxAmp at: &maxLocation];
     absMinAmp = fabs(minAmp);
@@ -856,7 +851,7 @@
 #if 1
    // Scalar implementation
     switch(format.dataFormat) {
-	case SND_FORMAT_FLOAT: {
+	case SndSampleFormatFloat: {
 	    unsigned long sampleIndex;
 	    float *samplePtr = (float *) [data bytes];
 	    
@@ -924,33 +919,33 @@
     
     for(sampleIndex = sampleNumber; sampleIndex < sampleNumber + averageOverChannels; sampleIndex++) {
 	switch (format.dataFormat) {
-	    case SND_FORMAT_LINEAR_8:
+	    case SndSampleFormatLinear8:
 		theSampleValue += ((char *) pcmData)[sampleIndex];
 		break;
-	    case SND_FORMAT_MULAW_8:
+	    case SndSampleFormatMulaw8:
 		theSampleValue += SndMuLawToLinear(((char *) pcmData)[sampleIndex]);
 		break;
-	    case SND_FORMAT_EMPHASIZED:
-	    case SND_FORMAT_COMPRESSED:
-	    case SND_FORMAT_COMPRESSED_EMPHASIZED:
-	    case SND_FORMAT_DSP_DATA_16:
-	    case SND_FORMAT_LINEAR_16:
+	    case SndSampleFormatEmphasized:
+	    case SndSampleFormatCompressed:
+	    case SndSampleFormatCompressedEmphasized:
+	    case SndSampleFormatDspData16:
+	    case SndSampleFormatLinear16:
 		theSampleValue += ((short *) pcmData)[sampleIndex];
 		break;
-	    case SND_FORMAT_LINEAR_24:
-	    case SND_FORMAT_DSP_DATA_24:
+	    case SndSampleFormatLinear24:
+	    case SndSampleFormatDspData24:
 		// theSampleValue = ((short *) pcmData)[frameIndex];
 		// TODO: this makes assumptions about the endian order and size of an int.
 		theSampleValue += *((int *) ((char *) pcmData + sampleIndex * 3)) >> 8;
 		break;
-	    case SND_FORMAT_LINEAR_32:
-	    case SND_FORMAT_DSP_DATA_32:
+	    case SndSampleFormatLinear32:
+	    case SndSampleFormatDspData32:
 		theSampleValue += ((int *) pcmData)[sampleIndex];
 		break;
-	    case SND_FORMAT_FLOAT:
+	    case SndSampleFormatFloat:
 		theSampleValue += ((float *) pcmData)[sampleIndex];
 		break;
-	    case SND_FORMAT_DOUBLE:
+	    case SndSampleFormatDouble:
 		theSampleValue += ((double *) pcmData)[sampleIndex];
 		break;
 	    default: /* just in case */
@@ -977,35 +972,35 @@
     }
     
     switch (format.dataFormat) {
-	case SND_FORMAT_LINEAR_8:
+	case SndSampleFormatLinear8:
 	    ((unsigned char *) pcmData)[sampleIndex] = (unsigned char) (sampleValue * SndMaximumAmplitude(format.dataFormat));
 	    break;
-	case SND_FORMAT_MULAW_8:
-	    ((unsigned char *) pcmData)[sampleIndex] = SndLinearToMuLaw(sampleValue * SndMaximumAmplitude(SND_FORMAT_LINEAR_16));
+	case SndSampleFormatMulaw8:
+	    ((unsigned char *) pcmData)[sampleIndex] = SndLinearToMuLaw(sampleValue * SndMaximumAmplitude(SndSampleFormatLinear16));
 	    break;
-	case SND_FORMAT_EMPHASIZED:
-	case SND_FORMAT_COMPRESSED:
-	case SND_FORMAT_COMPRESSED_EMPHASIZED:
-	case SND_FORMAT_DSP_DATA_16:
-	case SND_FORMAT_LINEAR_16:
+	case SndSampleFormatEmphasized:
+	case SndSampleFormatCompressed:
+	case SndSampleFormatCompressedEmphasized:
+	case SndSampleFormatDspData16:
+	case SndSampleFormatLinear16:
 	    ((short *) pcmData)[sampleIndex] = (short) (sampleValue * SndMaximumAmplitude(format.dataFormat));
 	    break;
-	case SND_FORMAT_LINEAR_24:
-	case SND_FORMAT_DSP_DATA_24: {
+	case SndSampleFormatLinear24:
+	case SndSampleFormatDspData24: {
 		int intRepresentationOfSample = (sampleValue * SndMaximumAmplitude(format.dataFormat));
 		// TODO: shift up to the top of the integer, assuming the first byte is the msb. This is problematic for little-endians
 		int alignedSample = intRepresentationOfSample << 8;
 		memcpy((unsigned char *) pcmData + sampleIndex * 3, (unsigned char *) &alignedSample, 3);
 	    }
 	    break;
-	case SND_FORMAT_LINEAR_32:
-	case SND_FORMAT_DSP_DATA_32:
+	case SndSampleFormatLinear32:
+	case SndSampleFormatDspData32:
 	    ((int *) pcmData)[sampleIndex] = (int) (sampleValue * SndMaximumAmplitude(format.dataFormat));
 	    break;
-	case SND_FORMAT_FLOAT:
+	case SndSampleFormatFloat:
 	    ((float *) pcmData)[sampleIndex] = sampleValue;
 	    break;
-	case SND_FORMAT_DOUBLE:
+	case SndSampleFormatDouble:
 	    ((double *) pcmData)[sampleIndex] = sampleValue;
 	    break;
 	default: /* just in case */

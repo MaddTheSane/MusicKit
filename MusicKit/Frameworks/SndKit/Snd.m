@@ -108,7 +108,7 @@
     [[SndTable defaultSndTable] removeAllSounds];
 }
 
-- initWithFormat: (SndSampleFormat) format
+- (id)initWithFormat: (SndSampleFormat) format
     channelCount: (int) channels
 	  frames: (unsigned long) frames
     samplingRate: (float) samplingRate
@@ -118,7 +118,7 @@
 	SndAudioBuffer *singleAudioBuffer;
 	
 	name = nil;
-	conversionQuality = SndConvertLowQuality;
+	conversionQuality = SndConversionQualityLow;
 	delegate = nil;
 	info = nil;
 	currentError = 0;
@@ -214,7 +214,7 @@
     int sampleRate;   
     int channelCount;
     
-    if([self init] == nil)
+    if(!(self = [self init]))
 	return nil;
     
     [soundData getBytes: &magic range: NSMakeRange(0, AU_FORMAT_INT_LENGTH)]; /* first integer */

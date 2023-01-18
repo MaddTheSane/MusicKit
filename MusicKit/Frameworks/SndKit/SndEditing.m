@@ -58,8 +58,10 @@
     NSRange destinationCopyRange = NSMakeRange(0, 0);
 
     if (frameRange.location > [self lengthInSampleFrames] ||
-	frameRange.location + frameRange.length > [self lengthInSampleFrames]) 
+        frameRange.location + frameRange.length > [self lengthInSampleFrames]) {
+	[newSound release];
 	return nil;
+    }
     
     [editingLock lock];
 
@@ -288,6 +290,8 @@
 		// Insert the soundBuffers of fromSnd, followed by the second subdivided audio buffer.
 		[soundBuffers insertObjects: fromSnd->soundBuffers atIndexes: insertAllBuffers];
 		[soundBuffers insertObject: secondSubdividedBuffer atIndex: [insertAllBuffers lastIndex] + 1];
+		[firstSubdividedBuffer release];
+		[secondSubdividedBuffer release];
 		break;
 	    }
 	    startFrameOfBuffer += [audioBuffer lengthInSampleFrames];

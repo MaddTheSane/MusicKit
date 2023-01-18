@@ -38,7 +38,7 @@
 - init
 {
   if (processingLock == nil) {
-    [super initWithParamCount: dlyNumParams name: @"Delay"];
+    self = [super initWithParamCount: dlyNumParams name: @"Delay"];
     processingLock = [[NSLock alloc] init];
   }
   [self setLength: 11025 andFeedback: 0.25];
@@ -82,8 +82,8 @@
     
     [self freemem];
     feedback = fFB;
-    chanL = (float*) calloc(nSams, sizeof(float *));
-    chanR = (float*) calloc(nSams, sizeof(float *));
+    chanL = (float*) calloc(nSams, sizeof(float));
+    chanR = (float*) calloc(nSams, sizeof(float));
     readPos  = 1;
     writePos = 0;
     length = nSams;

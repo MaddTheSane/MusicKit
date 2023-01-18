@@ -61,7 +61,9 @@
   
   @return     id to the default SndAudioProcessorInspector.
 */
-+ (instancetype)defaultAudioProcessorInspector;
++ (SndAudioProcessorInspector*)defaultAudioProcessorInspector;
+
+@property (class, readonly, retain) SndAudioProcessorInspector *defaultAudioProcessorInspector;
 
 /*!
   @brief
