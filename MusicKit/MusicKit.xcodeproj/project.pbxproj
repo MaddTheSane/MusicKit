@@ -256,6 +256,10 @@
 		D80151DF0FA64D47002FB882 /* MKUnitGenerators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D85F905207DFE7D4009DC57B /* MKUnitGenerators.framework */; };
 		D80151E00FA64D47002FB882 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
 		D80151E10FA64D47002FB882 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
+		D80246EE122EB60F00A88264 /* SndVSTController.h in Headers */ = {isa = PBXBuildFile; fileRef = D80246EA122EB60F00A88264 /* SndVSTController.h */; };
+		D80246EF122EB60F00A88264 /* SndVSTController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80246EB122EB60F00A88264 /* SndVSTController.m */; };
+		D80246F0122EB60F00A88264 /* SndVSTProcessor.h in Headers */ = {isa = PBXBuildFile; fileRef = D80246EC122EB60F00A88264 /* SndVSTProcessor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D80246F1122EB60F00A88264 /* SndVSTProcessor.mm in Sources */ = {isa = PBXBuildFile; fileRef = D80246ED122EB60F00A88264 /* SndVSTProcessor.mm */; };
 		D804E064063DB32C0098E73C /* SndPlaying.m in Sources */ = {isa = PBXBuildFile; fileRef = D804E063063DB32C0098E73C /* SndPlaying.m */; };
 		D80DA57D0764C8A20052DFAF /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D80DA57E0764C8A20052DFAF /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
@@ -6132,6 +6136,8 @@
 				D81B13010628D9FF009058DB /* SndStretchableScroller.h in Headers */,
 				D8227E750F8B343100681ED5 /* SndReverbAllpassFilter.h in Headers */,
 				D8227E770F8B343100681ED5 /* SndReverbCombFilter.h in Headers */,
+				D80246EE122EB60F00A88264 /* SndVSTController.h in Headers */,
+				D80246F0122EB60F00A88264 /* SndVSTProcessor.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7896,6 +7902,8 @@
 				D8227E780F8B343100681ED5 /* SndReverbCombFilter.m in Sources */,
 				D8A441F610777A7300E12376 /* SndAudioUnitController.m in Sources */,
 				D8A441F810777A7300E12376 /* SndAudioUnitProcessor.m in Sources */,
+				D80246EF122EB60F00A88264 /* SndVSTController.m in Sources */,
+				D80246F1122EB60F00A88264 /* SndVSTProcessor.mm in Sources */,
 				D82D42F213AE616700F6CE50 /* SndStreamInput.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
