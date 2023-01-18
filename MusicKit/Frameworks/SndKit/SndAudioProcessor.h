@@ -108,12 +108,11 @@
   @param      name Name of the SndAudioProcessor to initialise.
   @return     Returns <B>self</B>.
  */
-- (instancetype)initWithParameterDictionary: (NSDictionary *) paramDictionary name: (NSString *) name;
+- (instancetype)initWithParameterDictionary: (NSDictionary<NSString*,id> *) paramDictionary name: (NSString *) name;
 
 /*!
   @brief    Message sent when host determines the SndAudioProcessor should reinitialize
   its processing state. Eg, a delay processor would zero its z-buffers.
-  @return      self
 */
 - (void) reset;
 
@@ -220,7 +219,6 @@
 /*!
   @brief   Sets the active status of the processor.
   @param      b TRUE if the processor is to be made active.
-  @return     self
 */
 - (void)setActive: (BOOL) b;
 
@@ -228,7 +226,6 @@
 
 /*!
   @brief   Assigns the SndAudioProcessor instance a new name.
-  @return     Returns self.
   
   
 */
@@ -251,7 +248,7 @@
   Each element in the dictionary has a key with an NSString of the parameter name and an 
   object which is an NSValue of the floating point parameter value.
 */
-- (NSDictionary *) paramDictionary;
+- (NSDictionary<NSString*,id> *) paramDictionary;
 
 /*!
   @brief   Sets parameters with names and values provided by the given NSDictionary.
@@ -260,7 +257,7 @@
   Each element in the dictionary has a key with an NSString of the parameter name and an
   object which is an NSValue of the floating point parameter value.
  */
-- (void) setParamsWithDictionary: (NSDictionary *) paramDictionary;
+- (void) setParamsWithDictionary: (NSDictionary<NSString*,id> *) paramDictionary;
 
 /*!
   @brief   Assigns the parameter named keyName to the passed value.

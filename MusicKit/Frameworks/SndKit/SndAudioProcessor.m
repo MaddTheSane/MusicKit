@@ -310,9 +310,8 @@ static NSMutableArray *fxClassesArray = nil;
 - (void) setParamsWithDictionary: (NSDictionary *) paramDictionary
 {
     NSEnumerator *keyEnumerator = [paramDictionary keyEnumerator];
-    NSString *key;
     
-    while ((key = [keyEnumerator nextObject]) != nil) {
+    for (NSString *key in keyEnumerator) {
 	[self setParamWithKey: key toValue: [paramDictionary objectForKey: key]];
     }    
 }
