@@ -171,7 +171,7 @@ static void handleMKError(NSString *msg)
                 length++;
             }
 	}
-	else {			// non hex int input encountered, TODO report the error
+	else {			// non hex int input encountered, TODO: report the error
 	    NSLog(@"Error reading hex numbers\n");
 	}
     }

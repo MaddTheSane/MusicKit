@@ -96,7 +96,7 @@ int main (int argc, const char *argv[])
 				/* considering the tempo. */
     scorefileExtensions = [NSArray arrayWithObjects:  @"midi", @"score", @"playscore", nil];
     
-    // TODO replace this with getopt.
+    // TODO: replace this with getopt.
     if (argc == 1) {
 	fprintf(stderr,help);
 	exit(1);

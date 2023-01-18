@@ -44,7 +44,7 @@
   processing is performed on the main processor, so there's only one MKOrchestra.
 
   The methods defined by the MKOrchestra class let you manage a DSP by allocating 
-  (TODO should this be assign?, i.e. alloc as normal, then assign the initialised instance?)
+  (TODO: should this be assign?, i.e. alloc as normal, then assign the initialised instance?)
   portions of its memory for specific synthesis modules and by setting its
   processing characteristics. There are two levels of allocation: MKSynthPatch allocation and
   unit generator allocation. MKSynthPatches are higher-level entities, collections of
@@ -110,7 +110,7 @@
   output is called "Host sound output" because the samples are sent from the DSP to
   the host computer.  
  
- TODO modify this:
+ TODO: modify this:
  But there are a number of other alternatives.  You can write the
 samples to the DSP serial port, to be played through any of a number of devices
 that have their own DACs or do digital transfer to DAT recorders.  To do this,
@@ -129,7 +129,7 @@ sending <b>open</b> to the MKOrchestra.  This is also called "SSI" sound output.
 
   The MKOrchestra can also process sound that it receives. 
   To do this, send <b>setSoundIn:</b> with a <b>YES</b> argument. 
- TODO update this:
+ TODO: update this:
   &lt;&lt;Note that currently serial input may not be combined with writing a
   soundfile.&gt;&gt;
 
@@ -576,8 +576,8 @@ extern void MKSetPreemptDuration(double seconds);
 */
 - (double) headroom;
 
-// TODO investigate if needed.
-// TODO candidate to return void
+// TODO: investigate if needed.
+// TODO: candidate to return void
 /*!
   @return Returns an id.
   @brief Marks the beginning of a section of DSP commands that are sent as a
@@ -587,8 +587,8 @@ extern void MKSetPreemptDuration(double seconds);
 */
 - beginAtomicSection;
 
-// TODO investigate if needed.
-// TODO candidate to return void
+// TODO: investigate if needed.
+// TODO: candidate to return void
 /*!
   @return Returns an id.
   @brief Marks the end of a section of DSP commands that are sent as a unit.
@@ -729,8 +729,8 @@ extern void MKSetPreemptDuration(double seconds);
 */
 + abort;
 
-// TODO document
-// TODO investigate if needed.
+// TODO: document
+// TODO: investigate if needed.
 - (void) synchTime: (NSTimer *) timer;
 
 /*!
@@ -750,7 +750,7 @@ extern void MKSetPreemptDuration(double seconds);
 */
 - (double) samplingRate; 
 
-// TODO candidate to return void
+// TODO: candidate to return void
 /*!
   @param  newSRate is a double.
   @return Returns an id.
@@ -764,7 +764,7 @@ extern void MKSetPreemptDuration(double seconds);
 */
 + (void) setSamplingRate: (double) newSRate; 
 
-// TODO candidate to return BOOL
+// TODO: candidate to return BOOL
 /*!
   @param  newSRate is a double.
   @return Returns an id.
@@ -777,7 +777,7 @@ extern void MKSetPreemptDuration(double seconds);
 */
 - setSamplingRate: (double) newSRate; 
 
-// TODO candidate to return void
+// TODO: candidate to return void
 /*!
   @param  areOrchsTimed is a MKOrchestraTiming.
   @return Returns an id.
@@ -793,7 +793,7 @@ extern void MKSetPreemptDuration(double seconds);
 */
 + setTimed: (MKOrchestraTiming) areOrchsTimed; 
 
-// TODO candidate to return void
+// TODO: candidate to return void
 /*!
   @param  isOrchTimed is a MKOrchestraTiming.
   @return Returns an id.
@@ -819,7 +819,7 @@ extern void MKSetPreemptDuration(double seconds);
 */
 - (MKOrchestraTiming) isTimed; 
 
-// TODO candidate to return void
+// TODO: candidate to return void
 /*!
   @brief Specify that the MKOrchestra is to synchronize the DSP's notion of
   time to that of the MKConductor's time.

@@ -148,7 +148,7 @@
 
 	    // Accumulate comb filters in parallel
 	    for(combIndex = 0; combIndex < NUMCOMBS; combIndex++) {
-		// TODO expand for multiple channels.
+		// TODO: expand for multiple channels.
 		// for(int channelIndex = 0; channelIndex < NUMCHANNELS; channelIndex++) {
 		    outL += [comb[0][combIndex] process: input];
 		    outR += [comb[1][combIndex] process: input];

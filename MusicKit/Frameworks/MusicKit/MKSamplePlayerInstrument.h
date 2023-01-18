@@ -30,7 +30,7 @@
     double pbSensitivity;
     BOOL preloadingEnabled;
 
-    // TODO these are suspiciously GUI controls...
+    // TODO: these are suspiciously GUI controls...
     id  preloadingSwitch;
     id  tieNotesSwitch;
     id  modeButtons;

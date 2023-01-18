@@ -104,7 +104,7 @@ fit between 0.0 (inaudible) and 1.0 (maximum amplitude).
 
   The object's attributes are initialized as follows:
 
-<table border=1 cellspacing=2 cellpadding=0 align=center>
+<table border="1" cellspacing="2" cellpadding="0" align="center">
 <tr>
  <td><b>Attribute</b></td>
  <td><b>Value</b></td>
@@ -117,6 +117,7 @@ fit between 0.0 (inaudible) and 1.0 (maximum amplitude).
  <td>Background gray</td>
  <td>[NSColor darkGrayColor]</td>
 </tr>
+<tr>
  <td>Running bar gray</td>
  <td>[NSColor lightGrayColor]</td>
 </tr>
@@ -124,6 +125,7 @@ fit between 0.0 (inaudible) and 1.0 (maximum amplitude).
  <td>Peak bubble gray</td>
  <td>[NSColor whiteColor]</td>
 </tr>
+<tr>
  <td>Border</td>
  <td>bezeled</td>
 </tr>

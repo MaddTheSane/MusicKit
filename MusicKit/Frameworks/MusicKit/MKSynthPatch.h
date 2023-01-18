@@ -118,7 +118,7 @@ typedef enum _MKPhraseStatus {
 @interface MKSynthPatch : MKPatch
 {
     /*! Array of MKUnitGenerator and MKSynthData objects. */
-    // TODO this should become an NSDictionary with the index becoming a key, so DUMMY values can be replaced with simply deleting that
+    // TODO: this should become an NSDictionary with the index becoming a key, so DUMMY values can be replaced with simply deleting that
     // key.
     NSMutableArray *synthElements;
     /*! The MKSynthInstrument object currently in possession of the MKSynthPatch or nil if none. */

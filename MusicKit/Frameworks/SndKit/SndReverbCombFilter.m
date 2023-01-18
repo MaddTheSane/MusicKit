@@ -93,7 +93,7 @@
     return output;
 }
 
-// TODO should incorporate process: inline into this method & use this method as interface.
+// TODO: should incorporate process: inline into this method & use this method as interface.
 - (void) processBuffer: (float *) input
 	      outputTo: (float *) output
 		length: (long) bufferLength

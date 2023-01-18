@@ -267,7 +267,7 @@
   
 */
 - (void) setParamWithKey: (NSString *) keyName toValue: (NSNumber *) value;
-// TODO - (void) setParamWithKey: (NSString *) keyName toValue: (NSValue *) value;
+// TODO: - (void) setParamWithKey: (NSString *) keyName toValue: (NSValue *) value;
 
 
 /*!
@@ -277,7 +277,7 @@
   
 */
 - (NSNumber *) paramObjectForIndex: (const NSInteger) i;
-// TODO - (id) paramObjectForIndex: (const int) i;
+// TODO: - (id) paramObjectForIndex: (const int) i;
 
 /*!
   @brief Assigns the current parameter delegate.

@@ -55,7 +55,7 @@
 	// We create a queue to use to save buffers which are to be written to disk by a separate thread.
 	// This is to keep the time spent in processReplacingInputBuffer:outputBuffer: to a minimum avoiding
 	// file writing latencies interrupting the stream processing.
-	// TODO either calculate from the number of buffers or from the queue duration.
+	// TODO: either calculate from the number of buffers or from the queue duration.
 	writingQueue = [[SndAudioBufferQueue audioBufferQueueWithLength: NUMBER_OF_BUFFERS] retain];
 	writingFileHandle = nil;
     }
@@ -112,11 +112,11 @@
 				 ofFormat: (SndFormat) queueFormat
 {
     if (!isRecording) {
-	// TODO this makes the assumption that the audio processor chain has already been
+	// TODO: this makes the assumption that the audio processor chain has already been
 	// initialised and processing and has a usable format to return.
 	SndAudioBuffer *recordBuffer;
 	
-	// TODO should use durationOfBuffering to determine number of buffers the queue should have
+	// TODO: should use durationOfBuffering to determine number of buffers the queue should have
 	// int numberOfBuffers = durationOfBuffering * queueFormat.sampleRate / queueFormat.frameCount;
 	
 	recordBuffer = [[SndAudioBuffer audioBufferWithFormat: queueFormat] retain];
@@ -136,7 +136,7 @@
 
 - (BOOL) prepareToRecordWithQueueDuration: (double) durationOfBuffering
 {
-    // TODO this makes the assumption that the audio processor chain has already been
+    // TODO: this makes the assumption that the audio processor chain has already been
     // initialised and processing and has a usable format to return.
     SndFormat chainFormat = [[self audioProcessorChain] format];
 
@@ -228,7 +228,7 @@
 	int error;
 
 	// NSLog(@"saveBuffer: %@ bufferFormattedForFile: %@\n", saveBuffer, bufferFormattedForFile);
-	// TODO make SndWriteSampleData a SndAudioBuffer method? [bufferFormattedForFile writeToFile: recordFile];
+	// TODO: make SndWriteSampleData a SndAudioBuffer method? [bufferFormattedForFile writeToFile: recordFile];
 	error = SndWriteSampleData(recordFile, [bufferFormattedForFile bytes], recordBufferFormat);
 	if(error != SND_ERR_NONE)
 	    NSLog(@"SndAudioProcessorRecorder writeToFileBuffer problem writing buffer\n");
@@ -240,7 +240,7 @@
 {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
-    // TODO we probably need to drain the queue first once we stop.
+    // TODO: we probably need to drain the queue first once we stop.
     while(!stopSignal) {
 	// We create an inner autorelease pool since this thread can run a long time writing many buffers which otherwise are not released.
 	NSAutoreleasePool *bufferPool = [[NSAutoreleasePool alloc] init];
@@ -303,7 +303,7 @@
     
     // Create a temporary buffer of QUEUE_DURATION seconds duration for buffering before writing to disk.
 #if 0
-    // TODO THIS IS A REAL PROBLEM, WHY SHOULD I BE TRYING TO OVERRIDE THE GIVEN FORMAT?
+    // TODO: THIS IS A REAL PROBLEM, WHY SHOULD I BE TRYING TO OVERRIDE THE GIVEN FORMAT?
     if ([self audioProcessorChain]) {
 	if (![self prepareToRecordWithQueueDuration: QUEUE_DURATION]) {
 	    NSLog(@"SndAudioProcessorRecorder -startRecordingToFile - Error in prepareToRecordWithQueueDuration.\n");
@@ -477,7 +477,7 @@
 	return NO;
     }
     if(isRecording) {
-	float *inputData = (float *) [inB bytes];          // TODO this assumes the data is always floats.
+	float *inputData = (float *) [inB bytes];          // TODO: this assumes the data is always floats.
 	unsigned long inBuffLengthInFrames = [inB lengthInSampleFrames];
 	NSRange aboveThresholdRange = { 0, inBuffLengthInFrames };
 	int channelCount = [inB channelCount];

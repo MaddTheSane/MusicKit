@@ -18,17 +18,17 @@
     NSCursor *theFilledCross;			// crosshairs plus knob cursor
 	
     int selected;				// current highlighted point in envelope
-    float defaultSmooth;			// default smoothing read from the defaults database
+    CGFloat defaultSmooth;			// default smoothing read from the defaults database
     NSColor *envColour;				// colour to draw envelope with
     int defaultFormat;				// which copy format to begin popup menu on.
 
-    float xMax;					// coordinate system limits
-    float xMin;
-    float yMax;
-    float yMin;
+    CGFloat xMax;				// coordinate system limits
+    CGFloat xMin;
+    CGFloat yMax;
+    CGFloat yMin;
 	
-    float xSnap;				// Snap increments
-    float ySnap;
+    CGFloat xSnap;				// Snap increments
+    CGFloat ySnap;
 	
     NSBezierPath *userPath;			// user path for drawing segments
 	
@@ -40,7 +40,7 @@
 - initWithFrame:(NSRect)frameRect;
 - (void)controllerIs:sender;
 - (void)drawRect:(NSRect)rect;
-- (int) hitKnobAt:(NSPoint)p border:(float)delta;
+- (int) hitKnobAt:(NSPoint)p border:(CGFloat)delta;
 - (int) movePoint:(int)n to: (NSPoint)p;
 - (void)mouseDown:(NSEvent *)event;
 
@@ -50,39 +50,39 @@
 - (BOOL) becomeFirstResponder;
 - (BOOL) resignFirstResponder;
 
-- (void)copy:(id)id;
-- (void)paste:(id)id;
+- (IBAction)copy:(id)id;
+- (IBAction)paste:(id)id;
 
 - (void)setPointTo:(int)i;
 - (void)nextPoint;
 - (void)previousPoint;
-- setXAt: (int)point to: (float)coord;
-- setYAt: (int)point to: (float)coord;
-- setYrAt: (int)point to: (float)coord;
-- setSmoothAt: (int)point to: (float)val;
-- (void)setXMinTo:(float)coord;
-- (void)setXMaxTo:(float)coord;
-- setXLimitsTo: (float)min : (float)max;
-- (void)setYMinTo:(float)coord;
-- (void)setYMaxTo:(float)coord;
-- (void)setXSnapTo:(float)coord;
-- (void)setYSnapTo:(float)coord;
+- setXAt: (int)point to: (CGFloat)coord;
+- setYAt: (int)point to: (CGFloat)coord;
+- setYrAt: (int)point to: (CGFloat)coord;
+- setSmoothAt: (int)point to: (CGFloat)val;
+- (void)setXMinTo:(CGFloat)coord;
+- (void)setXMaxTo:(CGFloat)coord;
+- setXLimitsTo: (CGFloat)min : (CGFloat)max;
+- (void)setYMinTo:(CGFloat)coord;
+- (void)setYMaxTo:(CGFloat)coord;
+- (void)setXSnapTo:(CGFloat)coord;
+- (void)setYSnapTo:(CGFloat)coord;
 - (void)setStickyAt:(int)point To:(NSControlStateValue)state;
 - (void) setShowSmooth: (BOOL) state;
 - (void) setDrawSegments: (BOOL) state;
 - (void)scaleLimits;
 - (int)getPoint;
-- (float)getX:(int)i;
-- (float)getY:(int)i;
-- (float)getYr:(int)i;
-- (float)getSmoothing:(int)i;
+- (CGFloat)getX:(int)i;
+- (CGFloat)getY:(int)i;
+- (CGFloat)getYr:(int)i;
+- (CGFloat)getSmoothing:(int)i;
 - (int)getSticky:(int)i;
-- (float)getXMax;
-- (float)getXMin;
-- (float)getYMax;
-- (float)getYMin;
-- (float)getXSnap;
-- (float)getYSnap;
+- (CGFloat)getXMax;
+- (CGFloat)getXMin;
+- (CGFloat)getYMax;
+- (CGFloat)getYMin;
+- (CGFloat)getXSnap;
+- (CGFloat)getYSnap;
 - (BOOL) getShowSmooth;
 - (BOOL) getDrawSegments;
 

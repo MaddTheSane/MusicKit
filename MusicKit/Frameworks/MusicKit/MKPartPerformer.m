@@ -213,7 +213,7 @@ static BOOL fastActivation = NO;
     */
 {
     [super deactivate];  // need to stop the performance.
-    // TODO we have to do the casting since notesNoCopy returns an NSMutableArray
+    // TODO: we have to do the casting since notesNoCopy returns an NSMutableArray
     // and noteArray is an NSArray, we should investigate why notesNoCopy returns a
     // mutable array, it should be the job of the method using the result to
     // reset it's mutability.

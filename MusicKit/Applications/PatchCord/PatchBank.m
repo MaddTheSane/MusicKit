@@ -160,7 +160,7 @@ Controller may need to inform the user that a complete bank must be downloaded, 
         [messagePart addNote: patchChangeNote];
         // NSLog(@"at %ld, change to patch %d\n", absoluteTime, [patch midiPatchNumber]);
 
-        // TODO this willl become a preference
+        // TODO: this willl become a preference
 	absoluteTime += 500.0; // patch change 0.5 a second before sending the sysex message.
 
 	// should just be able to ask SysExMessage to give us a note
@@ -178,12 +178,12 @@ Controller may need to inform the user that a complete bank must be downloaded, 
         [sysexScore addPart: messagePart];
 
         // 1 second event delay
-        // TODO this will become a preference
+        // TODO: this will become a preference
 	absoluteTime += 1000.0;
         // Any further SysEx messages for this patch
         // text meta-event for any other non-standard data saving requirements.
 
-	// TODO release all that we've created for next time.
+	// TODO: release all that we've created for next time.
     }
     // [sysexScore writeMidiFileToData - preferable for Object persisitance
     // just use the stream named methods for now until we can rename them properly.
@@ -269,7 +269,7 @@ Controller may need to inform the user that a complete bank must be downloaded, 
     [sortOrder release];
     sortOrder = [newSortOrder retain];  // keep a copy of the sort order to write out to the MIDI file.
     [theBank release];     // release the old one
-    // TODO should this be a copy operation?
+    // TODO: should this be a copy operation?
     theBank = [sorted retain];  // keep the new one
 }
 

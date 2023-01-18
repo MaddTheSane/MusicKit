@@ -55,7 +55,7 @@
     [self removeNoteSenders];
     /* Split this up because elements may try and remove themselves from noteSenders when they are freed. */
     [noteSendersCopy removeAllObjects];  
-    // TODO [noteSendersCopy release];  // _MKLightweightArrayCopy is a copy method, it doesn't autorelease
+    // TODO: [noteSendersCopy release];  // _MKLightweightArrayCopy is a copy method, it doesn't autorelease
     return self;
 }
 

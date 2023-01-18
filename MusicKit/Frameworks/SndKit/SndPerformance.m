@@ -154,7 +154,7 @@ startPosition: (double) startPosition
 
 - (BOOL) isEqual: (id) anotherPerformance
 {
-  BOOL equal = ((SndPerformance *) anotherPerformance)->snd == snd && // TODO [((SndPerformance *) anotherPerformance)->snd isEqual: snd]
+  BOOL equal = ((SndPerformance *) anotherPerformance)->snd == snd && // TODO: [((SndPerformance *) anotherPerformance)->snd isEqual: snd]
   ((SndPerformance *) anotherPerformance)->playTime == playTime &&
   ((SndPerformance *) anotherPerformance)->startAtIndex == startAtIndex &&
   ((SndPerformance *) anotherPerformance)->endAtIndex == endAtIndex &&

@@ -93,12 +93,12 @@ Modification history before commit to CVS:
 /* TYPE: Manipulating; Returns a copy of the List of the connections.
 * Returns a copy of the NSArray of the receiver's noteSenders. 
 * The noteSenders themselves are not
-* copied. TODO at the moment it is the sender's responsibility to free the NSArray.
+* copied. TODO: at the moment it is the sender's responsibility to free the NSArray.
 */
 - (NSArray *) connections
 {
     return _MKLightweightArrayCopy(noteSenders);
-    // TODO should become return [_MKLightweightArrayCopy(noteSenders) autorelease];
+    // TODO: should become return [_MKLightweightArrayCopy(noteSenders) autorelease];
 }
 
 #define VERSION2 2

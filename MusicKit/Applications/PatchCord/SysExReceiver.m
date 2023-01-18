@@ -101,7 +101,7 @@
 	    // unless we have already had a positive result from some other
 	    // synth instance and a catch-all is the only one left.
 	    if(![candidateSynth catchesAllMessages] || !aSynthResponded) {
-		if([candidateSynth initWithSysEx: msg] == YES) { // TODO not strictly reinitialising the object
+		if([candidateSynth initWithSysEx: msg] == YES) { // TODO: not strictly reinitialising the object
 		    aSynthResponded = YES;
 		    if([candidateSynth isNewPatch: msg] == YES)
                         [lastRespondantSynths addObject: candidateSynth];

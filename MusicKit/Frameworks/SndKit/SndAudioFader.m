@@ -562,7 +562,7 @@ static inline int processBalance(int xPtr,
         // [anAudioBuffer stereoChannels]
         short stereoChannels[2] = { 0, 1 };
 
-        // TODO Currently this balance routine generates the balance between two nominated stereo channels.
+        // TODO: Currently this balance routine generates the balance between two nominated stereo channels.
         // We should extend this so that multiple channels such as L/R surround channels are also balanced.
         // This can get tricky with centre channels, rear and LFE channels, so we need to determine speaker placement.
         for (sampleIndex = 0; sampleIndex < lengthInSamples; sampleIndex += channelCount) {

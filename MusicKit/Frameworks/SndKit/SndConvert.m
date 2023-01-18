@@ -95,7 +95,7 @@ void SndChangeSampleRate(const SndFormat fromSound,
 
 // dataFormat is the same going in and going out.
 // This is capable of in place conversion if inPtr and outPtr are the same.
-// TODO This is a good candidate for Altivec optimisation
+// TODO: This is a good candidate for Altivec optimisation
 void SndChannelDecrease(void *inPtr, 
 			void *outPtr, 
 			unsigned long numberOfSampleFrames, 
@@ -133,7 +133,7 @@ void SndChannelDecrease(void *inPtr,
 		sumInteger[map[oldChannelIndex]] += ((SND_HWORD *) inPtr)[sampleIndex + oldChannelIndex];
 		break;
 	    case SND_FORMAT_LINEAR_24:
-		// TODO Not endian ok, the shift down currently assumes big endian!
+		// TODO: Not endian ok, the shift down currently assumes big endian!
 		sumInteger[map[oldChannelIndex]] += *((long int *)((signed char *) inPtr + (sampleIndex + oldChannelIndex) * 3)) >> 8;
 		break;
 	    case SND_FORMAT_LINEAR_32:
@@ -189,11 +189,11 @@ void SndChannelDecrease(void *inPtr,
 // endian-agnostic, as all formats are cast to memory pointers and duplicated as memory regions.
 // dataFormat is the same going in and going out.
 // This is capable of in place conversion if inPtr and outPtr are the same.
-// TODO Perhaps a good candidate for AltiVec optimisation
+// TODO: Perhaps a good candidate for AltiVec optimisation
 void SndChannelMap(void *inPtr, void *outPtr, long numberOfSampleFrames, int oldNumChannels, int newNumChannels, SndSampleFormat dataFormat, short *map)
 {
     int newChanIndex;
-    long frame; // TODO frames should be unsigned long, not signed, but this makes testing a decrementing index at or below zero impossible.
+    long frame; // TODO: frames should be unsigned long, not signed, but this makes testing a decrementing index at or below zero impossible.
     int sampleWidth = SndSampleWidth(dataFormat);
 
 #if DEBUG_CHANNEL_MAPPING
@@ -221,7 +221,7 @@ void SndChannelMap(void *inPtr, void *outPtr, long numberOfSampleFrames, int old
 // Check channel count -- if we need to increase the number of channels from 1 to
 // 2, or 4, we have hopefully got enough data malloced in *toSound to duplicate pairs
 // of samples.
-// TODO remove either fromSampleData: or toSampleData: parameter and directly read from or write to
+// TODO: remove either fromSampleData: or toSampleData: parameter and directly read from or write to
 // SndAudioBuffer's data
 - (int) changeFromChannelCount: (int) oldNumChannels
                 fromSampleData: (void *) inPtr
@@ -236,7 +236,7 @@ void SndChannelMap(void *inPtr, void *outPtr, long numberOfSampleFrames, int old
     if(newNumChannels > MAX_CHANNEL_MAPPING)
 	NSLog(@"Channels to be mixed %d exceeds maximum number of channels %d", newNumChannels, MAX_CHANNEL_MAPPING);
 #else
-    short *channelMap; // TODO either pass this in or use the speakerConfiguration ivar.
+    short *channelMap; // TODO: either pass this in or use the speakerConfiguration ivar.
 #endif
     
     if ((newNumChannels > oldNumChannels) && (newNumChannels % oldNumChannels == 0)) {
@@ -248,9 +248,9 @@ void SndChannelMap(void *inPtr, void *outPtr, long numberOfSampleFrames, int old
 	if(oldNumChannels == 2 && newNumChannels > 2) {
             unsigned int chanIndex;
                 
-            // TODO this is totally KLUDGED! CHANGE CHANGE!
+            // TODO: this is totally KLUDGED! CHANGE CHANGE!
             // We should check if we have a ivar indicating a specific speaker configuration/channel arrangement.
-            // TODO Mapping onto a center channel should be done by mixing L+R down to the channel before all others.
+            // TODO: Mapping onto a center channel should be done by mixing L+R down to the channel before all others.
             // Perhaps SndChannelMap should replace SndChannelIncrease/Decrease decision with a channelMap derivation 
             // and use SndChannelDecrease as a means to decrease during mapping.
             channelMap[0] = 0;
@@ -316,7 +316,7 @@ void SndChannelMap(void *inPtr, void *outPtr, long numberOfSampleFrames, int old
 // If the new format is bigger, it expands from the last sample
 // to the first - if the new one is smaller, then the other way
 // around.
-// TODO this is probably a good candidate for Altivec optimisation.
+// TODO: this is probably a good candidate for Altivec optimisation.
 //////////////////////////////////////////////////////////////
 
 int SndChangeSampleType(void *fromPtr, void *toPtr, SndSampleFormat fromDataFormat, SndSampleFormat toDataFormat, long sampleCount)
@@ -424,7 +424,7 @@ int SndChangeSampleType(void *fromPtr, void *toPtr, SndSampleFormat fromDataForm
 	    }
 	    break;
 
-	// TODO Since 24 bit is an evil odd byte count format, these conversions are currently big endian only.
+	// TODO: Since 24 bit is an evil odd byte count format, these conversions are currently big endian only.
 	case SND_FORMAT_LINEAR_24:
 	    switch(toDataFormat) {
 	    case SND_FORMAT_LINEAR_32:
@@ -818,9 +818,9 @@ int SndChangeSampleType(void *fromPtr, void *toPtr, SndSampleFormat fromDataForm
     void *toDataPtr = [newBuffer bytes];
     BOOL convertedSomething = NO;
 
-    // TODO need to do sample conversion.
+    // TODO: need to do sample conversion.
     if(format.sampleRate != toSamplingRate) {
-	// TODO should do sampling rate conversion
+	// TODO: should do sampling rate conversion
 	NSLog(@"Sampling rate conversion %lf to %lf not done! Needs implementation.\n", format.sampleRate, toSamplingRate);
     }
     

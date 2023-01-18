@@ -1039,7 +1039,7 @@ static void writeDataAsNumString(MKNote *aNote, int par, unsigned char *data, in
 	MKMIDIFileEndReading(fileStructP);
 	return nil;
     }
-    _MK_MALLOC(midiParts, id, trackCount); // TODO Good candidate to be replaced with NSArray
+    _MK_MALLOC(midiParts, id, trackCount); // TODO: Good candidate to be replaced with NSArray
     curPart = midiParts;
     for (i = 0; i < trackCount; i++) {
 	aPart = [MKGetPartClass() new];
@@ -1484,7 +1484,7 @@ outOfLoop:
 
 @synthesize scorefilePrintStream;
 
-/* Needed by scorefile parser  TODO should merge with setInfoNote: */
+/* Needed by scorefile parser  TODO: should merge with setInfoNote: */
 -_setInfo:aInfo
 {
   if (!info)

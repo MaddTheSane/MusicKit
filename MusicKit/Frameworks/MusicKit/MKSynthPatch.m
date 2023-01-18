@@ -1174,7 +1174,7 @@ id _MKAddPatchToList(MKSynthPatch *self, MKSynthPatch **headP, MKSynthPatch **ta
 
 + (Class) findPatchClass: (NSString *) className
 {
-    // TODO [@"MKSynthPatches" stringByAppendingPathComponent: className]
+    // TODO: [@"MKSynthPatches" stringByAppendingPathComponent: className]
     return [[self superclass] findPatchClass: className];
 }
 

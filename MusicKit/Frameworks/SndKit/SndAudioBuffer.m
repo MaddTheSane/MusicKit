@@ -224,7 +224,7 @@
         else {
             data = [[NSMutableData alloc] initWithBytes: sampleData length: byteCount];
         }
-	// TODO Perhaps cache this in +initialize and just copy the speaker configuration array.
+	// TODO: Perhaps cache this in +initialize and just copy the speaker configuration array.
 	// [self speakerConfiguration];
     }
     return self;
@@ -305,7 +305,7 @@
 {
     int frameSize = [self frameSizeInBytes];
     
-    // TODO this assumes all bytes per sample need to be set to zero to create a zero valued sample.
+    // TODO: this assumes all bytes per sample need to be set to zero to create a zero valued sample.
     memset([data mutableBytes] + frameRange.location * frameSize, 0, frameRange.length * frameSize);
     return self;
 }
@@ -420,7 +420,7 @@
 #endif
     }
     out += startFrame * selfNumChannels; // use selfNumChannels since we may have changed the channel count.
-    // TODO we need a universal vector mixer for all destination sample formats.
+    // TODO: we need a universal vector mixer for all destination sample formats.
     if(selfDataFormat == SND_FORMAT_FLOAT) {
 #if defined(__APPLE_CC__) // || (__i386__ && __GNUC__)
 	// NSLog(@"vectors in %p, out %p, lengthInSamples %d", in, out, lengthInSamples);
@@ -583,14 +583,14 @@
 		       fromFormat: [fromBuffer dataFormat]
 		     channelCount: [fromBuffer channelCount]
 		     samplingRate: [fromBuffer samplingRate]];
-	// TODO need to pass in the channel conversion map.
+	// TODO: need to pass in the channel conversion map.
 #else	
 	
 	
 	switch ([self dataFormat]) {
 	    case SND_FORMAT_FLOAT: {
 		// Our buffer is in an array of floats, numOfChannelsInBuffer per frame.
-		// TODO we should rewrite this to manipulate the audio data as array of bytes until we need to actually do the conversion.
+		// TODO: we should rewrite this to manipulate the audio data as array of bytes until we need to actually do the conversion.
 		// This is preferable to having duplicated code with just a couple of changes for type definitions and arithmetic.
 		// So the switch statement should be moved inside the loops.
 		float *buff = [self bytes];  
@@ -940,7 +940,7 @@
 	    case SND_FORMAT_LINEAR_24:
 	    case SND_FORMAT_DSP_DATA_24:
 		// theSampleValue = ((short *) pcmData)[frameIndex];
-		// TODO this makes assumptions about the endian order and size of an int.
+		// TODO: this makes assumptions about the endian order and size of an int.
 		theSampleValue += *((int *) ((char *) pcmData + sampleIndex * 3)) >> 8;
 		break;
 	    case SND_FORMAT_LINEAR_32:
@@ -993,7 +993,7 @@
 	case SND_FORMAT_LINEAR_24:
 	case SND_FORMAT_DSP_DATA_24: {
 		int intRepresentationOfSample = (sampleValue * SndMaximumAmplitude(format.dataFormat));
-		// TODO shift up to the top of the integer, assuming the first byte is the msb. This is problematic for little-endians
+		// TODO: shift up to the top of the integer, assuming the first byte is the msb. This is problematic for little-endians
 		int alignedSample = intRepresentationOfSample << 8;
 		memcpy((unsigned char *) pcmData + sampleIndex * 3, (unsigned char *) &alignedSample, 3);
 	    }

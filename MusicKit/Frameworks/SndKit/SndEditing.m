@@ -45,7 +45,7 @@
 {
     NSUInteger soundBufferIndex;
     SndAudioBuffer *audioBuffer;
-    // TODO perhaps make this allocWithZone:, take a zone parameter and make soundFromSamplesInRange:zone: the basis of copyWithZone:.
+    // TODO: perhaps make this allocWithZone:, take a zone parameter and make soundFromSamplesInRange:zone: the basis of copyWithZone:.
     Snd *newSound = [[[self class] alloc] initWithFormat: [self dataFormat]
 					    channelCount: [self channelCount]
 						  frames: frameRange.length
@@ -116,7 +116,7 @@
     [newSound setName: [self name]];
     newSound->conversionQuality = conversionQuality;
 
-    // TODO these should be modified to match the new sound's dimensions.
+    // TODO: these should be modified to match the new sound's dimensions.
     newSound->loopWhenPlaying = loopWhenPlaying;
     newSound->loopStartIndex = loopStartIndex;
     newSound->loopEndIndex = loopEndIndex;
@@ -566,7 +566,7 @@
     
     [editingLock lock];
     bufferRange.location = 0;
-    bufferRange.length = fillLength; // TODO this may become [buff lengthInSamples] if we remove toLength: parameter.
+    bufferRange.length = fillLength; // TODO: this may become [buff lengthInSamples] if we remove toLength: parameter.
     
     // NSLog(@"fillAudioBuffer: intoFrameRange: %ld %ld samplesInRange: %ld %ld, length of snd %ld", 
     // bufferRange.location, bufferRange.length, readFromSndSample.location, readFromSndSample.length, [self lengthInSampleFrames]);

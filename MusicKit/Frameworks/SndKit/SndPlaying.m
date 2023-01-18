@@ -64,7 +64,7 @@
     SNDSetMute(aFlag);
 }
 
-// TODO See if we can make this use self playInFuture so all use of looping
+// TODO: See if we can make this use self playInFuture so all use of looping
 // is done in playInFuture:beginSample:sampleCount:
 - (SndPerformance *) playAtTimeInSeconds: (double) t withDurationInSeconds: (double) d
 {
@@ -167,7 +167,7 @@
 - (void) stopInFuture: (double) inSeconds
 {
     if ([self isRecording]) {
-	// TODO must inform the SndStreamRecorder to stop.
+	// TODO: must inform the SndStreamRecorder to stop.
         [self tellDelegate: @selector(didRecord:)];	
     }
   // SKoT: I commented this out as the player may have PENDING performances to
@@ -341,7 +341,7 @@
 	    *newLoopEnd = 0;
     }
     if(*newLoopStart < startSample + sampleCountRemoved)
-	// TODO Perhaps just leave it rather than moving it to startSample?
+	// TODO: Perhaps just leave it rather than moving it to startSample?
 	*newLoopStart = MIN(*newLoopStart, startSample); 
     else {
 	*newLoopStart -= sampleCountRemoved;
@@ -398,7 +398,7 @@
 	long performanceStartLoopIndex;
 	long performanceEndLoopIndex;
 	
-	[performancesArrayLock lock]; // TODO check this is right.
+	[performancesArrayLock lock]; // TODO: check this is right.
 	performance = [performancesArray objectAtIndex: performanceIndex];
 	performanceStartLoopIndex = [performance loopStartIndex];
 	performanceEndLoopIndex = [performance loopEndIndex];

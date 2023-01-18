@@ -40,7 +40,7 @@
     [spectrumColor release];
     [cursorColor release];
     [waterfallColor release];
-    // TODO we're leaking like a sieve here...
+    // TODO: we're leaking like a sieve here...
     // waterFallPaths
     [super dealloc];
 }

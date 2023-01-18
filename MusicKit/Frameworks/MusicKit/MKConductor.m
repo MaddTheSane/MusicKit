@@ -129,7 +129,7 @@ static id classDelegate = nil;  /* Delegate for the whole class. */
 static MKConductor *curRunningCond = nil; /* Or nil if no running conductor. */
 static MKConductor *condQueue = nil;   /* Head of conductor queue. */
 static MKConductor *defaultCond = nil; /* default Conductor. */
-// TODO this should be static but has to be extern for categories to be able to access it.
+// TODO: this should be static but has to be extern for categories to be able to access it.
 MKConductor *clockCond = nil;   /* clock time Conductor. */
 
 #define NORMALCOND (unsigned char) 0

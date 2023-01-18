@@ -76,11 +76,11 @@ static float smoothValue(SndMeter *self, float aValue)
     return (aValue > 0)? newValue : aValue;
 }
 
-// TODO this only handles muLaw encoded sound! Needs upgrading to handle all formats,
+// TODO: this only handles muLaw encoded sound! Needs upgrading to handle all formats,
 // especially 16 bit and float.
 static float prepareValueForDisplay(SndMeter *self, float m)
 {
-    // TODO switch([self->sound dataFormat]) {
+    // TODO: switch([self->sound dataFormat]) {
     float result;
     int val = (m > 0)? 32767.0 * m  :  0;
     int temp = (int)SndMuLawToLinear(val);

@@ -136,7 +136,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
 
 */
 
-@interface Snd : NSObject <NSCopying>
+@interface Snd : NSObject <NSCopying, NSCoding>
 {
  @protected
     /*! An array of SndAudioBuffers, the number of elements will depend on the fragmentation. */
@@ -743,7 +743,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
               <i>filename</i>.
 
   The Snd loses its current name, if any. An error code is returned.
-  TODO it would be preferable to have readSoundfile: (NSString *) fromRange: (NSRange). 
+  TODO: it would be preferable to have readSoundfile: (NSString *) fromRange: (NSRange). 
   However we need a mechanism to indicate infinity for the length in order to signal to read to EOF.
  */
 - (SndError) readSoundfile: (NSString *) filename

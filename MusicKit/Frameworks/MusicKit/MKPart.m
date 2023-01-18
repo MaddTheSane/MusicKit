@@ -222,7 +222,7 @@ static void removeNote(MKPart *self, MKNote *aNote);
 
 /* Reading and Writing files. ------------------------------------ */
 
-// TODO should be able to be replaced with setInfoNote:
+// TODO: should be able to be replaced with setInfoNote:
 - _setInfo: (MKNote *) aInfo
     /* Needed by scorefile parser  */
 {

@@ -63,7 +63,7 @@ NSColor *stringToColor(NSString *buffer)
 
 #if 0
 
-// TODO set the file types for the document from Snd -soundFileExtensions
+// TODO: set the file types for the document from Snd -soundFileExtensions
 // <key>CFBundleDocumentTypes</key>
 // <key>CFBundleTypeExtensions</key>
 // insert the fileTypes

@@ -177,13 +177,13 @@ Creation of a MKFilePerformer's MKNoteSender(s) is a subclass responsibility.
   @param  aStream is an id.
   @return Returns an id.
 */
-- setStream: (id) aStream; // TODO either NSMutableData, or NSData
+- setStream: (id) aStream; // TODO: either NSMutableData, or NSData
 
 /*!
   @brief Returns the object's encoded stream object, or NULL if it isn't set.
   @return Returns an id.
 */
-- (id) stream; // TODO either NSMutableData, or NSData
+- (id) stream; // TODO: either NSMutableData, or NSData
 
 /*!
   @brief Prepares the object for a performance by opening the associated file

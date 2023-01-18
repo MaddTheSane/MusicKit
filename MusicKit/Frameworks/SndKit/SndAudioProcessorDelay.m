@@ -151,7 +151,7 @@
     [processingLock lock];
     
     // no processing? copy data!
-    //TODO [outB hasSameFormatAsBuffer: inB] checks sample rate also.
+    //TODO: [outB hasSameFormatAsBuffer: inB] checks sample rate also.
     if ([outB lengthInSampleFrames] == [inB lengthInSampleFrames] &&
 	[outB channelCount]         == [inB channelCount]    &&
 	[outB dataFormat]           == [inB dataFormat]      &&

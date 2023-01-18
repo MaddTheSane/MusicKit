@@ -23,7 +23,7 @@
     [well setContinuous: YES];
 }
 
-// TODO we currently initialize all the preferences in SpectroController.
+// TODO: we currently initialize all the preferences in SpectroController.
 #if 0
 + (void) initialize;
 {    

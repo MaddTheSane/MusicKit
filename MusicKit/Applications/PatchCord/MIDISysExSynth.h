@@ -9,7 +9,7 @@
 
      The class deals with functions concerning update, display and user
      interaction with the synth.
-     Currently this object is both the controller and the model - TODO that must change!
+     Currently this object is both the controller and the model - TODO: that must change!
      This is a subclass of NSWindowController so it automatically orders the windows it creates.
 
      The user has three conceptual fields describing a patch - Synth name (Class
@@ -38,7 +38,7 @@
     /*! name of the patch (from synth and any description). */
     NSString *patchDescription;
     /*! MIDI channel this synth is on (if determinable) 0-15. */
-    // TODO check if there is a type for MIDIChannel already
+    // TODO: check if there is a type for MIDIChannel already
     int MIDIChannel;
     /*! the patchnumber on the channel this patch is associated with. */
     int MIDIpatchNumber;

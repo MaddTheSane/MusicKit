@@ -255,7 +255,7 @@ static BOOL isCSym(const register char *sym)
   return YES;
 }
 
-// TODO work directly on NSString, not on char *.
+// TODO: work directly on NSString, not on char *.
 static void convertToCSym(const register char *sym,register char *newSym)
 /* newSym is assumed to be allocated to be at least the length of sym.
 Returns newSym. */
@@ -572,7 +572,7 @@ void _MKCheckInit(void)
     [[[MKNote alloc] init] release]; /* Force initialization. Must be after table creation.*/
 }
 
-// TODO Needs NSDictionary
+// TODO: Needs NSDictionary
 _MKNameTable *_MKNewScorefileParseTable(void)
 {
     // Initialize a local symbol table for a new score file to be parsed.

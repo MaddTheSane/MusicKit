@@ -207,8 +207,8 @@ extern void MKConvertSecondsToMTC(double seconds,
     double lastTimeTag;    /*!< lastTimeTag, as specified by user. */
     int direction;         /*!< 1 for forward, -1 for reverse. */
     short format;          /*!< MTC format. */
-    id noteSender;  // TODO MKNoteSender *
-    id aNote; // TODO MKNote *
+    id noteSender;  // TODO: MKNoteSender *
+    id aNote; // TODO: MKNote *
     BOOL frozen;
 
 @private

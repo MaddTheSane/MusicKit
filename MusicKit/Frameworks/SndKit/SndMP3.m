@@ -446,7 +446,7 @@ static unsigned long getFrameHeaderAt(const unsigned char *bitstream)
 	soundFormat.frameCount = 0;
 	// Holds a collection of currently decoded frames. We keep more than one frame decoded to optimize simultaneous
 	// access of an SndMP3, particularly to avoid thrashing between two continuously accessed non-contiguous frames.
-	// TODO should be SndAgedDictionary
+	// TODO: should be SndAgedDictionary
 	decodedBufferCache = [[NSMutableDictionary dictionaryWithCapacity: CACHED_DECODED_BUFFERS] retain];
 
 	// TODO
@@ -478,7 +478,7 @@ static unsigned long getFrameHeaderAt(const unsigned char *bitstream)
 - (double) samplingRate
 {
     // If we are not predecoding, and we have read the MP3 data, we can return it's sample rate.
-    // TODO We return a valid sample rate even if the instance is uninitialized since findFrameHeadersInBitstream uses it.
+    // TODO: We return a valid sample rate even if the instance is uninitialized since findFrameHeadersInBitstream uses it.
     // return (!preDecode && mp3DataDescription.mp != NULL) ? (double) mp3DataDescription.samplerate : 44100.0;
     return soundFormat.sampleRate;
 }
@@ -710,7 +710,7 @@ static unsigned long getFrameHeaderAt(const unsigned char *bitstream)
         [self checkID3Tag: mp3Data];
         [self findFrameHeadersInBitstream: mp3Data];
       
-        // TODO could be erroneous to assume SND_MPEGV1_SAMPLES_PER_FRAME
+        // TODO: could be erroneous to assume SND_MPEGV1_SAMPLES_PER_FRAME
         soundFormat.frameCount = encodedFrameLocationsCount * SND_MPEGV1_SAMPLES_PER_FRAME; 
         duration = soundFormat.frameCount / [self samplingRate];
     }
@@ -816,7 +816,7 @@ static unsigned long getFrameHeaderAt(const unsigned char *bitstream)
 }
 
 // Given a range of decoded samples, return which range of MP3 bitstream frames will retrieve those.
-// TODO handle VBR (Variable Bit Rate).
+// TODO: handle VBR (Variable Bit Rate).
 - (NSRange) findInBitstreamSamplesInRange: (NSRange) sndReadingRange
 {
     NSRange bitstreamFrames;
@@ -871,12 +871,12 @@ static unsigned long getFrameHeaderAt(const unsigned char *bitstream)
     // NSLog(@"resetMP3StreamForNoncontiguousFrame: reading frame %d to determine main_data_begin bytesToRetrieve = %d bytesRetrieved = %d\n",
     //  MP3FrameIDToDecode, bytesToRetrieve, bytesRetrieved);
     
-    // TODO For some as yet unexplained reason, we need to track back two extra frames before we decode a frame 
+    // TODO: For some as yet unexplained reason, we need to track back two extra frames before we decode a frame 
     // accurately. My hypothesis is that the lookahead nature of HIP (you receive the decoding of a frame on the
     // second call to hip_decode_headers) accounts for 1 extra frame, but hip_audiodata_precedesframes should account
     // for the other, unless the calculation of the number of bitstream frames corresponding to main_data_begin
     // is incorrect.
-//    framesToBacktrack = hip_audiodata_precedesframes(&mp3DataDescription) + 2; // TODO 2
+//    framesToBacktrack = hip_audiodata_precedesframes(&mp3DataDescription) + 2; // TODO: 2
 #if DEBUG_BACKTRACK
     NSLog(@"resetMP3StreamForNoncontiguousFrame: Need to back track %d MP3 frames from frame %d (just decoded)\n", framesToBacktrack, MP3FrameIDToDecode);
 #endif
@@ -919,7 +919,7 @@ static unsigned long getFrameHeaderAt(const unsigned char *bitstream)
     short decodedPCMBufferLeft[MAX_MPEG_SAMPLES_PER_FRAME];
     short decodedPCMBufferRight[MAX_MPEG_SAMPLES_PER_FRAME];
     
-    // TODO debugging
+    // TODO: debugging
     int prevMP3FrameID;
     
     // This serves to prevent disrupting the backtracking when the sound is accessed by multiple threads.
@@ -936,7 +936,7 @@ static unsigned long getFrameHeaderAt(const unsigned char *bitstream)
 	[self resetMP3StreamForNoncontiguousFrame: MP3FrameIDToDecode];
     }
 
-    prevMP3FrameID = currentMP3FrameID;  // TODO debugging
+    prevMP3FrameID = currentMP3FrameID;  // TODO: debugging
     currentMP3FrameID = MP3FrameIDToDecode;  // retain the current bitstream frame ID.
     
     decodeRange = [self decodeRangeOfBitstreamFrame: MP3FrameIDToDecode];
@@ -991,17 +991,17 @@ static unsigned long getFrameHeaderAt(const unsigned char *bitstream)
     }
 
     
-    // TODO set the frame count of the decodedPCMBuffer.
+    // TODO: set the frame count of the decodedPCMBuffer.
     // [decodedPCMBuffer setLengthInSampleFrames: framesCreated];
     
     
     /////////////////////////////////////////////////////////////////
     
     
-    // TODO [decodedBufferCache deleteOldestKey]; when we write SndAgedDictionary which records the time of each key's access.
+    // TODO: [decodedBufferCache deleteOldestKey]; when we write SndAgedDictionary which records the time of each key's access.
     // For now, only remove when the dictionary has more than our maximum number (CACHED_DECODED_BUFFERS) of cached buffers and remove 
     if([decodedBufferCache count] > CACHED_DECODED_BUFFERS - 1) {
-	// TODO this isn't guaranteed to remove the oldest buffer, but we punt for now it will be ok to prove the concept...
+	// TODO: this isn't guaranteed to remove the oldest buffer, but we punt for now it will be ok to prove the concept...
 	// NSNumber *bufferKeyToRemove = [[[decodedBufferCache allKeys] sortedArrayUsingSelector: @selector(compare:)] objectAtIndex: 0];
 	NSArray *accessCount = [decodedBufferAccessCount keysSortedByValueUsingSelector: @selector(compare:)];
 	NSNumber *bufferKeyToRemove = [accessCount objectAtIndex: 0];
@@ -1060,7 +1060,7 @@ static unsigned long getFrameHeaderAt(const unsigned char *bitstream)
         // Check if we can use the cached PCM data.
 	decodedPCMBuffer = [decodedBufferCache objectForKey: [NSNumber numberWithInt: decodeFromMP3FrameID]];
 	
-	// TODO this should be inside decodedBufferCache when it is a SndAgedDictionary
+	// TODO: this should be inside decodedBufferCache when it is a SndAgedDictionary
 	if(decodedPCMBuffer != nil) {
 	    NSNumber *key = [NSNumber numberWithInt: decodeFromMP3FrameID];
 #if DEBUG_CACHE
@@ -1077,7 +1077,7 @@ static unsigned long getFrameHeaderAt(const unsigned char *bitstream)
 		NSLog(@"decodeIntoAudioBuffer: Assertion failed, decoded <= 0 frames (%ld) from MP3 bitstream FrameID %d\n", [decodedPCMBuffer lengthInSampleFrames], decodeFromMP3FrameID);
         }
 
-	// TODO using sndReadingRange.location not correct?
+	// TODO: using sndReadingRange.location not correct?
         decodedFrameRange.location = (sndReadingRange.location + totalFramesCreated) % samplesPerMP3Frame;
         // We copy the number of frames remaining in the decoded MP3 frame or the number of frames remaining to copy, whichever is less.
         decodedFrameRange.length = MIN((samplesPerMP3Frame - decodedFrameRange.location), (numOfFramesToCopy - totalFramesCreated));
@@ -1264,7 +1264,7 @@ static unsigned long getFrameHeaderAt(const unsigned char *bitstream)
 #endif
     }
 
-    // TODO Should initialize this with the native data format?
+    // TODO: Should initialize this with the native data format?
     [ab initWithDataFormat: SND_FORMAT_FLOAT
 	      channelCount: 2
               samplingRate: [self samplingRate]

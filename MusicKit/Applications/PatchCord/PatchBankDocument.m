@@ -259,7 +259,7 @@ static unsigned int patchCounter;
 
 @end
 
-// TODO check if there are no more windows, in which case [SysExMessage disable]
+// TODO: check if there are no more windows, in which case [SysExMessage disable]
 // figure out what to do once all banks are closed, should disable.
 // Hmm maybe, we could just do the same as synthLoader and create an untitled PatchBankDocument.
 

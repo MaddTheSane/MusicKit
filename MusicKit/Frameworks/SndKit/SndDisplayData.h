@@ -33,9 +33,7 @@ OF THIS AGREEMENT.
 
 /*!
 @class SndDisplayData
-@brief
-
-  For internal use of the SndView
+@brief For internal use of the SndView
 */
 
 @interface SndDisplayData:NSObject

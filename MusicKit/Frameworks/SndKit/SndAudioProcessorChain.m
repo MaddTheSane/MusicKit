@@ -185,15 +185,15 @@
 	processorOutputBuffer = [[SndAudioBuffer alloc] initWithBuffer: buff];
     }
 
-    // TODO inputBuffer = buff; outputBuffer = processorOutputBuffer;
+    // TODO: inputBuffer = buff; outputBuffer = processorOutputBuffer;
     for (audioProcessorIndex = 0; audioProcessorIndex < audioProcessorCount; audioProcessorIndex++) {
 	SndAudioProcessor *proc = [audioProcessorArray objectAtIndex: audioProcessorIndex];
 	
 	if ([proc isActive]) {
-	    // TODO [proc processReplacingInputBuffer: inputBuffer outputBuffer: outputBuffer]
+	    // TODO: [proc processReplacingInputBuffer: inputBuffer outputBuffer: outputBuffer]
 	    if ([proc processReplacingInputBuffer: buff
 				     outputBuffer: processorOutputBuffer]) {
-		// TODO rather than copying between each stage of the chain, just swap input and output buffers
+		// TODO: rather than copying between each stage of the chain, just swap input and output buffers
 		// tempBuffer = (inputBuffer == buff) ? secondOutputBuffer : inputBuffer
 		// inputBuffer = outputBuffer
 		// outputBuffer = tempBuffer
@@ -205,15 +205,15 @@
 	}
     }
     if ([postFader isActive]) {
-	// TODO [proc processReplacingInputBuffer: inputBuffer outputBuffer: outputBuffer]
+	// TODO: [proc processReplacingInputBuffer: inputBuffer outputBuffer: outputBuffer]
 	if ([postFader processReplacingInputBuffer: buff
 				      outputBuffer: processorOutputBuffer]) {
 	    [buff copyDataFromBuffer: processorOutputBuffer];
 	}
 	// NSLog(@"fader after buff %@\n", buff);
     }
-    // TODO Do a final copy, could make this conditional on at least one processor in the chain needing to replace.
-    // TODO [buff copyDataFromBuffer: outputBuffer];
+    // TODO: Do a final copy, could make this conditional on at least one processor in the chain needing to replace.
+    // TODO: [buff copyDataFromBuffer: outputBuffer];
     return self;
 }
 

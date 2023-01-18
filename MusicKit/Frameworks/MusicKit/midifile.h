@@ -108,7 +108,7 @@ typedef struct _midiFileOutStruct {
 
 /*!
   @brief Begins reading the standard MIDI file located in the NSData instance fileData.
-  TODO should be NSData, not NSMutableData.
+  TODO: should be NSData, not NSMutableData.
  */
 extern MKMIDIFileIn *MKMIDIFileBeginReading(NSMutableData *fileData, BOOL evaluateTempo);
 

@@ -189,7 +189,7 @@ static NSMutableArray *initPatchLists(NSArray *oldLists)
     return newLists;
 }
 
-// TODO LMS should be dealloc and just leave data around when the noteSeen is still TRUE.
+// TODO: LMS should be dealloc and just leave data around when the noteSeen is still TRUE.
 #if 0
 -(oneway void)release
 {

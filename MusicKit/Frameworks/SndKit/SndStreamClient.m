@@ -300,7 +300,7 @@ enum {
 	return nil;
     }
     else
-	return [[manager retain] autorelease];  // TODO should we be retaining & autoreleasing here?
+	return [[manager retain] autorelease];  // TODO: should we be retaining & autoreleasing here?
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -323,7 +323,7 @@ enum {
         if (generatesOutput) {
             [outputQueue prepareQueueAsType: audioBufferQueue_typeOutput withBufferPrototype: outputBuffer];
         }        
-        [self prepareToStreamWithBuffer: outputBuffer]; // TODO should separate by input and output buffers.
+        [self prepareToStreamWithBuffer: outputBuffer]; // TODO: should separate by input and output buffers.
 	[managerConnectionLock lockWhenCondition: SC_disconnected];
         [self setManager: streamManager];
 	[managerConnectionLock unlockWithCondition: SC_connected];
@@ -395,7 +395,7 @@ enum {
 #endif
     }
     if (needsInput) {
-	// TODO Need to check this is even meaningful...
+	// TODO: Need to check this is even meaningful...
 	NSLog(@"SndStreamClient::preemptQueuedStream need to implement preemption of queued input streams.\n");
 	// [inputQueue cancelProcessedBuffers];
     }
@@ -480,10 +480,10 @@ enum {
 	    processedInputBuffersCount = [inputQueue processedBuffersCount];
 
 	    if (processedInputBuffersCount) {
-		// TODO check why we need to retain it here and then release it at the end of the buffer, for copyDataFromBuffer: or addPendingBuffer:?
+		// TODO: check why we need to retain it here and then release it at the end of the buffer, for copyDataFromBuffer: or addPendingBuffer:?
 		SndAudioBuffer *exposedInputBuffer = [[inputQueue popNextProcessedBuffer] retain];
 
-		// TODO perhaps we could eventually just add the inB into the inputQueue, rather than copying it.
+		// TODO: perhaps we could eventually just add the inB into the inputQueue, rather than copying it.
 		// This requires looking at the persistence of inB.
 		// NSLog(@"startProcessingNextBuffer exposedInputBuffer %@ copied from inB %@\n", exposedInputBuffer, inB);
 		[exposedInputBuffer copyDataFromBuffer: inB];
@@ -716,7 +716,7 @@ static void inline setThreadPriority()
 #if SNDSTREAMCLIENT_DEBUG_SYNTHTHREAD
     NSLog(@"SYNTH THREAD: (%@ %@) processing thread ended\n", [NSThread currentThread], clientName);
 #endif
-    // TODO Exiting this method will exit the thread, but on GNUstep, perhaps we need to be explicit
+    // TODO: Exiting this method will exit the thread, but on GNUstep, perhaps we need to be explicit
     // about ending the thread?
     // [NSThread exit];
 }
@@ -780,11 +780,11 @@ static void inline setThreadPriority()
     // This should be locked by the synthThreadLock, but since we expect it to be run from within subclass -processBuffers
     // which will already be protected by a lock, we leave it unprotected.
     // [synthThreadLock lock];
-    // TODO we could update the clientNowTime, but it is updated correctly in -processingThread.
+    // TODO: we could update the clientNowTime, but it is updated correctly in -processingThread.
     [outputQueue addProcessedBuffer: synthOutputBuffer];
     [synthOutputBuffer release];
     synthOutputBuffer = [[outputQueue popNextPendingBuffer] retain];
-    // TODO Need to check if we exhaust those pending. We should manufacture them, but perhaps not on demand.
+    // TODO: Need to check if we exhaust those pending. We should manufacture them, but perhaps not on demand.
     // [synthThreadLock unlock];
 }
 
@@ -981,7 +981,7 @@ static void inline setThreadPriority()
 	return latency;
     }
     else
-	return -1; // TODO to indicate the value is bogus.
+	return -1; // TODO: to indicate the value is bogus.
 }
 
 - (long) instantaneousOutputLatencyInSamples
@@ -992,7 +992,7 @@ static void inline setThreadPriority()
 	return latency;
     }
     else
-	return -1;  // TODO to indicate the value is bogus.
+	return -1;  // TODO: to indicate the value is bogus.
 }
 
 ////////////////////////////////////////////////////////////////////////////////

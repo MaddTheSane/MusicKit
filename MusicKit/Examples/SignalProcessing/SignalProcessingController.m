@@ -59,7 +59,7 @@
 
 - (IBAction) startProcessing: (id) sender
 {
-    // TODO do we need setOutputStream: to allow input to be directed to a different output stream?    
+    // TODO: do we need setOutputStream: to allow input to be directed to a different output stream?    
     if(![streamInput isReceivingInput]) {
 	[streamInput startReceivingInput];
     }
@@ -72,7 +72,7 @@
 
 - (IBAction) inputSourceSelected: (id) sender
 {
-    // TODO Must Restart sound to use the new driver.
+    // TODO: Must Restart sound to use the new driver.
     NSLog(@"Selected for input %@", [soundInputDriverPopup titleOfSelectedItem]);
     // [streamManager setAssignedDriverToIndex: [soundInputDriverPopup indexOfSelectedItem] forOutput: NO];
 
@@ -198,9 +198,9 @@
 	
 	soundToPlay = nil;
 	liveFader = [[SndAudioFader alloc] init]; // Create the live fader.
-	[liveFader setAmp: 1.0 clearingEnvelope: NO]; // TODO use [liveFaderSlider floatValue]
+	[liveFader setAmp: 1.0 clearingEnvelope: NO]; // TODO: use [liveFaderSlider floatValue]
 	sndFader = [[SndAudioFader alloc] init]; // Create the sound playback fader.
-	[sndFader setAmp: 1.0 clearingEnvelope: NO];  // TODO use [sndFaderSlider floatValue]
+	[sndFader setAmp: 1.0 clearingEnvelope: NO];  // TODO: use [sndFaderSlider floatValue]
 	
 	reverb = [[SndAudioProcessorReverb alloc] init];
 	distortion = [[SndAudioProcessorDistortion alloc] init];
@@ -224,7 +224,7 @@
 	[self testBufferMagnitude];
 	[self loadVSTPlugin];
 	
-	// TODO compute new output buffer size based on original size together with minimum
+	// TODO: compute new output buffer size based on original size together with minimum
 	// size = BUFFER_SIZE/44100 seconds.
 	bufferSize = BUFFER_SIZE;
 #if CHANGE_BUFFER_SIZES

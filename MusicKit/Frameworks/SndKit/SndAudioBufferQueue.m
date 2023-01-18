@@ -246,7 +246,7 @@ enum {
 }
 
 // For redefining the queue dynamically.
-// TODO should enable to copy over the existing buffers.
+// TODO: should enable to copy over the existing buffers.
 - (void) setBufferCount: (int) newNumberOfBuffers
 {
     [pendingBuffersLock lock];

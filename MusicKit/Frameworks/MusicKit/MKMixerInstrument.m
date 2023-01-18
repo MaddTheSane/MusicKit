@@ -240,7 +240,7 @@ static long secondsToFrames(Snd *s, double time)
 	NSLog(@"No input sound file specified, using default: %@.\n", file);
 	return NO;
     }
-    // TODO there is scope for optimization using SndTable names to look up existing (converted once sounds), rather than reading in each time.
+    // TODO: there is scope for optimization using SndTable names to look up existing (converted once sounds), rather than reading in each time.
     [newSoundFileSamples readSoundfile: file];
     // Establish an audio processing chain (including a fader) for signal processing each sound.
     [newSoundFileSamples setAudioProcessorChain: [SndAudioProcessorChain audioProcessorChain]];

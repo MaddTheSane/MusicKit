@@ -59,7 +59,7 @@
     int currentMP3FrameID;
     /*! Caches the n most recently decoded bitstream frames, when we are simultaneously accessing the same SndMP3.
 	Each key is the MP3 frame ID, each object is a SndAudioBuffer in 16 bit PCM data (left and right channels) format. */
-    NSMutableDictionary *decodedBufferCache;   /* TODO this should become SndAgedDictionary */
+    NSMutableDictionary *decodedBufferCache;   /* TODO: this should become SndAgedDictionary */
     
     NSMutableDictionary *decodedBufferAccessCount;
     int accessTime;

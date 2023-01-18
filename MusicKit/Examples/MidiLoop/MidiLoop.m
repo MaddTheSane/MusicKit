@@ -27,7 +27,7 @@
 
 - (IBAction) showInfoPanel: (id) sender
 {
-    // TODO platform specific bundle searching disabled/broken on 4K46?
+    // TODO: platform specific bundle searching disabled/broken on 4K46?
     // [NSBundle loadNibNamed: @"Info" owner: self];
     [NSBundle loadNibNamed: @"Info-macos" owner: self];
     [infoPanel makeKeyAndOrderFront: sender];

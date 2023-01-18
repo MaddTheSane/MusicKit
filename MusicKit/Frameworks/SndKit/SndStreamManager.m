@@ -12,7 +12,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-// TODO This is needed since we check for NSApp, but I don't think checking for NSApp is the correct way to
+// TODO: This is needed since we check for NSApp, but I don't think checking for NSApp is the correct way to
 // check for an NSApplication generated run loop.
 #import <AppKit/AppKit.h>
 #import "SndAudioBuffer.h"
@@ -392,7 +392,7 @@ static SndStreamManager *defaultStreamManager = nil;
     NSAutoreleasePool *localPool = [NSAutoreleasePool new];
     id controllerProxy = nil;
 
-    // TODO I presume this is to register the retain on the local autorelease pool? It may not be necessary.
+    // TODO: I presume this is to register the retain on the local autorelease pool? It may not be necessary.
     // [self retain]; 
 
 #if SNDSTREAMMANAGER_DEBUG_DELEGATE
@@ -456,7 +456,7 @@ static SndStreamManager *defaultStreamManager = nil;
 	}
 	[bgdm_threadLock unlockWithCondition: bgdm_sem];
     }
-    // [self release];  // TODO is this necessary?
+    // [self release];  // TODO: is this necessary?
     [localPool release];
     /* even if there is a new thread is created between the following two
      * statements, that would be ok -- there would temporarily be one

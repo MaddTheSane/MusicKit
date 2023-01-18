@@ -150,7 +150,7 @@ inline static int axonData(id msg, int start)
 - (void) setPatchDescription: (NSString *) name
 {
     [super setPatchDescription: name];
-    // TODO assign into the patch at the right place
+    // TODO: assign into the patch at the right place
 }
 
 // interpret the complete patch setting appropriate ivars.

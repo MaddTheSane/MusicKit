@@ -400,7 +400,7 @@ static int fileType(NSString *name)
     else if ([ext isEqualToString:@"playscore"] ||
              [ext isEqualToString:@"PLAYSCORE"])
         return PLAYSCORE_FILE;
-    // TODO [[Snd fileExtensions] indexOfObject: ext] != NSNotFound
+    // TODO: [[Snd fileExtensions] indexOfObject: ext] != NSNotFound
     else if ([ext isEqualToString:@"snd"] ||
              [ext isEqualToString:@"SND"])
         return (soundFile && [soundFile length]) ? SOUND_FILE : DSP_COMMANDS_FILE;
@@ -416,7 +416,7 @@ static int fileType(NSString *name)
         return validFileNameAndObject && scoreForm == SCORE_FILE;
     if([[menuItem title] isEqualToString: @"Save As..."])
         return validFileNameAndObject;
-    // TODO surely this is more valid?
+    // TODO: surely this is more valid?
     // return [super validateMenuItem: menuItem];
     return YES;
 }
@@ -755,8 +755,8 @@ static double getUntempo(float tempoVal)
             if(newMIDI != nil)
                 [[partPerformer noteSender] connect: [newMIDI channelNoteReceiver: midiChan]];
 	}
-        else if(NSClassFromString(instrumentClassName) != nil) { // TODO should be "SamplePlayer" and MKSamplePlayerInstrument
-	    // TODO need an NSArray of these
+        else if(NSClassFromString(instrumentClassName) != nil) { // TODO: should be "SamplePlayer" and MKSamplePlayerInstrument
+	    // TODO: need an NSArray of these
 	    nonSynthInstrument = [[NSClassFromString(instrumentClassName) alloc] init];
             [[partPerformer noteSender] connect: [nonSynthInstrument noteReceiver]];
 	}
@@ -769,7 +769,7 @@ static double getUntempo(float tempoVal)
                 [errorLog addText: errMsg];
 		if (!NSRunAlertPanel(STR_SCOREPLAYER, errMsg, STR_CONTINUE, STR_CANCEL, nil))
 		    return;
-		/* TODO We would prefer to dynamically load the class here. */
+		/* TODO: We would prefer to dynamically load the class here. */
 		continue;
 	    }
 	    anIns = [MKSynthInstrument new];      
@@ -964,7 +964,7 @@ static BOOL setUpFile(NSString *workspaceFileName)
     }
     if ([shortFileName isEqualToString:@"Jungle.score"] ||
         [shortFileName isEqualToString:@"Jungle.playscore"])
-        tempoExponent = 1.3;  /* TODO A real hack to make the demos play ok.  Probably redundant */
+        tempoExponent = 1.3;  /* TODO: A real hack to make the demos play ok.  Probably redundant */
     else
         tempoExponent = 1.5;
     firstTime = NO;
@@ -1118,7 +1118,7 @@ static void adjustTempo(double slowDown)
     [timeCodeTextField setStringValue: (synchToTimeCode) ? @"Press Play, then start time code" : @"Press button above to enable time code"]; 
 }
 
-// TODO rename to setTimeCodeMidiDevice:
+// TODO: rename to setTimeCodeMidiDevice:
 - (IBAction) setTimeCodeSerialPort: sender
 {
     /* 0 for portA, 1 for portB */

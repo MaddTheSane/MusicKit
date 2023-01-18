@@ -45,7 +45,7 @@ static char         **speakerConfigurationList;
 static unsigned int outputDriverIndex = 0;
 static unsigned int inputDriverIndex = 0;
 
-// TODO should probably become a structure.
+// TODO: should probably become a structure.
 static int  outputBufferSizeInFrames;
 static long outputBufferSizeInBytes = DEFAULT_BUFFERSIZE;
 static AudioStreamBasicDescription outputStreamBasicDescription;
@@ -140,7 +140,7 @@ static BOOL getDeviceProperty(AudioObjectID deviceID, BOOL forOutputDevice, Audi
     return TRUE;
 }
 
-// TODO this should be a good candidate for altivec using vec_perm, except that when deinterleaving
+// TODO: this should be a good candidate for altivec using vec_perm, except that when deinterleaving
 // streams beyond two channels, the increment across the sample frame exceeds the vector size.
 // This means that for deinterleaving greater than two channel (e.g quad, 5.1) buffers, only two samples per channel
 // could be deinterleaved per iteration. This then requires a lot of work to compute the permutation
@@ -222,7 +222,7 @@ static OSStatus vendOutputBuffersToStreamManagerIOProc(AudioDeviceID outDevice,
 	    (unsigned int) outOutputData->mNumberBuffers, (unsigned int) outputStreamIOProcUsage->mNumberStreams);
     }
     
-    // TODO we need to determine if the streams are themselves interleaved and if so iterate through them.
+    // TODO: we need to determine if the streams are themselves interleaved and if so iterate through them.
     interleavedStreamIndex = 0; 
     // for(interleavedStreamIndex = 0; interleavedStreamIndex < outputStreamIOProcUsage->mNumberStreams; interleavedStreamIndex++) 
     {
@@ -254,15 +254,15 @@ static OSStatus vendOutputBuffersToStreamManagerIOProc(AudioDeviceID outDevice,
 	//NSLog(@"inStream dataFormat %d frameCount %ld channelCount %d sampleRate %lf\n",
 	//      inStream.dataFormat, inStream.frameCount, inStream.channelCount, inStream.sampleRate);
 	      
-	// TODO The whole approach of using two vending IOProcs which initiate one stream manager callback may need 
+	// TODO: The whole approach of using two vending IOProcs which initiate one stream manager callback may need
 	// rethinking so that there are two stream manager callbacks.
 	inStream.streamData = inputStreamIOProcUsage->mStreamIsOn[0] ? inputBuffer : NULL;
 	
 	// hand over the stream buffers to the processor/stream manager.
 	// the output time goes out as a relative time in seconds, with a datum from the
 	// first sample time we first receive.
-	// TODO perhaps inOutputTime->mSampleTime - firstSampleTime would work
-	// TODO or (inOutputTime->mSampleTime - firstSampleTime) / sampleRate
+	// TODO: perhaps inOutputTime->mSampleTime - firstSampleTime would work
+	// TODO: or (inOutputTime->mSampleTime - firstSampleTime) / sampleRate
 	(*streamProcessor)((AudioConvertHostTimeToNanos(inOutputTime->mHostTime) - firstSampleTime) / 1.0e9,
 			   &inStream, &outStream, streamUserData);
 	
@@ -301,10 +301,10 @@ static OSStatus vendOutputBuffersToStreamManagerIOProc(AudioDeviceID outDevice,
     NSLog(@"[vendOutputBuffersToStreamManagerIOProc] ending vend...\n");
 #endif
 
-    return 0; // TODO need better definition...
+    return noErr;
 }
 
-// TODO This is only retrieving the audio buffer from the CoreAudio API, it does not hand the buffer
+// TODO: This is only retrieving the audio buffer from the CoreAudio API, it does not hand the buffer
 // onto the streamProcessor() function within the SndKit, that is done in vendOutputBuffersToStreamManagerIOProc.
 static OSStatus vendInputBuffersToStreamManagerIOProc(AudioDeviceID inDevice,
                           const AudioTimeStamp *inNow,
@@ -368,7 +368,7 @@ static OSStatus vendInputBuffersToStreamManagerIOProc(AudioDeviceID inDevice,
     NSLog(@"[SND] ending vendInputBuffersToStreamManagerIOProc...\n");
 #endif
     
-    return 0; // TODO need better definition...
+    return noErr;
 }
 
 // Retrieves the configuration of how many channels are situated within each stream.
@@ -541,12 +541,12 @@ static BOOL determineBasicDescription(AudioDeviceID deviceID,
     devicePropertyAddress.mScope = forOutputDevice ? kAudioDevicePropertyScopeOutput : kAudioDevicePropertyScopeInput;
     devicePropertyAddress.mElement = kAudioObjectPropertyElementMaster;
     
-    // check to see if the sample rate is changeable... TODO this could be used to change the hardware rather than resampling.
+    // check to see if the sample rate is changeable... TODO: this could be used to change the hardware rather than resampling.
     CAstatus = AudioObjectGetPropertyDataSize(deviceID, &devicePropertyAddress, 0, NULL, &propertySize);
     NSLog(@"AudioObjectGetPropertyDataSize kAudioDevicePropertyRateScalar  CAstatus:%s, propertySize = %ld, propertyWritable = %d\n",
 	  getCoreAudioErrorStr(CAstatus), propertySize, propertyWritable);
     
-    // TODO check kAudioDevicePropertyLatency
+    // TODO: check kAudioDevicePropertyLatency
     
 #endif
     
@@ -672,7 +672,7 @@ static const char **retrieveDriverList(BOOL forOutputDevice)
 }
 
 // Find the output device ID in the driver list and return the driver list index.
-// TODO we make the reasonably safe assumption that the sequence of deviceIDs and 
+// TODO: we make the reasonably safe assumption that the sequence of deviceIDs and
 // driver names will be in the same order. Returns 0 if unable to find the device.
 static unsigned int findDeviceInDriverList(AudioDeviceID deviceIDToFind, BOOL forOutputDevice)
 {
@@ -794,7 +794,7 @@ static long getBufferSize(AudioDeviceID deviceID, BOOL forOutputDevice)
         
     // If the device is non-interleaved, we return the buffer size as it will be returned to the caller, i.e. always interleaved.
     // return currentBufferSizeInBytes * numberOfStreams;
-    // TODO this is actually not right: We should be retrieving all streams and then returning them as a fully interleaved buffer.
+    // TODO: this is actually not right: We should be retrieving all streams and then returning them as a fully interleaved buffer.
     return notInterleaved ? currentBufferSizeInBytes * numberOfStreams : currentBufferSizeInBytes;
 }
 
@@ -872,7 +872,7 @@ static BOOL getSpeakerConfiguration(AudioDeviceID outputDeviceID)
 {
     // unsigned char channelDescription[1024];
     UInt32 stereoChannels[2] = { 0, 1 }; // create defaults so we don't have problems if a device doesn't respond to the preferred channels property.
-    int numOfChannels = 4;  // TODO hardwired
+    int numOfChannels = 4;  // TODO: hardwired
     // AudioChannelLayout channelLayout;
     
     if (!getDeviceProperty(outputDeviceID, TRUE, kAudioDevicePropertyPreferredChannelsForStereo, &stereoChannels, sizeof(stereoChannels))) {
@@ -883,7 +883,7 @@ static BOOL getSpeakerConfiguration(AudioDeviceID outputDeviceID)
     // NSLog(@"Preferred channels for stereo Left = %d, Right = %d\n", stereoChannels[0], stereoChannels[1]);
 
 #if 0
-    // TODO determine multichannel layouts. 
+    // TODO: determine multichannel layouts.
     if (!getDeviceProperty(outputDeviceID, TRUE, kAudioDevicePropertyPreferredChannelLayout, &channelLayout, sizeof(channelLayout))) {
 	// In case a device doesn't respond to preferred channels for stereo, we create a default.
 	numOfChannels = 2;
@@ -1068,7 +1068,7 @@ PERFORM_API BOOL SNDTerminate(void)
 // channels named "Left" and "Right" to ensure that stereo can always be used.
 PERFORM_API const char **SNDSpeakerConfiguration(void)
 {
-    // TODO should check if initialised so that the speaker configuration can be obtained for the assigned hardware.
+    // TODO: should check if initialised so that the speaker configuration can be obtained for the assigned hardware.
     // if(!initialised)
     //    return FALSE;
 
@@ -1136,14 +1136,14 @@ PERFORM_API BOOL SNDSetDriverIndex(unsigned int selectedIndex, BOOL forOutputDri
 		outputDriverIndex = selectedIndex;
 		
 		if(!setOutputDevice(outputDeviceID))
-		    return FALSE; // TODO this will leave the stream stopped.
+		    return FALSE; // TODO: this will leave the stream stopped.
 	    }
 	    else {
 		inputDeviceID = deviceID;
 		inputDriverIndex = selectedIndex;
 		
 		if(!(inputInit = setInputDevice(inputDeviceID)))
-		    return FALSE; // TODO this will leave the stream stopped.
+		    return FALSE; // TODO: this will leave the stream stopped.
 	    }
 
 	    if(wasStreaming)
@@ -1262,7 +1262,7 @@ PERFORM_API BOOL SNDStreamStart(SNDStreamProcessor newStreamProcessor, void *new
     {
 	unsigned int streamIndex;
 
-	// TODO turn off all but the first stream. This isn't right in the general case, we should use what the
+	// TODO: turn off all but the first stream. This isn't right in the general case, we should use what the
 	// the user has nominated as the default AudioStream in the default AudioDevice, but there doesn't seem to be
 	// a means to determine this. For now, we do what iTunes seems to do, use the first AudioStream. 
         // This only seems to manifest itself for some multichannel boxes and now they interpret streams more logically.

@@ -316,7 +316,7 @@
 	}
 	else
 	    [playingSamples[recordKey] setSound: recorder];
-	recordTag = recordKey = UNASSIGNED_SAMPLE_KEYNUM; // TODO not the right definition.
+	recordTag = recordKey = UNASSIGNED_SAMPLE_KEYNUM; // TODO: not the right definition.
     }
 #endif
 #if 0

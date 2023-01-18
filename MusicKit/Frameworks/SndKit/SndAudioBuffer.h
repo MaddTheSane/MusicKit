@@ -295,7 +295,7 @@ typedef enum {
 /*!
   @brief   Changes the length of the buffer to <I>newSampleFrameCount</I> sample frames.
 
-  TODO Need to explain the consequences of setting the length longer or shorter than current. See the source code.
+  TODO: Need to explain the consequences of setting the length longer or shorter than current. See the source code.
  */
 - setLengthInSampleFrames: (unsigned long) newSampleFrameCount;
 

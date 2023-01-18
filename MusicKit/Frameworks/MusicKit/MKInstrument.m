@@ -153,7 +153,7 @@
 - (void) dealloc
 {
     if (!noteSeen) {
-	// TODO is this necessary to create a copy of the array?
+	// TODO: is this necessary to create a copy of the array?
 	NSMutableArray *aList = _MKLightweightArrayCopy(noteReceivers);
 	
 	[self disconnectNoteReceivers];

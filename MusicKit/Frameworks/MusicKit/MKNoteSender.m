@@ -117,7 +117,7 @@ Modification history prior to commit to CVS:
     [dataObject release];
     dataObject = nil;
     // We don't release the owner since it is a weak reference.
-    // Also removes the name, if any, from the name table. TODO check if appropriate to do here.
+    // Also removes the name, if any, from the name table. TODO: check if appropriate to do here.
     MKRemoveObjectName(self);
     [super dealloc];
 }			

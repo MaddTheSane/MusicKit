@@ -83,7 +83,7 @@
 
 #define MAXMSGLENGTH 1024
 
-// TODO convert this into a class method.
+// TODO: convert this into a class method.
 static id buildAlert(MKAlert *alert, NSString *title, NSString *s, NSString *first, NSString *second, NSString *third)
 {
     NSString *t;

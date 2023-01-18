@@ -375,11 +375,11 @@ static DSPAddress getDataMem(MKOrchestra *self,MKOrchMemSegment segment,int size
 static DSPAddress getPELoop(MKOrchestra *self,int size);
 static BOOL givePELoop(MKOrchestra *self,int freedPEAddr);
 
-// TODO should become an NSArray
+// TODO: should become an NSArray
 static id *patchTemplates = NULL; /* Array of PatchTemplates */
 static int nTemplates = 0;  /* Number of templates about which the orchestra knows. */
 static unsigned short nDSPs = 0;  /* Number of DSP resources */
-// TODO should become an NSArray
+// TODO: should become an NSArray
 static id *orchestraClasses = NULL;
 
 // The default loop unit generator class
@@ -387,13 +387,13 @@ static id defaultOrchloopClass = nil;
 
 // Holds the mapping from DSP index number to MKOrchestra instance.
 // All orchestra instances created are held, indexed by DSP number (0 based).
-// TODO this implies a strict one DSP, one MKOrchestra instance. This may nowdays be a relaxable constraint.
+// TODO: this implies a strict one DSP, one MKOrchestra instance. This may nowdays be a relaxable constraint.
 static NSMutableDictionary *dspNumToOrch = nil; 
 
-// TODO should become an NSArray caching the result of [dspNumToOrch valueObjects]
+// TODO: should become an NSArray caching the result of [dspNumToOrch valueObjects]
 static id *orchs = NULL;
 /* Packed nil-terminated array of Orchestras that have actually been created */
-// TODO should become [orchs makeObjectsPerformSelector: @sel(blah)];
+// TODO: should become [orchs makeObjectsPerformSelector: @sel(blah)];
 #define FOREACHORCH(_i) for (_i=0; orchs[i]; _i++) 
 
 
@@ -497,7 +497,7 @@ static NSString * orchMemSegmentNames[(int) MK_numOrchMemSegments] =
 	deviceStatus = MK_devClosed;
 	_simFP = NULL;
 	[dspNumToOrch setObject: self forKey: [NSNumber numberWithInt: orchIndex]];
-	// TODO orchs = [dspNumToOrch values];
+	// TODO: orchs = [dspNumToOrch values];
 	/* Now add it to the end of orchs */
 	for (i = 0; orchs[i] != nil; i++) /* Get to end */
 	    ;
@@ -554,7 +554,7 @@ static NSString * orchMemSegmentNames[(int) MK_numOrchMemSegments] =
     if (!driverPresent(index))
 	return nil;
 #endif
-    // TODO this means we can only create one instance of MKOrchestra on a DSP resource.
+    // TODO: this means we can only create one instance of MKOrchestra on a DSP resource.
     // We may want to relax this constraint in the future.
     orch = [dspNumToOrch objectForKey: [NSNumber numberWithInt: index]];
     if (orch != nil)
@@ -795,7 +795,7 @@ Returns self. */
 }
 
 /* Sends open to each orchestra object. Returns nil if one of the
-MKOrchestra returns nil, else self. TODO self should be replaced by the known singleton. */
+MKOrchestra returns nil, else self. TODO: self should be replaced by the known singleton. */
 + open
 {
     return broadcastAndRtn(self, @selector(open));
@@ -2098,7 +2098,7 @@ void _MKOrchTrace(MKOrchestra *orch,int typeOfInfo, NSString *fmt, ...)
     va_end(ap);
 }
 
-// TODO Should be a method
+// TODO: Should be a method
 DSPFix48 *_MKCurSample(MKOrchestra *self)
 /* Returns time turned into sample time for use to DSP routines. 
 DeltaT is included in the result. */
@@ -2205,10 +2205,10 @@ extern BOOL _MKAdjustTimeIfNotBehind(void);
     double dspTime,hostTime;
     if (![_MKClassConductor() inPerformance])
 	return;
-    _MKLock(); // TODO can we replace this with [MKConductor lockPerformance]; ?
+    _MKLock(); // TODO: can we replace this with [MKConductor lockPerformance]; ?
     if ((self->_parenCount) /* Don't mess with parens */
         || (!_MKAdjustTimeIfNotBehind())) {
-	_MKUnlock(); // TODO can we replace this with [MKConductor unlockPerformance]; ?
+	_MKUnlock(); // TODO: can we replace this with [MKConductor unlockPerformance]; ?
 	return;
     }
     DSPSetCurrentDSP(self->orchIndex); /* Added March 7, 1993--DAJ */
@@ -2218,7 +2218,7 @@ extern BOOL _MKAdjustTimeIfNotBehind(void);
     /* one pole filter */
     synchTimeRatio = (synchTimeRatio * .8 + dspTime/hostTime * .2);
     timeOffset = (synchTimeRatio - 1) * hostTime;
-    _MKUnlock();  // TODO can we replace this with [MKConductor unlockPerformance]; ?
+    _MKUnlock();  // TODO: can we replace this with [MKConductor unlockPerformance]; ?
 }
 
 static void adjustOrchTE(MKOrchestra *self,BOOL yesOrNo,BOOL reset) {
@@ -2784,7 +2784,7 @@ Returns YES if compaction was accomplished.
         unsigned int pendingLoopBLT = ~0; // *pendingLoopBLT = NULL;
         MKOrchMemStruct *ugReso,resoToBLT,newReloc,fromBLT,toBLT, *oldReloc;
         int pLoopNeeds;
-	// TODO needs release
+	// TODO: needs release
         register NSMutableArray *aList = _MKLightweightArrayCopy(self->unitGeneratorStack); //was [self->unitGeneratorStack copy]; /* Local copy */
 	id spHead = nil;
 	id spTail = nil;

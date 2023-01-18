@@ -63,7 +63,7 @@ MIDITimeStamp MIDIGetCurrentTime(void)
     return AudioGetCurrentHostTime();
 }
 
-// TODO we need to properly convert the result to an int, since the division will reduce the actual result within those bounds.
+// TODO: we need to properly convert the result to an int, since the division will reduce the actual result within those bounds.
 static int timeStampToMKTime(MIDITimeStamp timeStamp)
 {
     return (int) ((timeStamp - datumRefTime) / quantumFactor);
@@ -103,7 +103,7 @@ static void replyDispatch(const MIDIPacketList *receivedPacketList, void *savedR
 	    }
 	    // NSLog(@"\n");
 	    // claimedSources[unit] == 0; // determine from refCon and connRefCon
-	    incomingUnit = 0; // TODO determine the unit the data was received on.
+	    incomingUnit = 0; // TODO: determine the unit the data was received on.
 	    if (dataReplyPort != MKMD_PORT_NULL)
 		(*(userFuncs->dataReply))(userData, incomingUnit, events, packet->length);
 	    else
@@ -202,7 +202,7 @@ PERFORM_API char *MKMDErrorString(MKMDReturn errorCode)
 // Returns NULL if unable to find the hostname, otherwise whatever value for MKMDPort
 // that has meaning.
 // hostname should eventually be a URL.
-// TODO this is problematic, there could be many MIDI devices on a named host.
+// TODO: this is problematic, there could be many MIDI devices on a named host.
 PERFORM_API MKMDPort MKMDGetMIDIDeviceOnHost(const char *hostname)
 {
     if (*hostname) {
@@ -261,7 +261,7 @@ PERFORM_API MKMDReturn MKMDBecomeOwner(MKMDPort mididriver_port, MKMDOwnerPort o
 PERFORM_API MKMDReturn MKMDReleaseOwnership(MKMDPort mididriver_port, MKMDOwnerPort owner_port)
 {
 #if FUNCLOG
-    // TODO check the ports properly
+    // TODO: check the ports properly
     fprintf(debug, "MKMDReleaseOwnership called\n");
     fclose(debug); // hopefully save what we did.
 #endif
@@ -361,7 +361,7 @@ PERFORM_API MKMDReturn MKMDStartClock (
 	MKMDPort mididriver_port,
 	MKMDOwnerPort owner_port)
 {
-    // TODO check the ports properly
+    // TODO: check the ports properly
 #if FUNCLOG
     fprintf(debug, "MKMDStartClock called\n");
 #endif
@@ -371,7 +371,7 @@ PERFORM_API MKMDReturn MKMDStartClock (
 /* Routine MKMDStopClock */
 PERFORM_API MKMDReturn MKMDStopClock(MKMDPort mididriver_port, MKMDOwnerPort owner_port)
 {
-    // TODO check the ports properly
+    // TODO: check the ports properly
 #if FUNCLOG
     fprintf(debug, "MKMDStopClock called\n");
 #endif

@@ -69,7 +69,7 @@ OF THIS AGREEMENT.
 #define SAMPLE_RATE_REDUCTION 184 
 
 // Tried NSCompositeDestinationIn, NSCompositePlusLighter, NSCompositeDestinationOver
-// TODO to try: NSCompositeDestinationOut, NSCompositeClear
+// TODO: to try: NSCompositeDestinationOut, NSCompositeClear
 // This works well if the background is slightly transparent and either light or dark.
 #define SELECTION_DRAWING_COMPOSITE NSCompositingOperationDestinationAtop
 
@@ -78,7 +78,7 @@ OF THIS AGREEMENT.
 + (void) initialize
 {
     if (self == [SndView class]) {
-	[SndView setVersion: (int) 0]; // TODO this should be 1, but because this is in initialize, it screws up the decoded version.
+	[SndView setVersion: (int) 0]; // TODO: this should be 1, but because this is in initialize, it screws up the decoded version.
     }
 }
 
@@ -244,7 +244,7 @@ OF THIS AGREEMENT.
     [self setNeedsDisplay: YES];
 }
 
-// TODO this should removed once we can use the Snd method.
+// TODO: this should removed once we can use the Snd method.
 // retrieve a sound value at the given frame, for a specified channel, or average over all channels.
 // channelNumber is 0 - channelCount to retrieve a single channel, channelCount to average all channels
 // SndSampleAtFrame()
@@ -267,7 +267,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     sampleNumber = frameNumber * channelCount + startingChannel;
 
     for(sampleIndex = sampleNumber; sampleIndex < sampleNumber + averageOverChannels; sampleIndex++) {
-	// TODO move this into a SndAudioBuffer method.
+	// TODO: move this into a SndAudioBuffer method.
 	switch (sampleDataFormat) {
 	    case SND_FORMAT_LINEAR_8:
 		theValue += ((char *) pcmData)[sampleIndex];
@@ -864,7 +864,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     // If so, check to see if there are 2 channels to sum.
     // If sound is mono, just do 'left' (0'th) channel
         
-    if (stereoMode == SNDVIEW_STEREOMODE) { // TODO rename for multiple channel sounds.
+    if (stereoMode == SNDVIEW_STEREOMODE) { // TODO: rename for multiple channel sounds.
 	if (chanCount < 2) {
 	    whichChannel = 0;
 	}
@@ -1258,7 +1258,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 	    &defaultRecordSampleRate,
 	    &tmpFloat];
 	[aCoder encodeObject: dataList];
-	// [aCoder encodeValuesOfObjCTypes: "f", &amplitudeZoom]; // TODO should be encoded when versioning is managed.
+	// [aCoder encodeValuesOfObjCTypes: "f", &amplitudeZoom]; // TODO: should be encoded when versioning is managed.
     }
 }
 
@@ -1352,7 +1352,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 // generate an NSImage from the visible selected region of the view.
 - (NSImage *) dragImageFromSelection
 {
-    // TODO This isn't correct with scrollable SndViews, needs fixing.
+    // TODO: This isn't correct with scrollable SndViews, needs fixing.
     NSRect selectionVisible = NSIntersectionRect([self visibleRect], [self selectionRect]);
     /* create an empty image of the size of the visible selection. */
     NSImage *dragImage = [[NSImage alloc] initWithSize: selectionVisible.size];
@@ -1407,7 +1407,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     [self tellDelegate: @selector(selectionChanged:)];    
 }
 
-// TODO check if this can be unified with drawSelectionRectangleWithin:
+// TODO: check if this can be unified with drawSelectionRectangleWithin:
 - (void) drawSelectedRegionRect: (NSRect) selectedRegionRect
 	   previousSelectedRect: (NSRect) previousSelectedRegionRect
 {
@@ -2066,14 +2066,14 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 				    samplingRate: sr];
     //	NSLog(@"recordingSound %@\n", recordingSound);
 
-    // TODO set self as recording delegate.
+    // TODO: set self as recording delegate.
     [recordingSound record];
 #endif /* NEXT_RECORDING_ENABLED */
 }
 
 - (void) stop: (id) sender
 {
-  [sound stop: self];  // TODO should self be sender?
+  [sound stop: self];  // TODO: should self be sender?
   return;
 }
 
@@ -2493,7 +2493,7 @@ LMS: Nowdays we want to rescale to fit the entire sound into the view, regardles
                     [self tellDelegate: @selector(hadError:)];
 		    // [self showCursor];
                     return YES;
-		    // TODO do I need to free anything else here?
+		    // TODO: do I need to free anything else here?
 		}
             }
         }
@@ -2572,7 +2572,7 @@ LMS: Nowdays we want to rescale to fit the entire sound into the view, regardles
     }
     
     [pasteboardSound setName: [[sound name] stringByAppendingString: @" region"]];
-    [pasteboardSound setInfo: [pasteboardSound name]]; // TODO kludge to duplicate name to info for transport.
+    [pasteboardSound setInfo: [pasteboardSound name]]; // TODO: kludge to duplicate name to info for transport.
 
     // NSLog(@"pasteboard sound %@\n", pasteboardSound);
     

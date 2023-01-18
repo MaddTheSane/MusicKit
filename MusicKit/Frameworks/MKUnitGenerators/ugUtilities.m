@@ -23,7 +23,7 @@
  */
 
 /*!
-  TODO this should be in an header file somewhere...
+  TODO: this should be in an header file somewhere...
   @brief Apply a DSP-synthesis envelope during a performance.
   @param
  */

@@ -45,7 +45,7 @@
 */
     BOOL             remainConnectedToManager;
 /*!  Holds those performances which will be removed after completing playback.
-	  TODO I'm guessing this is an ivar rather than just a local variable to save time creating the object,
+	  TODO: I'm guessing this is an ivar rather than just a local variable to save time creating the object,
 	  by reusing it? Strikes me it would be efficient to simply release the damn thing than to actually
 	  empty it each time. This needs testing.
  */

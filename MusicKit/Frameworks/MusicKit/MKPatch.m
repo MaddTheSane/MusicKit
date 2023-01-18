@@ -19,7 +19,7 @@
 
 @implementation MKPatch
 
-// TODO Nothing for now, eventually we could incorporate nib loading and display for each MKPatch.
+// TODO: Nothing for now, eventually we could incorporate nib loading and display for each MKPatch.
 
 @end
 

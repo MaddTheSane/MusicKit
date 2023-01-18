@@ -55,7 +55,7 @@
 */
 - init;
 
-// TODO perhaps add initWithFormat: (SndFormat) newFormat to prime the chain format?
+// TODO: perhaps add initWithFormat: (SndFormat) newFormat to prime the chain format?
 
 /*!
   @brief   Adds an SndAudioProcessor to the end of the effects chain.

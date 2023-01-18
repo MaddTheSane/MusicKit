@@ -149,7 +149,7 @@ BOOL subRangeIsInsideSuperRange(NSRange subR, NSRange superR)
 		toLength: (long) fillLength
           samplesInRange: (NSRange) sndReadingRange;
 {
-    // TODO this is a kludge which assumes the region read from and copied to is the same number
+    // TODO: this is a kludge which assumes the region read from and copied to is the same number
     // of samples which isn't strictly true if there is resampling occuring.
     // Anyway, this all should be replaced with insertIntoAudioBuffer:inFrameRange:samplesStartingFrom:
     NSRange playRegion = { sndReadingRange.location, fillLength };

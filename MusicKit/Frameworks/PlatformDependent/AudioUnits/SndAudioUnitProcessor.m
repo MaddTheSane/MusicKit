@@ -390,7 +390,7 @@ static void parameterListener(void *audioProcessorInstance, void *inObject, cons
 }
 
 // set stream format property
-// TODO this should probably be inside the processReplacingInputBuffer: method.
+// TODO: this should probably be inside the processReplacingInputBuffer: method.
 - (void) setStreamFormat: (SndFormat) streamFormat
 { 
     AudioStreamBasicDescription newStreamFormat;

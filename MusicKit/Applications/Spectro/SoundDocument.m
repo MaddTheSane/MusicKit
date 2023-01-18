@@ -186,7 +186,7 @@
 				 channelCount: [templateSound channelCount]];
 	if (err) {
 	    /* The DSP is required for compression or decompression */
-	    // TODO assign outError
+	    // TODO: assign outError
 	    [self saveError: @"Cannot do format conversion %@ (DSP busy?)" arg: @""];
 	    return NO;
 	}

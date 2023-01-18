@@ -73,7 +73,7 @@
 
 //-------------------------------------------------------------------
 // Temporary copy arrays for envelope copy operations
-// TODO - this should become an instance of Envelope
+// TODO: - this should become an instance of Envelope
 
 typedef struct _env {
     double *x;                     // x array for adding or removing points
@@ -123,14 +123,14 @@ void freeTemp(void)
 
 //-------------------------------------------------------------------
 // Temporary arrays for drawing operations
-// TODO this should be an array of points, bundled as an Object
+// TODO: this should be an array of points, bundled as an Object
 
 typedef struct _draw {
     int num;                    // number of points in draw arrays (x,y,p)
     int *p;                     // point number array
-    float *x;                   // x array of drawing coordinates
-    float *y;                   // y array
-    float *yr;                  // real y coordinate of each point 
+    CGFloat *x;                   // x array of drawing coordinates
+    CGFloat *y;                   // y array
+    CGFloat *yr;                  // real y coordinate of each point
     int max;                    // currently allocated length
 } Draw;
 
@@ -149,10 +149,10 @@ void allocateDraw(int size)
     if (newsize<64) newsize=64;
     if (draw==NULL)    {
         draw=malloc(sizeof(Draw));
-        draw->x=malloc(sizeof(float)*newsize*MAXNUMSEGS);
-        draw->y=malloc(sizeof(float)*newsize*MAXNUMSEGS);
+        draw->x=malloc(sizeof(CGFloat)*newsize*MAXNUMSEGS);
+        draw->y=malloc(sizeof(CGFloat)*newsize*MAXNUMSEGS);
         draw->p=malloc(sizeof(int)*newsize*MAXNUMSEGS);
-        draw->yr=malloc(sizeof(float)*newsize);
+        draw->yr=malloc(sizeof(CGFloat)*newsize);
         draw->max=newsize;
         draw->num=0;
     }
@@ -161,10 +161,10 @@ void allocateDraw(int size)
             draw->max=size;
 	else 
 	    draw->max*=2;
-        draw->x=realloc(draw->x,sizeof(float)*draw->max*MAXNUMSEGS);
-        draw->y=realloc(draw->y,sizeof(float)*draw->max*MAXNUMSEGS);
+        draw->x=realloc(draw->x,sizeof(CGFloat)*draw->max*MAXNUMSEGS);
+        draw->y=realloc(draw->y,sizeof(CGFloat)*draw->max*MAXNUMSEGS);
         draw->p=realloc(draw->p,sizeof(int)*draw->max*MAXNUMSEGS);
-        draw->yr=realloc(draw->yr,sizeof(float)*draw->max);
+        draw->yr=realloc(draw->yr,sizeof(CGFloat)*draw->max);
     }
 }
 
@@ -331,11 +331,11 @@ void freeDraw(void)
 // The boundaries of the zone are delta pixels wide. Returns the
 // number of the hit point or -1 if no hit.
 
-- (int) hitKnobAt: (NSPoint) p border: (float) delta;
+- (int) hitKnobAt: (NSPoint) p border: (CGFloat) delta;
 {
-// TODO use mouse:inRect:
+// TODO: use mouse:inRect:
     int point;
-    float kx, ky, dx, dy;
+    CGFloat kx, ky, dx, dy;
     
     dx = delta / WIDTH * (xMax - xMin);
     dy = delta / HEIGHT * (yMax - yMin);
@@ -732,7 +732,7 @@ void freeDraw(void)
     
     if (hitpt >= 0) {                                    // Move hitpt as mouse drags
         [self selectPoint: hitpt];                       // select and redraw image
-// TODO dunno if this should be here, probably during init, perhaps replace with tracking rectangle?
+// TODO: dunno if this should be here, probably during init, perhaps replace with tracking rectangle?
         [[self window] setAcceptsMouseMovedEvents: YES];
         
         [self lockFocus];
@@ -953,7 +953,7 @@ int token(char *t)
 {
     char *orig, tk[1024];
     int   symb;
-    unsigned int length;
+    NSUInteger length;
     NSString *prs;
     NSArray *pastetypes;
     int sticky, point;
@@ -962,7 +962,7 @@ int token(char *t)
     prs = [[NSPasteboard generalPasteboard] stringForType:NSStringPboardType];
     if (prs != nil) {                            // if ASCII in pasteboard...
 	length = [prs lengthOfBytesUsingEncoding: NSUTF8StringEncoding];
-// TODO change calloc to object declaration.	
+// TODO: change calloc to object declaration.
         data = orig = calloc(length + 16,sizeof(char));     // copy data to local buffer
         strncpy(data, [prs UTF8String], length);
         
@@ -1239,7 +1239,7 @@ int token(char *t)
 
 //-------------------------------------------------------------------
 // setXAt:to: changes value of x coordinate of point n
-- setXAt: (int) n to: (float) coord
+- setXAt: (int) n to: (CGFloat) coord
 {
     if (n != 0 && coord < xValues[n - 1])             // force selected point to be within
         coord = xValues[n - 1];                     // enclosing points
@@ -1247,7 +1247,7 @@ int token(char *t)
         coord = xValues[n + 1];
     if (coord != xValues[n]) {                    // if x changed update display panel
         xValues[n] = coord;
-        [self display];
+        [self setNeedsDisplay:YES];
         [(Controller *)theController update: self];
     }
     return self;
@@ -1255,14 +1255,14 @@ int token(char *t)
 
 //-------------------------------------------------------------------
 // setYAt:to: changes value of y coordinate of point n
-- setYAt: (int) n to: (float) coord
+- setYAt: (int) n to: (CGFloat) coord
 {
     if (coord > yMax) coord = yMax;                // clip y values to max and min
     if (coord < yMin) coord = yMin;
     
     if (coord != yValues[n]) {                   // if y changed update display panel
         yValues[n] = coord;
-        [self display];
+        [self setNeedsDisplay:YES];
         [(Controller *)theController update: self];
     }
     return self;
@@ -1271,7 +1271,7 @@ int token(char *t)
 //-------------------------------------------------------------------
 // setYrAt:to: changes value of real y coordinate of point n
  
-- setYrAt: (int) n to: (float) coord
+- setYrAt: (int) n to: (CGFloat) coord
 {
     double y;
     
@@ -1289,11 +1289,11 @@ int token(char *t)
 //-------------------------------------------------------------------
 // setSmoothAt:to: changes value of smoothing of point n
  
-- setSmoothAt: (int) n to: (float) value
+- setSmoothAt: (int) n to: (CGFloat) value
 {
     if (value != sValues[n]) {                  // if smoothing changed update panel
         sValues[n] = value;
-        [self display];
+        [self setNeedsDisplay:YES];
         [(Controller *)theController update: self];
     }
     return self;
@@ -1302,11 +1302,11 @@ int token(char *t)
 //-------------------------------------------------------------------
 // setXMinTo: changes minimum value of x component of envelope
  
-- (void) setXMinTo: (float) coord
+- (void) setXMinTo: (CGFloat) coord
 {
     if (coord < xMax) {
         xMin = coord;
-        [self display];
+        [self setNeedsDisplay:YES];
     }
     else if (theController != nil)
         [(Controller *)theController update: self]; 
@@ -1315,11 +1315,11 @@ int token(char *t)
 //-------------------------------------------------------------------
 // setXMaxTo: changes maximun value of x component of envelope
  
-- (void) setXMaxTo: (float) coord
+- (void) setXMaxTo: (CGFloat) coord
 {
     if (coord > xMin) {
         xMax = coord;
-        [self display];
+        [self setNeedsDisplay:YES];
     }
     else if (theController != nil)
         [(Controller *)theController update: self]; 
@@ -1328,22 +1328,22 @@ int token(char *t)
 //-------------------------------------------------------------------
 // setXLimitsTo:: changes max and min values of x component
  
-- setXLimitsTo: (float) min : (float) max
+- setXLimitsTo: (CGFloat) min : (CGFloat) max
 {
     xMin = min;
     xMax = max;
-    [self display];
+    [self setNeedsDisplay:YES];
     return self;
 }
 
 //-------------------------------------------------------------------
 // setYMinTo: changes minimum value of y component of envelope
  
-- (void) setYMinTo: (float) coord
+- (void) setYMinTo: (CGFloat) coord
 {
     if (coord < yMax) {
         yMin = coord;
-        [self display];
+        [self setNeedsDisplay:YES];
     }
     else if (theController != nil)
         [(Controller *)theController update: self]; 
@@ -1352,11 +1352,11 @@ int token(char *t)
 //-------------------------------------------------------------------
 // setYMaxTo: changes maximun value of y component of envelope
  
-- (void) setYMaxTo: (float) coord
+- (void) setYMaxTo: (CGFloat) coord
 {
     if (coord > yMax) {
         yMax = coord;
-        [self display];
+        [self setNeedsDisplay:YES];
     }
     else if (theController != nil)
         [(Controller *)theController update: self]; 
@@ -1365,19 +1365,19 @@ int token(char *t)
 //-------------------------------------------------------------------
 // setXSnapTo: changes value of x Snap
  
-- (void) setXSnapTo: (float) coord
+- (void) setXSnapTo: (CGFloat) coord
 {
     xSnap = coord;
-    [self display]; 
+    [self setNeedsDisplay:YES];
 }
 
 //-------------------------------------------------------------------
 // setYSnapTo: changes value of y Snap
  
-- (void) setYSnapTo: (float) coord
+- (void) setYSnapTo: (CGFloat) coord
 {
     ySnap = coord;
-    [self display]; 
+    [self setNeedsDisplay:YES];
 }
 
 //-------------------------------------------------------------------
@@ -1442,7 +1442,7 @@ int token(char *t)
     if (ymin == 0)
 	yMin = ymin;
     
-    [self display]; 
+    [self setNeedsDisplay:YES];
 }
 
 //===================================================================
@@ -1460,7 +1460,7 @@ int token(char *t)
 //-------------------------------------------------------------------
 // (float)getX:(int)i Return value of x component of point i
 
-- (float) getX: (int) i
+- (CGFloat) getX: (int) i
 {
     if (i >= pointCount) 
 	i = pointCount - 1;
@@ -1472,7 +1472,7 @@ int token(char *t)
 //-------------------------------------------------------------------
 // (float)getY:(int)i Return value of y component of point i
 
-- (float) getY: (int) i
+- (CGFloat) getY: (int) i
 {
     if (i >= pointCount)
 	i = pointCount - 1;
@@ -1484,7 +1484,7 @@ int token(char *t)
 //-------------------------------------------------------------------
 // (float)getYr:(int)i Return value of real y component of point i
 
-- (float) getYr: (int) i
+- (CGFloat) getYr: (int) i
 {
     if (i >= pointCount) 
 	i = pointCount - 1;
@@ -1496,7 +1496,7 @@ int token(char *t)
 //-------------------------------------------------------------------
 // (float)getSmoothing:(int)i Return value of smoothing of point i
 
-- (float) getSmoothing: (int) i
+- (CGFloat) getSmoothing: (int) i
 {
     if (i >= pointCount) 
 	i = pointCount - 1;
@@ -1523,7 +1523,7 @@ int token(char *t)
 //-------------------------------------------------------------------
 // (float) getXMax 
 
-- (float) getXMax 
+- (CGFloat) getXMax
 { 
     return xMax;
 }
@@ -1531,7 +1531,7 @@ int token(char *t)
 //-------------------------------------------------------------------
 // (float)getXMin 
 
-- (float) getXMin 
+- (CGFloat) getXMin
 {
     return xMin;
 }
@@ -1539,7 +1539,7 @@ int token(char *t)
 //-------------------------------------------------------------------
 // (float)getYMax 
 
-- (float) getYMax
+- (CGFloat) getYMax
 {
     return yMax;
 }
@@ -1547,7 +1547,7 @@ int token(char *t)
 //-------------------------------------------------------------------
 // (float)getYMin 
 
-- (float) getYMin
+- (CGFloat) getYMin
 {
     return yMin;
 }
@@ -1555,7 +1555,7 @@ int token(char *t)
 //-------------------------------------------------------------------
 // (float)getXSnap 
 
-- (float) getXSnap
+- (CGFloat) getXSnap
 {
     return xSnap;
 }
@@ -1563,7 +1563,7 @@ int token(char *t)
 //-------------------------------------------------------------------
 // (float)getYSnap 
 
-- (float) getYSnap
+- (CGFloat) getYSnap
 {
     return ySnap;
 }

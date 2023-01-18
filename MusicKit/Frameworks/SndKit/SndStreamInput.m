@@ -94,7 +94,7 @@
 
 - (void) processBuffers
 {  
-    // TODO handle when the output stream is not the same as the input stream.
+    // TODO: handle when the output stream is not the same as the input stream.
     SndAudioBuffer *currentSynthOutputBuffer = [self synthOutputBuffer];
     NSRange outputBufferRange = { 0, [currentSynthOutputBuffer lengthInSampleFrames] };
     
@@ -113,7 +113,7 @@
 	    NSRange fillFromInputRange = { 0, outputBufferRange.length }; // Should be an ivar
 	    
 	    while(NSMaxRange(fillFromInputRange) < wholeInputBufferRange.length) {
-		// TODO copy a partial length buffer into synthOutputBuffer
+		// TODO: copy a partial length buffer into synthOutputBuffer
 		[currentSynthOutputBuffer copyFromBuffer: inBuffer 
 					  intoFrameRange: outputBufferRange
 					  fromFrameRange: fillFromInputRange];
@@ -128,7 +128,7 @@
 	}
 	else if(wholeInputBufferRange.length < outputBufferRange.length) {
 	    NSLog(@"output buffer larger than input buffer"); 
-	    // TODO copy a partial length buffer into synthOutputBuffer
+	    // TODO: copy a partial length buffer into synthOutputBuffer
 	    [currentSynthOutputBuffer copyFromBuffer: inBuffer 
 				      intoFrameRange: outputBufferRange // change to be a portion of the buffer.
 				      fromFrameRange: wholeInputBufferRange];

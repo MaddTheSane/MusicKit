@@ -39,7 +39,7 @@ int main (int argc, const char *argv[])
     NSArray *noteSenders;
     Snd *mixedSound;
 
-    // [SndMP3 setPreDecode: YES];  // TODO kludge for now, should  be initialized in MKSamples.
+    // [SndMP3 setPreDecode: YES];  // TODO: kludge for now, should  be initialized in MKSamples.
     if (argc != 3) {
         fprintf(stderr, "Usage: mixsounds <input score file> <output snd file>.\n");
         exit(1);

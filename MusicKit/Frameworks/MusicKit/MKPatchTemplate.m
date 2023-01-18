@@ -186,7 +186,7 @@ Modification history:
 {
     MKPatchTemplate *newObj = (MKPatchTemplate *) [[MKPatchTemplate allocWithZone: zone] init];
 
-    // TODO this may not be correct.
+    // TODO: this may not be correct.
     newObj->_deallocatedPatches = [_MKClassOrchestra() _addTemplate: newObj];
     newObj->_connectionStorage = [_connectionStorage copy];
     newObj->_elementStorage = [_elementStorage copy];

@@ -56,7 +56,7 @@
     /*! The sample the loop ends at. This sample is included in the loop. */
     long loopEndIndex;
 
-    // ivars for variable speed playback - TODO needs fixing and documenting
+    // ivars for variable speed playback - TODO: needs fixing and documenting
     double  deltaTime;
 
     double  actualTime;
@@ -309,7 +309,7 @@ startPosition: (double) startPosition
   playIndex is updated, and looping is respected. In the case of the end of the sound
   being encountered, a smaller buffer will be filled, and the smaller size is returned.
   @param bufferToFill A SndAudioBuffer that will be filled with samples.
-  @param buffLength The intended number of samples TODO or bytes? to retrieve.
+  @param buffLength The intended number of samples TODO: or bytes? to retrieve.
   @return Returns the final buffer length, which may be less than the requested amount in the case of
   a premature stop, or simply reaching the end of the data. 
   */

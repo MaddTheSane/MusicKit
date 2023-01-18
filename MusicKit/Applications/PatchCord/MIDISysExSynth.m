@@ -226,7 +226,7 @@ patch name be derived from the description (when downloading) & vice-versa when 
 {
     NSWindow *theWindow = [self window];
 
-//    [patchDescription autorelease]; // TODO check this is now ok
+//    [patchDescription autorelease]; // TODO: check this is now ok
     patchDescription = [newDescription copy];
     if(theWindow != nil)
 	[theWindow setTitle: [self patchDescription]];

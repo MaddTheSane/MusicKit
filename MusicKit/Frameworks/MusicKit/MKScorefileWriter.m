@@ -111,7 +111,7 @@ Modification history prior to CVS commit.
     if ([aDecoder versionForClassName: @"MKScorefileWriter"] == VERSION2) {
 	[aDecoder decodeValuesOfObjCTypes: "@ci", &info, &_isOptimized, &noteReceiverCount];
 	NSArray *allNoteReceivers = [super noteReceivers];
-	/* TODO Because we can't install the MKPart infos now in the MKNoteReceivers 
+	/* TODO: Because we can't install the MKPart infos now in the MKNoteReceivers 
 	   (since the MKNoteReceivers are in the super class), we have to save them temporarily
 	   in an available NSArray _p and then insert them later. However at the moment there doesn't
 	   seem to be a good time to determine when to do this. So this may be broken, unless the object decoding order has changed.
@@ -220,7 +220,7 @@ Modification history prior to CVS commit.
 {
     if (noteSeen || (![self isNoteReceiverPresent: aNR]))
 	return nil;
-    // TODO this will leak. We need to recheck if we need to copy the note.
+    // TODO: this will leak. We need to recheck if we need to copy the note.
     [[aNR _getData] setInfoNote: [aNote copy]];
     return self;
 }

@@ -472,7 +472,7 @@ of it.
 	else
 	    scaler = scaling / (double)(0x7fff); 
 
-	/* TODO This should be rewritten to accept sound data of any format. */
+	/* TODO: This should be rewritten to accept sound data of any format. */
 	data = (short *)[sound bytes];
 	_MK_MALLOC(dataDouble, double, aLength);
 	dbl = dataDouble;

@@ -191,7 +191,7 @@
 {
   self = [self init];
   if (self != nil) {
-      // TODO this should actually read HTTP, FTP URLs also.
+      // TODO: this should actually read HTTP, FTP URLs also.
     if ([self readSoundfile: [url path]] != SND_ERR_NONE) {
       [self release];
       return nil;
@@ -207,7 +207,7 @@
     unsigned char *soundDataBytes;
     int infoStringLength;
     char *infoUTF8String;
-    // TODO need to ensure these are all 4 bytes long.
+    // TODO: need to ensure these are all 4 bytes long.
     int dataLocation;
     int dataSize;
     int dataFormat;
@@ -253,7 +253,7 @@
     [soundData getBytes: soundDataBytes range: NSMakeRange(dataLocation, dataSize)];
     if(soundBuffers)
 	[soundBuffers release];
-    // TODO define audioBufferWithFormat: data: (NSData *) and audioBufferWithFormat: bytes:
+    // TODO: define audioBufferWithFormat: data: (NSData *) and audioBufferWithFormat: bytes:
     soundBuffers = [[NSMutableArray arrayWithObject: [SndAudioBuffer audioBufferWithFormat: &soundFormat data: soundDataBytes]] retain];
     free(soundDataBytes);
     
@@ -321,7 +321,7 @@
     NSUInteger UTF8InfoLength = [info lengthOfBytesUsingEncoding: NSUTF8StringEncoding];
     NSUInteger audioBufferIndex;
 
-    // TODO not sure this will work with indirect sounds.
+    // TODO: not sure this will work with indirect sounds.
     dataOffsetLocation += UTF8InfoLength;
 
     soundData = [NSMutableData dataWithCapacity: sampleDataSize]; 
@@ -625,7 +625,7 @@
                     channelCount: nativeFormat.channelCount];
 }
 
-// TODO Perhaps just use soundFromSampleInRange: specifying entire range and passing a NSZone parameter.
+// TODO: Perhaps just use soundFromSampleInRange: specifying entire range and passing a NSZone parameter.
 - (id) copyWithZone: (NSZone *) zone
 {
     Snd *newSound = [[[self class] allocWithZone: zone] initWithFormat: [self dataFormat]
@@ -633,7 +633,7 @@
 								frames: [self lengthInSampleFrames]
 							  samplingRate: [self samplingRate]];
     
-    // TODO verify deep copying behaviour.
+    // TODO: verify deep copying behaviour.
     newSound->soundBuffers = [soundBuffers copyWithZone: zone];
     
     // Duplicate all other ivars
@@ -692,7 +692,7 @@
     return [singleFrameBuffer sampleAtFrameIndex: frameIndex channel: channelNumber];
 #else
     float theValue = 0.0;
-    int channelCount = [self channelCount]; // TODO can eventually replace channelCount with soundFormat.channelCount
+    int channelCount = [self channelCount]; // TODO: can eventually replace channelCount with soundFormat.channelCount
     int averageOverChannels;
     int startingChannel;
     unsigned long sampleIndex;
@@ -718,7 +718,7 @@
     sampleNumber = fragmentIndex * channelCount + startingChannel;
     
     for(sampleIndex = sampleNumber; sampleIndex < sampleNumber + averageOverChannels; sampleIndex++) {
-	// TODO move this into a SndAudioBuffer method.
+	// TODO: move this into a SndAudioBuffer method.
 	switch (dataFormat) {
 	    case SND_FORMAT_LINEAR_8:
 		theValue += ((char *) pcmData)[sampleIndex];

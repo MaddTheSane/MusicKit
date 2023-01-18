@@ -113,7 +113,7 @@
 	sf_command(NULL, SFC_GET_FORMAT_MAJOR, &sfFormatInfo, sizeof(sfFormatInfo));
 	fileExtension = [NSString stringWithUTF8String: sfFormatInfo.extension];
 	[fileTypes addObject: fileExtension];
-	// Accept upper case equivalent. TODO This should probably be an optional behaviour.
+	// Accept upper case equivalent. TODO: This should probably be an optional behaviour.
 	[fileTypes addObject: [fileExtension uppercaseString]];
     }
     return [NSArray arrayWithArray: fileTypes]; // make it immutable
@@ -124,7 +124,7 @@
 
 + (NSString *) defaultFileExtension
 {
-    return @"au"; // TODO this should probably be determined at run time based on the operating system
+    return @"au"; // TODO: this should probably be determined at run time based on the operating system
 }
 
 + (BOOL) isPathForSoundFile: (NSString *) path
@@ -153,7 +153,7 @@
 	if(sf_error(sfp) != SF_ERR_NO_ERROR) {
 	    NSLog(@"%s\n", sf_strerror(sfp));
             if([[NSUserDefaults standardUserDefaults] boolForKey: @"SndShowLogOnReadError"]) {
-                char readingLogBuffer[2048];  // TODO we could malloc and free this here instead.
+                char readingLogBuffer[2048];  // TODO: we could malloc and free this here instead.
 		
                 sf_command(sfp, SFC_GET_LOG_INFO, readingLogBuffer, sizeof(readingLogBuffer));
                 NSLog(@"Error log of file reading: %s\n", readingLogBuffer);
@@ -185,7 +185,7 @@
 // Returns YES if we could find a set of loop points, NO if not.
 - (NSRange) loopRange
 {
-    // TODO loopEndIndex will be loop.location + loop.length - 1;
+    // TODO: loopEndIndex will be loop.location + loop.length - 1;
     NSRange loop = { 0, [self lengthInSampleFrames] };
     
 #if HAVE_LIBSNDFILE
@@ -211,7 +211,7 @@
     return loop;
 }
 
-// TODO it would be preferable to have readSoundfile: (NSString *) fromRange: (NSRange) 
+// TODO: it would be preferable to have readSoundfile: (NSString *) fromRange: (NSRange) 
 // However we need a mechanism to indicate infinity for the length in order to signal to read to EOF.
 - (SndError) readSoundfile: (NSString *) path
 	   startFrame: (unsigned long) startFrame
@@ -238,7 +238,7 @@
 	if(sf_error(sfp) != SF_ERR_NO_ERROR) {
 	    NSLog(@"File reading error: %s\n", sf_strerror(sfp));
             if([[NSUserDefaults standardUserDefaults] boolForKey: @"SndShowLogOnReadError"]) {
-                char readingLogBuffer[2048];  // TODO we could malloc and free this here instead.
+                char readingLogBuffer[2048];  // TODO: we could malloc and free this here instead.
 
                 sf_command(sfp, SFC_GET_LOG_INFO, readingLogBuffer, sizeof(readingLogBuffer));
                 NSLog(@"Error log of file reading: %s\n", readingLogBuffer);
@@ -324,9 +324,9 @@
     if (errorClosing != 0)
 	return SND_ERR_UNKNOWN;
         
-    // TODO Need to retrieve loop pointers.
+    // TODO: Need to retrieve loop pointers.
     // This is probably a bit kludgy but it will do for now.
-    // TODO when we can retrieve the loop indexes from the sound file, this should become the default value.
+    // TODO: when we can retrieve the loop indexes from the sound file, this should become the default value.
     loopEndIndex = [self lengthInSampleFrames] - 1;
     
     [fileReadingPool release];
@@ -368,7 +368,7 @@
 }
 
 // writes the sound data, soundDataFormat describes the format of the data pointed to by soundData.
-// TODO The parameters can probably be eventually changed to take an SndAudioBuffer when Snd's hold it's internal
+// TODO: The parameters can probably be eventually changed to take an SndAudioBuffer when Snd's hold it's internal
 // data as one or more SndAudioBuffers. Alternatively, perhaps this is a candidate to become a SndAudioBuffer method.
 int SndWriteSampleData(SNDFILE *sfp, void *soundData, SndFormat soundDataFormat)
 {
@@ -447,7 +447,7 @@ int SndWriteSampleData(SNDFILE *sfp, void *soundData, SndFormat soundDataFormat)
 	// if saving comments are not supported for this file format, just skip it silently
 	if(error != 0) {
 	    NSLog(@"-writeSoundfile:fileFormat:dataFormat: Error writing info comment \"%s\": %s\n", [info UTF8String], sf_error_number(error));
-	    // TODO libsndfile does not allow testing whether strings are supported or not, so we have to skip over a potential hard error.
+	    // TODO: libsndfile does not allow testing whether strings are supported or not, so we have to skip over a potential hard error.
 	    // return SND_ERR_CANNOT_WRITE;	
 	}
     }

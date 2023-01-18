@@ -9,7 +9,7 @@
  which is accessed by pitch variables is referred to as the "installed
  tuning system".
  
- TODO this should be restructured such that each instance is a tuning system that can be copied rather than
+ TODO: this should be restructured such that each instance is a tuning system that can be copied rather than
  installing an instance as the default. Then use +defaultTuningSystem or +twelveToneTempered to return an pristine instance.
  
  Original Author: David A. Jaffe

@@ -352,7 +352,7 @@ int main(int argc, char *argv[])
 		outputFile = [[NSString stringWithUTF8String: optarg] stringByAppendingPathExtension: SOUND_EXTENSION];
 		break;
 	    case 'y':  // override synthPatch for given part.
-		       // TODO NSDictionary of optarg, parsed into part "=" synthPatch
+		       // TODO: NSDictionary of optarg, parsed into part "=" synthPatch
 		fprintf(stderr, "synthPatch assignment: %s\n", optarg);
 		break;
 	    case 'h':
@@ -403,7 +403,7 @@ int main(int argc, char *argv[])
 	else { /* on the fly */
             aStream = [NSData dataWithContentsOfFile: findFile(inputFile, &midifile)];
             if(midifile) {
-                // TODO once we have a MKMidifilePerformer class we can do this.
+                // TODO: once we have a MKMidifilePerformer class we can do this.
                 fprintf(stderr, "Unable to play MIDI files on the fly, exitting.\n");
                 exit(1);
             }

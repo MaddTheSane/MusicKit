@@ -183,10 +183,10 @@ NSLocalizedStringFromTableInBundle(@"Problem communicating with MIDI device driv
 /* All of the above */
 #define IGNORE_REAL_TIME (IGNORE_CLOCK + IGNORE_START + IGNORE_CONTINUE + IGNORE_STOP + IGNORE_ACTIVE + IGNORE_RESET)
 
-// TODO This should be able to be removed.
+// TODO: This should be able to be removed.
 #define FCC_DID_NOT_APPROVE_DRIVER_CHANGE 1 
 
-#define DEFAULT_SOFT_NAME @"midi0" // TODO This should be changed to "midi" or "midiDefault"
+#define DEFAULT_SOFT_NAME @"midi0" // TODO: This should be changed to "midi" or "midiDefault"
 
 #define NO_UNIT (-1)
 
@@ -201,7 +201,7 @@ static NSMutableArray *bidirectionalDriverNames = nil;
 static NSMutableArray *inputDriverNames = nil;
 static NSMutableArray *outputDriverNames = nil;
 static unsigned int systemDefaultDriverNum;   // index into the midiDriverNames and units that the operating system has nominated as default
-static double mtcTimeOffset = 0;    // TODO should this be an ivar?
+static double mtcTimeOffset = 0;    // TODO: should this be an ivar?
 
 /* Some forward decls */
 static void midi_data_reply(void *receivingMidiPtr, short unit, MKMDRawEvent *events, unsigned int count);
@@ -264,8 +264,8 @@ static void midi_data_reply(void *receivingMidiPtr, short unit, MKMDRawEvent *ev
 	[aCoder encodeValuesOfObjCTypes: "iidiccI", &outputUnit, &queueSize, &alarmTime,
 	    &intAlarmTime, &alarmTimeValid, &alarmPending, &systemIgnoreBits];
     }
-    //_MKMidiInStruct *_pIn;                  // TODO perhaps we can get away without archiving
-    //_MKMidiOutStruct *_pOut;                // TODO perhaps we can get away without archiving
+    //_MKMidiInStruct *_pIn;                  // TODO: perhaps we can get away without archiving
+    //_MKMidiOutStruct *_pOut;                // TODO: perhaps we can get away without archiving
     
     NSLog(@"encodeWithCoder: queueSize = %d\n", queueSize);	
 }
@@ -448,7 +448,7 @@ NSString *midiDriverErrorString(int errorCode)
     }
     if (!ownerPort) {
 	/* Tells driver funcs to call: */ 
-	// TODO MKMDReplyFunctions recvStruct = { midi_data_reply, my_alarm_reply, my_exception_reply, 0};
+	// TODO: MKMDReplyFunctions recvStruct = { midi_data_reply, my_alarm_reply, my_exception_reply, 0};
 	MKMDReplyFunctions recvStruct = { midi_data_reply, NULL, NULL, NULL};
 	
         ownerPort++;
@@ -518,7 +518,7 @@ NSString *midiDriverErrorString(int errorCode)
     if (!timeInfoTable) /* Mapping from hostname to tvs pointer */
         timeInfoTable = [[NSMutableDictionary dictionary] retain];
     if ((timeVarsEncoded = [timeInfoTable objectForKey: timeInfoHostname]) != nil) {
-        // TODO Assign ivars from [timeVarsEncoded bytes] or somesuch if timeVarsEncoded changes to be an object.
+        // TODO: Assign ivars from [timeVarsEncoded bytes] or somesuch if timeVarsEncoded changes to be an object.
     }
     else { // initialise MTC ivars
         synchConductor = nil;                // If non-nil, time mode is MTC Synch
@@ -529,7 +529,7 @@ NSString *midiDriverErrorString(int errorCode)
         intAlarmTime = 0;
         alarmTimeValid = NO;
         alarmPending = NO;
-        // TODO assign MTC ivars into NSData or object and use the following to save it.
+        // TODO: assign MTC ivars into NSData or object and use the following to save it.
         // [timeInfoTable setObject: [NSData dataWithBytes: ?] forKey: hostname];
     }
 }
@@ -734,7 +734,7 @@ static void putSysExcl(struct __MKMidiOutStruct *ptr, NSString *sysExclString)
     while (*sysExclStr) {
         c = _MKGetSysExByte(&sysExclStr);
         // Add an inter-byte delay of 300mS to avoid overflow problems in slow synthesisers.
-        // TODO this delay should actually be a note parameter: MK_interByteDelay
+        // TODO: this delay should actually be a note parameter: MK_interByteDelay
         curTime += 0.300 * _MK_MIDI_QUANTUM;
 	putTimedByteWithCheck(ptr, curTime, c);
     }
@@ -993,7 +993,7 @@ static void midi_data_reply(void *receivingMidiPtr, short unit, MKMDRawEvent *ev
 
     // Eventually MKMDHandleReply should be unnecessary, when we receive the MIDI data direct into handlePortMessage
     // Then we can merge this method and midi_data_reply into a single handlePortMessage. 
-    // TODO we should indicate which MKMidi instance we are talking to by passing in self instead of msg.
+    // TODO: we should indicate which MKMidi instance we are talking to by passing in self instead of msg.
     r = MKMDHandleReply(msg, &recvStruct);        /* This gets data */
     if (r != MKMD_SUCCESS) {
       MKErrorCode(MK_machErr, errorMessage, midiDriverErrorString(r), @"midiIn");
@@ -1186,7 +1186,7 @@ static BOOL isSoftDevice(NSString *deviceName, int *unitNum)
 	}
 	else if (deviceNumber == 0) { 
             // Use the system default MIDI driver for midi0, not necessarily the first entry.
-            // TODO this should probably be changed to allow "midiDefault" as a device name,
+            // TODO: this should probably be changed to allow "midiDefault" as a device name,
             // or consign midi0 to be the default, midi1 as [midiDriverNames objectAtIndex: 0], etc.
             return [bidirectionalDriverNames objectAtIndex: systemDefaultDriverNum];
 	}
@@ -1322,7 +1322,7 @@ static BOOL isSoftDevice(NSString *deviceName, int *unitNum)
 			    IGNORE_CONTINUE |
 			    IGNORE_STOP);
 	deviceStatus = MK_devClosed;
-	// TODO Maybe we don't want this here, in case we ever want to use MKMidi without MKNotes.
+	// TODO: Maybe we don't want this here, in case we ever want to use MKMidi without MKNotes.
 	_MKCheckInit(); 
 	_MKClassOrchestra(); /* Force find-class here */
 	ioMode = MKMidiInputOutput;

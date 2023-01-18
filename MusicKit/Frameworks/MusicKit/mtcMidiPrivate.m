@@ -18,7 +18,7 @@
 
 static MKMidi *mtcMidi = nil;
 
-// LMS TODO these will no longer be called due to the change to handleMachMessage. We should call them from the handler or 
+// LMS TODO: these will no longer be called due to the change to handleMachMessage. We should call them from the handler or
 // incorporate their functionality into the handler.
 #if 0
 static void my_alarm_reply(mach_port_t replyPort, int requestedTime, int actualTime)

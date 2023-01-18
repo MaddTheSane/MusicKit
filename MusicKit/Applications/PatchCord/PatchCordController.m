@@ -39,7 +39,7 @@
 
 - (void) loadTheBundles
 {
-    // TODO check NSUserDefault if we should load unhandled. If not loaded, we should just ignore unhandled SysEx.
+    // TODO: check NSUserDefault if we should load unhandled. If not loaded, we should just ignore unhandled SysEx.
     // if ([[NSUserDefaults standardUserDefaults] boolForKey: ShouldRespondToUnhandledSynths])
     {
 	MIDISysExSynth *respondantSynth1;
@@ -72,7 +72,7 @@
 	}
     }
     
-    // TODO For now just load the ones we need
+    // TODO: For now just load the ones we need
     //[[Juno106 alloc] init];
     //[[ProphetVS alloc] init];
     [[QuadraverbGT alloc] init];
