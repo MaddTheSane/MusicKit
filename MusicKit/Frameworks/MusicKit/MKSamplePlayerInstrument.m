@@ -62,9 +62,9 @@
 {
     self = [super init];
     if(self != nil) {
-	[self addNoteReceiver: [[MKNoteReceiver alloc] init]];
+	[self addNoteReceiver: [[[MKNoteReceiver alloc] init] autorelease]];
 	
-	playingNotes = [[NSMutableDictionary dictionaryWithCapacity: 20] retain]; 
+	playingNotes = [[NSMutableDictionary alloc] initWithCapacity: 20]; 
 	// since we update the playingNotes queue (actually a dictionary) via an abort/stop routine from
 	// the application and from the asynchronous didPlay: delegate message, we protect it with a lock.
 	[self reset];
@@ -481,7 +481,7 @@ NSInvocation *untimedMessage = [NSInvocation invocationWithMethodSignature:(NSMe
 - (id)initWithCoder:(NSCoder *) decoder
   /* Unarchive the instrument from a typed stream. */
 {
-  [super initWithCoder: decoder];
+  self = [super initWithCoder: decoder];
   if ([decoder versionForClassName: @"MKSamplePlayerInstrument"] == 1) {
     [decoder decodeValuesOfObjCTypes:"iiiccci", &keyNum, &testKey,
 	     &voiceCount, &diatonic, &tieRepeats, &preloadingEnabled, &recordModeController];

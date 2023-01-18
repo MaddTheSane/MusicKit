@@ -48,7 +48,7 @@ extern unsigned _MKGetSynthElementSynthPatchLoc(SynthElement *synthEl);
 + (id) _newInOrch: (id) anOrch
 	    index: (unsigned short) whichDSP 
             reloc: (MKOrchMemStruct *) reloc
-	   looper: (unsigned int) looper;
+	   looper: (unsigned int) looper NS_RETURNS_NOT_RETAINED;
 - _free;
 - _deallocAndAddToList;
 - (MKOrchMemStruct *) _setSynthPatch: aSynthPatch;

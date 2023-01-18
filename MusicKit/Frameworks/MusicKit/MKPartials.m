@@ -149,7 +149,7 @@ id MKGetPartialsClass(void)
   allocated, sets defaultPhase to 0, and calls [super init].
   This is invoked when a new object is created. */
 {
-  [super init];
+  self = [super init];
   freeArrays(self);
   defaultPhase      = 0.0;
   dbMode            = NO;
@@ -201,7 +201,7 @@ static void putArray(int partialCount,NSCoder *aTypedStream,double *arr) /*sb: o
 static void getArray(int partialCount,NSCoder *aTypedStream,BOOL *aBool, /*sb: originally converted as NSArchiver, not NSCoder */
 double **arrPtr)
 {
-  [aTypedStream decodeValueOfObjCType:"c" at:aBool];
+  [aTypedStream decodeValueOfObjCType:"c" at:aBool size:sizeof(*aBool)];
   if (*aBool) {
     double *arr; /* We do it like this because read: can be called
     multiple times. */

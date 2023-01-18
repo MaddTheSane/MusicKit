@@ -181,14 +181,15 @@ NSMutableArray *_MKLightweightArrayCopy(NSMutableArray *oldArray)
 NSMutableArray *_MKDeepMutableArrayCopy(NSMutableArray *oldArray)
 {
     NSMutableArray *newArray;
-    int i, count;
+    NSInteger count;
     if (!oldArray) {
 	return nil;
     }
     count = [oldArray count];
     newArray = [[NSMutableArray alloc] initWithCapacity: count];
-    for (i = 0; i < count; i++) {
-	[newArray addObject: [[oldArray objectAtIndex: i] copy]];
+    for (id obj in oldArray) {
+	// Static analyzer warning about a leaked object can be ignored
+	[newArray addObject: [obj copy]];
     }
     [newArray makeObjectsPerformSelector: @selector(release)];
     return newArray;

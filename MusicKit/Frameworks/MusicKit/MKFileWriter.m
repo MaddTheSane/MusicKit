@@ -99,8 +99,8 @@ Modification history prior to commit to CVS repository:
      Should be invoked via NXReadObject(). 
      See write:. */
 {
-    int version;
-    [super initWithCoder: aDecoder];
+    NSInteger version;
+    self = [super initWithCoder: aDecoder];
     version = [aDecoder versionForClassName: @"MKFileWriter"];
     if (version >= VERSION2)
         [aDecoder decodeValuesOfObjCTypes: "i@d", &timeUnit, &filename, &timeShift];//sb: was i*d
@@ -114,7 +114,7 @@ Modification history prior to commit to CVS repository:
      If subclass overrides this method, it must send [super init]
      before setting its own defaults. */
 {
-    [super init];
+    self = [super init];
     timeUnit = MK_second;
     stream = nil;
     filename = nil;

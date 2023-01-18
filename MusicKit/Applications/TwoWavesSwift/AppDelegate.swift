@@ -8,6 +8,7 @@
 
 import Cocoa
 import SndKit
+import SndKit.SndPlayer
 
 /// number of seconds of sound to display
 let SECONDS: Float = 0.2

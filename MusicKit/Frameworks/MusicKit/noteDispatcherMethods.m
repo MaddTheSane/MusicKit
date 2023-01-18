@@ -41,7 +41,7 @@
     return [noteSenders containsObject: aNoteSender];
 }
 
-- releaseNoteSenders
+- (void)releaseNoteSenders
   /* TYPE: Creating
    * Empties and frees contents of noteSenders.
    * Returns the receiver.
@@ -50,28 +50,26 @@
     NSMutableArray *noteSendersCopy;
     
     if ([self inPerformance])
-	return nil;
+	return;
     noteSendersCopy = _MKLightweightArrayCopy(noteSenders);
     [self removeNoteSenders];
     /* Split this up because elements may try and remove themselves from noteSenders when they are freed. */
     [noteSendersCopy removeAllObjects];  
-    // TODO: [noteSendersCopy release];  // _MKLightweightArrayCopy is a copy method, it doesn't autorelease
-    return self;
+    [noteSendersCopy release];
 }
 
-- removeNoteSenders
+- (void)removeNoteSenders
   /* Empties noteSenders by repeatedly sending removeNoteSender:
      with each element of the collection as the argument. */
 {
-    unsigned i;
+    NSUInteger i;
     
     if (!noteSenders)
-	return self;
+	return;
     i = [noteSenders count]; 
     /* We remove them in the reverse order, which should work (!) */
     while (i--) 
 	[self removeNoteSender: [noteSenders objectAtIndex: i]];
-    return self;
 }
 
 - (MKNoteSender *) noteSender

@@ -30,10 +30,7 @@ Modification history before commit to CVS:
 @implementation MKNoteReceiver
 
 /* Gets the owner (an MKInstrument or MKNoteFilter). */
-- owner
-{
-    return owner;
-}
+@synthesize owner;
 
 /* TYPE: Querying; YES if aNoteSender is a connection.
 * Returns YES if aNoteSender is connected to the receiver.
@@ -55,37 +52,32 @@ Modification history before commit to CVS:
 *
 * Returns the receiver.
 */
-- squelch
+- (void)squelch
 {
     isSquelched = YES;
     // This shuts down any sounding notes, otherwise it can be very annoying when
     // the instrument such as an MKSamplePlayerInstrument is playing a long sounding note.
     [owner allNotesOff];  
-    return self;
 }
 
 /* TYPE: Squelch; Turns on message-sending capability.
 * Unsquelches and returns the receiver.
 */
-- unsquelch
+- (void)unsquelch
 {
     isSquelched = NO;
-    return self;
 }
 
 /* TYPE: Querying; YES if the receiver is squelched.
 * Returns YES if the receiver is squelched.
 */
-- (BOOL) isSquelched
-{
-    return isSquelched;
-}
+@synthesize squelched=isSquelched;
 
 /* TYPE: Querying; Returns the number of noteSenders.
 * Returns the number of noteSenders in the
 * receiver's connection set.
 */
-- (unsigned) connectionCount
+- (NSInteger) connectionCount
 {
     return [noteSenders count];
 }
@@ -93,12 +85,11 @@ Modification history before commit to CVS:
 /* TYPE: Manipulating; Returns a copy of the List of the connections.
 * Returns a copy of the NSArray of the receiver's noteSenders. 
 * The noteSenders themselves are not
-* copied. TODO: at the moment it is the sender's responsibility to free the NSArray.
+* copied.
 */
 - (NSArray *) connections
 {
-    return _MKLightweightArrayCopy(noteSenders);
-    // TODO: should become return [_MKLightweightArrayCopy(noteSenders) autorelease];
+    return [_MKLightweightArrayCopy(noteSenders) autorelease];
 }
 
 #define VERSION2 2
@@ -161,11 +152,11 @@ Modification history before commit to CVS:
  */
 - copyWithZone: (NSZone *) zone
 {
-    unsigned n = [noteSenders count], i;
+    NSUInteger n = [noteSenders count], i;
     MKNoteReceiver *newObj = [[MKNoteReceiver allocWithZone: zone] init];
 
     [newObj->noteSenders release];
-    newObj->noteSenders = [[NSMutableArray arrayWithCapacity: [noteSenders count]] retain];
+    newObj->noteSenders = [[NSMutableArray alloc] initWithCapacity: [noteSenders count]];
     for (i = 0; i < n; i++)
         [newObj connect: [noteSenders objectAtIndex: i]];
     newObj->isSquelched = isSquelched;
@@ -174,39 +165,36 @@ Modification history before commit to CVS:
 
 // Disconnects aNoteSender from the receiver. We do this by requesting the MKNoteSender to disconnect from us.
 // This concentrates responsibility (and more concretely object allocation management) with the MKNoteSender.
-- disconnect: (MKNoteSender *) aNoteSender
+- (void)disconnect: (MKNoteSender *) aNoteSender
 {
     if (!aNoteSender)
-	return self;
+	return;
     
     // Inform the note sender to disconnect from us.
     if ([aNoteSender _disconnect: self]) {
         [self _disconnect: aNoteSender];
     }
-    return self;
-}	
+}
 
-- disconnect
+- (void)disconnect
 {
     /* Need to copy since MKNoteSender -disconnect: modifies contents. */
     NSMutableArray *allOfOurNoteSenders = _MKLightweightArrayCopy(noteSenders);
     // NSLog(@"MKNoteReceiver %p disconnecting all note senders %@\n", self, allOfOurNoteSenders);
     [allOfOurNoteSenders makeObjectsPerformSelector: @selector(disconnect:) withObject: self];
     [allOfOurNoteSenders release];
-    return self;
 }
 
 /* TYPE: Manipulating; Connects aNoteSender to the receiver.
 * Connects aNoteSender to the receiver 
 * and returns self.  
 */
-- connect: (MKNoteSender *) aNoteSender 
+- (void)connect: (MKNoteSender *) aNoteSender
 {
     if (![aNoteSender isKindOfClass: [MKNoteSender class]])
-	return self;
+	return;
     if ([self _connect: aNoteSender])  /* Success ? */
 	[aNoteSender _connect: self];    /* Make other-way link */
-    return self;
 }
 
 // Receiving; Forwards note to its owner, unless squelched.
@@ -265,13 +253,13 @@ Uses the note's Conductor for time coordination. */
 
 	[noteSenders release];
 	noteSenders = [[aDecoder decodeObjectForKey: @"MKNoteReceiver_noteSenders"] retain];
-	objectName = [aDecoder decodeObjectForKey: @"MKNoteReceiver_objectName"];
+	objectName = [aDecoder decodeObjectOfClass:[NSString class] forKey: @"MKNoteReceiver_objectName"];
 	if (objectName) {
 	    MKNameObject(objectName, self);
 	}
 	isSquelched = [aDecoder decodeBoolForKey: @"MKNoteReceiver_isSquelched"];
 	[owner release];
-	owner = [[aDecoder decodeObjectForKey: @"MKNoteReceiver_owner"] retain];
+	owner = [[aDecoder decodeObjectOfClass:[MKInstrument class] forKey: @"MKNoteReceiver_owner"] retain];
     }
     else {
 	NSString *str;
@@ -289,50 +277,36 @@ Uses the note's Conductor for time coordination. */
     return self;
 }
 
-@end
-
-@implementation MKNoteReceiver(Private)
-
 /* Sets the owner (an MKInstrument or MKNoteFilter). In most cases,
 only the owner itself sends this message. 
 */
-- _setOwner: obj
-{
-    owner = obj; // Don't retain as this is a weak reference.
-    return self;
-}
+//- (void) _setOwner: obj
+//{
+//    owner = obj; // Don't retain as this is a weak reference.
+//}
 
 /* Facility for associating an arbitrary datum in a MKNoteReceiver */
-- (void) _setData: (id) anObj 
-{
-    [dataObject release];
-    dataObject = [anObj retain];
-}
+@synthesize _data=dataObject;
 
-- (id) _getData
-{
-    return [[dataObject retain] autorelease];
-}
-
-- _connect: (MKNoteSender *) aNoteSender
+- (BOOL) _connect: (MKNoteSender *) aNoteSender
 {
     if ([noteSenders indexOfObject: aNoteSender] != NSNotFound)  /* Already there. */
-	return nil;
+	return NO;
     [noteSenders addObject: aNoteSender];
-    return self;
+    return YES;
 }
 
-- _disconnect: (MKNoteSender *) aNoteSender
+- (BOOL) _disconnect: (MKNoteSender *) aNoteSender
 {
     NSUInteger returnedIndex;
     
     if ((returnedIndex = [noteSenders indexOfObjectIdenticalTo: aNoteSender]) != NSNotFound) {
         [noteSenders removeObjectAtIndex: returnedIndex];
-        return self; /* Returns aNoteSender if success */
+        return YES; /* Returns aNoteSender if success */
     }
     /*    if ([noteSenders removeObject:aNoteSender])       return self;
     */
-    return nil;
+    return NO;
 }
 
 @end

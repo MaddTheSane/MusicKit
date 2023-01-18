@@ -2135,7 +2135,7 @@
 		D825566905A2142800B0192B /* MKConductorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MKConductorDelegate.h; sourceTree = "<group>"; };
 		D825566A05A2142800B0192B /* MKDeviceStatus.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MKDeviceStatus.h; sourceTree = "<group>"; };
 		D825566B05A2142800B0192B /* MKEnvelope.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MKEnvelope.h; sourceTree = "<group>"; };
-		D825566C05A2142800B0192B /* MKEnvelope.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MKEnvelope.m; sourceTree = "<group>"; };
+		D825566C05A2142800B0192B /* MKEnvelope.m */ = {isa = PBXFileReference; fileEncoding = 30; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = MKEnvelope.m; sourceTree = "<group>"; };
 		D825566D05A2142800B0192B /* MKFilePerformer.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MKFilePerformer.h; sourceTree = "<group>"; };
 		D825566E05A2142800B0192B /* MKFilePerformer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MKFilePerformer.m; sourceTree = "<group>"; };
 		D825566F05A2142800B0192B /* MKFileWriter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MKFileWriter.h; sourceTree = "<group>"; };
@@ -2149,7 +2149,7 @@
 		D825567705A2142800B0192B /* MKMTCPerformer.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MKMTCPerformer.h; sourceTree = "<group>"; };
 		D825567805A2142800B0192B /* MKMTCPerformer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MKMTCPerformer.m; sourceTree = "<group>"; };
 		D825567905A2142800B0192B /* MKNote.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MKNote.h; sourceTree = "<group>"; };
-		D825567A05A2142800B0192B /* MKNote.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MKNote.m; sourceTree = "<group>"; };
+		D825567A05A2142800B0192B /* MKNote.m */ = {isa = PBXFileReference; fileEncoding = 30; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = MKNote.m; sourceTree = "<group>"; };
 		D825567B05A2142800B0192B /* MKNoteFilter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MKNoteFilter.h; sourceTree = "<group>"; };
 		D825567C05A2142800B0192B /* MKNoteFilter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MKNoteFilter.m; sourceTree = "<group>"; };
 		D825567D05A2142800B0192B /* MKNoteReceiver.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MKNoteReceiver.h; sourceTree = "<group>"; };

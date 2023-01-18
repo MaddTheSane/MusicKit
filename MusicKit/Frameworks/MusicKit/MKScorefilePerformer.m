@@ -288,12 +288,6 @@ Modification history:
     return newObj;
 }
 
-
-@end
-
-
-@implementation MKScorefilePerformer(Private)
-
 -_newFilePartWithName:(NSString *)name
   /* You never send this message. It is used only by the Scorefile parser
      to add a MKNoteSender to the receiver when a part is declared in the
@@ -321,16 +315,15 @@ Modification history:
    the differences between MKScore and MKScorefilePerformer. */
 {
 //    return [self noteSenders];
-    return _MKLightweightArrayCopy(_partStubs); 
+    return [_MKLightweightArrayCopy(_partStubs) autorelease];
 }
 
--_setInfo:aInfo
+-(void)_setInfo:aInfo
   /* Needed by scorefile parser  */
 {
     if (!info)
       info = [aInfo copy];
     else [info copyParsFrom:aInfo];
-    return self;
 }
 
 @end

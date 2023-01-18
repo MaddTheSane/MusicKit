@@ -115,7 +115,7 @@ static void removeNote(MKPart *self, MKNote *aNote);
 - combineNotes
 {
     MKNote *noteOn, *aNote;
-    int noteTag, listSize;
+    NSInteger noteTag, listSize;
     register int i, j;
     
     if (!noteCount)
@@ -160,7 +160,7 @@ static void removeNote(MKPart *self, MKNote *aNote);
  * to a noteOn in this case).
  * Returns the receiver, or nil if the receiver contains no MKNotes.
  */
-- splitNotes
+- (void)splitNotes
 {
     NSArray *noteList;
     MKNote *noteOff;
@@ -171,7 +171,7 @@ static void removeNote(MKPart *self, MKNote *aNote);
     int originalNoteCount = noteCount;  // noteCount is updated by addNote:
     
     if (!noteCount)
-	return self;
+	return;
     // Create a local lightweight copy of list (autoreleased) so the notes can be modified.
     [self sort]; 
     noteList = _MKLightweightArrayCopy(notes);
@@ -217,20 +217,18 @@ static void removeNote(MKPart *self, MKNote *aNote);
 	    }
 	}
     }
-    return self;
 }
 
 /* Reading and Writing files. ------------------------------------ */
 
 // TODO: should be able to be replaced with setInfoNote:
-- _setInfo: (MKNote *) aInfo
+- (void)_setInfo: (MKNote *) aInfo
     /* Needed by scorefile parser  */
 {
     if (!info)
 	info = [aInfo copy];
     else
 	[info copyParsFrom:aInfo];
-    return self;
 }
 
 /* MKScore Interface. ------------------------------------------------------- */
@@ -481,7 +479,8 @@ static int findAtOrBeforeTime(MKPart *self, double lastTimeTag)
     if (!aNote)
 	return nil;
     [aNote retain]; /* so the next statement does not dealloc it */
-    [oldPart = [aNote part] removeNote:aNote];
+    oldPart = [aNote part];
+    [oldPart removeNote:aNote];
     [aNote _setPartLink:self order:++_highestOrderTag];
     if ((noteCount++) && (isSorted)) {
 	MKNote *lastObj = [notes lastObject];
@@ -909,16 +908,10 @@ static void removeNote(MKPart *self, MKNote *aNote)
     * a copy of the contents of the receiver. The info is copied as well.
     */
 {
-    MKPart *rtn = [MKPart allocWithZone: zone];
-    [rtn init];
+    MKPart *rtn = [[MKPart allocWithZone: zone] init];
     [rtn addNoteCopies: notes timeShift: 0];
     rtn->info = [info copy];
     return rtn;
-}
-
-- copy
-{
-    return [self copyWithZone: [self zone]];
 }
 
 - (NSMutableArray *) notesNoCopy
@@ -933,7 +926,7 @@ static void removeNote(MKPart *self, MKNote *aNote)
     // Joerg reports [notes mutableCopy] is needed to produce a mutable deep
     // copy, but this does not appear to be the case on GNUStep. Thus the MK
     // defines its own explicit deep array copy mechanism.
-    return [NSArray arrayWithArray: _MKDeepMutableArrayCopy(notes)];
+    return [NSArray arrayWithArray: [_MKDeepMutableArrayCopy(notes) autorelease]];
 }
 
 - (MKScore *) score
@@ -1057,7 +1050,7 @@ static void removeNote(MKPart *self, MKNote *aNote)
 	if (oldTag != MAXINT) { /* Ignore unset tags */
 	    oldTagNum = [NSNumber numberWithInt: oldTag];
 	    newTagNum = [hashTable objectForKey: oldTagNum];
-	    if (!newTagNum) {
+	    if (newTagNum == nil) {
 		newTagNum = [NSNumber numberWithInt: MKNoteTag()];
 		[hashTable setObject: newTagNum forKey: oldTagNum];
 	    }

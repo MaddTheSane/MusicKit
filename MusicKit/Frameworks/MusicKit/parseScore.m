@@ -1431,7 +1431,7 @@ static void emit(short t)
 {
     _MKParameterUnion *val1,*val2;
     _MKParameterUnion valResult;
-    short type1,type2,resultType;
+    short type1,type2,resultType=0;
     val2 = stackPop(&type2);
     switch(t) {
       case '+': case '-': case '*': case '/': case '&': case '^': case '%':
@@ -1837,7 +1837,7 @@ static NSString *_errorMsg(MKErrno errCode,va_list ap)
     else
       s = [parsePtr->_name stringByAppendingFormat: @", pg %d, line %d: ",
                            parsePtr->_pageNo, parsePtr->_lineNo];
-    s = [s stringByAppendingString: [[NSString alloc] initWithFormat: fmt arguments:ap]];
+    s = [s stringByAppendingString: [[[NSString alloc] initWithFormat: fmt arguments:ap] autorelease]];
     //_MKOverideErrorMessage(s);
     return s;
 }

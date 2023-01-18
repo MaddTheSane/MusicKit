@@ -241,11 +241,10 @@ static void unsetPartRecorders(MKScoreRecorder *self)
 - (NSArray *) partRecorders
   /* TYPE: Processing
    * Returns a copy of the NSArray of the receiver's MKPartRecorder collection.
-   * The PartRecorders themselves are not copied. It is the sender's
-   * responsibility to free the NSArray.
+   * The PartRecorders themselves are not copied.
    */
 {
-    return _MKLightweightArrayCopy(partRecorders);
+    return [_MKLightweightArrayCopy(partRecorders) autorelease];
 }
 
 - (BOOL) inPerformance
@@ -278,13 +277,14 @@ static void unsetPartRecorders(MKScoreRecorder *self)
 {
     // this functionality is now embodied in _MKLightweigthArrayCopy()
     // return [[NSMutableArray arrayWithArray:partRecorders] retain];
-    return _MKLightweightArrayCopy(partRecorders);
+    return [_MKLightweightArrayCopy(partRecorders) autorelease];
 }
 
 - (MKPartRecorder *) partRecorderForPart: (MKPart *) aPart
   /* Returns the MKPartRecorder for aPart, if found. */
 {
-    unsigned n = [partRecorders count], partRecorderIndex;
+    NSUInteger n = [partRecorders count], partRecorderIndex;
+    //TODO: for..in syntax.
     for (partRecorderIndex = 0; partRecorderIndex < n; partRecorderIndex++) {
 	MKPartRecorder *partRecorderCandidate = [partRecorders objectAtIndex: partRecorderIndex];
 	

@@ -1274,19 +1274,20 @@ static BOOL isSoftDevice(NSString *deviceName, int *unitNum)
 {
     self = [super init];
     if(self != nil) {
-	MKMidi *obj;
 	NSString *hostAndDevName;
 	int notePortIndex;
 	NSString *driverName = [[self class] mapSoftNameToDriverName: devName];
 	
-	if (driverName == nil)
+	if (driverName == nil) {
+	    [self autorelease];
 	    return nil;
+	}
 	devName = driverName;
 #if !m68k
 	hostName = @""; /* Only on local host, see extensive comment above */
 #endif
 	hostAndDevName = [hostName stringByAppendingString: devName];
-	if ((obj = [openDrivers objectForKey: hostAndDevName]) == nil) {         // Doesn't already exist
+	if (([openDrivers objectForKey: hostAndDevName]) == nil) {         // Doesn't already exist
 	    [self getTimeInfoFromHost: hostName];
 	    [openDrivers setObject: self forKey: hostAndDevName]; 
 	}
@@ -1470,7 +1471,7 @@ static BOOL isSoftDevice(NSString *deviceName, int *unitNum)
     return self;
 }
 
-static const int _MKAllNotesOffPause = 500; /* mSec between MIDI channel blasts 
+static const int _MKAllNotesOffPause = 500; /* mSec between MIDI channel blasts
 				* This is a temporary hack and should
 				* not be depended on!  It may change in 
 				* the future.
@@ -1784,8 +1785,8 @@ static const int _MKAllNotesOffPause = 500; /* mSec between MIDI channel blasts
    * Returns a copy of the receiver's MKNoteSender List. 
    */
 {
-    return _MKLightweightArrayCopy(noteSenders);
-    // return [_MKLightweightArrayCopy(noteSenders) autorelease];
+//    return _MKLightweightArrayCopy(noteSenders);
+    return [_MKLightweightArrayCopy(noteSenders) autorelease];
 }
 
 - (MKNoteSender *) noteSender
@@ -1801,8 +1802,8 @@ static const int _MKAllNotesOffPause = 500; /* mSec between MIDI channel blasts
    * are not copied.	
    */
 {
-    return _MKLightweightArrayCopy(noteReceivers);
-    // return [_MKLightweightArrayCopy(noteReceivers) autorelease];
+//    return _MKLightweightArrayCopy(noteReceivers);
+    return [_MKLightweightArrayCopy(noteReceivers) autorelease];
 }
 
 - (MKNoteReceiver *) noteReceiver

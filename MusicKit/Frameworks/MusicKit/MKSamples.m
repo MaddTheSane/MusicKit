@@ -78,7 +78,7 @@ id MKGetSamplesClass(void)
      instance is created. You may send this message to reset the object. */ 
 
 {
-    [super init];
+    self = [super init];
     if (sound) 
 	[sound release];
     if (soundfile) 

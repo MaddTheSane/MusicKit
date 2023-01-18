@@ -146,7 +146,7 @@ Modification history prior to commit to CVS repository:
      Should be invoked via NXReadObject(). 
      See write:. */
 {
-    [super initWithCoder: aDecoder];
+    self = [super initWithCoder: aDecoder];
     if ([aDecoder versionForClassName: @"MKFilePerformer"] == VERSION2) {
 	[aDecoder decodeValuesOfObjCTypes: "*ddd", &filename, &firstTimeTag, &lastTimeTag];
     }

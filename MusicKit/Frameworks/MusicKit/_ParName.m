@@ -757,33 +757,33 @@ void _MKUnarchiveParOn(_MKParameter *param,NSCoder *aTypedStream) /*sb: NSCoder 
 {
   BOOL isMKPublicPar;
   NSString *strVar;
-  [aTypedStream decodeValueOfObjCType:"c" at:&isMKPublicPar];
+  [aTypedStream decodeValueOfObjCType:"c" at:&isMKPublicPar size:sizeof(isMKPublicPar)];
   /* See fix for bug in MKNote.m's read: method */
   if (isMKPublicPar) /* Write parameter number */
-    [aTypedStream decodeValueOfObjCType:"s" at:&param->parNum];
+    [aTypedStream decodeValueOfObjCType:"s" at:&param->parNum size:sizeof(param->parNum)];
   else {       /* Write parameter name */
     id aParNameObj;
-    [aTypedStream decodeValueOfObjCType:"@" at:&strVar];
+    [aTypedStream decodeValueOfObjCType:"@" at:&strVar size:sizeof(strVar)];
     param->parNum = _MKGetPar(strVar,&aParNameObj);
     [strVar release];
     strVar = nil;
   }
-  [aTypedStream decodeValueOfObjCType:"s" at:&param->_uType];
+  [aTypedStream decodeValueOfObjCType:"s" at:&param->_uType size:sizeof(param->_uType)];
   switch (param->_uType) {
     case MK_double:
-      [aTypedStream decodeValueOfObjCType:"d" at:&param->_uVal.rval];
+      [aTypedStream decodeValueOfObjCType:"d" at:&param->_uVal.rval size:sizeof(param->_uVal.rval)];
       break;
     case MK_string:
-      [aTypedStream decodeValueOfObjCType:"@" at:&param->_uVal.sval];//sb: type was "%"
+      [aTypedStream decodeValueOfObjCType:"@" at:&param->_uVal.sval size:sizeof(param->_uVal.sval)];//sb: type was "%"
       break;
     case MK_envelope:
     case MK_waveTable:
     case MK_object:
-      [aTypedStream decodeValueOfObjCType:"@" at:&param->_uVal.symbol];
+      [aTypedStream decodeValueOfObjCType:"@" at:&param->_uVal.symbol size:sizeof(param->_uVal.symbol)];
       break;
     default:
     case MK_int:
-      [aTypedStream decodeValueOfObjCType:"i" at:&param->_uVal.ival];
+      [aTypedStream decodeValueOfObjCType:"i" at:&param->_uVal.ival size:sizeof(param->_uVal.ival)];
       break;
   }
 }

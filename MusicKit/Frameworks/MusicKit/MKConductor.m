@@ -712,8 +712,10 @@ static void condInit()
 	   each performance in the _initialize method. */
 	MKConductor *oldLast = [allConductors lastObject];
 	
-	if (oldLast == self) /* Check for an attempt to init twice */
+	if (oldLast == self) /* Check for an attempt to init twice */ {
+	    [self autorelease];
 	    return nil;
+	}
 	if (![allConductors containsObject: self])
 	    [allConductors addObject: self];
 	if ([allConductors lastObject] != self)

@@ -367,7 +367,7 @@ static dataMemBlockStruct *freeDataMemBlock(dataMemBlockStruct *block)
     return NULL;
 }
 
-static id allocUG(register MKOrchestra *self,id factObj,id beforeObj,id afterObj); /* Forward refs. */
+static id allocUG(register MKOrchestra *self,id factObj,id beforeObj,id afterObj) NS_RETURNS_RETAINED; /* Forward refs. */
 static void givePatchMem(MKOrchestra *self,MKOrchMemSegment segment,DSPAddress addr);
 static void giveDataMem(MKOrchestra *self,MKOrchMemSegment segment, int addr);
 static DSPAddress getPatchMem(MKOrchestra *self,MKOrchMemSegment segment);
@@ -561,7 +561,7 @@ static NSString * orchMemSegmentNames[(int) MK_numOrchMemSegments] =
 	return orch;
     if (self == [MKOrchestra class]) { /* Avoid infinite recursion */
 	if (orchestraClasses[index]) 
-	    return [[orchestraClasses[index] alloc] initOnDSP: index];
+	    return [[[orchestraClasses[index] alloc] initOnDSP: index] autorelease];
     }
     orch = [[MKOrchestra alloc] initOnDSP: index];
     return [orch autorelease];
@@ -2645,11 +2645,8 @@ freed.
 
 #if COMPACTION 
 
-static void freeUG2(self,aUG,aSP)
-register MKOrchestra *self;
-id aUG;
-id aSP;
-/* Used when freeing unit generators during compaction. Like 
+static void freeUG2(register MKOrchestra *self,id aUG,id aSP)
+/* Used when freeing unit generators during compaction. Like
 freeUG but doesn't change ploop nor argument memory. The
 point here is that we don't need to set these because
 we will just clobber the values later. */
@@ -3570,8 +3567,8 @@ allocUG(register MKOrchestra *self,id factObj,id beforeObj,id afterObj)
         [s writeToFile: fileName atomically: YES];
     else [s writeToFile: [fileName stringByAppendingPathExtension: @"lod"] atomically: YES];
     */
-    [s release];
     _MKOpenFileStreamForWriting(fileName,@"lod",s, YES);
+    [s release];
     
     return self;
 }

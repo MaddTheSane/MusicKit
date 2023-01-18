@@ -1076,7 +1076,7 @@ typedef NS_ENUM(int, MKDataType) {
   @return Returns <b>self</b>.
   @see  -<b>copy</b>, -<b>copyFromZone:</b>, -<b>split::</b>
 */
-- copyParsFrom: (MKNote *) aNote; 
+- (void)copyParsFrom: (MKNote *) aNote; 
 
 /*!
   @brief This method returns the MKNote's frequency, measured in Hertz or

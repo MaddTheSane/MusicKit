@@ -621,7 +621,7 @@ extern void MKSetPreemptDuration(double seconds);
   @return Returns an id.
   @see registerOrchestraSubclass:forOrchIndex:.
 */
-+ orchestraOnDSP: (unsigned short) index; 
++ (__kindof MKOrchestra*)orchestraOnDSP: (unsigned short) index; 
 
 /*!
   @brief Creates an MKOrchestra instance for every available DSP, if it has not
@@ -1447,7 +1447,7 @@ extern void MKSetPreemptDuration(double seconds);
   @param  aSynthPatchClass is an id.
   @return Returns an id.
 */
-- allocSynthPatch: (id) aSynthPatchClass; 
+- (id)allocSynthPatch: (id) aSynthPatchClass; 
 
 /*!
   @brief Allocates and returns a MKSynthPatch for MKPatchTemplate <i>p</i>.
@@ -1461,7 +1461,7 @@ extern void MKSetPreemptDuration(double seconds);
   @param  p is an id.
   @return Returns an id.
  */
-- allocSynthPatch: (id) aSynthPatchClass patchTemplate: (id) p; 
+- (id)allocSynthPatch: (id) aSynthPatchClass patchTemplate: (id) p;
 
 /*!
   @brief Allocates and returns a MKUnitGenerator of the specified class,
@@ -1469,7 +1469,7 @@ extern void MKSetPreemptDuration(double seconds);
   @param  aClass is an id.
   @return Returns an id.
 */
-- allocUnitGenerator: (id) aClass; 
+- (id)allocUnitGenerator: (id) aClass;
 
 /*!
   @brief Allocates and returns a MKUnitGenerator of the specified class.
@@ -1479,7 +1479,7 @@ extern void MKSetPreemptDuration(double seconds);
   @param  aUnitGeneratorInstance is an id.
   @return Returns an id.
 */
-- allocUnitGenerator: (id) aClass before: (id) aUnitGeneratorInstance; 
+- (id)allocUnitGenerator: (id) aClass before: (id) aUnitGeneratorInstance;
 
 /*!
   @brief Allocates and returns a MKUnitGenerator of the specified class.
@@ -1489,7 +1489,7 @@ extern void MKSetPreemptDuration(double seconds);
   @param  aUnitGeneratorInstance is an id.
   @return Returns an id. 
  */
-- allocUnitGenerator: (id) aClass after: (id) aUnitGeneratorInstance; 
+- (id)allocUnitGenerator: (id) aClass after: (id) aUnitGeneratorInstance;
 
 /*!
   @brief Allocates and returns an MKUnitGenerator of the specified class.
@@ -1501,7 +1501,7 @@ extern void MKSetPreemptDuration(double seconds);
   @param  anotherUnitGeneratorInstance is an id.
   @return Returns an id.
  */
-- allocUnitGenerator: (id) aClass between: (id) aUnitGeneratorInstance : (id) anotherUnitGeneratorInstance;
+- (id)allocUnitGenerator: (id) aClass between: (id) aUnitGeneratorInstance : (id) anotherUnitGeneratorInstance;
 
 - (NSString *) lastAllocationFailureString;
 

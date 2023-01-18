@@ -66,11 +66,11 @@
      Should be invoked via NXReadObject(). 
      See write:. */
 {
-    int version;
-    [super initWithCoder:aDecoder];
+    NSInteger version;
+    self = [super initWithCoder:aDecoder];
     version = [aDecoder versionForClassName: @"MKPartRecorder"];
     if (version >= VERSION2) {
-	[aDecoder decodeValueOfObjCType:"i" at:&timeUnit];
+	[aDecoder decodeValueOfObjCType:"i" at:&timeUnit size:sizeof(timeUnit)];
 	part = [[aDecoder decodeObject] retain];
 	_scoreRecorder = [[aDecoder decodeObject] retain];
     }
@@ -161,11 +161,12 @@ void _MKSetScoreRecorderOfPartRecorder(MKPartRecorder *aPR, id aSR)
 */
 - realizeNote: (MKNote *) aNote fromNoteReceiver: (MKNoteReceiver *) aNoteReceiver
 {
-    aNote = [aNote copyWithZone: NSDefaultMallocZone()];
+    aNote = [aNote copy];
     [aNote setTimeTag: _MKTimeTagForTimeUnit(aNote, timeUnit, compensatesDeltaT)];
     if ([aNote noteType] == MK_noteDur) 
         [aNote setDuration: _MKDurForTimeUnit(aNote, timeUnit)];
     [part addNote: aNote];
+    [aNote release];
     return self;
 }
 

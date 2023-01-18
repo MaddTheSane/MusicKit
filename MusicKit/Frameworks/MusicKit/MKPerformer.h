@@ -249,13 +249,13 @@ typedef NS_ENUM(int, MKPerformerStatus) {
   @brief Disconnects and releases the receiver's MKNoteSenders.
   @return Returns the receiver.
 */
-- releaseNoteSenders; 
+- (void)releaseNoteSenders;
 
 /*!
   @brief Removes the receiver's MKNoteSenders (but doesn't free them).
   @return Returns the receiver.
 */
-- removeNoteSenders; 
+- (void)removeNoteSenders; 
 
 /*!
   @return Returns an id.

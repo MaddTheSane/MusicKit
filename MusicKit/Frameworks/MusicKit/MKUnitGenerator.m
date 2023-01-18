@@ -135,7 +135,7 @@ id _MKFixupUG(MKUnitGenerator *self, DSPFix48 *ts)
     int i,j;
     int ec;
     int reloc,word;
-    DSPAddress loadAddresses[DSP_LC_NUM]; 
+    DSPAddress loadAddresses[DSP_LC_NUM] = {0};
     DSPDataRecord **data; 
     DSPFixup **fixupsArr = self->_classInfo->fixups;   /* Array of arrays */
     DSPFixup *fixup;
@@ -289,7 +289,7 @@ relocateArgs(MKUnitGenerator *self)
 
 void MKInitUnitGeneratorClass(MKLeafUGStruct *classInfo)
 {
-    classInfo->availLists = (id **)calloc(DSPGetDSPCount(),sizeof(id));
+    classInfo->availLists = (id **)calloc(DSPGetDSPCount(),sizeof(id*));
 }
 
 /* Allocation methods */

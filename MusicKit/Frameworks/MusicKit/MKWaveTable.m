@@ -50,7 +50,7 @@
 {
     if ([aDecoder versionForClassName: @"MKWaveTable"] == VERSION2) {
 	NSString *str;
-	[aDecoder decodeValueOfObjCType: "@" at: &str];
+	[aDecoder decodeValueOfObjCType: "@" at: &str size:sizeof(str)];
 	if (str) {
 	    MKNameObject(str,self);
 	}

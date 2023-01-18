@@ -1012,7 +1012,7 @@ static void deallocRunningVoices(MKSynthInstrument *self,id orch)
      Should be invoked via NXReadObject(). 
      See write:. */
 {
-    [super initWithCoder:aDecoder];
+    self = [super initWithCoder:aDecoder];
     if ([aDecoder versionForClassName:@"MKSynthInstrument"] == VERSION2){
 	[aDecoder decodeValuesOfObjCTypes:"#sc",&synthPatchClass,&allocMode,
 		    &retainUpdates];

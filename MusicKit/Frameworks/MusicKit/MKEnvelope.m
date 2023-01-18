@@ -165,7 +165,7 @@ static void getArray(int pointCount,NSCoder *aTypedStream, /*sb: originally conv
 double **arrPtr)
 {
   BOOL aBool;
-  [aTypedStream decodeValueOfObjCType:"c" at:&aBool];
+  [aTypedStream decodeValueOfObjCType:"c" at:&aBool size:sizeof(aBool)];
   if (aBool) {
     double *arr; /* We do it like this because read: can be called
     multiple times. */

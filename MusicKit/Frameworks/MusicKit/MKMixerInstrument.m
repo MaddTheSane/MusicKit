@@ -59,9 +59,9 @@ static int loopingParam = 0;
 	soundFormat.sampleRate = 44100.0;
 	currentMixFrame = 0;
 	// dictionary of MKSamples, one for each active file, keyed by noteTag.
-	samplesToMix = [[NSMutableDictionary dictionaryWithCapacity: 5] retain];
+	samplesToMix = [[NSMutableDictionary alloc] initWithCapacity: 5];
 	// Use a single MKNoteReceiver to receive all mixing notes.
-	[self addNoteReceiver: [[MKNoteReceiver alloc] init]]; 	
+	[self addNoteReceiver: [[[MKNoteReceiver alloc] init] autorelease]];
     }
     return self;
 }

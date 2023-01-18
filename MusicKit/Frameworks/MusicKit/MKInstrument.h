@@ -167,10 +167,10 @@ realize MKNotes on an external MIDI synthesizer.
   @brief Returns the ordinal index of <i>aNoteReceiver</i> in the
   MKInstrument's MKNoteReceiver NSArray.
 
-  Returns -1 if
+  Returns \c NSNotFound if
   <i>aNoteReceiver</i>is not in the NSArray.
 */
-- (int) indexOfNoteReceiver: (MKNoteReceiver *) aNoteReceiver;
+- (NSInteger) indexOfNoteReceiver: (MKNoteReceiver *) aNoteReceiver;
 
 /*!
   @param  aNoteReceiver is an MKNoteReceiver.

@@ -307,6 +307,7 @@ static unsigned noteCachePtr = 0;
   }
   else
     newObj = [super allocWithZone:NSDefaultMallocZone()];
+  //FIXME: evil usage of -init without +alloc!
   [newObj initWithTimeTag: aTimeTag];
   return [newObj autorelease];
 }
@@ -1228,7 +1229,7 @@ BOOL MKIsNoteParPresent(MKNote *aNote,int par)
 
 static void copyPars(MKNote *toObj,MKNote *fromObj,BOOL override); /* forward ref */
 
--copyParsFrom: (MKNote *) aNote
+-(void)copyParsFrom: (MKNote *) aNote
   /* TYPE: Copying; Copies parameters and dur (if any) from aNote to receiver.
    * Copies aNote's parameters and duration into
    * the receiver (MKEnvelope and WaveTables and other objects are shared rather than copied).
@@ -1238,7 +1239,6 @@ static void copyPars(MKNote *toObj,MKNote *fromObj,BOOL override); /* forward re
   /* (cf. unionWith) */
 {
     copyPars(self,aNote,YES);
-    return self;
 }
 
 /* Parameter getting methods which provide defaults. --------------- */
@@ -1888,8 +1888,10 @@ int MKNextParameter(MKNote *aNote, NSHashEnumerator *aState)
     else
         durAndNoteTagString = [NSString stringWithFormat: @"%.5lf %d", duration, noteTag];
 
-    return [NSString stringWithFormat: @"%@ at %lf: %s(%@) %@ %@\n%@\n",
+    NSString *toRet = [NSString stringWithFormat: @"%@ at %lf: %s(%@) %@ %@\n%@\n",
         [super description], timeTag, _MKTokName(noteType), durAndNoteTagString, partString, performerString, paramString];
+    [paramString release];
+    return toRet;
 }
 
 -_unionWith:aNote

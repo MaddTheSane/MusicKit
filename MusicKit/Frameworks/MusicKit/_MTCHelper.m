@@ -25,7 +25,7 @@ Modification history:
 
 -init
 {
-    [super init];
+    self = [super init];
     [self setConductor:[MKConductor clockConductor]];
     period = _MK_DEFAULT_MTC_POLL_PERIOD;
     return self;

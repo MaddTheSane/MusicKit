@@ -13,11 +13,11 @@
 #define __MK__ScorefilePerformer_H___
 
 #import "MKScorefilePerformer.h"
-@interface MKScorefilePerformer(Private)
+@interface MKScorefilePerformer(/*Private*/)
 
--_newFilePartWithName:(NSString *)name;
+-_newFilePartWithName:(NSString *)name NS_RETURNS_NOT_RETAINED;
 -_elements;
--_setInfo:aInfo;
+-(void)_setInfo:aInfo;
 
 @end
 

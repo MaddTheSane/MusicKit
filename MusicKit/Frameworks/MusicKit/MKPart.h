@@ -263,7 +263,7 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
   
   @see -<b>combineNotes:</b>, -<b>split::</b> (MKNote)
 */
-- splitNotes; 
+- (void)splitNotes; 
 
 /*!
   @param  newScore is an MKScore instance.

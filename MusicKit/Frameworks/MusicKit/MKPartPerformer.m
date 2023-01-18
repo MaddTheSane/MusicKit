@@ -74,7 +74,7 @@ static BOOL fastActivation = NO;
     self = [super init];
     if (self) {
 	lastTimeTag = MK_ENDOFTIME;
-	[self addNoteSender: [MKNoteSender new]];    /* The object's only MKNoteSender. */
+	[self addNoteSender: [[MKNoteSender new] autorelease]];    /* The object's only MKNoteSender. */
     }
     return self;
 }

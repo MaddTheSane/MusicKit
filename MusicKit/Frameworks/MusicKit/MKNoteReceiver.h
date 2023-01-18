@@ -114,10 +114,10 @@ their assumption of the role of MKInstrument.
 
 #import <Foundation/Foundation.h>
 
-@interface MKNoteReceiver: NSObject
+@interface MKNoteReceiver: NSObject <NSCoding, NSCopying>
 {
     /*! Array of connected MKNoteSenders. */
-    NSMutableArray *noteSenders;
+    NSMutableArray<MKNoteSender*> *noteSenders;
     /*! YES if the object is currently squelched. */
     BOOL isSquelched;
     /*! MKInstrument that owns MKNoteReceiver. */
@@ -133,7 +133,7 @@ their assumption of the role of MKInstrument.
   @return Returns an id.
   @see -<b>addNoteReceiver:</b> (MKInstrument, MKMidi)
 */
-- owner; 
+@property (readonly, assign) MKInstrument *owner;
 
 /*!
   @brief Initializes a MKNoteReceiver that was created through <b>allocFromZone:</b>.
@@ -141,12 +141,7 @@ their assumption of the role of MKInstrument.
   Subclass should send [super init] when overriding this method.
   @return Returns <b>self</b>.
 */
-- init;
-
-/*!
-  @brief Disconnects and frees the receiver.
- */
-- (void) dealloc; 
+- (instancetype)init;
 
 /*!
   @brief Severs the connection between the MKNoteReceiver and
@@ -155,14 +150,14 @@ their assumption of the role of MKInstrument.
   @return Returns <b>self</b>.
   @see -<b>disconnect</b>, -<b>connect:</b>, -<b>isConnected:</b>, -<b>connections</b> 
 */
-- disconnect: (MKNoteSender *) aNoteSender; 
+- (void)disconnect: (MKNoteSender *) aNoteSender;
 
 /*!
   @brief Severs the connections between the MKNoteReceiver and all the MKNoteSenders it's connected to.
   @return Returns <b>self</b>.
   @see -<b>disconnect:</b>, -<b>connect:</b>, -<b>isConnected:</b>, -<b>connections</b> 
 */
-- disconnect; 
+- (void)disconnect; 
 
 /*!
   @brief Returns YES if <i>aNoteSender</i> is connected to the
@@ -180,23 +175,21 @@ their assumption of the role of MKInstrument.
   @return Returns <b>self</b>.
   @see -<b>disconnect:</b>, -<b>isConnected</b>, -<b>connections</b>
 */
-- connect: (MKNoteSender *) aNoteSender; 
+- (void)connect: (MKNoteSender *) aNoteSender;
 
 /*!
   @brief Disables the MKNoteReceiver's ability to send <b>realizeNote:fromMKNoteReceiver:</b>
   messages to its owner.
-  @return Returns <b>self</b>.
   @see -<b>isSquelched</b>, -<b>unsquelch</b>
 */
-- squelch; 
+- (void)squelch;
 
 /*!
   @brief Enables the MKNoteReceiver's ability to send <b>realizeNote:fromMKNoteReceiver:</b>
   messages to its owner, undoing the effect of a previous <b>squelch</b> message.
-  @return Returns <b>self</b>.
   @see -<b>isSquelched</b>, -<b>squelch</b>
 */
-- unsquelch; 
+- (void)unsquelch;
 
 /*!
   @brief Returns YES if the MKNoteReceiver is squelched, otherwise returns NO.
@@ -206,7 +199,8 @@ their assumption of the role of MKInstrument.
   @return Returns a BOOL.
   @see -<b>squelch</b>, -<b>unsquelch</b>
 */
-- (BOOL) isSquelched; 
+- (BOOL) isSquelched;
+@property (readonly, getter=isSquelched) BOOL squelched;
 
 /*!
   @brief Creates and returns a new MKNoteReceiver with the same
@@ -217,14 +211,14 @@ their assumption of the role of MKInstrument.
   @return Returns an id.
   @see -<b>copy</b>
 */
-- copyWithZone: (NSZone *) zone; 
+- (id)copyWithZone: (NSZone *) zone;
 
 /*!
   @brief Returns the number of MKNoteSenders that are connected to the MKNoteReceiver.
   @return Returns an unsigned int.
   @see -<b>connect:</b>, -<b>disconnect:</b>, -<b>isConnected</b>, -<b>connections</b>
 */
-- (unsigned) connectionCount;
+- (NSInteger) connectionCount;
 
 /*!
   @brief Creates and returns a NSArray of the MKNoteSenders that are
@@ -232,7 +226,7 @@ their assumption of the role of MKInstrument.
   @return Returns a NSArray instance.
   @see -<b>connect:</b>, -<b>disconnect:</b>, -<b>isConnected</b>
 */
-- (NSArray *) connections;
+- (NSArray<MKNoteSender*> *) connections;
 
 /*!
   @param  aNote is an MKNote instance.
@@ -290,32 +284,17 @@ their assumption of the role of MKInstrument.
 */
 - receiveNote: (MKNote *) aNote withDelay: (double) delayTime; 
 
-/* 
-    You never send this message directly.  
-    Should be invoked with NXWriteRootObject(). 
-    Archives isSquelched and object name, if any. 
-    Also optionally archives elements of MKNoteSender NSArray and owner using 
-    NXWriteObjectReference(). 
-*/
-- (void) encodeWithCoder: (NSCoder *) aCoder;
-
-/* 
-    You never send this message directly.  
-    Should be invoked via NXReadObject(). 
-    See write:. 
-*/
-- (id) initWithCoder: (NSCoder *) aDecoder;
-
 @end
 
-@interface MKNoteReceiver(Private)
+@interface MKNoteReceiver(/*Private*/)
 
-- _setOwner: obj;
+@property (readwrite, assign, setter=_setOwner:) MKInstrument *owner;
 - (void) _setData: (id) anObj;
 - (id) _getData;
+@property (retain, setter=_setData:, getter=_getData) id _data;
 
-- _connect: (MKNoteSender *) aNoteSender;
-- _disconnect: (MKNoteSender *) aNoteSender;
+- (BOOL) _connect: (MKNoteSender *) aNoteSender;
+- (BOOL) _disconnect: (MKNoteSender *) aNoteSender;
 
 @end
 

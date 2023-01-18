@@ -23,7 +23,7 @@
 @interface MKScore (Private)
 
 +(BOOL)_isUnarchiving;
--_newFilePartWithName:(NSString *)name;
+-_newFilePartWithName:(NSString *)name NS_RETURNS_NOT_RETAINED;
 
 @end
 

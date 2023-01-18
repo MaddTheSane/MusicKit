@@ -52,6 +52,7 @@
    * before setting its own defaults. 
    */
 {
+    self = [super init];
     noteReceivers = [[NSMutableArray alloc] init];
     return self;
 }
@@ -88,11 +89,10 @@
    * are not copied.	
    */
 {
-    return _MKLightweightArrayCopy(noteReceivers);
-    // return [_MKLightweightArrayCopy(noteReceivers) autorelease];
+    return [_MKLightweightArrayCopy(noteReceivers) autorelease];
 }
 
-- (int) indexOfNoteReceiver: (MKNoteReceiver *) aNoteReceiver
+- (NSInteger) indexOfNoteReceiver: (MKNoteReceiver *) aNoteReceiver
 {
     return [noteReceivers indexOfObject: aNoteReceiver];
 }
@@ -160,7 +160,7 @@
 	[self removeNoteReceivers];
 	[aList removeAllObjects];  // Split this up because elements may try
 				   // and remove themselves from noteReceivers when they are freed.
-	// [aList release]; // don't release as aList is autoreleased.
+	[aList release];
 	[noteReceivers release];
 	noteReceivers = nil;
 	[super dealloc];
@@ -259,7 +259,7 @@
    */
 {
     if ([noteReceivers count] == 0)
-        [self addNoteReceiver: [[MKNoteReceiver alloc] init]];
+        [self addNoteReceiver: [[[MKNoteReceiver alloc] init] autorelease]];
     return [noteReceivers objectAtIndex: 0];
 }
 

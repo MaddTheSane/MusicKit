@@ -1525,17 +1525,16 @@ outOfLoop:
  */
 - (NSMutableArray *) parts;
 {
-    return _MKLightweightArrayCopy(parts);
+    return [_MKLightweightArrayCopy(parts) autorelease];
 }
 
 /* Copies receiver, including its MKParts, MKNotes and info. */
 - copyWithZone: (NSZone *) zone
 {
-    unsigned numOfParts = [parts count], partIndex;
-    MKScore *newScore = [MKScore allocWithZone:zone];
-    [newScore init];
+    NSUInteger numOfParts = [parts count], partIndex;
+    MKScore *newScore = [[MKScore allocWithZone:zone] init];
     for (partIndex = 0; partIndex < numOfParts; partIndex++)
-	[newScore addPart:[[parts objectAtIndex:partIndex] copyWithZone:zone]];
+	[newScore addPart:[[[parts objectAtIndex:partIndex] copyWithZone:zone] autorelease]];
     
     newScore->info = [info copyWithZone:zone];
     return newScore;
@@ -1579,7 +1578,7 @@ static BOOL isUnarchiving = NO;
     }
     [scoreDescription appendFormat: @"With MKScore info note:\n%@", [[self infoNote] description]];
     
-    return scoreDescription;
+    return [scoreDescription autorelease];
 }
 
 @end

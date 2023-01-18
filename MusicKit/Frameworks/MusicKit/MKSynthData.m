@@ -166,12 +166,7 @@ Modification history:
 
 #define CONSTANT ((void *)((unsigned)-1)) /* A non-0 impossible pointer */
 
-static id sendPreamble(self,dataArray,len,off,value)
-    MKSynthData *self;
-    void *dataArray; /* Or CONSTANT */
-    unsigned int len;
-    int off;
-    DSPDatum value; /* Optional. Only supplied if CONSTANT */
+static id sendPreamble(MKSynthData *self,void *dataArray /* Or CONSTANT */,unsigned int len,int off,DSPDatum value/* Optional. Only supplied if CONSTANT */)
 {
     if ((!dataArray) || (len + off > self->length)) {
 	MKErrorCode(MK_synthDataLoadErr);
@@ -226,7 +221,7 @@ static id sendPreamble(self,dataArray,len,off,value)
     int ec;
     if (ORCHABORT)
       return self;
-    if (!sendPreamble(self,dataArray,len,off))
+    if (!sendPreamble(self,dataArray,len,off,0))
 	return nil;
     if (_MK_ORCHTRACE(orchestra,MK_TRACEDSPARRAYS)) {
 	unsigned int i;
@@ -262,7 +257,7 @@ static id sendPreamble(self,dataArray,len,off,value)
     int ec;
     if (ORCHABORT)
       return self;
-    if (!sendPreamble(self,dataArray,len,off))
+    if (!sendPreamble(self,dataArray,len,off,0))
 	return nil;
     if (_MK_ORCHTRACE(orchestra,MK_TRACEDSPARRAYS)) {
 	unsigned int i;

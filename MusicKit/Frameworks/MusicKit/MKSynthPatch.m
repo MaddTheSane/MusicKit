@@ -251,7 +251,7 @@ static void cancelMsgs(register id self)
      The elements themselves are not copied. */
 - synthElements
 {
-    return _MKLightweightArrayCopy(synthElements);
+    return [_MKLightweightArrayCopy(synthElements) autorelease];
 }
 
     /* Init is sent by the orchestra 

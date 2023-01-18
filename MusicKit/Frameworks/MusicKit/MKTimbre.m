@@ -359,17 +359,17 @@ description:"d"];
 	return nil;                                  /* No hope */
     obj = (MKTimbre *) [timbreDictionary objectForKey: pureName];
     if (obj)
-	return obj;
+	return [obj retain];
     obj = [[self alloc] init];
-    obj->timbreName = [pureName retain];
+    obj->timbreName = [pureName copy];
     [timbreDictionary setObject: obj forKey: obj->timbreName];
     return obj;
 }
 
 -addWaveTable:(MKWaveTable *)aWaveTable forFreq:(double)freq
 {
-    int i;
-    int count;
+    NSInteger i;
+    NSInteger count;
 //    double *d;
 //    id *wt; //sb: seemed to be unused
 //    NXStorageId *freqStorage = (NXStorageId *)freqs;
@@ -557,7 +557,7 @@ MKWaveTable *MKWaveTableForTimbreKey(NSString *key,
 	[waveTables release];
 	[freqs release];
 	[super release];
-	return obj;
+	return [obj retain];
     }
     return self;
 }

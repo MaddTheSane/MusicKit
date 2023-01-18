@@ -642,7 +642,6 @@ static const char **retrieveDriverList(BOOL forOutputDevice)
         
     for(driverIndex = 0; driverIndex < numOfDevices; driverIndex++) {
 	NSString *deviceName;
-	const char *utf8DeviceName;
 	UInt32 propertySize;
 	OSStatus CAstatus;
 	AudioObjectPropertyAddress deviceNamePropertyAddress;
@@ -661,9 +660,7 @@ static const char **retrieveDriverList(BOOL forOutputDevice)
         }
 	
         // NSLog(@"DevID: %d   name: %@\n", deviceIDs[driverIndex], deviceName);
-	utf8DeviceName = [deviceName UTF8String];
-        driverList[driverIndex] = (char *) malloc(strlen(utf8DeviceName) + 1);
-	strcpy((char *) driverList[driverIndex], utf8DeviceName);
+        driverList[driverIndex] = strdup([deviceName UTF8String]);
     }
     free(deviceIDs);
     

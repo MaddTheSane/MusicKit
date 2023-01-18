@@ -43,7 +43,7 @@
 
   
 */
-- init;
+- (instancetype)init;
 
 /*!
   @return Returns an NSArray instance.
@@ -72,7 +72,7 @@
   new object contains copies of the receiver's MKNoteSenders and
   MKNoteReceivers.
 */
-- copyWithZone: (NSZone *) zone;
+- (id)copyWithZone: (NSZone *) zone;
 
 /*!
   @return Returns an id.
@@ -80,7 +80,7 @@
 
   Returns the receiver.
 */
-- releaseNoteSenders;
+- (void)releaseNoteSenders;
 
 /*!
   @return Returns an id.
@@ -88,7 +88,7 @@
 
   Returns the receiver.
 */
-- removeNoteSenders;
+- (void)removeNoteSenders;
 
 /*!
   @return Returns an MKNoteSender instance.

@@ -6,7 +6,7 @@
 
 - init
 {
-    [super init];
+    self = [super init];
     idleNewest = idleOldest = activeNewest = activeOldest = nil;
     idleCount = totalCount = manualCount = 0;
     template = nil;

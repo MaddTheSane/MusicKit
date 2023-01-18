@@ -560,7 +560,7 @@ void _MKCheckInit(void)
 	NULL,NULL] retain];
     
     [defaults registerDefaults: MKDefaults]; //stick these in the temporary area that is searched last.
-    
+    [MKDefaults release];
     MKSetTrace([defaults integerForKey: @"MKTrace"]);
     
     /*sb: I don't think we need to register anything here. */

@@ -21,7 +21,7 @@ enum {CMP_NONE, CMP_HOURS, CMP_MINUTES, CMP_SECONDS};
 
 - init
 {
-    [super init];
+    self = [super init];
     [self addNoteSender: noteSender = [[MKNoteSender alloc] init]];
     aNote = [[MKNote alloc] init];
     format = MK_MTC_FORMAT_24; /* default */
