@@ -52,18 +52,26 @@
   Responsible for loading the user interface and displaying it either in a separate window (Carbon)
   or initialising it ready for incorporation within another view (Cocoa).
  */
-- initWithAudioProcessor: (SndAudioUnitProcessor *) processor;
+- (instancetype)initWithAudioProcessor: (SndAudioUnitProcessor *) processor;
+
+/*!
+  @brief Initialises a view instance with a given AudioUnit Processor.
+  
+  Responsible for loading the user interface and displaying it either in a separate window (Carbon)
+  or initialising it ready for incorporation within another view (Cocoa).
+ */
+- (instancetype)initWithAudioProcessor: (SndAudioUnitProcessor *) processor error: (NSError**) error;
 
 /*!
   @brief Returns the audio unit processor this SndAudioUnitController is controlling.
   @return Returns an autoreleased SndAudioUnitProcessor instance.
  */
-- (SndAudioUnitProcessor *) audioUnitProcessor;
+@property (readonly, strong) SndAudioUnitProcessor *audioUnitProcessor;
 
 /*!
   @brief Returns the window displaying and managing the audio unit view (Carbon or Cocoa).
  */
-- (NSWindow *) window;
+@property (readonly, strong) NSWindow *window;
 
 /*!
   @brief Returns the NSView of the AudioUnit user interface.
@@ -71,7 +79,7 @@
   Use this method if it necessary to embed the AudioUnit user interface inside an existing window.
   If you want the AudioUnit user interface to have it's own window, use -window to retrieve an existing one.
  */
-- (NSView *) contentView;
+@property (readonly, strong) NSView *contentView;
 
 /*!
   @brief 

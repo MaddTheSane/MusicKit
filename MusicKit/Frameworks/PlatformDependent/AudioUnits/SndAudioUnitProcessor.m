@@ -17,10 +17,10 @@
 
 @implementation SndAudioUnitProcessor
 
-static NSMutableDictionary *namedComponents = nil;
+static NSMutableDictionary<NSString*,NSArray<NSNumber*>*> *namedComponents = nil;
 
 // General routine to retrieve a device property, performing error checking.
-static BOOL getAudioUnitProperty(AudioUnit au, AudioUnitPropertyID propertyType, AudioUnitScope scope, AudioUnitElement element, void *buffer, int maxBufferSize)
+static BOOL getAudioUnitProperty(AudioUnit au, AudioUnitPropertyID propertyType, AudioUnitScope scope, AudioUnitElement element, void *buffer, int maxBufferSize, NSError *__autoreleasing*error)
 {
     OSStatus AUstatus;
     UInt32 propertySize;
@@ -29,18 +29,27 @@ static BOOL getAudioUnitProperty(AudioUnit au, AudioUnitPropertyID propertyType,
     AUstatus = AudioUnitGetPropertyInfo(au, propertyType, scope, element, &propertySize, &propertyWritable);
     if (AUstatus != noErr) {
         NSLog(@"getDeviceProperty AudioDeviceGetPropertyInfo property %4s: %d\n", (char *)&propertyType, AUstatus);
+        if (error) {
+            *error = [NSError errorWithDomain:NSOSStatusErrorDomain code:AUstatus userInfo:nil];
+        }
         return FALSE;
     }
     
     if(propertySize > maxBufferSize) {
         NSLog(@"getAudioUnitProperty property %4s: size %d larger than available buffer size %d\n",
 	      (char *)&propertyType, propertySize, maxBufferSize);
+        if (error) {
+            *error = [NSError errorWithDomain:NSOSStatusErrorDomain code:AUstatus userInfo:nil];
+        }
         return FALSE;
     }
     
     AUstatus = AudioUnitGetProperty(au, propertyType, scope, element, buffer, &propertySize);
     if (AUstatus != noErr) {
         NSLog(@"getAudioUnitProperty AudioUnitGetProperty %4s: %d\n", (char *)&propertyType, AUstatus);
+        if (error) {
+            *error = [NSError errorWithDomain:NSOSStatusErrorDomain code:AUstatus userInfo:nil];
+        }
         return FALSE;
     }
     
@@ -49,24 +58,32 @@ static BOOL getAudioUnitProperty(AudioUnit au, AudioUnitPropertyID propertyType,
 
 // Retrieves the text describing the AudioUnit as described by it's component.
 // This takes the form of "Manufacturer: Audio Unit Name"
-+ (NSString *) getComponentDescription: (AudioComponent) theComponent
++ (NSString *) getComponentDescription: (AudioComponent) theComponent error: (NSError**) error
 {
-    NSString *componentDescription;
     CFStringRef cfComponentDescription;
     OSStatus err = AudioComponentCopyName(theComponent, &cfComponentDescription);
     
-    if (err) 
-	return nil;
+    if (err != noErr) {
+        if (error) {
+            *error = [NSError errorWithDomain:NSOSStatusErrorDomain code:err userInfo:nil];
+        }
+        return nil;
+    }
     
-    componentDescription = CFBridgingRelease(cfComponentDescription);
-    
-    return componentDescription;
+    return CFBridgingRelease(cfComponentDescription);
 }
 
 + (SndAudioProcessor *) audioProcessorNamed: (NSString *) processorName
 {
-    return [[[SndAudioUnitProcessor alloc] initWithParameterDictionary: nil 
-								  name: processorName] autorelease];
+    return [[SndAudioUnitProcessor alloc] initWithParameterDictionary: nil
+                                                                 name: processorName];
+}
+
++ (SndAudioProcessor *) audioProcessorNamed: (NSString *) processorName error: (NSError *__autoreleasing *) error
+{
+    return [[SndAudioUnitProcessor alloc] initWithParamCount: 0
+							name: processorName
+						       error: error];
 }
 
 // Provide a list of the AUs which are available. 
@@ -90,10 +107,7 @@ static BOOL getAudioUnitProperty(AudioUnit au, AudioUnitPropertyID propertyType,
 
     theAUComponent = AudioComponentFindNext(NULL, &desc);
     
-    if(namedComponents != nil) {
-	[namedComponents release];
-    }
-    namedComponents = [[NSMutableDictionary dictionaryWithCapacity: AudioComponentCount(&desc)] retain];
+    namedComponents = [[NSMutableDictionary alloc] initWithCapacity: AudioComponentCount(&desc)];
     audioUnitNameArray = [NSMutableArray arrayWithCapacity: AudioComponentCount(&desc)];
     
     while (theAUComponent != NULL) {
@@ -110,12 +124,14 @@ static BOOL getAudioUnitProperty(AudioUnit au, AudioUnitPropertyID propertyType,
         NSLog(@"%4.4s,", (char *) &(found.componentManufacturer));
         NSLog(@"%lx,%lx\n", found.componentFlags, found.componentFlagsMask);
 #endif
-	componentDescription = [self getComponentDescription: theAUComponent];
+        componentDescription = [self getComponentDescription: theAUComponent error: NULL];
+        if (!componentDescription) {
+            theAUComponent = AudioComponentFindNext(theAUComponent, &desc);
+            continue;
+        }
 	
 	[audioUnitNameArray addObject: componentDescription];
-	componentFields = [NSArray arrayWithObjects: [NSNumber numberWithUnsignedInt: found.componentManufacturer],
-						     [NSNumber numberWithUnsignedInt: found.componentSubType],
-					             nil];
+        componentFields = @[@(found.componentManufacturer), @(found.componentSubType)];
 	[namedComponents setObject: componentFields forKey: componentDescription];
 
         theAUComponent = AudioComponentFindNext(theAUComponent, &desc);
@@ -128,10 +144,7 @@ static BOOL getAudioUnitProperty(AudioUnit au, AudioUnitPropertyID propertyType,
 #endif
 }
 
-- (AudioUnit) audioUnit
-{
-    return audioUnit;
-}
+@synthesize audioUnit;
 
 // Provide the audio data into ioData
 // get source data for the supplied bus number
@@ -147,12 +160,13 @@ static OSStatus auInputCallback(void *inRefCon,
 				UInt32 inNumFrames, 
 				AudioBufferList *theAudioData)
 {
-    SndAudioUnitProcessor *audioUnitProcessor = inRefCon;
+    SndAudioUnitProcessor *audioUnitProcessor = (__bridge SndAudioUnitProcessor *)(inRefCon);
 
     if(audioUnitProcessor->auIsNonInterleaved) {
 	// Deinterleave the buffers in order to process them, then reassemble in processReplacingInputBuffer:.
 #if ALTIVEC
-	// TODO Use Altivec permute instruction to do this.
+	// TODO: Use Altivec permute instruction to do this.
+        // TODO: Or use any vector instructions to do this.
 #else
 	unsigned int channelIndex;
 	// If there is a mismatch in channels, we take a subset of channels from the interleaved input samples.
@@ -160,9 +174,8 @@ static OSStatus auInputCallback(void *inRefCon,
 	// erroneously leaving some channels unfilled.
 	// The AudioBufferList has a number of buffers, each to hold one channel, so the number of buffers matches the number of
 	// expected AudioUnit channels.
-	// TODO we should expand to match the number of AU channels with duplicated data.
-	// TODO We really should take the appropriate stereo channels, rather than just the first minimum number,
-	// but we probably need a smarter channel remapping algorithm, i.e stereo->5.1, 5.1->stereo etc.
+	// TODO: we should expand to match the number of AU channels with duplicated data.
+	// TODO: We really should take the appropriate stereo channels, rather than just the first minimum number, but we probably need a smarter channel remapping algorithm, i.e stereo->5.1, 5.1->stereo etc.
 	unsigned int channelCount = MIN(theAudioData->mNumberBuffers, audioUnitProcessor->inputChannelCount);
 	
 	for (channelIndex = 0; channelIndex < channelCount; channelIndex++) {
@@ -192,7 +205,7 @@ static OSStatus auInputCallback(void *inRefCon,
     
     AUstatus = AudioUnitGetPropertyInfo(audioUnit, kAudioUnitProperty_ParameterList, kAudioUnitScope_Global, inputBusNumber, &propertySize, &propertyWritable);
     if (AUstatus) {
-        NSLog(@"discoverParameters AudioDeviceGetPropertyInfo property %4s: %d\n", (char *) kAudioUnitProperty_ParameterList, AUstatus);
+        NSLog(@"discoverParameters AudioDeviceGetPropertyInfo property %d: %d\n",  kAudioUnitProperty_ParameterList, AUstatus);
         return;
     }
     
@@ -202,15 +215,14 @@ static OSStatus auInputCallback(void *inRefCon,
         
     AUstatus = AudioUnitGetProperty(audioUnit, kAudioUnitProperty_ParameterList, kAudioUnitScope_Global, inputBusNumber, parameterIDList, &propertySize);
     if (AUstatus) {
-        NSLog(@"discoverParameters AudioUnitGetProperty %4s: %d\n", (char *) kAudioUnitProperty_ParameterList, AUstatus);
+        NSLog(@"discoverParameters AudioUnitGetProperty %d: %d\n", kAudioUnitProperty_ParameterList, AUstatus);
         return;
     }
     
     [self setNumParams: parameterListLength];
 }
 
-// TODO Need to create a delegate for notification of parameter changes
-// and drive it from the AudioUnit parameter notification call-back
+// TODO: Need to create a delegate for notification of parameter changes and drive it from the AudioUnit parameter notification call-back
 
 - (float) paramValue: (const int) index
 {
@@ -234,9 +246,9 @@ static OSStatus auInputCallback(void *inRefCon,
 {
     AudioUnitParameterInfo parameterInfo;
         
-    if(getAudioUnitProperty(audioUnit, kAudioUnitProperty_ParameterInfo, kAudioUnitScope_Global, parameterIDList[index], &parameterInfo, sizeof(parameterInfo))) {
+    if(getAudioUnitProperty(audioUnit, kAudioUnitProperty_ParameterInfo, kAudioUnitScope_Global, parameterIDList[index], &parameterInfo, sizeof(parameterInfo), NULL)) {
 	if(parameterInfo.flags & kAudioUnitParameterFlag_HasCFNameString)
-	    return [NSString stringWithString: (NSString *) parameterInfo.cfNameString];
+            return (__bridge NSString *)(parameterInfo.cfNameString);
 	else
 	    return [NSString stringWithUTF8String: parameterInfo.name];
     }
@@ -253,7 +265,7 @@ static OSStatus auInputCallback(void *inRefCon,
     AudioUnitParameterInfo parameterInfo;
     
     // use the kAudioUnitProperty_ParameterInfo property to retrieve the unit identifier for the given ParameterID.		
-    if(getAudioUnitProperty(audioUnit, kAudioUnitProperty_ParameterInfo, kAudioUnitScope_Global, parameterIDList[index], &parameterInfo, sizeof(parameterInfo))) {
+    if(getAudioUnitProperty(audioUnit, kAudioUnitProperty_ParameterInfo, kAudioUnitScope_Global, parameterIDList[index], &parameterInfo, sizeof(parameterInfo), NULL)) {
 	switch(parameterInfo.unit) {
 	case kAudioUnitParameterUnit_Boolean:
 	    return @"Yes/No";
@@ -329,7 +341,7 @@ static OSStatus auInputCallback(void *inRefCon,
 
 - (void) messageDelegateOfParameter: (int) parameterID value: (float) inValue
 {
-    id delegate = [self parameterDelegate];
+    id<SndAudioProcessorParameterDelegate> delegate = [self parameterDelegate];
     
     if(delegate) {
 	unsigned int parameterIndex;
@@ -344,7 +356,7 @@ static OSStatus auInputCallback(void *inRefCon,
 static void parameterListener(void *audioProcessorInstance, void *inObject, const AudioUnitParameter *inParameter, Float32 inValue)
 {
 #if 1
-    [(SndAudioUnitProcessor *) audioProcessorInstance messageDelegateOfParameter: inParameter->mParameterID value: inValue];
+    [(__bridge SndAudioUnitProcessor *) audioProcessorInstance messageDelegateOfParameter: inParameter->mParameterID value: inValue];
 #else
     NSLog(@"parameter %d changed to %f\n", inParameter->mParameterID, inValue);
 #endif	
@@ -362,17 +374,17 @@ static void parameterListener(void *audioProcessorInstance, void *inObject, cons
     int parameterIndex;
     
     for(parameterIndex = 0; parameterIndex < parameterListLength; parameterIndex++) {
-	OSStatus error = AUListenerCreate(parameterListener, self, NULL, NULL, 0.0, &outListener);
-	if(error != 0) // TODO need better constant than 0
+        OSStatus error = AUListenerCreate(parameterListener, (__bridge void * _Nonnull)(self), NULL, NULL, 0.0, &outListener);
+	if(error != noErr)
 	    NSLog(@"Unable to AUListenerCreate %d\n", error);
 	
 	parameterToMonitor.mAudioUnit = audioUnit;
 	parameterToMonitor.mParameterID = parameterIDList[parameterIndex];
 	parameterToMonitor.mScope = kAudioUnitScope_Global;
-	parameterToMonitor.mElement = 0; // TODO this shouldn't be hardwired
+	parameterToMonitor.mElement = 0; // TODO: this shouldn't be hardwired
 	
 	error = AUListenerAddParameter(outListener, NULL, &parameterToMonitor);
-	if(error != 0) // TODO need better constant than 0
+	if(error != noErr)
 	    NSLog(@"Unable to AUListenerAddParameter %d\n", error);
     }
 }
@@ -405,6 +417,12 @@ static void parameterListener(void *audioProcessorInstance, void *inObject, cons
 
 - initWithParamCount: (NSInteger) count name: (NSString *) audioUnitName
 {
+    return [self initWithParamCount:count name:audioUnitName error:NULL];
+}
+
+- initWithParamCount: (NSInteger) count name: (NSString *) audioUnitName error:(NSError *__autoreleasing *)error
+{
+    // TODO: More descriptive error messages
     AudioComponent auComp;
     OSErr result;
     AURenderCallbackStruct auRenderCallback;
@@ -435,12 +453,18 @@ static void parameterListener(void *audioProcessorInstance, void *inObject, cons
 
 	auComp = AudioComponentFindNext(NULL, &desc);
 	if (auComp == NULL) {
-	    NSLog(@"didn't find the component\n");
+	    NSLog(@"didn't find the component");
+	    if (error) {
+		*error = [NSError errorWithDomain:NSOSStatusErrorDomain code:paramErr userInfo:nil];
+	    }
 	    return nil;
 	}
 	
 	if ((result = AudioComponentInstanceNew(auComp, &audioUnit)) != noErr) {
 	    NSLog(@"Error: %d opening AudioUnit\n", result);
+            if (error) {
+                *error = [NSError errorWithDomain:NSOSStatusErrorDomain code:result userInfo:nil];
+            }
 	    return nil;
 	}
 
@@ -453,6 +477,9 @@ static void parameterListener(void *audioProcessorInstance, void *inObject, cons
 	
 	if ((result = AudioUnitInitialize(audioUnit)) != noErr) {
 	    NSLog(@"Error: %d initialising AudioUnit\n", result);
+            if (error) {
+                *error = [NSError errorWithDomain:NSOSStatusErrorDomain code:result userInfo:nil];
+            }
 	    return nil;
 	}
 
@@ -465,7 +492,7 @@ static void parameterListener(void *audioProcessorInstance, void *inObject, cons
 	// or has some flexibility then the audio unit must publish this capability through supporting the
 	// kAudioUnitProperty_SupportedNumChannels property.
 	
-	if(!getAudioUnitProperty(audioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &auFormatDescription, sizeof(auFormatDescription)))
+	if(!getAudioUnitProperty(audioUnit, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &auFormatDescription, sizeof(auFormatDescription), error))
 	    return nil;
 	
 	auIsNonInterleaved = (auFormatDescription.mFormatFlags & kAudioFormatFlagIsNonInterleaved) == kAudioFormatFlagIsNonInterleaved;
@@ -483,7 +510,7 @@ static void parameterListener(void *audioProcessorInstance, void *inObject, cons
 	// data in processReplacingInputBuffer:outputBuffer: before calling the AudioUnitRender function.
 	
 	auRenderCallback.inputProc = auInputCallback;
-	auRenderCallback.inputProcRefCon = self; // store the instance pointer so we can retrieve ivars in the callback.
+        auRenderCallback.inputProcRefCon = (__bridge void * _Nullable)(self); // store the instance pointer so we can retrieve ivars in the callback.
 	
 	// Set up render callback
 	result = AudioUnitSetProperty(audioUnit, 
@@ -509,8 +536,7 @@ static void parameterListener(void *audioProcessorInstance, void *inObject, cons
     if(parameterIDList != NULL)
 	free(parameterIDList);
     parameterIDList = NULL;
-    [super dealloc];
-}    
+}
 
 - (NSString *) description
 {
@@ -569,7 +595,7 @@ static void parameterListener(void *audioProcessorInstance, void *inObject, cons
 	// TODO
 #else
 	// Only retrieve the minimum number of channels if the AudioUnit processes a different number than the output audio buffer.
-	// TODO We should be using speaker configuration to map channels.
+	// TODO: We should be using speaker configuration to map channels.
 	minimumChannelCount = MIN(theAudioData->mNumberBuffers, channelCount);
 	for (channelIndex = 0; channelIndex < minimumChannelCount; channelIndex++) {
 	    unsigned int frameIndex;
@@ -588,7 +614,7 @@ static void parameterListener(void *audioProcessorInstance, void *inObject, cons
     // we're done - remember to free!!!
     free(theAudioData);
     
-    // TODO this should change depending on whether the audio unit modifies the output. Most audio units produce output in the nominated output buffer.
+    // TODO: this should change depending on whether the audio unit modifies the output. Most audio units produce output in the nominated output buffer.
     return YES;
 }
 

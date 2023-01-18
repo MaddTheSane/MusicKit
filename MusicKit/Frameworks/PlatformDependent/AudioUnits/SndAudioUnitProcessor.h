@@ -68,13 +68,19 @@
 + (SndAudioProcessor *) audioProcessorNamed: (NSString *) processorName;
 
 /*!
+  @brief Returns an autoreleased instance of a SndAudioProcessor subclass named <I>processorName</I>.
+  @param processorName An NSString with one of the names returned by <B>+availableAudioProcessors</B>.
+ */
++ (SndAudioProcessor *) audioProcessorNamed: (NSString *) processorName error:(NSError**)error;
+
+/*!
   @brief Returns the C++ AudioUnit handle.
  */
-- (AudioUnit) audioUnit;
+@property (readonly) AudioUnit audioUnit;
 
-// TODO perhaps rename superclass and this to method initWithAudioUnitNamed: and remove paramCount parameter.
+// TODO: perhaps rename superclass and this to method initWithAudioUnitNamed: and remove paramCount parameter.
 
-/*
+/*!
  @brief Given a name previously returned by availableAudioUnits, a SndAudioUnitProcessor instance is created.
  @param audioUnitName The name of a unit as returned by <B>+availableAudioProcessors</B>.
  
@@ -83,6 +89,16 @@
              SndAudioUnitProcessor instance.
  */
 - (instancetype)initWithParamCount: (NSInteger) count name: (NSString *) audioUnitName;
+
+/*!
+ @brief Given a name previously returned by availableAudioUnits, a SndAudioUnitProcessor instance is created.
+ @param audioUnitName The name of a unit as returned by <B>+availableAudioProcessors</B>.
+ 
+   A SndAudioUnitProcessor instance is created for each AudioUnit. SndAudioUnitProcessor factory methods
+             are the overseer of multiple available AudioUnits, each one is loaded and instantiated as a
+             SndAudioUnitProcessor instance.
+ */
+- (instancetype)initWithParamCount: (NSInteger) count name: (NSString *) audioUnitName error:(NSError**)error NS_DESIGNATED_INITIALIZER;
 
 /*!
   @brief Process the given audio buffer through the AudioUnit.

@@ -13,11 +13,11 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #import <AudioUnit/AudioUnit.h>
-#import <AudioUnit/AUCocoaUIView.h>
-#import <AudioUnit/AudioUnitCarbonView.h>
+#import <AudioToolbox/AUCocoaUIView.h>
+#import <AudioToolbox/AudioUnitCarbonView.h>
 #import "SndAudioUnitController.h"
 
-// TODO there currently isn't much point trapping modification of parameters since no mouse drag events are messaged.
+// TODO: there currently isn't much point trapping modification of parameters since no mouse drag events are messaged.
 #define EVENT_LISTENING 0
 #define DEBUG_COCOA_VIEW 0
 
@@ -34,9 +34,9 @@
  interface component in a separate window.
 */ 
 
-// TODO perhaps these should be promoted to ivars?
-static const float kOffsetForAUView_X = 0;
-static const float kOffsetForAUView_Y = 0;
+// TODO: perhaps these should be promoted to ivars?
+static const CGFloat kOffsetForAUView_X = 0;
+static const CGFloat kOffsetForAUView_Y = 0;
 
 // verification method that returns true if the plugin class conforms to the protocol
 // and responds to all of its methods
@@ -88,21 +88,22 @@ static void eventListener(void *controller, AudioUnitCarbonView inView,
 }
 #endif
 
-// Creates the Cocoa View and assigns it into the Cocoa Window.
+//! Creates the Cocoa View and assigns it into the Cocoa Window.
 - (BOOL) createCocoaWindowFromAudioUnit: (AudioUnit) audioUnit 
 		       andCocoaViewInfo: (AudioUnitCocoaViewInfo *) cocoaViewInfo
+				  error: (NSError **) error
 {
-    NSURL    *viewBundleURL	= (NSURL *) cocoaViewInfo->mCocoaAUViewBundleLocation;
-    NSBundle *viewBundle  	= [NSBundle bundleWithPath: [viewBundleURL path]];
+    NSURL    *viewBundleURL	= CFBridgingRelease(cocoaViewInfo->mCocoaAUViewBundleLocation);
+    NSBundle *viewBundle  	= [NSBundle bundleWithURL: viewBundleURL];
     // Main Cocoa UI class name
-    NSString *viewClassName	= (NSString *) cocoaViewInfo->mCocoaAUViewClass[0];		
+    NSString *viewClassName	= (__bridge NSString *) cocoaViewInfo->mCocoaAUViewClass[0];
     Class classOfViewFactory;
-    id cocoaAUViewFactory;
+    id<AUCocoaUIBase, NSObject> cocoaAUViewFactory;
     NSString *windowTitle;
-    NSSize viewSize = {	640,480 }; // Punt the required size.
+    NSSize viewSize = NSMakeSize(640, 480); // Punt the required size.
     
     if(viewBundle == nil) {
-	NSLog(@"Error loading AU view's bundle %@", viewBundleURL);
+	NSLog(@"Error loading AU view's bundle %@", viewBundleURL.path);
 	return NO;
     }
     
@@ -114,17 +115,21 @@ static void eventListener(void *controller, AudioUnitCarbonView inView,
     NSLog(@"executablePath %@\n", [viewBundle executablePath]);
 #endif
     
+    if(![viewBundle loadAndReturnError:error]) {
+	NSLog(@"Unable to load bundle %@", viewBundle);
+	return NO;
+    }
+
     classOfViewFactory = [viewBundle classNamed: viewClassName];
     // make sure 'classOfViewFactory' implements the AUCocoaUIBase protocol
     if(![SndAudioUnitController plugInClassIsValid: classOfViewFactory]) {
 	NSLog(@"SndAudioUnitController's main class %@ does not properly implement the AUCocoaUIBase protocol", classOfViewFactory);
+	if (error) {
+	    *error = [NSError errorWithDomain:NSOSStatusErrorDomain code:paramErr userInfo:nil];
+	}
 	return NO;
     }
     
-    if(![viewBundle load]) {
-	NSLog(@"Unable to load bundle %@", viewBundle);
-	return NO;
-    }
     cocoaAUViewFactory = [[classOfViewFactory alloc] init];	// instantiate principal class
 
 #if DEBUG_COCOA_VIEW
@@ -152,8 +157,6 @@ static void eventListener(void *controller, AudioUnitCarbonView inView,
     [cocoaAUWindow setContentView: audioUnitUIView];	// replace the current view with the newly created AU view
     // NSLog(@"cocoaAUWindow %@ backingType %d\n", cocoaAUWindow, [cocoaAUWindow backingType]);
 
-    // release cocoaViewInfo's objects
-    [viewBundleURL release];
     return YES;
 }
 
@@ -166,7 +169,12 @@ static void eventListener(void *controller, AudioUnitCarbonView inView,
     // We need to recreate the object.
 }
 
-- initWithAudioProcessor: (SndAudioUnitProcessor *) processor;
+- (id) initWithAudioProcessor: (SndAudioUnitProcessor *) processor;
+{
+    return [self initWithAudioProcessor:processor error:NULL];
+}
+
+- (id) initWithAudioProcessor: (SndAudioUnitProcessor *) processor error:(NSError *__autoreleasing *)error
 {
     UInt32 dataSize;
     Boolean isWritable;
@@ -177,8 +185,7 @@ static void eventListener(void *controller, AudioUnitCarbonView inView,
     if(!self)
 	return nil;
     
-    [audioUnitProcessor release];
-    audioUnitProcessor = [processor retain];
+    audioUnitProcessor = processor;
     
     // get AU's Cocoa view property if it exists.
     OSStatus result = AudioUnitGetPropertyInfo(audioUnit, kAudioUnitProperty_CocoaUI, kAudioUnitScope_Global, 0, &dataSize, &isWritable);
@@ -189,6 +196,9 @@ static void eventListener(void *controller, AudioUnitCarbonView inView,
     if ((result != noErr) || (numberOfClasses == 0)) {
         // If we get here, the audio unit does not have a Cocoa UI.
         // Now that Carbon UI's are deprecated, we just return nil.
+	if (error) {
+	    *error = [NSError errorWithDomain:NSOSStatusErrorDomain code:result userInfo:nil];
+	}
 	return nil;
     } 
     else {
@@ -201,11 +211,15 @@ static void eventListener(void *controller, AudioUnitCarbonView inView,
 				      cocoaViewInfo,
 				      &dataSize);
 	if(result != noErr) {
-	    NSLog(@"AudioUnitGetProperty(kAudioUnitProperty_CocoaUI) error %ld cocoaViewInfo %p dataSize %u\n",
-		  (long) result, cocoaViewInfo, (UInt32) dataSize);
+            NSLog(@"AudioUnitGetProperty(kAudioUnitProperty_CocoaUI) error %d cocoaViewInfo %p dataSize %u\n",
+                  (int)result, cocoaViewInfo, (UInt32) dataSize);
+	    if (error) {
+		*error = [NSError errorWithDomain:NSOSStatusErrorDomain code:result userInfo:nil];
+	    }
+	    free (cocoaViewInfo);
 	    return nil;
 	}
-	createdCocoaWindow = [self createCocoaWindowFromAudioUnit: audioUnit andCocoaViewInfo: cocoaViewInfo];
+	createdCocoaWindow = [self createCocoaWindowFromAudioUnit: audioUnit andCocoaViewInfo: cocoaViewInfo error: error];
 
 	UInt32 classIndex;
 	for (classIndex = 0; classIndex < numberOfClasses; classIndex++)
@@ -217,28 +231,8 @@ static void eventListener(void *controller, AudioUnitCarbonView inView,
     return self;
 }
 
-- (SndAudioUnitProcessor *) audioUnitProcessor
-{
-    return [[audioUnitProcessor retain] autorelease];
-}
-
-- (void) dealloc
-{
-    [audioUnitProcessor release];
-    audioUnitProcessor = nil;
-    [cocoaAUWindow release];
-    cocoaAUWindow = nil;
-    [super dealloc];
-}
-
-- (NSWindow *) window
-{
-    return [[cocoaAUWindow retain] autorelease];
-}
-
-- (NSView *) contentView
-{
-    return [[audioUnitUIView retain] autorelease];
-}
+@synthesize audioUnitProcessor;
+@synthesize window = cocoaAUWindow;
+@synthesize contentView = audioUnitUIView;
 
 @end

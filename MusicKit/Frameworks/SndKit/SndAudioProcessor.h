@@ -100,7 +100,7 @@
   @param      name Name of sound audio processor.
   @return     Returns <B>self</B>.
 */
-- (instancetype)initWithParamCount: (NSInteger) count name: (NSString *) name;
+- (instancetype)initWithParamCount: (NSInteger) count name: (NSString *) name NS_DESIGNATED_INITIALIZER;
 
 /*!
   @brief   Initialization using a dictionary of parameters.

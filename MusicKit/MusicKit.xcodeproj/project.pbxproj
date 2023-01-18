@@ -852,9 +852,9 @@
 		D8A1DC5609F65BD10094B3F5 /* example4_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A1DC5009F65BD10094B3F5 /* example4_main.m */; };
 		D8A1DC5709F65BD10094B3F5 /* MyObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A1DC5209F65BD10094B3F5 /* MyObject.m */; };
 		D8A441F510777A7300E12376 /* SndAudioUnitController.h in Headers */ = {isa = PBXBuildFile; fileRef = D8A441F110777A7300E12376 /* SndAudioUnitController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D8A441F610777A7300E12376 /* SndAudioUnitController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A441F210777A7300E12376 /* SndAudioUnitController.m */; };
+		D8A441F610777A7300E12376 /* SndAudioUnitController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A441F210777A7300E12376 /* SndAudioUnitController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D8A441F710777A7300E12376 /* SndAudioUnitProcessor.h in Headers */ = {isa = PBXBuildFile; fileRef = D8A441F310777A7300E12376 /* SndAudioUnitProcessor.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D8A441F810777A7300E12376 /* SndAudioUnitProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A441F410777A7300E12376 /* SndAudioUnitProcessor.m */; };
+		D8A441F810777A7300E12376 /* SndAudioUnitProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A441F410777A7300E12376 /* SndAudioUnitProcessor.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		D8A442241077D58C00E12376 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8A442231077D58C00E12376 /* AudioToolbox.framework */; };
 		D8A4422A1077D5BF00E12376 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8A442291077D5BF00E12376 /* AudioUnit.framework */; };
 		D8A442481077D6AF00E12376 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8A442471077D6AF00E12376 /* Carbon.framework */; };
@@ -2285,7 +2285,7 @@
 		D8A441F110777A7300E12376 /* SndAudioUnitController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SndAudioUnitController.h; sourceTree = "<group>"; };
 		D8A441F210777A7300E12376 /* SndAudioUnitController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SndAudioUnitController.m; sourceTree = "<group>"; };
 		D8A441F310777A7300E12376 /* SndAudioUnitProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SndAudioUnitProcessor.h; sourceTree = "<group>"; };
-		D8A441F410777A7300E12376 /* SndAudioUnitProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SndAudioUnitProcessor.m; sourceTree = "<group>"; };
+		D8A441F410777A7300E12376 /* SndAudioUnitProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SndAudioUnitProcessor.m; sourceTree = "<group>"; usesTabs = 1; };
 		D8A442231077D58C00E12376 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D8A442291077D5BF00E12376 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
 		D8A442471077D6AF00E12376 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
@@ -5533,6 +5533,7 @@
 			name = AudioUnits;
 			path = ../PlatformDependent/AudioUnits;
 			sourceTree = "<group>";
+			usesTabs = 1;
 		};
 		D8AE7A6A061A1636009D0112 /* Spectro */ = {
 			isa = PBXGroup;
