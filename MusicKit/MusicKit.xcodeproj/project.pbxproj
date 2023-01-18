@@ -3021,8 +3021,8 @@
 				D80246ED122EB60F00A88264 /* SndVSTProcessor.mm */,
 			);
 			name = "VST Plugins";
-			path = Frameworks/PlatformDependent/VSTPlugins;
-			sourceTree = SOURCE_ROOT;
+			path = ../PlatformDependent/VSTPlugins;
+			sourceTree = "<group>";
 		};
 		D80D48720B5D6523002E9A64 /* Classes */ = {
 			isa = PBXGroup;
