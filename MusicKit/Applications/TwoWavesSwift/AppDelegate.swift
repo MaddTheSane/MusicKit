@@ -181,7 +181,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		calcSound3()
 		soundView3.invalidateCachePixels(start: 0, end: -1)
 		soundView3.needsDisplay = true
-
 	}
 
 	@IBAction func changeLength(_ sender: Any) {

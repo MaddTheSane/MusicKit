@@ -225,8 +225,16 @@ enum SndViewStereoMode {
     SNDVIEW_STEREOMODE = 256  /* (open the way for up to 8 channel sound) */
 };
 
-#define SND_SOUNDVIEW_MINMAX 0
-#define SND_SOUNDVIEW_WAVE 1
+typedef NS_ENUM(int, SndViewDisplayMode) {
+    SndViewDisplayModeMinMax = 0,
+    SndViewDisplayModeWave
+};
+
+#define DeprecatedEnum(type, oldname, newval) \
+static const type oldname NS_DEPRECATED_WITH_REPLACEMENT_MAC( #newval , 10.0, 10.8) = newval
+DeprecatedEnum(SndViewDisplayMode, SND_SOUNDVIEW_MINMAX, SndViewDisplayModeMinMax);
+DeprecatedEnum(SndViewDisplayMode, SND_SOUNDVIEW_WAVE, SndViewDisplayModeWave);
+#undef DeprecatedEnum
 
 // Legacy definitions
 #define NX_SOUNDVIEW_MINMAX SND_SOUNDVIEW_MINMAX
@@ -243,7 +251,7 @@ enum SndViewStereoMode {
     /*! The region of the sound (in frames) selected (and displayed highlighted) for copy/paste/drag operations. */
     NSRange	selectedFrames;
     /*! The form of display, either SND_SOUNDVIEW_MINMAX or SND_SOUNDVIEW_WAVE */
-    int		displayMode;
+    SndViewDisplayMode displayMode;
     /*! Colour used as a non image background. */
     NSColor	*backgroundColour;
     /*! Colour used when drawing the amplitude of each pixel. */
@@ -426,7 +434,9 @@ enum SndViewStereoMode {
               (oscilloscopic display) or SND_SOUNDVIEW_MINMAX (minimum/maximum
               display; this is the default).
 */
-- (int) displayMode;
+- (SndViewDisplayMode) displayMode;
+
+@property (nonatomic) SndViewDisplayMode displayMode;
 
 /*!
   @param  rects is a NSRect.
@@ -782,7 +792,7 @@ enum SndViewStereoMode {
   
    If autodisplaying is enabled, the Snd is automatically redisplayed.
 */
-- (void) setDisplayMode: (int) aMode;
+- (void) setDisplayMode: (SndViewDisplayMode) aMode;
 
 /*!
   @param  aFlag is a BOOL.

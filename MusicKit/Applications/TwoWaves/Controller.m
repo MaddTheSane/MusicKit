@@ -177,7 +177,7 @@ void doCalc(int type, short *pointer, float theFreq, float theAmp)
     }
     else 
         [mesgBox setString: @""];
-    [mesgBox display];
+    [mesgBox setNeedsDisplay:YES];
     return self;
 }
 

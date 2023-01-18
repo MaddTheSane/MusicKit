@@ -228,13 +228,9 @@ OF THIS AGREEMENT.
 }
 
 @synthesize delegate;
+@synthesize displayMode;
 
-- (int) displayMode;
-{
-    return displayMode;
-}
-
-- (void) setDisplayMode: (int) aMode /*SND_SOUNDVIEW_WAVE or SND_SOUNDVIEW_MINMAX*/
+- (void) setDisplayMode: (SndViewDisplayMode) aMode /*SND_SOUNDVIEW_WAVE or SND_SOUNDVIEW_MINMAX*/
 {
     if (displayMode != aMode)
 	[self invalidateCache];
