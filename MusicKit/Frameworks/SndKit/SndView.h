@@ -925,9 +925,9 @@ enum SndViewStereoMode {
  * these methods are unique to SndKit.
  *************************/
 
-- (BOOL) invalidateCacheStartPixel: (int) start end: (int) end;
+- (BOOL) invalidateCacheStartPixel: (int) start end: (int) end NS_SWIFT_NAME(invalidateCachePixels(start:end:));
 	/* if end == -1, invalidates to end of last cache*/
-- (BOOL) invalidateCacheStartSample: (int) start end: (int) end;
+- (BOOL) invalidateCacheStartSample: (int) start end: (int) end NS_SWIFT_NAME(invalidateCacheSamples(start:end:));
 	/* start and end are samples. Must be exact. */
 
 /*!

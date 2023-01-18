@@ -559,7 +559,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   examine or manipulate the samples in a fragmented sound,
   you should retrieve the audio buffers array using <b>audioBuffers</b>.
 */
-- (void *) bytes;
+@property (readonly) void *bytes NS_RETURNS_INNER_POINTER;
 
 /*!
   @brief Return the size (in bytes) of the Snd's sample data.
@@ -569,7 +569,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   the value returned by this method is still the total size of the Snd's data.
   @return Returns a long int.
 */
-- (long) dataSize;
+@property (nonatomic, readonly) long dataSize;
 
 /*!
   @return Returns an SndSampleFormat.
@@ -579,7 +579,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   the format of the samples is returned (in other words,
   SND_FORMAT_INDIRECT is never returned by this method).
 */
-- (SndSampleFormat) dataFormat;
+@property (nonatomic, readonly) SndSampleFormat dataFormat;
 
 /*!
   @param buff The SndAudioBuffer instance to compare.
@@ -594,8 +594,6 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   @brief  Returns the format (number of frames, channels, dataFormat) of the audio buffer as a SndFormat structure.
   @return Returns a SndFormat.
  */
-- (SndFormat) format;
-
 @property (readonly) SndFormat format;
 
 /*!
@@ -994,7 +992,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
 
   <b>Warning:</b> For this method to work properly, the main event loop must not be blocked.
  */
-- (int) record;
+- (SndError) record;
 
 /*!
   @brief Returns whether the Snd instance is currently recording audio into the sound.
@@ -1002,6 +1000,8 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   been received).
  */
 - (BOOL) isRecording;
+
+@property (readonly, getter=isRecording) BOOL recording;
 
 /*!
   @param performance The SndPerformance of which to enquire.
@@ -1020,7 +1020,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   Mainly for use by SndPlayer.
   @return     NSArray of performances.
 */
-- (NSArray*) performances;
+- (NSArray<SndPerformance*>*) performances;
 
 /*!
   @brief   Adds a performance to the performance array.
@@ -1029,7 +1029,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   @param      p A performance
   @return     self.
 */
-- addPerformance: (SndPerformance *) p;
+- (void)addPerformance: (SndPerformance *) p;
 
 /*!
   @brief   Removes a performance from the performance array.
@@ -1038,7 +1038,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   @param      p A performance to be removed.
   @return     self.
 */
-- removePerformance: (SndPerformance *) p;
+- (void)removePerformance: (SndPerformance *) p;
 
 /*!
   @brief Returns the number of active AND pending performances 
@@ -1067,7 +1067,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
 
   The loop start index may be changed while the sound is being performed and regardless of
   whether the performance is looping.
-  @param      newEndAtIndex The sample index that playing should stop after.
+  @param      loopStartIndex The sample index that playing should stop after.
  */
 - (void) setLoopStartIndex: (long) loopStartIndex;
 
@@ -1155,7 +1155,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
 - (SndError) deleteSamplesInRange: (NSRange) frameRange;
 
 /*!
-  @param  aSound is an id.
+  @param  aSnd is an id.
   @param  startSample is an int.
   @return Returns an int.
   @brief Pastes the sound data in <i>aSound</i> into the Snd receiving
@@ -1205,7 +1205,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
 - (BOOL) needsCompacting;
 
 /*!
-  @function fragmentOfFrame:indexInFragment:fragmentLength:dataFormat:
+  @method fragmentOfFrame:indexInFragment:fragmentLength:dataFormat:
   @brief Get data address and statistics for fragmented or non-fragmented Snds.
  
   For fragmented sounds, you often need to be able to find the
@@ -1252,7 +1252,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   samples left in the sndFrameRange to completely insert into the specified buffer region, the
   number of samples inserted will be returned less than bufferRange.length.
  @param buff The SndAudioBuffer object into which to copy the data.
- @param bufferRange An NSRange of sample frames (i.e channel independent time position specified in samples)
+ @param bufferFrameRange An NSRange of sample frames (i.e channel independent time position specified in samples)
               in the buffer to copy into.
  @param sndFrameRange An NSRange of sample frames (i.e channel independent time position specified in samples)
               within the Snd to start reading data from and the last permissible index to read from.

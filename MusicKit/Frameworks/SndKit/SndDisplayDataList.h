@@ -51,7 +51,6 @@ CONDITIONS OF THIS AGREEMENT.
 }
 
 /*!
-  @return Returns self.
   @brief Sorts the underlying list of display data for the current display
   resolution into chronological order.
 

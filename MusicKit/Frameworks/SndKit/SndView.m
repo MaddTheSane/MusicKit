@@ -317,9 +317,9 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 
 - (BOOL) invalidateCacheStartPixel: (int) start end: (int) end
 {
-    int startOfCache;
-    int startpix, endpix;
-    int i;
+    NSInteger startOfCache;
+    NSInteger startpix, endpix;
+    NSInteger i;
     SndDisplayData *theObj, *newObj;
     
     if (!dataList) return YES;
@@ -617,7 +617,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 	    }
 	    /* now see if we should join up to following cache */
 	    cacheIndex = [dataList findObjectContaining: localMax + 1 next: &nextCache leadsOnFrom: &leadsOnFrom];
-	    if (cacheIndex != -1 && leadsOnFrom != -1) {
+	    if (cacheIndex != NSNotFound && leadsOnFrom != NSNotFound) {
                 [[(NSMutableArray *) dataList objectAtIndex: leadsOnFrom] addDataFromDisplayData: [(NSMutableArray *) dataList objectAtIndex:cacheIndex]];
 		[(NSMutableArray *) dataList removeObjectAtIndex: cacheIndex];
 		// NSLog(@"Compacted %d with %d. Now %d caches\n", leadsOnFrom, cacheIndex,[dataList count]);

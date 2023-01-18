@@ -318,7 +318,7 @@
     // NSLog(@"length @ start of fragmentOfFrame %ld\n", [self lengthInSampleFrames]);
 
     *dataFormat = [self dataFormat];
-    if (*dataFormat != SND_FORMAT_INDIRECT) {
+    if (*dataFormat != SndSampleFormatIndirect) {
 	*fragmentLength = [self lengthInSampleFrames];
 	*currentFrame = frame < *fragmentLength ? frame : *fragmentLength - 1;
 	fragmentPtr = [self bytes];

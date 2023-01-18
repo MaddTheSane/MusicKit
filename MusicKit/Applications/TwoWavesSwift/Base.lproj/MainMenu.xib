@@ -720,7 +720,7 @@
                                                 <rect key="frame" x="66" y="7" width="887" height="124"/>
                                                 <clipView key="contentView" autoresizesSubviews="NO" id="j3a-nP-nfj">
                                                     <rect key="frame" x="1" y="1" width="885" height="122"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <customView id="VNp-15-cAt" customClass="SndView">
                                                             <rect key="frame" x="0.0" y="0.0" width="788" height="120"/>
@@ -833,7 +833,7 @@
                                     <rect key="frame" x="72" y="2" width="780" height="123"/>
                                     <clipView key="contentView" id="6dH-EN-glN">
                                         <rect key="frame" x="1" y="1" width="778" height="121"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <customView id="B9c-vg-OjK" customClass="SndView">
                                                 <rect key="frame" x="0.0" y="0.0" width="777" height="121"/>
@@ -930,13 +930,13 @@
                                     <font key="titleFont" size="12" name="Helvetica"/>
                                 </box>
                                 <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d4o-H1-dd2">
-                                    <rect key="frame" x="73" y="136" width="495" height="125"/>
+                                    <rect key="frame" x="73" y="136" width="785" height="125"/>
                                     <clipView key="contentView" id="ak2-Jt-pBX">
-                                        <rect key="frame" x="1" y="1" width="493" height="123"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <rect key="frame" x="1" y="1" width="783" height="123"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <customView id="fXn-8g-ra5" customClass="SndView">
-                                                <rect key="frame" x="0.0" y="0.0" width="492" height="123"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="782" height="123"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             </customView>
                                         </subviews>
@@ -953,7 +953,6 @@
                                 </scrollView>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="d4o-H1-dd2" secondAttribute="trailing" constant="293" id="0mM-XC-MAS"/>
                                 <constraint firstItem="nZY-Er-mg3" firstAttribute="top" secondItem="gHW-w5-RbQ" secondAttribute="top" constant="1" id="4OH-zv-xqa"/>
                                 <constraint firstAttribute="bottom" secondItem="f0i-qi-pnf" secondAttribute="bottom" constant="2" id="Bz8-gn-7O8"/>
                                 <constraint firstItem="d4o-H1-dd2" firstAttribute="top" secondItem="nZY-Er-mg3" secondAttribute="bottom" constant="4" id="ItK-qS-0sc"/>
@@ -962,6 +961,7 @@
                                 <constraint firstItem="nZY-Er-mg3" firstAttribute="leading" secondItem="gHW-w5-RbQ" secondAttribute="leading" constant="7" id="PaI-uZ-oUg"/>
                                 <constraint firstAttribute="trailing" secondItem="f0i-qi-pnf" secondAttribute="trailing" constant="9" id="R34-fj-L0F"/>
                                 <constraint firstItem="d4o-H1-dd2" firstAttribute="leading" secondItem="JeT-VV-6DJ" secondAttribute="trailing" constant="5" id="ciC-D8-l9g"/>
+                                <constraint firstItem="d4o-H1-dd2" firstAttribute="trailing" secondItem="nZY-Er-mg3" secondAttribute="trailing" id="kAM-Dk-OPr"/>
                                 <constraint firstItem="d4o-H1-dd2" firstAttribute="leading" secondItem="gHW-w5-RbQ" secondAttribute="leading" constant="73" id="m6c-xb-bWp"/>
                                 <constraint firstAttribute="trailing" secondItem="nZY-Er-mg3" secondAttribute="trailing" constant="3" id="q8h-dT-dFh"/>
                                 <constraint firstItem="d4o-H1-dd2" firstAttribute="top" secondItem="gHW-w5-RbQ" secondAttribute="top" constant="136" id="qa5-Sz-czV"/>
@@ -983,7 +983,7 @@
                                     <rect key="frame" x="398" y="80" width="360" height="75"/>
                                     <clipView key="contentView" drawsBackground="NO" id="dPe-yR-mdK">
                                         <rect key="frame" x="0.0" y="0.0" width="360" height="75"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <textView wantsLayer="YES" editable="NO" importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" usesRuler="YES" spellingCorrection="YES" smartInsertDelete="YES" id="ArC-NB-WQd">
                                                 <rect key="frame" x="0.0" y="0.0" width="359" height="75"/>
@@ -1192,7 +1192,7 @@
                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <button tag="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cJF-CB-BUh">
+                                <button translatesAutoresizingMaskIntoConstraints="NO" id="cJF-CB-BUh">
                                     <rect key="frame" x="106" y="154.5" width="67" height="17"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="16" id="shS-yz-wwu"/>
@@ -1205,7 +1205,7 @@
                                         <action selector="waveChanged:" target="Voe-Tx-rLC" id="WNP-nE-f35"/>
                                     </connections>
                                 </button>
-                                <button tag="-1" translatesAutoresizingMaskIntoConstraints="NO" id="kd1-yA-swF">
+                                <button tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="kd1-yA-swF">
                                     <rect key="frame" x="106" y="134.5" width="67" height="17"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="16" id="8Ff-sA-RXD"/>
@@ -1218,7 +1218,7 @@
                                         <action selector="waveChanged:" target="Voe-Tx-rLC" id="Sqd-uY-nDx"/>
                                     </connections>
                                 </button>
-                                <button tag="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Stw-7n-cvc">
+                                <button tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="Stw-7n-cvc">
                                     <rect key="frame" x="106" y="114.5" width="67" height="17"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="16" id="EvY-Fh-7Ql"/>
@@ -1231,7 +1231,7 @@
                                         <action selector="waveChanged:" target="Voe-Tx-rLC" id="ZeA-EI-vnK"/>
                                     </connections>
                                 </button>
-                                <button tag="-1" translatesAutoresizingMaskIntoConstraints="NO" id="IdN-qj-0QD">
+                                <button tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="IdN-qj-0QD">
                                     <rect key="frame" x="106" y="94.5" width="67" height="17"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="16" id="wAe-ad-wva"/>
@@ -1244,7 +1244,7 @@
                                         <action selector="waveChanged:" target="Voe-Tx-rLC" id="M7i-r4-cKs"/>
                                     </connections>
                                 </button>
-                                <button tag="-1" translatesAutoresizingMaskIntoConstraints="NO" id="U9v-Wq-CFm">
+                                <button tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="U9v-Wq-CFm">
                                     <rect key="frame" x="106" y="74.5" width="67" height="17"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="16" id="tGz-kw-a4m"/>
@@ -1257,7 +1257,7 @@
                                         <action selector="waveChanged:" target="Voe-Tx-rLC" id="Y4N-bh-yn0"/>
                                     </connections>
                                 </button>
-                                <button tag="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Lw7-N1-4Qy">
+                                <button tag="5" translatesAutoresizingMaskIntoConstraints="NO" id="Lw7-N1-4Qy">
                                     <rect key="frame" x="106" y="53.5" width="67" height="18"/>
                                     <buttonCell key="cell" type="radio" title="triangle" imagePosition="right" alignment="right" controlSize="small" inset="2" id="RVg-h2-smj">
                                         <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1267,47 +1267,65 @@
                                         <action selector="waveChanged:" target="Voe-Tx-rLC" id="ZWv-80-SK2"/>
                                     </connections>
                                 </button>
-                                <button tag="-1" translatesAutoresizingMaskIntoConstraints="NO" id="DSi-t5-Z3A">
+                                <button translatesAutoresizingMaskIntoConstraints="NO" id="DSi-t5-Z3A">
                                     <rect key="frame" x="181" y="154.5" width="73" height="17"/>
                                     <buttonCell key="cell" type="radio" title="sine" imagePosition="left" alignment="left" controlSize="small" state="on" inset="2" id="f1n-TV-eI0">
                                         <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="smallSystem"/>
                                     </buttonCell>
+                                    <connections>
+                                        <action selector="waveChangedB:" target="Voe-Tx-rLC" id="9hj-i6-y0l"/>
+                                    </connections>
                                 </button>
-                                <button tag="-1" translatesAutoresizingMaskIntoConstraints="NO" id="nU3-L2-Ouz">
+                                <button tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="nU3-L2-Ouz">
                                     <rect key="frame" x="181" y="134.5" width="73" height="17"/>
                                     <buttonCell key="cell" type="radio" title="cosine" imagePosition="left" alignment="left" controlSize="small" tag="1" inset="2" id="yY2-Vj-oHN">
                                         <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="smallSystem"/>
                                     </buttonCell>
+                                    <connections>
+                                        <action selector="waveChangedB:" target="Voe-Tx-rLC" id="h7v-Kg-YDO"/>
+                                    </connections>
                                 </button>
-                                <button tag="-1" translatesAutoresizingMaskIntoConstraints="NO" id="sDO-Q6-D5f">
+                                <button tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="sDO-Q6-D5f">
                                     <rect key="frame" x="181" y="114.5" width="73" height="17"/>
                                     <buttonCell key="cell" type="radio" title="square" imagePosition="left" alignment="left" controlSize="small" inset="2" id="ygg-xH-PPk">
                                         <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="smallSystem"/>
                                     </buttonCell>
+                                    <connections>
+                                        <action selector="waveChangedB:" target="Voe-Tx-rLC" id="bU1-kz-sna"/>
+                                    </connections>
                                 </button>
-                                <button tag="-1" translatesAutoresizingMaskIntoConstraints="NO" id="V6l-VL-6zh">
+                                <button tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="V6l-VL-6zh">
                                     <rect key="frame" x="181" y="94.5" width="73" height="17"/>
                                     <buttonCell key="cell" type="radio" title="sawtooth" imagePosition="left" alignment="left" controlSize="small" inset="2" id="Yig-SS-8yq">
                                         <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="smallSystem"/>
                                     </buttonCell>
+                                    <connections>
+                                        <action selector="waveChangedB:" target="Voe-Tx-rLC" id="hIw-df-xM9"/>
+                                    </connections>
                                 </button>
-                                <button tag="-1" translatesAutoresizingMaskIntoConstraints="NO" id="JhR-HQ-qLe">
+                                <button tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="JhR-HQ-qLe">
                                     <rect key="frame" x="181" y="74.5" width="73" height="17"/>
                                     <buttonCell key="cell" type="radio" title="rev. saw" imagePosition="left" alignment="left" controlSize="small" inset="2" id="XcI-fN-R2d">
                                         <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="smallSystem"/>
                                     </buttonCell>
+                                    <connections>
+                                        <action selector="waveChangedB:" target="Voe-Tx-rLC" id="Aur-7V-l2m"/>
+                                    </connections>
                                 </button>
-                                <button tag="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Y8a-qn-kAS">
+                                <button tag="5" translatesAutoresizingMaskIntoConstraints="NO" id="Y8a-qn-kAS">
                                     <rect key="frame" x="181" y="53.5" width="73" height="18"/>
                                     <buttonCell key="cell" type="radio" title="triangle" imagePosition="left" alignment="left" controlSize="small" inset="2" id="UZO-yp-J1c">
                                         <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" metaFont="smallSystem"/>
                                     </buttonCell>
+                                    <connections>
+                                        <action selector="waveChangedB:" target="Voe-Tx-rLC" id="zgV-i3-rk5"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <constraints>

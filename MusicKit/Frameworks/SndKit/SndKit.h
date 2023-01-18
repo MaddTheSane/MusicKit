@@ -93,3 +93,5 @@
 #import <SndKit/SndAudioUnitProcessor.h>
 #import <SndKit/SndAudioUnitController.h>
 #endif
+
+#import <SndKit/SndVSTProcessor.h>

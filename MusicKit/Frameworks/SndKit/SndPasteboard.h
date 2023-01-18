@@ -46,7 +46,6 @@ extern const NSPasteboardType SndPasteboardType;
 
 /*!
   @param  thePboard is a NSPasteboard *.
-  @return Returns an int.
   @brief Puts a copy of the Snd's contents (its sample format and sound data) on the pasteboard 
   maintained by the NSPasteboard object <i>thePboard</i>.
 

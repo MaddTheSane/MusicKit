@@ -137,7 +137,7 @@
     return self;
 }
 
-- (int) record
+- (SndError) record
 {
     [self record: self];
     return SND_ERR_NONE;
@@ -252,20 +252,18 @@
     return performancesArray;
 }
 
-- addPerformance: (SndPerformance*) p
+- (void)addPerformance: (SndPerformance*) p
 {
     [performancesArrayLock lock];
     [performancesArray addObject: p];
     [performancesArrayLock unlock];
-    return self;
 }
 
-- removePerformance: (SndPerformance*) p
+- (void)removePerformance: (SndPerformance*) p
 {
     [performancesArrayLock lock];
     [performancesArray removeObject: p];
     [performancesArrayLock unlock];
-    return self;
 }
 
 - (NSInteger) performanceCount
