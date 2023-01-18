@@ -896,7 +896,7 @@ DeprecatedEnum(SndViewDisplayMode, SND_SOUNDVIEW_WAVE, SndViewDisplayModeWave);
   @brief You never invoke this method; it's implemented to support services
               that act on sound data.
 */
-- validRequestorForSendType: (NSString *) sendType returnType: (NSString *) returnType;
+- (id)validRequestorForSendType: (NSString *) sendType returnType: (NSString *) returnType;
 
 /*!
   @brief Sent to the delegate just before the SndView's sound is played.

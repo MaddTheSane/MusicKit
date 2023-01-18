@@ -19,15 +19,14 @@
   NSMutableDictionary *nameTable;
 }
 
-+ defaultSndTable;
-- init;
-- (void) dealloc;
-- soundNamed:(NSString *)aName;
-- findSoundFor:(NSString *)aName;
-- addName:(NSString *)aname sound:aSnd;
-- addName:(NSString *)aname fromSoundfile:(NSString *)filename;
-- addName:(NSString *)aname fromSection:(NSString *)sectionName;
-- addName:(NSString *)aName fromBundle:(NSBundle *)aBundle;
++ (SndTable*)defaultSndTable;
+- (instancetype)init;
+- (Snd*)soundNamed:(NSString *)aName;
+- (Snd*)findSoundFor:(NSString *)aName;
+- (Snd*)addName:(NSString *)aname sound:(Snd*)aSnd;
+- (Snd*)addName:(NSString *)aname fromSoundfile:(NSString *)filename;
+- (Snd*)addName:(NSString *)aname fromSection:(NSString *)sectionName DEPRECATED_ATTRIBUTE;
+- (Snd*)addName:(NSString *)aName fromBundle:(NSBundle *)aBundle;
 - (void)removeSoundForName: (NSString *) aname;
 - (void) removeAllSounds;
 

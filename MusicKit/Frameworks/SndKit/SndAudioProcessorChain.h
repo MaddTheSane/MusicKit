@@ -45,7 +45,7 @@
   @brief   Factory method.
   @return     A freshly initialized, autoreleased SndAudioProcessorChain.
 */
-+ audioProcessorChain;
++ (instancetype)audioProcessorChain;
 
 /*!
   @brief   Initializes SndAudioProcessorChain instance.
@@ -53,7 +53,7 @@
   Creates an active SndAudioFader instance as the post effects fader.
   @return     Self
 */
-- init;
+- (instancetype)init;
 
 // TODO: perhaps add initWithFormat: (SndFormat) newFormat to prime the chain format?
 
@@ -86,7 +86,7 @@
   
   @param      index The base 0 entry in effects chain to remove.
  */
-- (void) removeAudioProcessorAtIndex: (int) index;
+- (void) removeAudioProcessorAtIndex: (NSInteger) index;
 
 /*!
   @brief   Get the processor at a certain index.
@@ -94,7 +94,7 @@
   @param      index Base zero reference to the SndAudioProcessor required.
   @return     Returns an autoreleased SndAudioProcessor.
 */
-- (SndAudioProcessor *) processorAtIndex: (int) index;
+- (SndAudioProcessor *) processorAtIndex: (NSInteger) index;
 
 /*!
   @brief   Removes all processors from the processor chain.
@@ -112,7 +112,7 @@
   @param      timeInSeconds The time in seconds the buffer is intended to be played.
   @return     Returns self.
 */
-- processBuffer: (SndAudioBuffer *) buff forTime: (double) timeInSeconds;
+- (void)processBuffer: (SndAudioBuffer *) buff forTime: (double) timeInSeconds;
 
 /*!
   @brief   Returns the number of processors in the audio processor chain.

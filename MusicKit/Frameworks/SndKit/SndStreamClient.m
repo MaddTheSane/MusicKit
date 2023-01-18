@@ -202,22 +202,20 @@ enum {
 // basic mutators
 ////////////////////////////////////////////////////////////////////////////////
 
-- setNeedsInput: (BOOL) b
+- (void)setNeedsInput: (BOOL) b
 {
     if (!active)
         needsInput = b;
     else
         NSLog(@"SndStreamClient -setNeedsInput: Can't change needsInput whilst streaming!");
-    return self;
 }
 
-- setGeneratesOutput: (BOOL) b 
+- (void)setGeneratesOutput: (BOOL) b
 {
     if (!active)
         generatesOutput = b;
     else
         NSLog(@"SndStreamClient -:setGeneratesOutput: Can't change generatesOutput whilst streaming!");
-  return self; 
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -294,7 +292,7 @@ enum {
 // welcomeClientWithBuffer:manager:
 ////////////////////////////////////////////////////////////////////////////////
 
-- welcomeClientWithInputBuffer: (SndAudioBuffer *) inputBuffer 
+- (BOOL)welcomeClientWithInputBuffer: (SndAudioBuffer *) inputBuffer
 		  outputBuffer: (SndAudioBuffer *) outputBuffer
 		       manager: (SndStreamManager *) streamManager
 {
@@ -320,11 +318,11 @@ enum {
         [NSThread detachNewThreadSelector: @selector(processingThread)
                                  toTarget: self
                                withObject: nil];
-        return self;
+        return YES;
     }
     else {
         NSLog(@"SndStreamClient -welcomeClientWithBuffer: Couldn't welcome client with buffer since it's already active!\n");
-        return nil;
+        return NO;
     }
 }
 
@@ -710,9 +708,8 @@ static void inline setThreadPriority()
 // sub-classed stream client's internal setup stuff. 
 ////////////////////////////////////////////////////////////////////////////////
 
-- prepareToStreamWithBuffer: (SndAudioBuffer*) buff
+- (void)prepareToStreamWithBuffer: (SndAudioBuffer*) buff
 {
-    return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -721,9 +718,9 @@ static void inline setThreadPriority()
 // Override this to give a sub-classed client an opportunity to 'clean up'
 ////////////////////////////////////////////////////////////////////////////////
 
-- didFinishStreaming
+- (void)didFinishStreaming
 {
-    return self;
+    
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -813,7 +810,7 @@ static void inline setThreadPriority()
 // setDetectPeaks
 ////////////////////////////////////////////////////////////////////////////////
 
-- setDetectPeaks: (BOOL) detectPeaks
+- (id)setDetectPeaks: (BOOL) detectPeaks
 {
     return self;
 }
@@ -822,7 +819,7 @@ static void inline setThreadPriority()
 // getPeakLeft:right:
 ////////////////////////////////////////////////////////////////////////////////
 
-- getPeakLeft: (float *) leftPeak right: (float *) rightPeak 
+- (id)getPeakLeft: (float *) leftPeak right: (float *) rightPeak
 {
     return self;
 }
@@ -838,10 +835,9 @@ static void inline setThreadPriority()
     return self;
 }
 
-- unlockOutputBuffer
+- (void)unlockOutputBuffer
 {
     [outputBufferLock unlockWithCondition: OB_isInit];
-    return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

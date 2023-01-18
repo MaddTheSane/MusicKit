@@ -81,7 +81,7 @@ static void handleMKError(NSString *msg)
 	[NSApp terminate: NSApp];
 }
   
-- appDidInit: sender;
+- (void)appDidInit: sender;
 {
     MKSetErrorProc(handleMKError); /* Intercept music kit errors. */
 
@@ -165,21 +165,19 @@ static void handleMKError(NSString *msg)
 
     /* Start the performance. */
     [MKConductor startPerformance];        
-    return self;
 }
 
 #define PLAY(aNote) [[theIns noteReceiver] receiveNote: aNote] 
 
-- playNote: sender
+- (void)playNote: sender
 {
     [MKConductor lockPerformance];	     /* Prepare to send MK message */
     [theNote setPar: MK_freq toDouble: freq];  /* use the current frequency. */
     PLAY(theNote); 
     [MKConductor unlockPerformance];	     /* End of MK message block */
-    return self;
 }
 
-- bendPitch: sender
+- (void)bendPitch: sender
 {    
     transposition = [sender floatValue];	  /* -12 to +12 semitones */
     freq =  DEFAULTFREQ * pow(2, transposition / 12.0);         /* in Hz */
@@ -187,23 +185,21 @@ static void handleMKError(NSString *msg)
     [theNoteUpdate setPar: MK_freq toDouble: freq]; 
     PLAY(theNoteUpdate);
     [MKConductor unlockPerformance];
-    return self;
 }
 
-- terminate: sender
+- (void)terminate: sender
 {
     [MKConductor lockPerformance];
     [MKConductor finishPerformance];       
     [MKConductor unlockPerformance];
     [theOrch close];     /* Free MKOrchestra resources and release the DSP. */ 
-    return [NSApp terminate: self];
+    [NSApp terminate: self];
 }
 
-- showInfoPanel: sender
+- (void)showInfoPanel: sender
 {
     [self loadNibSection: @"Info.nib" owner: self];
     [infoPanel orderFront: sender];
-    return self;
 }
 
 @end

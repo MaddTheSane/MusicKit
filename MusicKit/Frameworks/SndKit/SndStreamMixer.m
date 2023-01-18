@@ -83,7 +83,7 @@
 // processInBuffer:outBuffer:nowTime:
 ////////////////////////////////////////////////////////////////////////////////
 
-- processInBuffer: (SndAudioBuffer *) inB
+- (void)processInBuffer: (SndAudioBuffer *) inB
         outBuffer: (SndAudioBuffer *) outB
           nowTime: (double) t
 {
@@ -139,7 +139,6 @@
 #if SNDSTREAMMIXER_DEBUG
     NSLog(@"[mixer] Leaving processInBuffer\n");
 #endif
-    return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -381,7 +381,7 @@ static SndPlayer *defaultSndPlayer;
 // addPerformance:
 ////////////////////////////////////////////////////////////////////////////////
 
-- addPerformance: (SndPerformance*) aPerformance
+- (void)addPerformance: (SndPerformance*) aPerformance
 {
     if(![self isActive] && autoStartManager) {
 	[[SndStreamManager defaultStreamManager] addClient: self];
@@ -430,7 +430,6 @@ static SndPlayer *defaultSndPlayer;
 	NSLog(@"SndPlayer::playSnd(4) playing unlock...\n");
 #endif
     }
-    return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -441,7 +440,7 @@ static SndPlayer *defaultSndPlayer;
 // TODO: Need a lock around the toBePlayed array!!
 ////////////////////////////////////////////////////////////////////////////////
 
-- stopSnd: (Snd *) s withTimeOffset: (double) inSeconds
+- (void) stopSnd: (Snd *) s withTimeOffset: (double) inSeconds
 {
   NSArray *performancesToStop = [s performances];
   NSMutableArray *pendingToRemove = [[NSMutableArray alloc] init];
@@ -465,7 +464,6 @@ static SndPlayer *defaultSndPlayer;
   [toBePlayed removeObjectsInArray: pendingToRemove];
   // [playingLock unlock];
   [pendingToRemove release];
-  return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -473,7 +471,7 @@ static SndPlayer *defaultSndPlayer;
 // stop all performances of the sound immediately.
 ////////////////////////////////////////////////////////////////////////////////
 
-- stopSnd: (Snd *) s
+- (void) stopSnd: (Snd *) s
 {
   return [self stopSnd: s withTimeOffset: 0.0];
 }
@@ -483,7 +481,7 @@ static SndPlayer *defaultSndPlayer;
 // pause ALL performances of the sound immediately.
 ////////////////////////////////////////////////////////////////////////////////
 
-- pauseSnd: (Snd*) s
+- (void) pauseSnd: (Snd*) s
 {
   NSArray *performancesToPause = [s performances];
   int i, count = [performancesToPause count];
@@ -492,7 +490,6 @@ static SndPlayer *defaultSndPlayer;
     SndPerformance *thePerf = [performancesToPause objectAtIndex: i];
     [thePerf setPaused: YES];
   }
-  return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -627,27 +624,8 @@ static SndPlayer *defaultSndPlayer;
 // setRemainConnectedToManager:
 ////////////////////////////////////////////////////////////////////////////////
 
-- setRemainConnectedToManager: (BOOL) b
-{
-    remainConnectedToManager = b;
-    return self;
-}
-
-- (BOOL) remainConnectedToManager
-{
-    return remainConnectedToManager;
-}
-
-- (BOOL) autoStartManager
-{
-    return autoStartManager;
-}
-
-- setAutoStartManager: (BOOL) b
-{
-    autoStartManager = b;
-    return self;
-}
+@synthesize remainConnectedToManager;
+@synthesize autoStartManager;
 
 ////////////////////////////////////////////////////////////////////////////////
 

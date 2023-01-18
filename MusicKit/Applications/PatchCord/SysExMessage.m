@@ -22,7 +22,7 @@ static void handleMKError(NSString *msg)
     
     [mkErrorAlert setMessageText: msg];
     [mkErrorAlert addButtonWithTitle: @"Quit"];
-    [mkErrorAlert setAlertStyle: NSCriticalAlertStyle];
+    [mkErrorAlert setAlertStyle: NSAlertStyleCritical];
     
     if ([mkErrorAlert runModal] == NSAlertSecondButtonReturn)
         [NSApp terminate: NSApp];

@@ -131,7 +131,7 @@
 // removeAudioProcessorAtIndex:
 ////////////////////////////////////////////////////////////////////////////////
 
-- (void) removeAudioProcessorAtIndex: (int) index
+- (void) removeAudioProcessorAtIndex: (NSInteger) index
 {
     [audioProcessorArray removeObjectAtIndex: index];
 }
@@ -140,7 +140,7 @@
 // processorAtIndex
 ////////////////////////////////////////////////////////////////////////////////
 
-- (SndAudioProcessor *) processorAtIndex: (int) index
+- (SndAudioProcessor *) processorAtIndex: (NSInteger) index
 {
     return [audioProcessorArray objectAtIndex: index];
 }
@@ -168,11 +168,11 @@
 // processBuffer:forTime:
 ////////////////////////////////////////////////////////////////////////////////
 
-- processBuffer: (SndAudioBuffer *) buff forTime: (double) t
+- (void)processBuffer: (SndAudioBuffer *) buff forTime: (double) t
 {
     NSInteger audioProcessorIndex, audioProcessorCount = [audioProcessorArray count];
     if (bypassProcessing)
-        return self;
+        return;
 
     nowTime = t;
     
@@ -214,7 +214,6 @@
     }
     // TODO: Do a final copy, could make this conditional on at least one processor in the chain needing to replace.
     // TODO: [buff copyDataFromBuffer: outputBuffer];
-    return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

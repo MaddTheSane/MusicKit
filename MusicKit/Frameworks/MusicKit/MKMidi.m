@@ -1470,7 +1470,7 @@ static BOOL isSoftDevice(NSString *deviceName, int *unitNum)
     return self;
 }
 
-int _MKAllNotesOffPause = 500; /* mSec between MIDI channel blasts 
+static const int _MKAllNotesOffPause = 500; /* mSec between MIDI channel blasts 
 				* This is a temporary hack and should
 				* not be depended on!  It may change in 
 				* the future.

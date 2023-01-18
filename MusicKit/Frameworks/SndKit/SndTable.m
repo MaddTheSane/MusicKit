@@ -61,7 +61,7 @@ static SndTable* defaultSndTable = nil;
 // Does not name sound, or add to name table.
 ////////////////////////////////////////////////////////////////////////////////
 
-- soundNamed: (NSString *) aName
+- (Snd*)soundNamed: (NSString *) aName
 {
     NSMutableArray *libraryDirs = [NSMutableArray arrayWithObject: @"."];
     NSArray *sndFileExtensions = [Snd soundFileExtensions];
@@ -101,7 +101,7 @@ static SndTable* defaultSndTable = nil;
 // findSoundFor:
 ////////////////////////////////////////////////////////////////////////////////
 
-- findSoundFor:(NSString *)aName
+- (Snd*)findSoundFor:(NSString *)aName
 {
   return [self soundNamed: aName];
 }
@@ -110,7 +110,7 @@ static SndTable* defaultSndTable = nil;
 // addName:sound:
 ////////////////////////////////////////////////////////////////////////////////
 
-- addName:(NSString *)aname sound:aSnd
+- (Snd*)addName:(NSString *)aname sound:(Snd*)aSnd
 {
   if ([nameTable objectForKey:aname]) return nil; /* already exists */
   if (!aSnd) return nil;
@@ -123,7 +123,7 @@ static SndTable* defaultSndTable = nil;
 // addName:fromSoundfile:
 ////////////////////////////////////////////////////////////////////////////////
 
-- addName:(NSString *)aname fromSoundfile:(NSString *)filename
+- (Snd*)addName:(NSString *)aname fromSoundfile:(NSString *)filename
 {
   Snd *newSnd;
   if ([nameTable objectForKey:aname]) return nil; /* already exists */
@@ -140,14 +140,14 @@ static SndTable* defaultSndTable = nil;
 - addName:(NSString *)aname fromSection:(NSString *)sectionName
 {
   printf("Snd: +addName:fromSection: obsolete, not implemented\n");
-  return self;
+  return nil;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // addName:fromBundle:
 ////////////////////////////////////////////////////////////////////////////////
 
-- addName:(NSString *)aName fromBundle:(NSBundle *)aBundle
+- (Snd*)addName:(NSString *)aName fromBundle:(NSBundle *)aBundle
 {
   BOOL found;
   Snd *newSound;

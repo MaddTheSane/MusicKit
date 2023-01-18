@@ -83,6 +83,11 @@
   @return     The default SndPlayer object
 */
 + (SndPlayer*) defaultSndPlayer;
+/*!
+  @brief   Factory method
+  
+  The default SndPlayer object
+*/
 @property (class, readonly, retain) SndPlayer *defaultSndPlayer;
 /*!
   @brief   Initializer
@@ -148,13 +153,13 @@
   @param inSeconds The future time interval when to stop playing.
   @return Self.
 */
-- stopSnd: (Snd*) s withTimeOffset: (double) inSeconds;
+- (void) stopSnd: (Snd*) s withTimeOffset: (double) inSeconds;
 /*!
   @brief Stop all performances of the sound immediately.
   @param    s The sound to stop.
   @return   Self.
 */
-- stopSnd: (Snd *) s;
+- (void) stopSnd: (Snd *) s;
 /*!
   @brief   Stop the given performance at some time in the future.
   
@@ -167,7 +172,7 @@
   @param inSeconds The future time interval when to stop playing.
   @return
 */
-- stopPerformance: (SndPerformance *) performance inFuture: (double) inSeconds;
+- (void) stopPerformance: (SndPerformance *) performance inFuture: (double) inSeconds;
 /*!
   @brief   Pause all performances of the sound immediately.
   
@@ -179,7 +184,7 @@
   @param      s The sound to pause.
   @return     Returns self.
 */
-- pauseSnd: (Snd*) s;
+- (void) pauseSnd: (Snd*) s;
 /*!
   @brief   Main Snd performance method.
   
@@ -201,7 +206,7 @@
   the future, as new threads are brought into existance, and 
   streaming is started up.
 */
-- setRemainConnectedToManager: (BOOL) b;
+- (void)setRemainConnectedToManager: (BOOL) b;
 
 /*!
   @brief Indicates the current setting if the SndPlayer will remain connected to
@@ -211,14 +216,16 @@
   no sounds are pending or playing, FALSE if it will disconnect.
 */
 - (BOOL) remainConnectedToManager;
- 
+
+@property BOOL remainConnectedToManager;
+
 /*!
  @brief Adds the performance to the list of those currently being played.
 
   
  @param  aPerformance A SndPerformance instance.
 */
-- addPerformance: (SndPerformance*) aPerformance;
+- (void)addPerformance: (SndPerformance*) aPerformance;
 
 /*!
   @brief Resets the playIndexes of all currently playing performances back to where
@@ -235,7 +242,7 @@
 
   @param yesOrNo If yesOrNo is YES, the SndStreamManager will be automatically started, if NO, it will not be.
  */
-- setAutoStartManager: (BOOL) yesOrNo;
+- (void)setAutoStartManager: (BOOL) yesOrNo;
 
 /*!
   @brief Returns the current state of whether the SndStreamManager will be automatically
@@ -244,6 +251,8 @@
   @return Returns YES if the SndStreamManager will be automatically started, NO if not.
  */
 - (BOOL) autoStartManager;
+
+@property BOOL autoStartManager;
 
 @end
 

@@ -47,17 +47,13 @@
   @brief   Factory method returning an initialized and autoreleased SndStreamMixer instance.
   @return     Returns an initialized and autoreleased SndStreamMixer instance.
 */
-+ mixer;
++ (instancetype)mixer;
 
 /*!
   @brief   Initializer method.
   @return     Returns self.
 */
-- init;
-
-- (void) dealloc;
-
-- (NSString *) description;
+- (instancetype)init;
 
 /*!
   @brief   Mixes together all clients currently exposed output buffers.
@@ -71,7 +67,7 @@
   @param      t The current now time.
   @return     Returns self.
 */
-- processInBuffer: (SndAudioBuffer *) inB
+- (void)processInBuffer: (SndAudioBuffer *) inB
         outBuffer: (SndAudioBuffer *) outB
           nowTime: (double) t;
 

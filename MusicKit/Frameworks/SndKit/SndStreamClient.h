@@ -147,7 +147,7 @@ enum {
   @brief Factory method to creates and initializes an autoreleased SndStreamClient instance.
   @return   An autoreleased SndStreamClient object.
 */
-+ streamClient;
++ (instancetype)streamClient;
 
 /*!
   @brief   Describes SndStreamClient
@@ -170,7 +170,7 @@ enum {
   @param      streamManager The SndStreamManager responsible for this client.
   @return     Returns self
 */
-- welcomeClientWithInputBuffer: (SndAudioBuffer *) inputBuffer 
+- (BOOL)welcomeClientWithInputBuffer: (SndAudioBuffer *) inputBuffer 
 		  outputBuffer: (SndAudioBuffer *) outputBuffer
 		       manager: (SndStreamManager *) streamManager;
 
@@ -309,7 +309,7 @@ enum {
   Not implemented yet - not convinced this should be here - maybe inside an SndAudioProcessor?
   @return     Returns self.
 */
-- setDetectPeaks: (BOOL) detectPeaks;
+- (id)setDetectPeaks: (BOOL) detectPeaks;
 
 /*!
   @brief   Get the most recent peak values for the stereo stream
@@ -319,7 +319,7 @@ enum {
   @param      rightPeak Righ peak value
   @return     Returns self.
 */
-- getPeakLeft: (float *) leftPeak right: (float *) rightPeak;
+- (id)getPeakLeft: (float *) leftPeak right: (float *) rightPeak;
 
 /*!
   @brief   Returns whether the client is an audio-producer (synthesizer, FX)
@@ -341,7 +341,7 @@ enum {
   @param      b Boolean switch 
   @return     Returns self.
 */
-- setGeneratesOutput: (BOOL) b;
+- (void)setGeneratesOutput: (BOOL) b;
 
 /*!
   @brief   Sets whether the client requires an input audio stream or not.
@@ -356,7 +356,7 @@ enum {
   @param      yesOrNo YES copy the input buffer into the client.
   @return     Returns self.
 */
-- setNeedsInput: (BOOL) yesOrNo;
+- (void)setNeedsInput: (BOOL) yesOrNo;
 
 /*!
   @brief   Blocks calling thread until outputBuffer is available for locking.  
@@ -371,7 +371,7 @@ enum {
   @brief   Releases lock on the outputBuffer.
   @return  Returns self.
 */
-- unlockOutputBuffer;
+- (void)unlockOutputBuffer;
 
 /*!
   @brief   Prepare to stream with buffers that look like the supplied buffer.
@@ -381,7 +381,7 @@ enum {
   @param      buff
   @return     Returns self.
 */
-- prepareToStreamWithBuffer: (SndAudioBuffer *) buff;
+- (void)prepareToStreamWithBuffer: (SndAudioBuffer *) buff;
 
 /*!
   @brief   streaming thread is shutting down message.
@@ -390,7 +390,7 @@ enum {
   derived client a chance to clean up after itself.
   @return     Returns self.
 */
-- didFinishStreaming;
+- (void)didFinishStreaming;
 
 /*!
   @brief   Returns the client's SndAudioProcessorChain.  

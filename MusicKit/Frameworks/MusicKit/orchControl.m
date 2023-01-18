@@ -108,7 +108,7 @@ static int DSPMKResumeSoundOut(void);
 #define TSTAMPS 100
 static NSDate *tstamps[TSTAMPS]; /*sb: was double... */
 static char *msgs[TSTAMPS];
-static int tstampCnt = 0;
+static NSInteger tstampCnt = 0;
 
 void TSTAMP(char *msg) {
     [tstamps[tstampCnt] autorelease];
