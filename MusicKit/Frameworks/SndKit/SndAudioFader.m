@@ -591,7 +591,7 @@ static inline int processBalance(int xPtr,
         [self staticMixIntoBuffer: inB];
     }
     else {  // Mix using envelopes.
-        if ([inB dataFormat] == SND_FORMAT_FLOAT && [inB channelCount] == 2) {
+        if ([inB dataFormat] == SndSampleFormatFloat && [inB channelCount] == 2) {
             long lengthInFrames  = [inB lengthInSampleFrames];
             double x = nowTime;
             double maxX = x + [inB duration];

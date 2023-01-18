@@ -25,7 +25,7 @@
 
 - testBufferMagnitude
 {
-    SndAudioBuffer *buff = [[SndAudioBuffer alloc] initWithDataFormat: SND_FORMAT_FLOAT
+    SndAudioBuffer *buff = [[SndAudioBuffer alloc] initWithDataFormat: SndSampleFormatFloat
 							 channelCount: 2
 							 samplingRate: 44100
 							   frameCount: 128];

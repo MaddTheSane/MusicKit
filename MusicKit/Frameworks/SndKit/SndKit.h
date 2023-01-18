@@ -50,6 +50,8 @@
  */
 #import <SndKit/SndKitConfig.h>
 
+#import <SndKit/sndfile.h>
+#ifdef __OBJC__
 #import <SndKit/SndFormat.h>
 #import <SndKit/SndEndianFunctions.h>
 #import <SndKit/SndTable.h>
@@ -92,6 +94,8 @@
 #if defined(__APPLE_CC__) // Only Apple defines AudioUnits.
 #import <SndKit/SndAudioUnitProcessor.h>
 #import <SndKit/SndAudioUnitController.h>
+#endif
+
 #endif
 
 #import <SndKit/SndVSTProcessor.h>

@@ -30,7 +30,7 @@
 #import <SndKit/SndAudioProcessor.h>
 
 #if HAVE_LIBSNDFILE
-# import <sndfile.h>
+# import <SndKit/sndfile.h>
 #else
 #define SNDFILE void
 #endif

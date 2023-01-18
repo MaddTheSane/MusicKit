@@ -60,25 +60,25 @@
     }
     
     switch (sndFormatCode) {
-    case SND_FORMAT_MULAW_8:
+    case SndSampleFormatMulaw8:
 	sndfileFormat |= SF_FORMAT_ULAW;
 	break;
-    case SND_FORMAT_LINEAR_8:
+    case SndSampleFormatLinear8:
 	sndfileFormat |= SF_FORMAT_PCM_S8;
 	break;
-    case SND_FORMAT_LINEAR_16:
+    case SndSampleFormatLinear16:
 	sndfileFormat |= SF_FORMAT_PCM_16;
 	break;
-    case SND_FORMAT_LINEAR_24:
+    case SndSampleFormatLinear24:
 	sndfileFormat |= SF_FORMAT_PCM_24;
 	break;
-    case SND_FORMAT_LINEAR_32:
+    case SndSampleFormatLinear32:
 	sndfileFormat |= SF_FORMAT_PCM_32;
 	break;
-    case SND_FORMAT_FLOAT:
+    case SndSampleFormatFloat:
 	sndfileFormat |= SF_FORMAT_FLOAT;
 	break;
-    case SND_FORMAT_DOUBLE:
+    case SndSampleFormatDouble:
 	sndfileFormat |= SF_FORMAT_DOUBLE;
 	break;
     default:
@@ -161,7 +161,7 @@
 	}	
     }
     else {
-	headerFormat.dataFormat   = SND_FORMAT_FLOAT;  // We only retrieve floats, we let libsndfile do the format conversions itself.
+	headerFormat.dataFormat   = SndSampleFormatFloat;  // We only retrieve floats, we let libsndfile do the format conversions itself.
 	headerFormat.sampleRate   = sfinfo.samplerate;
 	headerFormat.channelCount = sfinfo.channels;
 	headerFormat.frameCount   = sfinfo.frames; // whole sound for the moment	
@@ -282,7 +282,7 @@
     }
     
     // We only retrieve floats, we let libsndfile do the format conversions itself.
-    soundFormat.dataFormat = SND_FORMAT_FLOAT;
+    soundFormat.dataFormat = SndSampleFormatFloat;
     soundFormat.sampleRate = sfinfo.samplerate;
     soundFormat.channelCount = sfinfo.channels;
 
@@ -376,19 +376,19 @@ int SndWriteSampleData(SNDFILE *sfp, void *soundData, SndFormat soundDataFormat)
     long sampleCount = soundDataFormat.frameCount * soundDataFormat.channelCount;
 
     switch(soundDataFormat.dataFormat) {
-    case SND_FORMAT_FLOAT:
+    case SndSampleFormatFloat:
 	if (sf_write_float(sfp, (float *) soundData, sampleCount) != sampleCount) {
 	    NSLog(@"SndWriteSampleData() error writing %ld floats: %s\n", sampleCount, sf_strerror(sfp));
 	    return SND_ERR_UNKNOWN;
 	}
 	break;
-    case SND_FORMAT_LINEAR_16:
+    case SndSampleFormatLinear16:
 	if (sf_write_short(sfp, (short *) soundData, sampleCount) != sampleCount) {
 	    NSLog(@"SndWriteSampleData() error writing %ld shorts: %s\n", sampleCount, sf_strerror(sfp));
 	    return SND_ERR_UNKNOWN;
 	}
 	break;
-    case SND_FORMAT_LINEAR_32:
+    case SndSampleFormatLinear32:
 	if (sf_write_int(sfp, (int *) soundData, sampleCount) != sampleCount) {
 	    NSLog(@"SndWriteSampleData() error writing %ld ints: %s\n", sampleCount, sf_strerror(sfp));
 	    return SND_ERR_UNKNOWN;

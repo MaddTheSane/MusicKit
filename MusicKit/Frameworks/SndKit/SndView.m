@@ -2029,19 +2029,19 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 	for (i = 0; i < numEncodings; i++) {
 	    int anEncoding = encodings[i];
 	    if (anEncoding == NX_SoundStreamDataEncoding_Mulaw8 &&
-		df == SND_FORMAT_MULAW_8) formatPossible = YES;
+		df == SndSampleFormatMulaw8) formatPossible = YES;
 	    else if (anEncoding == NX_SoundStreamDataEncoding_Linear8 &&
-		     df == SND_FORMAT_LINEAR_8) formatPossible = YES;
+		     df == SndSampleFormatLinear8) formatPossible = YES;
 	    else if (anEncoding == NX_SoundStreamDataEncoding_Linear16 &&
-		     df == SND_FORMAT_LINEAR_16) formatPossible = YES;
+		     df == SndSampleFormatLinear16) formatPossible = YES;
 	}
 	if (!formatPossible && numEncodings) { 
 	    /* if our encoding not there, take best encoding hardware supports and convert later */
 	    formatPossible = YES;
 	    df = encodings[numEncodings - 1];
-	    if (df == NX_SoundStreamDataEncoding_Mulaw8) df = SND_FORMAT_MULAW_8;
-	    else if (df == NX_SoundStreamDataEncoding_Linear8) df = SND_FORMAT_LINEAR_8;
-	    else if (df == NX_SoundStreamDataEncoding_Linear16) df = SND_FORMAT_LINEAR_16;
+	    if (df == NX_SoundStreamDataEncoding_Mulaw8) df = SndSampleFormatMulaw8;
+	    else if (df == NX_SoundStreamDataEncoding_Linear8) df = SndSampleFormatLinear8;
+	    else if (df == NX_SoundStreamDataEncoding_Linear16) df = SndSampleFormatLinear16;
 	    else formatPossible = NO;
 	}
 	if (!possible || !formatPossible) {

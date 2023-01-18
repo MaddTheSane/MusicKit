@@ -513,7 +513,7 @@
     if (!theSound) 
 	return YES;
     format = [theSound dataFormat];
-    if (format == SND_FORMAT_MULAW_8 &&
+    if (format == SndSampleFormatMulaw8 &&
 	[theSound samplingRate] == (int) SND_RATE_CODEC &&
 	[theSound channelCount] == 1 )
 	return YES;

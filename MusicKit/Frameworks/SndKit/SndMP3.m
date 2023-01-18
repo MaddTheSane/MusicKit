@@ -440,7 +440,7 @@ static unsigned long getFrameHeaderAt(const unsigned char *bitstream)
         encodedFrameLocations = NULL;
         encodedFrameLocationsCount = 0;
         currentMP3FrameID = -1;
-	soundFormat.dataFormat = SND_FORMAT_MP3;
+	soundFormat.dataFormat = SndSampleFormatMp3;
 	soundFormat.sampleRate = 44100.0;
 	soundFormat.channelCount = 2;
 	soundFormat.frameCount = 0;
@@ -512,7 +512,7 @@ static unsigned long getFrameHeaderAt(const unsigned char *bitstream)
 	   channelCount: (int) toChannelCount
 {
     // we decode into either of these formats.
-    if((toFormat != SND_FORMAT_LINEAR_16 && toFormat != SND_FORMAT_FLOAT) || 
+    if((toFormat != SndSampleFormatLinear16 && toFormat != SndSampleFormatFloat) || 
        toRate != [self samplingRate] || toChannelCount != [self channelCount])
        return SND_ERR_UNKNOWN;
     else
@@ -912,7 +912,7 @@ static unsigned long getFrameHeaderAt(const unsigned char *bitstream)
     unsigned char *mp3DataBytes = (unsigned char *) [mp3Data bytes];
     // Define our buffer to match the format we expect HIP to provide decoded output in.
     // Set length to the largest number of samples per MPEG frame, regardless of MPEG Layer.
-    SndAudioBuffer *decodedPCMBuffer = [SndAudioBuffer audioBufferWithDataFormat: SND_FORMAT_LINEAR_16
+    SndAudioBuffer *decodedPCMBuffer = [SndAudioBuffer audioBufferWithDataFormat: SndSampleFormatLinear16
 								    channelCount: [self channelCount]
 								    samplingRate: [self samplingRate]
 								      frameCount: MAX_MPEG_SAMPLES_PER_FRAME];
@@ -1139,7 +1139,7 @@ static unsigned long getFrameHeaderAt(const unsigned char *bitstream)
     pData = [pcmData bytes];
     
     switch ([anAudioBuffer dataFormat]) {
-	case SND_FORMAT_FLOAT: {
+	case SndSampleFormatFloat: {
 	    float *pBuff = [anAudioBuffer bytes];
 	    
 	    if (buffChans == 2) {
@@ -1178,7 +1178,7 @@ static unsigned long getFrameHeaderAt(const unsigned char *bitstream)
 		NSLog(@"SndMP3 -insertPreDecodedIntoAudioBuffer: - Unhandled number of channels %d", buffChans);
 	}
 	    break;
-	case SND_FORMAT_LINEAR_16: {
+	case SndSampleFormatLinear16: {
 	    short *pBuff = [anAudioBuffer bytes];
 	    
 	    if (buffChans == 2) {
@@ -1213,7 +1213,7 @@ static unsigned long getFrameHeaderAt(const unsigned char *bitstream)
 #endif
 	    }
 	    else
-		NSLog(@"SndMP3 -insertPreDecodedIntoAudioBuffer: %@ - Unhandled number of channels %d of SND_FORMAT_LINEAR_16 data", anAudioBuffer, buffChans);
+		NSLog(@"SndMP3 -insertPreDecodedIntoAudioBuffer: %@ - Unhandled number of channels %d of SndSampleFormatLinear16 data", anAudioBuffer, buffChans);
 	    break;
 	}
 	default:
@@ -1265,7 +1265,7 @@ static unsigned long getFrameHeaderAt(const unsigned char *bitstream)
     }
 
     // TODO: Should initialize this with the native data format?
-    [ab initWithDataFormat: SND_FORMAT_FLOAT
+    [ab initWithDataFormat: SndSampleFormatFloat
 	      channelCount: 2
               samplingRate: [self samplingRate]
                 frameCount: r.length];

@@ -54,7 +54,7 @@ static int loopingParam = 0;
 	currentlyLooping = NO;
 	
 	// The default output sound format.
-	soundFormat.dataFormat = SND_FORMAT_FLOAT;
+	soundFormat.dataFormat = SndSampleFormatFloat;
 	soundFormat.channelCount = 2;
 	soundFormat.sampleRate = 44100.0;
 	currentMixFrame = 0;

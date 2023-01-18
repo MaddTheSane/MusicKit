@@ -44,8 +44,8 @@
  *			(bug #6312).
  * soundkit-25
  * =======================================================================================
- * 20 Sept 90 (wot)	Added support for SND_FORMAT_EMPHASIZED.
- *                      Made it do the same things as SND_FORMAT_LINEAR_16.
+ * 20 Sept 90 (wot)	Added support for SndSampleFormatEmphasized.
+ *                      Made it do the same things as SndSampleFormatLinear16.
  *
  * 3/18/92 mminnick	Use sound driver peak detection.
  * 4/23/92 mminnick	Lock/unlock focus around draw in -run (bug 19540)

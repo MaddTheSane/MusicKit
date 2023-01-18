@@ -44,7 +44,7 @@ int main (int argc, const char *argv[])
         NSLog(@"Input file must be stereo.\n");
         exit(1);
     }
-    if ([sound dataFormat] != SND_FORMAT_LINEAR_16) {
+    if ([sound dataFormat] != SndSampleFormatLinear16) {
         NSLog(@"Input file must be in 16-bit linear format.\n");
         exit(1);
     }

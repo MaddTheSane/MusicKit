@@ -48,9 +48,9 @@ static BOOL clipping = NO;
     [soundView1 setEditable: NO];
     [soundView2 setEditable: NO];
     [soundView3 setEditable: NO];
-    [soundView1 setDisplayMode: SND_SOUNDVIEW_WAVE];
-    [soundView2 setDisplayMode: SND_SOUNDVIEW_WAVE];
-    [soundView3 setDisplayMode: SND_SOUNDVIEW_WAVE];
+    [soundView1 setDisplayMode: SndViewDisplayModeWave];
+    [soundView2 setDisplayMode: SndViewDisplayModeWave];
+    [soundView3 setDisplayMode: SndViewDisplayModeWave];
     [soundView1 setOptimizedForSpeed: NO];
     [soundView2 setOptimizedForSpeed: NO];
     [soundView3 setOptimizedForSpeed: NO];
@@ -62,15 +62,15 @@ static BOOL clipping = NO;
     }
     type1 = 0;
     type2 = 0;
-    theSound1 = [[Snd alloc] initWithFormat: SND_FORMAT_LINEAR_16
+    theSound1 = [[Snd alloc] initWithFormat: SndSampleFormatLinear16
 			       channelCount: 1
 				     frames: SAMPLING_RATE * SECONDS
 			       samplingRate: SAMPLING_RATE];
-    theSound2 = [[Snd alloc] initWithFormat: SND_FORMAT_LINEAR_16
+    theSound2 = [[Snd alloc] initWithFormat: SndSampleFormatLinear16
 			       channelCount: 1
 				     frames: SAMPLING_RATE * SECONDS
 			       samplingRate: SAMPLING_RATE];
-    theSound3 = [[Snd alloc] initWithFormat: SND_FORMAT_LINEAR_16
+    theSound3 = [[Snd alloc] initWithFormat: SndSampleFormatLinear16
 			       channelCount: 1
 				     frames: SAMPLING_RATE * SECONDS
 			       samplingRate: SAMPLING_RATE];
@@ -194,7 +194,7 @@ void doCalc(int type, short *pointer, float theFreq, float theAmp)
 - (Snd *) singleSound: sender
 {
     short *pointer;
-    Snd *newSoundA = [[Snd alloc] initWithFormat: SND_FORMAT_LINEAR_16
+    Snd *newSoundA = [[Snd alloc] initWithFormat: SndSampleFormatLinear16
 				    channelCount: 1
 					  frames: SAMPLING_RATE * 3.0
 				    samplingRate: SAMPLING_RATE];
@@ -256,7 +256,7 @@ void doCalc(int type, short *pointer, float theFreq, float theAmp)
     freq2 = [freqNum2 floatValue];
     if (somethingChanged) {
         [newSound release];
-        newSound = [[Snd alloc] initWithFormat: SND_FORMAT_LINEAR_16
+        newSound = [[Snd alloc] initWithFormat: SndSampleFormatLinear16
 				  channelCount: 1
 					frames: SAMPLING_RATE * theLength
 				  samplingRate: SAMPLING_RATE];

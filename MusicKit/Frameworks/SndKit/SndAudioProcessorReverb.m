@@ -127,7 +127,7 @@
                         outputBuffer: (SndAudioBuffer *) outB
 {
     if ([outB hasSameFormatAsBuffer: inB]      &&
-	[inB dataFormat]   == SND_FORMAT_FLOAT &&
+	[inB dataFormat]   == SndSampleFormatFloat &&
 	[inB channelCount] == NUMCHANNELS) {
 	
 	float *inD  = (float*) [inB  bytes];

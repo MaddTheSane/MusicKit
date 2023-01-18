@@ -161,7 +161,7 @@
 // The default modern version, generate a zero length floating point, stereo CD quality sound.
 - init
 {
-    return [self initWithFormat: SND_FORMAT_FLOAT channelCount: 2 frames: 0 samplingRate: 44100.0];
+    return [self initWithFormat: SndSampleFormatFloat channelCount: 2 frames: 0 samplingRate: 44100.0];
 }
 
 - initWithAudioBuffer: (SndAudioBuffer *) aBuffer
@@ -380,7 +380,7 @@
     [aCoder encodeInt: soundFormat.dataFormat forKey: @"DataFormat"];
     [aCoder encodeDouble: soundFormat.sampleRate  forKey: @"SampleRate"];
     [aCoder encodeInt: soundFormat.channelCount forKey: @"ChannelCount"];
-    [aCoder encodeInt: soundFormat.frameCount forKey: @"FrameCount"]; 
+    [aCoder encodeInteger: soundFormat.frameCount forKey: @"FrameCount"];
     [aCoder encodeObject: soundBuffers forKey: @"SoundBuffers"];
 
 #if 0
@@ -412,7 +412,7 @@
 	soundFormat.dataFormat = [aDecoder decodeIntForKey: @"DataFormat"];
 	soundFormat.sampleRate = [aDecoder decodeDoubleForKey: @"SampleRate"];
 	soundFormat.channelCount = [aDecoder decodeIntForKey: @"ChannelCount"];
-	soundFormat.frameCount = [aDecoder decodeIntForKey: @"FrameCount"]; 
+	soundFormat.frameCount = [aDecoder decodeIntegerForKey: @"FrameCount"];
 	soundBuffers = [[aDecoder decodeObjectForKey: @"SoundBuffers"] retain];
     }
     else {
@@ -457,7 +457,7 @@
 
 - awakeAfterUsingCoder: (NSCoder *) aDecoder
 {
-    conversionQuality = SndConvertLowQuality;
+    conversionQuality = SndConversionQualityLow;
     return self; /* what to do here??? Doesn't seem to be anything pressing... */
 }
 
@@ -524,13 +524,13 @@
 - (BOOL) isEditable
 {
     switch ([self dataFormat]) {
-    case SND_FORMAT_MULAW_8:
-    case SND_FORMAT_LINEAR_8:
-    case SND_FORMAT_LINEAR_16:
-    case SND_FORMAT_LINEAR_24:
-    case SND_FORMAT_LINEAR_32:
-    case SND_FORMAT_FLOAT:
-    case SND_FORMAT_DOUBLE:
+    case SndSampleFormatMulaw8:
+    case SndSampleFormatLinear8:
+    case SndSampleFormatLinear16:
+    case SndSampleFormatLinear24:
+    case SndSampleFormatLinear32:
+    case SndSampleFormatFloat:
+    case SndSampleFormatDouble:
 	return YES;
     default:
 	break;
@@ -542,7 +542,7 @@
 {
     SndSampleFormat df1 = [self dataFormat];
     SndSampleFormat df2 = [aSound dataFormat];
-    BOOL formatsOk = ((df1 == df2) && df1 != SND_FORMAT_INDIRECT);
+    BOOL formatsOk = ((df1 == df2) && df1 != SndSampleFormatIndirect);
     
     if (aSound == nil) 
 	return YES;
@@ -574,9 +574,9 @@
 	error = [bufferToConvert convertToSampleFormat: toFormat
 					  channelCount: toChannelCount
 					  samplingRate: toRate
-					useLargeFilter: conversionQuality == SndConvertHighQuality
-				     interpolateFilter: conversionQuality != SndConvertLowQuality
-				useLinearInterpolation: conversionQuality == SndConvertLowQuality];
+					useLargeFilter: conversionQuality == SndConversionQualityHigh
+				     interpolateFilter: conversionQuality != SndConversionQualityLow
+				useLinearInterpolation: conversionQuality == SndConversionQualityLow];
 	totalFrameCount += [bufferToConvert lengthInSampleFrames];
 	if (error == nil)
 	    return SND_ERR_UNKNOWN;
@@ -720,32 +720,32 @@
     for(sampleIndex = sampleNumber; sampleIndex < sampleNumber + averageOverChannels; sampleIndex++) {
 	// TODO: move this into a SndAudioBuffer method.
 	switch (dataFormat) {
-	    case SND_FORMAT_LINEAR_8:
+	    case SndSampleFormatLinear8:
 		theValue += ((char *) pcmData)[sampleIndex];
 		break;
-	    case SND_FORMAT_MULAW_8:
+	    case SndSampleFormatMulaw8:
 		theValue += SndMuLawToLinear(((char *) pcmData)[sampleIndex]);
 		break;
-	    case SND_FORMAT_EMPHASIZED:
-	    case SND_FORMAT_COMPRESSED:
-	    case SND_FORMAT_COMPRESSED_EMPHASIZED:
-	    case SND_FORMAT_DSP_DATA_16:
-	    case SND_FORMAT_LINEAR_16:
+	    case SndSampleFormatEmphasized:
+	    case SndSampleFormatCompressed:
+	    case SndSampleFormatCompressedEmphasized:
+	    case SndSampleFormatDspData16:
+	    case SndSampleFormatLinear16:
 		theValue += ((short *) pcmData)[sampleIndex];
 		break;
-	    case SND_FORMAT_LINEAR_24:
-	    case SND_FORMAT_DSP_DATA_24:
+	    case SndSampleFormatLinear24:
+	    case SndSampleFormatDspData24:
 		// theValue = ((short *) pcmData)[frameIndex];
 		theValue += *((int *) ((char *) pcmData + sampleIndex * 3)) >> 8;
 		break;
-	    case SND_FORMAT_LINEAR_32:
-	    case SND_FORMAT_DSP_DATA_32:
+	    case SndSampleFormatLinear32:
+	    case SndSampleFormatDspData32:
 		theValue += ((int *) pcmData)[sampleIndex];
 		break;
-	    case SND_FORMAT_FLOAT:
+	    case SndSampleFormatFloat:
 		theValue += ((float *) pcmData)[sampleIndex];
 		break;
-	    case SND_FORMAT_DOUBLE:
+	    case SndSampleFormatDouble:
 		theValue += ((double *) pcmData)[sampleIndex];
 		break;
 	    default: /* just in case */

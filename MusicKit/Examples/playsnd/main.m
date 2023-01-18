@@ -158,7 +158,7 @@ int playSoundFile(NSString *soundFileName, long startTimeInSamples, long duratio
     }
     
 #if !USE_SNDONDISK
-    [soundToPlay convertToSampleFormat: SND_FORMAT_FLOAT];
+    [soundToPlay convertToSampleFormat: SndSampleFormatFloat];
 #endif
     if (showInfo) {
 	NSLog(@"%@", [soundToPlay description]);

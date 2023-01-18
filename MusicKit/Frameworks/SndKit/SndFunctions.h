@@ -62,7 +62,7 @@
 #import <SndKit/SndEndianFunctions.h>
 
 #if HAVE_LIBSNDFILE
-# import <sndfile.h> /* for libsndfile SNDFILE declaration */
+# import <SndKit/sndfile.h> /* for libsndfile SNDFILE declaration */
 #else
 #define SNDFILE void
 #endif

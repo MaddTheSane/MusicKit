@@ -155,7 +155,7 @@
     if ([outB lengthInSampleFrames] == [inB lengthInSampleFrames] &&
 	[outB channelCount]         == [inB channelCount]    &&
 	[outB dataFormat]           == [inB dataFormat]      &&
-	[inB dataFormat]            == SND_FORMAT_FLOAT      &&
+	[inB dataFormat]            == SndSampleFormatFloat      &&
 	[inB channelCount]          == 2) {
 	
 	float *inD  = (float*) [inB  bytes];

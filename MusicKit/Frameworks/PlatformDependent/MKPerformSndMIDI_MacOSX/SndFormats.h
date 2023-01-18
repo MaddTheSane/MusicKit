@@ -57,56 +57,56 @@
   @enum       SndSampleFormat
   @brief   Various sound sample data formats
   @constant   SND_FORMAT_UNSPECIFIED
-  @constant   SND_FORMAT_MULAW_8  u-law encoding.
-  @constant   SND_FORMAT_LINEAR_8  Linear 8 bits.
-  @constant   SND_FORMAT_LINEAR_16   Linear 16 bits.
-  @constant   SND_FORMAT_LINEAR_24   Linear 24 bits.
-  @constant   SND_FORMAT_LINEAR_32   Linear 32 bits.
-  @constant   SND_FORMAT_FLOAT       IEEE Floating Point 32 bits.
-  @constant   SND_FORMAT_DOUBLE      Floating Point 64 bits, could even be IEEE 80 bit Floating Point.
-  @constant   SND_FORMAT_INDIRECT    Fragmented.
-  @constant   SND_FORMAT_NESTED
-  @constant   SND_FORMAT_DSP_CORE
-  @constant   SND_FORMAT_DSP_DATA_8
-  @constant   SND_FORMAT_DSP_DATA_16
-  @constant   SND_FORMAT_DSP_DATA_24
-  @constant   SND_FORMAT_DSP_DATA_32
-  @constant   SND_FORMAT_DISPLAY
-  @constant   SND_FORMAT_MULAW_SQUELCH
-  @constant   SND_FORMAT_EMPHASIZED
-  @constant   SND_FORMAT_COMPRESSED Julius O. Smith III's SoundKit compressed format.
-  @constant   SND_FORMAT_COMPRESSED_EMPHASIZED Julius O. Smith III's SoundKit compressed format.
-  @constant   SND_FORMAT_DSP_COMMANDS MC56001 DSP instruction opcodes.
-  @constant   SND_FORMAT_DSP_COMMANDS_SAMPLES audio data in a format suitable for MC56001 DSP use?
-  @constant   SND_FORMAT_ADPCM_G721  GSM compressed format.
-  @constant   SND_FORMAT_ADPCM_G722  GSM compressed format.
-  @constant   SND_FORMAT_ADPCM_G723_3  GSM compressed format.
-  @constant   SND_FORMAT_ADPCM_G723_5  GSM compressed format.
-  @constant   SND_FORMAT_ALAW_8  a-law encoding.
-  @constant   SND_FORMAT_AES  a format specified by the Audio Engineering Society?
-  @constant   SND_FORMAT_DELTA_MULAW_8
-  @constant   SND_FORMAT_MP3  MPEG-1 Layer 3 audio format.
-  @constant   SND_FORMAT_AAC  MPEG-4 Advanced Audio Coder.
-  @constant   SND_FORMAT_AC3  Dolby AC3 A/52 encoding.
-  @constant   SND_FORMAT_VORBIS  Ogg/Vorbis compressed format.
+  @constant   SndSampleFormatMulaw8  u-law encoding.
+  @constant   SndSampleFormatLinear8  Linear 8 bits.
+  @constant   SndSampleFormatLinear16   Linear 16 bits.
+  @constant   SndSampleFormatLinear24   Linear 24 bits.
+  @constant   SndSampleFormatLinear32   Linear 32 bits.
+  @constant   SndSampleFormatFloat       IEEE Floating Point 32 bits.
+  @constant   SndSampleFormatDouble      Floating Point 64 bits, could even be IEEE 80 bit Floating Point.
+  @constant   SndSampleFormatIndirect    Fragmented.
+  @constant   SndSampleFormatNested
+  @constant   SndSampleFormatDspCore
+  @constant   SndSampleFormatDspData8
+  @constant   SndSampleFormatDspData16
+  @constant   SndSampleFormatDspData24
+  @constant   SndSampleFormatDspData32
+  @constant   SndSampleFormatDisplay
+  @constant   SndSampleFormatMulawSquelch
+  @constant   SndSampleFormatEmphasized
+  @constant   SndSampleFormatCompressed Julius O. Smith III's SoundKit compressed format.
+  @constant   SndSampleFormatCompressedEmphasized Julius O. Smith III's SoundKit compressed format.
+  @constant   SndSampleFormatDspCommands MC56001 DSP instruction opcodes.
+  @constant   SndSampleFormatDspCommandsSamples audio data in a format suitable for MC56001 DSP use?
+  @constant   SndSampleFormatAdpcmG721  GSM compressed format.
+  @constant   SndSampleFormatAdpcmG722  GSM compressed format.
+  @constant   SndSampleFormatAdpcmG723_3  GSM compressed format.
+  @constant   SndSampleFormatAdpcmG723_5  GSM compressed format.
+  @constant   SndSampleFormatAlaw8  a-law encoding.
+  @constant   SndSampleFormatAes  a format specified by the Audio Engineering Society?
+  @constant   SndSampleFormatDeltaMulaw8
+  @constant   SndSampleFormatMp3  MPEG-1 Layer 3 audio format.
+  @constant   SndSampleFormatAac  MPEG-4 Advanced Audio Coder.
+  @constant   SndSampleFormatAc3  Dolby AC3 A/52 encoding.
+  @constant   SndSampleFormatVorbis  Ogg/Vorbis compressed format.
  */
 typedef NS_ENUM(int, SndSampleFormat) {
     SndSampleFormatUnspecified = 0,
-    ///u-law encoding
+    /// u-law encoding
     SndSampleFormatMulaw8 = 1,
-    ///Linear 8 bits
+    /// Linear 8 bits
     SndSampleFormatLinear8 = 2,
-    ///Linear 16 bits
+    /// Linear 16 bits
     SndSampleFormatLinear16 = 3,
-    ///Linear 24 bits
+    /// Linear 24 bits
     SndSampleFormatLinear24 = 4,
-    ///Linear 32 bits
+    /// Linear 32 bits
     SndSampleFormatLinear32 = 5,
-    ///IEEE Floating Point 32 bits
+    /// IEEE Floating Point 32 bits
     SndSampleFormatFloat = 6,
-    ///Floating Point 64 bits, could even be IEEE 80 bit Floating Point
+    /// Floating Point 64 bits, could even be IEEE 80 bit Floating Point
     SndSampleFormatDouble = 7,
-    ///Fragmented
+    /// Fragmented
     SndSampleFormatIndirect = 8,
 
     SndSampleFormatNested = 9,
@@ -126,35 +126,35 @@ typedef NS_ENUM(int, SndSampleFormat) {
     SndSampleFormatMulawSquelch = 17,
 
     SndSampleFormatEmphasized = 18,
-    ///Julius O. Smith III's SoundKit compressed format
+    /// Julius O. Smith III's SoundKit compressed format
     SndSampleFormatCompressed = 19,
-    ///Julius O. Smith III's SoundKit compressed format
+    /// Julius O. Smith III's SoundKit compressed format
     SndSampleFormatCompressedEmphasized = 20,
-    ///MC56001 DSP instruction opcodes
+    /// MC56001 DSP instruction opcodes
     SndSampleFormatDspCommands = 21,
-    ///audio data in a format suitable for MC56001 DSP use?
+    /// audio data in a format suitable for MC56001 DSP use?
     SndSampleFormatDspCommandsSamples = 22,
-    ///GSM compressed format
+    /// GSM compressed format
     SndSampleFormatAdpcmG721 = 23,
-    ///GSM compressed format
+    /// GSM compressed format
     SndSampleFormatAdpcmG722 = 24,
-    ///GSM compressed format
+    /// GSM compressed format
     SndSampleFormatAdpcmG723_3 = 25,
-    ///GSM compressed format
+    /// GSM compressed format
     SndSampleFormatAdpcmG723_5 = 26,
-    ///a-law encoding
+    /// a-law encoding
     SndSampleFormatAlaw8 = 27,
-    ///a format specified by the Audio Engineering Society?
+    /// a format specified by the Audio Engineering Society?
     SndSampleFormatAes = 28,
 
     SndSampleFormatDeltaMulaw8 = 29,
-    ///MPEG-1 Layer 3 audio format
+    /// MPEG-1 Layer 3 audio format
     SndSampleFormatMp3 = 30,
-    ///MPEG-4 Advanced Audio Coder
+    /// MPEG-4 Advanced Audio Coder
     SndSampleFormatAac = 31,
-    ///Dolby AC3 A/52 encoding
+    /// Dolby AC3 A/52 encoding
     SndSampleFormatAc3 = 32,
-    ///Ogg/Vorbis compressed format
+    /// Ogg/Vorbis compressed format
     SndSampleFormatVorbis = 33,
 };
 

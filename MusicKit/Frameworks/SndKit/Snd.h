@@ -577,7 +577,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
 
   If the data is fragmented,
   the format of the samples is returned (in other words,
-  SND_FORMAT_INDIRECT is never returned by this method).
+  SndSampleFormatIndirect is never returned by this method).
 */
 @property (nonatomic, readonly) SndSampleFormat dataFormat;
 
@@ -765,8 +765,8 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   @param filename is a NSString instance.
   @param fileFormat An NSString giving the extension format name (.au, .wav, .aiff etc) to write out the sound
          which matches one of the encodings returned by +soundFileExtensions.
-  @param fileDataFormat a SndSampleFormat allowing the sound to be written out in a different format (e.g SND_FORMAT_LINEAR_16)
-         than it is held in (e.g SND_FORMAT_FLOAT).
+  @param fileDataFormat a SndSampleFormat allowing the sound to be written out in a different format (e.g SndSampleFormatLinear16)
+         than it is held in (e.g SndSampleFormatFloat).
   @return Returns SND_ERR_NONE if the writing went correctly, otherwise an error value.
  */
 - (SndError) writeSoundfile: (NSString *) filename
@@ -874,9 +874,9 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   Some unplayable Snds just need to be converted to
   another format, sampling rate, or number of channels; others are
   inherently unplayable, such as those whose format is
-  SND_FORMAT_DISPLAY. To play a Snd that's just been recorded from
-  the DSP, you must change its format from SND_FORMAT_DSP_DATA_16 to
-  SND_FORMAT_LINEAR_16. 
+  SndSampleFormatDisplay. To play a Snd that's just been recorded from
+  the DSP, you must change its format from SndSampleFormatDspData16 to
+  SndSampleFormatLinear16. 
 */
 - (BOOL) isPlayable;
 
@@ -974,10 +974,10 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
 
   To record from the CODEC
   microphone, the Snd's format, sampling rate, and channel count
-  must be SND_FORMAT_MULAW_8, SND_RATE_CODEC, and 1, respectively. If
+  must be SndSampleFormatMulaw8, SND_RATE_CODEC, and 1, respectively. If
   this information isn't set (if the Snd is a newly created object,
   for example), it defaults to accommodate a CODEC recording. If the
-  Snd's format is SND_FORMAT_DSP_DATA_16, the recording is from the DSP.
+  Snd's format is SndSampleFormatDspData16, the recording is from the DSP.
 
   The method returns immediately while the recording
   continues asynchronously in the background. The recording stops when

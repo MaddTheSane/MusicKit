@@ -44,7 +44,7 @@ newly created Snd.</LI>
 </UL>
  
 The Snd object or soundfile must be one channel of 16-bit linear data
-(SND_FORMAT_LINEAR_16).  The sampling rate is ignored; MKSamples objects are
+(SndSampleFormatLinear16).  The sampling rate is ignored; MKSamples objects are
 designed to be used as lookup tables for oscillator MKUnitGenerators in which use
 the sampling rate of the original data is of no consequence.
 

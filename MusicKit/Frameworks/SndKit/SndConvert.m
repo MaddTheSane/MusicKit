@@ -79,16 +79,16 @@ void SndChangeSampleRate(const SndFormat fromSound,
 				interpolateFilter, linearInterpolation, largeFilter, filterFile, fromSound, 0, inputPtr);
 
 	//NSLog(@"Completed resample stretching by %lf. fromSound.frameCount = %d outFrameCount = %d outCountReal = %d\n", stretchFactor, fromSound.frameCount, outFrameCount, outCountReal);
-	toSound->dataFormat = SND_FORMAT_LINEAR_16; /* this is the output format */
+	toSound->dataFormat = SndSampleFormatLinear16; /* this is the output format */
 	toSound->channelCount = MIN(fromChannelCount, toChannelCount); /* channel count is reduced if nec */
 	toSound->frameCount = outCountReal;
     }
     else {
 	// here I just copy the sound data into outSound. It will have its channels expanded after this...
-        if (fromDataFormat != SND_FORMAT_INDIRECT)
+        if (fromDataFormat != SndSampleFormatIndirect)
             memmove((char *) outPtr, (char *) inputPtr, SndDataSize(fromSound));
         else {
-	    NSLog(@"SND_FORMAT_INDIRECT no longer supported\n");
+	    NSLog(@"SndSampleFormatIndirect no longer supported\n");
         }
     }
 }
@@ -123,26 +123,26 @@ void SndChannelDecrease(void *inPtr,
 	// Sum old channels according to map into newNumChannels long summing array.
         for (oldChannelIndex = 0; oldChannelIndex < oldNumChannels; oldChannelIndex++) {
 	    switch(dataFormat) {
-	    case SND_FORMAT_LINEAR_8: /* endian ok */
+	    case SndSampleFormatLinear8: /* endian ok */
 		sumInteger[map[oldChannelIndex]] += ((signed char *) inPtr)[sampleIndex + oldChannelIndex];
 		break;
-	    case SND_FORMAT_MULAW_8: /* endian ok */
+	    case SndSampleFormatMulaw8: /* endian ok */
 		sumInteger[map[oldChannelIndex]] += SndMuLawToLinear(((unsigned char *) inPtr)[sampleIndex + oldChannelIndex]);
 		break;
-	    case SND_FORMAT_LINEAR_16: /* endian ok */
+	    case SndSampleFormatLinear16: /* endian ok */
 		sumInteger[map[oldChannelIndex]] += ((SND_HWORD *) inPtr)[sampleIndex + oldChannelIndex];
 		break;
-	    case SND_FORMAT_LINEAR_24:
+	    case SndSampleFormatLinear24:
 		// TODO: Not endian ok, the shift down currently assumes big endian!
 		sumInteger[map[oldChannelIndex]] += *((long int *)((signed char *) inPtr + (sampleIndex + oldChannelIndex) * 3)) >> 8;
 		break;
-	    case SND_FORMAT_LINEAR_32:
+	    case SndSampleFormatLinear32:
 		sumDouble[map[oldChannelIndex]] += (long int)(((signed long int *) inPtr)[sampleIndex + oldChannelIndex]);
 		break;
-	    case SND_FORMAT_FLOAT:
+	    case SndSampleFormatFloat:
 		sumFloat[map[oldChannelIndex]] += (float)(((float *) inPtr)[sampleIndex + oldChannelIndex]);
 		break;
-	    case SND_FORMAT_DOUBLE:
+	    case SndSampleFormatDouble:
 		sumDouble[map[oldChannelIndex]] += (double)(((double *) inPtr)[sampleIndex + oldChannelIndex]);
 		break;
 	    default:
@@ -152,26 +152,26 @@ void SndChannelDecrease(void *inPtr,
 	// Divide each new channel by the number of old channels which were summed.
 	for (newChannelIndex = 0; newChannelIndex < newNumChannels; newChannelIndex++) {
 	    switch(dataFormat) {
-	    case SND_FORMAT_LINEAR_8:
+	    case SndSampleFormatLinear8:
 		((signed char *) outPtr)[frame * newNumChannels + newChannelIndex] = (signed char)(sumInteger[newChannelIndex] / channelSumCount[newChannelIndex]);
 		sumInteger[newChannelIndex] = 0;
 		break;
-	    case SND_FORMAT_MULAW_8:
+	    case SndSampleFormatMulaw8:
 		((unsigned char *) outPtr)[frame * newNumChannels + newChannelIndex] = (unsigned char)SndLinearToMuLaw((short)(sumInteger[newChannelIndex] / channelSumCount[newChannelIndex]));
 		sumInteger[newChannelIndex] = 0;
 		break;
-	    case SND_FORMAT_LINEAR_16:
+	    case SndSampleFormatLinear16:
 		((signed short *) outPtr)[frame * newNumChannels + newChannelIndex] = (signed short)(sumInteger[newChannelIndex] / channelSumCount[newChannelIndex]);
 		sumInteger[newChannelIndex] = 0;
 		break;
-	    case SND_FORMAT_LINEAR_32:
+	    case SndSampleFormatLinear32:
 		((signed long int *) outPtr)[frame * newNumChannels + newChannelIndex] = (signed long int)(sumDouble[newChannelIndex] / channelSumCount[newChannelIndex]);
 		sumDouble[newChannelIndex] = 0;
-	    case SND_FORMAT_FLOAT:
+	    case SndSampleFormatFloat:
 		((float *) outPtr)[frame * newNumChannels + newChannelIndex] = (float)(sumFloat[newChannelIndex] / channelSumCount[newChannelIndex]);
 		sumFloat[newChannelIndex] = 0;
 		break;
-	    case SND_FORMAT_DOUBLE:
+	    case SndSampleFormatDouble:
 		((double *) outPtr)[frame * newNumChannels + newChannelIndex] = (double)(sumDouble[newChannelIndex] / channelSumCount[newChannelIndex]);
 		sumDouble[newChannelIndex] = 0;
 		break;
@@ -334,32 +334,32 @@ int SndChangeSampleType(void *fromPtr, void *toPtr, SndSampleFormat fromDataForm
 	/* toDataFormat takes up more space than fromDataFormat, or is at least higher quality */
 
 	switch(fromDataFormat) {
-	case SND_FORMAT_MULAW_8:
+	case SndSampleFormatMulaw8:
 	    switch(toDataFormat) {
-	    case SND_FORMAT_LINEAR_8:
+	    case SndSampleFormatLinear8:
 		LOOP_BACKWARD_THRU_SOUND {
 		    ((signed char *)toPtr)[i] = (signed char)
 		    ((short)SndMuLawToLinear(((unsigned char *)fromPtr)[i]) >> 8);
 		}
 		break;
-	    case SND_FORMAT_LINEAR_16:
+	    case SndSampleFormatLinear16:
 		LOOP_BACKWARD_THRU_SOUND {
 		    ((signed short *)toPtr)[i] = (signed short)
 		    SndMuLawToLinear(((unsigned char *)fromPtr)[i]);
 		}
 		break;
-	    case SND_FORMAT_LINEAR_32:
+	    case SndSampleFormatLinear32:
 		LOOP_BACKWARD_THRU_SOUND {
 		    ((signed int *)toPtr)[i] = (signed int)
 		    SndMuLawToLinear(((unsigned char *)fromPtr)[i]) << 16;
 		}
 		break;
-	    case SND_FORMAT_FLOAT:
+	    case SndSampleFormatFloat:
 		LOOP_BACKWARD_THRU_SOUND {
 		    ((float *)toPtr)[i] = (float)SndMuLawToLinear(((unsigned char *)fromPtr)[i]) * ONE_OVER_TWO_FIFTEEN;
 		}
 		break;
-	    case SND_FORMAT_DOUBLE:
+	    case SndSampleFormatDouble:
 		LOOP_BACKWARD_THRU_SOUND {
 		    ((double *)toPtr)[i] = (double)SndMuLawToLinear(((unsigned char *)fromPtr)[i]) * ONE_OVER_TWO_FIFTEEN;
 		}
@@ -371,24 +371,24 @@ int SndChangeSampleType(void *fromPtr, void *toPtr, SndSampleFormat fromDataForm
 	    }
 	    break;
 	    
-	case SND_FORMAT_LINEAR_8:
+	case SndSampleFormatLinear8:
 	    switch(toDataFormat) {
-	    case SND_FORMAT_LINEAR_16:
+	    case SndSampleFormatLinear16:
 		LOOP_BACKWARD_THRU_SOUND {
 		    ((signed short *) toPtr)[i] = ((char*) fromPtr)[i] << 8;
 		}
 		break;
-	    case SND_FORMAT_LINEAR_32:
+	    case SndSampleFormatLinear32:
 		LOOP_BACKWARD_THRU_SOUND {
 		    ((signed int *) toPtr)[i] = (signed int)((signed char*) fromPtr)[i] << 24;
 		}
 		break;
-	    case SND_FORMAT_FLOAT:
+	    case SndSampleFormatFloat:
 		LOOP_BACKWARD_THRU_SOUND {
 		    ((float *) toPtr)[i] = (float)(((char *) fromPtr)[i]) * ONE_OVER_TWO_SEVEN;
 		}
 		break;
-	    case SND_FORMAT_DOUBLE:
+	    case SndSampleFormatDouble:
 		LOOP_BACKWARD_THRU_SOUND {
 		    ((double *) toPtr)[i] = (double)(((char *) fromPtr)[i]) * ONE_OVER_TWO_SEVEN;
 		}
@@ -400,19 +400,19 @@ int SndChangeSampleType(void *fromPtr, void *toPtr, SndSampleFormat fromDataForm
 	    }
 	    break;
 
-	case SND_FORMAT_LINEAR_16:
+	case SndSampleFormatLinear16:
 	    switch(toDataFormat) {
-	    case SND_FORMAT_LINEAR_32:
+	    case SndSampleFormatLinear32:
 		LOOP_BACKWARD_THRU_SOUND {
 		    ((signed int *)toPtr)[i] = (signed int)((signed short *) fromPtr)[i] << 16;
 		}
 		break;
-	    case SND_FORMAT_FLOAT:
+	    case SndSampleFormatFloat:
 		LOOP_BACKWARD_THRU_SOUND {
 		    ((float *)toPtr)[i] = (float)(((signed short *) fromPtr)[i]) * ONE_OVER_TWO_FIFTEEN;
 		}
 		break;
-	    case SND_FORMAT_DOUBLE:
+	    case SndSampleFormatDouble:
 		LOOP_BACKWARD_THRU_SOUND {
 		    ((double *)toPtr)[i] = (double)((signed short *) fromPtr)[i] * ONE_OVER_TWO_FIFTEEN;
 		}
@@ -425,19 +425,19 @@ int SndChangeSampleType(void *fromPtr, void *toPtr, SndSampleFormat fromDataForm
 	    break;
 
 	// TODO: Since 24 bit is an evil odd byte count format, these conversions are currently big endian only.
-	case SND_FORMAT_LINEAR_24:
+	case SndSampleFormatLinear24:
 	    switch(toDataFormat) {
-	    case SND_FORMAT_LINEAR_32:
+	    case SndSampleFormatLinear32:
 		LOOP_BACKWARD_THRU_SOUND {
 		    ((signed int *)toPtr)[i] = (signed int)(*((signed short *) ((char *) fromPtr + i * 3)) << 8);
 		}
 		break;		    
-	    case SND_FORMAT_FLOAT:
+	    case SndSampleFormatFloat:
 		LOOP_BACKWARD_THRU_SOUND {
 		    ((float *)toPtr)[i] = (float) ((*((signed int *)((char *) fromPtr + i * 3)) >> 8) * ONE_OVER_TWO_TWENTYTHREE);
 		}
 		break;
-	    case SND_FORMAT_DOUBLE:
+	    case SndSampleFormatDouble:
 		LOOP_BACKWARD_THRU_SOUND {
 		    ((double *)toPtr)[i] = (double)((*((signed int *)((char *) fromPtr + i * 3)) >> 8) * ONE_OVER_TWO_TWENTYTHREE);
 		}
@@ -449,14 +449,14 @@ int SndChangeSampleType(void *fromPtr, void *toPtr, SndSampleFormat fromDataForm
 	    }
 	    break;
 	    
-	case SND_FORMAT_LINEAR_32:
+	case SndSampleFormatLinear32:
 	    switch(toDataFormat) {
-	    case SND_FORMAT_FLOAT:
+	    case SndSampleFormatFloat:
 		LOOP_BACKWARD_THRU_SOUND {
 		    ((float *)toPtr)[i] = (float)(((signed int *) fromPtr)[i] * ONE_OVER_TWO_THIRTYONE);
 		}
 		break;
-	    case SND_FORMAT_DOUBLE:
+	    case SndSampleFormatDouble:
 		LOOP_BACKWARD_THRU_SOUND {
 		    ((double *)toPtr)[i] = (double)(((signed int *) fromPtr)[i] * ONE_OVER_TWO_THIRTYONE);
 		}
@@ -468,9 +468,9 @@ int SndChangeSampleType(void *fromPtr, void *toPtr, SndSampleFormat fromDataForm
 	    }
 	    break;
 
-	case SND_FORMAT_FLOAT:
+	case SndSampleFormatFloat:
 	    switch(toDataFormat) {
-	    case SND_FORMAT_DOUBLE:
+	    case SndSampleFormatDouble:
 		LOOP_BACKWARD_THRU_SOUND {
 		    ((double *)toPtr)[i] = (double)(((float *) fromPtr)[i]);
 		}
@@ -500,29 +500,29 @@ int SndChangeSampleType(void *fromPtr, void *toPtr, SndSampleFormat fromDataForm
 	/* toDataFormat takes up less space than fromDataFormat, or is lower quality */
 
 	switch(toDataFormat) {
-	case SND_FORMAT_MULAW_8:
+	case SndSampleFormatMulaw8:
 	    switch(fromDataFormat) {
-	    case SND_FORMAT_LINEAR_8:
+	    case SndSampleFormatLinear8:
 		LOOP_FORWARD_THRU_SOUND {
 		    ((unsigned char *)toPtr)[i] = (unsigned char) SndLinearToMuLaw((int)(((signed char *) fromPtr)[i]) << 8);
 		}
 		break;
-	    case SND_FORMAT_LINEAR_16:
+	    case SndSampleFormatLinear16:
 		LOOP_FORWARD_THRU_SOUND {
 		    ((unsigned char *)toPtr)[i] = (unsigned char) SndLinearToMuLaw(((signed short *) fromPtr)[i]);
 		}
 		break;
-	    case SND_FORMAT_LINEAR_32:
+	    case SndSampleFormatLinear32:
 		LOOP_FORWARD_THRU_SOUND {
 		    ((unsigned char *)toPtr)[i] = (unsigned char) SndLinearToMuLaw(((signed int *) fromPtr)[i] >> 16);
 		}
 		break;
-	    case SND_FORMAT_FLOAT:
+	    case SndSampleFormatFloat:
 		LOOP_FORWARD_THRU_SOUND {
 		    ((unsigned char *)toPtr)[i] = (unsigned char) SndMuLawToLinear(((float *) fromPtr)[i] * 32767.0f);
 		}
 		break;
-	    case SND_FORMAT_DOUBLE:
+	    case SndSampleFormatDouble:
 		LOOP_FORWARD_THRU_SOUND {
 		    ((unsigned char *)toPtr)[i] = (unsigned char) SndMuLawToLinear(((double *) fromPtr)[i] * 32767.0f);
 		}
@@ -534,24 +534,24 @@ int SndChangeSampleType(void *fromPtr, void *toPtr, SndSampleFormat fromDataForm
 	    }
 	    break;
 
-	case SND_FORMAT_LINEAR_8:
+	case SndSampleFormatLinear8:
 	    switch(fromDataFormat) {
-	    case SND_FORMAT_LINEAR_16:
+	    case SndSampleFormatLinear16:
 		LOOP_FORWARD_THRU_SOUND {
 		    ((signed char*) toPtr)[i] = (((signed short *) fromPtr)[i]) >> 8;
 		}
 		break;
-	    case SND_FORMAT_LINEAR_32:
+	    case SndSampleFormatLinear32:
 		LOOP_FORWARD_THRU_SOUND {
 		    ((signed char *) toPtr)[i] = (int)(((signed int *) fromPtr)[i]) >> 24;
 		}
 		break;
-	    case SND_FORMAT_FLOAT:
+	    case SndSampleFormatFloat:
 		LOOP_FORWARD_THRU_SOUND {
 		    ((unsigned char *) toPtr)[i] = (unsigned char)((((float *) fromPtr)[i] * 127.0f));
 		}
 		break;
-	    case SND_FORMAT_DOUBLE:
+	    case SndSampleFormatDouble:
 		LOOP_FORWARD_THRU_SOUND {
 		    ((unsigned char *) toPtr)[i] = (unsigned char)((((double *) fromPtr)[i]) * 127.0f);
 		}
@@ -563,19 +563,19 @@ int SndChangeSampleType(void *fromPtr, void *toPtr, SndSampleFormat fromDataForm
 	    }
 	    break;
 
-	case SND_FORMAT_LINEAR_16:
+	case SndSampleFormatLinear16:
 	    switch(fromDataFormat) {
-	    case SND_FORMAT_LINEAR_32:
+	    case SndSampleFormatLinear32:
 		LOOP_FORWARD_THRU_SOUND {
 		    ((signed short *)toPtr)[i] = ((signed int *) fromPtr)[i] >> 16;
 		}
 		break;
-	    case SND_FORMAT_FLOAT:
+	    case SndSampleFormatFloat:
 		LOOP_FORWARD_THRU_SOUND {
 		    ((signed short *) toPtr)[i] = ((float *) fromPtr)[i] * 32767;
 		}
 		break;
-	    case SND_FORMAT_DOUBLE:
+	    case SndSampleFormatDouble:
 		LOOP_FORWARD_THRU_SOUND {
 		    ((signed short *) toPtr)[i] = ((double *) fromPtr)[i] * 32767;
 		}
@@ -587,14 +587,14 @@ int SndChangeSampleType(void *fromPtr, void *toPtr, SndSampleFormat fromDataForm
 	    }
 	    break;
 
-	case SND_FORMAT_LINEAR_32:
+	case SndSampleFormatLinear32:
 	    switch(fromDataFormat) {
-	    case SND_FORMAT_FLOAT:
+	    case SndSampleFormatFloat:
 		LOOP_FORWARD_THRU_SOUND {
 		    ((signed int *) toPtr)[i] = ((float *) fromPtr)[i] * 2147483647; /* (2 ^ 31 - 1) */
 		}
 		break;
-	    case SND_FORMAT_DOUBLE:
+	    case SndSampleFormatDouble:
 		LOOP_FORWARD_THRU_SOUND {
 		    ((signed int *) toPtr)[i] = ((double *) fromPtr)[i] * 2147483647; /* (2 ^ 31 - 1) */
 		}
@@ -606,9 +606,9 @@ int SndChangeSampleType(void *fromPtr, void *toPtr, SndSampleFormat fromDataForm
 	    }
 	    break;
 
-	case SND_FORMAT_FLOAT:
+	case SndSampleFormatFloat:
 	    switch(fromDataFormat) {
-	    case SND_FORMAT_DOUBLE:
+	    case SndSampleFormatDouble:
 		LOOP_FORWARD_THRU_SOUND {
 		    ((float *) toPtr)[i] = ((double *) fromPtr)[i];
 		}
@@ -685,10 +685,10 @@ int SndChangeSampleType(void *fromPtr, void *toPtr, SndSampleFormat fromDataForm
 	double stretchFactor = toSampleRate / format.sampleRate;
 	long sampleFrames = [self lengthInSampleFrames];
 	long numOfSamples = sampleFrames * format.channelCount;
-	NSMutableData *toData = [NSMutableData dataWithLength: numOfSamples * stretchFactor * SndSampleWidth(SND_FORMAT_LINEAR_16)];
+	NSMutableData *toData = [NSMutableData dataWithLength: numOfSamples * stretchFactor * SndSampleWidth(SndSampleFormatLinear16)];
 	void *fromDataPtr = [data mutableBytes];
 	void *toDataPtr = [toData mutableBytes];
-	SndFormat toSoundFormat = { SND_FORMAT_LINEAR_16, 0, format.channelCount, toSampleRate };
+	SndFormat toSoundFormat = { SndSampleFormatLinear16, 0, format.channelCount, toSampleRate };
 	SndFormat fromSoundFormat = { format.dataFormat, sampleFrames, format.channelCount, format.sampleRate }; 
 
 	SndChangeSampleRate(fromSoundFormat, fromDataPtr, &toSoundFormat, (short *) toDataPtr, largeFilter, interpFilter, fastInterpolation);
@@ -729,11 +729,11 @@ int SndChangeSampleType(void *fromPtr, void *toPtr, SndSampleFormat fromDataForm
 	double stretchFactor = toSampleRate / fromSampleRate;
 	SndFormat fromSoundFormat;
 	// If we change rate, output format is always linear 16 (due to resample()).
-	// TODO, resample needs to be modified so that conversions are in SND_FORMAT_FLOAT.
+	// TODO, resample needs to be modified so that conversions are in SndSampleFormatFloat.
 	// We keep the channel count the same, since we will do channel conversion later.
 	// We would only benefit doing the conversion here if we converting down to a mono source (nowdays unlikely)
 	// or from multi-channel to stereo.
-	SndFormat toSoundFormat = { SND_FORMAT_LINEAR_16, 0, fromChannelCount, toSampleRate };
+	SndFormat toSoundFormat = { SndSampleFormatLinear16, 0, fromChannelCount, toSampleRate };
 
 	fromSampleFrames = toSampleFrames / stretchFactor;  // adjust the number of frames to consume.
 	//NSLog(@"convertBytes: from format %d channels %d sample rate %lf frames %ld, to %@\n",

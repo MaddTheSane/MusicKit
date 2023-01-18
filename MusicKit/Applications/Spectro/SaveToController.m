@@ -19,15 +19,15 @@ static int _dataFormatToRow(int dataFormat)
     int format_row;
 
     switch (dataFormat) {
-    case SND_FORMAT_LINEAR_16:
-    case SND_FORMAT_EMPHASIZED:
+    case SndSampleFormatLinear16:
+    case SndSampleFormatEmphasized:
 	format_row = LINEAR_ROW;
 	break;
-    case SND_FORMAT_MULAW_8:
+    case SndSampleFormatMulaw8:
 	format_row = MULAW_ROW;
 	break;
-    case SND_FORMAT_COMPRESSED:
-    case SND_FORMAT_COMPRESSED_EMPHASIZED:
+    case SndSampleFormatCompressed:
+    case SndSampleFormatCompressedEmphasized:
 	format_row = COMPRESSED_ROW;
 	break;
     default:
@@ -41,13 +41,13 @@ static int _rowToDataFormat(int row)
     int dataFormat;
     switch (row) {
     case LINEAR_ROW:
-	dataFormat = SND_FORMAT_LINEAR_16;
+	dataFormat = SndSampleFormatLinear16;
 	break;
     case MULAW_ROW:
-	dataFormat = SND_FORMAT_MULAW_8;
+	dataFormat = SndSampleFormatMulaw8;
 	break;
     case COMPRESSED_ROW:
-	dataFormat = SND_FORMAT_COMPRESSED;
+	dataFormat = SndSampleFormatCompressed;
 	break;
     default:
 	return -1;

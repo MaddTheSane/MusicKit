@@ -22,7 +22,7 @@ int main (int argc, const char *argv[])
 	    NSLog(@"Can't find file %@\n", inFile);
 	    exit(1);
         }
-        if ([snd dataFormat] != SND_FORMAT_LINEAR_16) {
+        if ([snd dataFormat] != SndSampleFormatLinear16) {
 	    NSLog(@"Input file must be in 16-bit linear format.\n");
 	    exit(1);
         }

@@ -539,7 +539,7 @@
     [self copyBytes: bytes intoRange: NSMakeRange(0, count) format: newFormat];
 }
 
-// This is pretty kludgy, it only really works for SND_FORMAT_LINEAR_16 to SND_FORMAT_FLOAT conversions. It should
+// This is pretty kludgy, it only really works for SndSampleFormatLinear16 to SndSampleFormatFloat conversions. It should
 // be revamped to work with all formats, and to do channel mapping if necessary.
 - (long) copyFromBuffer: (SndAudioBuffer *) fromBuffer
 	 intoFrameRange: (NSRange) bufferFrameRange
@@ -731,7 +731,7 @@
 	    *pMin = ((float *) samplePtr)[minIndex];    
 	    *minLocation = (unsigned long) minIndex;
 	    break;
-	// case SND_FORMAT_LINEAR_16:
+	// case SndSampleFormatLinear16:
         // break;
 	default:
 	    NSLog(@"findMin:at:max:at: unsupported format %d\n", format.dataFormat);
@@ -749,10 +749,10 @@
 	float sample = 0.0;
 
 	switch(format.dataFormat) {
-	case SND_FORMAT_FLOAT:
+	case SndSampleFormatFloat:
 	    sample = ((float *) samplePtr)[sampleIndex];
 	    break;
-	case SND_FORMAT_LINEAR_16:
+	case SndSampleFormatLinear16:
 	    sample = ((short *) samplePtr)[sampleIndex];
 	    break;
 	default:
@@ -867,7 +867,7 @@
  #else
     // Altivec implementation
     switch(format.dataFormat) {
-	case SND_FORMAT_FLOAT: {
+	case SndSampleFormatFloat: {
 	    
 	}
 	default:

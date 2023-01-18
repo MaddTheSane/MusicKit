@@ -40,29 +40,29 @@ CONDITIONS OF THIS AGREEMENT.
 int SndSampleWidth(SndSampleFormat format)
 {
     switch (format) {
-	case SND_FORMAT_MULAW_8:
-	case SND_FORMAT_LINEAR_8:
+	case SndSampleFormatMulaw8:
+	case SndSampleFormatLinear8:
 	    return 1;
 	    break;
-	case SND_FORMAT_EMPHASIZED:
-	case SND_FORMAT_COMPRESSED:
-	case SND_FORMAT_COMPRESSED_EMPHASIZED:
-	case SND_FORMAT_DSP_DATA_16:
-	case SND_FORMAT_LINEAR_16:
+	case SndSampleFormatEmphasized:
+	case SndSampleFormatCompressed:
+	case SndSampleFormatCompressedEmphasized:
+	case SndSampleFormatDspData16:
+	case SndSampleFormatLinear16:
 	    return 2;
 	    break;
-	case SND_FORMAT_LINEAR_24:
-	case SND_FORMAT_DSP_DATA_24:
+	case SndSampleFormatLinear24:
+	case SndSampleFormatDspData24:
 	    return 3;
 	    break;
-	case SND_FORMAT_LINEAR_32:
-	case SND_FORMAT_DSP_DATA_32:
+	case SndSampleFormatLinear32:
+	case SndSampleFormatDspData32:
 	    return 4;
 	    break;
-	case SND_FORMAT_FLOAT:
+	case SndSampleFormatFloat:
 	    return sizeof(float);
 	    break;
-	case SND_FORMAT_DOUBLE:
+	case SndSampleFormatDouble:
 	    return sizeof(double);
 	    break;
 	default: /* just in case */
@@ -81,24 +81,24 @@ int SndFrameSize(SndFormat format)
 NSString *SndFormatName(SndSampleFormat dataFormat, BOOL verbose)
 {
     switch(dataFormat) {
-	case SND_FORMAT_MULAW_8:
-	case SND_FORMAT_MULAW_SQUELCH:
+	case SndSampleFormatMulaw8:
+	case SndSampleFormatMulawSquelch:
 	    return @"8-bit muLaw";
-	case SND_FORMAT_LINEAR_8:
+	case SndSampleFormatLinear8:
 	    return @"8-bit Linear";
-	case SND_FORMAT_LINEAR_16:
+	case SndSampleFormatLinear16:
 	    return verbose ? @"16-bit Integer (2's complement, big endian)" : @"16-bit Linear";
-	case SND_FORMAT_LINEAR_24:
+	case SndSampleFormatLinear24:
 	    return verbose ? @"24-bit Integer (2's complement, big endian)" : @"24-bit Linear";
-	case SND_FORMAT_LINEAR_32:
+	case SndSampleFormatLinear32:
 	    return verbose ? @"32-bit Integer (2's complement, big endian)" : @"32-bit Linear";
-	case SND_FORMAT_FLOAT:
+	case SndSampleFormatFloat:
 	    return verbose ? @"Signed 32-bit floating point" : @"32-bit Floating Point";
-	case SND_FORMAT_DOUBLE:
+	case SndSampleFormatDouble:
 	    return verbose ? @"Signed 64-bit floating point" : @"64-bit Floating Point";
-	case SND_FORMAT_MP3:
+	case SndSampleFormatMp3:
 	    return verbose ? @"MPEG 1 Layer 3 Compressed" : @"MP3 Compressed";
-	case SND_FORMAT_INDIRECT:
+	case SndSampleFormatIndirect:
 	    return @"Fragmented";
 	default:
 	    return [NSString stringWithFormat: @"Unknown format %d", dataFormat];
@@ -108,25 +108,25 @@ NSString *SndFormatName(SndSampleFormat dataFormat, BOOL verbose)
 double SndMaximumAmplitude(SndSampleFormat type)
 {
     switch (type) {
-	case SND_FORMAT_LINEAR_8:
+	case SndSampleFormatLinear8:
 	    return 128.0;
-	case SND_FORMAT_LINEAR_24:
-	case SND_FORMAT_DSP_DATA_24:
+	case SndSampleFormatLinear24:
+	case SndSampleFormatDspData24:
 	    return 8388608.0;
-	case SND_FORMAT_LINEAR_32:
-	case SND_FORMAT_DSP_DATA_32:
+	case SndSampleFormatLinear32:
+	case SndSampleFormatDspData32:
 	    return 2147483648.0;
-	case SND_FORMAT_MULAW_8:
+	case SndSampleFormatMulaw8:
 	    return 32768.0;
-	case SND_FORMAT_MP3:
-	case SND_FORMAT_FLOAT:
-	case SND_FORMAT_DOUBLE:
+	case SndSampleFormatMp3:
+	case SndSampleFormatFloat:
+	case SndSampleFormatDouble:
 	    return 1.0;
-	case SND_FORMAT_LINEAR_16:
-	case SND_FORMAT_EMPHASIZED:
-	case SND_FORMAT_COMPRESSED:
-	case SND_FORMAT_COMPRESSED_EMPHASIZED:
-	case SND_FORMAT_DSP_DATA_16:
+	case SndSampleFormatLinear16:
+	case SndSampleFormatEmphasized:
+	case SndSampleFormatCompressed:
+	case SndSampleFormatCompressedEmphasized:
+	case SndSampleFormatDspData16:
 	default:
 	    return 32768.0;
     }
@@ -196,14 +196,14 @@ SndError SndSwapBigEndianSoundToHost(void *dest, void *src, int sampleCount, int
 	}
 	return SND_ERR_NONE;
     }
-    if (dataFormat == SND_FORMAT_FLOAT) {
+    if (dataFormat == SndSampleFormatFloat) {
 	for (i = 0 ; i < samples; i++) {
 	    SndSwappedFloat toSwap = ((SndSwappedFloat *)src)[i];
 	    ((float *)dest)[i] = (float)SndSwapSwappedFloatToHost(toSwap);
 	}
 	return SND_ERR_NONE;
     }
-    if (dataFormat == SND_FORMAT_DOUBLE) {
+    if (dataFormat == SndSampleFormatDouble) {
 	for (i = 0 ; i < samples; i++) {
 	    SndSwappedDouble toSwap = ((SndSwappedDouble *)src)[i];
 	    ((double *)dest)[i] = (double)SndSwapSwappedDoubleToHost(toSwap);
@@ -230,14 +230,14 @@ SndError SndSwapHostToBigEndianSound(void *dest, void *src, int sampleCount, int
 	}
 	return SND_ERR_NONE;
     }
-    if (dataFormat == SND_FORMAT_FLOAT) {
+    if (dataFormat == SndSampleFormatFloat) {
 	for (i = 0 ; i < samples; i++) {
 	    ((SndSwappedFloat *)dest)[i] =
 	    (SndSwappedFloat)SndSwapHostToSwappedFloat(((float *)src)[i]);
 	}
 	return SND_ERR_NONE;
     }
-    if (dataFormat == SND_FORMAT_DOUBLE) {
+    if (dataFormat == SndSampleFormatDouble) {
 	for (i = 0 ; i < samples; i++) {
 	    ((SndSwappedDouble *)dest)[i] =
 	    (SndSwappedDouble)SndSwapHostToSwappedDouble(((double *)src)[i]);

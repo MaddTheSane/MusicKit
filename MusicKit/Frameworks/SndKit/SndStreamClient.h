@@ -27,6 +27,7 @@ enum {
 @class SndAudioBufferQueue;
 @class SndStreamManager;
 @class SndAudioProcessorChain;
+@class SndStreamClient;
 
 ////////////////////////////////////////////////////////////////////////////////
 // SndStreamClientDelegate
@@ -58,6 +59,7 @@ enum {
  */
 - (void)didProcessStreamBuffer: (id) sender;
 
+- (void)didStartRecording:(SndStreamClient*)sender;
 @end
 
 ////////////////////////////////////////////////////////////////////////////////

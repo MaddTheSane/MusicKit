@@ -349,7 +349,7 @@ static SndOnDiskAudioBufferServer *defaultServer = nil;
 		NSRange wholeSound = { 0, range.length };
 		SndAudioBuffer *aBuffer = [SndAudioBuffer audioBufferWithSnd: soundChunk inRange: wholeSound];
 
-		[aBuffer convertToSampleFormat: SND_FORMAT_FLOAT];
+		[aBuffer convertToSampleFormat: SndSampleFormatFloat];
 		return aBuffer;
     }
     else

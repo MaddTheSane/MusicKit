@@ -233,13 +233,13 @@
     if(sr <= 0.0)
 	return NO;
     switch (df) {
-	case SND_FORMAT_MULAW_8:
-	case SND_FORMAT_LINEAR_8:
-	case SND_FORMAT_LINEAR_16:
-	case SND_FORMAT_LINEAR_24:
-	case SND_FORMAT_LINEAR_32:
-	case SND_FORMAT_FLOAT:
-	case SND_FORMAT_DOUBLE:
+	case SndSampleFormatMulaw8:
+	case SndSampleFormatLinear8:
+	case SndSampleFormatLinear16:
+	case SndSampleFormatLinear24:
+	case SndSampleFormatLinear32:
+	case SndSampleFormatFloat:
+	case SndSampleFormatDouble:
 	    return YES;
 	default:
 	    break;

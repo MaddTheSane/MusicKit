@@ -1,0 +1,3 @@
+[submodule "MusicKit/Vendors/libsndfile"]
+	path = MusicKit/Vendors/libsndfile
+	url = https://github.com/libsndfile/libsndfile.git

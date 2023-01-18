@@ -527,7 +527,7 @@
 	windowOfSound = [windowOfSound audioBufferOfChannel: channel];
 	// If we drop through the buffer is already mono, now it will be converted to floating point.
     }
-    [windowOfSound convertToSampleFormat: SND_FORMAT_FLOAT channelCount: 1];
+    [windowOfSound convertToSampleFormat: SndSampleFormatFloat channelCount: 1];
     memcpy(samples, [windowOfSound bytes], [windowOfSound lengthInBytes]);
 	
     for (i = windowSize; i < dataSize; i++) 
@@ -600,7 +600,7 @@
 	    windowOfSound = [windowOfSound audioBufferOfChannel: channel];
 	    // If we drop through the buffer is already mono, now it will be converted to floating point.
 	}
-	[windowOfSound convertToSampleFormat: SND_FORMAT_FLOAT channelCount: 1];
+	[windowOfSound convertToSampleFormat: SndSampleFormatFloat channelCount: 1];
 	memcpy(samples, [windowOfSound bytes], [windowOfSound lengthInBytes]);
 	
 	for (i = windowSize; i < dataSize; i++)
