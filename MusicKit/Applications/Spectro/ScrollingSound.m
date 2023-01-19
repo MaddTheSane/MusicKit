@@ -26,7 +26,7 @@
     
 	(tempRect.size) = [NSScrollView contentSizeForFrameSize:(theFrame.size) hasHorizontalScroller:YES hasVerticalScroller:NO borderType:borderType];
 	theSoundView = [[SndView alloc] initWithFrame:tempRect];
-	[super initWithFrame:theFrame];
+	self = [super initWithFrame:theFrame];
     [self setBorderType:borderType];
     [self setHasHorizontalScroller:YES];
     [self setHasVerticalScroller:NO];

@@ -26,7 +26,7 @@
 {
     NSRect tempRect = theFrame;
     
-    [super initWithFrame:tempRect];
+    self = [super initWithFrame:tempRect];
     lastLength = 0;
     draw = NO;
     frames = NO;

@@ -25,7 +25,7 @@
 {
     NSRect tempRect = theFrame;
     
-    [super initWithFrame: tempRect];
+    self = [super initWithFrame: tempRect];
     lastLength = 0;
     currentFrame = 0;
     cursorPixel = 0;

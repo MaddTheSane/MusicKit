@@ -132,22 +132,6 @@
 {
     int selectedRow, selectedCol, temp;
     NSUserDefaults *ourDefaults = [NSUserDefaults standardUserDefaults];
-    NSMutableDictionary *newDefaults = [[NSMutableDictionary dictionaryWithObjectsAndKeys:
-	@"", @"WindowSize",
-	@"", @"ZPFactor",
-	@"", @"HopRatio",
-	@"", @"WindowType",
-	@"", @"SpectrumMaxFreq",
-	@"", @"dBLimit",
-	@"", @"WFMaxFreq",
-	@"", @"WFPlotHeight",
-	@"", @"DisplayType",
-	@"", @"SpectrumColor",
-	@"", @"WaterfallColor",
-	@"", @"CursorColor",
-	@"", @"GridColor",
-	@"", @"AmplitudeColor",
-	NULL, NULL] retain];
 
     if ([windowSizeCell integerValue] > 0)
 	[ourDefaults setInteger: [windowSizeCell integerValue] forKey: @"WindowSize"];

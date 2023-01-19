@@ -43,8 +43,8 @@
     BOOL fresh;
 }
 
-- init;
-- newSoundLocation: (NSPoint *) p;
+- (instancetype)init;
+- (void)newSoundLocation: (NSPoint *) p;
 
 /*!
   @brief Loads a file of the type given by aType from the URL.
@@ -69,26 +69,26 @@
 - (Snd *) sound;
 
 - (double) samplingRate;
-- printTimeWindow;
-- printSpectrumWindow;
-- printWaterfallWindow;
+- (void)printTimeWindow;
+- (void)printSpectrumWindow;
+- (void)printWaterfallWindow;
 - (float)sampToSec:(int)samples rate: (float)srate;
-- saveError:(NSString *)msg arg: (NSString *)arg;
+- (void)saveError:(NSString *)msg arg: (NSString *)arg;
 - (IBAction) play:sender;
 - (void) stop: (id) sender;
 - (IBAction) pause:sender;
 - (IBAction) record:sender;
 - (IBAction) displayMode:sender;
-- showDisplayTimes;
-- showSelectionTimes;
-- windowMatrixChanged:sender;
-- selectionMatrixChanged:sender;
-- touch;
-- setButtons;
+- (void)showDisplayTimes;
+- (void)showSelectionTimes;
+- (IBAction)windowMatrixChanged:sender;
+- (IBAction)selectionMatrixChanged:sender;
+- (void)touch;
+- (void)setButtons;
 - (IBAction) sndInfo:sender;
 - (IBAction) spectrum: (id) sender;
-- setColors;
-- zoom: (float) scale center: (int) sample;
+- (void)setColors;
+- (void)zoom: (float) scale center: (int) sample;
 - (IBAction) zoomIn:sender;
 - (IBAction) zoomOut:sender;
 - (IBAction) zoomSelect:sender;
@@ -99,6 +99,6 @@
 
 @interface SoundDocument(/*ScrollingSoundDelegate*/)
 
-- displayChanged: sender;
+- (void)displayChanged: sender;
 
 @end

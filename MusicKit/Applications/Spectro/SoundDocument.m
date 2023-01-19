@@ -21,12 +21,15 @@
 #define OUTLINE_MODE 1
 #define PUTVAL(cell,f)	[cell setStringValue: [NSString stringWithFormat: @"%3.3f", f]]
 
+@interface SoundDocument ()
+@property (retain) NSURL *soundFileURL;
+@end
+
 @implementation SoundDocument
 
-- init
+- (id)init
 {
-    self = [super init];
-    if(self != nil) {
+    if(self = [super init]) {
 	NSRect theFrame;
 
 	theSound = nil;
@@ -42,6 +45,8 @@
 {
     [theSound release];
     theSound = nil;
+    [soundInfo release];
+    [soundfileURL release];
     [super dealloc];
 }
 
@@ -53,7 +58,7 @@
     return @"soundDocument";
 }
 
-- newSoundLocation: (NSPoint *) p
+- (void)newSoundLocation: (NSPoint *) p
 {
     int count = [(SpectroController*)[NSApp delegate] documentCount];
     int cnt = (count > 3) ? count - 4 : count;
@@ -62,19 +67,9 @@
     p->y -= (25.0 * cnt);
     count = (count > 6) ? 0 : count + 1;
     [(SpectroController*)[NSApp delegate] setCounter: count];
-    return self;
 }
 
-- (void) setSoundFileURL: (NSURL *) newSoundFileURL
-{
-    [soundfileURL release];
-    soundfileURL = [newSoundFileURL copy];
-}
-
-- (NSURL *) soundFileURL
-{
-    return [[soundfileURL retain] autorelease];
-}
+@synthesize soundFileURL = soundfileURL;
 
 - (void) setWindowTitle
 {
@@ -102,24 +97,21 @@
 	return [sound samplingRate];
 }
 
-- printTimeWindow
+- (void)printTimeWindow
 {
     [[self windowForSheet] print:self];
-    return self;
 }
 
-- printSpectrumWindow
+- (void)printSpectrumWindow
 {
     if (mySpectrumDocument)
 	[mySpectrumDocument printSpectrum];
-    return self;
 }
 
-- printWaterfallWindow
+- (void)printWaterfallWindow
 {
     if (mySpectrumDocument)
 	[mySpectrumDocument printWaterfall];
-    return self;
 }
 
 - (float) sampToSec: (int) samples rate: (float) srate
@@ -155,23 +147,22 @@
 
     mySoundView = [scrollSound soundView];
     if ([[NSUserDefaults standardUserDefaults] floatForKey: @"DisplayType"] < 1.0)
-	[mySoundView setDisplayMode: SND_SOUNDVIEW_WAVE];
+        [mySoundView setDisplayMode: SndViewDisplayModeWave];
     else
-	[mySoundView setDisplayMode: SND_SOUNDVIEW_MINMAX];
+        [mySoundView setDisplayMode: SndViewDisplayModeMinMax];
     [mySoundView setDelegate: self];
     [mySoundView setContinuousSelectionUpdates: YES];
     [mySoundView setForegroundColor: objectToColor([[NSUserDefaults standardUserDefaults] objectForKey: @"AmplitudeColor"])];
     // [self setWindowTitle];
 }
 
-- saveError:(NSString *)msg arg: (NSString *)arg
+- (void)saveError:(NSString *)msg arg: (NSString *)arg
 {
     NSBundle *mainB = [NSBundle mainBundle];
     
     NSRunAlertPanel([mainB localizedStringForKey:@"Save" value:@"Save" table:nil],
                     [mainB localizedStringForKey:msg value:msg table:nil],
                     [mainB localizedStringForKey:@"OK" value:@"OK" table:nil], nil, nil, arg);
-    return nil;
 }
 
 // Need to determine the format from the extension.
@@ -259,12 +250,12 @@
 - (IBAction) displayMode: sender
 {
     if ([[sender selectedCell] tag] == OUTLINE_MODE)
-	[mySoundView setDisplayMode: SND_SOUNDVIEW_MINMAX];
+        [mySoundView setDisplayMode: SndViewDisplayModeMinMax];
     else 
-	[mySoundView setDisplayMode: SND_SOUNDVIEW_WAVE];	
+        [mySoundView setDisplayMode: SndViewDisplayModeWave];
 }
 
-- showDisplayTimes
+- (void)showDisplayTimes
 {
     int start, size;
     float srate;
@@ -278,10 +269,9 @@
     PUTVAL(wStartSec, [self sampToSec: start rate: srate]);
     [wDurSamp setIntValue: size];
     PUTVAL(wDurSec, [self sampToSec: size rate: srate]);
-    return self;
 }
 
-- showSelectionTimes
+- (void)showSelectionTimes
 {
     unsigned int start;
     unsigned int size;
@@ -294,13 +284,12 @@
     [sStartSamp setIntValue: start];
     PUTVAL(sStartSec, [self sampToSec: start rate: srate]);
     if (size > ([theSound lengthInSampleFrames] - start))
-	return self;
+	return;
     [sDurSamp setIntValue: size];
     PUTVAL(sDurSec, [self sampToSec: size rate: srate]);
-    return self;
 }
 
-- windowMatrixChanged: sender
+- (IBAction)windowMatrixChanged: sender
 {
     id cell;
     int start, size, dur;
@@ -326,12 +315,13 @@
 	case 3:	size = (int) ([cell floatValue] * rate);
 	    sizeChanged = YES;
 	    break;
-	default: ;
+	default:
+            break;
     }
     
     if (size <= 0 || start < 0) {		/* erase and ignore bad values */
 	[self showDisplayTimes];
-	return self;
+	return;
     }
     if (startChanged) {
 	if (start > dur - size)
@@ -347,10 +337,9 @@
 	[scrollSound setWindowStart: start];
     }
     [self showDisplayTimes];
-    return self;
 }
 
-- selectionMatrixChanged: sender
+- (IBAction)selectionMatrixChanged: sender
 {
     id cell;
     int start, size, end, dur;		/* Start/size/end of selection */
@@ -371,7 +360,8 @@
 	    break;
 	case 3: size = (int)([cell floatValue] * rate);
 	    break;
-	default: ;
+	default:
+            break;
     }
     end = start + size;
     vstart = [wStartSamp intValue];
@@ -380,7 +370,7 @@
     
     if (start < 0 || size < 0) {				/* Ignore negative values */
 	[self showSelectionTimes];
-	return self;
+	return;
     }
     if (end > dur) end = dur;		/* Can't select past EOF */
     if (start > end) start = end;
@@ -413,20 +403,17 @@
 	    vstart = 0;
 	[scrollSound setWindowStart: vstart];
     }
-    return self;
 }
 
-- touch
+- (void)touch
 {
     [self updateChangeCount: NSChangeDone];        // Indicate the sound document has been changed.
-    return self;
 }
 
-- setButtons
+- (void)setButtons
 {
     [recordButton setEnabled: ([self isRecordable] ? YES : NO)];
     [playButton setEnabled: YES];
-    return self;
 }
 
 - (IBAction) sndInfo: (id) sender
@@ -435,7 +422,7 @@
     
     if ([theSound isEmpty])
 	return;
-    title = [[[self soundFileURL] path] lastPathComponent];
+    title = [[self soundFileURL] lastPathComponent];
     [soundInfo displaySound: theSound title: title];
 }
 
@@ -453,19 +440,17 @@
     [spectrumButton setState: 0];
 }
 
-- setColors
+- (void)setColors
 {
     [mySpectrumDocument setViewColors];
-    return self;
 }
 
-- zoom: (float) scale center: (int) sample
+- (void)zoom: (float) scale center: (int) sample
 {
     if ([theSound isEmpty])
-	return self;
+	return;
     [scrollSound setReductionFactor: scale];
     [scrollSound centerAt: sample];
-    return self;	
 }
 
 - (IBAction) zoomIn: sender
@@ -521,10 +506,9 @@
 	return NO;
 }
 
-- displayChanged:sender
+- (void)displayChanged:sender
 {
     [self showDisplayTimes];
-    return self;
 }
 
 - (void) didPlay: (Snd *) soundThatPlayed duringPerformance: (SndPerformance *) endingPerformance
@@ -552,15 +536,15 @@
     if ([playButton state]) 
         NSRunAlertPanel(
 			[mainB localizedStringForKey: @"Play error" value: @"Play error" table: nil],
-			[mainB localizedStringForKey: SndSoundError(err) value: SndSoundError(err) table: nil],
+                        @"%@",
 			[mainB localizedStringForKey: @"OK" value: @"OK" table: nil],
-			nil, nil);
+			nil, nil, [mainB localizedStringForKey: SndSoundError(err) value: SndSoundError(err) table: nil]);
     else if ([recordButton state])
         NSRunAlertPanel(
 			[mainB localizedStringForKey: @"Record error" value: @"Record error" table: nil],
-			[mainB localizedStringForKey: SndSoundError(err) value: SndSoundError(err) table: nil],
+			@"%@",
 			[mainB localizedStringForKey: @"OK" value: @"OK" table: nil],
-			nil, nil);
+			nil, nil, [mainB localizedStringForKey: SndSoundError(err) value: SndSoundError(err) table: nil]);
     [self stop: self];
 }
 

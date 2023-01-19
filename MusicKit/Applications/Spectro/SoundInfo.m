@@ -14,7 +14,7 @@
 - init
 {
     self = [super init];
-    [NSBundle loadNibNamed:@"soundInfo.nib" owner:self];
+    [NSBundle loadNibNamed:@"soundInfo" owner:self];
     ssize = 0;
     return self;
 }
@@ -51,6 +51,12 @@
 {
     [NSApp stopModal];
     return YES;
+}
+
+- (void)dealloc
+{
+    [sndhdr release];
+    [super dealloc];
 }
 
 @end
