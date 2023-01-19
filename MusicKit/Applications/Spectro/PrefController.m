@@ -51,58 +51,84 @@
 
 - (void) awakeFromNib
 {
-    char const *type;
+    NSString *type;
     NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
     
     [[NSColorPanel sharedColorPanel] setContinuous: YES];
-    [self setUpWell: cursorColorWell tag: 0];
-    [self setUpWell: spectrumColorWell tag: 1];
-    [self setUpWell: gridColorWell tag: 2];
-    [self setUpWell: amplitudeColorWell tag: 3];
 
-    if([standardUserDefaults objectForKey: @"SpectrumColor"] != nil)
-	[spectrumColorWell setColor: stringToColor([standardUserDefaults objectForKey: @"SpectrumColor"])];
-    if([standardUserDefaults objectForKey: @"WaterfallColor"] != nil)
-	[waterfallColorWell setColor: stringToColor([standardUserDefaults objectForKey: @"WaterfallColor"])];
-    if([standardUserDefaults objectForKey: @"CursorColor"] != nil)
-	[cursorColorWell setColor: stringToColor([standardUserDefaults objectForKey: @"CursorColor"])];
-    if([standardUserDefaults objectForKey: @"GridColor"] != nil)
-	[gridColorWell setColor: stringToColor([standardUserDefaults objectForKey: @"GridColor"])];
-    if([standardUserDefaults objectForKey: @"AmplitudeColor"] != nil)
-	[amplitudeColorWell setColor: stringToColor([standardUserDefaults objectForKey: @"AmplitudeColor"])];
+    if([standardUserDefaults objectForKey: @"SpectrumColor"] != nil) {
+        id encColor = [standardUserDefaults objectForKey: @"SpectrumColor"];
+        if ([encColor isKindOfClass:[NSData class]]) {
+            [spectrumColorWell setColor: dataToColor(encColor)];
+        } else if ([encColor isKindOfClass:[NSString class]]) {
+            [spectrumColorWell setColor: stringToColor(encColor)];
+        }
+    }
+    if([standardUserDefaults objectForKey: @"WaterfallColor"] != nil) {
+        id encColor = [standardUserDefaults objectForKey: @"WaterfallColor"];
+        if ([encColor isKindOfClass:[NSData class]]) {
+            [waterfallColorWell setColor: dataToColor(encColor)];
+        } else if ([encColor isKindOfClass:[NSString class]]) {
+            [waterfallColorWell setColor: stringToColor(encColor)];
+        }
+    }
+    if([standardUserDefaults objectForKey: @"CursorColor"] != nil) {
+        id encColor = [standardUserDefaults objectForKey: @"CursorColor"];
+        if ([encColor isKindOfClass:[NSData class]]) {
+            [cursorColorWell setColor: dataToColor(encColor)];
+        } else if ([encColor isKindOfClass:[NSString class]]) {
+            [cursorColorWell setColor: stringToColor(encColor)];
+        }
+    }
+    if([standardUserDefaults objectForKey: @"GridColor"] != nil) {
+        id encColor = [standardUserDefaults objectForKey: @"GridColor"];
+        if ([encColor isKindOfClass:[NSData class]]) {
+            [gridColorWell setColor: dataToColor(encColor)];
+        } else if ([encColor isKindOfClass:[NSString class]]) {
+            [gridColorWell setColor: stringToColor(encColor)];
+        }
+    }
+    if([standardUserDefaults objectForKey: @"AmplitudeColor"] != nil) {
+        id encColor = [standardUserDefaults objectForKey: @"AmplitudeColor"];
+        if ([encColor isKindOfClass:[NSData class]]) {
+            [amplitudeColorWell setColor: dataToColor(encColor)];
+        } else if ([encColor isKindOfClass:[NSString class]]) {
+            [amplitudeColorWell setColor: stringToColor(encColor)];
+        }
+    }
     
-    [windowSizeCell setStringValue: [standardUserDefaults objectForKey: @"WindowSize"]];
-    [zpFactorCell setStringValue: [standardUserDefaults objectForKey: @"ZPFactor"]];
-    [hopRatioCell setStringValue: [standardUserDefaults objectForKey: @"HopRatio"]];
-    [spectrumMaxFreqCell setStringValue: [standardUserDefaults objectForKey: @"SpectrumMaxFreq"]];
-    [wfMaxFreqCell setStringValue: [standardUserDefaults objectForKey: @"WFMaxFreq"]];
-    [dBLimitCell setStringValue: [standardUserDefaults objectForKey: @"dBLimit"]];
-    [wfPlotHeightCell setStringValue: [standardUserDefaults objectForKey: @"WFPlotHeight"]];
+    [windowSizeCell setIntegerValue: [standardUserDefaults integerForKey: @"WindowSize"]];
+    [zpFactorCell setFloatValue: [standardUserDefaults floatForKey: @"ZPFactor"]];
+    [hopRatioCell setFloatValue: [standardUserDefaults floatForKey: @"HopRatio"]];
+    [spectrumMaxFreqCell setIntegerValue: [standardUserDefaults integerForKey: @"SpectrumMaxFreq"]];
+    [wfMaxFreqCell setIntegerValue: [standardUserDefaults integerForKey: @"WFMaxFreq"]];
+    [dBLimitCell setIntegerValue: [standardUserDefaults integerForKey: @"dBLimit"]];
+    [wfPlotHeightCell setFloatValue: [standardUserDefaults floatForKey: @"WFPlotHeight"]];
     if ([[standardUserDefaults objectForKey: @"DisplayType"] intValue])
 	[displayMode selectCellWithTag: 1];
     else
 	[displayMode selectCellWithTag: 0];
 
-    type = [[standardUserDefaults objectForKey: @"WindowType"] UTF8String];
-    if (!strcmp(type, "Rectangular"))
+    type = [standardUserDefaults stringForKey: @"WindowType"];
+    if ([type isEqualToString:@"Rectangular"])
 	[windowTypeMatrix selectCellAtRow: 0 column: 0];	
-    if (!strcmp(type, "Triangular"))
+    if ([type isEqualToString:@"Triangular"])
 	[windowTypeMatrix selectCellAtRow: 1 column: 0];	
-    if (!strcmp(type, "Hamming"))
+    if ([type isEqualToString:@"Hamming"])
 	[windowTypeMatrix selectCellAtRow: 2 column: 0];	
-    if (!strcmp(type, "Hanning"))
+    if ([type isEqualToString:@"Hanning"])
 	[windowTypeMatrix selectCellAtRow: 3 column: 0];	
-    if (!strcmp(type, "Blackman3"))
+    if ([type isEqualToString:@"Blackman3"])
 	[windowTypeMatrix selectCellAtRow: 0 column: 1];	
-    if (!strcmp(type, "Blackman4"))
+    if ([type isEqualToString:@"Blackman4"])
 	[windowTypeMatrix selectCellAtRow: 1 column: 1];	
-    if (!strcmp(type, "Kaiser"))
+    if ([type isEqualToString:@"Kaiser"])
 	[windowTypeMatrix selectCellAtRow: 2 column: 1];
     
     [self setPrefToView: [colorView contentView]];
 }
 
-- okay: sender
+- (IBAction)okay: sender
 {
     int selectedRow, selectedCol, temp;
     NSUserDefaults *ourDefaults = [NSUserDefaults standardUserDefaults];
@@ -123,156 +149,151 @@
 	@"", @"AmplitudeColor",
 	NULL, NULL] retain];
 
-    if ([windowSizeCell intValue] > 0)
-	[newDefaults setObject: [windowSizeCell stringValue] forKey: @"WindowSize"];
+    if ([windowSizeCell integerValue] > 0)
+	[newDefaults setObject: @([windowSizeCell integerValue]) forKey: @"WindowSize"];
     else {
-	[windowSizeCell setIntValue: 1024];
-	[newDefaults setObject: @"1024" forKey: @"WindowSize"];
+	[windowSizeCell setIntegerValue: 1024];
+	[newDefaults setObject: @1024 forKey: @"WindowSize"];
     }
     
     if ([zpFactorCell floatValue] >= 1.0)
-	[newDefaults setObject: [zpFactorCell stringValue] forKey: @"ZPFactor"];
+	[newDefaults setObject: @([zpFactorCell floatValue]) forKey: @"ZPFactor"];
     else {
 	[zpFactorCell setFloatValue: 1.0];
-	[newDefaults setObject: @"1.0" forKey: @"ZPFactor"];
+	[newDefaults setObject: @1.0f forKey: @"ZPFactor"];
     }
     if ([hopRatioCell floatValue] > 0)
-	[newDefaults setObject: [hopRatioCell stringValue] forKey: @"HopRatio"];
+	[newDefaults setObject: @([hopRatioCell floatValue]) forKey: @"HopRatio"];
     else {
 	[hopRatioCell setFloatValue: 0.5];
-	[newDefaults setObject: @"0.5" forKey: @"HopRatio"];
+	[newDefaults setObject: @0.5f forKey: @"HopRatio"];
     }
     if ([spectrumMaxFreqCell intValue] > 0)
-	[newDefaults setObject: [spectrumMaxFreqCell stringValue] forKey: @"SpectrumMaxFreq"];
+	[newDefaults setObject: @([spectrumMaxFreqCell integerValue]) forKey: @"SpectrumMaxFreq"];
     else {
 	[spectrumMaxFreqCell setIntValue: 10000];
-	[newDefaults setObject: @"10000" forKey: @"SpectrumMaxFreq"];
+	[newDefaults setObject: @10000 forKey: @"SpectrumMaxFreq"];
     }
     if ((temp = [dBLimitCell intValue]) < 0)
-	[newDefaults setObject: [dBLimitCell stringValue] forKey: @"dBLimit"];
+	[newDefaults setObject: @([dBLimitCell integerValue]) forKey: @"dBLimit"];
     else {
-	[dBLimitCell setIntValue: -temp];
-	[newDefaults setObject: [dBLimitCell stringValue] forKey: @"dBLimit"];
+	[dBLimitCell setIntegerValue: -temp];
+	[newDefaults setObject: @([dBLimitCell integerValue]) forKey: @"dBLimit"];
     }
     if ([wfMaxFreqCell intValue] > 0)
-	[newDefaults setObject: [wfMaxFreqCell stringValue] forKey: @"WFMaxFreq"];
+	[newDefaults setObject: @([wfMaxFreqCell integerValue]) forKey: @"WFMaxFreq"];
     else {
-	[wfMaxFreqCell setIntValue: 5000];
-	[newDefaults setObject: @"5000" forKey: @"WFMaxFreq"];
+	[wfMaxFreqCell setIntegerValue: 5000];
+	[newDefaults setObject: @5000 forKey: @"WFMaxFreq"];
     }
     if ([wfPlotHeightCell floatValue] >= 1)
-	[newDefaults setObject: [wfPlotHeightCell stringValue] forKey: @"WFPlotHeight"];
+	[newDefaults setObject: @([wfPlotHeightCell floatValue]) forKey: @"WFPlotHeight"];
     else {
 	[wfPlotHeightCell setFloatValue: 3.0];
-	[newDefaults setObject: @"3.0" forKey: @"WFPlotHeight"];
+	[newDefaults setObject: @3.0f forKey: @"WFPlotHeight"];
     }
     if ([displayMode selectedRow] > 0)
-	[newDefaults setObject: @"1" forKey: @"DisplayType"]; /* Outline Mode */
+	[newDefaults setObject: @1 forKey: @"DisplayType"]; /* Outline Mode */
     else {
-	[newDefaults setObject: @"0" forKey: @"DisplayType"]; /* Wave Mode */
+	[newDefaults setObject: @0 forKey: @"DisplayType"]; /* Wave Mode */
     }
     selectedRow = [windowTypeMatrix selectedRow];
     selectedCol = [windowTypeMatrix selectedColumn];
-    if (!selectedCol) 
-	switch (selectedRow) {
-	case 0:
-	    [newDefaults setObject: @"Rectangular" forKey: @"WindowType"];
-	    break;
-	case 1:
-	    [newDefaults setObject: @"Triangular" forKey: @"WindowType"];
-	    break;
-	case 2:
-	    [newDefaults setObject: @"Hamming" forKey: @"WindowType"];
-	    break;
-	case 3:
-	    [newDefaults setObject: @"Hanning" forKey: @"WindowType"];
-	    break;
-	}
-    else
-	switch (selectedRow) {
-	case 0:
-	    [newDefaults setObject: @"Blackman3" forKey: @"WindowType"];
-	    break;
-	case 1:
-	    [newDefaults setObject: @"Blackman4" forKey: @"WindowType"];
-	    break;
-	case 2:
-	    [newDefaults setObject: @"Kaiser" forKey: @"WindowType"];
-	    break;
-	}
-    [newDefaults setObject: colorToString([spectrumColorWell color]) forKey: @"SpectrumColor"];
-    [newDefaults setObject: colorToString([waterfallColorWell color]) forKey: @"WaterfallColor"];
-    [newDefaults setObject: colorToString([cursorColorWell color]) forKey: @"CursorColor"];
-    [newDefaults setObject: colorToString([gridColorWell color]) forKey: @"GridColor"];
-    [newDefaults setObject: colorToString([amplitudeColorWell color]) forKey: @"AmplitudeColor"];
+    if (!selectedCol) {
+        switch (selectedRow) {
+            case 0:
+                [newDefaults setObject: @"Rectangular" forKey: @"WindowType"];
+                break;
+            case 1:
+                [newDefaults setObject: @"Triangular" forKey: @"WindowType"];
+                break;
+            case 2:
+                [newDefaults setObject: @"Hamming" forKey: @"WindowType"];
+                break;
+            case 3:
+                [newDefaults setObject: @"Hanning" forKey: @"WindowType"];
+                break;
+        }
+    } else {
+        switch (selectedRow) {
+            case 0:
+                [newDefaults setObject: @"Blackman3" forKey: @"WindowType"];
+                break;
+            case 1:
+                [newDefaults setObject: @"Blackman4" forKey: @"WindowType"];
+                break;
+            case 2:
+                [newDefaults setObject: @"Kaiser" forKey: @"WindowType"];
+                break;
+        }
+    }
+    [newDefaults setObject: colorToData([spectrumColorWell color]) forKey: @"SpectrumColor"];
+    [newDefaults setObject: colorToData([waterfallColorWell color]) forKey: @"WaterfallColor"];
+    [newDefaults setObject: colorToData([cursorColorWell color]) forKey: @"CursorColor"];
+    [newDefaults setObject: colorToData([gridColorWell color]) forKey: @"GridColor"];
+    [newDefaults setObject: colorToData([amplitudeColorWell color]) forKey: @"AmplitudeColor"];
 
     [ourDefaults registerDefaults: newDefaults]; //stick these in the temporary area that is searched last.
 
     [window orderOut: self];
     [([NSColorPanel sharedColorPanelExists] ? [NSColorPanel sharedColorPanel] : nil) orderOut: self];
-    [(SoundDocument *) [[NSApp delegate] document] setColors];
-	
-    return self;
+    [[(SpectroController*)[NSApp delegate] document] setColors];
 }
 
-- defaults: sender
+- (IBAction)defaults: sender
 {
-    [windowSizeCell setStringValue: @"1024"];
-    [zpFactorCell setStringValue: @"2.0"];
-    [hopRatioCell setStringValue: @"0.5"];
-    [spectrumMaxFreqCell setStringValue: @"10000"];
-    [wfMaxFreqCell setStringValue: @"5000"];
-    [dBLimitCell setStringValue: @"-100"];
-    [wfPlotHeightCell setStringValue: @"3.0"];
+    [windowSizeCell setIntegerValue: 1024];
+    [zpFactorCell setFloatValue: 2.0];
+    [hopRatioCell setFloatValue: 0.5];
+    [spectrumMaxFreqCell setIntegerValue: 10000];
+    [wfMaxFreqCell setIntegerValue: 5000];
+    [dBLimitCell setIntegerValue: -100];
+    [wfPlotHeightCell setFloatValue: 3.0];
     [windowTypeMatrix selectCellAtRow: 3 column: 0];	/* Hanning */
     [displayMode selectCellAtRow: 0 column: 0];		/* Wave Mode */
     [spectrumColorWell setColor: [NSColor blackColor]];
     [cursorColorWell setColor: [NSColor redColor]];
     [gridColorWell setColor: [NSColor lightGrayColor]];
     [amplitudeColorWell setColor: [NSColor blueColor]];
-
-    return self;
 }
 
-- setPref: sender
+- (IBAction)setPref: sender
 {
     id newView = nil;
     
     switch ([sender tag]) {
     case 0: 
-	newView = [colorView contentView];
+	newView = realColorView;
 	break;
     case 1:
-	newView = [fftView contentView];
+	newView = realFftView;
 	break;
     case 2:
-	newView = [spectrumDisplayView contentView];
+	newView = realSpectrumDisplayView;
 	break;
     case 3:
-	newView = [soundDisplayView contentView];
+	newView = realSoundDisplayView;
 	break;
     }
     
     [self setPrefToView: newView];
-    return self;
 }
 
-- setPrefToView:theView
+- (void)setPrefToView:theView
 {
     NSRect boxRect, viewRect;
     
     boxRect = [multiView frame];
     viewRect = [theView frame];
     
-    [[(NSBox *)multiView contentView] retain];
-    [(NSBox *)multiView setContentView: theView];
+    [[multiView contentView] retain];
+    [multiView setContentView: theView];
     
-    (&viewRect)->origin.x = (NSWidth(boxRect) - NSWidth(viewRect)) / 2.0;
-    (&viewRect)->origin.y = (NSHeight(boxRect) - NSHeight(viewRect)) / 2.0;
+    viewRect.origin.x = (NSWidth(boxRect) - NSWidth(viewRect)) / 2.0;
+    viewRect.origin.y = (NSHeight(boxRect) - NSHeight(viewRect)) / 2.0;
     
     [theView setFrame:viewRect];	/* center the view */
     [multiView setNeedsDisplay:YES];
-    return self;
 }
 
 @end

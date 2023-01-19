@@ -36,7 +36,7 @@
     if(self != nil) {
 	NSRect theFrame;
 
-	[NSBundle loadNibNamed: @"spectrum.nib" owner: self];
+	[NSBundle loadNibNamed: @"spectrum" owner: self];
 	[spectrumWindow setDelegate: self];
 	theFrame = [spectrumWindow frame];
 	[self newSpectrumLocation: &theFrame.origin];
@@ -100,13 +100,13 @@
     int dBLimit, i;
     float plotHeight;
     
-    windowSize = [[[NSUserDefaults standardUserDefaults] objectForKey:@"WindowSize"] intValue];
+    windowSize = [[NSUserDefaults standardUserDefaults] integerForKey:@"WindowSize"];
     [windowSizeCell setIntValue:windowSize];
     
-    hopRatio = [[[NSUserDefaults standardUserDefaults] objectForKey:@"HopRatio"] floatValue];
+    hopRatio = [[NSUserDefaults standardUserDefaults] floatForKey:@"HopRatio"];
     PUTVAL(hopRatioCell, hopRatio);
     
-    zpFactor = [[[NSUserDefaults standardUserDefaults] objectForKey:@"ZPFactor"] floatValue];
+    zpFactor = [[NSUserDefaults standardUserDefaults] floatForKey:@"ZPFactor"];
     dataSize = windowSize * zpFactor;
     power = 0.999 + log((double) dataSize) / log(2.0);
     dataSize = pow(2.0, power);
@@ -114,18 +114,18 @@
     PUTVAL(zpFactorCell, zpFactor);
     samples = (float *)malloc(dataSize * sizeof(float));
     
-    dBLimit = [[[NSUserDefaults standardUserDefaults] objectForKey:@"dBLimit"] floatValue];
+    dBLimit = [[NSUserDefaults standardUserDefaults] floatForKey:@"dBLimit"];
     for (i=0; i<5; i++) {
 	[[dBLimitsMatrix cellAtRow:i column:0] setStringValue:
 	    [NSString stringWithFormat:@"%i dB",dBLimit * i/4]];
     }
     
-    plotHeight = [[[NSUserDefaults standardUserDefaults] objectForKey:@"WFPlotHeight"] floatValue];
+    plotHeight = [[NSUserDefaults standardUserDefaults] floatForKey:@"WFPlotHeight"];
     [wfPlotHeight setFloatValue:plotHeight];
     
     [frameSlider setMinValue:1.0];
     
-    windowType = [[NSUserDefaults standardUserDefaults] objectForKey:@"WindowType"];
+    windowType = [[NSUserDefaults standardUserDefaults] stringForKey:@"WindowType"];
     
     [windowTypeButton selectItemWithTitle:windowType];
 }
@@ -219,16 +219,14 @@
     return self;
 }
 
-- printSpectrum
+- (void)printSpectrum
 {
     [spectrumWindow print:self];
-    return self;
 }
 
-- printWaterfall
+- (void)printWaterfall
 {
     [waterfallWindow print:self];
-    return self;
 }
 
 /* This method is called by "displayChanged" to reflect scrolling.

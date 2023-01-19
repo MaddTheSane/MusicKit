@@ -158,7 +158,7 @@
                                     <action selector="showInfoPanel:" target="55" id="134"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Preferences..." id="126">
+                            <menuItem title="Preferences..." keyEquivalent="," id="126">
                                 <connections>
                                     <action selector="showPreferences:" target="55" id="135"/>
                                 </connections>
@@ -177,8 +177,8 @@
                                     <action selector="hide:" target="-1" id="132"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Hide Others" id="117">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Hide Others" keyEquivalent="h" id="117">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="hideOtherApplications:" target="-1" id="133"/>
                                 </connections>
@@ -407,6 +407,7 @@
                     </menu>
                 </menuItem>
             </items>
+            <point key="canvasLocation" x="-415" y="107"/>
         </menu>
         <customObject id="55" userLabel="SpectroController" customClass="SpectroController">
             <connections>
@@ -437,7 +438,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" alignment="left" title="Version 5.6.0" id="216">
                             <font key="font" size="10" name="Helvetica"/>
-                            <color key="textColor" white="0.33333333999999998" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
@@ -455,7 +456,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <textFieldCell key="cell" alignment="left" title="Stanford University Center for Computer Research in Music and Acoustics" id="215">
                             <font key="font" size="10" name="Helvetica"/>
-                            <color key="textColor" white="0.33333333999999998" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>

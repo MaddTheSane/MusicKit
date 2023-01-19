@@ -236,9 +236,9 @@
 
 - (void) setColors
 {
-    spectrumColor = [stringToColor([[NSUserDefaults standardUserDefaults] objectForKey: @"SpectrumColor"]) retain];
-    cursorColor = [stringToColor([[NSUserDefaults standardUserDefaults] objectForKey: @"CursorColor"]) retain];	
-    gridColor = [stringToColor([[NSUserDefaults standardUserDefaults] objectForKey: @"GridColor"]) retain];
+    spectrumColor = [objectToColor([[NSUserDefaults standardUserDefaults] objectForKey: @"SpectrumColor"]) retain];
+    cursorColor = [objectToColor([[NSUserDefaults standardUserDefaults] objectForKey: @"CursorColor"]) retain];
+    gridColor = [objectToColor([[NSUserDefaults standardUserDefaults] objectForKey: @"GridColor"]) retain];
 
     [self setNeedsDisplay: YES];
 }

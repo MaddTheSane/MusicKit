@@ -160,7 +160,7 @@
 	[mySoundView setDisplayMode: SND_SOUNDVIEW_MINMAX];
     [mySoundView setDelegate: self];
     [mySoundView setContinuousSelectionUpdates: YES];
-    [mySoundView setForegroundColor: stringToColor([[NSUserDefaults standardUserDefaults] objectForKey: @"AmplitudeColor"])];
+    [mySoundView setForegroundColor: objectToColor([[NSUserDefaults standardUserDefaults] objectForKey: @"AmplitudeColor"])];
     // [self setWindowTitle];
 }
 

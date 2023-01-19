@@ -16,12 +16,18 @@
 #import <AppKit/AppKit.h>
 #import "PrefController.h"
 
+@class SoundDocument;
+
 NSString *colorToString(NSColor  *color);
 NSColor  *stringToColor(NSString *buf);
 
+NSData *colorToData(NSColor *color);
+NSColor *dataToColor(NSData *buffer);
+NSColor *objectToColor(id buffer);
+
 @interface SpectroController: NSObject <NSApplicationDelegate>
 {
-    id currentDocument;
+    SoundDocument *currentDocument;
     IBOutlet id infoPanel;
     IBOutlet id saveToAccessoryView;
     PrefController *prefController;
@@ -30,14 +36,14 @@ NSColor  *stringToColor(NSString *buf);
 
 - init;
 + (void) initialize;
-- setDocument: aDocument;
-- document;
-- printSound: sender;
-- printSpectrum: sender;
-- printWaterfall: sender;
+- (void)setDocument:(SoundDocument *) aDocument;
+- (SoundDocument *)document;
+- (IBAction)printSound: sender;
+- (IBAction)printSpectrum: sender;
+- (IBAction)printWaterfall: sender;
 - (IBAction) sndInfo: (id) sender;
-- showInfoPanel: sender;
-- showPreferences: sender;
+- (IBAction)showInfoPanel: sender;
+- (IBAction)showPreferences: sender;
 - (int) documentCount;
 - setCounter: (int) count;
 

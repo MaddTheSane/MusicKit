@@ -91,8 +91,8 @@
 - setSoundView: (SndView *) aSoundView;
 - setWindowTitle: (NSString *) aFileName;
 - soundChanged;
-- printSpectrum;
-- printWaterfall;
+- (void)printSpectrum;
+- (void)printWaterfall;
 - displayFreqRange;
 - (IBAction) changeFreqRange: (id) sender;
 - (IBAction) changeWFFreqRange: (id) sender;
@@ -126,13 +126,5 @@
 @interface SpectrumDocument(ScrollingSpectrumDelegate)
 
 - spectrumMoved:sender;
-
-@end
-
-@interface SpectrumDocument(WindowDelegate)
-
-- (void)windowDidBecomeMain:(NSNotification *)notification;
-- (void)windowDidMiniaturize:(NSNotification *)notification;
-- (void)windowDidDeminiaturize:(NSNotification *)notification;
 
 @end

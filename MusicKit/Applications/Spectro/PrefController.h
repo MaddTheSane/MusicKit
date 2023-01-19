@@ -8,27 +8,33 @@
     IBOutlet NSColorWell *cursorColorWell;
     IBOutlet NSColorWell *gridColorWell;
     IBOutlet NSColorWell *amplitudeColorWell;
-    id colorView;
-    id fftView;
-    id spectrumDisplayView;
-    id soundDisplayView;
-    id multiView;
-    id window;
-    id windowSizeCell;
-    id hopRatioCell;
-    id zpFactorCell;
-    id windowTypeMatrix;
-    id spectrumMaxFreqCell;
-    id dBLimitCell;
-    id wfPlotHeightCell;
-    id wfMaxFreqCell;
-    id displayMode;
+    IBOutlet NSBox *colorView;
+    IBOutlet NSBox *fftView;
+    IBOutlet NSBox *spectrumDisplayView;
+    IBOutlet NSBox *soundDisplayView;
+    IBOutlet NSBox *multiView;
+    IBOutlet NSPanel *window;
+    IBOutlet id windowSizeCell;
+    IBOutlet id hopRatioCell;
+    IBOutlet id zpFactorCell;
+    IBOutlet NSMatrix *windowTypeMatrix;
+    IBOutlet id spectrumMaxFreqCell;
+    IBOutlet id dBLimitCell;
+    IBOutlet id wfPlotHeightCell;
+    IBOutlet id wfMaxFreqCell;
+    IBOutlet NSMatrix *displayMode;
+    
+    IBOutlet NSView *realColorView;
+    IBOutlet NSView *realFftView;
+    IBOutlet NSView *realSpectrumDisplayView;
+    IBOutlet NSView *realSoundDisplayView;
+
 }
 
 - window;
 - (void) awakeFromNib;
-- okay: sender;
-- defaults: sender;
-- setPref: sender;
-- setPrefToView: theView;
+- (IBAction)okay: sender;
+- (IBAction)defaults: sender;
+- (IBAction)setPref: sender;
+- (void)setPrefToView: theView;
 @end
