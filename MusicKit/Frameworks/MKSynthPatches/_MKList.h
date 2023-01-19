@@ -25,7 +25,7 @@
     id *theList;
 }
 -(id)init;
--(id)objectAtIndex:(int)indx;
+-(id)objectAtIndex:(NSInteger)indx;
 -(id *)baseAddress;
 
 @end

@@ -11,14 +11,12 @@
 
 #import <AppKit/AppKit.h>
 
-@interface ExampApp : NSObject
+@interface ExampApp : NSObject <NSApplicationDelegate>
 {
-    IBOutlet id infoPanel;
+    IBOutlet NSPanel *infoPanel;
     IBOutlet id stringTable;
 }
 
-- (IBAction)appDidInit:sender;
-- (IBAction)terminate:sender;
 - (IBAction)playNote:sender;
 - (IBAction)bendPitch:sender;
 - (IBAction)showInfoPanel:sender;

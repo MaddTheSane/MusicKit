@@ -12,7 +12,7 @@
 	}
     return self;
 }
--(id)objectAtIndex:(int)indx
+-(id)objectAtIndex:(NSInteger)indx
 {
 	if (indx < 0 || indx > 5) return nil;
 	return theList[indx];

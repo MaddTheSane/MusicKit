@@ -67,21 +67,22 @@
 
 #define DEFAULTFREQ 440
 
-static MKNote *theNote,*theNoteUpdate;
-static MKOrchestra *theOrch;
-static MKSynthInstrument *theIns;
-static double freq;  	        /* frequency in Hz */
-static float transposition;     /* shift in semitones (units of 1/12 octave) */
-
-@implementation ExampApp
+@implementation ExampApp {
+    NSArray *topLevelIBObjects;
+    MKNote *theNote,*theNoteUpdate;
+    MKOrchestra *theOrch;
+    MKSynthInstrument *theIns;
+    double freq;              /* frequency in Hz */
+    float transposition;      /* shift in semitones (units of 1/12 octave) */
+}
 
 static void handleMKError(NSString *msg)
 {
-    if (!NSRunAlertPanel(@"PlayNote", msg, @"OK", @"Quit", nil, NULL))
+    if (!NSRunAlertPanel(@"PlayNote", @"%@", @"OK", @"Quit", nil, msg))
 	[NSApp terminate: NSApp];
 }
   
-- (void)appDidInit: sender;
+- (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
     MKSetErrorProc(handleMKError); /* Intercept music kit errors. */
 
@@ -169,7 +170,7 @@ static void handleMKError(NSString *msg)
 
 #define PLAY(aNote) [[theIns noteReceiver] receiveNote: aNote] 
 
-- (void)playNote: sender
+- (IBAction)playNote: sender
 {
     [MKConductor lockPerformance];	     /* Prepare to send MK message */
     [theNote setPar: MK_freq toDouble: freq];  /* use the current frequency. */
@@ -177,7 +178,7 @@ static void handleMKError(NSString *msg)
     [MKConductor unlockPerformance];	     /* End of MK message block */
 }
 
-- (void)bendPitch: sender
+- (IBAction)bendPitch: sender
 {    
     transposition = [sender floatValue];	  /* -12 to +12 semitones */
     freq =  DEFAULTFREQ * pow(2, transposition / 12.0);         /* in Hz */
@@ -187,21 +188,22 @@ static void handleMKError(NSString *msg)
     [MKConductor unlockPerformance];
 }
 
-- (void)terminate: sender
+- (void)applicationWillTerminate:(NSNotification *)notification
 {
     [MKConductor lockPerformance];
     [MKConductor finishPerformance];       
     [MKConductor unlockPerformance];
     [theOrch close];     /* Free MKOrchestra resources and release the DSP. */ 
-    [NSApp terminate: self];
 }
 
 - (void)showInfoPanel: sender
 {
-    [self loadNibSection: @"Info.nib" owner: self];
+    if (!infoPanel) {
+        NSArray *tmpTop;
+        [[NSBundle mainBundle] loadNibNamed: @"Info" owner: self topLevelObjects:&tmpTop];
+        topLevelIBObjects = [tmpTop retain];
+    }
     [infoPanel orderFront: sender];
 }
 
 @end
-
-

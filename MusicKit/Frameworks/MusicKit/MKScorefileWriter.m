@@ -96,7 +96,7 @@ Modification history prior to CVS commit.
      Invokes superclass write:, which archives MKNoteReceivers.
      Then archives info, isOptimized, and MKPart info MKNotes.  */
 {
-    unsigned n = [noteReceivers count], noteReceiverIndex;
+    unsigned n = (unsigned)[noteReceivers count], noteReceiverIndex;
 
     [aCoder encodeValuesOfObjCTypes: "@ci", &info, &_isOptimized, &n];
     for (noteReceiverIndex = 0; noteReceiverIndex < n; noteReceiverIndex++)
@@ -151,7 +151,7 @@ Modification history prior to CVS commit.
     /* Initializes file specified by the name of the MKFileWriter. You never
        send this message directly. */
 {
-    unsigned n = [noteReceivers count], noteReceiverIndex;
+    NSUInteger n = [noteReceivers count], noteReceiverIndex;
     
     _highTag = -1;
     _lowTag = MAXINT;
@@ -234,8 +234,8 @@ Modification history prior to CVS commit.
     /* Copies object and set of parts. The copy has a copy of 
        the noteReceivers and info notes. */
 {
-    unsigned int noteReceiverIndex;
-    unsigned n = [noteReceivers count];
+    NSUInteger noteReceiverIndex;
+    NSUInteger n = [noteReceivers count];
     MKScorefileWriter *newObj =  [super copyWithZone:zone];
     newObj->_highTag = -1;
     newObj->_lowTag = MAXINT;
@@ -245,7 +245,7 @@ Modification history prior to CVS commit.
     for (noteReceiverIndex = 0; noteReceiverIndex < n; noteReceiverIndex++) {
         MKPart *part = [[newObj->noteReceivers objectAtIndex: noteReceiverIndex] _getData];
 	
-	[part setInfoNote: [[part infoNote] copy]];
+	[part setInfoNote: [[[part infoNote] copy] autorelease]];
     }
     
     return newObj;

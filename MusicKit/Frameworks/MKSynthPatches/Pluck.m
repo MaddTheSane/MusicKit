@@ -27,9 +27,15 @@
 #import <MusicKit/midi_spec.h>
 #import "Pluck.h"
 #import "_MKList.h" /* sb: addition. This is a minimal List object (6 objects max) */
+#import <MKUnitGenerators/OnepoleUGxx.h>
+#import <MKUnitGenerators/DswitchtUGyx.h>
+#import <MKUnitGenerators/OnezeroUGxy.h>
+#import <MKUnitGenerators/Out2sumUGx.h>
+#import <MKUnitGenerators/DelayUGxxy.h>
+#import <MKUnitGenerators/Allpass1UGxx.h>
 #import <objc/HashTable.h> /*sb: was way down the file. */
 
-@implementation Pluck:MKSynthPatch
+@implementation Pluck
 {
     /* Here are the parameters. */
     double freq;                  /* Frequency.   */
@@ -123,6 +129,10 @@ static int delay,oneZero,out2Sum,onePole,dSwitch,pp2,pp,allPass,ppy;
     /* In this simple case, always returns the same patch template. */
 {
     static id tmpl = nil;
+    dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+	
+    });
     if (tmpl)
       return tmpl;
     tmpl = [MKPatchTemplate new];
@@ -272,7 +282,7 @@ needToSetOneZero = NO;
     }
     /* Get parameters */
     state = MKInitParameterIteration(aNote);
-    while (par = MKNextParameter(aNote, state))  
+    while ((par = MKNextParameter(aNote, state)))
 
       switch (par) { 
 
@@ -474,7 +484,7 @@ static id addSlaveList(id theOrch)
 static id getSlaveListFor(id theOrch)
     /* We have to do this because there may be multiple orchestras. */
 {
-    int cnt = [slaveLists count];
+    NSInteger cnt = [slaveLists count];
     id innerList;
     int i;
     for (i=0; i<cnt; i++) {
