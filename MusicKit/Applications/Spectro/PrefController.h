@@ -14,14 +14,14 @@
     IBOutlet NSBox *soundDisplayView;
     IBOutlet NSBox *multiView;
     IBOutlet NSPanel *window;
-    IBOutlet id windowSizeCell;
-    IBOutlet id hopRatioCell;
-    IBOutlet id zpFactorCell;
+    IBOutlet NSFormCell *windowSizeCell;
+    IBOutlet NSFormCell *hopRatioCell;
+    IBOutlet NSFormCell *zpFactorCell;
     IBOutlet NSMatrix *windowTypeMatrix;
-    IBOutlet id spectrumMaxFreqCell;
-    IBOutlet id dBLimitCell;
-    IBOutlet id wfPlotHeightCell;
-    IBOutlet id wfMaxFreqCell;
+    IBOutlet NSFormCell *spectrumMaxFreqCell;
+    IBOutlet NSFormCell *dBLimitCell;
+    IBOutlet NSFormCell *wfPlotHeightCell;
+    IBOutlet NSFormCell *wfMaxFreqCell;
     IBOutlet NSMatrix *displayMode;
     
     IBOutlet NSView *realColorView;

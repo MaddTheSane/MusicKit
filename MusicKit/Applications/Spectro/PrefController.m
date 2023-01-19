@@ -150,90 +150,90 @@
 	NULL, NULL] retain];
 
     if ([windowSizeCell integerValue] > 0)
-	[newDefaults setObject: @([windowSizeCell integerValue]) forKey: @"WindowSize"];
+	[ourDefaults setInteger: [windowSizeCell integerValue] forKey: @"WindowSize"];
     else {
 	[windowSizeCell setIntegerValue: 1024];
-	[newDefaults setObject: @1024 forKey: @"WindowSize"];
+	[ourDefaults removeObjectForKey: @"WindowSize"];
     }
     
     if ([zpFactorCell floatValue] >= 1.0)
-	[newDefaults setObject: @([zpFactorCell floatValue]) forKey: @"ZPFactor"];
+	[ourDefaults setFloat: [zpFactorCell floatValue] forKey: @"ZPFactor"];
     else {
 	[zpFactorCell setFloatValue: 1.0];
-	[newDefaults setObject: @1.0f forKey: @"ZPFactor"];
+	[ourDefaults removeObjectForKey: @"ZPFactor"];
     }
     if ([hopRatioCell floatValue] > 0)
-	[newDefaults setObject: @([hopRatioCell floatValue]) forKey: @"HopRatio"];
+	[ourDefaults setFloat: [hopRatioCell floatValue] forKey: @"HopRatio"];
     else {
 	[hopRatioCell setFloatValue: 0.5];
-	[newDefaults setObject: @0.5f forKey: @"HopRatio"];
+	[ourDefaults removeObjectForKey: @"HopRatio"];
     }
     if ([spectrumMaxFreqCell intValue] > 0)
-	[newDefaults setObject: @([spectrumMaxFreqCell integerValue]) forKey: @"SpectrumMaxFreq"];
+	[ourDefaults setInteger: [spectrumMaxFreqCell integerValue] forKey: @"SpectrumMaxFreq"];
     else {
 	[spectrumMaxFreqCell setIntValue: 10000];
-	[newDefaults setObject: @10000 forKey: @"SpectrumMaxFreq"];
+	[ourDefaults removeObjectForKey: @"SpectrumMaxFreq"];
     }
     if ((temp = [dBLimitCell intValue]) < 0)
-	[newDefaults setObject: @([dBLimitCell integerValue]) forKey: @"dBLimit"];
+	[ourDefaults setInteger: [dBLimitCell integerValue] forKey: @"dBLimit"];
     else {
 	[dBLimitCell setIntegerValue: -temp];
-	[newDefaults setObject: @([dBLimitCell integerValue]) forKey: @"dBLimit"];
+	[ourDefaults removeObjectForKey: @"dBLimit"];
     }
     if ([wfMaxFreqCell intValue] > 0)
-	[newDefaults setObject: @([wfMaxFreqCell integerValue]) forKey: @"WFMaxFreq"];
+	[ourDefaults setInteger: [wfMaxFreqCell integerValue] forKey: @"WFMaxFreq"];
     else {
 	[wfMaxFreqCell setIntegerValue: 5000];
-	[newDefaults setObject: @5000 forKey: @"WFMaxFreq"];
+	[ourDefaults removeObjectForKey: @"WFMaxFreq"];
     }
     if ([wfPlotHeightCell floatValue] >= 1)
-	[newDefaults setObject: @([wfPlotHeightCell floatValue]) forKey: @"WFPlotHeight"];
+	[ourDefaults setFloat: [wfPlotHeightCell floatValue] forKey: @"WFPlotHeight"];
     else {
 	[wfPlotHeightCell setFloatValue: 3.0];
-	[newDefaults setObject: @3.0f forKey: @"WFPlotHeight"];
+	[ourDefaults removeObjectForKey: @"WFPlotHeight"];
     }
     if ([displayMode selectedRow] > 0)
-	[newDefaults setObject: @1 forKey: @"DisplayType"]; /* Outline Mode */
+	[ourDefaults setInteger: 1 forKey: @"DisplayType"]; /* Outline Mode */
     else {
-	[newDefaults setObject: @0 forKey: @"DisplayType"]; /* Wave Mode */
+	[ourDefaults setInteger: 0 forKey: @"DisplayType"]; /* Wave Mode */
     }
     selectedRow = [windowTypeMatrix selectedRow];
     selectedCol = [windowTypeMatrix selectedColumn];
     if (!selectedCol) {
         switch (selectedRow) {
             case 0:
-                [newDefaults setObject: @"Rectangular" forKey: @"WindowType"];
+                [ourDefaults setObject: @"Rectangular" forKey: @"WindowType"];
                 break;
             case 1:
-                [newDefaults setObject: @"Triangular" forKey: @"WindowType"];
+                [ourDefaults setObject: @"Triangular" forKey: @"WindowType"];
                 break;
             case 2:
-                [newDefaults setObject: @"Hamming" forKey: @"WindowType"];
+                [ourDefaults setObject: @"Hamming" forKey: @"WindowType"];
                 break;
             case 3:
-                [newDefaults setObject: @"Hanning" forKey: @"WindowType"];
+                [ourDefaults setObject: @"Hanning" forKey: @"WindowType"];
                 break;
         }
     } else {
         switch (selectedRow) {
             case 0:
-                [newDefaults setObject: @"Blackman3" forKey: @"WindowType"];
+                [ourDefaults setObject: @"Blackman3" forKey: @"WindowType"];
                 break;
             case 1:
-                [newDefaults setObject: @"Blackman4" forKey: @"WindowType"];
+                [ourDefaults setObject: @"Blackman4" forKey: @"WindowType"];
                 break;
             case 2:
-                [newDefaults setObject: @"Kaiser" forKey: @"WindowType"];
+                [ourDefaults setObject: @"Kaiser" forKey: @"WindowType"];
                 break;
         }
     }
-    [newDefaults setObject: colorToData([spectrumColorWell color]) forKey: @"SpectrumColor"];
-    [newDefaults setObject: colorToData([waterfallColorWell color]) forKey: @"WaterfallColor"];
-    [newDefaults setObject: colorToData([cursorColorWell color]) forKey: @"CursorColor"];
-    [newDefaults setObject: colorToData([gridColorWell color]) forKey: @"GridColor"];
-    [newDefaults setObject: colorToData([amplitudeColorWell color]) forKey: @"AmplitudeColor"];
+    [ourDefaults setObject: colorToData([spectrumColorWell color]) forKey: @"SpectrumColor"];
+    [ourDefaults setObject: colorToData([waterfallColorWell color]) forKey: @"WaterfallColor"];
+    [ourDefaults setObject: colorToData([cursorColorWell color]) forKey: @"CursorColor"];
+    [ourDefaults setObject: colorToData([gridColorWell color]) forKey: @"GridColor"];
+    [ourDefaults setObject: colorToData([amplitudeColorWell color]) forKey: @"AmplitudeColor"];
 
-    [ourDefaults registerDefaults: newDefaults]; //stick these in the temporary area that is searched last.
+//    [ourDefaults registerDefaults: newDefaults]; //stick these in the temporary area that is searched last.
 
     [window orderOut: self];
     [([NSColorPanel sharedColorPanelExists] ? [NSColorPanel sharedColorPanel] : nil) orderOut: self];
