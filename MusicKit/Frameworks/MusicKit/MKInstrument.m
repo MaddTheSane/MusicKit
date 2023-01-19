@@ -103,7 +103,7 @@
    * MKNoteReceiver collection.  Otherwise returns NO.
    */
 {
-    return ([self indexOfNoteReceiver: aNoteReceiver] == -1) ? NO : YES;
+    return ([self indexOfNoteReceiver: aNoteReceiver] == NSNotFound) ? NO : YES;
 }
 
 - addNoteReceiver: (MKNoteReceiver *) aNoteReceiver
