@@ -283,7 +283,7 @@ static BOOL needToReread(void)
     /* Run alert panel here if we're playing? FIXME */
 }
 
-+ scoreFileEditorAppName
++ (NSString*)scoreFileEditorAppName
 {
     return @"TextEdit";
 }
@@ -296,7 +296,7 @@ static BOOL needToReread(void)
     if ([soundOutDeviceName isEqualToString: selectedDevice])
 	return;
     if ([selectedDevice isEqualToString: NEXT_SOUND] && (!([theOrch capabilities] & MK_hostSoundOut))) {
-	NSRunAlertPanel(STR_SCOREPLAYER, @"NeXT sound not supported on this architecture", STR_OK, nil, nil);
+	NSRunAlertPanel(STR_SCOREPLAYER, @"%@", STR_OK, nil, nil, @"NeXT sound not supported on this architecture");
 	[soundOutputDevicePopUp selectItemWithTitle: soundOutDeviceName];
 	return;
     }
@@ -332,19 +332,19 @@ static BOOL needToReread(void)
 {
     if ([soundOutDeviceName isEqualToString: DAI2400]) {
 	if (!StealthDAI2400Panel) {
-	    [NSBundle loadNibNamed: @"StealthDAI2400.nib" owner: self];
+	    [NSBundle loadNibNamed: @"StealthDAI2400" owner: self];
 	}
 	[StealthDAI2400Panel makeKeyAndOrderFront: self];
     }
     else if ([soundOutDeviceName isEqualToString: AD64x]) {
         if (!SSAD64xPanel) {
-	    [NSBundle loadNibNamed: @"SSAD64x.nib" owner: self];
+	    [NSBundle loadNibNamed: @"SSAD64x" owner: self];
 	}
 	[SSAD64xPanel makeKeyAndOrderFront: self];
     }
     else if ([soundOutDeviceName isEqualToString: NEXT_SOUND]) {
 	if (!NeXTDACPanel) {
-	    [NSBundle loadNibNamed:@"NextDACs.nib" owner:self];
+	    [NSBundle loadNibNamed:@"NextDACs" owner:self];
 	}
 	[NeXTDACPanel makeKeyAndOrderFront:self];
     }
@@ -543,7 +543,7 @@ static BOOL setUpFile(NSString *workspaceFileName);
     [tooFastErrorMsg setTextColor: [NSColor lightGrayColor]];
     [tooFastErrorMsg setBackgroundColor: [NSColor lightGrayColor]];
     if (errorDuringPlayback && ![errorLog isVisible])
-	NSRunAlertPanel(STR_SCOREPLAYER, STR_ERRORS, STR_OK, nil, nil);
+	NSRunAlertPanel(STR_SCOREPLAYER, @"%@", STR_OK, nil, nil, STR_ERRORS);
     messageFlashed = NO;
     isLate = NO;
     wasLate = NO;
@@ -688,7 +688,7 @@ static double getUntempo(float tempoVal)
     if (msg && !warnedAboutSrate) {	
         [errorLog addText: msg];
 	warnedAboutSrate = YES;
-	NSRunAlertPanel(STR_SCOREPLAYER, msg, STR_OK, NULL, NULL);
+	NSRunAlertPanel(STR_SCOREPLAYER, @"%@", STR_OK, NULL, NULL, msg);
     }
     [theOrch setSamplingRate: actualSrate];
     
@@ -1190,7 +1190,7 @@ BOOL getSavePath(NSString **returnBuf, NSString *dir, NSString *name, NSString *
     }
     [savePanel setAccessoryView: accessoryView];
     if (theType && [theType length])
-        [savePanel setRequiredFileType: theType];
+        [savePanel setAllowedFileTypes: @[theType]];
     flag = [savePanel runModalForDirectory:@"" file:@""];
     if (flag)
         *returnBuf = [savePanel filename];
@@ -1286,7 +1286,7 @@ NSString *getPath(NSString *dir, NSString *name, NSString *ext)
 }
 
 /* Display the help file formatted as HTML with the default handling application. */
-- (void) help: sender
+- (IBAction) help: sender
 {
     /* Look in the app wrapper */
     NSString *helpfile = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent: @"help.html"];
@@ -1295,20 +1295,18 @@ NSString *getPath(NSString *dir, NSString *name, NSString *ext)
         NSRunAlertPanel(STR_SCOREPLAYER, STR_EDIT_CANT_OPEN_FILE, @"", nil, nil);
 }
 
-- pause: sender
+- (IBAction)pause: sender
 {
     [MKConductor lockPerformance];
     [[MKConductor defaultConductor] pause];
     [MKConductor unlockPerformance];
-    return self;
 }
 
-- resume: sender
+- (IBAction)resume: sender
 {
     [MKConductor lockPerformance];
     [[MKConductor defaultConductor] resume];
     [MKConductor unlockPerformance];
-    return self;
 }
 
 @end
