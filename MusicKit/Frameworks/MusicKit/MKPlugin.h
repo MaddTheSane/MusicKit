@@ -29,6 +29,7 @@
 
 @protocol MusicKitPlugin <NSObject>
 + (NSString *) protocolVersion;
+@property (class, readonly, copy) NSString *protocolVersion;
 - (void) setDelegate:(id)delegate;
 - (NSArray*)fileSavingSuffixes;
 - (NSArray*)fileOpeningSuffixes;

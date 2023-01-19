@@ -17,7 +17,7 @@
 
 #import "MKPartials.h"
 
-@interface MKPartials(Private)
+@interface MKPartials(/*Private*/)
 
 - writeBinaryScorefileStream: (NSMutableData *) aStream;
 - (void)_setPartialNoCopyCount: (int)howMany

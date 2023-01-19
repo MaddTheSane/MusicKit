@@ -504,9 +504,7 @@ static void unsetPartPerformers(MKScorePerformer *self)
 }
 #endif
 
-@end
-
-@implementation MKScorePerformer(Private)
+#pragma mark - Private methods
 
 - _partPerformerDidDeactivate: sender
 {  

@@ -66,7 +66,7 @@ extern void _MKSendVMMsgToApplicationThread(id self,
 
 extern double _MKTheTimeToWait(double nextMsgTime);
 
-@interface MKConductor(Private)
+@interface MKConductor(/*Private*/)
 
 +(MKMsgStruct *)_afterPerformanceSel:(SEL)aSelector 
  to:(id)toObject 

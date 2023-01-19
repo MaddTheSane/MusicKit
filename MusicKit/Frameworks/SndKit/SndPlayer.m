@@ -156,7 +156,7 @@ static SndPlayer *defaultSndPlayer;
 // stopPerformance:inFuture:
 ////////////////////////////////////////////////////////////////////////////////
 
-- stopPerformance: (SndPerformance *) performance inFuture: (double) inSeconds
+- (void)stopPerformance: (SndPerformance *) performance inFuture: (double) inSeconds
 {
     double whenToStop;
     double beginPlayTime;
@@ -193,7 +193,6 @@ static SndPlayer *defaultSndPlayer;
 #if SNDPLAYER_DEBUG
     NSLog(@"SndPlayer::stopPerformance - playingLock unlocked\n");
 #endif
-    return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

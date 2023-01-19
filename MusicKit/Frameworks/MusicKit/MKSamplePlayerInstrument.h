@@ -22,7 +22,7 @@
 #import <SndKit/SndKit.h>
 #import <MusicKit/MKInstrument.h>
 
-@interface MKSamplePlayerInstrument: MKInstrument
+@interface MKSamplePlayerInstrument: MKInstrument <SndDelegate>
 {
 @private
     double volume;

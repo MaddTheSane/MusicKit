@@ -25,7 +25,7 @@
 #import "MKNoteSender.h"
 #import "MKPerformer.h"
 
-@interface MKPerformer(Private)
+@interface MKPerformer(/*Private*/)
 
 -_copyFromZone:(NSZone *)zone;
 

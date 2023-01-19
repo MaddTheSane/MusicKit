@@ -6379,12 +6379,12 @@
 		D88FED7805A10F380024FD88 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				D88FED7E05A10F800024FD88 /* dsp_stubs.m */,
+				D88FED7B05A10F800024FD88 /* _DSPCV.c */,
 				D88FED7C05A10F800024FD88 /* _DSPString.c */,
+				D88FED7D05A10F800024FD88 /* _DSPUtilities.c */,
+				D88FED7E05A10F800024FD88 /* dsp_stubs.m */,
 				D88FED7F05A10F800024FD88 /* DSPError.m */,
 				D88FED8005A10F800024FD88 /* DSPGlobals.m */,
-				D88FED7B05A10F800024FD88 /* _DSPCV.c */,
-				D88FED7D05A10F800024FD88 /* _DSPUtilities.c */,
 				D88FED8105A10F800024FD88 /* DSPObject.m */,
 			);
 			name = "Other Sources";

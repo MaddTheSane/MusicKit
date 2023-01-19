@@ -16,6 +16,8 @@
   @file MKDeviceStatus.h
  */
 
+#import <Foundation/NSObjCRuntime.h>
+
 /*!
   @brief Status for MKMidi/MKOrchestra MusicKit classes.
  
@@ -41,16 +43,23 @@
   <li><b>abort</b>	Like close, but doesn't wait for enqueued events to finish.</li>
   </ul>
  */
-typedef enum _MKDeviceStatus { 
+typedef NS_ENUM(int, MKDeviceStatus) { 
     /*! Device is closed. */
-    MK_devClosed = 0,
+    MKDeviceStatusClosed = 0,
     /*! Device is open but its clock has not yet begun to run.
         It's clock is in a reset state. */
-    MK_devOpen,
+    MKDeviceStatusOpen,
     /*! Device is open and its clock is running. */
-    MK_devRunning,
+    MKDeviceStatusRunning,
     /*! Device is open, its clock has run, but it has been temporarily stopped. */
-    MK_devStopped
-} MKDeviceStatus;
+    MKDeviceStatusStopped
+};
 
+#define DeprecatedEnum(type, oldname, newval) \
+static const type oldname NS_DEPRECATED_WITH_REPLACEMENT_MAC( #newval , 10.0, 10.8) = newval
+DeprecatedEnum(MKDeviceStatus, MK_devClosed, MKDeviceStatusClosed);
+DeprecatedEnum(MKDeviceStatus, MK_devOpen, MKDeviceStatusOpen);
+DeprecatedEnum(MKDeviceStatus, MK_devRunning, MKDeviceStatusRunning);
+DeprecatedEnum(MKDeviceStatus, MK_devStopped, MKDeviceStatusStopped);
+#undef DeprecatedEnum
 #endif

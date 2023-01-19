@@ -17,6 +17,7 @@
 
 @class MKMidi;
 @class MKConductor;
+@protocol MKConductorDelegate;
 
 /*!
   @class MKConductor
@@ -595,7 +596,7 @@ extern MKMsgStruct *MKRepositionMsgRequest(MKMsgStruct *aMsgStructPtr, double ne
  */
 extern void MKFinishPerformance(void);
 
-@interface MKConductor: NSObject
+@interface MKConductor: NSObject <NSCopying>
 {
   /*! Current Time in beats, updated (for all instances) after timed entry fires off. */
     double time;       
@@ -612,7 +613,7 @@ extern void MKFinishPerformance(void);
    */ 
     BOOL isPaused;      
   /*! The object's delegate. */
-    id delegate;
+    id<MKConductorDelegate> delegate;
   /*! An NSMutableArray object of active performers using this conductor. Don't alter this NSMutableArray. */
     NSMutableArray *activePerformers;
   /*! MIDI Time Code synchronization object, if any. */
@@ -777,6 +778,7 @@ extern void MKFinishPerformance(void);
   @brief Returns the defaultConductor.
 */
 + (MKConductor *) defaultConductor; 
+@property (class, readonly, strong) MKConductor *defaultConductor;
 
 /*!
   @return Returns a BOOL.
@@ -888,14 +890,14 @@ extern void MKFinishPerformance(void);
  @brief Returns the receiver's delegate object, as set through the <b>setDelegate:</b> method.
  @return Returns an id.
  */
-- delegate;
+- (id<MKConductorDelegate>)delegate;
 
 /*!
  @brief Returns the receiver's delegate object, as set through the
  <b>setDelegate:</b> method.
  @return Returns an id.
  */
-+ delegate;
++ (id<MKConductorDelegate>)delegate;
 
 /*!
   @brief Returns a List of currently active Performers that are assigned to
@@ -968,7 +970,7 @@ extern void MKFinishPerformance(void);
  @param  delegate is an id.
  @return Returns an id.
 */
-- (void) setDelegate: (id) delegate;
+- (void) setDelegate: (id<MKConductorDelegate>) delegate;
 
 /*!
   @brief Sets the receiver's delegate object to <i>delegate</i> and returns
@@ -980,7 +982,7 @@ extern void MKFinishPerformance(void);
   @param  delegate is an id.
   @return Returns an id.
 */
-+ (void) setDelegate: (id) delegate;
++ (void) setDelegate: (id<MKConductorDelegate>) delegate;
 
 /*@}*/
 

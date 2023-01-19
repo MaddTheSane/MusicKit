@@ -38,6 +38,7 @@
 #define __MK_PerformerDelegate_H___
 
 #import <Foundation/NSObject.h>
+@class MKPerformer;
 @protocol MKPerformerDelegate <NSObject>
 @optional
 
@@ -49,7 +50,7 @@
 
   
 */
-- performerDidActivate: (id) sender;
+- (void)performerDidActivate: (MKPerformer*) sender;
 
 /*!
   @param  sender is an id.
@@ -59,7 +60,7 @@
 
   
 */
-- performerDidPause: (id) sender;
+- (void)performerDidPause: (MKPerformer*) sender;
 
 /*!
   @param  sender is an id.
@@ -69,7 +70,7 @@
 
   
 */
-- performerDidResume: (id) sender;
+- (void)performerDidResume: (MKPerformer*) sender;
 
 /*!
   @param  sender is an id.
@@ -79,7 +80,7 @@
 
   
 */
-- performerDidDeactivate: (id) sender;
+- (void)performerDidDeactivate: (MKPerformer*) sender;
 
 @end
 

@@ -37,7 +37,7 @@ extern void _MKProtectSynthElement(SynthElement *dataObj, BOOL protectIt);
 extern id _MKSetSynthElementSynthPatchLoc(SynthElement *synthEl, unsigned short loc);
 extern unsigned _MKGetSynthElementSynthPatchLoc(SynthElement *synthEl);
 
-@interface MKUnitGenerator(Private)
+@interface MKUnitGenerator(/*Private*/)
 
 - (MKOrchMemStruct *) _getRelocAndClassInfo: (MKLeafUGStruct **) classInfoPtr;
 - (MKOrchMemStruct *) _resources;

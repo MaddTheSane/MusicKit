@@ -309,7 +309,7 @@ extern void MKConvertSecondsToMTC(double seconds,
  @param  f is a short.
  @return Returns an id.
  */
-- setTimeShiftMTCHours: (short) h minutes: (short) m seconds: (short) s frames: (short) f;
+- (void)setTimeShiftMTCHours: (short) h minutes: (short) m seconds: (short) s frames: (short) f;
 
 /*!
   @brief Returns <i>firstTimeTag</i>, as previously set with
@@ -356,7 +356,7 @@ extern void MKConvertSecondsToMTC(double seconds,
 
   Assumes the current format.
 */
--getMTCHours:(short *)h minutes:(short *)m seconds:(short *)s frames:(short *)f;
+-(void)getMTCHours:(short *)h minutes:(short *)m seconds:(short *)s frames:(short *)f;
 
 /*!
   @param  newDirection is an int.
@@ -411,7 +411,7 @@ extern void MKConvertSecondsToMTC(double seconds,
   @return returns <b>self</b>
   @brief Prepares the object for performance
 */
--activateSelf;    
+-(BOOL)activateSelf;    
 
 /*!
   @return Returns an id.

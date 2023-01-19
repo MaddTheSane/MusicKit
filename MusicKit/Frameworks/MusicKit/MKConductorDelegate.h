@@ -6,13 +6,15 @@
 #define __MK_ConductorDelegate_H___
 
 #import <Foundation/NSObject.h>
-@interface MKConductorDelegate : NSObject
+@class MKConductor;
+@protocol MKConductorDelegate <NSObject>
+@optional
 
-- conductorWillSeek: (id) sender;
-- conductorDidSeek: (id) sender;
-- conductorDidReverse: (id) sender;
-- conductorDidPause: (id) sender;
-- conductorDidResume: (id) sender;
+- (void)conductorWillSeek: (MKConductor*) sender;
+- (void)conductorDidSeek: (MKConductor*) sender;
+- (void)conductorDidReverse: (MKConductor*) sender;
+- (void)conductorDidPause: (MKConductor*) sender;
+- (void)conductorDidResume: (MKConductor*) sender;
 
 -(double) beatToClock:(double)t from: (id) sender;
 -(double) clockToBeat:(double)t from: (id) sender;

@@ -1304,16 +1304,16 @@ outOfLoop:
 
 /* Number of notes and parts ------------------------------------------ */
 
-- (unsigned) partCount
+- (NSInteger) partCount
 {
     return [parts count];
 }
 
-- (unsigned) noteCount
+- (NSInteger) noteCount
     /* Returns the total number of notes in all the contained MKParts. */
 {
-    unsigned numOfParts = [parts count], partIndex;
-    unsigned numNotes = 0;
+    NSUInteger numOfParts = [parts count], partIndex;
+    NSUInteger numNotes = 0;
     for (partIndex = 0; partIndex < numOfParts; partIndex++)
 	numNotes += [[parts objectAtIndex:partIndex] noteCount];
     
@@ -1370,7 +1370,7 @@ outOfLoop:
     * Shift is added to the timeTags of all notes in the MKPart.
     */
 {
-    unsigned numOfParts = [parts count], partIndex;
+    NSUInteger numOfParts = [parts count], partIndex;
     
     for (partIndex = 0; partIndex < numOfParts; partIndex++)
 	[[parts objectAtIndex: partIndex] shiftTime: shift];
@@ -1382,7 +1382,7 @@ outOfLoop:
     * Scale factor is applied to the timeTags and durations of all notes in the MKPart.
     */
 {
-    unsigned numOfParts = [parts count], partIndex;
+    NSUInteger numOfParts = [parts count], partIndex;
     
     for (partIndex = 0; partIndex < numOfParts; partIndex++)
 	[[parts objectAtIndex:partIndex] scaleTime: scale];
@@ -1392,7 +1392,7 @@ outOfLoop:
 // Returns the time of the first note in the score.
 - (double) earliestNoteTime
 {
-    unsigned numOfParts = [parts count], partIndex;
+    NSUInteger numOfParts = [parts count], partIndex;
     double earliestNoteTime = MK_ENDOFTIME;
     
     for (partIndex = 0; partIndex < numOfParts; partIndex++) {
@@ -1418,7 +1418,7 @@ outOfLoop:
   MIDI system and channel mode messages. */
 {
   id el, aInfo;
-  unsigned numOfParts, partIndex;
+  NSInteger numOfParts, partIndex;
   if (aChan == MAXINT)
     return nil;
   numOfParts = [parts count];
@@ -1438,7 +1438,7 @@ outOfLoop:
 
 - (MKPart *) partTitled: (NSString *) partTitleToFind
 {
-    int partIndex, numOfParts = [parts count];
+    NSInteger partIndex, numOfParts = [parts count];
     
     for (partIndex = 0; partIndex < numOfParts; partIndex++) {
 	MKPart *mkp = [parts objectAtIndex: partIndex];
@@ -1456,7 +1456,7 @@ outOfLoop:
 
 - (MKPart *) partNamed: (NSString *) partNameToFind
 {
-    int partIndex, numOfParts = [parts count];
+    NSInteger partIndex, numOfParts = [parts count];
     
     for (partIndex = 0; partIndex < numOfParts; partIndex++) {
 	MKPart *mkp = [parts objectAtIndex: partIndex];
@@ -1581,16 +1581,14 @@ static BOOL isUnarchiving = NO;
     return [scoreDescription autorelease];
 }
 
-@end
-
-@implementation MKScore(Private)
+#pragma mark - Private methods
 
 + (BOOL) _isUnarchiving
 {
     return isUnarchiving;
 }
 
-- _newFilePartWithName: (NSString *) name
+- (MKPart*)_newFilePartWithName: (NSString *) name
     /* You never send this message. It is used only by the Scorefile parser
     to add a MKPart to the receiver when a part is declared in the
     scorefile.

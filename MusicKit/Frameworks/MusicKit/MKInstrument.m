@@ -194,7 +194,7 @@
      with each element of the collection as the argument. */
 {
     /* Need to use seq because we may be modifying the List. */
-    unsigned i;
+    NSUInteger i;
     if (!noteReceivers)
       return self;
     i = [noteReceivers count]; 
@@ -294,9 +294,7 @@
     return self;
 }
 
-@end
-
-@implementation MKInstrument(Private)
+#pragma mark - Private methods
 
 - _realizeNote: (MKNote *) aNote fromNoteReceiver: (MKNoteReceiver *) aNoteReceiver
 {

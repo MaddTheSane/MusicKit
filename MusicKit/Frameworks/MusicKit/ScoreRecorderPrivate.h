@@ -10,7 +10,7 @@
 
 #import "MKScoreRecorder.h"
 
-@interface MKScoreRecorder(Private)
+@interface MKScoreRecorder(/*Private*/)
 
 - (void) _firstNote: (MKNote *) aNote;
 - _afterPerformance;

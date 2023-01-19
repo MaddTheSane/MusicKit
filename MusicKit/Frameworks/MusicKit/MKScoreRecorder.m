@@ -30,7 +30,9 @@
 #import "PartRecorderPrivate.h"
 #import "ScoreRecorderPrivate.h"
 
-@implementation MKScoreRecorder(Private)
+#pragma mark - Private methods
+
+@implementation MKScoreRecorder
 
 - (void) _firstNote: (MKNote *) aNote
 {
@@ -49,9 +51,7 @@
     return self;
 }
 
-@end
-
-@implementation MKScoreRecorder
+#pragma mark - Public methods
 
 - init
 {

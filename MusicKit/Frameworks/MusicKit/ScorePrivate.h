@@ -20,10 +20,10 @@
 
 #import "MKScore.h"
 
-@interface MKScore (Private)
+@interface MKScore (/*Private*/)
 
 +(BOOL)_isUnarchiving;
--_newFilePartWithName:(NSString *)name NS_RETURNS_NOT_RETAINED;
+-(MKPart*)_newFilePartWithName:(NSString *)name NS_RETURNS_NOT_RETAINED;
 
 @end
 

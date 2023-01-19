@@ -179,26 +179,25 @@ void
     return self;
 }
 
--setTimeShiftMTCHours:(short)h minutes:(short)m seconds:(short)s frames:(short)f
+-(void)setTimeShiftMTCHours:(short)h minutes:(short)m seconds:(short)s frames:(short)f
 {
     if (status != MK_inactive) 
-      return nil;
-    return [self setTimeShift:MKConvertMTCToSeconds(format,h,m,s,f)];
+      return;
+    [self setTimeShift:MKConvertMTCToSeconds(format,h,m,s,f)];
 }
 
--getMTCHours:(short *)h minutes:(short *)m seconds:(short *)s frames:(short *)f
+-(void)getMTCHours:(short *)h minutes:(short *)m seconds:(short *)s frames:(short *)f
   /* Can be called at any time to get current timetag in MTC units */
 {
     if (MKGetDeltaTMode() == MK_DELTAT_DEVICE_LAG) {
 	double t = MKConvertMTCToSeconds(format,_hours,_minutes,_seconds,_frames);
 	MKConvertSecondsToMTC(t - MKGetDeltaT(),format,h,m,s,f);
-	return self;
+	return;
     }
     *h = _hours;
     *m = _minutes;
     *s = _seconds;
     *f = _frames;
-    return self;
 }
 
 -(double)timeTag
@@ -208,7 +207,7 @@ void
     return MKConvertMTCToSeconds(format,_hours,_minutes,_seconds,_frames) - deltaT;
 }
 
--activateSelf
+-(BOOL)activateSelf
 {
     nextPerform = firstTimeTag;
     [self setFirstTimeTag:firstTimeTag]; /* Updates MTC variables */
@@ -223,7 +222,7 @@ void
 	}
     }
     return (((firstTimeTag <= lastTimeTag) && (direction > 0)) ||
-	    ((firstTimeTag >= lastTimeTag) && (direction < 0))) ? self : nil;
+	    ((firstTimeTag >= lastTimeTag) && (direction < 0))) ? YES : NO;
 }
 
 -sendFullMTCMessage

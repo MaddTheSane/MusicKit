@@ -12,7 +12,7 @@
 
 #import "MKInstrument.h"
 
-@interface MKInstrument(Private)
+@interface MKInstrument(/*Private*/)
 
 - _realizeNote: (MKNote *) aNote fromNoteReceiver: (MKNoteReceiver *) aNoteReceiver;
 - _afterPerformance;

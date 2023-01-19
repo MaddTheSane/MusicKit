@@ -602,7 +602,7 @@ static void writeData(NSMutableData *aStream,_MKScoreOutStruct *p, id dataObj,in
             break;
     }
     if (binary) {
-        int val = (int)NSMapGet(p->_binaryIndecies, dataObj);
+        int val = (int)(uintptr_t)NSMapGet(p->_binaryIndecies, dataObj);
         
         if (val) {
             _MKWriteShort(aStream, type);
@@ -637,7 +637,7 @@ static void writeData(NSMutableData *aStream,_MKScoreOutStruct *p, id dataObj,in
         if (binary) {
 	    _MKWriteShort(aStream, declToken);
 	    _MKWriteNSString(aStream, name);
-            NSMapInsert(p->_binaryIndecies, dataObj, (++(p->_highBinaryIndex)));
+            NSMapInsert(p->_binaryIndecies, dataObj, (void*)(uintptr_t)(++(p->_highBinaryIndex)));
         }
         else {
             [aStream appendData: [[NSString stringWithFormat: @"%s %@ = ", _MKTokName(declToken), name]

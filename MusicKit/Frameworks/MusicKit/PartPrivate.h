@@ -17,8 +17,9 @@
 
 #import "MKPart.h"
 
-@interface MKPart(Private)
+@interface MKPart(/*Private*/)
 
+@property (readwrite, retain, setter=_setNoteSender:) MKNoteSender *_noteSender;
 - (void) _setNoteSender: (MKNoteSender *) aNS;
 - (MKNoteSender *) _noteSender;
 - (void) _unsetScore;

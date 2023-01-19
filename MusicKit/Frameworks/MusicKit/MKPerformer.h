@@ -193,7 +193,7 @@ typedef NS_ENUM(int, MKPerformerStatus) {
     MK_paused
 };
 
-@interface MKPerformer : NSObject
+@interface MKPerformer : NSObject <NSCoding, NSCopying>
 {
     /*! The object's MKConductor. */
     MKConductor *conductor;
@@ -211,7 +211,7 @@ typedef NS_ENUM(int, MKPerformerStatus) {
     /*! The next time in beats until the object will send a MKNote by sending a perform message. */
     double nextPerform;
     /*! The object's collection of MKNoteSenders. */
-    NSMutableArray *noteSenders;
+    NSMutableArray<MKNoteSender*> *noteSenders;
     /*! The object's delegate, if any. */
     id<MKPerformerDelegate> delegate;
 
@@ -230,7 +230,7 @@ typedef NS_ENUM(int, MKPerformerStatus) {
 
   The NSArray is autoreleased.
 */
-- (NSArray *) noteSenders; 
+- (NSArray<MKNoteSender*> *) noteSenders;
 
 /*!
   @brief Returns YES if <i>aNoteSender</i> is a member of the receiver's MKNoteSender NSArray.
@@ -243,7 +243,7 @@ typedef NS_ENUM(int, MKPerformerStatus) {
   @brief Sends -<b>disconnectAllReceivers</b> to each of the object's MKNoteSenders.
   @return Returns an id.
 */
-- disconnectNoteSenders;
+- (void)disconnectNoteSenders;
 
 /*!
   @brief Disconnects and releases the receiver's MKNoteSenders.
@@ -322,7 +322,7 @@ typedef NS_ENUM(int, MKPerformerStatus) {
   receiver.
   @return Returns an id.
 */
-- activateSelf; 
+- (BOOL)activateSelf;
 
 /*!
   @return Returns an id.
@@ -331,7 +331,7 @@ typedef NS_ENUM(int, MKPerformerStatus) {
 
   The return value is ignored.
 */
-- perform; 
+- (void)perform;
 
 /*!
   @param  timeShift is a double.
@@ -342,7 +342,7 @@ typedef NS_ENUM(int, MKPerformerStatus) {
   is currently in performance, otherwise returns the
   receiver.
 */
-- setTimeShift: (double) timeShift;
+- (void)setTimeShift: (double) timeShift;
 
 /*!
   @param  dur is a double.
@@ -354,7 +354,7 @@ typedef NS_ENUM(int, MKPerformerStatus) {
   receiver is currently in performance, otherwise returns the
   receiver.
 */
-- setDuration: (double) dur; 
+- (void)setDuration: (double) dur;
 
 /*!
   @return Returns a double.
@@ -396,7 +396,7 @@ typedef NS_ENUM(int, MKPerformerStatus) {
   implementation of the <b>activateSelf</b> method.  Returns the
   receiver.
 */
-- activate; 
+- (BOOL) activate;
 
 /*!
   @brief If the receiver's status is inactive, this does nothing and
@@ -427,7 +427,7 @@ typedef NS_ENUM(int, MKPerformerStatus) {
   To free a paused MKPerformer during a performance, you should first
   send it the <b>deactivate</b> message.  Also sends [delegate hasPaused:self];
 */
-- pause; 
+- (void)pause;
 
 /*!
   @param  beats is a double.
@@ -435,7 +435,7 @@ typedef NS_ENUM(int, MKPerformerStatus) {
   @brief Like pause, but also enqueues a resume message to be sent the specified
   number of beats into the future.
 */
--pauseFor: (double) beats;
+-(void)pauseFor: (double) beats;
 
 /*!
   @return Returns an id.
@@ -444,7 +444,7 @@ typedef NS_ENUM(int, MKPerformerStatus) {
 
   Also sends [delegate hasResumed:self];
 */
-- resume; 
+- (BOOL)resume;
 
 /*!
   @return Returns an MKPerformer instance.
@@ -475,14 +475,14 @@ typedef NS_ENUM(int, MKPerformerStatus) {
   
   Does nothing in this abstract class.
  */
-- setFirstTimeTag: (double) v;
+- (void)setFirstTimeTag: (double) v;
 
 /*!
   @brief Implements an informal protocol for firstTimeTag/lastTimeTag.
   
   Does nothing in this abstract class.
  */
-- setLastTimeTag: (double) v;
+- (void)setLastTimeTag: (double) v;
 
 /*!
   @brief  Returns the first time tag in beats.
@@ -505,13 +505,15 @@ typedef NS_ENUM(int, MKPerformerStatus) {
   The object is not retained.
   @param object The receiving delegate object. 
  */
-- (void) setDelegate: (id) object;
+- (void) setDelegate: (id<MKPerformerDelegate>) object;
 
 /*!
   @brief Returns the receiver's delegate, if any.
   @return Returns an id.
 */
-- delegate;
+- (id<MKPerformerDelegate>)delegate;
+
+@property (assign) id<MKPerformerDelegate> delegate;
 
 /*!
   @param  aTimeIncrement is a double.
@@ -524,7 +526,7 @@ typedef NS_ENUM(int, MKPerformerStatus) {
   magnitude large enough to shift the MKPerformer into the past,
   reschedules the MKPerformer to invoke <b>perform </b>immediately.
 */
-- rescheduleBy: (double) aTimeIncrement;
+- (BOOL)rescheduleBy: (double) aTimeIncrement;
 
 /*!
   @param  aTime is a double.
@@ -535,7 +537,7 @@ typedef NS_ENUM(int, MKPerformerStatus) {
   If <i>time</i> is in the past, reschedules the MKPerformer to invoke
   <b>perform</b>immediately.
 */
-- rescheduleAtTime: (double) aTime;
+- (BOOL)rescheduleAtTime: (double) aTime;
 
 /*!
   @brief  You never send this message directly.

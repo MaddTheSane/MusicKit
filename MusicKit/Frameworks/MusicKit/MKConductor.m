@@ -1910,9 +1910,7 @@ static double getNextMsgTime(MKConductor *aCond)
     return [queue stringByAppendingFormat: @"%@%@%@\n%@%@", timeStr, beatTime, msgs, pausing, misc];
 }
 
-@end
-
-@implementation MKConductor(Private)
+#pragma mark - Private methods
 
 /*sb: created for the change from DPS timers to OS-style timers. The timer performs a method, not
  * a function. It's a class method because we want only one object to look after these messages.

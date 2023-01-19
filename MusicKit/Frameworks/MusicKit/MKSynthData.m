@@ -410,9 +410,7 @@ extern int DSPReadValue(DSPMemorySpace space,
     return self;
 }
 
-@end
-
-@implementation MKSynthData(Private)
+#pragma mark - Private methods
 
 -(MKOrchMemStruct *) _resources     
   /* return pointer to memory requirements of this unit generator. */

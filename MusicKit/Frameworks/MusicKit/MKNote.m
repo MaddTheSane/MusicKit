@@ -1894,6 +1894,8 @@ int MKNextParameter(MKNote *aNote, NSHashEnumerator *aState)
     return toRet;
 }
 
+#pragma mark - Private methods
+
 -_unionWith:aNote
     /* Copies parameters from aNote to the receiver. For 
        parameters which are already present in the receiver, the

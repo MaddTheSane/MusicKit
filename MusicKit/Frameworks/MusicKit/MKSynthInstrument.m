@@ -1034,7 +1034,7 @@ static void deallocRunningVoices(MKSynthInstrument *self,id orch)
     return self;
 }
 
-#pragma mark - Private
+#pragma mark - Private methods
 
 -_repositionInActiveList:synthPatch template:patchTemplate
   /* -activeSynthPatches used to list patches in the order of their noteOns.

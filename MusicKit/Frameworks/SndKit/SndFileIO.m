@@ -144,7 +144,7 @@
 - (SndFormat) soundFormatOfFilename: (NSString *) path
 {
 #if HAVE_LIBSNDFILE
-    SndFormat headerFormat = { SND_FORMAT_UNSPECIFIED, 0, 0, 0 };
+    SndFormat headerFormat = { SndSampleFormatUnspecified, 0, 0, 0 };
     SNDFILE *sfp;
     SF_INFO sfinfo;
     NSFileHandle *readingFileHandle = [NSFileHandle fileHandleForReadingAtPath: [path stringByExpandingTildeInPath]]; 

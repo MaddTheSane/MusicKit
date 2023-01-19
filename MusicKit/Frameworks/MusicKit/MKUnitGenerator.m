@@ -1068,10 +1068,7 @@ extern int _MKOrchestraGetNoops(void);
     return self;
 }
 
-@end
-
-
-@implementation MKUnitGenerator(Private)
+#pragma mark - Private methods
 
 -(MKOrchMemStruct *) _getRelocAndClassInfo:(MKLeafUGStruct **)classInfoPtr
   /* Returns pointer to DSP memory requirements of the receiver */

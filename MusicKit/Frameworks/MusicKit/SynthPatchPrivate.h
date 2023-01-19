@@ -29,7 +29,7 @@ extern id _MKSynthPatchCmp();
 #define _MK_ORCHTMPLIST 3
 #define _MK_ORPHANLIST 4
 
-@interface MKSynthPatch(Private)
+@interface MKSynthPatch(/*Private*/)
 
 + _newWithTemplate: (id) aTemplate
  inOrch: (id) anOrch index: (int) whichDSP;

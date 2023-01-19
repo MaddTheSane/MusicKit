@@ -775,7 +775,7 @@ id _MKSynthPatchNoteDur(MKSynthPatch *synthP,id aNoteDur,BOOL noTag)
         return;
     }
     if (synthElements) {
-	int count = [synthElements count], i;
+	NSInteger count = [synthElements count], i;
         
 	for (i = 0; i < count; i++)
 	    if ([[synthElements objectAtIndex: i] isEqual: DUMMY]) {
@@ -786,9 +786,7 @@ id _MKSynthPatchNoteDur(MKSynthPatch *synthP,id aNoteDur,BOOL noTag)
     [super doesNotRecognizeSelector:aSelector];  return;
 }
 
-@end
-
-@implementation MKSynthPatch(Private)
+#pragma mark - Private methods
 
 /*//////////////////////////////////////////////////////////////////////////////
 

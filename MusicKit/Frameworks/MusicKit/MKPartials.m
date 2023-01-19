@@ -661,7 +661,101 @@ NSLocalizedStringFromTableInBundle(@"MKPartials object currently supports table 
     return tableType;
 }
 
+#pragma mark - Private methods
+
+/* Writes on aStream the following:
+  {1.0, 0.3, 0.0}{2.0,.1,0.0}{3.0,.01,0.0}
+  Returns nil if ampRatios or freqRatios is NULL, otherwise self.
+*/
+- writeBinaryScorefileStream: (NSMutableData *) aStream
+{
+    int i;
+    double *aRatios, *fRatios, *phs;
+    
+    _MKWriteChar(aStream, '\0'); /* Marks it as a partials rather than samples */
+    if ((freqRatios == NULL) || (ampRatios == NULL)) {
+	_MKWriteChar(aStream, '\2');
+	_MKWriteDouble(aStream, 1.0);
+	_MKWriteDouble(aStream, 1.0);
+	return nil;
+    }
+    i = 0;
+    fRatios = freqRatios;
+    aRatios = ampRatios;
+    phs = phases;
+    while (i < partialCount) {
+	if (phs == NULL) {
+	    _MKWriteChar(aStream,(i == 0) ? '\3' : '\2');
+	    _MKWriteDouble(aStream,*fRatios++);
+	    _MKWriteDouble(aStream,*aRatios++);
+	    if (i == 0)
+		_MKWriteDouble(aStream,defaultPhase);
+	}
+	else {
+	    _MKWriteChar(aStream,'\3');
+	    _MKWriteDouble(aStream,*fRatios++);
+	    _MKWriteDouble(aStream,*aRatios++);
+	    _MKWriteDouble(aStream,*phs++);
+	}
+	i++;
+    }
+    _MKWriteChar(aStream,'\0');
+    return self;
+}
+
+/* Same as setPartialCount:freqRatios:ampRatios:phases:orDefaultPhase
+  except that the array arguments are not copied or freed. */
+- (void)_setPartialNoCopyCount: (int)howMany
+	      freqRatios: (short *)fRatios
+	       ampRatios: (float *)aRatios
+		  phases: (double *)phs
+	  orDefaultPhase: (double)defPhase
+{
+    if (fRatios) {
+	freeArray(self,MK_freq);
+	freqRatios = (double *)fRatios;
+	_freqArrayFreeable = NO;
+    }
+    if (aRatios) {
+	freeArray(self,MK_amp);
+	ampRatios = (double *)aRatios;
+	_ampArrayFreeable = NO;
+    }
+    if (phs == NULL)
+	defaultPhase = defPhase;
+    else {
+	freeArray(self,MK_phase);
+	phases = phs;
+	_phaseArrayFreeable = NO;
+    }
+    partialCount = howMany;
+    length = 0;   /* This ensures a recomputation of the tables. */
+    dbMode = YES;
+}
+
+- _normalize
+{
+    register double *dataEnd,*dataPtr;
+    double tmp;
+    double aScaling = scaling;
+    
+    if (scaling == 0.0) { /* Figure out normalization */
+	for (dataPtr = dataDouble, dataEnd = dataDouble + length; dataPtr < dataEnd; dataPtr++) {
+	    if ((tmp = ABS(*dataPtr)) > aScaling)
+		aScaling = tmp;
+	}
+	aScaling = 1.0/aScaling;
+    }
+    if (aScaling != 1.0) {
+	for (dataPtr = dataDouble, dataEnd = dataDouble + length; dataPtr < dataEnd; dataPtr++)
+	    *dataPtr = *dataPtr * aScaling;
+    }
+    return self;
+}
+
 @end
+
+#pragma mark -
 
 @implementation MKPartials(OscTable)
 
@@ -828,100 +922,6 @@ NSLocalizedStringFromTableInBundle(@"MKPartials object currently supports table 
 - (DSPDatum *) dataDSPAsOscTable
 {
     return [self dataDSP];
-}
-
-@end
-
-@implementation MKPartials(Private)
-
-/* Writes on aStream the following:
-  {1.0, 0.3, 0.0}{2.0,.1,0.0}{3.0,.01,0.0}
-  Returns nil if ampRatios or freqRatios is NULL, otherwise self. 
-*/
-- writeBinaryScorefileStream: (NSMutableData *) aStream
-{
-    int i;
-    double *aRatios, *fRatios, *phs;
-    
-    _MKWriteChar(aStream, '\0'); /* Marks it as a partials rather than samples */
-    if ((freqRatios == NULL) || (ampRatios == NULL)) {
-	_MKWriteChar(aStream, '\2');
-	_MKWriteDouble(aStream, 1.0);
-	_MKWriteDouble(aStream, 1.0);
-	return nil;
-    }
-    i = 0;
-    fRatios = freqRatios;
-    aRatios = ampRatios;
-    phs = phases;
-    while (i < partialCount) {
-	if (phs == NULL) {
-	    _MKWriteChar(aStream,(i == 0) ? '\3' : '\2');
-	    _MKWriteDouble(aStream,*fRatios++);
-	    _MKWriteDouble(aStream,*aRatios++);
-	    if (i == 0)
-		_MKWriteDouble(aStream,defaultPhase);
-	}
-	else {
-	    _MKWriteChar(aStream,'\3');
-	    _MKWriteDouble(aStream,*fRatios++);
-	    _MKWriteDouble(aStream,*aRatios++);
-	    _MKWriteDouble(aStream,*phs++);
-	}
-	i++;
-    }
-    _MKWriteChar(aStream,'\0');
-    return self;
-}
-
-/* Same as setPartialCount:freqRatios:ampRatios:phases:orDefaultPhase
-  except that the array arguments are not copied or freed. */
-- (void)_setPartialNoCopyCount: (int)howMany
-              freqRatios: (short *)fRatios
-               ampRatios: (float *)aRatios
-                  phases: (double *)phs
-          orDefaultPhase: (double)defPhase
-{
-    if (fRatios) {
-	freeArray(self,MK_freq);
-	freqRatios = (double *)fRatios;
-	_freqArrayFreeable = NO;
-    }
-    if (aRatios) {
-	freeArray(self,MK_amp);
-	ampRatios = (double *)aRatios;
-	_ampArrayFreeable = NO;
-    }
-    if (phs == NULL)
-	defaultPhase = defPhase;
-    else {
-	freeArray(self,MK_phase);
-	phases = phs;
-	_phaseArrayFreeable = NO;
-    }
-    partialCount = howMany;
-    length = 0;   /* This ensures a recomputation of the tables. */
-    dbMode = YES;
-}
-
-- _normalize
-{
-    register double *dataEnd,*dataPtr;
-    double tmp;
-    double aScaling = scaling;
-    
-    if (scaling == 0.0) { /* Figure out normalization */
-	for (dataPtr = dataDouble, dataEnd = dataDouble + length; dataPtr < dataEnd; dataPtr++) {
-	    if ((tmp = ABS(*dataPtr)) > aScaling)
-		aScaling = tmp;
-	}
-	aScaling = 1.0/aScaling;
-    }
-    if (aScaling != 1.0) {
-	for (dataPtr = dataDouble, dataEnd = dataDouble + length; dataPtr < dataEnd; dataPtr++)
-	    *dataPtr = *dataPtr * aScaling;
-    }
-    return self;
 }
 
 @end

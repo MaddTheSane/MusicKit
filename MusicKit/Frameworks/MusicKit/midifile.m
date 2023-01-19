@@ -188,7 +188,7 @@ static int readShort(NSMutableData *midiStream, short *n,unsigned int *streamPos
 
 static int readVariableQuantity(NSMutableData *midiStream, int *n, unsigned int *streamPos)
 {
-    int lastByte = [midiStream length] - 1;
+    NSInteger lastByte = [midiStream length] - 1;
     const char *theData = [midiStream bytes];
     int m=0;
     unsigned char temp;

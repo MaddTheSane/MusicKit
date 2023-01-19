@@ -13,7 +13,7 @@
 
 #import "MKSynthData.h"
 
-@interface MKSynthData(Private)
+@interface MKSynthData(/*Private*/)
 
 - (MKOrchMemStruct *) _resources;
 

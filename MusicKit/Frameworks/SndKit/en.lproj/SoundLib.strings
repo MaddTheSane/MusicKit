@@ -20,7 +20,7 @@
 "Cannot configure" = "Cannot configure";
 "Bad configuration" = "Bad configuration";
 "Mach kernel error" = "Mach kernel error";
-"Bad memory space in dsp load image" = "Bad memory space in dsp load image";
+"Bad memory space in dsp load image" = "Bad memory space in DSP load image";
 "Cannot edit sound" = "Cannot edit sound";
 "Cannot find sound" = "Cannot find sound";
 "Not playing sound" = "Not playing sound";

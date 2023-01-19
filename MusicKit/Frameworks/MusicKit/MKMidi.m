@@ -382,7 +382,7 @@ NSString *midiDriverErrorString(int errorCode)
         somebodyElseHasOwnership = NO;
     else {
 	MKMidi *aMidi;
-	int i, cnt = [otherMidis count];
+	NSInteger i, cnt = [otherMidis count];
 	for (i = 0; i < cnt && !somebodyElseHasOwnership; i++) {
 	    aMidi = [otherMidis objectAtIndex: i];
 	    if (aMidi->ownerPort) 
@@ -1004,7 +1004,7 @@ static void midi_data_reply(void *receivingMidiPtr, short unit, MKMDRawEvent *ev
 
 - setUseInputTimeStamps: (BOOL) yesOrNo
 {
-    if (deviceStatus != MK_devClosed)
+    if (deviceStatus != MKDeviceStatusClosed)
       return nil;
     useInputTimeStamps = yesOrNo;
     return self;
@@ -1038,7 +1038,7 @@ static unsigned ignoreBit(unsigned param)
 - ignoreSys: (MKMidiParVal) param
 {
     systemIgnoreBits |= ignoreBit(param);
-    if (deviceStatus != MK_devClosed)
+    if (deviceStatus != MKDeviceStatusClosed)
 	setMidiSysIgnore(self, systemIgnoreBits);
     return self;
 } 
@@ -1046,7 +1046,7 @@ static unsigned ignoreBit(unsigned param)
 - acceptSys: (MKMidiParVal) param 
 {
     systemIgnoreBits &= ~(ignoreBit(param));
-    if (deviceStatus != MK_devClosed)
+    if (deviceStatus != MKDeviceStatusClosed)
 	setMidiSysIgnore(self, systemIgnoreBits);
     return self;
 }
@@ -1322,7 +1322,7 @@ static BOOL isSoftDevice(NSString *deviceName, int *unitNum)
 			    IGNORE_START |
 			    IGNORE_CONTINUE |
 			    IGNORE_STOP);
-	deviceStatus = MK_devClosed;
+	deviceStatus = MKDeviceStatusClosed;
 	// TODO: Maybe we don't want this here, in case we ever want to use MKMidi without MKNotes.
 	_MKCheckInit(); 
 	_MKClassOrchestra(); /* Force find-class here */
@@ -1432,7 +1432,7 @@ static BOOL isSoftDevice(NSString *deviceName, int *unitNum)
 	}
     }
     resetAndStopMidiClock(self);
-    deviceStatus = MK_devOpen;
+    deviceStatus = MKDeviceStatusOpen;
     return self;
 }
 
@@ -1443,9 +1443,9 @@ static BOOL isSoftDevice(NSString *deviceName, int *unitNum)
  */
 - allNotesOff
 {
-    int i, cnt, j, r;
+    NSInteger i, cnt, j, r;
     
-    if (!MIDIOUTPTR(self) || deviceStatus != MK_devRunning)
+    if (!MIDIOUTPTR(self) || deviceStatus != MKDeviceStatusRunning)
 	return nil;
     /* MKMDFlushQueue not MKMDClearQueue, which can leave MIDI devices confused. */
     if ((r = MKMDFlushQueue(devicePort, ownerPort, outputUnit)) != MKMD_SUCCESS) {
@@ -1486,8 +1486,8 @@ static const int _MKAllNotesOffPause = 500; /* mSec between MIDI channel blasts
     MKMDRawEvent tmpMidiBuf[257];                     /* 1 for "noteOff", 256 for keyNum/chan */
     MKMDRawEvent *tmpBufPtr = &(tmpMidiBuf[1]);
     unsigned char chan;
-    int i, r;
-    if (deviceStatus == MK_devClosed || !OUTPUTENABLED(ioMode))
+    int i, r=0;
+    if (deviceStatus == MKDeviceStatusClosed || !OUTPUTENABLED(ioMode))
 	return nil;
     for (i = 0; i < 128; i++) {
 	tmpBufPtr->time = 0; 
@@ -1553,24 +1553,24 @@ static const int _MKAllNotesOffPause = 500; /* mSec between MIDI channel blasts
 {
     ioMode = direction;
     switch (deviceStatus) {
-    case MK_devClosed: /* Need to open it */
-	return [self openMidi];
-    case MK_devOpen:
-	break;
-    case MK_devRunning:
-	if (INPUTENABLED(ioMode)) 
-	    [self listenToMIDI: NO];
-	if (OUTPUTENABLED(ioMode)) 
-	    [self cancelQueueReq];
-	/* no break here */
-    case MK_devStopped:
-	if (OUTPUTENABLED(ioMode))
-            emptyMidi(self);
-	resetAndStopMidiClock(self);
-	deviceStatus = MK_devOpen;
-	break;
-    default:
-	break;
+	case MKDeviceStatusClosed: /* Need to open it */
+	    return [self openMidi];
+	case MKDeviceStatusOpen:
+	    break;
+	case MKDeviceStatusRunning:
+	    if (INPUTENABLED(ioMode))
+		[self listenToMIDI: NO];
+	    if (OUTPUTENABLED(ioMode))
+		[self cancelQueueReq];
+	    /* no break here */
+	case MKDeviceStatusStopped:
+	    if (OUTPUTENABLED(ioMode))
+		emptyMidi(self);
+	    resetAndStopMidiClock(self);
+	    deviceStatus = MKDeviceStatusOpen;
+	    break;
+	default:
+	    break;
     }
     return self;
 }
@@ -1578,14 +1578,14 @@ static const int _MKAllNotesOffPause = 500; /* mSec between MIDI channel blasts
 - openOutputOnly
   /* Same as open but does not enable output. */
 {
-    if ((deviceStatus != MK_devClosed) && (ioMode != MKMidiOutputOnly))
+    if ((deviceStatus != MKDeviceStatusClosed) && (ioMode != MKMidiOutputOnly))
         [self close];
     return [self openIfNecessary: MKMidiOutputOnly];
 }
 
 - openInputOnly
 {
-    if ((deviceStatus != MK_devClosed) && (ioMode != MKMidiInputOnly))
+    if ((deviceStatus != MKDeviceStatusClosed) && (ioMode != MKMidiInputOnly))
         [self close];
     return [self openIfNecessary: MKMidiInputOnly];
 }
@@ -1597,7 +1597,7 @@ static const int _MKAllNotesOffPause = 500; /* mSec between MIDI channel blasts
      Returns nil if failure.
      */
 {
-    if ((deviceStatus != MK_devClosed) && (ioMode != MKMidiInputOutput))
+    if ((deviceStatus != MKDeviceStatusClosed) && (ioMode != MKMidiInputOutput))
         [self close];
     return [self openIfNecessary: MKMidiInputOutput];
 }
@@ -1616,19 +1616,19 @@ static const int _MKAllNotesOffPause = 500; /* mSec between MIDI channel blasts
 - run
 {
     switch (deviceStatus) {
-    case MK_devClosed:
+    case MKDeviceStatusClosed:
 	if (![self openMidi])
             return nil;
 	/* no break here */
-    case MK_devOpen:
+    case MKDeviceStatusOpen:
 /*	doDeltaT(self);  Needed if we'd ever use relative time to the driver */
 	timeOffset = MKGetTime(); /* This is needed by MidiOut. */
 	/* no break here */
-    case MK_devStopped:
+    case MKDeviceStatusStopped:
 	if (INPUTENABLED(ioMode)) 
             [self listenToMIDI: YES];
 	resumeMidiClock(self);
-	deviceStatus = MK_devRunning;
+	    deviceStatus = MKDeviceStatusRunning;
     default:
 	break;
     }
@@ -1638,20 +1638,20 @@ static const int _MKAllNotesOffPause = 500; /* mSec between MIDI channel blasts
 - stop
 {
     switch (deviceStatus) {
-    case MK_devClosed:
-	return [self open];
-    case MK_devOpen:
-    case MK_devStopped:
-	return self;
-    case MK_devRunning:
-	[self stopMidiClock];
-	if (INPUTENABLED(ioMode)) 
-	    [self listenToMIDI: NO];
-	if (OUTPUTENABLED(ioMode)) 
-	    [self cancelQueueReq];
-	deviceStatus = MK_devStopped;
-    default:
-	break;
+	case MKDeviceStatusClosed:
+	    return [self open];
+	case MKDeviceStatusOpen:
+	case MKDeviceStatusStopped:
+	    return self;
+	case MKDeviceStatusRunning:
+	    [self stopMidiClock];
+	    if (INPUTENABLED(ioMode))
+		[self listenToMIDI: NO];
+	    if (OUTPUTENABLED(ioMode))
+		[self cancelQueueReq];
+	    deviceStatus = MKDeviceStatusStopped;
+	default:
+	    break;
     }
     return self;
 }
@@ -1659,24 +1659,24 @@ static const int _MKAllNotesOffPause = 500; /* mSec between MIDI channel blasts
 - abort
 {
     switch (deviceStatus) {
-      case MK_devClosed:
-	break;
-      case MK_devRunning:
-	if (INPUTENABLED(ioMode)) 
-	    [self listenToMIDI: NO];
-	if (OUTPUTENABLED(ioMode)) 
-	    [self cancelQueueReq];
-	/* No break here */
-      case MK_devStopped:
-      case MK_devOpen:
-	if (OUTPUTENABLED(ioMode)) {
-	    emptyMidi(self);
-	}
-	_pIn = (void *)_MKFinishMidiIn(MIDIINPTR(self));
-	incomingDataCount = 0;
-	_pOut = (void *)_MKFinishMidiOut(MIDIOUTPTR(self));
-	[self closeMidiDevice];
-	deviceStatus = MK_devClosed;
+	case MKDeviceStatusClosed:
+	    break;
+	case MKDeviceStatusRunning:
+	    if (INPUTENABLED(ioMode))
+		[self listenToMIDI: NO];
+	    if (OUTPUTENABLED(ioMode))
+		[self cancelQueueReq];
+	    /* No break here */
+	case MKDeviceStatusStopped:
+	case MKDeviceStatusOpen:
+	    if (OUTPUTENABLED(ioMode)) {
+		emptyMidi(self);
+	    }
+	    _pIn = (void *)_MKFinishMidiIn(MIDIINPTR(self));
+	    incomingDataCount = 0;
+	    _pOut = (void *)_MKFinishMidiOut(MIDIOUTPTR(self));
+	    [self closeMidiDevice];
+	    deviceStatus = MKDeviceStatusClosed;
     }
     return self;
 }
@@ -1685,46 +1685,45 @@ static const int _MKAllNotesOffPause = 500; /* mSec between MIDI channel blasts
 - (void) close
 {
     switch (deviceStatus) {
-    case MK_devClosed:
-	break;
-    case MK_devRunning:
-	if (INPUTENABLED(ioMode)) 
-	    [self listenToMIDI: NO];
-	if (OUTPUTENABLED(ioMode)) 
-	    [self cancelQueueReq];
+	case MKDeviceStatusClosed:
+	    break;
+	case MKDeviceStatusRunning:
+	    if (INPUTENABLED(ioMode))
+		[self listenToMIDI: NO];
+	    if (OUTPUTENABLED(ioMode))
+		[self cancelQueueReq];
 	    /* No break here */
-    case MK_devStopped:
-    case MK_devOpen:
-	if (INPUTENABLED(ioMode)) {
-	    _pIn = (void *)_MKFinishMidiIn(MIDIINPTR(self));
-	    // NSLog(@"[%@ close]: _pIn = %p\n", self, _pIn);
-	    incomingDataCount = 0;
-	}
-	if (OUTPUTENABLED(ioMode)) {
-	    [self awaitQueueDrain];
-	    emptyMidi(self);
-	    _pOut = (void *)_MKFinishMidiOut(MIDIOUTPTR(self));
-	}
-	[self closeMidiDevice];
-	deviceStatus = MK_devClosed;
+	case MKDeviceStatusStopped:
+	case MKDeviceStatusOpen:
+	    if (INPUTENABLED(ioMode)) {
+		_pIn = (void *)_MKFinishMidiIn(MIDIINPTR(self));
+		// NSLog(@"[%@ close]: _pIn = %p\n", self, _pIn);
+		incomingDataCount = 0;
+	    }
+	    if (OUTPUTENABLED(ioMode)) {
+		[self awaitQueueDrain];
+		emptyMidi(self);
+		_pOut = (void *)_MKFinishMidiOut(MIDIOUTPTR(self));
+	    }
+	    [self closeMidiDevice];
+	    deviceStatus = MKDeviceStatusClosed;
     }
 }
 
 - awaitQueueDrain
 {
-    if (deviceStatus == MK_devRunning) 
+    if (deviceStatus == MKDeviceStatusRunning)
         awaitMidiOutDone(self, MKMD_NO_TIMEOUT);
     return self;
 }
 /* output configuration */
 
-- setOutputTimed: (BOOL) yesOrNo
+- (void)setOutputTimed: (BOOL) yesOrNo
 /* Controls whether MIDI commands are sent timed or untimed. The default
    is timed. It is permitted to change
    from timed to untimed during a performance. */
 {
     outputIsTimed = yesOrNo;
-    return self;
 }
 
 - (BOOL) outputIsTimed
@@ -1744,7 +1743,7 @@ static const int _MKAllNotesOffPause = 500; /* mSec between MIDI channel blasts
 {
     double t;
     int chan;
-    if ((!MIDIOUTPTR(self)) || (!aNote) || (deviceStatus != MK_devRunning))
+    if ((!MIDIOUTPTR(self)) || (!aNote) || (deviceStatus != MKDeviceStatusRunning))
         return nil;
     if (outputIsTimed) {
         if (self->synchConductor) {
@@ -1834,7 +1833,7 @@ static const int _MKAllNotesOffPause = 500; /* mSec between MIDI channel blasts
     unsigned int *dlsPatchArray;
     unsigned int i;
 
-    if (OUTPUTENABLED(ioMode) && deviceStatus != MK_devClosed) {
+    if (OUTPUTENABLED(ioMode) && deviceStatus != MKDeviceStatusClosed) {
         _MK_MALLOC(dlsPatchArray, unsigned int, [dlsPatches count]);
         for(i = 0; i < [dlsPatches count]; i++)
             dlsPatchArray[i] = [[dlsPatches objectAtIndex: i] unsignedIntValue];

@@ -303,7 +303,7 @@ static long secondsToFrames(Snd *s, double time)
 	if ((resamplingFactor > 32) || (resamplingFactor < .03125))
 	    NSLog(@"Warning: resampling more than 5 octaves.\n");
     }
-    [newSound setConversionQuality: SndConvertHighQuality];
+    [newSound setConversionQuality: SndConversionQualityHigh];
     [newSound convertToSampleFormat: soundFormat.dataFormat
 		 samplingRate: (fabs(resamplingFactor - 1.0) > 0.0001) ? [newSound samplingRate] * resamplingFactor : [newSound samplingRate]
 		 channelCount: soundFormat.channelCount];

@@ -400,7 +400,7 @@ See <b>Administration/MidiHardwareInfo.rtf</b> for using MIDI on NeXT hardware.
   @param  yesOrNo is a BOOL.
   @return Returns an id.
 */
-- setOutputTimed: (BOOL) yesOrNo;
+- (void)setOutputTimed: (BOOL) yesOrNo;
 
 /*!
   @brief Returns YES if the receiver is timed, otherwise returns NO.

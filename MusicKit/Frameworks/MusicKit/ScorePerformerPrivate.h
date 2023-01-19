@@ -17,7 +17,7 @@
 
 #import "MKScorePerformer.h"
 
-@interface MKScorePerformer(Private)
+@interface MKScorePerformer(/*Private*/)
 
 -_partPerformerDidDeactivate: (id) sender;
 -_deactivate;

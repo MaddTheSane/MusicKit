@@ -288,6 +288,8 @@ Modification history:
     return newObj;
 }
 
+#pragma mark - Private methods
+
 -_newFilePartWithName:(NSString *)name
   /* You never send this message. It is used only by the Scorefile parser
      to add a MKNoteSender to the receiver when a part is declared in the

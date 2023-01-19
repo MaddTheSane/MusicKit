@@ -1027,9 +1027,7 @@ static void removeNote(MKPart *self, MKNote *aNote)
     return [partDescription autorelease];
 }
 
-@end
-
-@implementation MKPart(Private)
+#pragma mark - Private methods
 
 - (void) _mapTags: (NSMutableDictionary *) hashTable
     /* Must be method to avoid loading MKScore. hashTable is a NSMutableDictionary object
@@ -1059,19 +1057,20 @@ static void removeNote(MKPart *self, MKNote *aNote)
     }
 }
 
-- (void) _setNoteSender: (MKNoteSender *) aNS
-    /* Private. Used only by scorefilePerformers. */
-{
-    [_aNoteSender release];
-    _aNoteSender = [aNS retain];
-}
-
-- (MKNoteSender *) _noteSender
-    /* Private. Used only by scorefilePerformers. */
-{
-    // we didn't allocate it, so we don't autorelease it.
-    return _aNoteSender;
-}
+@synthesize _noteSender=_aNoteSender;
+//- (void) _setNoteSender: (MKNoteSender *) aNS
+//    /* Private. Used only by scorefilePerformers. */
+//{
+//    [_aNoteSender release];
+//    _aNoteSender = [aNS retain];
+//}
+//
+//- (MKNoteSender *) _noteSender
+//    /* Private. Used only by scorefilePerformers. */
+//{
+//    // we didn't allocate it, so we don't autorelease it.
+//    return _aNoteSender;
+//}
 
 - _addPerformanceObj: (MKPerformer *) aPerformer
 {
