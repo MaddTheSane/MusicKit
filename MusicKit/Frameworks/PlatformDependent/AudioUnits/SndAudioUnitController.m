@@ -192,7 +192,6 @@ static void eventListener(void *controller, AudioUnitCarbonView inView,
     numberOfClasses = (dataSize - sizeof(CFURLRef)) / sizeof(CFStringRef);
     // NSLog(@"numberOfClasses %d dataSize %d, isWritable %d\n", numberOfClasses, dataSize, isWritable);
     
-    carbonView = 0; // default.
     if ((result != noErr) || (numberOfClasses == 0)) {
         // If we get here, the audio unit does not have a Cocoa UI.
         // Now that Carbon UI's are deprecated, we just return nil.

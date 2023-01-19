@@ -15,7 +15,6 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 #import <SndKit/SndAudioUnitProcessor.h>
-#import <AudioUnit/AudioUnitCarbonView.h>
 
 /*!
   @class SndAudioUnitController
@@ -32,10 +31,6 @@
 */
 @interface SndAudioUnitController : NSObject
 {
-    /*! The handle onto the AudioUnitCarbonView */
-    AudioUnitCarbonView carbonView;
-    /*! The handle onto the Carbon window loaded from the Carbon nib file. */
-    WindowRef auWindow;
     /*! The NSWindow instance that will wrap a Carbon window if the nib file is Carbon or will
 	be a Cocoa window that contains the Cocoa Audio Unit user interface instance.
      */
