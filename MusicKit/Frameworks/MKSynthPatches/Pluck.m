@@ -131,44 +131,41 @@ static int delay,oneZero,out2Sum,onePole,dSwitch,pp2,pp,allPass,ppy;
     static id tmpl = nil;
     dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-	
-    });
-    if (tmpl)
-      return tmpl;
-    tmpl = [MKPatchTemplate new];
+	tmpl = [MKPatchTemplate new];
 
-    /* First we allocate two patchpoints. */
-    pp = [tmpl addPatchpoint:MK_xPatch];         /* General purpose */
-    ppy = [tmpl addPatchpoint:MK_yPatch]; /* General purpose */
-    pp2 = [tmpl addPatchpoint:MK_xPatch]; /* All pass output */
+	/* First we allocate two patchpoints. */
+	pp = [tmpl addPatchpoint:MK_xPatch];         /* General purpose */
+	ppy = [tmpl addPatchpoint:MK_yPatch]; /* General purpose */
+	pp2 = [tmpl addPatchpoint:MK_xPatch]; /* All pass output */
 
-    /* Next we allocate unit generators. 
-       Order is critical here, since we reuse patchpoints. Alternatively, 
-       we could do a version that uses unordered UGs and 6 patchpoints. */
+	/* Next we allocate unit generators.
+	   Order is critical here, since we reuse patchpoints. Alternatively,
+	   we could do a version that uses unordered UGs and 6 patchpoints. */
 
 #   define ADDUG(_factory) [tmpl addUnitGenerator:[_factory class] ordered:YES]
-    onePole =       ADDUG(OnepoleUGxx);
-    dSwitch =       ADDUG(DswitchtUGyx);
-    oneZero =       ADDUG(OnezeroUGxy);
-    out2Sum =       ADDUG(Out2sumUGx);
-    delay =         ADDUG(DelayUGxxy);
-    allPass =       ADDUG(Allpass1UGxx);
+	onePole =       ADDUG(OnepoleUGxx);
+	dSwitch =       ADDUG(DswitchtUGyx);
+	oneZero =       ADDUG(OnezeroUGxy);
+	out2Sum =       ADDUG(Out2sumUGx);
+	delay =         ADDUG(DelayUGxxy);
+	allPass =       ADDUG(Allpass1UGxx);
 
 #   define MSG(_target,_message,_arg) \
     [tmpl to:_target sel:@selector(_message) arg:_arg]
-    MSG(onePole,      setOutput:,pp);
-    MSG(dSwitch,      setInput1:,pp);
-    MSG(dSwitch,      setOutput:,ppy);
-    MSG(oneZero,      setInput:, ppy);
-    MSG(oneZero,      setOutput:,pp);
-    MSG(delay,        setInput:, pp);
-    MSG(delay,        setOutput:,pp);
-    MSG(allPass,      setInput:, pp);
-    MSG(allPass,      setOutput:,pp2);
-    MSG(dSwitch,setInput2:,pp2);
-    /* We allow garbage to pump around the loop here. The assumption is that
-       the attack will be at least 8 samples long so the garbage will clear
-       out. */
+	MSG(onePole,      setOutput:,pp);
+	MSG(dSwitch,      setInput1:,pp);
+	MSG(dSwitch,      setOutput:,ppy);
+	MSG(oneZero,      setInput:, ppy);
+	MSG(oneZero,      setOutput:,pp);
+	MSG(delay,        setInput:, pp);
+	MSG(delay,        setOutput:,pp);
+	MSG(allPass,      setInput:, pp);
+	MSG(allPass,      setOutput:,pp2);
+	MSG(dSwitch,setInput2:,pp2);
+	/* We allow garbage to pump around the loop here. The assumption is that
+	   the attack will be at least 8 samples long so the garbage will clear
+	   out. */
+    });
     return tmpl;
 }
 
