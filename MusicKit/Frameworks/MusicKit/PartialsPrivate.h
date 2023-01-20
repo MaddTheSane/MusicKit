@@ -25,7 +25,7 @@
   ampRatios: (float *)aRatios
   phases: (double *)phs
   orDefaultPhase: (double)defPhase;
-- _normalize;
+- (void)_normalize;
 
 @end
 

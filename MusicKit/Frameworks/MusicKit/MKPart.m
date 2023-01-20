@@ -112,14 +112,14 @@ static void removeNote(MKPart *self, MKNote *aNote);
  * If a match isn't found, the MKNote is unaffected.
  * Returns the receiver.
  */
-- combineNotes
+- (void)combineNotes
 {
     MKNote *noteOn, *aNote;
     NSInteger noteTag, listSize;
-    register int i, j;
+    register NSInteger i, j;
     
     if (!noteCount)
-	return self;
+	return;
     listSize = [notes count];
     
     for (i = 0; i < listSize; i++) {			/* For each note... */
@@ -147,7 +147,6 @@ static void removeNote(MKPart *self, MKNote *aNote);
     }
 
     compact(self); /* drops all notes that are PlaceHolder and remakes list without them */
-    return self;
 }
 
 /* TYPE: Editing

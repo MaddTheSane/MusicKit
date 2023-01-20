@@ -31,9 +31,14 @@
 + (NSString *) protocolVersion;
 @property (class, readonly, copy) NSString *protocolVersion;
 - (void) setDelegate:(id)delegate;
-- (NSArray*)fileSavingSuffixes;
-- (NSArray*)fileOpeningSuffixes;
+- (NSArray<NSString*>*)fileSavingSuffixes;
+- (NSArray<NSString*>*)fileOpeningSuffixes;
+@property (nonatomic, readonly, copy) NSArray<NSString*> *fileSavingSuffixes;
+@property (nonatomic, readonly, copy) NSArray<NSString*> *fileOpeningSuffixes;
+
 - (MKScore*)openFileName:(NSString *)f forScore:(MKScore*)s;
+@optional
+- (MKScore*)openURL:(NSURL *)f forScore:(MKScore*)s error:(NSError**)error;
 @end
 
 #define MK_BUNDLE_DIR @"MusicKitPlugins"

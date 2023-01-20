@@ -11,6 +11,10 @@
   Copyright (c) 1999-2002 The MusicKit Project.
 */
 
+#ifndef __MUSICKIT_trigonometry_h__
+#define __MUSICKIT_trigonometry_h__
+
 double MKSine(double x);
 double MKCosine(double x);
 
+#endif

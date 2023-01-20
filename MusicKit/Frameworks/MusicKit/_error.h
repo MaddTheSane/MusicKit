@@ -18,7 +18,7 @@ Modification history:
 #ifndef __MK__error_H___
 #define __MK__error_H___
 
-#define _MK_ERRMSG static NSString * 
+#define _MK_ERRMSG static NSString * const 
 
 #import "errors.h"
 

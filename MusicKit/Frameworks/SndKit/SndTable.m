@@ -139,7 +139,7 @@ static SndTable* defaultSndTable = nil;
 
 - addName:(NSString *)aname fromSection:(NSString *)sectionName
 {
-  printf("Snd: +addName:fromSection: obsolete, not implemented\n");
+  NSLog(@"Snd: +addName:fromSection: obsolete, not implemented!");
   return nil;
 }
 

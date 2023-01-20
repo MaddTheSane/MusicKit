@@ -123,7 +123,26 @@ static NSArray<NSString*> *scoreFileExtensions = nil;
     firstWordData = [fh readDataOfLength: 4];
     return [MKScore scoreFormatOfData: firstWordData];
 }    
-    
+
++ (MKScoreFormat) scoreFormatOfURL: (NSURL *) filename error:(NSError **)error
+{
+    NSData *firstWordData;
+    NSFileHandle *fh = [NSFileHandle fileHandleForReadingFromURL:filename error:error];
+
+    if (fh == nil)
+	return MK_UNRECOGNIZEDFORMAT;
+    if (@available(macOS 10.15, *)) {
+	firstWordData = [fh readDataUpToLength:4 error:error];
+    } else {
+	firstWordData = [fh readDataOfLength: 4];
+    }
+    if (!firstWordData) {
+	return MK_UNRECOGNIZEDFORMAT;
+    }
+    return [MKScore scoreFormatOfData: firstWordData];
+
+}
+
 -init
   /* TYPE: Creating and freeing a MKPart
 * Initializes the receiver:
@@ -143,7 +162,7 @@ static NSArray<NSString*> *scoreFileExtensions = nil;
   return self;
 }
 
--releaseNotes
+-(void)releaseNotes
   /* Releases the notes contained in the parts. Does not releaseParts
   nor does it release the receiver. Implemented as
   [parts makeObjectsPerformSelector:@selector(releaseNotes)];
@@ -153,7 +172,6 @@ static NSArray<NSString*> *scoreFileExtensions = nil;
   [parts makeObjectsPerformSelector:@selector(releaseNotes)];
   [info release];
   info = nil;
-  return self;
 }
 
 - (void)dealloc
@@ -235,7 +253,7 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
   receiver.
   Returns self or nil if file not found or the parse was aborted due to errors. 
  */
-- readScorefile: (NSString *) fileName
+- (MKScore*)readScorefile: (NSString *) fileName
    firstTimeTag: (double) firstTimeTag
     lastTimeTag: (double) lastTimeTag
       timeShift: (double) timeShift
@@ -247,7 +265,7 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
     MKLoadAllBundlesOneOff();
     if ([[MKScore bundleExtensions] containsObject: e]) {
 	for (id<MusicKitPlugin> p in plugins) {
-	    if ([[p fileOpeningSuffixes] containsObject: e]) {
+	    if ([[p fileOpeningSuffixes] containsObject: [e lowercaseString]]) {
 		id s = [p openFileName: fileName forScore: self];
 		
 		if (s)
@@ -267,6 +285,44 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
     return rtnVal;
 }
 
+- (MKScore*)readScoreAtURL: (NSURL *) fileURL
+	      firstTimeTag: (double) firstTimeTag
+	       lastTimeTag: (double) lastTimeTag
+		 timeShift: (double) timeShift
+		     error: (NSError **) error
+{
+    NSData *stream;
+    id rtnVal;
+    NSString *e = [fileURL pathExtension];
+    
+    MKLoadAllBundlesOneOff();
+    if ([[MKScore bundleExtensions] containsObject: [e lowercaseString]]) {
+	for (id<MusicKitPlugin> p in plugins) {
+	    if ([[p fileOpeningSuffixes] containsObject: [e lowercaseString]]) {
+		id s;
+		if ([p respondsToSelector:@selector(openURL:forScore:error:)]) {
+		    s = [p openURL: fileURL forScore: self error: error];
+		} else {
+		    s = [p openFileName: fileURL.path forScore: self];
+		}
+		
+		if (s)
+		    return s;
+		else
+		    NSLog(@"Plugin failed to read file, though it should have managed");
+	    }
+	}
+    }
+
+    stream = _MKOpenFileStreamForReading(fileURL.path, _MK_BINARYSCOREFILEEXT, NO);
+    if (!stream)
+	stream = _MKOpenFileStreamForReading(fileURL.path, _MK_SCOREFILEEXT, YES);
+    if (!stream)
+	return nil;
+    rtnVal = readScorefile(self, stream, firstTimeTag, lastTimeTag, timeShift, fileURL.path);
+    return rtnVal;
+
+}
 /* Read from scoreFile to receiver, creating new MKParts as needed
   and including only those notes between times firstTimeTag to
   time lastTimeTag, inclusive. Note that the TimeTags of the
@@ -454,6 +510,42 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
     }
     else
 	return YES;
+}
+
+- (BOOL)writeScoreToURL: (NSURL *) aFileName
+	   firstTimeTag: (double) firstTimeTag
+	    lastTimeTag: (double) lastTimeTag
+	      timeShift: (NSTimeInterval) timeShift
+		 binary: (BOOL) isBinary
+		  error: (NSError**) error
+{
+    NSMutableData *stream = [[NSMutableData alloc] initWithCapacity:0];
+    BOOL success;
+    NSError *subError = nil;
+
+    success = [self writeScorefileStream: stream
+			    firstTimeTag: firstTimeTag
+			     lastTimeTag: lastTimeTag
+			       timeShift: timeShift
+				  binary: isBinary];
+    
+    if (!success) {
+	if (error) {
+	    *error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteUnknownError userInfo:@{NSURLErrorKey: aFileName}];
+	}
+	[stream release];
+	return NO;
+    }
+    
+    success = [stream writeToURL:aFileName options:NSDataWritingAtomic error:error];
+    [stream release];
+    if (!success) {
+	MKErrorCode(MK_cantCloseFileErr, aFileName);
+	
+	return NO;
+    } else {
+	return YES;
+    }
 }
 
 - (BOOL)writeScorefile: (NSString *) aFileName
@@ -651,7 +743,7 @@ static void sendBufferedData(struct __MKMidiOutStruct *ptr)
 // return the possible extensions of MIDI files for pathnames
 + (NSArray *) midifileExtensions
 {
-    return [NSArray arrayWithObjects: _MK_MIDIFILEEXT, nil];
+    return [NSArray arrayWithObjects: _MK_MIDIFILEEXT, @"mid", nil];
 }
 
 // return the extension of scorefiles allowed
@@ -663,7 +755,7 @@ static void sendBufferedData(struct __MKMidiOutStruct *ptr)
 + (void) setAlternativeScorefileExtensions: (NSArray *) otherScoreFileExtensions
 {
     [scoreFileExtensions release];
-    scoreFileExtensions = [otherScoreFileExtensions retain];
+    scoreFileExtensions = [otherScoreFileExtensions copy];
 }
 
 + (NSArray *) bundleExtensions
@@ -787,7 +879,7 @@ static void writeNoteToMidifile(_MKMidiOutStruct *p, MKMIDIFileOut *fileStructP,
 }
 
 /* Write midi on aStream. */
-- writeMidifileStream: (NSMutableData *) aStream
+- (BOOL)writeMidifileStream: (NSMutableData *) aStream
 	 firstTimeTag: (double) firstTimeTag
 	  lastTimeTag: (double) lastTimeTag
 	    timeShift: (double) timeShift
@@ -810,7 +902,7 @@ static void writeNoteToMidifile(_MKMidiOutStruct *p, MKMIDIFileOut *fileStructP,
 	      INRANGE(MK_keySignature)), @"Illegal use of parVector.");
     
     if (!aStream)
-	return nil;
+	return NO;
     tempo = 60;
     if (info) {
 	if ([info isParPresent: MK_title])
@@ -826,7 +918,7 @@ static void writeNoteToMidifile(_MKMidiOutStruct *p, MKMIDIFileOut *fileStructP,
     p = _MKInitMidiOut();
     if (!(fileStructP = MKMIDIFileBeginWriting(aStream, 1, title, [MKScore midifilesEvaluateTempo]))) {
 	_MKFinishMidiOut(p);
-	return nil;
+	return NO;
     }
     else 
 	p->_midiFileStruct = fileStructP; /* Needed so functions called from _MKWriteMidiOut can find struct */
@@ -834,7 +926,7 @@ static void writeNoteToMidifile(_MKMidiOutStruct *p, MKMIDIFileOut *fileStructP,
     if (numOfParts == 0) {
 	MKMIDIFileEndWriting(fileStructP);
 	_MKFinishMidiOut(p);
-	return self;
+	return YES;
     }
     p->_owner = self;
     p->_putSysMidi = putMidi;
@@ -908,11 +1000,11 @@ static void writeNoteToMidifile(_MKMidiOutStruct *p, MKMIDIFileOut *fileStructP,
     }
     MKMIDIFileEndWriting(fileStructP);
     _MKFinishMidiOut(p);
-    return self;
+    return YES;
 }
 
 /* Write midi to file with specified name. */
-- writeMidifile: (NSString *) aFileName 
+- (BOOL)writeMidifile: (NSString *) aFileName 
    firstTimeTag: (double) firstTimeTag
     lastTimeTag: (double) lastTimeTag 
       timeShift: (double) timeShift
@@ -929,10 +1021,10 @@ static void writeNoteToMidifile(_MKMidiOutStruct *p, MKMIDIFileOut *fileStructP,
     
     if (!success) {
 	MKErrorCode(MK_cantCloseFileErr, aFileName);
-	return nil;
+	return NO;
     }
     else {
-	return self;
+	return YES;
     }
 }
 
@@ -975,17 +1067,17 @@ static void writeNoteToMidifile(_MKMidiOutStruct *p, MKMIDIFileOut *fileStructP,
 
 /* Reading MIDI files ---------------------------------------------- */
 
-- readMidifile: (NSString *) aFileName
+- (BOOL)readMidifile: (NSString *) aFileName
   firstTimeTag: (double) firstTimeTag
    lastTimeTag: (double) lastTimeTag
      timeShift: (double) timeShift
 {
-    id rtnVal;
+    BOOL rtnVal;
     id stream; /*sb: could be NSMutableData or NSData */
 
     stream = _MKOpenFileStreamForReading(aFileName, [[MKScore midifileExtensions] objectAtIndex: 0], YES);
     if (stream == nil)
-        return nil;
+        return NO;
     rtnVal = [self readMidifileStream: stream
                          firstTimeTag: firstTimeTag
                           lastTimeTag: lastTimeTag
@@ -1009,7 +1101,7 @@ static void writeDataAsNumString(MKNote *aNote, int par, unsigned char *data, in
     free(str);
 }
 
-- readMidifileStream: (NSMutableData *) aStream
+- (BOOL)readMidifileStream: (NSMutableData *) aStream
 	firstTimeTag: (double) firstTimeTag
          lastTimeTag: (double) lastTimeTag
 	   timeShift: (double) timeShift
@@ -1027,17 +1119,17 @@ static void writeDataAsNumString(MKNote *aNote, int par, unsigned char *data, in
     MKMIDIFileIn *fileStructP;
     
     if (!(fileStructP = MKMIDIFileBeginReading(aStream, [MKScore midifilesEvaluateTempo])))
-	return nil;
+	return NO;
 #   define DATA (fileStructP->data)
     if (!MKMIDIFileReadPreamble(fileStructP, &fileFormatLevel, &trackCount))
-	return nil;
+	return NO;
     if (fileFormatLevel == 0)
 	trackCount = MIDIPARTS;
     else 
 	trackCount++; 	/* trackCount doesn't include the 'tempo' track so we increment here */
     if (!(midiInPtr = _MKInitMidiIn())) {
 	MKMIDIFileEndReading(fileStructP);
-	return nil;
+	return NO;
     }
     _MK_MALLOC(midiParts, id, trackCount); // TODO: Good candidate to be replaced with NSArray
     curPart = midiParts;
@@ -1197,8 +1289,6 @@ static void writeDataAsNumString(MKNote *aNote, int par, unsigned char *data, in
 	    [aNote release];
 	}
 	else { /* Standard MIDI, not sys excl */
-	    NSAutoreleasePool *arp;
-	    
 	    switch (fileStructP->nData) {
 		case 3:
 		    midiInPtr->_dataByte2 = DATA[2];
@@ -1230,32 +1320,32 @@ static void writeDataAsNumString(MKNote *aNote, int par, unsigned char *data, in
 		    continue;
 		}
 	    }
-	    arp = [NSAutoreleasePool new];
-	    aNote = _MKMidiToMusicKit(midiInPtr, DATA[0]); /* autoreleased */
-	    if (aNote) { /* _MKMidiToMusicKit can omit MKNotes sometimes. */
-		[aNote setTimeTag: t + timeShift];
-		// Need to copy MKNote because it's "owned" by midiInPtr (pre-OpenStep).
-		// Now we just add to the part as-is, and it will retain or copy it as necessary.
-		if (LEVEL0) {
-		    // LMS even if aNote has come from a Level0 file it should retain midiChannels from mode messages.
-		    if (midiInPtr->chan != _MK_MIDISYS) {
-			MKSetNoteParToInt(aNote, MK_midiChan, midiInPtr->chan);
+	    @autoreleasepool {
+		aNote = _MKMidiToMusicKit(midiInPtr, DATA[0]); /* autoreleased */
+		if (aNote) { /* _MKMidiToMusicKit can omit MKNotes sometimes. */
+		    [aNote setTimeTag: t + timeShift];
+		    // Need to copy MKNote because it's "owned" by midiInPtr (pre-OpenStep).
+		    // Now we just add to the part as-is, and it will retain or copy it as necessary.
+		    if (LEVEL0) {
+			// LMS even if aNote has come from a Level0 file it should retain midiChannels from mode messages.
+			if (midiInPtr->chan != _MK_MIDISYS) {
+			    MKSetNoteParToInt(aNote, MK_midiChan, midiInPtr->chan);
+			}
+			[midiParts[midiInPtr->chan] addNote: aNote];
 		    }
-		    [midiParts[midiInPtr->chan] addNote: aNote];
+		    else {
+			if (!trackInfoMidiChanWritten && midiInPtr->chan != _MK_MIDISYS) {
+			    trackInfoMidiChanWritten = YES;
+			    MKSetNoteParToInt([CURPART infoNote], MK_midiChan, midiInPtr->chan);
+			    /* Set Part's chan to chan of first note in track. */
+			}
+			if (midiInPtr->chan != _MK_MIDISYS) {
+			    MKSetNoteParToInt(aNote, MK_midiChan, midiInPtr->chan);
+			}
+			[CURPART addNote: aNote];
+		    }
 		}
-		else {
-		    if (!trackInfoMidiChanWritten && midiInPtr->chan != _MK_MIDISYS) {
-			trackInfoMidiChanWritten = YES;
-			MKSetNoteParToInt([CURPART infoNote], MK_midiChan, midiInPtr->chan);
-			/* Set Part's chan to chan of first note in track. */
-		    }
-		    if (midiInPtr->chan != _MK_MIDISYS) {
-			MKSetNoteParToInt(aNote, MK_midiChan, midiInPtr->chan);
-		    }
-		    [CURPART addNote: aNote];
-		}
-	    }
-	    [arp release]; /* take care of autoreleased notes one at a time */
+	    } /* take care of autoreleased notes one at a time */
 	} /* End of standard MIDI block */
 	prevT = t;
     } /* End of while loop */
@@ -1263,12 +1353,12 @@ outOfLoop:
     free(midiParts);
     _MKFinishMidiIn(midiInPtr);
     MKMIDIFileEndReading(fileStructP);
-    return self;
+    return YES;
 }
 
 /* Midifile reading "convenience methods"------------------------ */
 
-- readMidifile: (NSString *) fileName
+- (BOOL)readMidifile: (NSString *) fileName
   firstTimeTag: (double) firstTimeTag
    lastTimeTag: (double) lastTimeTag
 {
@@ -1278,7 +1368,7 @@ outOfLoop:
 		  timeShift: 0.0];
 }
 
--readMidifileStream:(NSMutableData *)aStream
+-(BOOL)readMidifileStream:(NSMutableData *)aStream
        firstTimeTag:(double)firstTimeTag
         lastTimeTag:(double)lastTimeTag
 {
@@ -1286,7 +1376,7 @@ outOfLoop:
                       lastTimeTag:lastTimeTag timeShift:0.0];
 }
 
--readMidifile:(NSString *)fileName
+-(BOOL)readMidifile:(NSString *)fileName
 /* Like readMidifile:firstTimeTag:lastTimeTag:,
   but always reads the whole file. */
 {
@@ -1294,7 +1384,7 @@ outOfLoop:
                 lastTimeTag:MK_ENDOFTIME timeShift:0.0];
 }
 
--readMidifileStream:(NSMutableData *)aStream
+-(BOOL)readMidifileStream:(NSMutableData *)aStream
 /* Like readMidifileStream:firstTimeTag:lastTimeTag:,
   but always reads the whole file. */
 {
@@ -1509,21 +1599,18 @@ outOfLoop:
 @synthesize infoNote=info;
 
 /* combine notes into noteDurs for all MKParts */
-- combineNotes
+- (void)combineNotes
 {
-    unsigned numOfParts = [parts count], partIndex;
-    
-    for (partIndex = 0; partIndex < numOfParts; partIndex++)
-	[(MKPart *) [parts objectAtIndex: partIndex] combineNotes];
-    
-    return self;
+    for (MKPart *part in parts) {
+	[part combineNotes];
+    }
 }
 
 /* Returns a copy of the Array of MKParts in the receiver. The MKParts themselves are not copied.
    Now that we use NSArrays, a [List copyWithZone] did a shallow copy, whereas
    [NSMutableArray copyWithZone] does a deep copy, so we emulate the List operation.  
  */
-- (NSMutableArray *) parts;
+- (NSArray *) parts;
 {
     return [_MKLightweightArrayCopy(parts) autorelease];
 }

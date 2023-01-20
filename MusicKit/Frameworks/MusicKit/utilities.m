@@ -833,17 +833,13 @@ void MKLoadAllBundlesOneOff(void)
 BOOL MKLoadAllBundles(void)
 {
     NSArray *libraryDirs = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSAllDomainsMask, YES);
-    unsigned int i, j;
+    NSUInteger i, j;
     id newClass;
     BOOL loadedSome = FALSE;
 
     for(i = 0; i < [libraryDirs count]; i++) {
         NSString *path = [[libraryDirs objectAtIndex: i] stringByAppendingPathComponent: MK_BUNDLE_DIR];
-#if !defined(MAC_OS_X_VERSION_10_5) || (MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_5)
-	NSArray *files = [[NSFileManager defaultManager] directoryContentsAtPath:path];
-#else	
         NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath: path error: NULL];
-#endif
 
         for (j = 0 ; j < [files count] ; j++) {
             NSString *tryFile = [files objectAtIndex: j];
@@ -852,6 +848,11 @@ BOOL MKLoadAllBundles(void)
                 if ([[NSFileManager defaultManager] isReadableFileAtPath: tryFile]) {
                     NSBundle *bundleToLoad = [NSBundle bundleWithPath: tryFile];
                     NSLog(@"Attempting to load bundle at %@", tryFile);
+		    NSError *err;
+		    if (![bundleToLoad loadAndReturnError:&err]) {
+			NSLog(@"Loading failed: %@", err);
+			continue;
+		    }
                     if ((newClass = [[[bundleToLoad principalClass] alloc] init])) {
                         NSLog(@"Managed to load principal class");
                         loadedSome = TRUE;

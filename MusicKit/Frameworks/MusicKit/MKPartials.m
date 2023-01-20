@@ -507,9 +507,16 @@ return self;
 -(void)setFreqRangeLow:(double)freq1 high:(double)freq2
   /* Sets the frequency range associated with this timbre. */
 {
+    [self willChangeValueForKey:@"minFreq"];
   minFreq = freq1;
+    [self didChangeValueForKey:@"minFreq"];
+    [self willChangeValueForKey:@"maxFreq"];
   maxFreq = freq2;
+    [self didChangeValueForKey:@"maxFreq"];
 }
+
+@synthesize maxFreq;
+@synthesize minFreq;
 
 -(double)maxFreq
   /* Returns the maximum fundamental frequency at which this timbre is
@@ -519,8 +526,6 @@ return self;
 }
 
 -(double)minFreq
-  /* Returns the minimum fundamental frequency at which this timbre is
-  ordinarily used. */
 {
   return minFreq;
 }
@@ -566,7 +571,7 @@ NSLocalizedStringFromTableInBundle(@"MKPartials object currently supports table 
 // #import "fastFFT.c"
 
 /* Sets three arrays based on FFT of the supplied samples object. */
-- setFromSamples: (MKSamples *) samplesObject
+- (BOOL)setFromSamples: (MKSamples *) samplesObject
 {
     double *arr;
     double real,imaginary;
@@ -578,8 +583,8 @@ NSLocalizedStringFromTableInBundle(@"MKPartials object currently supports table 
 
     if (!isPowerOfTwo(howMany)) {
 	MKErrorCode(MK_musicKitErr, POWERS_OF_2_ERROR);
-	/*** FIXME ***/
-	return nil;
+	/*** FIXME: ***/
+	return NO;
     }
     /* Now reset everything */
     freeArrays(self);
@@ -609,7 +614,7 @@ NSLocalizedStringFromTableInBundle(@"MKPartials object currently supports table 
 	*arr++ = i;
     partialCount = halfHowMany;
     length = 0;   /* This ensures a recomputation of the tables. */
-    return self;
+    return YES;
 }
 
 /* Change contents to remove any partials with amplitudes below
@@ -656,10 +661,7 @@ NSLocalizedStringFromTableInBundle(@"MKPartials object currently supports table 
     return self;
 }
 
-- (int) tableType
-{
-    return tableType;
-}
+@synthesize tableType;
 
 #pragma mark - Private methods
 
@@ -733,7 +735,7 @@ NSLocalizedStringFromTableInBundle(@"MKPartials object currently supports table 
     dbMode = YES;
 }
 
-- _normalize
+- (void)_normalize
 {
     register double *dataEnd,*dataPtr;
     double tmp;
@@ -750,7 +752,6 @@ NSLocalizedStringFromTableInBundle(@"MKPartials object currently supports table 
 	for (dataPtr = dataDouble, dataEnd = dataDouble + length; dataPtr < dataEnd; dataPtr++)
 	    *dataPtr = *dataPtr * aScaling;
     }
-    return self;
 }
 
 @end
@@ -759,7 +760,7 @@ NSLocalizedStringFromTableInBundle(@"MKPartials object currently supports table 
 
 @implementation MKPartials(OscTable)
 
-- fillOscTableLength: (int) aLength scale: (double) aScaling
+- (BOOL)fillOscTableLength: (int) aLength scale: (double) aScaling
 {
   return [self fillTableLength: aLength scale: aScaling];
 }
@@ -771,7 +772,7 @@ NSLocalizedStringFromTableInBundle(@"MKPartials object currently supports table 
   (inherited from the Wave class) used to access the resulting
   wavetable. 
 */
-- fillTableLength: (unsigned int) aLength scale: (double) aScaling
+- (BOOL)fillTableLength: (unsigned int) aLength scale: (double) aScaling
 {
     int i;
     double cosPhase = 0; /* Initialize to shut up compiler warnings */
@@ -791,7 +792,7 @@ NSLocalizedStringFromTableInBundle(@"MKPartials object currently supports table 
     if (!isPowerOfTwo(aLength)) {
 	MKErrorCode(MK_musicKitErr, POWERS_OF_2_ERROR);
 	/*** FIXME ***/
-	return nil;
+	return NO;
     }
     if (!dataDouble || (length != aLength)) {
 	if (dataDouble) {
@@ -854,7 +855,7 @@ NSLocalizedStringFromTableInBundle(@"MKPartials object currently supports table 
     scaling = aScaling;
     [self _normalize];
 
-    return self;
+    return YES;
 }
 
 - (DSPDatum *) dataDSPLength: (unsigned int) aLength scale: (double) aScaling

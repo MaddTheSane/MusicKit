@@ -334,6 +334,8 @@ release notes for the latest information on supported drivers.
   @file MKOrchestra.h
  */
 
+@protocol MKOrchestraDelegate;
+
 /*!
   @brief This enumeration defines the types of shared objects that can be
   registered with the MKOrchestra's shared object mechanism.
@@ -345,7 +347,7 @@ release notes for the latest information on supported drivers.
   representing its oscTable representation and one representing its
   waveshapingTable representation.
  */
-typedef enum _MKOrchSharedType {
+typedef NS_ENUM(int, MKOrchSharedType) {
     /*! Wildcard. */
     MK_noOrchSharedType = 0, 
     /*! Data used as a wave table for an oscillator.  This shared
@@ -359,27 +361,27 @@ typedef enum _MKOrchSharedType {
         This type is similar to oscTable but it need not be a power of 2 and
         it is shortened by truncation (from the end.) */
     MK_excitationTable = 3
-} MKOrchSharedType;
+};
 
-typedef enum _MKEMemType {
-    MK_orchEmemNonOverlaid = 0, 
-    MK_orchEmemOverlaidXYP = 1, 
-    MK_orchEmemOverlaidPX = 2
-} MKEMemType;
+typedef NS_ENUM(int, MKEMemType) {
+    MKEMemTypeNonOverlaid = 0,
+    MKEMemTypeOverlaidXYP = 1,
+    MKEMemTypeOverlaidPX = 2
+};
 
 /*!
   @brief MK_UNTIMED and MK_TIMED are arguments for the MKConductor <b>setTimed:</b> method.     
  
   @see <b>MKConductor</b> and the Performance Concepts documentation for details.
  */
-typedef enum {
+typedef NS_ENUM(int, MKOrchestraTiming) {
     /*! DSP commands are executed as soon as they are sent. */
-    MK_UNTIMED = 0,
+    MKOrchestraTimingUntimed = 0,
     /*! DSP commands are executed at the time of their time-stamp. */
-    MK_TIMED = 1,
+    MKOrchestraTimingTimed = 1,
     /*! Obsolete. */
-    MK_SOFTTIMED = 2
-} MKOrchestraTiming;
+    MKOrchestraTimingSoft = 2
+};
 
 /*!
   @defgroup PreemptionFns Set the SynthPatch preemption time.
@@ -435,7 +437,7 @@ extern void MKSetPreemptDuration(double seconds);
     NSMutableArray *unitGeneratorStack;      
     /*! For output sound samples. */
     NSString *outputSoundfile;
-    id outputSoundDelegate;
+    id<MKOrchestraDelegate> outputSoundDelegate;
     /*! For input sound samples. READ DATA */
     NSString *inputSoundfile;
     /*! For output DSP commands. */
@@ -977,8 +979,10 @@ extern void MKSetPreemptDuration(double seconds);
 */
 - (NSString *) outputSoundfile;
 
--setOutputSoundDelegate:aDelegate;
--outputSoundDelegate;
+-(void)setOutputSoundDelegate:(id<MKOrchestraDelegate>)aDelegate;
+-(id<MKOrchestraDelegate>)outputSoundDelegate;
+
+@property (nonatomic, assign) id<MKOrchestraDelegate> outputSoundDelegate;
 
 /*!
   @param  fileName is an NSString instance.
@@ -1617,23 +1621,13 @@ extern void MKSetPreemptDuration(double seconds);
 /*!
  @brief These constants define the MKOrchestra capabilities bits returned by the MKOrchestra <b>capabilities</b> method.
  */
-#define MK_nextCompatibleDSPPort 1
-/*!
- @brief These constants define the MKOrchestra capabilities bits returned by the MKOrchestra <b>capabilities</b> method.
- */
-#define MK_hostSoundOut (1<<1)
-/*!
- @brief These constants define the MKOrchestra capabilities bits returned by the MKOrchestra <b>capabilities</b> method.
- */
-#define MK_serialSoundOut (1<<2)
-/*!
- @brief These constants define the MKOrchestra capabilities bits returned by the MKOrchestra <b>capabilities</b> method.
- */
-#define MK_soundIn (1<<3)
-/*!
- @brief These constants define the MKOrchestra capabilities bits returned by the MKOrchestra <b>capabilities</b> method.
- */
-#define MK_soundfileOut (1<<4)
+typedef NS_OPTIONS(unsigned, MKOrchestraCapabilities) {
+    MKOrchestraCapabilitiesNeXTCompatibleDSPPort = 1,
+    MKOrchestraCapabilitiesHostSoundOut = 1 << 1,
+    MKOrchestraCapabilitiesSerialSoundOut = 1 << 2,
+    MKOrchestraCapabilitiesSoundIn = 1 << 3,
+    MKOrchestraCapabilitiesSoundFileOut = 1 << 4
+};
 
 /*!
   @return Returns an unsigned.
@@ -1649,7 +1643,7 @@ extern void MKSetPreemptDuration(double seconds);
 \#define MK_soundfileOut (1<<4)
 </pre> 
 */
-- (unsigned) capabilities;
+- (MKOrchestraCapabilities) capabilities;
 
 /*!
   @brief Returns the number of output channels.
@@ -1771,10 +1765,29 @@ extern void MKSetPreemptDuration(double seconds);
 
 @end
 
-@interface OrchestraDelegate : NSObject
+@protocol MKOrchestraDelegate <NSObject>
 
--orchestra: (id) sender didRecordData: (short *) data size: (unsigned int) dataCount;
+-(void)orchestra: (MKOrchestra*) sender didRecordData: (short *) data size: (unsigned int) dataCount;
 
 @end
+
+#define DeprecatedEnum(type, oldname, newval) \
+static const type oldname NS_DEPRECATED_WITH_REPLACEMENT_MAC( #newval , 10.0, 10.8) = newval
+
+DeprecatedEnum(MKEMemType, MK_orchEmemNonOverlaid, MKEMemTypeNonOverlaid);
+DeprecatedEnum(MKEMemType, MK_orchEmemOverlaidXYP, MKEMemTypeOverlaidXYP);
+DeprecatedEnum(MKEMemType, MK_orchEmemOverlaidPX, MKEMemTypeOverlaidPX);
+
+DeprecatedEnum(MKOrchestraTiming, MK_UNTIMED, MKOrchestraTimingUntimed);
+DeprecatedEnum(MKOrchestraTiming, MK_TIMED, MKOrchestraTimingTimed);
+DeprecatedEnum(MKOrchestraTiming, MK_SOFTTIMED, MKOrchestraTimingSoft);
+
+DeprecatedEnum(MKOrchestraCapabilities, MK_nextCompatibleDSPPort, MKOrchestraCapabilitiesNeXTCompatibleDSPPort);
+DeprecatedEnum(MKOrchestraCapabilities, MK_hostSoundOut, MKOrchestraCapabilitiesHostSoundOut);
+DeprecatedEnum(MKOrchestraCapabilities, MK_serialSoundOut, MKOrchestraCapabilitiesSerialSoundOut);
+DeprecatedEnum(MKOrchestraCapabilities, MK_soundIn, MKOrchestraCapabilitiesSoundIn);
+DeprecatedEnum(MKOrchestraCapabilities, MK_soundfileOut, MKOrchestraCapabilitiesSoundFileOut);
+
+#undef DeprecatedEnum
 
 #endif

@@ -20,6 +20,7 @@
 }
 
 + (SndTable*)defaultSndTable;
+@property (class, readonly, retain) SndTable *defaultSndTable;
 - (instancetype)init;
 - (Snd*)soundNamed:(NSString *)aName;
 - (Snd*)findSoundFor:(NSString *)aName;

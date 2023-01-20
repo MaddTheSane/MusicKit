@@ -34,11 +34,9 @@ Modification history:
   Added Win32 compatibility, CVS logs, SBs changes
 
 */
-#ifdef GNUSTEP
-# include <math.h>
-#else
-# import <math.h>
-#endif
+#include "trigonometry.h"
+#include <dispatch/dispatch.h>
+#include <math.h>
 
 #define SINTABLEN 1024
 
@@ -50,25 +48,19 @@ Modification history:
 #define M_PI_2          1.57079632679489661923  /* pi/2 */
 #endif
 
-static unsigned char sinTabInited = 0;
 static double sinTab[SINTABLEN];
-
-static void initSineTab(void)
-{
-    int i;
-    for (i=0; i<SINTABLEN; i++) 
-	sinTab[i] = sin(i * (M_PI * 2/SINTABLEN));
-}
 
 double MKSine(double x)
 {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+	for (int i=0; i<SINTABLEN; i++) {
+	    sinTab[i] = sin(i * (M_PI * 2/SINTABLEN));
+	}
+    });
     int floorVal;
     double diff;
-    if (!sinTabInited) {
-	initSineTab();
-	sinTabInited = 1;
-    }
-    while (x < 0) 
+    while (x < 0)
 	x += (M_PI * 2);
     while (x > (M_PI*2))
 	x -= (M_PI * 2);

@@ -78,7 +78,7 @@ fillTableLength:scale:.
 //sb:
 #import <MusicKit/dsp_types.h> /* for DSPDatum */
 
-@interface MKWaveTable : NSObject <NSCopying>
+@interface MKWaveTable : NSObject <NSCopying, NSCoding>
 {
     unsigned int length;    /* Non-0 if a data table exists, 0 otherwise */
     double scaling;         /* 0.0 = normalization scaling */
@@ -103,14 +103,7 @@ fillTableLength:scale:.
   the receiver.
   @return Returns an id.
 */
-- init;
-
-/*!
-  @brief dealloc frees dataDSP and dataDouble then sends [super free].
-    
-  It also removes the name, if any, from the MusicKit name table. 
- */
-- (void)dealloc;
+- (instancetype)init;
 
 /*!
   @return Returns an int.
@@ -125,6 +118,16 @@ fillTableLength:scale:.
  /* Length returns the length in samples of the data buffers.  If it is 0,
     neither the DSPDatum or real buffer has been allocated. */
 
+/*!
+  @return Returns an int.
+  @brief Returns the length, in elements, of the data arrays (the two arrays
+  should always contain the same number of elements).
+
+  A return value
+  of 0 indicates that the arrays haven't been filled, or that the data
+  needs to be recomputed.
+*/
+@property (readonly) unsigned int length;
 
 /*!
   @return Returns a double.
@@ -139,6 +142,17 @@ fillTableLength:scale:.
  /* Scaling returns the current scaling of the data buffers.  If it is 0,
     normalization scaling is specified. Normalization is the default. */
 
+/*!
+  @return Returns a double.
+  @brief Returns the factor by which the values (sample amplitues) in the
+  data arrays are scaled.
+
+  A return value of 0.0, the default,
+  indicates that the values are normalized, or scaled to fit perfectly
+  within the range -1.0 to 1.0.
+*/
+@property (readonly) double scaling;
+- (double)scaling;
 
 /*!
   @param  aLength is an int.
@@ -177,7 +191,7 @@ fillTableLength:scale:.
   NULL is returned.  You should neither modify nor free the data
   returned by this method.
 */
-- (double *) dataDoubleLength: (unsigned int) aLength scale: (double) aScaling;
+- (double *) dataDoubleLength: (unsigned int) aLength scale: (double) aScaling NS_RETURNS_INNER_POINTER;
  
  /* The following methods are minor variations of 
     dataDSPScaling:length: and are implemented in terms of it. 
@@ -231,7 +245,7 @@ fillTableLength:scale:.
   the <b>length</b> and <b>scaling</b> instance variables as
   arguments.
 */
-- (double *)   dataDouble;
+- (double *)   dataDouble NS_RETURNS_INNER_POINTER;
 
 /*!
   @param  aLength is an int.
@@ -243,7 +257,7 @@ fillTableLength:scale:.
   <i>aLength</i> and the <b>scaling</b> instance variable as
   arguments.
 */
-- (double *)   dataDoubleLength:(int)aLength;
+- (double *)   dataDoubleLength:(int)aLength NS_RETURNS_INNER_POINTER;
 
 /*!
   @param  aScaling is a double.
@@ -255,7 +269,7 @@ fillTableLength:scale:.
   the <b>length</b> instance variable and <i>aScaling</i> as
   arguments.
 */
-- (double *)   dataDoubleScale:(double)aScaling;
+- (double *)   dataDoubleScale:(double)aScaling NS_RETURNS_INNER_POINTER;
 
 
 /*!
@@ -275,7 +289,7 @@ fillTableLength:scale:.
   
   Note that the <i>scaling</i> and <i>length</i> instance variables must be set by the subclass' <b>fillTableLength:scale:</b>method.
 */
-- fillTableLength:(int)aLength scale:(double)aScaling ;
+- (BOOL)fillTableLength:(int)aLength scale:(double)aScaling ;
  /* This method is a subclass responsibility. It must do the following:
 
    This method computes the data. It allocates or reuses either (or 

@@ -241,9 +241,9 @@ XARGPCDEFAULT = 272/(DSPMK_HE_USR - DSPMK_LE_USR) =
 #define O_EMEM X_EMEM /* Overlaid external memory. */
 #define EMEM_INVALID (-1)
 
-#define P_IND(_self) ((_self->_overlaidEMem!=MK_orchEmemNonOverlaid)?O_EMEM: P_EMEM)
-#define X_IND(_self) ((_self->_overlaidEMem!=MK_orchEmemNonOverlaid) ?O_EMEM: X_EMEM)
-#define Y_IND(_self) ((_self->_overlaidEMem==MK_orchEmemOverlaidXYP) ?O_EMEM: Y_EMEM)
+#define P_IND(_self) ((_self->_overlaidEMem!=MKEMemTypeNonOverlaid)?O_EMEM: P_EMEM)
+#define X_IND(_self) ((_self->_overlaidEMem!=MKEMemTypeNonOverlaid) ?O_EMEM: X_EMEM)
+#define Y_IND(_self) ((_self->_overlaidEMem==MKEMemTypeOverlaidXYP) ?O_EMEM: Y_EMEM)
 
 static int segToMemIndNonOverlaid[] = {
     EMEM_INVALID, /* MK_noSegment */
@@ -274,8 +274,8 @@ static int segToMemIndOverlaidPX[] = {
     EMEM_INVALID}; /* MK_lPatch */
 
 #define S_IND(_self,_segment) \
-  ((_self->_overlaidEMem==MK_orchEmemOverlaidXYP) ?O_EMEM: \
-   (_self->_overlaidEMem==MK_orchEmemNonOverlaid) ?segToMemIndNonOverlaid[_segment]: \
+  ((_self->_overlaidEMem==MKEMemTypeOverlaidXYP) ?O_EMEM: \
+   (_self->_overlaidEMem==MKEMemTypeNonOverlaid) ?segToMemIndNonOverlaid[_segment]: \
    (segToMemIndOverlaidPX[_segment]))
    
 static int extraRoomAtTopOfOffchipMemory = 0;
@@ -399,9 +399,16 @@ static id *orchs = NULL;
 
 _MK_ERRMSG garbageMsg = @"Garbage collecting freed unit generator %@_%p";
 
-static NSString * orchMemSegmentNames[(int) MK_numOrchMemSegments] = 
-{@"noSegment",@"pLoop",@"pSubr",@"xArg",@"yArg",@"lArg",@"xData",@"yData",@"lData",
-    @"xPatch",@"yPatch",@"lPatch"};
+#define ARRAY @"noSegment",@"pLoop",@"pSubr",@"xArg",@"yArg",@"lArg",@"xData",@"yData",@"lData", \
+    @"xPatch",@"yPatch",@"lPatch"
+#if __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_11_0
+static NSArray<NSString *> * const orchMemSegmentNames =
+@[ARRAY];
+#else
+static NSString * orchMemSegmentNames[(int) MK_numOrchMemSegments] =
+{ARRAY};
+#endif
+#undef ARRAY
 
 - (double) systemOverhead
     /* Subclasses can override this. */
@@ -494,7 +501,7 @@ static NSString * orchMemSegmentNames[(int) MK_numOrchMemSegments] =
     self = [super init];
     if(self != nil) {
 	orchIndex = dspIndex;
-	deviceStatus = MK_devClosed;
+	deviceStatus = MKDeviceStatusClosed;
 	_simFP = NULL;
 	[dspNumToOrch setObject: self forKey: [NSNumber numberWithInt: orchIndex]];
 	// TODO: orchs = [dspNumToOrch values];
@@ -659,7 +666,7 @@ static void _MKTimeStamp()
 
 -setMonitorFileName: (NSString *) name
 {
-    if (deviceStatus != MK_devClosed)
+    if (deviceStatus != MKDeviceStatusClosed)
 	return nil;
     [monitorFileName autorelease];
 //    if (monitorFileName)         /* This is only set if the user explicitly set it */
@@ -704,7 +711,7 @@ static void _MKTimeStamp()
 -flushTimedMessages
     /* Flush timed messages. */
 {
-    if (deviceStatus == MK_devClosed)
+    if (deviceStatus == MKDeviceStatusClosed)
 	return self;
     DSPSetCurrentDSP(orchIndex);
     DSPMKFlushTimedMessages();
@@ -754,7 +761,7 @@ static int resoAlloc(MKOrchestra *self,id factObj,MKOrchMemStruct *reloc);
         s = [[NSUserDefaults standardUserDefaults] objectForKey: name];
     }
     s = [[NSUserDefaults standardUserDefaults] objectForKey: @"MKOrchestraSoundOut"];
-    if ([s isEqualToString: @"Host"] && ([self capabilities] & MK_hostSoundOut))
+    if ([s isEqualToString: @"Host"] && ([self capabilities] & MKOrchestraCapabilitiesHostSoundOut))
 	[self setHostSoundOut: YES];
     return self;
 }
@@ -1022,7 +1029,7 @@ static void initSharedTable(void)
 
 + (char *) nameForSharedType: (int) typeInt
 {
-    int i;
+    NSInteger i;
     if (!sharedTypeTable) 
 	initSharedTable();
     for (i=0; i<numSharedTypes; i++)
@@ -1040,7 +1047,7 @@ static void initSharedTable(void)
     anObj is any object associated with the abstract notion of the data.
     The object comparison is done on the basis of aKeyObj's id. */
 {
-    if (deviceStatus == MK_devClosed)
+    if (deviceStatus == MKDeviceStatusClosed)
 	return nil;
     return _MKFindSharedSynthObj(_sharedSet,sharedGarbage,aKeyObj,
                                  whichSegment,length,MK_noOrchSharedType);
@@ -1060,7 +1067,7 @@ static void initSharedTable(void)
 	      length: (int) length
 	        type: (MKOrchSharedType) type
 {
-    if (deviceStatus == MK_devClosed)
+    if (deviceStatus == MKDeviceStatusClosed)
 	return nil;
     return _MKFindSharedSynthObj(_sharedSet,sharedGarbage,aKeyObj,
                                  whichSegment,length,type);
@@ -1112,7 +1119,7 @@ aKeyObj is not copied and should not be freed while any shared data
 associated with it exists. 
 */
 {
-    if (self->deviceStatus == MK_devClosed)
+    if (self->deviceStatus == MKDeviceStatusClosed)
 	return nil;
     if (_MKInstallSharedObject(self->_sharedSet,aSynthObj,aKeyObj,whichSegment,
                                length,type)) {
@@ -1278,7 +1285,7 @@ associated with it exists.
     /* Set sampling rate. Only legal when receiver is closed. Returns self
     or nil if receiver is not closed. */ 
 {
-    if (deviceStatus != MK_devClosed) 
+    if (deviceStatus != MKDeviceStatusClosed)
 	return nil;
     samplingRate =  newSRate;
     _effectiveSamplePeriod = (1.0 / newSRate) * (1 - _headroom);
@@ -1291,7 +1298,7 @@ associated with it exists.
     Only legal when receiver is closed. Returns self
     or nil if receiver is not closed. */ 
 {
-    if (deviceStatus != MK_devClosed) 
+    if (deviceStatus != MKDeviceStatusClosed)
 	return nil;
     fastResponse = yesOrNo;
     return self;
@@ -1324,7 +1331,7 @@ associated with it exists.
      Note that sending setOutputSoundfile: NULL does not automatically 
      send setHostSoundOut: YES. You must do this yourself. */
 {
-    if (deviceStatus != MK_devClosed) 
+    if (deviceStatus != MKDeviceStatusClosed)
 	return nil;
     if (outputSoundfile) {
         [outputSoundfile release];
@@ -1344,26 +1351,21 @@ associated with it exists.
     return outputSoundfile;
 }
 
-- setOutputSoundDelegate: aDelegate
+- (void)setOutputSoundDelegate: aDelegate
     /* Sets an object to receive delegate messages.  Same restrictions as
      setOutputSoundfile: 
     */
 {
-    if (deviceStatus != MK_devClosed) 
-	return nil;
+    if (deviceStatus != MKDeviceStatusClosed) 
+	return;
     outputSoundDelegate = aDelegate;
     if (!aDelegate)
-	return self;
+	return;
     hostSoundOut = NO;
     [self useDSP: YES];
-    return self;
 }
 
-- outputSoundDelegate
-    /* Returns the output sound delegate */
-{
-    return outputSoundDelegate;
-}
+@synthesize outputSoundDelegate;
 
 - setOutputCommandsFile: (NSString *) file
     /* Sets a file name to which DSP commands are to be written as a DSPCommands
@@ -1372,7 +1374,7 @@ associated with it exists.
     This message is currently ignored if the receiver is not closed.
     */
 {
-    if (deviceStatus != MK_devClosed)
+    if (deviceStatus != MKDeviceStatusClosed)
         return nil;
     if (!file)
         return self;
@@ -1391,7 +1393,7 @@ associated with it exists.
 /* READ DATA */
 - setInputSoundfile: (NSString *) file
 {
-    if (deviceStatus != MK_devClosed) 
+    if (deviceStatus != MKDeviceStatusClosed)
 	return nil;
     if (inputSoundfile) {
         [inputSoundfile release];
@@ -1419,7 +1421,7 @@ associated with it exists.
     you no longer want a file when the MKOrchestra is re-run, close the MKOrchestra,
      then send setSimulatorFile: NULL.  */
 {
-    if (deviceStatus != MK_devClosed) 
+    if (deviceStatus != MKDeviceStatusClosed)
 	return nil;
     if (simulatorFile) {
 	free(simulatorFile);
@@ -1450,7 +1452,7 @@ If the receiver is not closed, this message has no effect.
 */
 - setHostSoundOut: (BOOL) yesOrNo
 {
-    if (deviceStatus != MK_devClosed)
+    if (deviceStatus != MKDeviceStatusClosed)
 	return nil;
     hostSoundOut = yesOrNo;
     if (hostSoundOut) {
@@ -1485,7 +1487,7 @@ Now disabled.
 */
 - setSerialSoundOut: (BOOL) yesOrNo
 {
-    if (deviceStatus != MK_devClosed)
+    if (deviceStatus != MKDeviceStatusClosed)
 	return nil;
     [self useDSP: YES];
     return self;
@@ -1502,7 +1504,7 @@ Now disabled.
     If the receiver is not closed, this message has no effect.
     */
 {
-    if (deviceStatus != MK_devClosed) 
+    if (deviceStatus != MKDeviceStatusClosed)
 	return nil;
     soundIn = yesOrNo;
     [self useDSP: YES];
@@ -1558,7 +1560,7 @@ static void freeUGs(MKOrchestra *self)
 /* Free all MKSynthData and MKUnitGenerators. */
 {
     char wasTimed = [self isTimed];
-    self->deviceStatus = MK_devClosed;
+    self->deviceStatus = MKDeviceStatusClosed;
     [self setTimed: NO];          /* Finalization may generate some
 	reset code and we don't want it
 	to go out timed. */
@@ -1631,16 +1633,16 @@ static void freeUGs(MKOrchestra *self)
     self->yModulusSink = nil;
 
     switch (self->_overlaidEMem) {
-	case MK_orchEmemNonOverlaid: 
+	case MKEMemTypeNonOverlaid:
 	    freeEMem(self,X_EMEM);
 	    freeEMem(self,Y_EMEM);
 	    freeEMem(self,P_EMEM);
 	    break;
-	case MK_orchEmemOverlaidPX: 
+	case MKEMemTypeOverlaidPX:
 	    freeEMem(self,O_EMEM);
 	    freeEMem(self,Y_EMEM);
 	    break;
-	case MK_orchEmemOverlaidXYP: 
+	case MKEMemTypeOverlaidXYP:
 	    freeEMem(self,O_EMEM);
 	    break;
     }
@@ -1725,13 +1727,13 @@ static id loadOrchLoop(MKOrchestra *self)
     self->_previousTimeStamp.low24 = 0;
     if (!self->_orchloopClass)
 	self->_orchloopClass = defaultOrchloopClass;
-    self->deviceStatus = MK_devOpen;
+    self->deviceStatus = MKDeviceStatusOpen;
     self->_sharedSet = _MKNewSharedSet(&self->sharedGarbage);
     self->unitGeneratorStack = [[NSMutableArray alloc] initWithCapacity: INITIAL_STACK_SIZE];
     self->computeTime = 0;
     self->isLoopOffChip = 0;  /* Added by DAJ. 11/21/95 */
     switch (self->_overlaidEMem) {
-	case MK_orchEmemOverlaidXYP: 
+	case MKEMemTypeOverlaidXYP:
 	    _MK_MALLOC(peLoop, dataMemBlockStruct, 1);
 	    _MK_MALLOC(availDataMem,dataMemBlockStruct,1);
 	    self->_availDataMem[O_EMEM] = (void *)availDataMem;
@@ -1758,7 +1760,7 @@ static id loadOrchLoop(MKOrchestra *self)
 			   self->_numXArgs - self->_numYArgs + 1);
 	    self->_yArg = self->_xArg + self->_numXArgs;
 	    break;
-	case MK_orchEmemOverlaidPX: 
+	case MKEMemTypeOverlaidPX:
 	    /* First do P/X overlaid portion */
 	    _MK_MALLOC(peLoop, dataMemBlockStruct, 1);
 	    _MK_MALLOC(availDataMem,dataMemBlockStruct,1);
@@ -1802,7 +1804,7 @@ static id loadOrchLoop(MKOrchestra *self)
 		 self->_numYArgs - yAvailDmb->baseAddr + 1);
 	    self->_yArg = (yAvailDmb->size + yAvailDmb->baseAddr);
 	    break;
-	case MK_orchEmemNonOverlaid: 
+	case MKEMemTypeNonOverlaid:
 	    for (i=0; i<3; i++) {
 		_MK_MALLOC(availDataMem, dataMemBlockStruct, 1);
 		_MK_MALLOC(endMarker, dataMemBlockStruct, 1);
@@ -1909,7 +1911,7 @@ if (((resoAlloc(self,self->_orchSysUGClass,&reloc) != OK) ||
 	    freeUGs(self);
 	    if (self->useDSP)
 	    DSPClose();
-	    self->deviceStatus = MK_devClosed;
+	    self->deviceStatus = MKDeviceStatusClosed;
 	    return nil;
 }
 #else
@@ -1922,7 +1924,7 @@ if ((resoAlloc(self,self->_orchloopClass,&reloc) != OK) ||
 	   freeUGs(self);
 	   if (self->useDSP)
 	   DSPClose();
-	   self->deviceStatus = MK_devClosed;
+	   self->deviceStatus = MKDeviceStatusClosed;
 	   return nil;
 }
 #endif
@@ -1967,7 +1969,7 @@ clean up at the end of time. */
 
 BOOL _MKOrchLateDeltaTMode(MKOrchestra *self)
 {
-    return (self->isTimed == MK_SOFTTIMED);
+    return (self->isTimed == MKOrchestraTimingSoft);
 }
 
 - setTimed: (MKOrchestraTiming) isOrchTimed
@@ -1976,7 +1978,7 @@ BOOL _MKOrchLateDeltaTMode(MKOrchestra *self)
     It is permitted to change
     from timed to untimed during a performance. (But this won't work in 0.9.) */
 {
-    if (deviceStatus != MK_devClosed && (isTimed != isOrchTimed))
+    if (deviceStatus != MKDeviceStatusClosed && (isTimed != isOrchTimed))
 	DSPSetTimedZeroNoFlush(0);
     isTimed = isOrchTimed;
     return self;
@@ -2031,7 +2033,7 @@ do so generates an error.
     if the MKOrchestra is not closed. The default is YES. 
     This method should not be used in release 0.9. */
 {
-    if (deviceStatus != MK_devClosed)
+    if (deviceStatus != MKDeviceStatusClosed)
 	return nil;
     useDSP = useIt;
     return self;
@@ -2106,10 +2108,10 @@ DeltaT is included in the result. */
     /* Need to differentiate between truly untimed and 'on next tick' 
     untimed. */
     switch (self->deviceStatus) {
-	case MK_devClosed:  /* A bug, probably but, play along. */
-	case MK_devOpen:    /* Can only do truly untimed pokes when open. */ 
+	case MKDeviceStatusClosed:  /* A bug, probably but, play along. */
+	case MKDeviceStatusOpen:    /* Can only do truly untimed pokes when open. */
 	    return DSPMK_UNTIMED;
-	case MK_devStopped: /* It's ok to do truly untimed pokes when stopped
+	case MKDeviceStatusStopped: /* It's ok to do truly untimed pokes when stopped
 	    because we're not running the orch loop */
 	    if (!self->isTimed)
 		return DSPMK_UNTIMED;
@@ -2248,7 +2250,7 @@ static void adjustOrchTE(MKOrchestra *self,BOOL yesOrNo,BOOL reset) {
 -setSynchToConductor: (BOOL) yesOrNo
 {
     synchToConductor = yesOrNo;
-    if (deviceStatus == MK_devRunning)
+    if (deviceStatus == MKDeviceStatusRunning)
 	[self _adjustOrchTE: yesOrNo reset: YES];
     return self;
 }
@@ -2286,7 +2288,7 @@ static BOOL compactResourceStack(MKOrchestra *self); /* Forward ref */
     /* We're overly conservative in our UG timings so we fudge here. */
     if (headroom > .99)
 	headroom = .99;
-    if ((deviceStatus != MK_devClosed) && 
+    if ((deviceStatus != MKDeviceStatusClosed) &&
     	(headroom + (HEADROOMFUDGE+[self systemOverhead]) > _headroom)) {
 	popResoAndSetLooper(self);
 	compactResourceStack(self);
@@ -2340,7 +2342,7 @@ MK_xSig or MK_ySig memory. */
 	[aSynthPatchClass defaultPatchTemplate]];
 }
 
-#define CHECKADJUSTTIME() if (self->isTimed == MK_SOFTTIMED) _MKAdjustTimeIfNecessary()
+#define CHECKADJUSTTIME() if (self->isTimed == MKOrchestraTimingSoft) _MKAdjustTimeIfNecessary()
 
 -allocSynthPatch: aSynthPatchClass patchTemplate: p
     /* Reuse a MKSynthPatch if possible. Otherwise, build a new one, if 
@@ -2349,7 +2351,7 @@ MK_xSig or MK_ySig memory. */
     MKSynthPatch is in the same order as specified in the template. */
 {
     id rtnVal;
-    if ((!p) || (deviceStatus == MK_devClosed))
+    if ((!p) || (deviceStatus == MKDeviceStatusClosed))
 	return nil;
     CHECKADJUSTTIME();
     if ((_previousLosingTemplate == p) || /* If we just lost, don't even try */
@@ -2517,7 +2519,7 @@ static DSPAddress allocMem(MKOrchestra *self,MKOrchMemSegment segment,unsigned s
     * Returns nil if not open.
     */
 {
-    if (deviceStatus == MK_devClosed)
+    if (deviceStatus == MKDeviceStatusClosed)
 	return nil;
     *versionP = version;
     *releaseP = release;
@@ -3250,7 +3252,7 @@ static DSPAddress allocMem(MKOrchestra *self,MKOrchMemSegment segment,unsigned s
     DSPAddress rtnVal;     
     unsigned i;
     CHECKADJUSTTIME();
-    if (self->deviceStatus == MK_devClosed)
+    if (self->deviceStatus == MKDeviceStatusClosed)
 	return NOMEMORY;
     if (size == 0)
 	return BADADDR;
@@ -3466,7 +3468,7 @@ allocUG(register MKOrchestra *self,id factObj,id beforeObj,id afterObj)
     NSMutableArray *deallocatedPatches;     
     unsigned i,option;
     CHECKADJUSTTIME();
-    if (self->deviceStatus == MK_devClosed)
+    if (self->deviceStatus == MKDeviceStatusClosed)
 	return nil;
     rtnVal = getUG(self,factObj,beforeObj,afterObj,&option);
     if (option == WIN) 

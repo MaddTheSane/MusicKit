@@ -3771,9 +3771,9 @@ _MKNewScoreInStruct(NSData *aStream,id owner,NSMutableData *printStream,
         NSString * aName;
         aList = [owner _elements];
         if (aList) {
-            int el;
+            NSInteger el;
             id elObj;
-            unsigned n;
+            NSUInteger n;
             for (el = 0, n = [aList count]; n--; el++)
                 if ((aName = (NSString *)MKGetObjectName(elObj = [aList objectAtIndex:el])))
                     addLocalSymbol(aName,elObj,_MK_partInstance);

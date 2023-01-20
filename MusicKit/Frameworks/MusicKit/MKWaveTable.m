@@ -37,9 +37,14 @@
      All other data archiving is left to the subclass. 
      */
 {
-    NSString *str;
-    str = MKGetObjectName(self);
-    [aCoder encodeValueOfObjCType:"@" at:&str];
+    if ([aCoder allowsKeyedCoding]) {
+	NSString *str = MKGetObjectName(self);
+	[aCoder encodeObject:str forKey:@"MKName"];
+    }  else {
+	NSString *str;
+	str = MKGetObjectName(self);
+	[aCoder encodeValueOfObjCType:"@" at:&str];
+    }
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -48,17 +53,24 @@
      object using MKGetObjectName(). 
      */
 {
-    if ([aDecoder versionForClassName: @"MKWaveTable"] == VERSION2) {
-	NSString *str;
-	[aDecoder decodeValueOfObjCType: "@" at: &str size:sizeof(str)];
-	if (str) {
-	    MKNameObject(str,self);
+    self = [self init];
+    NSString *str = nil;
+    if ([aDecoder allowsKeyedCoding]) {
+	str = [aDecoder decodeObjectOfClass:[NSString class] forKey:@"MKName"];
+    }
+    
+    if (str == nil) {
+	if ([aDecoder versionForClassName: @"MKWaveTable"] == VERSION2) {
+	    [aDecoder decodeValueOfObjCType: "@" at: &str size:sizeof(str)];
 	}
+    }
+    if (str) {
+	MKNameObject(str,self);
     }
     return self;
 }
 
-- init
+- (id)init
     /* This method is ordinarily invoked only when an 
     instance is created. 
     A subclass should send [super init] if it overrides this 
@@ -138,19 +150,13 @@
     [super dealloc];
 }
 
-- (unsigned int)length
+@synthesize length;
 /* Returns the length in samples of the cached data arrays.  If it is 0,
    neither the DSPDatum nor real buffer has been allocated nor computed. */
-{
-    return length;
-}
  
-- (double)scaling
+@synthesize scaling;
 /* Scaling returns the current scaling of the data buffers. A value of 0
    indicates normalization scaling. */
-{
-    return scaling;
-}
 
 - (DSPDatum *) dataDSPLength:(unsigned int) aLength scale: (double) aScaling
 /* Returns the MKWaveTable as an array of DSPDatums, recomputing 
@@ -188,7 +194,7 @@
     return dataDouble;
 }
 
-- fillTableLength: (int) aLength scale: (double) aScaling 
+- (BOOL)fillTableLength: (int) aLength scale: (double) aScaling
 /* This method is a subclass responsibility.
 
    This method computes the data. It allocates or reuses either (or 
@@ -201,7 +207,7 @@
    NULL. 
 */
 {
-    [NSException raise:NSInvalidArgumentException format:@"*** Subclass responsibility: %@", NSStringFromSelector(_cmd)]; return nil;
+    [NSException raise:NSInvalidArgumentException format:@"*** Subclass responsibility: %@", NSStringFromSelector(_cmd)]; return NO;
 }
 
 - (DSPDatum *) dataDSP

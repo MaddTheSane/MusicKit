@@ -47,6 +47,8 @@ printed by invoking <b>setScorefilePrintStream:</b>.
 
 #import <Foundation/NSObject.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @class MKNote;
 @class MKPart;
 
@@ -68,7 +70,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
     MK_MUSICXML
 };
 
-@interface MKScore: NSObject
+@interface MKScore: NSObject <NSCoding, NSCopying>
 {
     /*! The object's collection of MKParts. */
     NSMutableArray<MKPart*> *parts;
@@ -88,11 +90,11 @@ printed by invoking <b>setScorefilePrintStream:</b>.
 */
 - init;
 
- /* 
+ /*!
  Removes and releases the MKNotes contained in the receiver's MKParts.
  Also releases the receiver's info MKNote.  Returns the receiver.
  */
-- releaseNotes; 
+- (void)releaseNotes;
 
 /*! 
   @brief Removes the receiver's MKParts.
@@ -107,7 +109,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
  
   The file is automatically closed. Returns the receiver or <b>nil</b> if the file couldn't be read.
 */
-- (MKScore*)readScorefile: (NSString *) fileName;
+- (nullable MKScore*)readScorefile: (NSString *) fileName;
 
 /*!
   @param  stream is a NSData instance.
@@ -117,7 +119,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   The file must be open for reading; the sender is responsible for
   closing the file. 
 */
-- (MKScore*)readScorefileStream: (NSData *) stream;
+- (nullable MKScore*)readScorefileStream: (NSData *) stream;
 
 /*!
   @param  fileName is a NSString instance.
@@ -131,10 +133,28 @@ printed by invoking <b>setScorefilePrintStream:</b>.
  
  The added MKNotes' timeTags are shifted by <i>timeShift</i> beats.  
 */
-- (MKScore*)readScorefile: (NSString *) fileName
+- (nullable MKScore*)readScorefile: (NSString *) fileName
    firstTimeTag: (double) firstTimeTag
     lastTimeTag: (double) lastTimeTag
       timeShift: (double) timeShift; 
+
+/*!
+  @param  fileURL is a NSURL instance.
+  @param  firstTimeTag is a double.
+  @param  lastTimeTag is a double.
+  @param  timeShift is a double.
+  @return Returns the receiver or <b>nil</b> if the file couldn't be read.
+  @brief The same as <b>readScorefile:</b>, but only those
+  MKNotes with timeTags in the specified range are added
+  to the receiver.
+ 
+ The added MKNotes' timeTags are shifted by <i>timeShift</i> beats.
+*/
+- (nullable MKScore*)readScoreAtURL: (NSURL *) fileURL
+	      firstTimeTag: (double) firstTimeTag
+	       lastTimeTag: (double) lastTimeTag
+		 timeShift: (double) timeShift
+		     error: (NSError*__autoreleasing*) error;
 
 /*!
   @param  stream is a NSMutableData instance.
@@ -148,7 +168,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
  
  The added MKNotes' timeTags are shifted by <i>timeShift</i> beats.  
 */
-- (MKScore*)readScorefileStream: (NSData *) stream
+- (nullable MKScore*)readScorefileStream: (NSData *) stream
          firstTimeTag: (double) firstTimeTag
           lastTimeTag: (double) lastTimeTag
             timeShift: (double) timeShift; 
@@ -288,7 +308,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   
   @see -<b>readMidiFileStream</b>: for a discussion of MIDI to MKNote conversion.
 */
-- readMidifile: (NSString *) aFileName
+- (BOOL)readMidifile: (NSString *) aFileName
   firstTimeTag: (double) firstTimeTag
    lastTimeTag: (double) lastTimeTag
      timeShift: (double) timeShift;
@@ -306,7 +326,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   <i>timeShift<b></b></i> is added to each MKNote's
   timeTag.
 */
-- readMidifileStream: (NSMutableData *) aStream
+- (BOOL)readMidifileStream: (NSMutableData *) aStream
         firstTimeTag: (double) firstTimeTag
          lastTimeTag: (double) lastTimeTag
            timeShift: (double) timeShift;
@@ -320,7 +340,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
  
   @see -<b>readMidifileStream</b>: for a discussion of MIDI to MKNote conversion.
 */
-- readMidifile: (NSString *) fileName;
+- (BOOL)readMidifile: (NSString *) fileName;
 
 /*!
   @param  aStream is a NSMutableData instance.
@@ -362,7 +382,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   contents.  Instead, new MKParts are added to the
   MKScore.  
 */
-- readMidifileStream: (NSMutableData *) aStream;
+- (BOOL)readMidifileStream: (NSMutableData *) aStream;
 
 /*!
   @param  aFileName is a NSString instance.
@@ -377,7 +397,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
 
   @see -<b>writeMidifile:</b> for conversion details. 
  */
-- writeMidifile: (NSString *) aFileName
+- (BOOL)writeMidifile: (NSString *) aFileName
    firstTimeTag: (double) firstTimeTag
     lastTimeTag: (double) lastTimeTag
       timeShift: (double) timeShift;
@@ -393,7 +413,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   Only the MKNotes within the given timeTag boundaries are written. 
   <i>timeShift</i> is added to each MKNote's timeTag.
 */
-- writeMidifileStream: (NSMutableData *) aStream
+- (BOOL)writeMidifileStream: (NSMutableData *) aStream
          firstTimeTag: (double) firstTimeTag
           lastTimeTag: (double) lastTimeTag
             timeShift: (double) timeShift;
@@ -428,7 +448,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   @return Returns an unsigned.
   @brief Returns the number of MKNotes in all the receiver's MKParts.
 */
-- (unsigned) noteCount; 
+- (NSInteger) noteCount; 
 
 /*!
   @brief Removes <i>oldPart</i> from the receiver and replaces it with <i>newPart</i>.
@@ -442,7 +462,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   @param  newPart is an id.
   @return Returns <i>newPart</i>.
 */
-- (MKPart *) replacePart: (MKPart *) oldPart with: (MKPart *) newPart;
+- (nullable MKPart *) replacePart: (nullable MKPart *) oldPart with: (MKPart *) newPart;
 
 /*!
   @brief Adds <i>aPart</i> to the receiver.
@@ -499,21 +519,21 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   @param  aChan is an int.
   @return Returns an MKPart instance.
 */
-- (MKPart *) midiPart: (int) aChan; 
+- (nullable MKPart *) midiPart: (int) aChan; 
 
 /*!
   @brief Returns the number of MKPart contained in the receiver.
   @return Returns an unsigned.
 */
-- (unsigned) partCount;
+- (NSInteger) partCount;
 
 /*!
   @brief Creates and returns a NSMutableArray containing the receiver's MKParts.
  
   The MKParts themselves aren't copied.
-  @return Returns a NSMutableArray of MKParts.
+  @return Returns a NSArray of MKParts.
 */
-- (NSMutableArray *) parts;
+- (NSArray<MKPart*> *) parts;
 
 /*!
   @brief Retrieve the partIndex'th MKPart stored in the receiver.
@@ -527,20 +547,22 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   @param  partTitleToFind
   @return Returns the MKPart, nil if it couldn't be found.
  */
-- (MKPart *) partTitled: (NSString *) partTitleToFind;
+- (nullable MKPart *) partTitled: (NSString *) partTitleToFind;
 
 /*!
   @brief Returns the MKPart named partNameToFind, nil if it couldn't be found.
   @param  partNameToFind
   @return Returns the MKPart named partNameToFind, nil if it couldn't be found.
  */
-- (MKPart *) partNamed: (NSString *) partNameToFind;
+- (nullable MKPart *) partNamed: (NSString *) partNameToFind;
 
 /*!
   @brief Returns an NSArray of all MKNotes in all MKParts in the receiver.
   @return Returns an autoreleased NSArray instance.
  */
-- (NSArray *) notes;
+- (NSArray<MKNote*> *) notes;
+
+@property (readonly, copy, nonatomic) NSArray<MKNote*> *notes;
 
 /*!
   @brief Returns an NSArray of all the notes in the score which have a time tag between
@@ -553,7 +575,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
 /*!
  @brief Combine notes into noteDurs for all MKParts 
 */
-- combineNotes;
+- (void)combineNotes;
 
 /*!
   @brief Creates and returns a new MKScore as a copy of the receiver in the
@@ -562,7 +584,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   The receiver's MKPart, MKNotes, and info MKNote are all copied.
   @return Returns an id.
  */
-- copyWithZone: (NSZone *) zone;
+- (id)copyWithZone: (nullable NSZone *) zone;
 
 /*!
   @brief Sets the receiver's info MKNote to a copy of <i>aNote</i>.
@@ -592,25 +614,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
 */
 - (NSMutableData *) scorefilePrintStream;
 
-@property (assign) NSMutableData *scorefilePrintStream;
-
-/* 
-   You never send this message directly.  
-   Archives MKNotes and info.
- */
-- (void) encodeWithCoder: (NSCoder *) aCoder;
-
-/* 
-   You never send this message directly.  
-   Note that -init is not sent to newly unarchived objects.
-   See write:.
-
-   Maps noteTags as represented in the archive file onto a set that is
-   unused in the current application. This insures that the integrity
-   of the noteTag is maintained. The noteTags of all MKParts in the MKScore are 
-   considered part of a single noteTag space. 
-*/ 
-- (id) initWithCoder: (NSCoder *) aDecoder;
+@property (assign, nullable) NSMutableData *scorefilePrintStream;
 
 /*!
   @brief Sets the class variable <i>midifilesEvaluateTempo</i>, which
@@ -723,6 +727,13 @@ printed by invoking <b>setScorefilePrintStream:</b>.
 + (MKScoreFormat) scoreFormatOfFile: (NSString *) filename;
 
 /*!
+  @brief Determines the format of the named scorefile.
+  @param filename The URL of the file to be inspected.
+  @return Returns the format of the files data.
+ */
++ (MKScoreFormat) scoreFormatOfURL: (NSURL *) filename error: (NSError**) error;
+
+/*!
   @brief The same as <b>writeScorefile:</b>, but only those
   MKNotes with timeTags in the specified range are written
   to the file.  
@@ -800,7 +811,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   @param  lastTimeTag is a double.
   @return Returns an id.
 */
-- readMidifile: (NSString *) aFileName 
+- (BOOL)readMidifile: (NSString *) aFileName 
   firstTimeTag: (double) firstTimeTag
    lastTimeTag: (double) lastTimeTag;
 
@@ -814,7 +825,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
   @param  lastTimeTag is a double.
   @return Returns an id.
 */
-- readMidifileStream: (NSMutableData *) aStream 
+- (BOOL)readMidifileStream: (NSMutableData *) aStream 
         firstTimeTag: (double) firstTimeTag
          lastTimeTag: (double) lastTimeTag;
 
@@ -846,5 +857,7 @@ printed by invoking <b>setScorefilePrintStream:</b>.
                 lastTimeTag: (double) lastTimeTag;
 
 @end
+
+NS_ASSUME_NONNULL_END
 
 #endif

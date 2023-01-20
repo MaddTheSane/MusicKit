@@ -234,7 +234,7 @@ For more information on waveshaping synthesis, see the <b>Shape</b> and
   This is done by taking an FFT of the
   data.
 */
-- setFromSamples:(MKSamples *)samplesObject;
+- (BOOL)setFromSamples:(MKSamples *)samplesObject;
     
 /*!
   @param  amplitudeThreshold is a double.
@@ -337,8 +337,16 @@ For more information on waveshaping synthesis, see the <b>Shape</b> and
 
   /* The following methods are obsolete.  See MKTimbre. */
 -(void)setFreqRangeLow:(double)freq1 high:(double)freq2;
--(double)minFreq;
--(double)maxFreq;
+/*! Returns the minimum fundamental frequency at which this timbre is
+ *  ordinarily used.
+ */
+@property (readonly) double minFreq;
+
+/*! Returns the maximum fundamental frequency at which this timbre is
+ * ordinarily used.
+ */
+@property (readonly) double maxFreq;
+
 -(BOOL)freqWithinRange:(double)freq;
 
 
@@ -351,6 +359,8 @@ For more information on waveshaping synthesis, see the <b>Shape</b> and
   If none, returns the default, MK_oscTable.
 */
 -(int)tableType;
+
+@property (readonly) int tableType;
 
 @end
 
@@ -440,7 +450,7 @@ For more information on waveshaping synthesis, see the <b>Shape</b> and
   at or near the same point only if the partial ratios are integers.
   Currently, only lengths that are a power of 2 are allowed.  
 */
-- fillOscTableLength:(int)aLength scale:(double)aScaling ;
+- (BOOL)fillOscTableLength:(int)aLength scale:(double)aScaling ;
 
 /*!
   @param  aLength is an int.
@@ -458,7 +468,7 @@ For more information on waveshaping synthesis, see the <b>Shape</b> and
   
   <i>Note that currently, only power-of-2 lengths are supported for oscTable format.</i>
 */
-- fillTableLength: (unsigned int) aLength scale: (double) aScaling;
+- (BOOL)fillTableLength: (unsigned int) aLength scale: (double) aScaling;
 
 @end
 

@@ -250,7 +250,7 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
  
   @see -<b>splitNotes</b>
 */
-- combineNotes; 
+- (void)combineNotes; 
 
 /*!
   @return Returns an id.

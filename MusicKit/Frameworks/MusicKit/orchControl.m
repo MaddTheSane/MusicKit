@@ -377,7 +377,7 @@ to send open to an already opened, running or stopped MKOrchestra.
     DSPSetCurrentDSP(orchIndex);
     DSPMKSetSamplingRate(samplingRate);
     switch (deviceStatus) {
-	case MK_devClosed: /* Need to open it */
+	case MKDeviceStatusClosed: /* Need to open it */
 	    [self _clearNotification];
 	    /* For some reason, calling this function if we're timed causes delays sez Nick */
 	    DSPSetTimedZeroNoFlush(!isTimed);
@@ -409,14 +409,14 @@ to send open to an already opened, running or stopped MKOrchestra.
 				    }
 		if (DSP_YLE_USR == DSP_PLE_USR) {
 		    if (DSP_PLE_USR == DSP_XLE_USR)
-			_overlaidEMem = MK_orchEmemNonOverlaid;
+			_overlaidEMem = MKEMemTypeNonOverlaid;
 		    else
-			_overlaidEMem = MK_orchEmemOverlaidPX;
+			_overlaidEMem = MKEMemTypeOverlaidPX;
 		}
 		else
-		    _overlaidEMem = MK_orchEmemOverlaidXYP;
+		    _overlaidEMem = MKEMemTypeOverlaidXYP;
 	    switch (_overlaidEMem) {
-		case MK_orchEmemOverlaidXYP: {
+		case MKEMemTypeOverlaidXYP: {
 		    int memSize;
 		    _topOfExternalMemory[O_EMEM] = 
 			_topOfExternalMemory[X_EMEM] = 
@@ -436,7 +436,7 @@ to send open to an already opened, running or stopped MKOrchestra.
 		    _numYArgs = _yArgPercentage * memSize; /* Implicit floor() here */ 
 		    break;
 		}
-		case MK_orchEmemOverlaidPX: {
+		case MKEMemTypeOverlaidPX: {
 		    int memSize;
 		    _topOfExternalMemory[O_EMEM] = 
 			_topOfExternalMemory[X_EMEM] = 
@@ -462,7 +462,7 @@ to send open to an already opened, running or stopped MKOrchestra.
 		    _numYArgs = _yArgPercentage * memSize; /* Implicit floor() here */ 
 		    break;
 		}
-		case MK_orchEmemNonOverlaid: {
+		case MKEMemTypeNonOverlaid: {
 		    int memSize;
 		    _bottomOfExternalMemory[X_EMEM] = DSPGetLowestExternalUserXAddress();
 		    _topOfExternalMemory[X_EMEM] = (DSPGetHighestExternalUserXAddress() - 
@@ -573,8 +573,8 @@ to send open to an already opened, running or stopped MKOrchestra.
 		}
 	    }
 	    break;
-    case MK_devStopped:
-    case MK_devRunning:
+	case MKDeviceStatusStopped:
+	case MKDeviceStatusRunning:
 	/* All of the following is an attempt to avoid doing a 
 	DSPClose/DSPMKInit. Perhaps this is silly! */
 	[self _adjustOrchTE: NO reset: YES];
@@ -623,7 +623,7 @@ to send open to an already opened, running or stopped MKOrchestra.
     [self abort];
     return [self open];
 #endif
-    case MK_devOpen:
+	case MKDeviceStatusOpen:
     default:
 	break;
     }
@@ -636,10 +636,10 @@ to send open to an already opened, running or stopped MKOrchestra.
     Sets deviceStatus to MK_devRunning. */
 {
     switch (deviceStatus) {
-	case MK_devClosed:
+	case MKDeviceStatusClosed:
 	    if (![self open])
 		return nil;
-	case MK_devOpen:
+	case MKDeviceStatusOpen:
 	    DSPSetCurrentDSP(orchIndex);
 	    if (![self startSoundWhenOpening])
 		startSoundAndFillBuffers(self);
@@ -663,7 +663,7 @@ to send open to an already opened, running or stopped MKOrchestra.
 #if USEFREEZE
 	    else DSPMKResumeSoundOut();
 #endif
-	    deviceStatus = MK_devRunning;
+	    deviceStatus = MKDeviceStatusRunning;
 	    if ((outputSoundfile || outputSoundDelegate))
 		DSPMKStartWriteDataTimed(_MKCurSample(self));
 		if (inputSoundfile) /* READ DATA */
@@ -677,7 +677,7 @@ to send open to an already opened, running or stopped MKOrchestra.
 		    we give them deltaT's worth of 0s. */
 		    [self _adjustOrchTE:YES reset:YES];
 	    break;
-	case MK_devStopped:
+	case MKDeviceStatusStopped:
 #if USEFREEZE
 	    DSPMKThawOrchestra(); 
 	    if (hostSoundOut)
@@ -689,9 +689,9 @@ to send open to an already opened, running or stopped MKOrchestra.
 	    else DSPMKResumeOrchestra();
 #endif
 	    [self _adjustOrchTE:YES reset:NO];
-	    deviceStatus = MK_devRunning;
+	    deviceStatus = MKDeviceStatusRunning;
 	    break;
-	case MK_devRunning:
+	case MKDeviceStatusRunning:
 	default:
 	    break;
     }

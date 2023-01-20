@@ -425,7 +425,7 @@ static int fileType(NSString *name)
 {
     MKTuningSystem *tuningSys;
     MKNote *scoreInfo;
-    MKScore *loadResult;
+    MKScore *loadResult = nil;
     
     MKSetScorefileParseErrorAbort(10);
     /* Can this every happen? */
@@ -442,9 +442,15 @@ static int fileType(NSString *name)
     [tuningSys install];
     [tuningSys release];
     userCancelFileRead = NO;
-    loadResult = (scoreForm == MIDI_FILE) ? [scoreObj readMidifile: fileName] :
-	[scoreObj readScorefile: fileName];
-    if (!loadResult || userCancelFileRead) {  
+    if (scoreForm == MIDI_FILE) {
+        BOOL success = [scoreObj readMidifile: fileName];
+        if (success) {
+            loadResult = scoreObj;
+        }
+    } else {
+        loadResult = [scoreObj readScorefile: fileName];
+    }
+    if (!loadResult || userCancelFileRead) {
 	/* Error in file? */
 	if (!userCancelFileRead) 
 	    NSRunAlertPanel(STR_SCOREPLAYER, STR_FIX_ERRORS, STR_OK, NULL, NULL);
