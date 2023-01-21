@@ -55,7 +55,7 @@ static double mangleTime(MKMidi *self,double driverTime)
     int theTime;
     MKMDReturn r; 
     double t;
-    if (deviceStatus == MK_devClosed)
+    if (deviceStatus == MKDeviceStatusClosed)
         return 0;
     r = MKMDGetClockTime(devicePort, ownerPort, &theTime);
     if (r != MKMD_SUCCESS) 

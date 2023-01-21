@@ -426,18 +426,17 @@ static void unsetPartPerformers(MKScorePerformer *self)
 - (MKPartPerformer *) partPerformerForPart: (MKPart *) aPart
   /* Returns the MKPartPerformer for aPart, if found. */
 {
-    MKPartPerformer *partPerformer;
-    unsigned n = [partPerformers count], i;
-    
-    for (i = 0; i < n; i++)
-        if ([(partPerformer = [partPerformers objectAtIndex: i]) part] == aPart)
+    for (MKPartPerformer *partPerformer in partPerformers) {
+        if ([partPerformer part] == aPart) {
             return partPerformer;
+        }
+    }
     return nil;
 }
 
 - (NSArray *) partPerformers
 {
-    return _MKLightweightArrayCopy(partPerformers);
+    return [_MKLightweightArrayCopy(partPerformers) autorelease];
 }
 
 - (NSArray *) noteSenders

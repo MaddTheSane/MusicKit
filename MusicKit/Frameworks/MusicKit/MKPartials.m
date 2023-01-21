@@ -153,7 +153,7 @@ id MKGetPartialsClass(void)
   freeArrays(self);
   defaultPhase      = 0.0;
   dbMode            = NO;
-  tableType         = MK_oscTable;
+    tableType         = MKOrchestraSharedTypeOscillatorTable;
 
   return self;
 }
@@ -391,24 +391,24 @@ double **arrPtr)
   while ((freqs1 < end1) || (freqs2 < end2)) {
     if ((freqs1 < end1) && (freqs2 < end2) &&
         (ABS(*freqs1 - *freqs2) < .001)) { /* The same freq ratio? */
-        *freqs++ = *freqs1++;
-        freqs2++;
-        *amps++ = *amps1 + (*amps2++ - *amps1) * value;
-        amps1++;
+      *freqs++ = *freqs1++;
+      freqs2++;
+      *amps++ = *amps1 + (*amps2++ - *amps1) * value;
+      amps1++;
     }
-else if ((freqs1 < end1) &&
-         ((freqs2 == end2) || (*freqs1 < *freqs2))) {
-  *freqs++ = *freqs1++;
-  *amps++ = *amps1++ * (1 - value);
-}
-else {
-  *freqs++ = *freqs2++;
-  *amps++ = *amps2++ * value;
-}
+    else if ((freqs1 < end1) &&
+             ((freqs2 == end2) || (*freqs1 < *freqs2))) {
+      *freqs++ = *freqs1++;
+      *amps++ = *amps1++ * (1 - value);
+    }
+    else {
+      *freqs++ = *freqs2++;
+      *amps++ = *amps2++ * value;
+    }
   }
-partialCount = freqs - freqRatios;
-length = 0;   /* This ensures a recomputation of the tables. */
-return self;
+  partialCount = freqs - freqRatios;
+  length = 0;   /* This ensures a recomputation of the tables. */
+  return self;
 }
 
 - (int)partialCount
@@ -779,7 +779,7 @@ NSLocalizedStringFromTableInBundle(@"MKPartials object currently supports table 
     double sinPhase = 0;
     double tmp;
     int indexVal, halfLength;
-    tableType = MK_oscTable;
+    tableType = MKOrchestraSharedTypeOscillatorTable;
 
     if (!ampRatios || !freqRatios || (partialCount <= 0))
 	return nil;
@@ -864,7 +864,7 @@ NSLocalizedStringFromTableInBundle(@"MKPartials object currently supports table 
   subclass has no data, returns NULL. The data should neither be modified
   nor freed by the sender. */
 {
-    if ((tableType != MK_oscTable) ||
+    if ((tableType != MKOrchestraSharedTypeOscillatorTable) ||
 	(length != aLength) || (scaling != aScaling) || (length == 0))
 	if (![self fillTableLength:aLength scale:aScaling])
 	    return NULL;
@@ -883,7 +883,7 @@ NSLocalizedStringFromTableInBundle(@"MKPartials object currently supports table 
  */
 - (double *) dataDoubleLength: (unsigned int) aLength scale: (double) aScaling
 {
-    if ((tableType != MK_oscTable) ||
+    if ((tableType != MKOrchestraSharedTypeOscillatorTable) ||
 	(length != aLength) || (scaling != aScaling) || (length == 0))
 	if (![self fillTableLength:aLength scale:aScaling])
 	    return NULL;

@@ -29,8 +29,10 @@ OF THIS AGREEMENT.
 #ifndef __SND_ENDIAN_FUNCTIONS__
 #define __SND_ENDIAN_FUNCTIONS__
 
-typedef unsigned long int SndSwappedFloat;
-typedef unsigned long long int SndSwappedDouble;
+#include <stdint.h>
+
+typedef uint32_t SndSwappedFloat;
+typedef uint64_t SndSwappedDouble;
 
 typedef union _SndSwappedFloatUnion {
 	float aFloat;
@@ -78,6 +80,6 @@ unsigned char *SndSwap_Convert16BitNative2LittleEndian(unsigned short si);
   @param li 4 byte native word to be byte swapped (if needed) to Little Endian
   @return Pointer to the byte swapped value. Do NOT store this!  
 */
-unsigned char *SndSwap_Convert32BitNative2LittleEndian(unsigned long li);
+unsigned char *SndSwap_Convert32BitNative2LittleEndian(uint32_t li);
 
 #endif

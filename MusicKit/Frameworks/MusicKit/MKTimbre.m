@@ -141,8 +141,7 @@ static void initNeXTTimbres(void)
 	    p = [partialsClass new];
 	    s = ss[j];
 	    (*setAll)(p,
-		      @selector(_setPartialNoCopyCount:freqRatios:ampRatios:
-			      phases:orDefaultPharse:),
+		      @selector(_setPartialNoCopyCount:freqRatios:ampRatios:phases:orDefaultPhase:),
 		      (int) s->numharms,
 		      (short *) s->hrms,
 		      (float *) s->amps,

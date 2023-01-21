@@ -148,7 +148,7 @@ int main (int argc, const char *argv[])
             exit(1);
         }
         [aNoteInfo setPar: MK_synthPatch toString: @"midi0"];
-        printf("%d parts\n", [aScore partCount]);
+        printf("%ld parts\n", (long)[aScore partCount]);
         parts = [aScore parts];
         [parts makeObjectsPerformSelector: @selector(setInfoNote:) withObject: aNoteInfo];
         if(combineNotes) {

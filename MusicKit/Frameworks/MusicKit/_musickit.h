@@ -186,8 +186,8 @@ extern void _MKDoubleToFix24Array (double *doubleArr, DSPDatum *fix24Arr, int le
 extern void _MKFix24ToDoubleArray (DSPDatum *fix24Arr, double *doubleArr, int len);
 
 // array duplication
-NSMutableArray<MKNote*> *_MKLightweightArrayCopy(NSMutableArray *oldArray) NS_RETURNS_RETAINED;
-NSMutableArray<MKNote*> *_MKDeepMutableArrayCopy(NSMutableArray *oldArray) NS_RETURNS_RETAINED;
+NSMutableArray *_MKLightweightArrayCopy(NSMutableArray *oldArray) NS_RETURNS_RETAINED;
+NSMutableArray *_MKDeepMutableArrayCopy(NSMutableArray *oldArray) NS_RETURNS_RETAINED;
 
 /* Files */
 /*

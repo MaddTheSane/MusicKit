@@ -112,7 +112,7 @@ unsigned char *SndSwap_Convert16BitNative2LittleEndian(unsigned short si)
     return pch;
 }
 
-unsigned char *SndSwap_Convert32BitNative2LittleEndian(unsigned long li)
+unsigned char *SndSwap_Convert32BitNative2LittleEndian(uint32_t li)
 {
     static unsigned char pch[4];
     

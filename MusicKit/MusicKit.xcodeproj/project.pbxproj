@@ -2160,7 +2160,7 @@
 		D825568305A2142800B0192B /* MKPart.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MKPart.h; sourceTree = "<group>"; };
 		D825568405A2142800B0192B /* MKPart.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MKPart.m; sourceTree = "<group>"; };
 		D825568505A2142800B0192B /* MKPartials.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MKPartials.h; sourceTree = "<group>"; };
-		D825568605A2142800B0192B /* MKPartials.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MKPartials.m; sourceTree = "<group>"; };
+		D825568605A2142800B0192B /* MKPartials.m */ = {isa = PBXFileReference; fileEncoding = 30; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = MKPartials.m; sourceTree = "<group>"; usesTabs = 0; };
 		D825568705A2142800B0192B /* MKPartialsWaveshapingTable.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MKPartialsWaveshapingTable.m; sourceTree = "<group>"; };
 		D825568805A2142800B0192B /* MKPartPerformer.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MKPartPerformer.h; sourceTree = "<group>"; };
 		D825568905A2142800B0192B /* MKPartPerformer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MKPartPerformer.m; sourceTree = "<group>"; };
@@ -2190,7 +2190,7 @@
 		D82556A105A2142800B0192B /* MKScorefileWriter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MKScorefileWriter.h; sourceTree = "<group>"; };
 		D82556A205A2142800B0192B /* MKScorefileWriter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MKScorefileWriter.m; sourceTree = "<group>"; };
 		D82556A305A2142800B0192B /* MKScorePerformer.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MKScorePerformer.h; sourceTree = "<group>"; };
-		D82556A405A2142800B0192B /* MKScorePerformer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MKScorePerformer.m; sourceTree = "<group>"; };
+		D82556A405A2142800B0192B /* MKScorePerformer.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MKScorePerformer.m; sourceTree = "<group>"; usesTabs = 0; };
 		D82556A505A2142800B0192B /* MKScoreRecorder.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MKScoreRecorder.h; sourceTree = "<group>"; };
 		D82556A605A2142800B0192B /* MKScoreRecorder.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MKScoreRecorder.m; sourceTree = "<group>"; };
 		D82556A705A2142800B0192B /* MKSynthData.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MKSynthData.h; sourceTree = "<group>"; };
@@ -4283,14 +4283,14 @@
 		D82AC39305A0F39000780F57 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				D88FE34105A0FBC10024FD88 /* SndFunctions.h */,
-				D88FE34205A0FBC10024FD88 /* SndFunctions.m */,
 				D88FE2B405A0F8430024FD88 /* SndEndianFunctions.c */,
 				D88FE2B505A0F8430024FD88 /* SndEndianFunctions.h */,
 				D88FE2B805A0F8430024FD88 /* SndError.h */,
 				D88FE2B905A0F8430024FD88 /* SndError.m */,
-				D88FE33D05A0FBC10024FD88 /* Sndfilterkit.m */,
 				D88FE33E05A0FBC10024FD88 /* Sndfilterkit.h */,
+				D88FE33D05A0FBC10024FD88 /* Sndfilterkit.m */,
+				D88FE34105A0FBC10024FD88 /* SndFunctions.h */,
+				D88FE34205A0FBC10024FD88 /* SndFunctions.m */,
 				D88FE30905A0F9E40024FD88 /* SndMuLaw.h */,
 				D88FE30A05A0F9E40024FD88 /* SndMuLaw.m */,
 				D88FE30F05A0F9E40024FD88 /* SndResample.h */,

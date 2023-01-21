@@ -73,7 +73,7 @@ be seen by the MKScorePerformer.
 @interface MKScorePerformer : NSObject
 {
     MKPerformerStatus status;       /*! The object's status. */
-    NSMutableArray<MKPerformer*> *partPerformers; /*! An array of the object's MKPartPerformer instances. */
+    NSMutableArray<MKPartPerformer*> *partPerformers; /*! An array of the object's MKPartPerformer instances. */
     MKScore *score;                 /*! The MKScore with which this object is associated. */     
     double firstTimeTag;            /*! The smallest timeTag value considered for
                                        performance, as last broadcast to the MKPartPerformers. */
@@ -301,7 +301,7 @@ be seen by the MKScorePerformer.
   @brief Creates and returns a NSArray containing the receiver's MKPartPerformers.
   @return Returns an NSArray instance.
 */
-- (NSArray *) partPerformers; 
+- (NSArray<MKPartPerformer*> *) partPerformers; 
    
 /*!
   @return Returns an NSArray.

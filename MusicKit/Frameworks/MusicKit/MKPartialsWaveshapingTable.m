@@ -18,7 +18,7 @@
 - (DSPDatum *) dataDSPAsWaveshapingTableLength: (unsigned int) aLength 
 					 scale: (double) aScaling
 {
-    if ((tableType != MK_waveshapingTable) || 
+    if ((tableType != MKOrchestraSharedTypeWaveshapingTable) ||
 	(length != aLength) || (scaling != aScaling) || (length == 0))
 	if (![self fillWaveshapingTableLength:aLength scale:aScaling])
 	    return NULL;
@@ -33,7 +33,7 @@
 
 - (double *)dataDoubleAsWaveshapingTableLength:(unsigned int)aLength scale:(double)aScaling
 {  
-   if ((tableType != MK_waveshapingTable) || 
+    if ((tableType != MKOrchestraSharedTypeWaveshapingTable) ||
        (length != aLength) || (scaling != aScaling) || (length == 0))
      if (![self fillWaveshapingTableLength:aLength scale:aScaling])
        return NULL;
@@ -121,7 +121,7 @@ NSLocalizedStringFromTableInBundle(@"Waveshaping harmonics must be integers.", _
 	    aLength = length;
     }
     isEven = (aLength % 2 == 0);
-    tableType = MK_waveshapingTable;
+    tableType = MKOrchestraSharedTypeWaveshapingTable;
     if (!dataDouble || (length != aLength)) {
     	if (dataDouble) {
 	    free(dataDouble); 

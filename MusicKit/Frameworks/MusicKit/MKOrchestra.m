@@ -1050,7 +1050,7 @@ static void initSharedTable(void)
     if (deviceStatus == MKDeviceStatusClosed)
 	return nil;
     return _MKFindSharedSynthObj(_sharedSet,sharedGarbage,aKeyObj,
-                                 whichSegment,length,MK_noOrchSharedType);
+				 whichSegment,length,MKOrchestraSharedTypeNone);
 }
 
 /* Obsolete */
@@ -1138,7 +1138,7 @@ associated with it exists.
     return installSharedObject(self,aSynthDataObj,aKeyObj,
                                [aSynthDataObj orchAddrPtr]->memSegment, 
                                [aSynthDataObj length],
-			       MK_noOrchSharedType);
+			       MKOrchestraSharedTypeNone);
 }
 
 -installSharedSynthDataWithSegmentAndLength: (MKSynthData *) aSynthDataObj
@@ -1156,7 +1156,7 @@ associated with it exists.
     return installSharedObject(self,aSynthDataObj,aKeyObj,
                                [aSynthDataObj orchAddrPtr]->memSegment,
 			       0,
-			       MK_noOrchSharedType); 
+			       MKOrchestraSharedTypeNone);
 }
 
 -installSharedSynthDataWithSegment: aSynthDataObj
@@ -1174,7 +1174,7 @@ associated with it exists.
     return installSharedObject(self,aSynthObj,aKeyObj, 
                                MK_noSegment,
 			       0,
-			       MK_noOrchSharedType);
+			       MKOrchestraSharedTypeNone);
 }
 
 -installSharedObject: aSynthObj 
@@ -3550,15 +3550,15 @@ allocUG(register MKOrchestra *self,id factObj,id beforeObj,id afterObj)
 
 - writeSymbolTable: (NSString *) fileName
 {
-    int i=0,cnt;//sb: fd
+    NSInteger i=0,cnt;//sb: fd
     NSMutableData *s = [[NSMutableData alloc] initWithCapacity: 100];
     DSPAddress looperAddr = (isLoopOffChip) ?
 	((dataMemBlockStruct *) _eMemList[P_IND(self)])->next->baseAddr - LOOPERSIZE : 
         _piLoop;
     if (!s)
 	return nil;
-    for (cnt=[unitGeneratorStack count], i=0; i<cnt; i++)
-        [[unitGeneratorStack objectAtIndex: i] writeSymbolsToStream: s];
+    for (id obj in unitGeneratorStack)
+        [obj writeSymbolsToStream: s];
 //    [NX_ADDRESS(unitGeneratorStack)[i] writeSymbolsToStream: s];
     [s appendData: [[NSString stringWithFormat: @"_SYMBOL P\nLOOPER I %06X\n_END %06X\n", looperAddr,ORCHLOOPLOC]
                     dataUsingEncoding: NSNEXTSTEPStringEncoding]];

@@ -73,7 +73,7 @@ id MKGetSamplesClass(void)
 	[MKSamples setVersion: VERSION2]; //sb: suggested by Stone conversion guide (replaced self)
 }
 
--  init
+-  (id)init
   /* This method is ordinarily invoked only by the superclass when an 
      instance is created. You may send this message to reset the object. */ 
 
@@ -86,7 +86,7 @@ id MKGetSamplesClass(void)
     sound = nil;
     soundfile = nil;
 
-    tableType = MK_oscTable;
+    tableType = MKOrchestraSharedTypeOscillatorTable;
     return self;
 }
 
@@ -382,7 +382,7 @@ of it.
   /* Private method that supports both osc and excitation tables */
 {
     /*** FIXME Eventually allow double and other format Sounds and avoid losing precision in this case. ***/
-    int originalLength, inc;
+    NSInteger originalLength, inc;
     short *data,*end;
     DSPDatum  *newData;
     
@@ -391,7 +391,7 @@ of it.
     originalLength = [sound lengthInSampleFrames];
     if (aLength == 0)
 	aLength = originalLength;
-    if (tableType == MK_oscTable) {
+    if (tableType == MKOrchestraSharedTypeOscillatorTable) {
 	inc = originalLength/aLength;
 	if (inc * aLength != originalLength) {
 	    MKErrorCode(MK_samplesNoResampleErr);
@@ -417,7 +417,7 @@ of it.
     length = aLength;
     scaling = aScaling;
     data = (short *)[sound bytes]; 
-    if (tableType == MK_oscTable)
+    if (tableType == MKOrchestraSharedTypeOscillatorTable)
 	end = data + originalLength;
     else 
 	end = data + MIN(aLength,originalLength);
@@ -497,7 +497,7 @@ of it.
 
 - (NSString *) description
 {
-    return [NSString stringWithFormat: @"%@ sound %@, file %@, processor chain %@\nCurrently at %d of (%u,%u) amp: %lf pan: %lf\n", 
+    return [NSString stringWithFormat: @"%@ sound %@, file %@, processor chain %@\nCurrently at %d of (%u,%u) amp: %lf pan: %lf", 
 	[super description], sound, soundfile, audioProcessorChain, curLoc, startSampleLoc, lastSampleLoc, amplitude, panBearing];
 }
 
@@ -514,7 +514,7 @@ of it.
    copying the data into the data buffer.
    Returns self or nil if there's a problem. */
 {
-    tableType = MK_oscTable;
+    tableType = MKOrchestraSharedTypeOscillatorTable;
     return [self _fillTableLength:aLength scale:aScaling];
 }
 
@@ -566,13 +566,13 @@ of it.
    copying the data into the data buffer.
    Returns self or nil if there's a problem. */
 {
-    tableType = MK_excitationTable;
+    tableType = MKOrchestraSharedTypeExcitationTable;
     return [self _fillTableLength:aLength scale:aScaling];
 }
 
 - (DSPDatum *) dataDSPAsExcitationTableLength: (unsigned int) aLength scale: (double) aScaling
 {
-   if ((tableType != MK_excitationTable) || 
+    if ((tableType != MKOrchestraSharedTypeExcitationTable) ||
        (length != aLength) || (scaling != aScaling) || (length == 0))
      if (![self fillExcitationTableLength:aLength scale:aScaling])
        return NULL;
@@ -586,7 +586,7 @@ of it.
 
 - (double *) dataDoubleAsExcitationTableLength: (unsigned int) aLength scale: (double) aScaling
 {  
-   if ((tableType != MK_excitationTable) || 
+    if ((tableType != MKOrchestraSharedTypeExcitationTable) ||
        (length != aLength) || (scaling != aScaling) || (length == 0))
      if (![self fillExcitationTableLength:aLength scale:aScaling])
        return NULL;

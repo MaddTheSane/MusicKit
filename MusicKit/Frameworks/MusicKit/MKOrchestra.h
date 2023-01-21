@@ -334,6 +334,7 @@ release notes for the latest information on supported drivers.
   @file MKOrchestra.h
  */
 
+@class MKUnitGenerator;
 @protocol MKOrchestraDelegate;
 
 /*!
@@ -435,7 +436,7 @@ extern void MKSetPreemptDuration(double seconds);
     /*! Sampling rate. */     
     double samplingRate;
     /*! Stack of MKUnitGenerator instances in the order they appear in DSP memory. MKSynthData instances are not on this unitGeneratorStack. */
-    NSMutableArray *unitGeneratorStack;      
+    NSMutableArray<MKUnitGenerator*> *unitGeneratorStack;
     /*! For output sound samples. */
     NSString *outputSoundfile;
     id<MKOrchestraDelegate> outputSoundDelegate;
