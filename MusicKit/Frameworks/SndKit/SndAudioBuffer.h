@@ -48,7 +48,7 @@ typedef enum {
   SndAudioBuffer encapsulates sampling rate, number of channels, number of frames and the format of the sample data.
   A SndAudioBuffer is guaranteed to be uncompressed, therefore it can be processed as a linear buffer of memory.
 */
-@interface SndAudioBuffer : NSObject
+@interface SndAudioBuffer : NSObject <NSCopying>
 {
     /*! Holds sound parameters (sample rate, data format, channel count, frame count). */
     SndFormat format;
@@ -69,7 +69,7 @@ typedef enum {
   @param      timeInSeconds Duration is specified in seconds.
   @return     Returns an autoreleased SndAudioBuffer instance.
 */
-+ audioBufferWithDataFormat: (SndSampleFormat) dataFormat
++ (instancetype) audioBufferWithDataFormat: (SndSampleFormat) dataFormat
 	       channelCount: (int) channelCount
                samplingRate: (double) sampleRate
                    duration: (double) timeInSeconds;
@@ -82,7 +82,7 @@ typedef enum {
   @param      newFrameCount Duration is specified in frames.
   @return     Returns an autoreleased SndAudioBuffer instance.
  */
-+ audioBufferWithDataFormat: (SndSampleFormat) newDataFormat
++ (instancetype) audioBufferWithDataFormat: (SndSampleFormat) newDataFormat
 	       channelCount: (int) newChannelCount
                samplingRate: (double) newSamplingRate
 		 frameCount: (long) newFrameCount;
@@ -92,7 +92,7 @@ typedef enum {
   @param      format A SndFormat describing the format of the buffer to be created.
   @return     Returns an autoreleased SndAudioBuffer instance.
  */
-+ audioBufferWithFormat: (SndFormat) format;
++ (instancetype) audioBufferWithFormat: (SndFormat) format;
 
 /*!
     @brief   Factory method creating an audio buffer in the given format with the audio data.
@@ -102,14 +102,14 @@ typedef enum {
     @param      dataPointer
     @return     Returns an autoreleased SndAudioBuffer instance.
 */
-+ audioBufferWithFormat: (SndFormat *) format data: (void *) dataPointer;
++ (instancetype) audioBufferWithFormat: (SndFormat *) format data: (void *) dataPointer;
 
 /*!
     @brief   Factory method creating an SndAudioBuffer instance from a SNDStreamBuffer.
     @param      streamBuffer A fully populated SNDStreamBuffer structure.
     @return     Returns an autoreleased SndAudioBuffer instance.
 */
-+ audioBufferWithSNDStreamBuffer: (SNDStreamBuffer *) streamBuffer;
++ (instancetype) audioBufferWithSNDStreamBuffer: (SNDStreamBuffer *) streamBuffer;
 
 /*!
     @brief   Factory method creating audioBuffers from a region of the given Snd.
@@ -117,7 +117,7 @@ typedef enum {
     @param      rangeInFrames An NSRange structure indicating the start and end of the region in samples.
     @return     Returns an autoreleased SndAudioBuffer instance.
 */
-+ audioBufferWithSnd: (Snd *) snd inRange: (NSRange) rangeInFrames;
++ (instancetype) audioBufferWithSnd: (Snd *) snd inRange: (NSRange) rangeInFrames;
 
 /*!
   @brief   Initialization method from a SndFormat and the data it describes.
@@ -128,7 +128,7 @@ typedef enum {
   @param      sampleData A pointer to the memory holding the sample data in the format described by format.
   @return     Returns self.
 */
-- initWithFormat: (SndFormat *) format data: (void *) sampleData;
+- (instancetype) initWithFormat: (SndFormat *) format data: (void *) sampleData;
 
 /*!
   @brief   Initialize a buffer with a matching format to the supplied buffer
@@ -137,7 +137,7 @@ typedef enum {
   @param      sndBuffer An existing initialised SndAudioBuffer.
   @return     Returns self.
 */
-- initWithBuffer: (SndAudioBuffer *) sndBuffer;
+- (instancetype) initWithBuffer: (SndAudioBuffer *) sndBuffer;
 
 /*!
   @brief   Initialize a buffer with a matching format to the supplied buffer, for a subset range of that audio buffer.
@@ -145,8 +145,8 @@ typedef enum {
   @param      rangeInFrames The NSRange of the supplied sndBuffer to initialise the new instance with.
   @return     Returns self.
 */
-- initWithBuffer: (SndAudioBuffer *) sndBuffer
-           range: (NSRange) rangeInFrames;
+- (instancetype) initWithBuffer: (SndAudioBuffer *) sndBuffer
+			  range: (NSRange) rangeInFrames;
 
 /*!
   @brief   Initializes the instance to the given format.
@@ -158,10 +158,10 @@ typedef enum {
   @param      newFrameCount The number of frames, each frame consists of channelCount number of samples.
   @return     Returns self.
  */
-- initWithDataFormat: (SndSampleFormat) dataFormat
-	channelCount: (int) channelCount
-        samplingRate: (double) samplingRate
-          frameCount: (long) newFrameCount;
+- (instancetype)initWithDataFormat: (SndSampleFormat) dataFormat
+		      channelCount: (int) channelCount
+		      samplingRate: (double) samplingRate
+			frameCount: (long) newFrameCount;
 
 /*!
   @brief   Initializes this audio buffer with sound data of the given format, channels, sample rate and duration.
@@ -173,10 +173,10 @@ typedef enum {
   @param      timeInSeconds The size of the buffer in seconds.
   @return     Returns self.
 */
-- initWithDataFormat: (SndSampleFormat) dataFormat
-	channelCount: (int) channelCount
-        samplingRate: (double) samplingRate
-            duration: (double) timeInSeconds;
+- (instancetype)initWithDataFormat: (SndSampleFormat) dataFormat
+		      channelCount: (int) channelCount
+		      samplingRate: (double) samplingRate
+			  duration: (NSTimeInterval) timeInSeconds;
 
 /*!
   @brief   Mixes supplied SndAudioBuffer instance with the receiving instance, modifying it.
@@ -337,7 +337,7 @@ typedef enum {
   The user of this method will need to have determined the format of the data in order to correctly traverse it.
   @return     Pointer to the audio data.
 */
-- (void *) bytes;
+- (void *) bytes NS_RETURNS_INNER_POINTER;
 
 /*!
   @brief   compares the data format and length of this buffer to a second buffer.

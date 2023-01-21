@@ -331,7 +331,7 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
   argument in methods such as <b>addNotes:</b> (sent to another
   MKPart), <b>addNotes:timeShift:</b>, and <b>removeNotes:</b>.
 */
-- firstTimeTag: (double) firstTimeTag lastTimeTag: (double) lastTimeTag;
+- (NSArray*)firstTimeTag: (double) firstTimeTag lastTimeTag: (double) lastTimeTag;
 
 /*!
   @param  aNote is an MKNote.
@@ -370,7 +370,7 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
   @brief Removes all the MKNotes the MKPart has in common with <i>aNoteList</i>.
   @see -<b>removeNote:</b>, -<b>empty</b>, -<b>addNote:</b>, -<b>firstTimeTag:lastTimeTag:</b>
 */
-- removeNotes: (NSArray<MKNote*> *) aNoteList;
+- (void)removeNotes: (NSArray<MKNote*> *) aNoteList;
 
 /*!
   @brief Deletes all MKNotes within this part.
@@ -393,7 +393,7 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
  
   @see  -<b>addNotes:timeShift:</b>, -<b>shift</b>
 */
-- addNoteCopies: (NSArray<MKNote*> *) aNoteList timeShift: (double) shift;
+- (void)addNoteCopies: (NSArray<MKNote*> *) aNoteList timeShift: (double) shift;
 
 /*!
   @param  aNoteList is an NSArray instance.
@@ -410,7 +410,7 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
 
   @see  -<b>addNoteCopies:timeShift:</b>, -<b>shift:</b>
 */
-- addNotes: (NSArray<MKNote*> *) aNoteList timeShift: (double) shift;
+- (void) addNotes: (NSArray<MKNote*> *) aNoteList timeShift: (double) shift;
 
 /*!
   @param  shift is a double.
@@ -422,7 +422,7 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
   removed and then readded to the MKPart.  Returns the
   MKPart.
 */
-- shiftTime: (double) shift; 
+- (void) shiftTime: (double) shift; 
 
 /*!
   @param  scale is a double.
@@ -453,6 +453,8 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
 */
 - (BOOL) hasSoundingNotes;
 
+@property (readonly) BOOL hasSoundingNotes;
+
 /*!
   @return Returns a BOOL.
   @brief Returns YES if the MKPart contains no MKNotes (not including the info MKNote), otherwise returns NO.
@@ -471,9 +473,9 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
  
   Invokes MKNote's <b>compareNotes:</b> method if the MKPart contains more than one such MKNote.
   
-  @see -<b>atOrAfterTime:</b>, -<b>atTime:nth:</b>, -<b>next</b>
+  @see -<b>noteAtOrAfterTime:</b>, -<b>noteAtTime:index:</b>, -<b>next</b>
 */
-- (MKNote *) atTime: (double) timeTag; 
+- (MKNote *) noteAtTime: (NSTimeInterval) timeTag;
 
 /*!
   @param  timeTag is a double.
@@ -481,16 +483,16 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
   @brief Returns the first MKNote with a time tag equal to or greater than
   <i>timeTag</i>, or <b>nil</b> if none.
   
-  @see -<b>atTime:</b>, -<b>atOrAfterTime:nth:</b>, -<b>next</b>
+  @see -<b>noteAtTime:</b>, -<b>noteAtOrAfterTime:index:</b>, -<b>next</b>
 */
-- (MKNote *) atOrAfterTime: (double) timeTag;
+- (MKNote *) noteAtOrAfterTime: (NSTimeInterval) timeTag;
 
 /*!
   @param  timeTag is a double.
   @return Returns an MKNote instance.
   @brief Returns the first MKNote with a time tag equal to or less than <i>timeTag</i>, or <b>nil</b> if none.
 */
-- (MKNote *) atOrBeforeTime: (double) timeTag;
+- (MKNote *) noteAtOrBeforeTime: (NSTimeInterval) timeTag;
 
 /*!
   @param  n is an unsigned.
@@ -499,9 +501,9 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
   is out of bounds (negative or greater than the MKPart's MKNote
   count).
   
-  @see -<b>notes</b>, -<b>noteCount</b>, -<b>atTime:</b>
+  @see -<b>notes</b>, -<b>noteCount</b>, -<b>noteAtTime:</b>
 */
-- (MKNote *) nth: (unsigned) n; 
+- (MKNote *) noteAtIndex: (NSInteger) n;
 
 /*!
   @param  timeTag is a double.
@@ -510,9 +512,9 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
   @brief Returns the <i>n</i>th MKNote (zero-based) in the MKPart that has a
   time tag equal to or greater than <i>timeTag</i>, or <b>nil</b> if none.
   
-  @see  -<b>atTime:</b>, -<b>atOrAfterTime:</b>, -<b>next</b>
+  @see  -<b>noteAtTime:</b>, -<b>noteAtOrAfterTime:</b>, -<b>next</b>
 */
-- (MKNote *) atOrAfterTime: (double) timeTag nth: (unsigned) n; 
+- (MKNote *) noteAtOrAfterTime: (NSTimeInterval) timeTag index: (NSInteger) n;
 
 /*!
   @param  timeTag is a double.
@@ -521,9 +523,9 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
   @brief Returns the <i>n</i>th MKNote (zero-based) in the MKPart that has a
   time tag of <i>timeTag</i>, or <b>nil </b>if none.
   
-  @see -<b>atTime:</b>, -<b>atOrAfterTime:</b>, -<b>next</b>
+  @see -<b>noteAtTime:</b>, -<b>noteAtOrAfterTime:</b>, -<b>next</b>
 */
-- (MKNote *) atTime: (double) timeTag nth: (unsigned) n;
+- (MKNote *) noteAtTime: (NSTimeInterval) timeTag index: (NSInteger) n;
 
 /*!
   @param  aNote is an MKNote instance.
@@ -535,9 +537,9 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
   For greater efficiency, you should create a NSMutableArray from the <b>notes</b> method
   and then iterate over the array.
   
-  @see -<b>nth:</b>, -<b>atTime:</b>, -<b>atOrAfterTime:</b>
+  @see -<b>noteAtIndex:</b>, -<b>noteAtTime:</b>, -<b>noteAtOrAfterTime:</b>
 */
-- (MKNote *) next: (MKNote *) aNote; 
+- (MKNote *) noteAfterNote: (MKNote *) aNote; 
 
 /*!
   @brief Returns the time of the earliest note in the part.
@@ -669,6 +671,86 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
   compares the symbolized versions of the part name and the query name.
  */
 - (BOOL) isNamed: (NSString *) partNameToFind;
+
+@end
+
+@interface MKPart (Deprecated)
+
+/*!
+  @param  timeTag is a double.
+  @return Returns an MKNote instance.
+  @brief Returns the (first) MKNote in the MKPart that has a time tag of
+  <i>timeTag</i>, or <b>nil</b> if none.
+ 
+  Invokes MKNote's <b>compareNotes:</b> method if the MKPart contains more than one such MKNote.
+  
+  @see -<b>atOrAfterTime:</b>, -<b>atTime:nth:</b>, -<b>next</b>
+*/
+- (MKNote *) atTime: (double) timeTag NS_DEPRECATED_WITH_REPLACEMENT_MAC("-noteAtTime:", 10.0, 10.8);
+
+/*!
+  @param  timeTag is a double.
+  @return Returns an MKNote instance.
+  @brief Returns the first MKNote with a time tag equal to or greater than
+  <i>timeTag</i>, or <b>nil</b> if none.
+  
+  @see -<b>atTime:</b>, -<b>atOrAfterTime:nth:</b>, -<b>next</b>
+*/
+- (MKNote *) atOrAfterTime: (double) timeTag NS_DEPRECATED_WITH_REPLACEMENT_MAC("-noteAtOrAfterTime:", 10.0, 10.8);
+
+/*!
+  @param  timeTag is a double.
+  @return Returns an MKNote instance.
+  @brief Returns the first MKNote with a time tag equal to or less than <i>timeTag</i>, or <b>nil</b> if none.
+*/
+- (MKNote *) atOrBeforeTime: (double) timeTag NS_DEPRECATED_WITH_REPLACEMENT_MAC("-noteAtOrBeforeTime:", 10.0, 10.8);
+
+/*!
+  @param  n is an unsigned.
+  @return Returns an MKNote instance.
+  @brief Returns the <i>n</i>th MKNote (0-based), or <b>nil</b> if <i>n</i>
+  is out of bounds (negative or greater than the MKPart's MKNote
+  count).
+  
+  @see -<b>notes</b>, -<b>noteCount</b>, -<b>atTime:</b>
+*/
+- (MKNote *) nth: (unsigned) n NS_DEPRECATED_WITH_REPLACEMENT_MAC("-noteAtIndex:", 10.0, 10.8);
+
+/*!
+  @param  timeTag is a double.
+  @param  n is an unsigned.
+  @return Returns an MKNote instance.
+  @brief Returns the <i>n</i>th MKNote (zero-based) in the MKPart that has a
+  time tag equal to or greater than <i>timeTag</i>, or <b>nil</b> if none.
+  
+  @see  -<b>atTime:</b>, -<b>atOrAfterTime:</b>, -<b>next</b>
+*/
+- (MKNote *) atOrAfterTime: (double) timeTag nth: (unsigned) n NS_DEPRECATED_WITH_REPLACEMENT_MAC("-noteAtOrAfterTime:index:", 10.0, 10.8);
+
+/*!
+  @param  timeTag is a double.
+  @param  n is an unsigned.
+  @return Returns an MKNote instance.
+  @brief Returns the <i>n</i>th MKNote (zero-based) in the MKPart that has a
+  time tag of <i>timeTag</i>, or <b>nil </b>if none.
+  
+  @see -<b>atTime:</b>, -<b>atOrAfterTime:</b>, -<b>next</b>
+*/
+- (MKNote *) atTime: (double) timeTag nth: (unsigned) n NS_DEPRECATED_WITH_REPLACEMENT_MAC("-noteAtTime:index:", 10.0, 10.8);
+
+/*!
+  @param  aNote is an MKNote instance.
+  @return Returns an MKNote instance.
+  @brief Returns the MKNote immediately following <i>aNote</i>, or <b>nil</b>
+  if <i>aNote</i> isn't a member of the MKPart, or if it's the last
+  MKNote in the MKPart.
+ 
+  For greater efficiency, you should create a NSMutableArray from the <b>notes</b> method
+  and then iterate over the array.
+  
+  @see -<b>nth:</b>, -<b>atTime:</b>, -<b>atOrAfterTime:</b>
+*/
+- (MKNote *) next: (MKNote *) aNote NS_DEPRECATED_WITH_REPLACEMENT_MAC("-noteAfterNote:", 10.0, 10.8);
 
 @end
 

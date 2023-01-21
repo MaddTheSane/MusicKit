@@ -82,7 +82,7 @@ id MKGetPartClass(void)
 static id compact(MKPart *self)
 {
     NSMutableArray *newList = [[NSMutableArray alloc] initWithCapacity: self->noteCount];
-    int noteIndex, nc = [self->notes count];
+    NSInteger noteIndex, nc = [self->notes count];
   
     for (noteIndex = 0; noteIndex < nc; noteIndex++) {
 	MKNote *aNote = [self->notes objectAtIndex: noteIndex];
@@ -410,7 +410,7 @@ static NSInteger findNoteIndex(MKPart *self, MKNote *aNote)
     return -1;
 }
 
-static int findAux(MKPart *self,double timeTag)
+static NSInteger findAux(MKPart *self,double timeTag)
 {
     /* This function returns:
     If no elements in list, -1
@@ -419,14 +419,14 @@ static int findAux(MKPart *self,double timeTag)
     Otherwise, the index of the last MKNote with timeTag less than the one
     specified. */
     
-    register int low = 0;
-    register int high = low + self->noteCount;
-    register int tmp = low + ((unsigned)((high - low) >> 1));
+    register NSInteger low = 0;
+    register NSInteger high = low + self->noteCount;
+    register NSInteger tmp = low + ((unsigned)((high - low) >> 1));
     
     if (self->noteCount == 0)
 	return -1;
     while (low + 1 < high) {
-	tmp = low + ((unsigned)((high - low) >> 1));
+	tmp = low + ((NSUInteger)((high - low) >> 1));
 	if (timeTag > [[self->notes objectAtIndex:tmp] timeTag])
 	    low = tmp;
 	else high = tmp;
@@ -434,9 +434,9 @@ static int findAux(MKPart *self,double timeTag)
     return low;
 }
 
-static int findAtOrAfterTime(MKPart *self, double firstTimeTag) /* sb did the change from id to int return */
+static NSInteger findAtOrAfterTime(MKPart *self, double firstTimeTag) /* sb did the change from id to int return */
 {
-    int el = findAux(self, firstTimeTag);
+    NSInteger el = findAux(self, firstTimeTag);
 
     if (el == -1)
 	return -1;
@@ -447,9 +447,9 @@ static int findAtOrAfterTime(MKPart *self, double firstTimeTag) /* sb did the ch
     return -1;
 }
 
-static int findAtOrBeforeTime(MKPart *self, double lastTimeTag)
+static NSInteger findAtOrBeforeTime(MKPart *self, double lastTimeTag)
 {
-    int el = findAux(self, lastTimeTag);
+    NSInteger el = findAux(self, lastTimeTag);
     
     if (el == -1)
 	return -1;
@@ -547,14 +547,14 @@ static void removeNote(MKPart *self, MKNote *aNote)
 /* Contents editing operations. ----------------------------------------- */
 
 
-- removeNotes: (NSArray *) noteList
+- (void)removeNotes: (NSArray *) noteList
    /* TYPE: Editing
     * Removes from the receiver all MKNotes common to the receiver and noteList.
     * Returns the receiver.
     */
 {
     if (!noteList)
-	return self;
+	return;
     
     [self->notes removeObjectsInArray: noteList];
     /* now unset partlink for each note, in case the notes are used in other
@@ -563,10 +563,9 @@ static void removeNote(MKPart *self, MKNote *aNote)
     for (MKNote *obj in noteList) {
 	[obj _setPartLink: nil order: 0];
     }
-    return self;
 }
 
-- addNoteCopies: (NSArray *) noteList timeShift: (double) shift
+- (void) addNoteCopies: (NSArray<MKNote*> *) noteList timeShift: (double) shift
    /* TYPE: Editing
     * Copies the MKNotes in noteList, shifts the copies'
     * timeTags by shift beats, and then adds them
@@ -576,7 +575,7 @@ static void removeNote(MKPart *self, MKNote *aNote)
     */
 {
     if (noteList == nil)
-	return nil;
+	return;
     
     for (MKNote *element in noteList) {
         MKNote *copyElement = [element copy];
@@ -584,12 +583,11 @@ static void removeNote(MKPart *self, MKNote *aNote)
 	if (tTag < (MK_ENDOFTIME - 1))
 	    [copyElement setTimeTag: tTag + shift];
         [self addNote:copyElement];
-	[copyElement release]; /* we're holding extra retain from "copyWithZone" */
+	[copyElement release]; /* we're holding extra retain from "copy" */
     }
-    return self;
 }
 
-- addNotes: (NSArray<MKNote*> *) noteList timeShift: (double) shift
+- (void) addNotes: (NSArray<MKNote*> *) noteList timeShift: (double) shift
   /* TYPE: Editing
     * noteList should contain only MKNotes.
     * For each MKNote in noteList, removes the MKNote
@@ -610,12 +608,8 @@ static void removeNote(MKPart *self, MKNote *aNote)
     
     Finally, we add the MKNotes. */
     
-    register MKNote *el;
-    MKPart *elPart;
-    SEL oaiSel = @selector(objectAtIndex:);
-    
     if (noteList == nil)
-	return self;
+	return;
     {
 	id aPart;
 	NSMutableArray *parts = [[NSMutableArray alloc] init];
@@ -645,8 +639,6 @@ static void removeNote(MKPart *self, MKNote *aNote)
     }
     {
 	double tTag;
-	int noteIndex, alc;
-	IMP selfAddNote = [self methodForSelector:@selector(addNote:)];
 	for (MKNote *el in noteList) {
 	    tTag = [el timeTag];
 	    if (tTag < (MK_ENDOFTIME-1))
@@ -659,7 +651,6 @@ static void removeNote(MKPart *self, MKNote *aNote)
 # undef ADDPART
 # undef PARTSCONTAINSOBJECT
     }
-    return self;
 }
 
 - (void) removeAllNotes
@@ -673,16 +664,15 @@ static void removeNote(MKPart *self, MKNote *aNote)
     noteCount = 0;
 }
 
-- shiftTime: (double) shift
+- (void) shiftTime: (double) shift
     /* TYPE: Editing
     * Shift is added to the timeTags of all notes in the MKPart.
   * Implemented in terms of addNotes:timeShift:.
     */
 {
     NSArray *noteList = _MKLightweightArrayCopy(notes);
-    id ret = [self addNotes: noteList timeShift: shift];
+    [self addNotes: noteList timeShift: shift];
     [noteList release];
-    return ret;
 }
 
 - scaleTime: (double) scale
@@ -704,7 +694,7 @@ static void removeNote(MKPart *self, MKNote *aNote)
 
 /* Accessing ------------------------------------------------------------- */
 
-- firstTimeTag: (double) firstTimeTag lastTimeTag: (double) lastTimeTag
+- (NSArray*)firstTimeTag: (double) firstTimeTag lastTimeTag: (double) lastTimeTag
        /* TYPE: Querying the object
     * Creates and returns a List containing the receiver's MKNotes
     * between firstTimeTag and lastTimeTag in time order.
@@ -713,7 +703,7 @@ static void removeNote(MKPart *self, MKNote *aNote)
     */
 {
     NSMutableArray *anArray;
-    int firstEl, lastEl;
+    NSInteger firstEl, lastEl;
     
     if (!noteCount)
 	return [[[NSMutableArray alloc] init] autorelease];
@@ -769,7 +759,7 @@ static void removeNote(MKPart *self, MKNote *aNote)
     return (noteCount == 0);
 }
 
-- (MKNote *) atTime: (double) timeTag
+- (MKNote *) noteAtTime: (NSTimeInterval) timeTag
  /* TYPE: Accessing MKNotes
     * Returns the first MKNote found at time timeTag, or nil if
     * no such MKNote.
@@ -789,7 +779,7 @@ static void removeNote(MKPart *self, MKNote *aNote)
     return [[el retain] autorelease];
 }
 
-- (MKNote *) atOrAfterTime: (double) timeTag
+- (MKNote *) noteAtOrAfterTime: (double) timeTag
    /* TYPE: Accessing MKNotes
     * Returns the first MKNote found at or after time timeTag,
     * or nil if no such MKNote.
@@ -805,14 +795,14 @@ static void removeNote(MKPart *self, MKNote *aNote)
     return [[[self->notes objectAtIndex: elReturned] retain] autorelease];
 }
 
-- (MKNote *) atOrBeforeTime: (double) timeTag
+- (MKNote *) noteAtOrBeforeTime: (double) timeTag
    /* TYPE: Accessing MKNotes
     * Returns the first MKNote found at or after time timeTag,
     * or nil if no such MKNote.
     * Doesn't copy the MKNote.
     */
 {
-    int elReturned;
+    NSInteger elReturned;
     
     sortIfNeeded(self);
     elReturned = findAtOrBeforeTime(self, timeTag);
@@ -821,7 +811,7 @@ static void removeNote(MKPart *self, MKNote *aNote)
     return [[[self->notes objectAtIndex: elReturned] retain] autorelease];
 }
 
-- (MKNote *) nth: (unsigned) n
+- (MKNote *) noteAtIndex: (NSInteger) n
  /* TYPE: Accessing MKNotes
     * Returns the nth MKNote (0-based), or nil if no such MKNote.
     * Doesn't copy the MKNote. */
@@ -830,15 +820,15 @@ static void removeNote(MKPart *self, MKNote *aNote)
     return [[[notes objectAtIndex: n] retain] autorelease];
 }
 
-- (MKNote *) atOrAfterTime: (double) timeTag nth: (unsigned) n
+- (MKNote *) noteAtOrAfterTime: (double) timeTag index: (NSInteger) n
        /* TYPE: Accessing MKNotes
     * Returns the nth MKNote (0-based) at or after time timeTag,
     * or nil if no such MKNote.
     * Doesn't copy the MKNote.
     */
 {
-    unsigned int arrEnd;
-    int elReturned;
+    NSInteger arrEnd;
+    NSInteger elReturned;
     
     sortIfNeeded(self);
     elReturned = findAtOrAfterTime(self, timeTag);
@@ -852,14 +842,14 @@ static void removeNote(MKPart *self, MKNote *aNote)
     return [[[notes objectAtIndex: elReturned + n] retain] autorelease];
 }
 
-- (MKNote *) atTime: (double) timeTag nth: (unsigned) n
+- (MKNote *) noteAtTime: (NSTimeInterval) timeTag index: (NSInteger) n
    /* TYPE: Accessing MKNotes
     * Returns the nth MKNote (0-based) at time timeTag,
     * or nil if no such MKNote.
     * Doesn't copy the MKNote.
     */
 {
-    MKNote *aNote = [self atOrAfterTime: timeTag nth: n];
+    MKNote *aNote = [self noteAtOrAfterTime: timeTag index: n];
     
     if (!aNote)
 	return nil;
@@ -868,13 +858,13 @@ static void removeNote(MKPart *self, MKNote *aNote)
     return nil;
 }
 
-- (MKNote *) next: (MKNote *) aNote
+- (MKNote *) noteAfterNote: (MKNote *) aNote
  /* TYPE: Accessing MKNotes
     * Returns the MKNote immediately following aNote, or nil
     * if no such MKNote.
     */
 {
-    int elReturned;
+    NSInteger elReturned;
     
     if (!aNote)
 	return nil;
@@ -1118,3 +1108,42 @@ static void removeNote(MKPart *self, MKNote *aNote)
 
 @end
 
+@implementation MKPart (Deprecated)
+
+
+- (MKNote *)atTime:(double)timeTag
+{
+    return [self noteAtTime:timeTag];
+}
+
+- (MKNote *) atOrAfterTime: (double) timeTag
+{
+    return [self noteAtOrAfterTime:timeTag];
+}
+
+- (MKNote *) atOrBeforeTime: (double) timeTag
+{
+    return [self noteAtOrBeforeTime:timeTag];
+}
+
+- (MKNote *) nth: (unsigned) n
+{
+    return [self noteAtIndex:n];
+}
+
+- (MKNote *) atOrAfterTime: (double) timeTag nth: (unsigned) n
+{
+    return [self noteAtOrAfterTime:timeTag index:n];
+}
+
+- (MKNote *) atTime: (double) timeTag nth: (unsigned) n
+{
+    return [self noteAtTime:timeTag index:n];
+}
+
+- (MKNote *) next: (MKNote *) aNote
+{
+    return [self noteAfterNote:aNote];
+}
+
+@end

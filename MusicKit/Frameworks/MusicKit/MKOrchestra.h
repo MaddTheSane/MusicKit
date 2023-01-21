@@ -347,21 +347,22 @@ release notes for the latest information on supported drivers.
   representing its oscTable representation and one representing its
   waveshapingTable representation.
  */
-typedef NS_ENUM(int, MKOrchSharedType) {
+typedef NS_ENUM(int, MKOrchestraSharedType) {
     /*! Wildcard. */
-    MK_noOrchSharedType = 0, 
+    MKOrchestraSharedTypeNone = 0,
     /*! Data used as a wave table for an oscillator.  This shared
 	type must be a power of 2 in length and if a request for
-        a shorter length is made, it is	downsampled. */
-    MK_oscTable = 1, 
+	a shorter length is made, it is downsampled. */
+    MKOrchestraSharedTypeOscillatorTable = 1,
     /*! Data used as a waveshaping table. This table performs a non-linear mapping.
-        When looked-up with a sine wave, it provides a specified spectrum.  */
-    MK_waveshapingTable = 2,
-    /*! Data used as an excitation table for waveguide-based synthesis. 
-        This type is similar to oscTable but it need not be a power of 2 and
-        it is shortened by truncation (from the end.) */
-    MK_excitationTable = 3
+	When looked-up with a sine wave, it provides a specified spectrum.  */
+    MKOrchestraSharedTypeWaveshapingTable = 2,
+    /*! Data used as an excitation table for waveguide-based synthesis.
+	This type is similar to oscTable but it need not be a power of 2 and
+	it is shortened by truncation (from the end.) */
+    MKOrchestraSharedTypeExcitationTable = 3
 };
+typedef MKOrchestraSharedType MKOrchSharedType;
 
 typedef NS_ENUM(int, MKEMemType) {
     MKEMemTypeNonOverlaid = 0,
@@ -1773,6 +1774,11 @@ typedef NS_OPTIONS(unsigned, MKOrchestraCapabilities) {
 
 #define DeprecatedEnum(type, oldname, newval) \
 static const type oldname NS_DEPRECATED_WITH_REPLACEMENT_MAC( #newval , 10.0, 10.8) = newval
+
+DeprecatedEnum(MKOrchestraSharedType, MK_noOrchSharedType, MKOrchestraSharedTypeNone);
+DeprecatedEnum(MKOrchestraSharedType, MK_oscTable, MKOrchestraSharedTypeOscillatorTable);
+DeprecatedEnum(MKOrchestraSharedType, MK_waveshapingTable, MKOrchestraSharedTypeWaveshapingTable);
+DeprecatedEnum(MKOrchestraSharedType, MK_excitationTable, MKOrchestraSharedTypeExcitationTable);
 
 DeprecatedEnum(MKEMemType, MK_orchEmemNonOverlaid, MKEMemTypeNonOverlaid);
 DeprecatedEnum(MKEMemType, MK_orchEmemOverlaidXYP, MKEMemTypeOverlaidXYP);
