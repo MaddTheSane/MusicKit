@@ -340,7 +340,7 @@ NSString *midiDriverErrorString(int errorCode)
 }
 
 // This method searches for any other open MKMidi instances on hostname NOT matching the specified unit.
-+ (NSMutableArray *) midisOnHost: (NSString *) midiHostname
++ (NSMutableArray<MKMidi*> *) midisOnHost: (NSString *) midiHostname
 	      otherThanInputUnit: (int) midiInputUnit
 		    orOutputUnit: (int) midiOutputUnit
 {
@@ -433,12 +433,7 @@ NSString *midiDriverErrorString(int errorCode)
     devicePort = driverDevicePort;
     otherMidis = [MKMidi midisOnHost: hostname otherThanInputUnit: inputUnit orOutputUnit: outputUnit];
     if ([otherMidis count]) {
-        int unitIndex;
-        int unitCount = [otherMidis count];
-	
-        for (unitIndex = 0; unitIndex < unitCount; unitIndex++) {
-	    MKMidi *aMidi = [otherMidis objectAtIndex: unitIndex];
-	    
+        for (MKMidi *aMidi in otherMidis) {
             /* Should be the first one, but just in case... */
             if (aMidi->ownerPort != MKMD_PORT_NULL) {
                 ownerPort = aMidi->ownerPort;
@@ -516,7 +511,7 @@ NSString *midiDriverErrorString(int errorCode)
     NSData *timeVarsEncoded;
 
     if (!timeInfoTable) /* Mapping from hostname to tvs pointer */
-        timeInfoTable = [[NSMutableDictionary dictionary] retain];
+        timeInfoTable = [[NSMutableDictionary alloc] init];
     if ((timeVarsEncoded = [timeInfoTable objectForKey: timeInfoHostname]) != nil) {
         // TODO: Assign ivars from [timeVarsEncoded bytes] or somesuch if timeVarsEncoded changes to be an object.
     }
@@ -665,7 +660,7 @@ static void sendBufferedData(struct __MKMidiOutStruct *ptr)
 {
     MKMDReturn r;
     MKMidi *midiObj;
-    int nBytes = bufPtr - midiBuf;
+    int nBytes = (int)(bufPtr - midiBuf);
     
     if (nBytes == 0)
 	return;
@@ -936,35 +931,34 @@ static void midi_data_reply(void *receivingMidiPtr, short unit, MKMDRawEvent *ev
     unsigned char statusByte;
     MKMidi *receivingMidi = (MKMidi *) receivingMidiPtr;
     // since the callback is coming in from the cold harsh world of C, not cozy ObjC:
-    NSAutoreleasePool *handlerPool = [[NSAutoreleasePool alloc] init]; 
-
-    // check we assigned this in handleMachMessage and it survives the driver.
-    if(receivingMidi) {
-	ptr = MIDIINPTR(receivingMidi);
-	// NSLog(@"receivingMIDI %@ events %p ptr = %p\n", receivingMidi, events, ptr);
-	if(receivingMidi->displayReceivedMIDI)
-	    NSLog(@"%@ received %d bytes: first is %02X\n", receivingMidi, eventCount, events->byte);
-	for (incomingDataCount = eventCount; incomingDataCount--; events++) {
-	    if ((statusByte = parseMidiByte(events->byte, ptr))) {
-		if (statusByte == MIDI_SYSEXCL)
-		    aNote = handleSysExclbyte(ptr, events->byte); /* not retained or autoreleased */
-		else
-		    aNote = _MKMidiToMusicKit(ptr, statusByte); /* autoreleased */
-		if (aNote) {
-		    sendIncomingNote(ptr->chan, aNote, receivingMidi, events->time);
-		    /* sending the MKNote can have unknown side-effects, since the
-		     * user defines the behavior here.  For example, the MKMidi obj 
-		     * could be aborted or re-opened. It could even be freed!
-		     * So when we abort, we clear incomingDataCount.  This 
-		     * guarantees that we won't be left in a bad state */
+    @autoreleasepool {
+	// check we assigned this in handleMachMessage and it survives the driver.
+	if(receivingMidi) {
+	    ptr = MIDIINPTR(receivingMidi);
+	    // NSLog(@"receivingMIDI %@ events %p ptr = %p\n", receivingMidi, events, ptr);
+	    if(receivingMidi->displayReceivedMIDI)
+		NSLog(@"%@ received %d bytes: first is %02X\n", receivingMidi, eventCount, events->byte);
+	    for (incomingDataCount = eventCount; incomingDataCount--; events++) {
+		if ((statusByte = parseMidiByte(events->byte, ptr))) {
+		    if (statusByte == MIDI_SYSEXCL)
+			aNote = handleSysExclbyte(ptr, events->byte); /* not retained or autoreleased */
+		    else
+			aNote = _MKMidiToMusicKit(ptr, statusByte); /* autoreleased */
+		    if (aNote) {
+			sendIncomingNote(ptr->chan, aNote, receivingMidi, events->time);
+			/* sending the MKNote can have unknown side-effects, since the
+			 * user defines the behavior here.  For example, the MKMidi obj
+			 * could be aborted or re-opened. It could even be freed!
+			 * So when we abort, we clear incomingDataCount.  This
+			 * guarantees that we won't be left in a bad state */
+		    }
 		}
 	    }
 	}
+	else {
+	    MKErrorCode(MK_musicKitErr, @"Internal error, receiving MKMidi has not been assigned");
+	}
     }
-    else {
-	MKErrorCode(MK_musicKitErr, @"Internal error, receiving MKMidi has not been assigned");
-    }
-    [handlerPool release];
 }
 
 /*sb: added the following method to handle mach messages. This replaces the earlier function

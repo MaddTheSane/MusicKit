@@ -225,14 +225,12 @@ Modification history:
 #import "noteDispatcherMethods.m"
 
 /* Implement a dummy protocol for firstTimeTag/lastTimeTag. */
-- setFirstTimeTag: (double) v
+- (void) setFirstTimeTag: (double) v
 {
-    return self;
 }
 
-- setLastTimeTag: (double) v
+- (void) setLastTimeTag: (double) v
 {
-    return self; 
 }
 
 - (double) firstTimeTag

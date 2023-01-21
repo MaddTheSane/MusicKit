@@ -182,7 +182,7 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
 
 #import <Foundation/NSObject.h>
 
-@interface MKPart : NSObject
+@interface MKPart : NSObject <NSCopying, NSCoding>
 {
 /*! The score to which this MKPart belongs. */
     MKScore *score;
@@ -557,19 +557,6 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
 - copyWithZone: (NSZone *) zone; 
 
 /*!
-  @return Returns an id.
-  @brief Creates and returns a new MKPart as a copy of the receiving MKPart.
- 
- 
-  The new MKPart contains copies of receiving MKPart's MKNotes
-  (including the info MKNote).   The new MKPart is added to the same
-  MKScore as the receiving MKPart, but is left unnamed.
-  
-  @see -<b>copyFromZone:</b>
-*/
-- copy;
-
-/*!
   @return Returns an NSArray.
   @brief Creates and returns a NSArray of the MKPart's MKNotes in time order.
   
@@ -579,7 +566,7 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
   
   @see -<b>notesNoCopy</b>, -<b>noteCount</b>
 */
-- (NSArray *) notes;
+- (NSArray<MKNote*> *) notes;
 
 /*!
   @return Returns an id.
@@ -589,7 +576,7 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
 
   @see -<b>notes</b>, -<b>noteCount</b>
  */
-- (NSMutableArray *) notesNoCopy;
+- (NSMutableArray<MKNote*> *) notesNoCopy;
 
 /*!
   @return Returns an MKScore.
@@ -682,11 +669,6 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
   compares the symbolized versions of the part name and the query name.
  */
 - (BOOL) isNamed: (NSString *) partNameToFind;
-
-- (void) encodeWithCoder: (NSCoder *) aCoder;
-- (id) initWithCoder: (NSCoder *) aDecoder;
-
-- (NSString *) description;
 
 @end
 

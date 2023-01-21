@@ -19,9 +19,9 @@ Modification history:
 extern void _MKSetConductedPerformance(BOOL yesOrNo,id conductorClass);
 extern double _MKLastTime(void);
 extern double _MKAdjustTime(double newTime);
-extern double _MKTime();      /* Gets clock time, before deltaT added. */ 
-extern double _MKDeltaTTime();/* Gets clock time, after deltaT is added. */
-extern double _MKGetDeltaT(); /* Gets deltaT (Clock time - real time). */
+extern double _MKTime(void);      /* Gets clock time, before deltaT added. */
+extern double _MKDeltaTTime(void);/* Gets clock time, after deltaT is added. */
+extern double _MKGetDeltaT(void); /* Gets deltaT (Clock time - real time). */
 extern void _MKSetDeltaT(double val); /* Sets deltaT (Clock time-real time). */
 
 #endif

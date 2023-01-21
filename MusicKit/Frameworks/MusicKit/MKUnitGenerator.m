@@ -542,7 +542,7 @@ static BOOL optimize(self,arg,argP,highVal,lowVal)
     int highVal;
     int lowVal;
 {
-    if ([self->orchestra deviceStatus] == MK_devClosed) /* DAJ - 10/8/93 */
+    if ([self->orchestra deviceStatus] == MKDeviceStatusClosed) /* DAJ - 10/8/93 */
       return YES;
     if (![[self class] shouldOptimize: arg])
       return NO;

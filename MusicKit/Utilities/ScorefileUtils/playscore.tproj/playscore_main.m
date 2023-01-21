@@ -281,7 +281,7 @@ int main(int argc, char *argv[])
     int orchPar;
     NSMutableArray *instruments = nil;
     NSData *aStream;
-    double midiOffset;
+    double midiOffset=0;
     BOOL weGotAnOpenOrch = NO;
     BOOL allDSPs = NO;
     BOOL onTheFly = NO;
@@ -295,7 +295,7 @@ int main(int argc, char *argv[])
     int orchIndex = 0;
     NSString *outputFile = nil;
     NSString *commandsFile = nil;
-    MKPerformer *aPerformer = nil;
+    id<MKPerformer> aPerformer = nil;
     double samplingRate;
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
@@ -364,7 +364,7 @@ int main(int argc, char *argv[])
     
     anOrch = [[MKOrchestra orchestraOnDSP: orchIndex] retain];
     if ((soundOutType != DEFAULT_SOUND) && 
-	!([anOrch capabilities] & MK_nextCompatibleDSPPort)) {
+        !([anOrch capabilities] & MKOrchestraCapabilitiesNeXTCompatibleDSPPort)) {
 	fprintf(stderr, "A NeXT-compatible DSP port is not supported by this hardware configuration.\n");
 	exit(1);
     }
@@ -498,7 +498,7 @@ int main(int argc, char *argv[])
 			    fprintf(stderr,"MKSynthPatch %s cannot be loaded into program.\n", [className UTF8String]);
 			continue;
 		    }
-		    if ([[MKOrchestra nthOrchestra: orchIndex] deviceStatus] != MK_devOpen) {
+                    if ([[MKOrchestra nthOrchestra: orchIndex] deviceStatus] != MKDeviceStatusOpen) {
 			if (openOrch(orchIndex, waitForIt, quiet, allDSPs) == -1)
 			    continue;			
 		    }
@@ -580,7 +580,7 @@ int main(int argc, char *argv[])
 				    [className UTF8String]);
 			continue;
 		    }
-		    if ([[MKOrchestra nthOrchestra: orchIndex] deviceStatus] != MK_devOpen) {
+                    if ([[MKOrchestra nthOrchestra: orchIndex] deviceStatus] != MKDeviceStatusOpen) {
 			if (openOrch(orchIndex, waitForIt, quiet, allDSPs) == -1)
 			    continue;			
 		    }

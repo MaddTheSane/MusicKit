@@ -3592,7 +3592,7 @@ allocUG(register MKOrchestra *self,id factObj,id beforeObj,id afterObj)
     return DEFAULTSRATE;
 }
 
-- (unsigned) capabilities
+- (MKOrchestraCapabilities) capabilities
 {
 #if m68k
     return (MK_nextCompatibleDSPPort | MK_hostSoundOut |
@@ -3600,9 +3600,9 @@ allocUG(register MKOrchestra *self,id factObj,id beforeObj,id afterObj)
 #else
     unsigned rtn;
     if (_nextCompatibleSerialPort)
-	rtn = MK_nextCompatibleDSPPort;
+	rtn = MKOrchestraCapabilitiesNeXTCompatibleDSPPort;
     else rtn = 0;
-    return (rtn | (MK_serialSoundOut | MK_soundIn | MK_soundfileOut));
+    return (rtn | (MKOrchestraCapabilitiesSerialSoundOut | MKOrchestraCapabilitiesSoundIn | MKOrchestraCapabilitiesSoundFileOut));
 #endif    
 }
 

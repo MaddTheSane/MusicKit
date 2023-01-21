@@ -708,26 +708,26 @@ static void processAudio(double bufferTime, SNDStreamBuffer *streamInputBuffer, 
     // process required, hence the need for full allocation and initialisation. If SndAudioBuffers
     // themselves can be non-interleaved, we then _really_ need to hide all this within the class.
 
-    NSAutoreleasePool *localPool = [NSAutoreleasePool new];
-    SndAudioBuffer *inB  = (streamInputBuffer  == NULL) ? nil : [SndAudioBuffer audioBufferWithSNDStreamBuffer: streamInputBuffer ];
-    SndAudioBuffer *outB = (streamOutputBuffer == NULL) ? nil : [SndAudioBuffer audioBufferWithSNDStreamBuffer: streamOutputBuffer];
-
+    @autoreleasepool {
+	SndAudioBuffer *inB  = (streamInputBuffer  == NULL) ? nil : [SndAudioBuffer audioBufferWithSNDStreamBuffer: streamInputBuffer ];
+	SndAudioBuffer *outB = (streamOutputBuffer == NULL) ? nil : [SndAudioBuffer audioBufferWithSNDStreamBuffer: streamOutputBuffer];
+	
 #if SNDSTREAMMANAGER_DEBUG_PROCESSING
-    NSLog(@"[SndStreamManager] --> processAudio bufferTime = %lf, streamOutputBuffer = %p, streamOutputBuffer->streamData = %p\n", 
-	  bufferTime, streamOutputBuffer, streamOutputBuffer->streamData);
-    NSLog(@"[SndStreamManager] --> processAudio bufferTime = %lf, streamInputBuffer = %p, streamInputBuffer->streamData = %p\n", 
-	  bufferTime, streamInputBuffer, streamInputBuffer->streamData);
-    // NSLog(@"[SndStreamManager] --> processAudio outB = %@\n", outB);
-    [[NSThread currentThread] setName: @"SndStreamManager processAudio"]; // Just for debugging.
+	NSLog(@"[SndStreamManager] --> processAudio bufferTime = %lf, streamOutputBuffer = %p, streamOutputBuffer->streamData = %p\n",
+	      bufferTime, streamOutputBuffer, streamOutputBuffer->streamData);
+	NSLog(@"[SndStreamManager] --> processAudio bufferTime = %lf, streamInputBuffer = %p, streamInputBuffer->streamData = %p\n",
+	      bufferTime, streamInputBuffer, streamInputBuffer->streamData);
+	// NSLog(@"[SndStreamManager] --> processAudio outB = %@\n", outB);
+	[[NSThread currentThread] setName: @"SndStreamManager processAudio"]; // Just for debugging.
 #endif
-
-    [(SndStreamManager *) manager processStreamAtTime: bufferTime input: inB output: outB];
-    [outB fillSNDStreamBuffer: streamOutputBuffer];
-
+	
+	[(SndStreamManager *) manager processStreamAtTime: bufferTime input: inB output: outB];
+	[outB fillSNDStreamBuffer: streamOutputBuffer];
+	
 #if SNDSTREAMMANAGER_DEBUG_PROCESSING
-    NSLog(@"[SndStreamManager] About to release pool...\n");
+	NSLog(@"[SndStreamManager] About to release pool...\n");
 #endif
-    [localPool release];
+    }
 #if SNDSTREAMMANAGER_DEBUG_PROCESSING
     NSLog(@"[SndStreamManager] Released pool...\n");
 #endif

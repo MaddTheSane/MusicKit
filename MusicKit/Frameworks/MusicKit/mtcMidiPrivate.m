@@ -71,7 +71,7 @@ static void my_exception_reply(mach_port_t replyPort, int exception)
     int theTime;
     int r; 
     double t;
-    if (deviceStatus == MK_devClosed)
+    if (deviceStatus == MKDeviceStatusClosed)
         return 0;
     r = MKMDGetClockTime(devicePort, ownerPort, &theTime);
     if (r != MKMD_SUCCESS)
@@ -87,14 +87,14 @@ static void my_exception_reply(mach_port_t replyPort, int exception)
     int newIntTime;
     #define ISENDOFTIME(_x) (_x > (MK_ENDOFTIME - 1.0))
     if (ISENDOFTIME(requestedTime)) {
-	if (deviceStatus == MK_devRunning)
+	if (deviceStatus == MKDeviceStatusRunning)
             MKMDRequestAlarm(devicePort, ownerPort, MKMD_PORT_NULL, 0);
 	self->alarmTimeValid = NO;
 	self->alarmPending = NO;
 	return self;
     }
     newIntTime = requestedTime * _MK_MIDI_QUANTUM;
-    if (deviceStatus == MK_devRunning) {
+    if (deviceStatus == MKDeviceStatusRunning) {
 	if (!self->alarmPending || 
 	    self->intAlarmTime != newIntTime) {
             MKMDRequestAlarm(devicePort, 
@@ -135,11 +135,11 @@ static void my_exception_reply(mach_port_t replyPort, int exception)
 	    mtcMidi = nil;
 	}
     }
-    if (deviceStatus == MK_devClosed) /* We'll set up later */
+    if (deviceStatus == MKDeviceStatusClosed) /* We'll set up later */
       return self;
     if (aCond) {
 	[self setUpMTC];
-	if (deviceStatus == MK_devRunning)
+	if (deviceStatus == MKDeviceStatusRunning)
 	  resumeMidiClock(self);
     }
     else

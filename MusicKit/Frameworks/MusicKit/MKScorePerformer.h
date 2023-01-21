@@ -69,10 +69,11 @@ be seen by the MKScorePerformer.
 
 @protocol MKPerformerDelegate;
 
+//TODO: make a subclass of MKPerformer?
 @interface MKScorePerformer : NSObject
 {
     MKPerformerStatus status;       /*! The object's status. */
-    NSMutableArray *partPerformers; /*! An array of the object's MKPartPerformer instances. */
+    NSMutableArray<MKPerformer*> *partPerformers; /*! An array of the object's MKPartPerformer instances. */
     MKScore *score;                 /*! The MKScore with which this object is associated. */     
     double firstTimeTag;            /*! The smallest timeTag value considered for
                                        performance, as last broadcast to the MKPartPerformers. */
@@ -92,7 +93,7 @@ be seen by the MKScorePerformer.
   @brief Allocates, initialises and returns an autoreleased instance.
   @return Returns an MKScorePerformer.  
 */
-+ (MKScorePerformer *) scorePerformer;
++ (instancetype) scorePerformer;
 
 /*!
   @brief Initializes the receiver.
@@ -101,7 +102,7 @@ be seen by the MKScorePerformer.
   <b>[super init]</b> before performing its own initialization. 
   @return Returns an id.
  */
-- init; 
+- (instancetype) init;
 
 /*!
   @brief If the receiver is in performance, does nothing and returns <b>nil</b>.
@@ -135,7 +136,7 @@ be seen by the MKScorePerformer.
   @param  aScore is an id.
   @return Returns an id.
 */
-- setScore: (MKScore *) aScore;
+- (void) setScore: (MKScore *) aScore;
 
 /*!
   @brief Returns the object's MKScore.
@@ -152,7 +153,7 @@ be seen by the MKScorePerformer.
   [delegate hasActivated:self] and returns the receiver.
  @return Returns an id.
 */
-- activate; 
+- (BOOL)activate; 
 
 /*!
   @brief You never invoke this method directly; it's invoked as part of the
@@ -311,7 +312,7 @@ be seen by the MKScorePerformer.
 
   The array is autoreleased.
 */
-- (NSArray *) noteSenders; 
+- (NSArray<MKNoteSender*> *) noteSenders;
 
 /*!
   @brief Returns the receiver's status.
@@ -378,5 +379,9 @@ be seen by the MKScorePerformer.
 
 /* Describes the protocol that may be implemented by the delegate: */
 #import <MusicKit/MKPerformerDelegate.h>
+
+@interface MKScorePerformer () <MKPerformer>
+
+@end
 
 #endif

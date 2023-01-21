@@ -125,7 +125,7 @@ extern Class _MKCheckClassConductor(void);
   ((_MKConductorClass.alreadyChecked) ? _MKConductorClass.aClass : \
   _MKCheckClassConductor())
 
-extern void _MKLinkUnreferencedClasses();
+extern void _MKLinkUnreferencedClasses(Class aClass, ...);
 extern BOOL _MKInheritsFrom(id aFactObj,id superObj);
 
 #define BACKSLASH '\\'

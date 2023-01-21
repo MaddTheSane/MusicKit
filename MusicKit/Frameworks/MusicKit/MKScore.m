@@ -1655,12 +1655,10 @@ static BOOL isUnarchiving = NO;
 
 - (NSString *) description
 {
-    unsigned int partIndex;
     NSMutableString *scoreDescription = [[NSMutableString alloc] initWithFormat: @"%@ containing MKParts:\n", [super description]];
-    NSMutableArray *partList = [self parts];
+    NSArray *partList = [self parts];
     
-    for(partIndex = 0; partIndex < [partList count]; partIndex++) {
-	MKPart *aPart = [partList objectAtIndex: partIndex];
+    for(MKPart *aPart in partList) {
 	[scoreDescription appendString: [aPart description]];
     }
     [scoreDescription appendFormat: @"With MKScore info note:\n%@", [[self infoNote] description]];

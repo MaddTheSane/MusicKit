@@ -701,7 +701,7 @@ See <b>Administration/MidiHardwareInfo.rtf</b> for using MIDI on NeXT hardware.
 /*!
   @brief Download MMA DownLoadable Sounds with patch numbers provided.
 */
-- (void) downloadDLS: (NSArray *) dlsPatches;
+- (void) downloadDLS: (NSArray<NSNumber*> *) dlsPatches;
 
 @end
 

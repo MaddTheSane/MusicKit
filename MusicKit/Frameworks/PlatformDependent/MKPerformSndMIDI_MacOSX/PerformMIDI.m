@@ -165,11 +165,11 @@ PERFORM_API const char **MKMDGetAvailableDrivers(BOOL input, unsigned int *selec
 		    
 		    if (deviceError == noErr) {
 			MIDIObjectGetStringProperty(deviceOfEntity, kMIDIPropertyName, &deviceName);
-			[driverNameList addObject: [NSString stringWithFormat: @"%@ %@", (NSString *) deviceName, (NSString *) endPointName]];
+			[driverNameList addObject: [NSString stringWithFormat: @"%@ %@", (__bridge NSString *) deviceName, (__bridge NSString *) endPointName]];
 		    }
 		}
 		else
-		    [driverNameList addObject: (NSString *) endPointName];		
+		    [driverNameList addObject: (__bridge NSString *) endPointName];
 	    }
 	    else {
 		NSLog(@"Error getting MIDI Driver endPoint's string property\n");
@@ -237,7 +237,7 @@ PERFORM_API MKMDReturn MKMDBecomeOwner(MKMDPort mididriver_port, MKMDOwnerPort o
 #else
     // NSLog(@"in MKMDBecomeOwner before MIDIClientCreate, appname: %@\n", executable);
 #endif
-    if ((result = MIDIClientCreate((CFStringRef) executable, NULL, NULL, &client)) != noErr) {
+    if ((result = MIDIClientCreate((__bridge CFStringRef) executable, NULL, NULL, &client)) != noErr) {
         NSLog(@"Unable to create MIDI Client %d", result);
         return MKMD_ERROR_UNKNOWN_ERROR;
     }
@@ -334,9 +334,7 @@ PERFORM_API MKMDReturn MKMDSetClockTime (
     // defines datum to associate the integer time to the nanosecond time
     datumRefTime = MIDIGetCurrentTime();
     datumMilliSecTime = time;
-    if (datumAsDate)
-        [datumAsDate release];
-    datumAsDate = [[NSDate date] retain]; // Note the absolute date we set the time datum, for MKMDAwaitReply
+    datumAsDate = [NSDate date]; // Note the absolute date we set the time datum, for MKMDAwaitReply
 #if FUNCLOG
     fprintf(debug, "MKMDSetClockTime called %d, datumRefTime = %f\n", time, (double) datumRefTime);
 #endif

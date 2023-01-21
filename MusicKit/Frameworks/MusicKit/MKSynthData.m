@@ -76,7 +76,7 @@ Modification history:
 #import "synthElementMethods.m"
 
 // Added by DAJ 10/8/93
-#define ORCHABORT  ([self->orchestra deviceStatus] == MK_devClosed) 
+#define ORCHABORT  ([self->orchestra deviceStatus] == MKDeviceStatusClosed)
 
 /* clears memory */
 - clear

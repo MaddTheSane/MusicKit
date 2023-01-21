@@ -38,7 +38,20 @@
 #define __MK_PerformerDelegate_H___
 
 #import <Foundation/NSObject.h>
-@class MKPerformer;
+#import <Foundation/NSArray.h>
+
+@class MKNoteSender;
+
+NS_SWIFT_NAME(MKPerformerProtocol)
+@protocol MKPerformer <NSObject>
+
+- (BOOL) activate;
+
+- (NSArray<MKNoteSender*>*) noteSenders;
+//TODO: fill out!
+
+@end
+
 @protocol MKPerformerDelegate <NSObject>
 @optional
 
@@ -50,7 +63,7 @@
 
   
 */
-- (void)performerDidActivate: (MKPerformer*) sender;
+- (void)performerDidActivate: (id<MKPerformer>) sender;
 
 /*!
   @param  sender is an id.
@@ -60,7 +73,7 @@
 
   
 */
-- (void)performerDidPause: (MKPerformer*) sender;
+- (void)performerDidPause: (id<MKPerformer>) sender;
 
 /*!
   @param  sender is an id.
@@ -70,7 +83,7 @@
 
   
 */
-- (void)performerDidResume: (MKPerformer*) sender;
+- (void)performerDidResume: (id<MKPerformer>) sender;
 
 /*!
   @param  sender is an id.
@@ -80,7 +93,7 @@
 
   
 */
-- (void)performerDidDeactivate: (MKPerformer*) sender;
+- (void)performerDidDeactivate: (id<MKPerformer>) sender;
 
 @end
 

@@ -770,12 +770,12 @@ to send open to an already opened, running or stopped MKOrchestra.
     */
 {
     switch (deviceStatus) {
-	case MK_devClosed:
+	case MKDeviceStatusClosed:
 	    return [self open];
-	case MK_devOpen:
-	case MK_devStopped:
+	case MKDeviceStatusOpen:
+	case MKDeviceStatusStopped:
 	    return self;
-	case MK_devRunning:
+	case MKDeviceStatusRunning:
 	    DSPSetCurrentDSP(orchIndex);
 #if USEFREEZE
 	    if (hostSoundOut)
@@ -788,7 +788,7 @@ to send open to an already opened, running or stopped MKOrchestra.
 	    else DSPMKPauseOrchestra();
 #endif
 	    [self _adjustOrchTE:NO reset:NO];
-	    deviceStatus = MK_devStopped; 
+	    deviceStatus = MKDeviceStatusStopped;
 	    return self;
 	default:
 	    break;
@@ -811,7 +811,7 @@ to send open to an already opened, running or stopped MKOrchestra.
 {
     DSPFix48 curTimeStamp;
     
-    if (deviceStatus != MK_devClosed) {
+    if (deviceStatus != MKDeviceStatusClosed) {
         DSPSetCurrentDSP(orchIndex); /* Was after freeUGs--Moved March 7, 1993-DAJ */
 	[self _adjustOrchTE:NO reset:YES];
         freeUGs(self);
@@ -846,7 +846,7 @@ to send open to an already opened, running or stopped MKOrchestra.
      SB's Notes: bufferTime is absolute in seconds.
     */
 {
-    if (deviceStatus == MK_devRunning) { /* If not, can't wait for end of time */ 
+    if (deviceStatus == MKDeviceStatusRunning) { /* If not, can't wait for end of time */ 
         /* Wait for end of time */
         DSPFix48 endTimeStamp;
         double endTime;

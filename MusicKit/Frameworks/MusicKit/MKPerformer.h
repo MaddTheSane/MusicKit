@@ -565,4 +565,8 @@ typedef NS_ENUM(int, MKPerformerStatus) {
 /* Describes the protocol that may be implemented by the delegate: */
 #import <MusicKit/MKPerformerDelegate.h>
 
+@interface MKPerformer () <MKPerformer>
+
+@end
+
 #endif

@@ -152,7 +152,6 @@ fillTableLength:scale:.
   within the range -1.0 to 1.0.
 */
 @property (readonly) double scaling;
-- (double)scaling;
 
 /*!
   @param  aLength is an int.

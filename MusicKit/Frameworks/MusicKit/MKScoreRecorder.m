@@ -122,38 +122,35 @@ static void unsetPartRecorders(MKScoreRecorder *self)
     self->score = nil;
 }
 
-- setScore: (MKScore *) aScore
+- (void)setScore: (MKScore *) aScore
   /* Sets score over which we will sequence and creates MKPartRecorders for
      each MKPart in the MKScore. Note that any MKParts added to aScore after
      the setScore: call will not appear in the performance. */
 {
-    NSMutableArray *aListOfParts;
+    NSArray *aListOfParts;
     MKPart *part;
     MKPartRecorder *newPartRecorder;
     unsigned n, i;
     
     if (aScore == score)
-        return self;
+        return;
     if ([self inPerformance])
-        return nil;
+        return;
     unsetPartRecorders(self);
     [partRecorders release];
     partRecorders = [[NSMutableArray array] retain];
     score = aScore;
     if (aScore == nil)
-        return self;  // early out if resetting the score to nil
+        return;  // early out if resetting the score to nil
     [score retain];
     aListOfParts = [score parts];
-    n = [aListOfParts count];
-    for (i = 0; i < n; i++) {
-        part = [aListOfParts objectAtIndex:i];
+    for (MKPart *part in aListOfParts) {
         newPartRecorder = [partRecorderClass new];
         [newPartRecorder setPart: part];
         _MKSetScoreRecorderOfPartRecorder(newPartRecorder, self);
        	[partRecorders addObject: newPartRecorder];
         [newPartRecorder release]; /* since +new will retain */
     }
-    return self;
 }
 
 - (MKScore *) score

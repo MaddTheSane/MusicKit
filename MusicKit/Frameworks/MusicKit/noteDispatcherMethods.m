@@ -81,9 +81,8 @@
     return [noteSenders objectAtIndex: 0];
 }
 
-- disconnectNoteSenders
+- (void)disconnectNoteSenders
     /* Broadcasts "disconnect" to MKNoteSenders. */ 
 {
     [noteSenders makeObjectsPerformSelector: @selector(disconnectAllReceivers)];
-    return self;
 }

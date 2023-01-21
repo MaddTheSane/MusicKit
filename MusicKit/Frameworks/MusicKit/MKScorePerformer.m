@@ -161,28 +161,27 @@ static void unsetPartPerformers(MKScorePerformer *self)
     return score;
 }
 
-- activate
+- (BOOL)activate
     /* If score is not set or MKScore contains no parts, returns nil. Otherwise, 
     sends activateSelf, broadcasts activate message to contents, and 
     returns self and sets status to MK_active if any one of the
     MKPartPerformers returns self.
     */ 
 {
-    unsigned n = [partPerformers count], i;
     if (!score || (![score partCount]) || (![self activateSelf]))
-	return nil;
-    for (i = 0; i < n; i++)
-        if ([(MKPerformer *)[partPerformers objectAtIndex:i] activate])
+	return NO;
+    for (MKPerformer *performer in partPerformers)
+        if ([performer activate])
             status = MK_active;
     if (status != MK_active)
-	return nil;
+	return NO;
     _deactivateMsgPtr = MKCancelMsgRequest(_deactivateMsgPtr);
     // LMS - why shouldn't this be a deactivate rather than _deactivate?
     _deactivateMsgPtr = [MKConductor _afterPerformanceSel:
 				@selector(_deactivate) to:self argCount:0];
     if ([delegate respondsToSelector:@selector(performerDidActivate:)])
 	[delegate performerDidActivate:self];
-    return self;
+    return YES;
 }
 
 - activateSelf
@@ -207,12 +206,12 @@ static void unsetPartPerformers(MKScorePerformer *self)
    frees all contained MKPartPerformers.  The MKPartPerformers are added
    in the order the corresponding MKParts appear in the MKScore. 
 */
-- setScore: (MKScore *) aScore
+- (void) setScore: (MKScore *) aScore
 {
     if (aScore == score)
-	return self;
+	return;
     if (status != MK_inactive)
-	return nil;
+	return;
     [self releasePartPerformers]; // also releases score
     score = [aScore retain];
     if (score != nil) {
@@ -234,7 +233,6 @@ static void unsetPartPerformers(MKScorePerformer *self)
 	[self setTimeShift: timeShift];
 	[self setConductor: conductor];
     }
-    return self;
 }
 
 - pause

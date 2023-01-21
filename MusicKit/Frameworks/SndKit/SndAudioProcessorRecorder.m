@@ -241,9 +241,8 @@
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
     // TODO: we probably need to drain the queue first once we stop.
-    while(!stopSignal) {
+    while(!stopSignal) @autoreleasepool {
 	// We create an inner autorelease pool since this thread can run a long time writing many buffers which otherwise are not released.
-	NSAutoreleasePool *bufferPool = [[NSAutoreleasePool alloc] init];
 
 	// This will sleep waiting for an available buffer on the queue.
 	// We have to inject a final empty buffer on the queue to finally retrieve the buffer and exit the loop.
@@ -251,7 +250,6 @@
 
 	[self writeToFileBuffer: bufferToWrite];
 	[writingQueue addPendingBuffer: bufferToWrite];
-	[bufferPool release];
     }
     // close the file after stopSignal is set.
     [self closeRecordFile];

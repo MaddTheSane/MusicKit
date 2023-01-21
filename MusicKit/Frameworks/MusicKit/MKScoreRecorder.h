@@ -93,7 +93,7 @@ MKPartRecorders receives a MKNote until the performance is finished.
   @param  aScore is an MKScore instance.
   @return Returns an id.
 */
-- setScore: (MKScore *) aScore; 
+- (void)setScore: (MKScore *) aScore; 
 
 /*!
   @brief Returns the receiver's MKScore.

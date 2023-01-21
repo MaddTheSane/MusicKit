@@ -1052,7 +1052,6 @@ PERFORM_API BOOL SNDInit(BOOL useDefaultDevice)
 // Shut down what we started up in SNDInit();
 PERFORM_API BOOL SNDTerminate(void)
 {
-    [inputLock release];
     inputLock = nil;
     initialised = FALSE;
 

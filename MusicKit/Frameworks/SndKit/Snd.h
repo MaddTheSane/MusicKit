@@ -229,7 +229,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
   @param  	  sectionName
   @return
 */
-+ (instancetype)addName: (NSString *) name fromSection: (NSString *) sectionName;
++ (instancetype)addName: (NSString *) name fromSection: (NSString *) sectionName DEPRECATED_ATTRIBUTE;
 
 /*!
   @brief

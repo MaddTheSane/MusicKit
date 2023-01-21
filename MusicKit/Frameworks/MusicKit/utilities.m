@@ -71,7 +71,7 @@ _MK_GLOBAL _MKClassLoaded _MKMidiClass = {0};
 _MK_GLOBAL unsigned _MKTraceFlag = 0;
 
 /* A dumb function that causes a reference to its arguments (to fool the linker.) */
-void _MKLinkUnreferencedClasses()
+void _MKLinkUnreferencedClasses(Class aClass, ...)
 {
 }
 /* The following mechanism is to make it so it's fast to check if a class
