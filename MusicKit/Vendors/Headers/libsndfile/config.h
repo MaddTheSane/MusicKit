@@ -50,7 +50,7 @@
 /* #undef HAVE_ENDIAN_H */
 
 /* Will be set to 1 if flac, ogg, vorbis, and opus are available. */
-#define HAVE_EXTERNAL_XIPH_LIBS 0
+#define HAVE_EXTERNAL_XIPH_LIBS 1
 
 /* Define to 1 if you have the `floor' function. */
 #define HAVE_FLOOR 1
@@ -194,7 +194,13 @@
 #define HAVE_WRITE 1
 
 /* The host triplet of the compiled binary. */
+#ifdef __x86_64__
+#define HOST_TRIPLET x86_64-apple-darwin22.2.0
+#elif defined(__aarch64__)
 #define HOST_TRIPLET aarch64-apple-darwin22.2.0
+#else
+#error unknown architecture!
+#endif
 
 /* Define to the sub-directory where libtool stores uninstalled libraries. */
 #define LT_OBJDIR ".libs/"

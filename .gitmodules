@@ -1,3 +1,15 @@
 [submodule "MusicKit/Vendors/libsndfile"]
 	path = MusicKit/Vendors/libsndfile
 	url = https://github.com/libsndfile/libsndfile.git
+[submodule "MusicKit/Vendors/opus"]
+	path = MusicKit/Vendors/opus
+	url = https://github.com/xiph/opus.git
+[submodule "MusicKit/Vendors/flac"]
+	path = MusicKit/Vendors/flac
+	url = https://github.com/xiph/flac.git
+[submodule "MusicKit/Vendors/vorbis"]
+	path = MusicKit/Vendors/vorbis
+	url = https://github.com/xiph/vorbis.git
+[submodule "MusicKit/Vendors/ogg"]
+	path = MusicKit/Vendors/ogg
+	url = https://github.com/xiph/ogg.git
