@@ -894,7 +894,7 @@
 		D85C2F8A06308A2900E6397B /* SndEditing.m in Sources */ = {isa = PBXBuildFile; fileRef = D85C2F8806308A2900E6397B /* SndEditing.m */; };
 		D85E27FC06FA0D0800385C32 /* ScorePlayer_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D85E27FB06FA0D0800385C32 /* ScorePlayer_main.m */; };
 		D85E280306FA0D2E00385C32 /* ScorePlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = D85E280106FA0D2E00385C32 /* ScorePlayerController.m */; };
-		D85E281F06FA0E1200385C32 /* ScorePlayer.strings in Resources */ = {isa = PBXBuildFile; fileRef = D85E281D06FA0E1200385C32 /* ScorePlayer.strings */; };
+		D85E281F06FA0E1200385C32 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D85E281D06FA0E1200385C32 /* Localizable.strings */; };
 		D85F909F07DFE883009DC57B /* Add2UG.h in Headers */ = {isa = PBXBuildFile; fileRef = D85F905A07DFE882009DC57B /* Add2UG.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D85F90A007DFE883009DC57B /* Add2UG.m in Sources */ = {isa = PBXBuildFile; fileRef = D85F905B07DFE882009DC57B /* Add2UG.m */; };
 		D85F90A107DFE883009DC57B /* Allpass1UG.h in Headers */ = {isa = PBXBuildFile; fileRef = D85F905C07DFE882009DC57B /* Allpass1UG.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1947,7 +1947,7 @@
 		556A3D0029722007007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/Info-macosx.xib"; sourceTree = "<group>"; };
 		556A3D0129722007007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/PianoRoll-macosx.xib"; sourceTree = "<group>"; };
 		556A3D0229722007007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Score.xib; sourceTree = "<group>"; };
-		556A3D0329722008007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ScorePlayer.strings; sourceTree = "<group>"; };
+		556A3D0329722008007FFAA7 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		556A3D0429722008007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/ScorePlayer.sgml; sourceTree = "<group>"; };
 		556A3D0529722008007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ErrorLog.xib; sourceTree = "<group>"; };
 		556A3D0629722008007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MKAlertPanel.xib; sourceTree = "<group>"; };
@@ -6970,7 +6970,7 @@
 		D85E27E506FA0BAF00385C32 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D85E281D06FA0E1200385C32 /* ScorePlayer.strings */,
+				D85E281D06FA0E1200385C32 /* Localizable.strings */,
 				D828F9B40780C4FC00215EB9 /* Help */,
 				D828F9A50780C3EA00215EB9 /* Images */,
 				D85E280606FA0DBD00385C32 /* Interfaces */,
@@ -10481,7 +10481,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D85E281F06FA0E1200385C32 /* ScorePlayer.strings in Resources */,
+				D85E281F06FA0E1200385C32 /* Localizable.strings in Resources */,
 				556A3CEF297121F8007FFAA7 /* StealthDAI2400.xib in Resources */,
 				55A2A8D82975175500BCC536 /* Media.xcassets in Resources */,
 				556A3CF1297121F8007FFAA7 /* MKAlertPanel.xib in Resources */,
@@ -12174,12 +12174,12 @@
 			path = ../../..;
 			sourceTree = "<group>";
 		};
-		D85E281D06FA0E1200385C32 /* ScorePlayer.strings */ = {
+		D85E281D06FA0E1200385C32 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				556A3D0329722008007FFAA7 /* en */,
 			);
-			name = ScorePlayer.strings;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		D8684F68081CA77400926058 /* example3.xib */ = {
@@ -12819,6 +12819,7 @@
 					Vendors/vorbis/include,
 					Vendors/vorbis/lib,
 				);
+				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -12844,6 +12845,7 @@
 					Vendors/vorbis/include,
 					Vendors/vorbis/lib,
 				);
+				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -12869,6 +12871,7 @@
 					Vendors/vorbis/include,
 					Vendors/vorbis/lib,
 				);
+				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -12893,6 +12896,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				HEADER_SEARCH_PATHS = Vendors/ogg/include;
+				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -12913,6 +12917,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				HEADER_SEARCH_PATHS = Vendors/ogg/include;
+				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -12933,6 +12938,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				HEADER_SEARCH_PATHS = Vendors/ogg/include;
+				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -12957,6 +12963,7 @@
 					"VAR_ARRAYS=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = /usr/local/include/opus;
 				SKIP_INSTALL = YES;
@@ -12983,6 +12990,7 @@
 					"VAR_ARRAYS=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = /usr/local/include/opus;
 				SKIP_INSTALL = YES;
@@ -13009,6 +13017,7 @@
 					"VAR_ARRAYS=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = /usr/local/include/opus;
 				SKIP_INSTALL = YES;

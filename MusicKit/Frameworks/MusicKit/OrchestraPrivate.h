@@ -51,7 +51,7 @@ extern void _MKOrchAddSynthIns(id anIns);
 extern void _MKOrchRemoveSynthIns(id anIns);
 extern BOOL _MKOrchLateDeltaTMode(MKOrchestra *theOrch); /* See MKOrchestra.m ***SIGH*** */
 
-@interface MKOrchestra(Private)
+@interface MKOrchestra(/*Private*/)
 
 +(NSMutableArray **)_addTemplate:aNewTemplate ;
 -_adjustOrchTE:(int)yesOrNo reset:(int)reset;

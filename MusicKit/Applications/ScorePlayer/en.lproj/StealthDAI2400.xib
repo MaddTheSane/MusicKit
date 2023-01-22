@@ -16,24 +16,24 @@
             <rect key="contentRect" x="614" y="916" width="299" height="62"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
             <view key="contentView" id="5">
-                <rect key="frame" x="0.0" y="0.0" width="299" height="74"/>
+                <rect key="frame" x="0.0" y="0.0" width="299" height="78"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6">
-                        <rect key="frame" x="18" y="38" width="99" height="18"/>
+                        <rect key="frame" x="18" y="41" width="108" height="18"/>
                         <buttonCell key="cell" type="check" title="Copy Prohibit" imagePosition="leading" inset="2" id="13">
                             <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                            <font key="font" size="12" name="Helvetica"/>
+                            <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
                             <action selector="setDAI2400CopyProhibit:" target="-2" id="9"/>
                         </connections>
                     </button>
                     <button imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2">
-                        <rect key="frame" x="18" y="18" width="79" height="18"/>
+                        <rect key="frame" x="18" y="19" width="85" height="18"/>
                         <buttonCell key="cell" type="check" title="Emphasis" imagePosition="leading" inset="2" id="12">
                             <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                            <font key="font" size="12" name="Helvetica"/>
+                            <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
                             <action selector="setDAI2400Emphasis:" target="-2" id="10"/>

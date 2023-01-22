@@ -2,9 +2,10 @@
 #define __MK_ScorePlayerController_H___
 
 #import <AppKit/AppKit.h>
+#import <MusicKit/MKConductor.h>
 #define TEXT 0
 
-@interface ScorePlayerController: NSObject
+@interface ScorePlayerController: NSObject <MKConductorDelegate, NSMenuItemValidation>
 {
     IBOutlet NSButton *playButton;
     IBOutlet NSPanel *soundSavePanel;
@@ -32,9 +33,9 @@
     NSString *soundOutDeviceName;
 }
 
-- (void) help: (id) sender;
-- (void) openEditFile: (id) sender;
-- (void) deviceSpecificSettings: (id) sender;
+- (IBAction) help: (id) sender;
+- (IBAction) openEditFile: (id) sender;
+- (IBAction) deviceSpecificSettings: (id) sender;
 // Sets the audio output from the selected list.
 - (IBAction) setSoundOutFrom: (id) sender;
 // Sets the default MIDI driver name from the selected list.
@@ -44,16 +45,14 @@
 - (IBAction) setTimeCodeSerialPort: (id) sender;
 // Enables or disables tempo adjustment
 - (IBAction) setTempoAdjustment: (id) sender;
-- (void) saveAsDefaultDevice: (id) sender;
-- (void) applicationWillFinishLaunching: (NSNotification *) notification;
-- (void) playStop: (id) sender;
-- (void) selectFile: (id) sender;
-- (void) showErrorLog: (id) sender;
-- (void) saveScoreAs: (id) sender;
+- (IBAction) saveAsDefaultDevice: (id) sender;
+- (IBAction) playStop: (id) sender;
+- (IBAction) selectFile: (id) sender;
+- (IBAction) showErrorLog: (id) sender;
+- (IBAction) saveScoreAs: (id) sender;
 - (void) setNeXTDACVolume: (id) sender;
 - (void) setNeXTDACMute: (id) sender;
 - (void) getNeXTDACCurrentValues: (id) sender;
-- (BOOL) validateMenuItem: (NSMenuItem *) menuItem;
 
 @end
 

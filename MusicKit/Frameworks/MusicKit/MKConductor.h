@@ -596,7 +596,7 @@ extern MKMsgStruct *MKRepositionMsgRequest(MKMsgStruct *aMsgStructPtr, double ne
  */
 extern void MKFinishPerformance(void);
 
-@interface MKConductor: NSObject <NSCopying>
+@interface MKConductor: NSObject <NSCoding>
 {
   /*! Current Time in beats, updated (for all instances) after timed entry fires off. */
     double time;       
@@ -638,35 +638,19 @@ extern void MKFinishPerformance(void);
 /*@{*/
 /*!
   @return Returns an id.
-  @brief Allocates memory for a new MKConductor, from specified zone, if not in performance.
-*/
-+ allocWithZone: (NSZone *) zone;
-
-/*!
-  @return Returns an id.
-  @brief Creates and returns a new MKConductor object with a tempo of 60.0
-  beats per minute, allocated from the default zone.
-
-  You must send <b>init </b>to the new instance.  If a performance is currently in
-  progress, this does nothing and returns <b>nil</b>.
-*/
-+ alloc;
-
-/*!
-  @return Returns an id.
   @brief Initializes a new MKConductor.
 
   You must send this message after
   using <b>alloc</b> or <b>allocFromZone:</b> to create a
   MKConductor.
 */
-- init;
+- (instancetype)init;
 
 /*!
  @return Returns an id.
  @brief Returns a new MKConductor created through <b>[MKConductor new]</b>.
  */
-- copyWithZone: (NSZone *) zone;
+- (id)copyWithZone: (NSZone *) zone;
 
 /*@}*/
 
@@ -798,7 +782,7 @@ extern void MKFinishPerformance(void);
   @brief Returns the MKConductor instance that's currently sending a message,
   or <b>nil</b> if no message is being sent.  
 */
-+ currentConductor; 
++ (MKConductor*)currentConductor;
 
 /*!
   @return Returns an id.
@@ -834,7 +818,10 @@ extern void MKFinishPerformance(void);
   @return Returns a BOOL.
   @brief Returns <b>YES</b> if the receiver is paused.
 */
-- (BOOL) isPaused; 
+- (BOOL) isPaused;
+
+/*! Returns YES if the receiver is paused. */
+@property (readonly, nonatomic, getter=isPaused) BOOL paused;
 
 /*!
   @return Returns a double.
@@ -858,7 +845,7 @@ extern void MKFinishPerformance(void);
   for this return value.
  @return Returns a double.
 */
-+ (double) timeInSeconds; 
++ (NSTimeInterval) timeInSeconds;
 
 /*!
   @brief Returns the receiver's notion of the current time in
@@ -892,12 +879,16 @@ extern void MKFinishPerformance(void);
  */
 - (id<MKConductorDelegate>)delegate;
 
+@property (nonatomic, assign) id<MKConductorDelegate> delegate;
+
 /*!
  @brief Returns the receiver's delegate object, as set through the
  <b>setDelegate:</b> method.
  @return Returns an id.
  */
 + (id<MKConductorDelegate>)delegate;
+
+@property (class, assign) id<MKConductorDelegate> delegate;
 
 /*!
   @brief Returns a List of currently active Performers that are assigned to
@@ -950,7 +941,7 @@ extern void MKFinishPerformance(void);
  Doesn't send any of the messages.
  @return Returns an id.
  */
-- emptyQueue; 
+- (void)emptyQueue;
 
 /*!
   @param  newDeltaT is a double.
@@ -1009,7 +1000,7 @@ extern void MKFinishPerformance(void);
   message if you are invoked in response to MKConductor or
   MKMidi messages.  Returns the receiver.
 */
-+ adjustTime; 
++ (void)adjustTime;
 
 /*!
   @param  newBeatSize is a double.
@@ -1256,9 +1247,7 @@ argCount: (int) argCount
 
 /*@}*/
 
-- (void) encodeWithCoder: (NSCoder *) aCoder;
-- (id) initWithCoder: (NSCoder *) aDecoder;
-- awakeAfterUsingCoder: (NSCoder *) aDecoder;
+- (id) awakeAfterUsingCoder: (NSCoder *) aDecoder;
 
 @end
 

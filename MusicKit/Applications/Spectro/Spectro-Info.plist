@@ -13,11 +13,13 @@
 				<string>au</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>FileIcon_txt.tiff</string>
+			<string>FileIcon_txt</string>
 			<key>CFBundleTypeName</key>
 			<string>sound</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>NSDocumentClass</key>
 			<string>SoundDocument</string>
 		</dict>

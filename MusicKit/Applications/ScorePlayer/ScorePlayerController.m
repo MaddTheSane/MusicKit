@@ -112,92 +112,85 @@ static BOOL errorDuringPlayback = NO;
 
 
 /* Localizable strings */
-#define MB [NSBundle mainBundle]
+#define STR_SCOREPLAYER NSLocalizedString(@"ScorePlayer", "Name of program")
 
-#define STR_SCOREPLAYER NSLocalizedStringFromTableInBundle(@"ScorePlayer", @"ScorePlayer", MB, "Name of program")
+#define STR_SCOREPLAYER_ERROR NSLocalizedString(@"ScorePlayer Error", "ScorePlayer error alert panel name.")
 
-#define STR_SCOREPLAYER_ERROR NSLocalizedStringFromTableInBundle(@"ScorePlayer Error", @"ScorePlayer", MB, "ScorePlayer error alert panel name.")
+#define STR_OK NSLocalizedString(@"OK", "OK button name")
 
-#define STR_OK NSLocalizedStringFromTableInBundle(@"OK", @"ScorePlayer", MB, "OK button name")
+#define STR_CANCEL NSLocalizedString(@"Cancel", "Cancel button name")
 
-#define STR_CANCEL NSLocalizedStringFromTableInBundle(@"Cancel", @"ScorePlayer", MB, "Cancel button name")
+#define STR_FILE_CHANGED NSLocalizedString(@"File has changed. Reread it?", "This message appears when the user attempts to play a file, but that file has changed.")
 
-#define STR_FILE_CHANGED NSLocalizedStringFromTableInBundle(@"File has changed. Reread it?", @"ScorePlayer", MB, "This message appears when the user attempts to play a file, but that file has changed.")
+#define STR_YES NSLocalizedString(@"Yes", "Yes button name")
 
-#define STR_YES NSLocalizedStringFromTableInBundle(@"Yes", @"ScorePlayer", MB, "Yes button name")
+#define STR_NO NSLocalizedString(@"No", "No button name")
 
-#define STR_NO NSLocalizedStringFromTableInBundle(@"No", @"ScorePlayer", MB, "No button name")
+#define STR_NO_FILE_OPEN NSLocalizedString(@"No file open.", "This message appears when the user asks to edit a file but no file is open. Also used as title of main window when no file is open.")
 
-#define STR_NO_FILE_OPEN NSLocalizedStringFromTableInBundle(@"No file open.", @"ScorePlayer", MB, "This message appears when the user asks to edit a file but no file is open. Also used as title of main window when no file is open.")
+#define STR_NO_SETTINGS NSLocalizedString(@"The selected device has no user-settable settings.", "This message appears when the user asks to set settings of a sound out device for which there is no settings panel.")
 
-#define STR_NO_SETTINGS NSLocalizedStringFromTableInBundle(@"The selected device has no user-settable settings.", @"ScorePlayer", MB, "This message appears when the user asks to set settings of a sound out device for which there is no settings panel.")
+#define STR_EDIT_CANT_OPEN_FILE NSLocalizedString(@"Can't open file for editing.", "This message appears if the user tries to edit a file but that file can't be opened.")
 
-#define STR_EDIT_CANT_OPEN_FILE NSLocalizedStringFromTableInBundle(@"Can't open file for editing.", @"ScorePlayer", MB, "This message appears if the user tries to edit a file but that file can't be opened.")
+#define STR_READING NSLocalizedString(@"Reading %@...", "This message appears when a file is being read.  It takes one argument which follows the message. E.g. 'Reading x.score...'")
 
-#define STR_READING NSLocalizedStringFromTableInBundle(@"Reading %@...", @"ScorePlayer", MB, "This message appears when a file is being read.  It takes one argument which follows the message. E.g. 'Reading x.score...'")
+#define STR_HUNG_DSP NSLocalizedString(@"No response from DSP--aborting", "Hung DSP msg")
 
-#define STR_HUNG_DSP NSLocalizedStringFromTableInBundle(@"No response from DSP--aborting", @"ScorePlayer", MB, "Hung DSP msg")
+#define STR_FIX_ERRORS NSLocalizedString(@"Fix scorefile errors and try again.", "This message appears after the user aborts a scorefile parse due to errors.")
 
-#define STR_FIX_ERRORS NSLocalizedStringFromTableInBundle(@"Fix scorefile errors and try again.", @"ScorePlayer", MB, "This message appears after the user aborts a scorefile parse due to errors.")
+#define STR_BAD_SRATE NSLocalizedString(@"Sampling rate must be 44100 or 22050 for the NeXT DACs--using default of 22050.", "This message appears if the scorefile specifies an illegal sampling rate.")
 
-#define STR_BAD_SRATE NSLocalizedStringFromTableInBundle(@"Sampling rate must be 44100 or 22050 for the NeXT DACs--using default of 22050.", @"ScorePlayer", MB, "This message appears if the scorefile specifies an illegal sampling rate.")
+#define STR_BAD_SSI_SRATE NSLocalizedString(@"Requested sampling rate not supported by the specified serial port device.", "This message appears if the scorefile specifies an illegal sampling rate for SSI device.")
 
-#define STR_BAD_SSI_SRATE NSLocalizedStringFromTableInBundle(@"Requested sampling rate not supported by the specified serial port device.", @"ScorePlayer", MB, "This message appears if the scorefile specifies an illegal sampling rate for SSI device.")
+#define STR_ERRORS NSLocalizedString(@"There were errors during playback.\nClick the \"Show Errors\" menu item to view them.", "This message appears after a file is played if errors occurred during playback")
 
-#define STR_ERRORS NSLocalizedStringFromTableInBundle(@"There were errors during playback.\nClick the \"Show Errors\" menu item to view them.", @"ScorePlayer", MB, "This message appears after a file is played if errors occurred during playback")
+#define STR_CANT_OPEN_DSP NSLocalizedString(@"Can't open DSP. Perhaps another application has it.", "This message appears if the DSP is busy.")
 
-#define STR_CANT_OPEN_DSP NSLocalizedStringFromTableInBundle(@"Can't open DSP. Perhaps another application has it.", @"ScorePlayer", MB, "This message appears if the DSP is busy.")
+#define STR_INFO_MISSING NSLocalizedString(@"%@ info missing.", "This message takes one leading argument, the name of a scorefile part.  It appears when a part is declared with no info.")
 
-#define STR_INFO_MISSING NSLocalizedStringFromTableInBundle(@"%@ info missing.", @"ScorePlayer", MB, "This message takes one leading argument, the name of a scorefile part.  It appears when a part is declared with no info.")
+#define STR_NO_SYNTHPATCH NSLocalizedString(@"This scorefile calls for a synthesis instrument (%@) that isn't available in this application.", "This message appears if a SynthPatch is specified in the scorefile for which no SynthPatch can be found.  Its one argument is the name of the SynthPatch.")
 
-#define STR_NO_SYNTHPATCH NSLocalizedStringFromTableInBundle(@"This scorefile calls for a synthesis instrument (%@) that isn't available in this application.", @"ScorePlayer", MB, "This message appears if a SynthPatch is specified in the scorefile for which no SynthPatch can be found.  Its one argument is the name of the SynthPatch.")
+#define STR_CONTINUE NSLocalizedString(@"Continue", "Continue button name")
 
-#define STR_CONTINUE NSLocalizedStringFromTableInBundle(@"Continue", @"ScorePlayer", MB, "Continue button name")
+#define STR_PLAYING NSLocalizedString(@"Playing %@...", "This message appears when a file is being played.  The trailing argument is the name of the file.")
 
-#define STR_PLAYING NSLocalizedStringFromTableInBundle(@"Playing %@...", @"ScorePlayer", MB, "This message appears when a file is being played.  The trailing argument is the name of the file.")
+#define STR_TOO_MANY_SYNTHPATCHES NSLocalizedString(@"Could only allocate %d instead of %d %@s for %@", "This message apepars when too many Synthpatches are requested in the scorefile for a given part. There are four arguments, which must appear in the following order: 1 = the number of patches that could be allocated, 2 = number of patches that were requested to be allocated, 3 = the name of the synthpatch specified in the scorefile and 4 = the part name")
 
-#define STR_TOO_MANY_SYNTHPATCHES NSLocalizedStringFromTableInBundle(@"Could only allocate %d instead of %d %@s for %@", @"ScorePlayer", MB, "This message apepars when too many Synthpatches are requested in the scorefile for a given part. There are four arguments, which must appear in the following order: 1 = the number of patches that could be allocated, 2 = number of patches that were requested to be allocated, 3 = the name of the synthpatch specified in the scorefile and 4 = the part name")
+#define STR_SCOREFILE NSLocalizedString(@"Score File", "This appears in the SaveAs... panel")
 
-#define STR_SCOREFILE NSLocalizedStringFromTableInBundle(@"Score File", @"ScorePlayer", MB, "This appears in the SaveAs... panel")
+#define STR_PLAYSCOREFILE NSLocalizedString(@"Playscore File", "This appears in the SaveAs... panel")
 
-#define STR_PLAYSCOREFILE NSLocalizedStringFromTableInBundle(@"Playscore File", @"ScorePlayer", MB, "This appears in the SaveAs... panel")
+#define STR_MIDIFILE NSLocalizedString(@"MIDI File", "This appears in the SaveAs... panel")
 
-#define STR_MIDIFILE NSLocalizedStringFromTableInBundle(@"MIDI File", @"ScorePlayer", MB, "This appears in the SaveAs... panel")
+#define STR_DSPFILE NSLocalizedString(@"DSPCommands File", "This appears in the SaveAs... panel")
 
-#define STR_DSPFILE NSLocalizedStringFromTableInBundle(@"DSPCommands File", @"ScorePlayer", MB, "This appears in the SaveAs... panel")
+#define STR_SOUNDFILE NSLocalizedString(@"Sound File", "This appears in the SaveAs... panel")
 
-#define STR_SOUNDFILE NSLocalizedStringFromTableInBundle(@"Sound File", @"ScorePlayer", MB, "This appears in the SaveAs... panel")
+#define STR_CANT_OPEN_MIDI NSLocalizedString(@"Can't open MIDI driver port for MIDI. Perhaps another application has it.", "This message appears if the serial port is busy.")
 
-#define STR_CANT_OPEN_MIDI NSLocalizedStringFromTableInBundle(@"Can't open MIDI driver port for MIDI. Perhaps another application has it.", @"ScorePlayer", MB, "This message appears if the serial port is busy.")
-
-- showConductorDidSeek
+- (void)showConductorDidSeek
 {
     [timeCodeTextField setStringValue: @"Time code running"];
-    return self;
 }
 
-- showConductorWillSeek
+- (void)showConductorWillSeek
 {
     [timeCodeTextField setStringValue: @"Time code starting..."];
-    return self;
 }
 
-- showConductorDidReverse
+- (void)showConductorDidReverse
 {
     [timeCodeTextField setStringValue: @"Time code running backwards"];
-    return self;
 }
 
-- showConductorDidPause
+- (void)showConductorDidPause
 {
     [timeCodeTextField setStringValue: @"Time code stopped.  Waiting for time code to start"];
-    return self;
 }
 
-- showConductorDidResume
+- (void)showConductorDidResume
 { 
     [timeCodeTextField setStringValue: @"Time code running"];
-    return self;
 }
 
 - (void) showErrorLog: sender
@@ -295,7 +288,7 @@ static BOOL needToReread(void)
     
     if ([soundOutDeviceName isEqualToString: selectedDevice])
 	return;
-    if ([selectedDevice isEqualToString: NEXT_SOUND] && (!([theOrch capabilities] & MK_hostSoundOut))) {
+    if ([selectedDevice isEqualToString: NEXT_SOUND] && (!([theOrch capabilities] & MKOrchestraCapabilitiesHostSoundOut))) {
 	NSRunAlertPanel(STR_SCOREPLAYER, @"%@", STR_OK, nil, nil, @"NeXT sound not supported on this architecture");
 	[soundOutputDevicePopUp selectItemWithTitle: soundOutDeviceName];
 	return;
@@ -305,8 +298,8 @@ static BOOL needToReread(void)
 
 - (void) saveAsDefaultDevice: sender
 {
-    unsigned caps = [theOrch capabilities];
-    if (caps & MK_hostSoundOut) {
+    MKOrchestraCapabilities caps = [theOrch capabilities];
+    if (caps & MKOrchestraCapabilitiesHostSoundOut) {
         NSDictionary *pdi =
         [[NSUserDefaults standardUserDefaults] persistentDomainForName:NSGlobalDomain];
         NSMutableDictionary *pdm = [[pdi mutableCopy] autorelease];
@@ -316,7 +309,7 @@ static BOOL needToReread(void)
         [[NSUserDefaults standardUserDefaults] setPersistentDomain: pdm forName: NSGlobalDomain]; 
 	
     }
-    if (caps & MK_nextCompatibleDSPPort)
+    if (caps & MKOrchestraCapabilitiesNeXTCompatibleDSPPort)
         if (![soundOutDeviceName isEqualToString: NEXT_SOUND]) {
             NSDictionary *pdi = [[NSUserDefaults standardUserDefaults] persistentDomainForName: NSGlobalDomain];
             NSMutableDictionary *pdm = [[pdi mutableCopy] autorelease];
@@ -452,8 +445,13 @@ static int fileType(NSString *name)
     }
     if (!loadResult || userCancelFileRead) {
 	/* Error in file? */
-	if (!userCancelFileRead) 
-	    NSRunAlertPanel(STR_SCOREPLAYER, STR_FIX_ERRORS, STR_OK, NULL, NULL);
+        if (!userCancelFileRead) {
+            NSAlert *alert = [[NSAlert alloc] init];
+            alert.messageText = STR_SCOREPLAYER;
+            alert.informativeText = STR_FIX_ERRORS;
+            [alert runModal];
+            [alert release];
+        }
 	scoreObj = nil;
         [fileName release];
 	fileName = @"";
@@ -850,12 +848,11 @@ static double getUntempo(float tempoVal)
 
 static void abortNow(void);
 
-- orchestraDidAbort: whichOrch
+- (void)orchestraDidAbort: whichOrch
     /* This is received by the appkit thread */
 {
     NSRunAlertPanel(STR_SCOREPLAYER,STR_HUNG_DSP,NULL,NULL,NULL);
     abortNow();
-    return self;
 }
 
 - (void) applicationWillFinishLaunching: (NSNotification *) aNotification 
@@ -1128,50 +1125,45 @@ static void adjustTempo(double slowDown)
 - (IBAction) setTimeCodeSerialPort: sender
 {
     /* 0 for portA, 1 for portB */
-    timeCodeDevice = [[sender selectedCell] title]; 
+    [timeCodeDevice release];
+    timeCodeDevice = [[[sender selectedCell] title] copy];
 }
 
 
-- conductorWillSeek: sender
+- (void)conductorWillSeek: sender
 {
     [MKConductor sendMsgToApplicationThreadSel: @selector(showConductorWillSeek)
 					    to: self argCount: 0];
-    return self;
 }
 
-- conductorDidSeek: sender
+- (void)conductorDidSeek: sender
 {
     [MKConductor sendMsgToApplicationThreadSel: @selector(showConductorDidSeek)
 					    to: self argCount: 0];
-    return self;
 }
 
-- conductorDidReverse: sender
+- (void)conductorDidReverse:(MKConductor *)sender
 {
     [MKConductor sendMsgToApplicationThreadSel: @selector(showConductorDidReverse)
                                             to: self
                                       argCount: 0];
-    return self;
 }
 
-- conductorDidPause: sender
+- (void)conductorDidPause: sender
 {
     NSEnumerator *midiDevEnumerator = [playingMidiDevices objectEnumerator];
-    MKMidi *midiDev;
     
     [MKConductor sendMsgToApplicationThreadSel: @selector(showConductorDidPause) to: self argCount: 0];
     [synthInstruments makeObjectsPerformSelector: @selector(allNotesOff)];
     
-    while ((midiDev = [midiDevEnumerator nextObject])) {
+    for (MKMidi *midiDev in midiDevEnumerator) {
         [midiDev allNotesOff];
     }
-    return self;
 }
 
-- conductorDidResume: sender
+- (void)conductorDidResume: sender
 {
     [MKConductor sendMsgToApplicationThreadSel: @selector(showConductorDidResume) to: self argCount: 0];
-    return self;
 }
 
 - (void) applicationWillTerminate: (NSNotification *) aNotification
@@ -1233,7 +1225,7 @@ NSString *getPath(NSString *dir, NSString *name, NSString *ext)
     // ScorePlayer has it's preferred file icon, but other programs may also.
     [accessoryView setImage: [NSImage imageNamed: [fileIcons objectAtIndex: type]]];
     [accessoryView setTitle: [fileTypes objectAtIndex: type]];
-    [savePanel setRequiredFileType: [saveFileExtensions objectAtIndex: type]];
+    [savePanel setAllowedFileTypes: @[[saveFileExtensions objectAtIndex: type]]];
     return self;
 }
 
@@ -1241,7 +1233,7 @@ NSString *getPath(NSString *dir, NSString *name, NSString *ext)
     /* Called by the accessory view (the Type button on the Save Panel */
 {
     saveType++;
-    if (saveType == SOUND_FILE && (!(capabilities & MK_soundfileOut)))
+    if (saveType == SOUND_FILE && (!(capabilities & MKOrchestraCapabilitiesSoundFileOut)))
         saveType++;
     if (saveType > SOUND_FILE) 
 	saveType = SCORE_FILE; /* Wrap */

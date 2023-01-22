@@ -10,11 +10,13 @@
 				<string>score</string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>Score.icns</string>
+			<string>Score</string>
 			<key>CFBundleTypeName</key>
 			<string>score</string>
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 		</dict>
 	</array>
 	<key>CFBundleHelpBookFolder</key>

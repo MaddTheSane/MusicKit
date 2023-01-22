@@ -25,7 +25,7 @@
                                     <action selector="makeKeyAndOrderFront:" target="77" id="180"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Preferences..." id="165">
+                            <menuItem title="Preferences..." keyEquivalent="," id="165">
                                 <connections>
                                     <action selector="makeKeyAndOrderFront:" target="75" id="181"/>
                                 </connections>
@@ -45,11 +45,13 @@
                                 </connections>
                             </menuItem>
                             <menuItem title="Hide Others" keyEquivalent="h" id="171">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                 <connections>
                                     <action selector="hideOtherApplications:" target="-1" id="179"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Show All" keyEquivalent="h" id="169">
+                            <menuItem title="Show All" id="169">
+                                <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="unhideAllApplications:" target="-1" id="177"/>
                                 </connections>
@@ -422,13 +424,13 @@
                                     <rect key="frame" x="7" y="24" width="291" height="85"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <textFieldCell key="cell" alignment="left" id="308">
-                                        <font key="font" size="12" name="Times-Roman"/>
+                                        <font key="font" size="12" name="TimesNewRomanPSMT"/>
                                         <string key="title">There is a limit to how fast a complex score can be played.   If you enable Automatic Tempo Adjustment, ScorePlayer dynamically reduces the tempo as needed to make sure the music plays smoothly and regularly.   </string>
                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     </textFieldCell>
                                 </textField>
-                                <matrix verticalHuggingPriority="750" fixedFrame="YES" drawsBackground="YES" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="83">
+                                <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="83">
                                     <rect key="frame" x="10" y="5" width="63" height="42"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -518,6 +520,7 @@
                     </box>
                 </subviews>
             </view>
+            <point key="canvasLocation" x="-676" y="-419"/>
         </window>
         <window title="About ScorePlayer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="77" userLabel="InfoPanel" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>

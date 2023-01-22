@@ -3625,10 +3625,14 @@ static BOOL notificationSent = NO;
     abortNotificationDelegate = aDelegate;
 }
 
-@end
+//Just to shut up orchestraDidAbort: message below
 
-/* Private MKOrchestra interface */
-@implementation MKOrchestra(Private)
+- (void)orchestraDidAbort:(MKOrchestra*)sender
+{
+    
+}
+
+#pragma mark - Private MKOrchestra interface
 
 -_notifyAbort
     /* Sent by MKUnitGenerator, MKSynthData or MKOrchestra when they notice trouble */

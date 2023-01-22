@@ -735,12 +735,11 @@ static void condInit()
   /* Same as [[self class] allocFromZone:zone] followed by [self init]. */
 {
     id obj;
-    obj = [[self class] allocWithZone:zone]; 
-    [obj init];
+    obj = [[[self class] allocWithZone:zone] init];
     return obj;
 }
 
-+ adjustTime
++ (void)adjustTime
   /* TYPE: Modifying; Updates the current time.
    * Updates the factory's notion of the current time.
    * This method should be invoked whenever 
@@ -750,7 +749,6 @@ static void condInit()
 {
     if (inPerformance)
 	adjustTime();
-    return self;
 }
 
 static void initializeConductorList()
@@ -1047,11 +1045,7 @@ static void evalAfterQueues()
     return activePerformers;
 }
 
-- (BOOL) isPaused 
-  /* Returns YES if the receiver is paused. */
-{
-    return isPaused;
-}
+@synthesize paused=isPaused;
 
 
   /* TYPE: Controlling; Pauses the receiver.
@@ -1331,7 +1325,7 @@ withDelay: (double) deltaT
 /* TYPE: Requesting; Flushes the receiver's message queue.
  * Flushes the receiver's message queue and returns self.
  */
-- emptyQueue
+- (void)emptyQueue
 {
     register MKMsgStruct *curProc;
     
@@ -1346,7 +1340,6 @@ withDelay: (double) deltaT
     }
     if (!isPaused)
 	repositionCond(self, MK_ENDOFTIME);
-    return self;
 }
 
 - (BOOL) isCurrentConductor
@@ -1791,13 +1784,15 @@ static MKMsgStruct *evalSpecialQueue(MKMsgStruct *queue, MKMsgStruct **queueEnd)
      See write: and finishUnarchiving.
      */
 {
-    delegateFlags = 0;
-    if ([aDecoder versionForClassName:@"MKConductor"] >= VERSION2) {
-        [aDecoder decodeValuesOfObjCTypes: "ddc", &beatSize, &timeOffset, &(archivingFlags)];
-        activePerformers = nil;
-    }
-    if ([aDecoder versionForClassName:@"MKConductor"] >= VERSION3) {
-          activePerformers = [[aDecoder decodeObject] retain];
+    if (self = [super init]) {
+	delegateFlags = 0;
+	if ([aDecoder versionForClassName:@"MKConductor"] >= VERSION2) {
+	    [aDecoder decodeValuesOfObjCTypes: "ddc", &beatSize, &timeOffset, &(archivingFlags)];
+	    activePerformers = nil;
+	}
+	if ([aDecoder versionForClassName:@"MKConductor"] >= VERSION3) {
+	    activePerformers = [[aDecoder decodeObject] retain];
+	}
     }
     return self;
 }
@@ -1867,10 +1862,7 @@ static MKMsgStruct *evalSpecialQueue(MKMsgStruct *queue, MKMsgStruct **queueEnd)
     delegateFlags = flags;
 }
 
--delegate
-{
-    return delegate;
-}
+@synthesize delegate;
 
 #if 0
 /* Needed to get around a compiler bug FIXME */
