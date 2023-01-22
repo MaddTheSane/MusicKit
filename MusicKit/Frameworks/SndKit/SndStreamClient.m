@@ -160,17 +160,17 @@ enum {
     }
         
     if (synthThreadLock) {
-        [synthThreadLock release];    
+        [synthThreadLock release];
 	synthThreadLock = nil;
     }
         
     if (outputBufferLock) {
-        [outputBufferLock release];    
+        [outputBufferLock release];
 	outputBufferLock = nil;
     }
     
     if (managerConnectionLock) {
-        [managerConnectionLock release];    
+        [managerConnectionLock release];
 	managerConnectionLock = nil;
     }
     
@@ -634,7 +634,7 @@ static void inline setThreadPriority()
     [[NSThread currentThread] setName: clientName]; // Just for debugging.
     active = TRUE;
     [managerConnectionLock lockWhenCondition: SC_connected];
-#if SNDSTREAMCLIENT_DEBUG_SYNTHTHREAD                  
+#if SNDSTREAMCLIENT_DEBUG_SYNTHTHREAD
     NSLog(@"SYNTH THREAD: (%@) starting processing thread\n", [NSThread currentThread]);
 #endif
     while (active) @autoreleasepool {
@@ -771,19 +771,13 @@ static void inline setThreadPriority()
 // synthOutputBuffer
 ////////////////////////////////////////////////////////////////////////////////
 
-- (SndAudioBuffer *) synthOutputBuffer
-{
-  return [[synthOutputBuffer retain] autorelease];
-}
+@synthesize synthOutputBuffer;
 
 ////////////////////////////////////////////////////////////////////////////////
 // synthInputBuffer
 ////////////////////////////////////////////////////////////////////////////////
 
-- (SndAudioBuffer *) synthInputBuffer
-{
-  return [[synthInputBuffer retain] autorelease];
-}
+@synthesize synthInputBuffer;
 
 ////////////////////////////////////////////////////////////////////////////////
 // finishStreaming

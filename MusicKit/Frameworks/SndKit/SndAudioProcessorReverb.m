@@ -85,16 +85,14 @@
 
     for (combIndex = 0; combIndex < NUMCOMBS; combIndex++) {
 	for (channelIndex = 0; channelIndex < NUMCHANNELS; channelIndex++) {
-	    [comb[channelIndex][combIndex] release];
+	    comb[channelIndex][combIndex] = nil;
 	}
     }
     for (allPassIndex = 0; allPassIndex < NUMALLPASSES; allPassIndex++) {
 	for (channelIndex = 0; channelIndex < NUMCHANNELS; channelIndex++) {
-	    [allpass[channelIndex][allPassIndex] release];
+	    allpass[channelIndex][allPassIndex] = nil;
 	}
     }
-    
-    [super dealloc];
 }
 
 - (void) mute

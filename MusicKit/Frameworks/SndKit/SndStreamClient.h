@@ -123,7 +123,7 @@ enum {
     /*! The stream clients manager. */
     SndStreamManager *manager;
     /*! The delegate to receive messages from the client. */
-    id<SndStreamClientDelegate> delegate;
+    __unsafe_unretained id<SndStreamClientDelegate> delegate;
     /*! The clients sense of time as used by subclasses for synthesis. */
     double     clientNowTime;
     /*! The last time received from the calling SndStreamManager.
@@ -221,6 +221,8 @@ enum {
 */
 - (SndAudioBuffer *) synthOutputBuffer;
 
+@property (readonly, strong) SndAudioBuffer *synthOutputBuffer;
+
 /*!
   @brief Moves the synthOutputBuffer onto the processed section of the queue, replacing it with the next empty pending buffer.
 
@@ -234,6 +236,8 @@ enum {
   @return     Returns the input buffer member
 */
 - (SndAudioBuffer *) synthInputBuffer;
+
+@property (readonly, strong) SndAudioBuffer *synthInputBuffer;
 
 /*!
   @brief Tell the client to finish streaming.

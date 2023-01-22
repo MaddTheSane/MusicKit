@@ -31,8 +31,8 @@
 	id     sndAudioArchObject;
 }
 - initWithRect: (NSRect) r andSndAudioArchObject: (id) object;
-- (void) dealloc;
-- (NSRect) rect;
+@property (readonly) NSRect rect;
+@property (readonly, strong) id sndAudioArchObject;
 - (id) sndAudioArchObject;
 
 @end
@@ -44,29 +44,18 @@
 	self = [super init];
 	if(self != nil) {
 		rect = r;
-		if (sndAudioArchObject != nil)
-			[sndAudioArchObject release];  
-		sndAudioArchObject = [object retain];
+		sndAudioArchObject = object;
 	}
 	return self;
 }
 
 - (void) dealloc
 {
-	[sndAudioArchObject release];
 	sndAudioArchObject = nil;
-	[super dealloc];
 }
 
-- (NSRect) rect
-{
-	return rect;
-}
-
-- (id) sndAudioArchObject
-{
-	return [[sndAudioArchObject retain] autorelease];
-}
+@synthesize rect;
+@synthesize sndAudioArchObject;
 
 @end
 
@@ -87,11 +76,11 @@
 	objectArrayLock = [[NSLock alloc] init];
 	
 	currentSndArchObject = nil;
-	timer = [[NSTimer scheduledTimerWithTimeInterval: 1
-                                                  target: self
-                                                selector: @selector(update:)
-                                                userInfo: nil
-                                                 repeats: TRUE] retain];
+	timer = [NSTimer scheduledTimerWithTimeInterval: 1
+											 target: self
+										   selector: @selector(update:)
+										   userInfo: nil
+											repeats: TRUE];
 	
 	if (displayObjectsArray != nil)
 		[displayObjectsArray removeAllObjects];
@@ -108,15 +97,7 @@
 
 - (void) dealloc
 {
-	[displayObjectsArray release];
-	if (currentSndArchObject != nil)
-		[currentSndArchObject release];
-	[objectArrayLock release];
     [timer invalidate];
-    [timer release];
-    [delegate release];
-	
-	[super dealloc];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -169,7 +150,7 @@
 		{
 			// Draw each of the stream clients
 			SndStreamMixer *mixer   = [[SndStreamManager defaultStreamManager] mixer];
-			int c = [mixer clientCount], i;
+			int c = [mixer countOfClients], i;
 			for (i=0;i<c;i++) {
 				NSRect cr;
 				cr.size.width  = rect.size.width / 7;
@@ -198,9 +179,9 @@
 				{
 					NSPoint p = {5,10};
 					if (currentSndArchObject == nil)
-						[msg setAttributedString:[[[NSAttributedString alloc] initWithString:@"Ready"] autorelease]];
+						[msg setAttributedString:[[NSAttributedString alloc] initWithString:@"Ready"]];
 					else
-                                            [msg setAttributedString:[[[NSAttributedString alloc] initWithString:[currentSndArchObject description]] autorelease]];
+						[msg setAttributedString:[[NSAttributedString alloc] initWithString:[currentSndArchObject description]]];
 					[msg drawAtPoint: p];
 				}
 			}
@@ -325,14 +306,13 @@
 	
 	[objectArrayLock lock];
 	c = [displayObjectsArray count];
-	if (currentSndArchObject != nil)
-		[currentSndArchObject release];
+	currentSndArchObject = nil;
 	for (i = 0; i < c; i++) {
 		SndAudioArchViewObject *theObj = [displayObjectsArray objectAtIndex: i];
 		NSRect r = [theObj rect];
 		if (mouseLoc.x >= r.origin.x && mouseLoc.y >= r.origin.y &&
 			mouseLoc.x <= r.origin.x + r.size.width && mouseLoc.y <= r.origin.y + r.size.height) {
-			currentSndArchObject = [[theObj sndAudioArchObject] retain];
+			currentSndArchObject = [theObj sndAudioArchObject];
 			if (delegate != nil && [delegate respondsToSelector: @selector(didSelectObject:)])
 				[delegate didSelectObject: [theObj sndAudioArchObject]];
 			break;
@@ -348,15 +328,10 @@
 // currentlySelectedAudioArchObject
 ////////////////////////////////////////////////////////////////////////////////
 
-- (id) currentlySelectedAudioArchObject
-{
-	return [[currentSndArchObject retain] autorelease];
-}
+@synthesize currentlySelectedAudioArchObject = currentSndArchObject;
 
 - (void)clearCurrentlySelectedAudioArchObject
 {
-	if (currentSndArchObject != nil)
-		[currentSndArchObject release];
 	currentSndArchObject = nil;
 }
 

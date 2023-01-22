@@ -247,7 +247,7 @@ DeprecatedEnum(SndViewDisplayMode, SND_SOUNDVIEW_WAVE, SndViewDisplayModeWave);
     /*! The region of the sound currently held on the pasteboard. */
     Snd		*pasteboardSound;
     /*! delegate receiving notification of SndView state changes. */
-    id<SndViewDelegate> delegate;
+    __weak id<SndViewDelegate> delegate;
     /*! The region of the sound (in frames) selected (and displayed highlighted) for copy/paste/drag operations. */
     NSRange	selectedFrames;
     /*! The form of display, either SND_SOUNDVIEW_MINMAX or SND_SOUNDVIEW_WAVE */
@@ -405,7 +405,7 @@ DeprecatedEnum(SndViewDisplayMode, SND_SOUNDVIEW_WAVE, SndViewDisplayModeWave);
 */
 - (id<SndViewDelegate>)delegate;
 
-@property (assign) id<SndViewDelegate> delegate;
+@property (weak) id<SndViewDelegate> delegate;
 
 /*!
   @brief Sent to the delegate just after the SndView's sound is played.
@@ -840,7 +840,7 @@ DeprecatedEnum(SndViewDisplayMode, SND_SOUNDVIEW_WAVE, SndViewDisplayModeWave);
 */
 - (Snd *) sound;
 
-@property (nonatomic, assign) Snd *sound;
+@property (nonatomic, strong) Snd *sound;
 
 /*!
   @brief Sets the width and height of the SndView's frame.
@@ -1046,7 +1046,7 @@ DeprecatedEnum(SndViewDisplayMode, SND_SOUNDVIEW_WAVE, SndViewDisplayModeWave);
  */
 - (NSImage *) dragIcon;
 
-@property (retain) NSImage *dragIcon;
+@property (strong) NSImage *dragIcon;
 
 @end
 

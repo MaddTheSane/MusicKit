@@ -59,7 +59,6 @@
 
     if (frameRange.location > [self lengthInSampleFrames] ||
         frameRange.location + frameRange.length > [self lengthInSampleFrames]) {
-	[newSound release];
 	return nil;
     }
     
@@ -127,7 +126,7 @@
     
     [editingLock unlock];
     
-    return [newSound autorelease];    
+    return newSound;
 }
 
 - (int) compactSamples
@@ -172,7 +171,7 @@
     [editingLock lock]; 
     
     for(soundBufferIndex = 0; soundBufferIndex < [soundBuffers count] && deleteState != DELETE_LAST_PARTIAL; soundBufferIndex++) {
-	audioBuffer = [[soundBuffers objectAtIndex: soundBufferIndex] retain]; // retain since we replace or remove it.
+	audioBuffer = [soundBuffers objectAtIndex: soundBufferIndex]; // retain since we replace or remove it.
 	
 	// Find the audio buffer which has the start of the frame range.
 	if((frameRange.location < startFrameOfBuffer + [audioBuffer lengthInSampleFrames]) && deleteState == BEFORE_DELETING) {
@@ -183,7 +182,6 @@
 		// with one new audio buffer.
 		preservedBuffer = [[SndAudioBuffer alloc] initWithBuffer: audioBuffer range: rangeOfBufferToPreserve];
 		[soundBuffers replaceObjectAtIndex: soundBufferIndex withObject: preservedBuffer];
-		[preservedBuffer release];
 		// then delete following buffers until a partial buffer.
 		deleteState = FULL_DELETE_ADDITIONAL;
 	    }
@@ -203,7 +201,6 @@
 		rangeOfBufferToPreserve.length = [audioBuffer lengthInSampleFrames] - rangeOfBufferToPreserve.location;
 		preservedBuffer = [[SndAudioBuffer alloc] initWithBuffer: audioBuffer range: rangeOfBufferToPreserve];
 		[soundBuffers insertObject: preservedBuffer atIndex: soundBufferIndex + 1];
-		[preservedBuffer release];
 		deleteState = DELETE_LAST_PARTIAL; // move to the terminal state.
 	    }
 	}
@@ -215,7 +212,6 @@
 		rangeOfBufferToPreserve.length = [audioBuffer lengthInSampleFrames] - rangeOfBufferToPreserve.location;
 		preservedBuffer = [[SndAudioBuffer alloc] initWithBuffer: audioBuffer range: rangeOfBufferToPreserve];		
 		[soundBuffers replaceObjectAtIndex: soundBufferIndex withObject: preservedBuffer];
-		[preservedBuffer release];
 		deleteState = DELETE_LAST_PARTIAL;
 	    }
 	    else {
@@ -227,7 +223,6 @@
 	    }
 	}
 	startFrameOfBuffer += [audioBuffer lengthInSampleFrames];
-	[audioBuffer release]; // remove the retain since we've finished with it.
     }
     
     soundFormat.frameCount -= frameRange.length;
@@ -290,8 +285,6 @@
 		// Insert the soundBuffers of fromSnd, followed by the second subdivided audio buffer.
 		[soundBuffers insertObjects: fromSnd->soundBuffers atIndexes: insertAllBuffers];
 		[soundBuffers insertObject: secondSubdividedBuffer atIndex: [insertAllBuffers lastIndex] + 1];
-		[firstSubdividedBuffer release];
-		[secondSubdividedBuffer release];
 		break;
 	    }
 	    startFrameOfBuffer += [audioBuffer lengthInSampleFrames];

@@ -104,13 +104,15 @@
   @brief   Returns the number of stream clients currently connected to the mixer.
   @return     Returns the number of stream clients currently connected to the mixer.
 */
-- (int) clientCount;
+- (NSInteger) countOfClients;
 
 /*!
   @brief   Returns the SndAudioProcessorChain applied after mixing SndStreamClients.
   @return     Returns a reference to the audio processor chain.
 */
 - (SndAudioProcessorChain *) audioProcessorChain;
+
+@property (readonly, strong) SndAudioProcessorChain *audioProcessorChain;
 
 /*!
   @brief   Resets the mixer's sense of time, and pro
@@ -127,5 +129,15 @@
 @end
 
 ////////////////////////////////////////////////////////////////////////////////
+
+@interface SndStreamMixer (Deprecated)
+
+/*!
+  @brief   Returns the number of stream clients currently connected to the mixer.
+  @return     Returns the number of stream clients currently connected to the mixer.
+*/
+- (int) clientCount NS_DEPRECATED_WITH_REPLACEMENT_MAC("-countOfClients", 10.0, 10.8);
+
+@end
 
 #endif

@@ -125,7 +125,7 @@
 	tag = 0;
 	
 	if (performancesArray == nil) {
-	    performancesArray     = [[NSMutableArray array] retain];
+	    performancesArray     = [NSMutableArray array];
 	    performancesArrayLock = [NSLock new];
 	}
 	else
@@ -143,12 +143,12 @@
 	
 	// Initialise with an array of a single SndAudioBuffer instance.
 	if (soundBuffers)
-	    [soundBuffers release];
+	    soundBuffers = nil;
 	singleAudioBuffer = [SndAudioBuffer audioBufferWithDataFormat: format
 							 channelCount: channels
 							 samplingRate: samplingRate
 							   frameCount: frames];
-	soundBuffers = [[NSMutableArray arrayWithObject: singleAudioBuffer] retain];
+	soundBuffers = [NSMutableArray arrayWithObject: singleAudioBuffer];
 	soundFormat.dataFormat = format;
 	soundFormat.sampleRate = samplingRate;
 	soundFormat.channelCount = channels;
@@ -180,7 +180,6 @@
   self = [self init];
   if (self != nil) {
     if ([self readSoundfile: filename] != SND_ERR_NONE) {
-      [self release];
       return nil;
     }
   }
@@ -193,7 +192,6 @@
   if (self != nil) {
       // TODO: this should actually read HTTP, FTP URLs also.
     if ([self readSoundfile: [url path]] != SND_ERR_NONE) {
-      [self release];
       return nil;
     }
   }
@@ -251,10 +249,8 @@
 			       userInfo: nil] raise];
     }
     [soundData getBytes: soundDataBytes range: NSMakeRange(dataLocation, dataSize)];
-    if(soundBuffers)
-	[soundBuffers release];
     // TODO: define audioBufferWithFormat: data: (NSData *) and audioBufferWithFormat: bytes:
-    soundBuffers = [[NSMutableArray arrayWithObject: [SndAudioBuffer audioBufferWithFormat: &soundFormat data: soundDataBytes]] retain];
+    soundBuffers = [NSMutableArray arrayWithObject: [SndAudioBuffer audioBufferWithFormat: &soundFormat data: soundDataBytes]];
     free(soundDataBytes);
     
     priority = 0;
@@ -275,24 +271,8 @@
     if (name) {
         if ([[SndTable defaultSndTable] soundNamed: name] == self)
             [[SndTable defaultSndTable] removeSoundForName: name];
-        [name release];
 	name = nil;
     }
-    [soundBuffers release];
-    soundBuffers = nil;
-    [performancesArray release];
-    performancesArray = nil;
-    [performancesArrayLock release];
-    performancesArrayLock = nil;
-    [editingLock release];
-    editingLock = nil;
-    [info release];
-    info = nil;
-    [audioProcessorChain release];
-    audioProcessorChain = nil;
-    //[delegate release]; // We don't retain it so we don't release it.
-    //delegate = nil;
-    [super dealloc];
 }
 
 // for debugging
@@ -407,13 +387,13 @@
     }
     if ([aDecoder allowsKeyedCoding]) {
 	[self setDelegate: [aDecoder decodeObjectForKey: @"delegate"]];
-	[self setName: [aDecoder decodeObjectForKey: @"Name"]];
-	[self setInfo: [aDecoder decodeObjectForKey: @"Info"]];
+	[self setName: [aDecoder decodeObjectOfClass: [NSString class] forKey: @"Name"]];
+	[self setInfo: [aDecoder decodeObjectOfClass: [NSString class] forKey: @"Info"]];
 	soundFormat.dataFormat = [aDecoder decodeIntForKey: @"DataFormat"];
 	soundFormat.sampleRate = [aDecoder decodeDoubleForKey: @"SampleRate"];
 	soundFormat.channelCount = [aDecoder decodeIntForKey: @"ChannelCount"];
 	soundFormat.frameCount = [aDecoder decodeIntegerForKey: @"FrameCount"];
-	soundBuffers = [[aDecoder decodeObjectForKey: @"SoundBuffers"] retain];
+	soundBuffers = [aDecoder decodeObjectOfClasses:[NSSet setWithObjects:[NSArray class], [SndAudioBuffer class], nil] forKey: @"SoundBuffers"];
     }
     else {
 	int infoSize;
@@ -424,7 +404,7 @@
 	unsigned char *soundBytes;
 	
 	delegate = [aDecoder decodeObject];
-	name = [[aDecoder decodeObject] retain];
+	name = [aDecoder decodeObject];
 	
 	[aDecoder decodeValuesOfObjCTypes: "iiiiii", &magic, &dataLocation, &dataSize,
 	    &(soundFormat.dataFormat), &(soundFormat.sampleRate), &(soundFormat.channelCount)];
@@ -437,9 +417,7 @@
 				   userInfo: nil] raise];
 	[aDecoder decodeArrayOfObjCType: "c" count: infoSize at: infoString];
 	infoString[infoSize] = '\0'; // Ensure the string is terminated.
-	if(info)
-	    [info release];
-	info = [[NSString stringWithUTF8String: infoString] retain];
+	info = [NSString stringWithUTF8String: infoString];
 	free(infoString);
 	
 	/* allocate enough room for info string */
@@ -449,7 +427,7 @@
 				   userInfo: nil] raise];
 	
 	[aDecoder decodeArrayOfObjCType: "c" count: dataSize at: soundBytes];
-	soundBuffers = [[NSMutableArray arrayWithObject: [SndAudioBuffer audioBufferWithFormat: &soundFormat data: soundBytes]] retain];
+	soundBuffers = [NSMutableArray arrayWithObject: [SndAudioBuffer audioBufferWithFormat: &soundFormat data: soundBytes]];
 	free(soundBytes);
     }
     return self;

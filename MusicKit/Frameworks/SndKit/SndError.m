@@ -227,8 +227,8 @@ NSString *SndSoundError(SndError err)
      * Tell string localize routines where .strings file is.
      */
     if (!soundBundle)
-	soundBundle = [[NSBundle
-                        bundleWithIdentifier:@"org.musickit.SndKit"] retain];
+	soundBundle = [NSBundle
+                        bundleWithIdentifier:@"org.musickit.SndKit"];
 
     switch (err) {
     case SND_ERR_NONE:			//	0

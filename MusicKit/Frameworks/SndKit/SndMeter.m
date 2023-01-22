@@ -106,7 +106,6 @@ static void calcValues(SndMeter *self, float *aveVal, float *peakVal)
 	    inStream = [[SndStreamClient alloc] init];
 	    if (inStream &&
 		([inStream setDetectPeaks: YES] == nil)) {
-		 [inStream release];
 		 inStream = nil;
 	    }
 	}
@@ -126,7 +125,6 @@ static void calcValues(SndMeter *self, float *aveVal, float *peakVal)
 	    outStream = [[SndStreamClient alloc] init];
 	    if (outStream &&
 		([outStream setDetectPeaks: YES] == nil)) {
-		 [outStream release];
  		 outStream = nil;
 	    }
 	}
@@ -235,7 +233,6 @@ static void calcValues(SndMeter *self, float *aveVal, float *peakVal)
 
 - (void) setBackgroundColor: (NSColor *) color;
 {
-    [backgroundColor autorelease];
     backgroundColor = [color copy];
     [self setNeedsDisplay: YES];
 }
@@ -244,7 +241,6 @@ static void calcValues(SndMeter *self, float *aveVal, float *peakVal)
 
 - (void) setForegroundColor: (NSColor *) color;
 {
-    [foregroundColor autorelease];
     foregroundColor = [color copy];
     [self setNeedsDisplay: YES];
 }
@@ -253,7 +249,6 @@ static void calcValues(SndMeter *self, float *aveVal, float *peakVal)
 
 - (void) setPeakColor: (NSColor *) color;
 {
-    [peakColor autorelease];
     peakColor = [color copy];
     [self setNeedsDisplay: YES];
 }
@@ -452,9 +447,9 @@ static void calcValues(SndMeter *self, float *aveVal, float *peakVal)
         minValue = [stream decodeFloatForKey:@"minValue"];
         maxValue = [stream decodeFloatForKey:@"maxValue"];
         holdTime = [stream decodeDoubleForKey:@"holdTime"];
-        backgroundColor = [[stream decodeObjectOfClass:[NSColor class] forKey:@"backgroundColor"] retain];
-        foregroundColor = [[stream decodeObjectOfClass:[NSColor class] forKey:@"foregroundColor"] retain];
-        peakColor = [[stream decodeObjectOfClass:[NSColor class] forKey:@"peakColor"] retain];
+        backgroundColor = [stream decodeObjectOfClass:[NSColor class] forKey:@"backgroundColor"];
+        foregroundColor = [stream decodeObjectOfClass:[NSColor class] forKey:@"foregroundColor"];
+        peakColor = [stream decodeObjectOfClass:[NSColor class] forKey:@"peakColor"];
         unsigned short tmpSmFlags = [stream decodeIntForKey:@"smFlags"];
         *((unsigned short*)&(smFlags)) = tmpSmFlags;
     } else {
@@ -474,15 +469,16 @@ static void calcValues(SndMeter *self, float *aveVal, float *peakVal)
             [self setPeakColor:[NSColor colorWithCalibratedWhite:peakGray alpha:1.0]];
         } else if (version >= 1) {
             float tmpTime;
-            [stream decodeValuesOfObjCTypes:"@fffff@@@s",&sound,&currentValue,
+	    id tmp1, tmp2, tmp3, tmp4;
+            [stream decodeValuesOfObjCTypes:"@fffff@@@s",&tmp1,&currentValue,
              &currentPeak, &minValue, &maxValue,
-             &tmpTime, &backgroundColor, &foregroundColor, &peakColor,
+             &tmpTime, &tmp2, &tmp3, &tmp4,
              &smFlags];
             holdTime = tmpTime;
-            [sound retain];
-            [backgroundColor retain];
-            [foregroundColor retain];
-            [peakColor retain];
+	    sound = tmp1;
+	    backgroundColor = tmp2;
+	    foregroundColor = tmp3;
+	    peakColor = tmp4;
         }
     }
     smFlags.running = NO;
@@ -490,14 +486,6 @@ static void calcValues(SndMeter *self, float *aveVal, float *peakVal)
     _valOneAgo = _valTwoAgo = 0.0;
     return self;
 
-}
-
-- (void) dealloc {
-    [backgroundColor release];
-    [foregroundColor release];
-    [peakColor release];
-    [sound release];
-    [super dealloc];
 }
 
 @end

@@ -454,7 +454,7 @@ static int fileType(NSString *name)
         }
 	scoreObj = nil;
         [fileName release];
-	fileName = @"";
+	fileName = [@"" retain];
 	[theMainWindow setTitle: STR_SCOREPLAYER];
 	[playButton setEnabled: YES];
 	return NO;

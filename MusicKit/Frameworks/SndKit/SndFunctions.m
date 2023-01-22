@@ -83,7 +83,7 @@ NSString *SndFormatName(SndSampleFormat dataFormat, BOOL verbose)
     switch(dataFormat) {
 	case SndSampleFormatMulaw8:
 	case SndSampleFormatMulawSquelch:
-	    return @"8-bit muLaw";
+	    return @"8-bit μLaw";
 	case SndSampleFormatLinear8:
 	    return @"8-bit Linear";
 	case SndSampleFormatLinear16:
@@ -248,5 +248,4 @@ SndError SndSwapHostToBigEndianSound(void *dest, void *src, int sampleCount, int
     return SND_ERR_BAD_FORMAT;
     
 #endif
-    
 }

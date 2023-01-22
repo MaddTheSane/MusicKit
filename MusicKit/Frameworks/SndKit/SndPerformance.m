@@ -32,7 +32,7 @@
 + (SndPerformance *) performanceOfSnd: (Snd *) s
                         playingAtTime: (double) t;
 {
-  return [[[SndPerformance alloc] initWithSnd: s playingAtTime: t] autorelease];
+  return [[SndPerformance alloc] initWithSnd: s playingAtTime: t];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -44,10 +44,10 @@
                          beginAtIndex: (long) beginIndex
                            endAtIndex: (long) endIndex
 {
-  return [[[SndPerformance alloc] initWithSnd: s
-                                playingAtTime: t
-                                 beginAtIndex: beginIndex
-                                   endAtIndex: endIndex] autorelease];
+  return [[SndPerformance alloc] initWithSnd: s
+			       playingAtTime: t
+				beginAtIndex: beginIndex
+				  endAtIndex: endIndex];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -73,7 +73,7 @@ playingAtTime: (double) t
 {
     self = [super init];
     if (self) {
-	snd          = [s retain];
+	snd          = s;
 	playTime     = t;
 	startAtIndex = beginIndex;
 	playIndex    = beginIndex;
@@ -95,33 +95,16 @@ startPosition: (double) startPosition
      duration: (double) duration
     deltaTime: (double) _deltaTime;
 {
-    self = [super init];
-    if (self) {
-	double samplingRate = [s samplingRate];
+    double samplingRate = [s samplingRate];
+    
+    if (self = [self initWithSnd: s
+		   playingAtTime: _playTime
+		    beginAtIndex: (long) (samplingRate * startPosition)
+		      endAtIndex: (long) (startAtIndex + samplingRate * duration * deltaTime)]) {
 	
-	[self initWithSnd: s
-	    playingAtTime: _playTime
-	     beginAtIndex: (long) (samplingRate * startPosition)
-	       endAtIndex: (long) (startAtIndex + samplingRate * duration * deltaTime)];
-
 	deltaTime = _deltaTime;
     }
     return self;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// dealloc
-////////////////////////////////////////////////////////////////////////////////
-
-- (void) dealloc
-{
-  if (snd)
-    [snd release];
-  snd = nil;
-  if (audioProcessorChain)
-    [audioProcessorChain release];
-  audioProcessorChain = nil;
-  [super dealloc];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -135,7 +118,7 @@ startPosition: (double) startPosition
   SndPerformance *newPerformance = [[[self class] allocWithZone: zone] init];
 
   // We do a lightweight copy since this is just a reference to the Snd anyway.
-  newPerformance->snd          = [snd retain];
+  newPerformance->snd          = snd;
   newPerformance->playTime     = playTime;
   newPerformance->playIndex    = playIndex;
   newPerformance->startAtIndex = startAtIndex;
@@ -185,44 +168,20 @@ startPosition: (double) startPosition
 // snd
 ////////////////////////////////////////////////////////////////////////////////
 
-- (Snd*) snd
-{
-  return [[snd retain] autorelease];
-}
-
-- (double) deltaTime
-{
-  return deltaTime;
-}
-
-- (void) setDeltaTime: (double) _deltaTime
-{
-  deltaTime = _deltaTime;
-}
+@synthesize snd;
+@synthesize deltaTime;
 
 ////////////////////////////////////////////////////////////////////////////////
 // playTime
 ////////////////////////////////////////////////////////////////////////////////
 
-- (double) playTime
-{
-  return playTime;
-}
-
-- setPlayTime: (double) t
-{
-  playTime = t;
-  return self;
-}
+@synthesize playTime;
 
 ////////////////////////////////////////////////////////////////////////////////
 // playIndex
 ////////////////////////////////////////////////////////////////////////////////
 
-- (long) playIndex
-{
-  return playIndex;
-}
+@synthesize playIndex;
 
 ////////////////////////////////////////////////////////////////////////////////
 // setPlayIndex:
@@ -257,7 +216,7 @@ startPosition: (double) startPosition
 // endAtIndex
 ////////////////////////////////////////////////////////////////////////////////
 
-- (long) endAtIndex   {  return endAtIndex; }
+@synthesize endAtIndex;
 - (long) startAtIndex {  return playIndex;  }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -296,8 +255,7 @@ startPosition: (double) startPosition
 // Pausing stuff.
 ////////////////////////////////////////////////////////////////////////////////
 
-- (BOOL) isPaused { return paused; };
-- setPaused: (BOOL) b  { paused = b; return self; }
+@synthesize paused;
 - pause  { paused = YES; return self; }
 - resume { paused = NO;  return self; }
 
@@ -310,17 +268,7 @@ startPosition: (double) startPosition
 // AudioProcessorChain stuff
 ////////////////////////////////////////////////////////////////////////////////
 
-- (SndAudioProcessorChain *) audioProcessorChain
-{
-    return [[audioProcessorChain retain] autorelease];
-}
-
-- (void) setAudioProcessorChain: (SndAudioProcessorChain *) anAudioProcessorChain
-{
-    if (audioProcessorChain)
-	[audioProcessorChain release];
-    audioProcessorChain = [anAudioProcessorChain retain];
-}
+@synthesize audioProcessorChain;
 
 // Fills the given buffer with sound data, reading from the playIndex up until endAtIndex
 // (which allows us to play a sub-section of a sound). playIndex is updated, and looping is
@@ -454,35 +402,15 @@ startPosition: (double) startPosition
 
 ////////////////////////////////////////////////////////////////////////////////
 
-- (void) setLooping: (BOOL) yesOrNo
-{
-    looping = yesOrNo;
-}
 
 - (BOOL) looping
 {
-    return looping;
+    return [self isLooping];
 }
 
-- (void) setLoopStartIndex: (long) newLoopStartIndex
-{
-    loopStartIndex = newLoopStartIndex;
-}
-
-- (long) loopStartIndex
-{
-    return loopStartIndex;
-}
-
-- (void) setLoopEndIndex: (long) newLoopEndIndex
-{
-    loopEndIndex = newLoopEndIndex;
-}
-
-- (long) loopEndIndex
-{
-    return loopEndIndex;
-}
+@synthesize looping;
+@synthesize loopStartIndex;
+@synthesize loopEndIndex;
 
 ////////////////////////////////////////////////////////////////////////////////
 

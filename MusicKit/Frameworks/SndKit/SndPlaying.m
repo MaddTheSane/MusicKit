@@ -316,13 +316,12 @@
 
 - (void) setAudioProcessorChain: (SndAudioProcessorChain *) newAudioProcessorChain
 {
-    [audioProcessorChain release];
-    audioProcessorChain = [newAudioProcessorChain retain];
+    audioProcessorChain = newAudioProcessorChain;
 }
 
 - (SndAudioProcessorChain *) audioProcessorChain
 {
-    return [[audioProcessorChain retain] autorelease];
+    return audioProcessorChain;
 }
 
 - (void) adjustLoopStart: (long *) newLoopStart 

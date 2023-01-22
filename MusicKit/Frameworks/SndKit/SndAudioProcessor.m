@@ -27,7 +27,7 @@ static NSMutableArray *fxClassesArray = nil;
 // registerAudioProcessorClass:
 ////////////////////////////////////////////////////////////////////////////////
 
-+ (void) registerAudioProcessorClass: (id) fxclass
++ (void) registerAudioProcessorClass: (Class) fxclass
 {
     if (!fxClassesArray)
 	fxClassesArray = [[NSMutableArray alloc] init];
@@ -49,7 +49,7 @@ static NSMutableArray *fxClassesArray = nil;
 + (NSArray*) fxClasses
 {
     if (fxClassesArray)
-	return [[fxClassesArray retain] autorelease];
+	return fxClassesArray;
     else
 	return nil;
 }
@@ -72,7 +72,7 @@ static NSMutableArray *fxClassesArray = nil;
 
 + (SndAudioProcessor *)audioProcessor
 {
-    return [[SndAudioProcessor new] autorelease];
+    return [SndAudioProcessor new];
 }
 
 + (SndAudioProcessor *) audioProcessorNamed: (NSString *) processorName
@@ -80,7 +80,7 @@ static NSMutableArray *fxClassesArray = nil;
     NSString *className = [@"SndAudioProcessor" stringByAppendingString: processorName];
     SndAudioProcessor *processor = [NSClassFromString(className) new];
 
-    return [processor autorelease];
+    return processor;
 }
 
 - initWithParamCount: (NSInteger) count name: (NSString *) s
@@ -117,14 +117,6 @@ static NSMutableArray *fxClassesArray = nil;
 //////////////////////////////////////////////////////////////////////////////
 // dealloc
 //////////////////////////////////////////////////////////////////////////////
-
-- (void) dealloc
-{
-    [name release];
-    name =  nil;
-    
-    [super dealloc];
-}
 
 - copyWithZone: (NSZone *) zone
 {

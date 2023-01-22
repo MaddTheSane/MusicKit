@@ -30,7 +30,7 @@
 
 + mixer
 {
-    return [[[SndStreamMixer alloc] init] autorelease];
+    return [[SndStreamMixer alloc] init];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -42,30 +42,15 @@
     self = [super init];
     if(self) {
 	if(streamClients == nil) 
-	    streamClients = [[NSMutableArray arrayWithCapacity: 10] retain];
+	    streamClients = [[NSMutableArray alloc] initWithCapacity: 10];
       
 	if(streamClientsLock == nil) 
 	    streamClientsLock = [NSRecursiveLock new];
       
 	if (processorChain == nil) 
-	    processorChain = [[SndAudioProcessorChain audioProcessorChain] retain];
+	    processorChain = [SndAudioProcessorChain audioProcessorChain];
     }
     return self;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// dealloc
-////////////////////////////////////////////////////////////////////////////////
-
-- (void) dealloc
-{
-  [processorChain release];
-  processorChain = nil;
-  [streamClients release];
-  streamClients = nil;
-  [streamClientsLock release];
-  streamClientsLock = nil;
-  [super dealloc];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -74,9 +59,9 @@
 
 - (NSString *) description
 {
-    int c = [self clientCount];
+    NSInteger c = [self countOfClients];
     
-    return [NSString stringWithFormat: @"%@ with %i client%s", [super description], c, c > 1 ? "s" : ""];
+    return [NSString stringWithFormat: @"%@ with %li client%s", [super description], (long)c, c > 1 ? "s" : ""];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -194,7 +179,7 @@
 // clientCount
 ////////////////////////////////////////////////////////////////////////////////
 
-- (int) clientCount
+- (NSInteger) countOfClients
 {
     return [streamClients count];
 }
@@ -220,10 +205,7 @@
 // audioProcessorChain
 ////////////////////////////////////////////////////////////////////////////////
 
-- (SndAudioProcessorChain *) audioProcessorChain
-{
-    return [[processorChain retain] autorelease]; 
-}
+@synthesize audioProcessorChain=processorChain;
 
 ////////////////////////////////////////////////////////////////////////////////
 // resetTime:
@@ -231,7 +213,7 @@
 
 - (void) resetTime: (double) originTimeInSeconds
 {
-    int clientCount, clientIndex;
+    NSInteger clientCount, clientIndex;
     
     [streamClientsLock lock];   
     clientCount = [streamClients count];
@@ -254,11 +236,20 @@
     SndStreamClient *client;
     
     [streamClientsLock lock];
-    client = [[[streamClients objectAtIndex: clientIndex] retain] autorelease];
+    client = [streamClients objectAtIndex: clientIndex];
     [streamClientsLock unlock];
     return client;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+
+@end
+
+@implementation SndStreamMixer (Deprecated)
+
+- (int) clientCount
+{
+    return (int)[self countOfClients];
+}
 
 @end

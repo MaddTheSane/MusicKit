@@ -27,7 +27,7 @@ static SndTable* defaultSndTable = nil;
 {
   if (defaultSndTable == nil)
     defaultSndTable = [SndTable new];
-  return [[defaultSndTable retain] autorelease];
+  return defaultSndTable;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -45,18 +45,6 @@ static SndTable* defaultSndTable = nil;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// dealloc
-////////////////////////////////////////////////////////////////////////////////
-
-- (void) dealloc
-{
-    if (nameTable)
-	[nameTable release];
-    nameTable = nil;
-    [super dealloc];
-}
-
-////////////////////////////////////////////////////////////////////////////////
 // soundNamed:
 // Does not name sound, or add to name table.
 ////////////////////////////////////////////////////////////////////////////////
@@ -69,7 +57,7 @@ static SndTable* defaultSndTable = nil;
     Snd *retSnd = [nameTable objectForKey: aName];
     
     if (retSnd)
-	return [[retSnd retain] autorelease];
+	return retSnd;
 
     [libraryDirs addObjectsFromArray: NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSAllDomainsMask, YES)];
 
@@ -88,7 +76,7 @@ static SndTable* defaultSndTable = nil;
 		    Snd *newSound = [[Snd alloc] initFromSoundfile: path];
 		    
 		    if (newSound) {
-			return [newSound autorelease];
+			return newSound;
 		    }
 		}
 	    }
@@ -130,7 +118,7 @@ static SndTable* defaultSndTable = nil;
   newSnd = [[Snd alloc] initFromSoundfile:filename];
   if (!newSnd) return nil;
   [Snd addName:aname sound:newSnd];
-  return [newSnd autorelease];
+  return newSnd;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -161,7 +149,7 @@ static SndTable* defaultSndTable = nil;
     newSound = [[Snd alloc] initFromSoundfile: path];
     if (newSound) {
       [Snd addName: aName sound: newSound];
-      return [newSound autorelease];
+      return newSound;
     }
   }
   return nil;

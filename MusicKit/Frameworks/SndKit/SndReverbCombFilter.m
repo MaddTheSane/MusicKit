@@ -42,7 +42,6 @@
 - (void) dealloc
 {
     free(buffer);
-    [super dealloc];
 }
 
 - (void) mute

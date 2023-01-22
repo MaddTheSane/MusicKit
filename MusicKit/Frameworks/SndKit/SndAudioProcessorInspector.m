@@ -115,17 +115,6 @@ static SndAudioProcessorInspector* defaultInspector = nil;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// dealloc
-////////////////////////////////////////////////////////////////////////////////
-
-- (void) dealloc
-{
-  if (theAudProc != nil)
-    [theAudProc release];
-  [super dealloc];
-}
-
-////////////////////////////////////////////////////////////////////////////////
 // setAudioProcessor:
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -133,9 +122,7 @@ static SndAudioProcessorInspector* defaultInspector = nil;
 {
     NSIndexSet *indexes = [NSIndexSet indexSetWithIndex: 0];
     
-    if (theAudProc != nil)
-	[theAudProc release];
-    theAudProc = [anAudProc retain];
+    theAudProc = anAudProc;
     [processorName setStringValue: [theAudProc name]];
     
     [parameterTableView selectRowIndexes: indexes byExtendingSelection: NO];
@@ -268,7 +255,6 @@ static SndAudioProcessorInspector* defaultInspector = nil;
     id fxClass = [[SndAudioProcessor fxClasses] objectAtIndex: [fxChooser indexOfSelectedItem]];
     SndAudioProcessor *newFX = [[fxClass alloc] init];
     [[currentObj audioProcessorChain] addAudioProcessor: newFX];
-    [newFX release];
   }
 }
 

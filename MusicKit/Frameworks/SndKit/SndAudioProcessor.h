@@ -37,13 +37,13 @@
     /*! Number of parameters in the audio processor */
     NSInteger numParams;
     /*! The SndAudioProcessorChain hosting this processor */
-    SndAudioProcessorChain *audioProcessorChain;
+    __unsafe_unretained SndAudioProcessorChain *audioProcessorChain;
     /*! */    
     NSString *name;
     /*! Indicates the processor instance will perform the processing. */
     BOOL  active;
     /*! Delegate object informed when a parameters value is changed. */
-    id<SndAudioProcessorParameterDelegate> parameterDelegate;
+    __weak id<SndAudioProcessorParameterDelegate> parameterDelegate;
 }
 
 /*!
@@ -53,7 +53,7 @@
   so any subclasses will automatically register themselves once instantiated.
   @param fxclass The class of an SndAudioProcessor
 */
-+ (void) registerAudioProcessorClass: (id) fxclass;
++ (void) registerAudioProcessorClass: (Class) fxclass;
 
 /*!
  @brief Use this to get a list of all the available FX processors.
@@ -292,7 +292,7 @@
  */
 - (id<SndAudioProcessorParameterDelegate>) parameterDelegate;
 
-@property (assign) id<SndAudioProcessorParameterDelegate> parameterDelegate;
+@property (weak) id<SndAudioProcessorParameterDelegate> parameterDelegate;
 
 @end
 

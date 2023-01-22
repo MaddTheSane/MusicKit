@@ -34,7 +34,7 @@
 @interface SndPerformance : NSObject <NSCopying>
 {
     /*! The sound being performed. */
-    Snd    *snd;
+    __strong Snd    *snd;
     /*! The time when to initiate playing. */
     double  playTime;
     /*! The index where the sound will begin playing from at the start of a sound performance. */
@@ -130,6 +130,7 @@ startPosition: (double) startPosition
   @return     Returns the Snd instance being played in this performance.
 */
 - (Snd *) snd;
+@property (readonly, strong) Snd *snd;
 
 /*!
   @brief   Returns the time the sound is to begin playing.
@@ -140,10 +141,11 @@ startPosition: (double) startPosition
 /*!
   @brief Sets the time interval in seconds from the current time the sound is to begin playing.
   */
-- setPlayTime: (double) t;
+- (void) setPlayTime: (double) t;
 
-- (double) deltaTime;
-- (void) setDeltaTime: (double) _deltaTime;
+@property double playTime;
+
+@property double deltaTime;
 
 /*!
   @brief   Returns the sample to start playing from.
@@ -156,6 +158,8 @@ startPosition: (double) startPosition
   @param      newPlayIndex The sample index that playing should begin from.
 */
 - (void) setPlayIndex: (long) newPlayIndex;
+
+@property (nonatomic) long playIndex;
 
 /*!
   @brief   Rewinds the sample to start playing from by the supplied number of samples.
@@ -182,6 +186,10 @@ startPosition: (double) startPosition
 */
 - (long) startAtIndex;
 
+@property (nonatomic) long endAtIndex;
+@property (nonatomic, readonly) long startAtIndex;
+
+
 /*!
   @brief Sets the sample to stop playing at.
   
@@ -201,7 +209,15 @@ startPosition: (double) startPosition
   @brief   Returns whether this performance loops.
   @return     Returns whether this performance loops.
  */
--  (BOOL) looping;
+-  (BOOL) looping NS_DEPRECATED_WITH_REPLACEMENT_MAC("-isLooping", 10.0, 10.8);
+
+/*!
+  @brief   Returns whether this performance loops.
+  @return     Returns whether this performance loops.
+ */
+-  (BOOL) isLooping;
+
+@property (getter=isLooping) BOOL looping;
 
 /*!
   @brief   Sets the sample to start looping from.
@@ -218,6 +234,8 @@ startPosition: (double) startPosition
   @return     Returns the sample index to start looping from.
  */
 - (long) loopStartIndex;
+
+@property long loopStartIndex;
 
 /*!
   @brief   Sets the sample at which the performance loops back to the start index
@@ -236,6 +254,8 @@ startPosition: (double) startPosition
   @return     Returns the sample index ending the loop.
  */
 - (long) loopEndIndex;
+
+@property long loopEndIndex;
 
 /*!
   @brief   Stop the currently playing performance at some time in the future.
@@ -271,7 +291,9 @@ startPosition: (double) startPosition
   @param    isPaused a flag to signal whether or not the performance is paused.
   @return   self
 */
-- setPaused: (BOOL) isPaused;
+- (void) setPaused: (BOOL) isPaused;
+
+@property (getter=isPaused) BOOL paused;
 
 /*!
   @brief Pauses a performance.
@@ -302,6 +324,8 @@ startPosition: (double) startPosition
 */
 - (void) setAudioProcessorChain: (SndAudioProcessorChain *) anAudioProcessorChain;
 
+@property (strong) SndAudioProcessorChain *audioProcessorChain;
+
 /*!
   @brief Fills the given buffer with sound data, reading from the playIndex up until endAtIndex
   	      (which allows us to play a sub-section of a sound).
@@ -319,7 +343,7 @@ startPosition: (double) startPosition
   @brief Tests if the play index has reached the end index, indicating that the performance
   has completed.  
  */
-- (BOOL) atEndOfPerformance;
+@property (readonly) BOOL atEndOfPerformance;
 
 @end
 

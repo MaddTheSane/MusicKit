@@ -35,21 +35,21 @@
 // audioBufferWrapperAroundSNDStreamBuffer:
 ////////////////////////////////////////////////////////////////////////////////
 
-+ audioBufferWithSNDStreamBuffer: (SNDStreamBuffer *) streamBuffer
++ (instancetype) audioBufferWithSNDStreamBuffer: (SNDStreamBuffer *) streamBuffer
 {
     // Repack the format parameters from the stream buffer into a SndFormat structure.
     SndFormat streamFormat = SndFormatOfSNDStreamBuffer(streamBuffer);
     SndAudioBuffer *ab = [[SndAudioBuffer alloc] initWithFormat: &streamFormat
     							   data: streamBuffer->streamData];
     
-    return [ab autorelease];
+    return ab;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // audioBufferWithSnd:inRange:
 ////////////////////////////////////////////////////////////////////////////////
 
-+ audioBufferWithSnd: (Snd *) snd inRange: (NSRange) rangeInFrames
++ (instancetype) audioBufferWithSnd: (Snd *) snd inRange: (NSRange) rangeInFrames
 {
     SndFormat sndFormat = [snd format];
     SndAudioBuffer *ab;
@@ -57,36 +57,36 @@
     sndFormat.frameCount = rangeInFrames.length;
     ab = [[SndAudioBuffer alloc] initWithFormat: &sndFormat
 					   data: [snd bytes] + rangeInFrames.location * SndFrameSize(sndFormat)];
-    return [ab autorelease];
+    return ab;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // audioBufferWithFormat:data:
 ////////////////////////////////////////////////////////////////////////////////
 
-+ audioBufferWithFormat: (SndFormat *) newFormat data: (void *) sampleData
++ (instancetype) audioBufferWithFormat: (SndFormat *) newFormat data: (void *) sampleData
 {
     SndAudioBuffer *ab = [[SndAudioBuffer alloc] initWithFormat: newFormat data: sampleData];
     
-    return [ab autorelease];
+    return ab;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // audioBufferWithFormat:duration:
 ////////////////////////////////////////////////////////////////////////////////
 
-+ audioBufferWithFormat: (SndFormat) newFormat
++ (instancetype) audioBufferWithFormat: (SndFormat) newFormat
 {
     SndAudioBuffer *ab = [[SndAudioBuffer alloc] initWithFormat: &newFormat data: NULL];
 
-    return [ab autorelease];
+    return ab;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // audioBufferWithDataFormat:channelCount:samplingRate:duration:
 ////////////////////////////////////////////////////////////////////////////////
 
-+ audioBufferWithDataFormat: (SndSampleFormat) newDataFormat
++ (instancetype) audioBufferWithDataFormat: (SndSampleFormat) newDataFormat
 	       channelCount: (int) newChannelCount
                samplingRate: (double) newSamplingRate
                    duration: (double) timeInSeconds
@@ -96,14 +96,14 @@
 						       samplingRate: newSamplingRate
 							   duration: timeInSeconds];
 
-    return [ab autorelease];
+    return ab;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // audioBufferWithDataFormat:channelCount:samplingRate:frameCount:
 ////////////////////////////////////////////////////////////////////////////////
 
-+ audioBufferWithDataFormat: (SndSampleFormat) newDataFormat
++ (instancetype) audioBufferWithDataFormat: (SndSampleFormat) newDataFormat
 	       channelCount: (int) newChannelCount
                samplingRate: (double) newSamplingRate
 		 frameCount: (long) newFrameCount
@@ -113,7 +113,7 @@
 						       samplingRate: newSamplingRate
 							 frameCount: newFrameCount];
     
-    return [ab autorelease];
+    return ab;
 }
 
 - (void) stereoChannels: (int *) leftAndRightChannels
@@ -193,7 +193,6 @@
     self = [self init];
     if (self) {
         format = b->format;
-        [data release];
         data = [[NSMutableData alloc] initWithData: b->data];
     }
     return self;
@@ -217,7 +216,6 @@
         if (byteCount < 0)
             NSLog(@"SndAudioBuffer -initWithFormat: error byteCount (%ld) < 0", byteCount);
 
-	[data release];
         if (sampleData == NULL) {
             data = [[NSMutableData alloc] initWithLength: byteCount];
         }
@@ -274,17 +272,6 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// dealloc
-////////////////////////////////////////////////////////////////////////////////
-
-- (void) dealloc
-{
-    [data release];
-    data = nil;
-    [super dealloc];
-}
-
-////////////////////////////////////////////////////////////////////////////////
 // description
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -327,7 +314,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 - (SndSampleFormat) dataFormat { return format.dataFormat;   }
-- (NSData *) data              { return [[data retain] autorelease]; }
+- (NSData *) data              { return data; }
 - (void *) bytes               { return [data mutableBytes]; }
 - (int) channelCount           { return format.channelCount; }
 - (double) samplingRate        { return format.sampleRate; }
@@ -400,9 +387,9 @@
 	    in = [buff bytes];
 	}
 	else {
-	    convertedBuffer = [[buff audioBufferConvertedToFormat: selfDataFormat
-						     channelCount: selfNumChannels
-						     samplingRate: [self samplingRate]] retain];
+	    convertedBuffer = [buff audioBufferConvertedToFormat: selfDataFormat
+						    channelCount: selfNumChannels
+						    samplingRate: [self samplingRate]];
 	    in = [convertedBuffer bytes];
 	    // NSLog(@"buff = %@, convertedBuffer = %@\n", buff, convertedBuffer);
 	}
@@ -441,8 +428,6 @@
     else {
 	NSLog(@"mixWithBuffer: attempting to mix into buffer of unsupported format %d\n", selfDataFormat);
     }
-    if (convertedBuffer)
-	[convertedBuffer release];
 
     return frameCount;
 }

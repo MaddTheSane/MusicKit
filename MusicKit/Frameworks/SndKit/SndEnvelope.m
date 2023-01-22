@@ -167,11 +167,9 @@ int indexOfBreakpointAfter(double inVal, NSMutableArray *inArray)
     newBreakpoint = [[SndBreakpoint alloc] initWithX:xVal y:yVal flags:flags];
     if (bp >= count) {
         [breakpoints addObject:newBreakpoint];
-        [newBreakpoint release]; /* let the array hold the release */
         return count;
     }
     [breakpoints insertObject:newBreakpoint atIndex:bp];
-    [newBreakpoint release];
     return bp;
 }
 
@@ -229,18 +227,12 @@ int indexOfBreakpointAfter(double inVal, NSMutableArray *inArray)
     if (bp >= count) return NO;
     newBreakpoint = [[SndBreakpoint alloc] initWithX:xVal y:yVal flags:flags];
     [breakpoints replaceObjectAtIndex:bp withObject:newBreakpoint];
-    [newBreakpoint release];
     return YES;
 }
-- (int) breakpointCount
+- (NSInteger) breakpointCount
 {
     if (!breakpoints) return 0;
     return [breakpoints count];
-}
-- (void) dealloc
-{
-    [breakpoints release];
-    [super dealloc];
 }
 
 

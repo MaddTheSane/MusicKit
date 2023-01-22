@@ -26,7 +26,7 @@
 + audioProcessorChain
 {
     SndAudioProcessorChain *pSAPC = [[SndAudioProcessorChain alloc] init];
-    return [pSAPC autorelease];
+    return pSAPC;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -46,18 +46,6 @@
     return self;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// dealloc
-////////////////////////////////////////////////////////////////////////////////
-
-- (void) dealloc;
-{
-    [audioProcessorArray release];
-    [processorOutputBuffer release];
-    [postFader release];
-    [super dealloc];
-}
-
 - copyWithZone: (NSZone *) zone
 {
     SndAudioProcessorChain *newSAPC = [[[self class] allocWithZone: zone] init];
@@ -65,8 +53,7 @@
     
     // Do deep copy of all elements of the array
     for(processorIndex = 0; processorIndex < [audioProcessorArray count]; processorIndex++)
-	[newSAPC->audioProcessorArray addObject: [[[audioProcessorArray objectAtIndex: processorIndex] copy] autorelease]];
-    [newSAPC->postFader release];
+	[newSAPC->audioProcessorArray addObject: [[audioProcessorArray objectAtIndex: processorIndex] copy]];
     newSAPC->postFader = [postFader copy];
 
     newSAPC->nowTime = [self nowTime];
@@ -181,7 +168,6 @@
         processorOutputBuffer = [[SndAudioBuffer alloc] initWithBuffer: buff];
     }
     else if(![processorOutputBuffer hasSameFormatAsBuffer: buff]) {
-	[processorOutputBuffer release];
 	processorOutputBuffer = [[SndAudioBuffer alloc] initWithBuffer: buff];
     }
 
@@ -256,25 +242,14 @@
 // postFader
 ////////////////////////////////////////////////////////////////////////////////
 
-- (SndAudioFader *) postFader
-{
-    return [[(id)postFader retain] autorelease];
-}
-
-- (void) setPostFader: (SndAudioFader *) newPostFader
-{
-    [postFader release];
-    postFader = [newPostFader retain];
-}
+@synthesize postFader;
 
 ////////////////////////////////////////////////////////////////////////////////
 // nowTime
 ////////////////////////////////////////////////////////////////////////////////
 
-- (double) nowTime
-{
-    return nowTime;
-}
+@synthesize nowTime;
+
 
 ////////////////////////////////////////////////////////////////////////////////
 

@@ -117,8 +117,8 @@ static SndStreamManager *defaultStreamManager = nil;
 + (instancetype)streamManagerOnDeviceForInput: (NSString *) inputDeviceName
 			      deviceForOutput: (NSString *) outputDeviceName 
 {
-    return [[[SndStreamManager alloc] initOnDeviceForInput: inputDeviceName
-					   deviceForOutput: outputDeviceName] autorelease];
+    return [[SndStreamManager alloc] initOnDeviceForInput: inputDeviceName
+					  deviceForOutput: outputDeviceName];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -133,7 +133,7 @@ static SndStreamManager *defaultStreamManager = nil;
     if (!self)
 	return nil;
     
-    mixer           = [[SndStreamMixer mixer] retain];
+    mixer           = [SndStreamMixer mixer];
     bg_threadLock   = [[NSConditionLock alloc] initWithCondition: BG_ready];
     bgdm_threadLock = [[NSConditionLock alloc] initWithCondition: BGDM_ready];
     delegateMessageArrayLock = [NSLock new];
@@ -208,25 +208,11 @@ static SndStreamManager *defaultStreamManager = nil;
 	[self stopStreaming];
     }
     
-    [mixer release];
-    mixer = nil;
-    
-    [delegateMessageArray release];
-    delegateMessageArray = nil;
-    
-    [delegateMessageArrayLock release];
-    delegateMessageArrayLock = nil;
-
-    [bg_threadLock release];
-    bg_threadLock = nil;
-    [bgdm_threadLock release];
-    bgdm_threadLock = nil;
     
 #if SNDSTREAMMANAGER_DEBUG
     NSLog(@"%@ ending dealloc\n", [super description]);
 #endif
     
-    [super dealloc];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -367,9 +353,9 @@ static SndStreamManager *defaultStreamManager = nil;
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-- (void) _sendDelegateInvocation: (in unsigned long) mesg
+- (void) _sendDelegateInvocation: (in NSInvocation *) mesg
 {
-    [(NSInvocation *) mesg invoke];
+    [mesg invoke];
 }
 
 /*
@@ -389,75 +375,74 @@ static SndStreamManager *defaultStreamManager = nil;
 */
 - (void) delegateMessageThread: (NSArray *) ports
 {
-    NSAutoreleasePool *localPool = [NSAutoreleasePool new];
-    id controllerProxy = nil;
-
-    // TODO: I presume this is to register the retain on the local autorelease pool? It may not be necessary.
-    // [self retain]; 
-
+    @autoreleasepool {
+	id controllerProxy = nil;
+	
+	// TODO: I presume this is to register the retain on the local autorelease pool? It may not be necessary.
+	// [self retain];
+	
 #if SNDSTREAMMANAGER_DEBUG_DELEGATE
-    NSLog(@"[SndStreamManager] entering delegate thread\n");
+	NSLog(@"[SndStreamManager] entering delegate thread\n");
 #endif
-
-    [[NSThread currentThread] setName: @"SndStreamManager delegateMessageThread"];
-    while (bgdm_sem != BGDM_threadStopped) {
-	[bgdm_threadLock lockWhenCondition: BGDM_hasFlag];
-	if (bgdm_sem == BGDM_delegateMessageReady)  {
-	    NSInvocation *delegateMessage = nil;
-	    
-	    // quickly release the lock so we don't deadlock if the queued messages take
-	    // a while to go through.
-	    [bgdm_threadLock unlockWithCondition: bgdm_sem];
-	    while (1) {
-		NSInteger count;
-
-		[delegateMessageArrayLock lock];
-		count = [delegateMessageArray count];
-		if (count) { // Get the first message off the queue
-		    // retain lest the delegateMessage disappear when we remove it from the array.
-		    delegateMessage = [[delegateMessageArray objectAtIndex: 0] retain]; 
-		    [delegateMessageArray removeObjectAtIndex: 0];
+	
+	[[NSThread currentThread] setName: @"SndStreamManager delegateMessageThread"];
+	while (bgdm_sem != BGDM_threadStopped) {
+	    [bgdm_threadLock lockWhenCondition: BGDM_hasFlag];
+	    if (bgdm_sem == BGDM_delegateMessageReady)  {
+		NSInvocation *delegateMessage = nil;
+		
+		// quickly release the lock so we don't deadlock if the queued messages take
+		// a while to go through.
+		[bgdm_threadLock unlockWithCondition: bgdm_sem];
+		while (1) {
+		    NSInteger count;
+		    
+		    [delegateMessageArrayLock lock];
+		    count = [delegateMessageArray count];
+		    if (count) { // Get the first message off the queue
+			// retain lest the delegateMessage disappear when we remove it from the array.
+			delegateMessage = [delegateMessageArray objectAtIndex: 0];
+			[delegateMessageArray removeObjectAtIndex: 0];
+		    }
+		    [delegateMessageArrayLock unlock];
+		    if (!count)
+			break;
+		    if (!controllerProxy) {
+			NSConnection *theConnection = [NSConnection connectionWithReceivePort: [ports objectAtIndex: 0]
+										     sendPort: [ports objectAtIndex: 1]];
+			// Note: if there's a problem with the NSRunLoop not running or
+			// responding here, the -rootProxy method will block. We could
+			// set a timout here and catch the exception thrown as a result,
+			// but there may be valid reasons why the NSRunLoop does not respond
+			// (perhaps the main loop is busy doing other stuff?). THis could do
+			// with some testing cos I think a timeout exception would be the
+			// best way forward.
+			
+			//[theConnection setReplyTimeout:0.1];
+			controllerProxy = [theConnection rootProxy];
+			[controllerProxy setProtocolForProxy: @protocol(SndDelegateMessagePassing)];
+		    }
+		    /* cast to unsigned long to prevent compiler warnings */
+		    [controllerProxy _sendDelegateInvocation:  delegateMessage];
 		}
-		[delegateMessageArrayLock unlock];
-		if (!count)
-		    break;
-		if (!controllerProxy) {
-		    NSConnection *theConnection = [NSConnection connectionWithReceivePort: [ports objectAtIndex: 0]
-										 sendPort: [ports objectAtIndex: 1]];
-		    // Note: if there's a problem with the NSRunLoop not running or
-		    // responding here, the -rootProxy method will block. We could
-		    // set a timout here and catch the exception thrown as a result,
-		    // but there may be valid reasons why the NSRunLoop does not respond
-		    // (perhaps the main loop is busy doing other stuff?). THis could do
-		    // with some testing cos I think a timeout exception would be the
-		    // best way forward.
-				
-		    //[theConnection setReplyTimeout:0.1];
-		    controllerProxy = [theConnection rootProxy];
-		    [controllerProxy setProtocolForProxy: @protocol(SndDelegateMessagePassing)];
-		}
-		/* cast to unsigned long to prevent compiler warnings */
-		[controllerProxy _sendDelegateInvocation: (unsigned long) delegateMessage];
-		[delegateMessage release];
+		continue;
 	    }
-	    continue;
-	}
-	else if (bgdm_sem == BGDM_abortNow) {
+	    else if (bgdm_sem == BGDM_abortNow) {
 #if SNDSTREAMMANAGER_DEBUG_DELEGATE
-	    NSLog(@"[SndStreamManager] Killing delegate message thread.\n");
+		NSLog(@"[SndStreamManager] Killing delegate message thread.\n");
 #endif
-	    bgdm_sem = BGDM_threadStopped;
+		bgdm_sem = BGDM_threadStopped;
+		[bgdm_threadLock unlockWithCondition: bgdm_sem];
+		break;
+	    }
+	    else {
+		NSLog(@"Semaphore status: %i\n", bgdm_sem);
+		bgdm_sem = BGDM_ready;
+	    }
 	    [bgdm_threadLock unlockWithCondition: bgdm_sem];
-	    break;
 	}
-	else {
-	    NSLog(@"Semaphore status: %i\n", bgdm_sem);
-	    bgdm_sem = BGDM_ready;
-	}
-	[bgdm_threadLock unlockWithCondition: bgdm_sem];
+	// [self release];  // TODO: is this necessary?
     }
-    // [self release];  // TODO: is this necessary?
-    [localPool release];
     /* even if there is a new thread is created between the following two
      * statements, that would be ok -- there would temporarily be one
      * extra thread but it won't cause a problem
@@ -485,65 +470,64 @@ static SndStreamManager *defaultStreamManager = nil;
 */
 - (void) streamStartStopThread
 {
-    NSAutoreleasePool *localPool = [NSAutoreleasePool new];
-    
-    bg_active = TRUE;
-    isStopping = FALSE;
-    // [self retain]; // I presume this is to register the retain on the local autorelease pool, but perhaps it's not necessary?
-    [[NSThread currentThread] setName: @"streamStartStopThread"]; // Just for debugging.
-
+    @autoreleasepool {
+	bg_active = TRUE;
+	isStopping = FALSE;
+	// [self retain]; // I presume this is to register the retain on the local autorelease pool, but perhaps it's not necessary?
+	[[NSThread currentThread] setName: @"streamStartStopThread"]; // Just for debugging.
+	
 #if SNDSTREAMMANAGER_DEBUG_STARTSTOP
-    NSLog(@"[SndStreamManager] streamStartStopThread - entering background streaming manager thread\n");
+	NSLog(@"[SndStreamManager] streamStartStopThread - entering background streaming manager thread\n");
 #endif
-    
-    while (1) {
-	[bg_threadLock lockWhenCondition: BG_hasFlag];
-	if (bg_sem == BG_startNow) {
-	    active = SNDStreamStart(processAudio, (void *) self);
-	    nowTime = 0.0;
-	    bg_sem = 0;
-	    isStopping = FALSE;
+	
+	while (1) {
+	    [bg_threadLock lockWhenCondition: BG_hasFlag];
+	    if (bg_sem == BG_startNow) {
+		active = SNDStreamStart(processAudio, (__bridge void *) self);
+		nowTime = 0.0;
+		bg_sem = 0;
+		isStopping = FALSE;
 #if SNDSTREAMMANAGER_DEBUG_STARTSTOP
 		NSLog(@"[SndStreamManager] streamStartStopThread - stream starting! active = %d\n", active);
 #endif
-	    [bg_threadLock unlockWithCondition: BG_hasStarted];
-	    continue;
-	}
-	else if (bg_sem == BG_stopNow) {
-#if SNDSTREAMMANAGER_DEBUG_STARTSTOP
-	    NSLog(@"[SndStreamManager] streamStartStopThread - stream stopping");
-#endif
-	    active  = FALSE;
-	    nowTime = 0.0;
-	    bg_sem  = 0;
-	    SNDStreamStop();
-	    
-	    if ([[NSRunLoop currentRunLoop] currentMode] != nil || NSApp) {
-#if SNDSTREAMMANAGER_DEBUG_DELEGATE
-		NSLog(@"[SndStreamManager] streamStartStopThread - sending delegate message for stopping\n");
-#endif
-		[bgdm_threadLock lock];
-		bgdm_sem = BGDM_abortNow;
-		[bgdm_threadLock unlockWithCondition: BGDM_hasFlag];
-		
-		[bgdm_threadLock lockWhenCondition: BGDM_threadStopped];
-		[bgdm_threadLock unlockWithCondition: BGDM_threadInactive];
+		[bg_threadLock unlockWithCondition: BG_hasStarted];
+		continue;
 	    }
-	    
-#if SNDSTREAMMANAGER_DEBUG_DELEGATE
-	    NSLog(@"[SndStreamManager] streamStartStopThread - delegate message thread is inactive.\n");
+	    else if (bg_sem == BG_stopNow) {
+#if SNDSTREAMMANAGER_DEBUG_STARTSTOP
+		NSLog(@"[SndStreamManager] streamStartStopThread - stream stopping");
 #endif
-	    
-	    break;
+		active  = FALSE;
+		nowTime = 0.0;
+		bg_sem  = 0;
+		SNDStreamStop();
+		
+		if ([[NSRunLoop currentRunLoop] currentMode] != nil || NSApp) {
+#if SNDSTREAMMANAGER_DEBUG_DELEGATE
+		    NSLog(@"[SndStreamManager] streamStartStopThread - sending delegate message for stopping\n");
+#endif
+		    [bgdm_threadLock lock];
+		    bgdm_sem = BGDM_abortNow;
+		    [bgdm_threadLock unlockWithCondition: BGDM_hasFlag];
+		    
+		    [bgdm_threadLock lockWhenCondition: BGDM_threadStopped];
+		    [bgdm_threadLock unlockWithCondition: BGDM_threadInactive];
+		}
+		
+#if SNDSTREAMMANAGER_DEBUG_DELEGATE
+		NSLog(@"[SndStreamManager] streamStartStopThread - delegate message thread is inactive.\n");
+#endif
+		
+		break;
+	    }
+	    else if (bg_sem == BG_abortNow) {
+		break;
+	    }
 	}
-	else if (bg_sem == BG_abortNow) {
-	    break;
-	}
+	bg_active = FALSE;
+	[bg_threadLock unlockWithCondition: BG_threadStopped];
+	// [self release];
     }
-    bg_active = FALSE;
-    [bg_threadLock unlockWithCondition: BG_threadStopped];
-    // [self release];
-    [localPool release];
     
 #if SNDSTREAMMANAGER_DEBUG_STARTSTOP
     NSLog(@"[SndStreamManager] exiting background streaming manager thread\n");
@@ -721,7 +705,7 @@ static void processAudio(double bufferTime, SNDStreamBuffer *streamInputBuffer, 
 	[[NSThread currentThread] setName: @"SndStreamManager processAudio"]; // Just for debugging.
 #endif
 	
-	[(SndStreamManager *) manager processStreamAtTime: bufferTime input: inB output: outB];
+	[(__bridge SndStreamManager *) manager processStreamAtTime: bufferTime input: inB output: outB];
 	[outB fillSNDStreamBuffer: streamOutputBuffer];
 	
 #if SNDSTREAMMANAGER_DEBUG_PROCESSING
@@ -793,15 +777,12 @@ static void processAudio(double bufferTime, SNDStreamBuffer *streamInputBuffer, 
 // Micro accessors
 ////////////////////////////////////////////////////////////////////////////////
 
-- (double) nowTime         { return nowTime; }
-- (SndStreamMixer*) mixer  { return mixer;   }
-- (BOOL)   isActive        { return active;  }
+@synthesize nowTime;
+@synthesize mixer;
+@synthesize active;
 - (double) samplingRate    { return outputFormat.sampleRate; }
 
-- (SndFormat) format
-{
-    return outputFormat;
-}
+@synthesize format=outputFormat;
 
 ////////////////////////////////////////////////////////////////////////////////
 // resetTime:

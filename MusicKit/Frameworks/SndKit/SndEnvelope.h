@@ -132,7 +132,7 @@
   @brief   Returns the number of breakpoints in the envelope.
   @return  The number of breakpoints in the envelope.
 */
-- (int) breakpointCount;
+- (NSInteger) breakpointCount;
 
 /*!
   @brief   Creates a new breakpoint in the envelope and returns the

@@ -50,20 +50,6 @@
     return self;
 }
 
-- (void) dealloc
-{
-    [cachedBuffer release];
-    cachedBuffer = nil;
-    [cacheLock release];
-    cacheLock = nil;
-    [readAheadBuffer release];
-    readAheadBuffer = nil;
-    [readAheadLock release];
-    readAheadLock = nil;
-    [theFileName release];
-    [super dealloc];
-}
-
 - (unsigned char*) data
 {
     NSLog(@"SndOnDisk:Don't even *think* of using the data method in experimental Snd objects!");
@@ -86,7 +72,6 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     
     if (name) {
-	[name release];
 	name = nil;
     }
     
@@ -108,8 +93,6 @@
 	err = [super readSoundfile: filename startFrame: startFrame frameCount: frameCount];
     }
     else {
-	if (theFileName)
-	    [theFileName release];
 	theFileName = [filename copy];
 	soundFormat = [self soundFormatOfFilename: filename];	
 	//    NSLog([self description]);
@@ -123,9 +106,6 @@
 
 - (SndError) readSoundfile: (NSString*) filename
 {
-    if (theFileName)
-	[theFileName release];
-    
     if (![[NSFileManager defaultManager] fileExistsAtPath: filename]) {
 	// NSLog(@"Snd::readSoundfile: sound file %@ doesn't exist",filename);
 	return SND_ERR_CANNOT_OPEN;
@@ -179,11 +159,7 @@ BOOL subRangeIsInsideSuperRange(NSRange subR, NSRange superR)
 #if SERVER_DEBUG
 	    NSLog(@"Jettisoning Buffer with location: %i play region %i", cachedBufferRange.location, playRegion.location);
 #endif
-	    if (cachedBuffer != nil)
-		[cachedBuffer release];
 	    cachedBuffer = nil;
-	    if (readAheadBuffer != nil)
-		[readAheadBuffer release];
 	    readAheadBuffer = nil;
 	    readAheadRange.location = 0;
 	    cachedBufferRange.location = 0;
@@ -196,10 +172,8 @@ BOOL subRangeIsInsideSuperRange(NSRange subR, NSRange superR)
 	    cachedBufferRange.location = (playRegion.location / 4096) * 4096;
 	    cachedBufferRange.length   = bufferSize;
 	    
-	    cachedBuffer = [[SndOnDiskAudioBufferServer readRange: cachedBufferRange
-						    ofSoundFile: theFileName] retain];
-	    if (readAheadBuffer != nil)
-		[readAheadBuffer release];
+	    cachedBuffer = [SndOnDiskAudioBufferServer readRange: cachedBufferRange
+						     ofSoundFile: theFileName];
 	    readAheadBuffer = nil;
 	    
 	    newLocation = cachedBufferRange.location + bufferSize - playRegion.length * 4;
@@ -224,8 +198,6 @@ BOOL subRangeIsInsideSuperRange(NSRange subR, NSRange superR)
 	    unsigned long newLocation = 0;
 	    
 	    [readAheadLock lock];
-	    if (cachedBuffer != nil)
-		[cachedBuffer release];
 	    cachedBuffer = readAheadBuffer;
 	    cachedBufferRange = readAheadRange;
 	    readAheadBuffer = nil;
@@ -284,7 +256,7 @@ BOOL subRangeIsInsideSuperRange(NSRange subR, NSRange superR)
 {
     SndAudioBuffer *ab = [SndAudioBuffer new];
     [self fillAudioBuffer: ab toLength: playRegion.length samplesInRange: playRegion];
-    return [ab autorelease];
+    return ab;
 }
 
 @synthesize filename=theFileName;
@@ -303,9 +275,7 @@ BOOL subRangeIsInsideSuperRange(NSRange subR, NSRange superR)
 - (void)receiveRequestedBuffer: (SndAudioBuffer*) aBuffer
 {
     [readAheadLock lock];
-    if (readAheadBuffer != nil)
-	[readAheadBuffer release];
-    readAheadBuffer = [aBuffer retain];
+    readAheadBuffer = aBuffer;
     [readAheadLock unlockWithCondition: HAS_DATA];
 #if SERVER_DEBUG              
     NSLog(@"Received Buffer with range: [%i, %i]",readAheadRange.location, readAheadRange.length);
@@ -370,15 +340,6 @@ static SndOnDiskAudioBufferServer *defaultServer = nil;
     return self;
 }
 
-- (void) dealloc
-{
-	[pendingJobsArrayLock release];
-	pendingJobsArrayLock = nil;
-	[pendingJobsArray release];
-	pendingJobsArray = nil;
-	[super dealloc];
-}
-
 - addJob: (SndOnDiskAudioBufferServerJob *) aJob
 {
     [pendingJobsArrayLock lock];
@@ -409,16 +370,14 @@ static SndOnDiskAudioBufferServer *defaultServer = nil;
 	[aBuffer setLengthInSampleFrames: requestedLength];
     
     [snd receiveRequestedBuffer: aBuffer];
-    [aJob release];
-#if SERVER_DEBUG              
+#if SERVER_DEBUG
     NSLog(@"Completed job for %@", [[aJob snd] filename]);
 #endif  
 }
 
 - (void) serverThread
 {
-    while (bGo) {
-	NSAutoreleasePool *pool = [NSAutoreleasePool new];
+    while (bGo) @autoreleasepool {
 	NSDate *date = [NSDate dateWithTimeIntervalSinceNow: 1.0];
 	
 	if (![pendingJobsArrayLock lockWhenCondition: SERVER_HAS_JOBS beforeDate: date])
@@ -427,7 +386,7 @@ static SndOnDiskAudioBufferServer *defaultServer = nil;
 	if ([pendingJobsArray count] == 0)
 	    continue;
 	
-	activeJob = [[pendingJobsArray objectAtIndex: 0] retain];
+	activeJob = [pendingJobsArray objectAtIndex: 0];
 	[pendingJobsArray removeObject: activeJob];
 	
 	if ([pendingJobsArray count] > 0)
@@ -437,7 +396,6 @@ static SndOnDiskAudioBufferServer *defaultServer = nil;
 	
 	if (activeJob != nil)
 	    [self doJob: activeJob];
-	[pool release];
     }
     [NSThread exit];
 }
@@ -454,20 +412,11 @@ static SndOnDiskAudioBufferServer *defaultServer = nil;
 {
     self = [super init];
     if (self) {
-	clientSndOnDisk    = [sndExpt retain];
+	clientSndOnDisk    = sndExpt;
 	audioBufferRange = range;
 	audioBuffer      = nil;
     }
     return self;
-}
-
-- (void) dealloc
-{
-    if (clientSndOnDisk)
-	[clientSndOnDisk release];
-    if (audioBuffer)
-	[audioBuffer release];
-    [super dealloc];
 }
 
 @synthesize snd=clientSndOnDisk;

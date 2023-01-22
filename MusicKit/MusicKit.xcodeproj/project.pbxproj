@@ -1126,7 +1126,7 @@
 		D88FE32D05A0F9E40024FD88 /* SndStreamArchitectureView.h in Headers */ = {isa = PBXBuildFile; fileRef = D88FE31205A0F9E40024FD88 /* SndStreamArchitectureView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D88FE32E05A0F9E40024FD88 /* SndStreamArchitectureView.m in Sources */ = {isa = PBXBuildFile; fileRef = D88FE31305A0F9E40024FD88 /* SndStreamArchitectureView.m */; };
 		D88FE32F05A0F9E40024FD88 /* SndStreamClient.h in Headers */ = {isa = PBXBuildFile; fileRef = D88FE31405A0F9E40024FD88 /* SndStreamClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D88FE33005A0F9E40024FD88 /* SndStreamClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D88FE31505A0F9E40024FD88 /* SndStreamClient.m */; };
+		D88FE33005A0F9E40024FD88 /* SndStreamClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D88FE31505A0F9E40024FD88 /* SndStreamClient.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D88FE33105A0F9E40024FD88 /* SndStreamManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D88FE31605A0F9E40024FD88 /* SndStreamManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D88FE33205A0F9E40024FD88 /* SndStreamManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D88FE31705A0F9E40024FD88 /* SndStreamManager.m */; };
 		D88FE33305A0F9E40024FD88 /* SndStreamMixer.h in Headers */ = {isa = PBXBuildFile; fileRef = D88FE31805A0F9E40024FD88 /* SndStreamMixer.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1197,9 +1197,9 @@
 		D8A1DC5609F65BD10094B3F5 /* example4_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A1DC5009F65BD10094B3F5 /* example4_main.m */; };
 		D8A1DC5709F65BD10094B3F5 /* MyObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A1DC5209F65BD10094B3F5 /* MyObject.m */; };
 		D8A441F510777A7300E12376 /* SndAudioUnitController.h in Headers */ = {isa = PBXBuildFile; fileRef = D8A441F110777A7300E12376 /* SndAudioUnitController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D8A441F610777A7300E12376 /* SndAudioUnitController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A441F210777A7300E12376 /* SndAudioUnitController.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		D8A441F610777A7300E12376 /* SndAudioUnitController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A441F210777A7300E12376 /* SndAudioUnitController.m */; };
 		D8A441F710777A7300E12376 /* SndAudioUnitProcessor.h in Headers */ = {isa = PBXBuildFile; fileRef = D8A441F310777A7300E12376 /* SndAudioUnitProcessor.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D8A441F810777A7300E12376 /* SndAudioUnitProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A441F410777A7300E12376 /* SndAudioUnitProcessor.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		D8A441F810777A7300E12376 /* SndAudioUnitProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = D8A441F410777A7300E12376 /* SndAudioUnitProcessor.m */; };
 		D8A442241077D58C00E12376 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8A442231077D58C00E12376 /* AudioToolbox.framework */; };
 		D8A4422A1077D5BF00E12376 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8A442291077D5BF00E12376 /* AudioUnit.framework */; };
 		D8A442481077D6AF00E12376 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8A442471077D6AF00E12376 /* Carbon.framework */; };
@@ -3512,7 +3512,7 @@
 		D88FE30F05A0F9E40024FD88 /* SndResample.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SndResample.h; sourceTree = "<group>"; };
 		D88FE31005A0F9E40024FD88 /* SndResample.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SndResample.m; sourceTree = "<group>"; };
 		D88FE31205A0F9E40024FD88 /* SndStreamArchitectureView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SndStreamArchitectureView.h; sourceTree = "<group>"; };
-		D88FE31305A0F9E40024FD88 /* SndStreamArchitectureView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SndStreamArchitectureView.m; sourceTree = "<group>"; };
+		D88FE31305A0F9E40024FD88 /* SndStreamArchitectureView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SndStreamArchitectureView.m; sourceTree = "<group>"; tabWidth = 4; };
 		D88FE31405A0F9E40024FD88 /* SndStreamClient.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SndStreamClient.h; sourceTree = "<group>"; };
 		D88FE31505A0F9E40024FD88 /* SndStreamClient.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SndStreamClient.m; sourceTree = "<group>"; };
 		D88FE31605A0F9E40024FD88 /* SndStreamManager.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SndStreamManager.h; sourceTree = "<group>"; };
@@ -3530,7 +3530,7 @@
 		D88FE33F05A0FBC10024FD88 /* Sndlargefilter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Sndlargefilter.h; sourceTree = "<group>"; };
 		D88FE34005A0FBC10024FD88 /* Sndsmallfilter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Sndsmallfilter.h; sourceTree = "<group>"; };
 		D88FE34105A0FBC10024FD88 /* SndFunctions.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SndFunctions.h; sourceTree = "<group>"; };
-		D88FE34205A0FBC10024FD88 /* SndFunctions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SndFunctions.m; sourceTree = "<group>"; };
+		D88FE34205A0FBC10024FD88 /* SndFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SndFunctions.m; sourceTree = "<group>"; };
 		D88FE34305A0FBC10024FD88 /* SndFileIO.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SndFileIO.m; sourceTree = "<group>"; };
 		D88FE34D05A0FC990024FD88 /* SndKit.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SndKit.h; sourceTree = "<group>"; };
 		D88FE34E05A0FC990024FD88 /* SndKitConfig.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SndKitConfig.h; sourceTree = "<group>"; };
@@ -13771,6 +13771,7 @@
 		D8B44F23099617E500B5C3A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -13813,6 +13814,7 @@
 		D8B44F24099617E500B5C3A4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
@@ -13856,6 +13858,7 @@
 		D8B44F25099617E500B5C3A4 /* Embedded */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;

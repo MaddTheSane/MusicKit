@@ -28,7 +28,7 @@
     SndAudioProcessorDelay* delay = [[SndAudioProcessorDelay alloc] init];
     
     [delay setLength: nSams andFeedback: newFeedback];
-    return [delay autorelease];
+    return delay;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -68,8 +68,6 @@
 - (void) dealloc
 {
   [self freemem];
-  [processingLock release];
-  [super dealloc];
 }
 
 ////////////////////////////////////////////////////////////////////////////////

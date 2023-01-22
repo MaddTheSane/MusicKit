@@ -50,8 +50,6 @@ CONDITIONS OF THIS AGREEMENT.
 - (void) dealloc
 {
     [embeddedArray removeAllObjects];
-    [embeddedArray release];
-    [super dealloc];
 }
 
 /* pass on any other methods to embeddedarray */
@@ -160,14 +158,12 @@ CONDITIONS OF THIS AGREEMENT.
     
     // Check if decoding a newer keyed coding archive
     if([aDecoder allowsKeyedCoding]) {
-	[embeddedArray release];
-	embeddedArray = [[aDecoder decodeObjectForKey: @"SndDisplayDataList_embeddedArray"] retain];
+	embeddedArray = [aDecoder decodeObjectForKey: @"SndDisplayDataList_embeddedArray"];
     }
     else {
 	NSInteger v = [aDecoder versionForClassName: @"SndDisplayDataList"];
 	if (v == 0) {
-	    [embeddedArray release];
-	    embeddedArray = [[aDecoder decodeObject] retain];
+	    embeddedArray = [aDecoder decodeObject];
 	}	
     }
     return self;

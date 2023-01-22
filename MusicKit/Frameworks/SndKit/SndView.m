@@ -110,7 +110,6 @@ OF THIS AGREEMENT.
 {
     if (cursorFlashTimer) {
 	[cursorFlashTimer invalidate];
-	[cursorFlashTimer release];
 	cursorFlashTimer = nil;
 	
 	// If the cursor is currently off, it means we previously drew a cursor, so force a cleanup.
@@ -129,11 +128,11 @@ OF THIS AGREEMENT.
 	    svFlags.cursorOn = YES; 
 	    [self toggleCursor];
 	    // Blinks the cursor on for the half period, off for the half period
-	    cursorFlashTimer = [[NSTimer scheduledTimerWithTimeInterval: CURSOR_TIMER_HALF_PERIOD
-								 target: self
-							       selector: @selector(toggleCursor)
-							       userInfo: self
-								repeats: YES] retain];
+	    cursorFlashTimer = [NSTimer scheduledTimerWithTimeInterval: CURSOR_TIMER_HALF_PERIOD
+								target: self
+							      selector: @selector(toggleCursor)
+							      userInfo: self
+							       repeats: YES];
 	}
     }
 }
@@ -353,7 +352,6 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 			  start: end + 1];
         [(NSMutableArray *) dataList insertObject: newObj atIndex: i + 1];
         [theObj truncateToLastPixel: start - 1];
-	[newObj release];
     }
     [self setNeedsDisplay:YES];
     return YES;
@@ -609,7 +607,6 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 				    count: localMax - currStartPoint + 1
 				    start: currStartPoint];
 		[(NSMutableArray *) dataList addObject: newCache];
-		[newCache release];
 		[dataList sort];
 		// NSLog(@"setting new cache: start %d count %d\n", currStartPoint, localMax - currStartPoint + 1);
 	    }
@@ -936,7 +933,6 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 
 - (void) setBackgroundColor: (NSColor *) color
 {
-    [backgroundColour release];
     backgroundColour = [color copy];
     [self setNeedsDisplay: YES];
 }
@@ -945,9 +941,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 
 - (void) setSelectionColor: (NSColor *) color
 {
-    [selectionColour release];
     selectionColour = [color copy];
-
     [self setNeedsDisplay: YES];
 }
 
@@ -955,7 +949,6 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 
 - (void) setForegroundColor: (NSColor *) color
 {
-    [foregroundColour release];
     foregroundColour = [color copy];
     [self setNeedsDisplay: YES];
 }
@@ -978,25 +971,10 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 	// from it's dictionary of sources which releases, causing a call to dealloc...
         // [self pasteboard: pboard provideDataForType: SndPasteboardType];
     }
-    [pasteboardSound release];
-    pasteboardSound = nil;
-    [backgroundColour release];
-    backgroundColour = nil;
-    [foregroundColour release];
-    foregroundColour = nil;
-    [recordingSound release];
-    recordingSound = nil;
-    [validPasteboardSendTypes release];
-    validPasteboardSendTypes = nil;
-    [validPasteboardReturnTypes release];
-    validPasteboardReturnTypes = nil;
     if (dataList) {
         [(NSMutableArray *) dataList removeAllObjects];
-        [dataList release];
+	dataList = nil;
     }
-    [dragIcon release];
-    [selectionColour release];
-    [super dealloc];
 }
 
 - (void) getSelection: (unsigned int *) firstSample size: (unsigned int *) sampleCount
@@ -1038,7 +1016,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     validPasteboardSendTypes = [[NSArray alloc] initWithObjects: SndPasteboardType, PlatformSoundPasteboardType, nil];
     validPasteboardReturnTypes = [validPasteboardSendTypes copy];
 #else
-    validPasteboardSendTypes = [[NSArray arrayWithObject: SndPasteboardType] retain];
+    validPasteboardSendTypes = [NSArray arrayWithObject: SndPasteboardType];
     validPasteboardReturnTypes = [validPasteboardSendTypes copy];
 #endif
     
@@ -1053,13 +1031,13 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     
     /* set colors */
     // selectionColour = [[NSColor controlHighlightColor] retain];
-    selectionColour = [[NSColor colorWithCalibratedRed: 0.8 green: 0.8 blue: 0.8 alpha: 0.8] retain];
+    selectionColour = [NSColor colorWithCalibratedRed: 0.8 green: 0.8 blue: 0.8 alpha: 0.8];
     
     // backgroundColour = [[NSColor controlBackgroundColor] retain];
-    backgroundColour = [[NSColor colorWithCalibratedWhite: 1.0 alpha: 1.0] retain];
+    backgroundColour = [NSColor colorWithCalibratedWhite: 1.0 alpha: 1.0];
     
     // foregroundColour = [[NSColor blueColor] retain];//black
-    foregroundColour = [[NSColor colorWithCalibratedRed: 0.6 green: 0.25 blue: 1.0 alpha: 0.7] retain];
+    foregroundColour = [NSColor colorWithCalibratedRed: 0.6 green: 0.25 blue: 1.0 alpha: 0.7];
     
     displayMode = SndViewDisplayModeMinMax;
     selectedFrames = NSMakeRange(0, 0);
@@ -1110,18 +1088,15 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     
     // Check if decoding a newer keyed coding archive
     if([aDecoder allowsKeyedCoding]) {
-	sound = [[aDecoder decodeObjectForKey: @"SndView_sound"] retain];
-	delegate = [[aDecoder decodeObjectForKey: @"SndView_delegate"] retain];
+	sound = [aDecoder decodeObjectOfClass: [Snd class] forKey: @"SndView_sound"];
+	delegate = [aDecoder decodeObjectForKey: @"SndView_delegate"];
 	selectedFrames.location = [aDecoder decodeIntegerForKey: @"SndView_selectionRangeLocation"];
 	selectedFrames.length = [aDecoder decodeIntegerForKey: @"SndView_selectionRangeLength"];
 	displayMode = [aDecoder decodeIntForKey: @"SndView_displayMode"];
 	reductionFactor = [aDecoder decodeFloatForKey: @"SndView_reductionFactor"];
-	[backgroundColour release];
-	backgroundColour = [[aDecoder decodeObjectForKey: @"SndView_backgroundColour"] retain];
-	[foregroundColour release];
-	foregroundColour = [[aDecoder decodeObjectForKey: @"SndView_foregroundColour"] retain];
-	[selectionColour release];
-	selectionColour = [[aDecoder decodeObjectForKey: @"SndView_selectionColour"] retain];
+	backgroundColour = [aDecoder decodeObjectForKey: @"SndView_backgroundColour"];
+	foregroundColour = [aDecoder decodeObjectForKey: @"SndView_foregroundColour"];
+	selectionColour = [aDecoder decodeObjectForKey: @"SndView_selectionColour"];
 	// Decode the flags
 	svFlags.disabled = [aDecoder decodeBoolForKey: @"SndView_disabled"];
 	svFlags.continuousSelectionUpdates = [aDecoder decodeBoolForKey: @"SndView_continuous"];
@@ -1143,24 +1118,24 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 	defaultRecordSampleRate = [aDecoder decodeDoubleForKey: @"SndView_defaultRecordSampleRate"];
 	defaultRecordSeconds = [aDecoder decodeDoubleForKey: @"SndView_defaultRecordLength"];
 	
-	[dataList release];
-	dataList = [[aDecoder decodeObjectForKey: @"SndView_dataList"] retain];
+	dataList = [aDecoder decodeObjectOfClass:[SndDisplayDataList class] forKey: @"SndView_dataList"];
 	amplitudeZoom = [aDecoder decodeFloatForKey: @"SndView_amplitudeZoom"];
     }
     else { // older serialized archive
 	char b1, b2, b3, b4, b5, b6, b7, b8;
 	NSRect selectionRect;
 	
-	sound = [[aDecoder decodeObject] retain];
-	delegate = [[aDecoder decodeObject] retain];
+	sound = [aDecoder decodeObject];
+	delegate = [aDecoder decodeObject];
 	selectionRect = [aDecoder decodeRect];
 	selectedFrames.location = selectionRect.origin.x;
 	selectedFrames.length = selectionRect.size.width;
 	    
 	[aDecoder decodeValuesOfObjCTypes: "if", &displayMode, &reductionFactor];
-	[backgroundColour release];
-	[foregroundColour release];
-	[aDecoder decodeValuesOfObjCTypes:  "@@", &backgroundColour, &foregroundColour];
+	NSColor *bgclr, *fgclr;
+	[aDecoder decodeValuesOfObjCTypes:  "@@", &bgclr, &fgclr];
+	backgroundColour = bgclr;
+	foregroundColour = fgclr;
 	[aDecoder decodeValuesOfObjCTypes:"cccccccc", &b1, &b2, &b3, &b4, &b5, &b6, &b7, &b8];
 	svFlags.disabled = b1;
 	svFlags.continuousSelectionUpdates = b2;
@@ -1184,8 +1159,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 	    &defaultRecordSampleRate,
 	    &tmpSecs];
         defaultRecordSeconds = tmpSecs;
-	[dataList release];
-	dataList = [[aDecoder decodeObject] retain];
+	dataList = [aDecoder decodeObject];
     }
     
     return self;
@@ -1364,7 +1338,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     [self drawRect: selectionVisible];
     // unlock focus from the image to make sure the next drawing does _not_ get done into it.
     [dragImage unlockFocus];
-    return [dragImage autorelease];
+    return dragImage;
 }
 
 - (void) mouseDragged: (NSEvent *) theEvent
@@ -2428,7 +2402,6 @@ LMS: Nowdays we want to rescale to fit the entire sound into the view, regardles
     [sound insertSamples: recordingSound at: selectedFrames.location];
     selectedFrames.length = [recordingSound lengthInSampleFrames];
     
-    [recordingSound release];
     recordingSound = nil;
     [self tellDelegate: @selector(didRecord:)];
     [self invalidateCacheStartSample: selectedFrames.location
@@ -2517,8 +2490,7 @@ LMS: Nowdays we want to rescale to fit the entire sound into the view, regardles
 					     end: [sound lengthInSampleFrames]];
             }
             else {
-		[sound release];
-		sound = [pastedSound retain];
+		sound = pastedSound;
                 [self invalidateCache];
             }
 	    selectedFrames.location = selectedFrames.location + [pastedSound lengthInSampleFrames];
@@ -2565,8 +2537,7 @@ LMS: Nowdays we want to rescale to fit the entire sound into the view, regardles
     if ([sound lengthInSampleFrames] < NSMaxRange(selectedFrames))
 	return NO;
     
-    [pasteboardSound release];
-    pasteboardSound = [[sound soundFromSamplesInRange: selectedFrames] retain];
+    pasteboardSound = [sound soundFromSamplesInRange: selectedFrames];
     if (pasteboardSound == nil) {
 	NSLog(@"there was a problem copying samples\n");
 	return NO;

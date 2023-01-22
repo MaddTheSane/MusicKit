@@ -56,7 +56,7 @@
 	// This is to keep the time spent in processReplacingInputBuffer:outputBuffer: to a minimum avoiding
 	// file writing latencies interrupting the stream processing.
 	// TODO: either calculate from the number of buffers or from the queue duration.
-	writingQueue = [[SndAudioBufferQueue audioBufferQueueWithLength: NUMBER_OF_BUFFERS] retain];
+	writingQueue = [SndAudioBufferQueue audioBufferQueueWithLength: NUMBER_OF_BUFFERS];
 	writingFileHandle = nil;
     }
     return self;
@@ -119,13 +119,12 @@
 	// TODO: should use durationOfBuffering to determine number of buffers the queue should have
 	// int numberOfBuffers = durationOfBuffering * queueFormat.sampleRate / queueFormat.frameCount;
 	
-	recordBuffer = [[SndAudioBuffer audioBufferWithFormat: queueFormat] retain];
+	recordBuffer = [SndAudioBuffer audioBufferWithFormat: queueFormat];
 #if SNDAUDIOPROCRECORDER_DEBUG  
 	NSLog(@"recordBuffer %@, should use %d buffers\n", recordBuffer, numberOfBuffers);
 #endif
 	[writingQueue prepareQueueAsType: audioBufferQueue_typeOutput withBufferPrototype: recordBuffer];
 	// [writingQueue setBufferCount: numberOfBuffers];
-	[recordBuffer release];
 	return YES;
     }
 #if SNDAUDIOPROCRECORDER_DEBUG  
@@ -172,10 +171,8 @@
 	return NO;
     }
     else {
-	[writingFileHandle release];
-	writingFileHandle = [[NSFileHandle fileHandleForWritingAtPath: expandedFilename] retain];
+	writingFileHandle = [NSFileHandle fileHandleForWritingAtPath: expandedFilename];
 	if((recordFile = sf_open_fd([writingFileHandle fileDescriptor], SFM_WRITE, &sfinfo, TRUE)) != NULL) {
-	    [recordFileName release];
 	    recordFileName = [expandedFilename copy];
 	    
 	    return YES;
@@ -238,22 +235,21 @@
 
 - (void) fileWritingThread: (id) emptyArgument
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    
-    // TODO: we probably need to drain the queue first once we stop.
-    while(!stopSignal) @autoreleasepool {
-	// We create an inner autorelease pool since this thread can run a long time writing many buffers which otherwise are not released.
-
-	// This will sleep waiting for an available buffer on the queue.
-	// We have to inject a final empty buffer on the queue to finally retrieve the buffer and exit the loop.
-	SndAudioBuffer *bufferToWrite = [writingQueue popNextProcessedBuffer];
-
-	[self writeToFileBuffer: bufferToWrite];
-	[writingQueue addPendingBuffer: bufferToWrite];
+    @autoreleasepool {
+	// TODO: we probably need to drain the queue first once we stop.
+	while(!stopSignal) @autoreleasepool {
+	    // We create an inner autorelease pool since this thread can run a long time writing many buffers which otherwise are not released.
+	    
+	    // This will sleep waiting for an available buffer on the queue.
+	    // We have to inject a final empty buffer on the queue to finally retrieve the buffer and exit the loop.
+	    SndAudioBuffer *bufferToWrite = [writingQueue popNextProcessedBuffer];
+	    
+	    [self writeToFileBuffer: bufferToWrite];
+	    [writingQueue addPendingBuffer: bufferToWrite];
+	}
+	// close the file after stopSignal is set.
+	[self closeRecordFile];
     }
-    // close the file after stopSignal is set.
-    [self closeRecordFile];
-    [pool release];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -373,13 +369,6 @@
 {
     // If we are deallocing, we are already way too late to wait for the stream to finish.
     [self stopRecordingWait: NO]; 
-    [writingQueue release];
-    writingQueue = nil;
-    [recordFileName release];
-    recordFileName = nil;
-    [writingFileHandle release];
-    writingFileHandle = nil;
-    [super dealloc];
 }
 
 ////////////////////////////////////////////////////////////////////////////////

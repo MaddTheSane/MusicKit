@@ -95,7 +95,7 @@ void SndChangeSampleRate(const SndFormat fromSound,
 
 // dataFormat is the same going in and going out.
 // This is capable of in place conversion if inPtr and outPtr are the same.
-// TODO: This is a good candidate for Altivec optimisation
+// TODO: This is a good candidate for vector optimisation
 void SndChannelDecrease(void *inPtr, 
 			void *outPtr, 
 			unsigned long numberOfSampleFrames, 
@@ -107,7 +107,7 @@ void SndChannelDecrease(void *inPtr,
     int oldChannelIndex;
     int newChannelIndex;
     unsigned long frame;
-    long int *sumInteger = (long int *) calloc(newNumChannels, sizeof(long int));
+    int32_t *sumInteger = (int32_t *) calloc(newNumChannels, sizeof(int32_t));
     float *sumFloat = (float *) calloc(newNumChannels, sizeof(float));
     double *sumDouble = (double *) calloc(newNumChannels, sizeof(double));
     int *channelSumCount = (int *) calloc(newNumChannels, sizeof(int));
@@ -134,10 +134,15 @@ void SndChannelDecrease(void *inPtr,
 		break;
 	    case SndSampleFormatLinear24:
 		// TODO: Not endian ok, the shift down currently assumes big endian!
+#ifdef __LITTLE_ENDIAN__
+		    fprintf(stderr, "SndChannelDecrease: SndSampleFormatLinear24 code needs to be re-written to work on little-endian systems.\n\nYour program will now exit!\n");
+		    fflush(stderr);
+//		    abort();
+#endif
 		sumInteger[map[oldChannelIndex]] += *((long int *)((signed char *) inPtr + (sampleIndex + oldChannelIndex) * 3)) >> 8;
 		break;
 	    case SndSampleFormatLinear32:
-		sumDouble[map[oldChannelIndex]] += (long int)(((signed long int *) inPtr)[sampleIndex + oldChannelIndex]);
+		sumDouble[map[oldChannelIndex]] += (int32_t)(((int32_t *) inPtr)[sampleIndex + oldChannelIndex]);
 		break;
 	    case SndSampleFormatFloat:
 		sumFloat[map[oldChannelIndex]] += (float)(((float *) inPtr)[sampleIndex + oldChannelIndex]);
@@ -165,7 +170,7 @@ void SndChannelDecrease(void *inPtr,
 		sumInteger[newChannelIndex] = 0;
 		break;
 	    case SndSampleFormatLinear32:
-		((signed long int *) outPtr)[frame * newNumChannels + newChannelIndex] = (signed long int)(sumDouble[newChannelIndex] / channelSumCount[newChannelIndex]);
+		((int32_t *) outPtr)[frame * newNumChannels + newChannelIndex] = (int32_t)(sumDouble[newChannelIndex] / channelSumCount[newChannelIndex]);
 		sumDouble[newChannelIndex] = 0;
 	    case SndSampleFormatFloat:
 		((float *) outPtr)[frame * newNumChannels + newChannelIndex] = (float)(sumFloat[newChannelIndex] / channelSumCount[newChannelIndex]);
@@ -640,8 +645,7 @@ int SndChangeSampleType(void *fromPtr, void *toPtr, SndSampleFormat fromDataForm
 	if (error == SND_ERR_BAD_FORMAT)
 	    return nil;
 	
-	[data release];
-	data = [toData retain];
+	data = toData;
 	format.dataFormat = toDataFormat;
 	// NSLog(@"convert: %@", self);
     }
@@ -667,8 +671,7 @@ int SndChangeSampleType(void *fromPtr, void *toPtr, SndSampleFormat fromDataForm
 	if(error != SND_ERR_NONE)
 	    return nil;
 	
-	[data release];
-	data = [toData retain];
+	data = toData;
 	format.channelCount = toChannelCount;
     }    
     return [self convertToSampleFormat: toDataFormat];
@@ -694,8 +697,7 @@ int SndChangeSampleType(void *fromPtr, void *toPtr, SndSampleFormat fromDataForm
 	SndChangeSampleRate(fromSoundFormat, fromDataPtr, &toSoundFormat, (short *) toDataPtr, largeFilter, interpFilter, fastInterpolation);
 
 	// replace the old data with the new sample rate converted data.
-	[data release];
-	data = [toData retain];
+	data = toData;
 
 	// assign dataFormat here in case we don't do any conversion using SndChangeSampleType() below.
 	format.dataFormat = toSoundFormat.dataFormat;
@@ -846,7 +848,7 @@ int SndChangeSampleType(void *fromPtr, void *toPtr, SndSampleFormat fromDataForm
     
     // newBuffer is already autoreleased but we retain and autorelease it again so that the current thread
     // will autorelease it. Convert the data format if necessary.
-    return [[[newBuffer convertToSampleFormat: toDataFormat] retain] autorelease];
+    return [newBuffer convertToSampleFormat: toDataFormat];
 }
 
 @end

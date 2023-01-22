@@ -39,7 +39,7 @@ static SndPlayer *defaultSndPlayer;
 
 + player
 {
-    return [[SndPlayer new] autorelease];
+    return [SndPlayer new];
 }
 
 + (SndPlayer *) defaultSndPlayer
@@ -63,7 +63,7 @@ static SndPlayer *defaultSndPlayer;
 	SNDStreamNativeFormat(&nativeOutputBuffer, YES); /* get maximum length for processing buffer of output stream. */
 	nativeOutputBuffer.streamData = NULL;
 	
-	nativelyFormattedStreamingBuffer = [[SndAudioBuffer audioBufferWithSNDStreamBuffer: &nativeOutputBuffer] retain];
+	nativelyFormattedStreamingBuffer = [SndAudioBuffer audioBufferWithSNDStreamBuffer: &nativeOutputBuffer];
 	
 	remainConnectedToManager = TRUE;
 	autoStartManager = TRUE;
@@ -85,27 +85,6 @@ static SndPlayer *defaultSndPlayer;
 	[self setClientName: @"SndPlayer"];
     }
     return self;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// dealloc
-////////////////////////////////////////////////////////////////////////////////
-
-- (void) dealloc
-{
-    [toBePlayed release];
-    toBePlayed = nil;
-    [playing release];
-    playing = nil;
-    [playingLock release];
-    playingLock = nil;
-    [removalArray release];
-    removalArray = nil;
-    [nativelyFormattedStreamingBuffer release];
-    nativelyFormattedStreamingBuffer = nil;
-    [preemptingPerformance release];
-    preemptingPerformance = nil;
-    [super dealloc];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -320,8 +299,7 @@ static SndPlayer *defaultSndPlayer;
 
     // Save the performance so we know which performance not to reset playIndexes for.
     // All other performances have their playIndexes reset when preempted.
-    [preemptingPerformance release];
-    preemptingPerformance = [thePerformance retain];
+    preemptingPerformance = thePerformance;
     
     // we need to add the performance before we preempt the queued stream so that the new performance will be mixed in.
     [self addPerformance: thePerformance];
@@ -365,7 +343,6 @@ static SndPlayer *defaultSndPlayer;
 	}
     }
     // Now we have performed the rewinding on the other performances, we have no need to keep the preemptingPerformance.
-    [preemptingPerformance release];
     preemptingPerformance = nil;
     [playingLock unlock];
 
@@ -462,7 +439,6 @@ static SndPlayer *defaultSndPlayer;
   // [playingLock lock];
   [toBePlayed removeObjectsInArray: pendingToRemove];
   // [playingLock unlock];
-  [pendingToRemove release];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -483,7 +459,7 @@ static SndPlayer *defaultSndPlayer;
 - (void) pauseSnd: (Snd*) s
 {
   NSArray *performancesToPause = [s performances];
-  int i, count = [performancesToPause count];
+  NSInteger i, count = [performancesToPause count];
 
   for (i = 0; i < count; i++) {
     SndPerformance *thePerf = [performancesToPause objectAtIndex: i];
@@ -504,8 +480,8 @@ static SndPlayer *defaultSndPlayer;
 - (void) processBuffers
 {
     SndAudioBuffer *currentSynthOutputBuffer = [self synthOutputBuffer];
-    int    numberPlaying;
-    int    i;
+    NSInteger    numberPlaying;
+    NSInteger    i;
 
     [playingLock lock];
 #if SNDPLAYER_DEBUG_SYNTHTHREAD_LOCKS
@@ -518,7 +494,7 @@ static SndPlayer *defaultSndPlayer;
     {
 	double bufferDur     = [currentSynthOutputBuffer duration]; // [[self synthOutputBuffer] duration];
 	double bufferEndTime = [self synthesisTime] + bufferDur;
-	int numberToBePlayed = [toBePlayed count];
+	NSInteger numberToBePlayed = [toBePlayed count];
         
 	for (i = 0; i < numberToBePlayed; i++) {
 	    SndPerformance *performance = [toBePlayed objectAtIndex: i];

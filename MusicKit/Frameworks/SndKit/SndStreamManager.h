@@ -32,7 +32,7 @@
 /*!
   @param mesg
  */
-- (void) _sendDelegateInvocation:(in unsigned long) mesg;
+- (void) _sendDelegateInvocation:(in NSInvocation *) mesg;
 @end 
 
 /*!
@@ -274,6 +274,8 @@
  */
 - (SndFormat) format;
 
+@property (readonly) SndFormat format;
+
 /*!
   @brief   Return the current time as understood by the SndStreamManager.
   
@@ -285,11 +287,15 @@
 */
 - (double) nowTime;
 
+@property (readonly) double nowTime;
+
 /*!
   @brief   Mixer member accessor method
   @return     The internal SndStreamMixer
 */
 - (SndStreamMixer *) mixer;
+
+@property (readonly, strong) SndStreamMixer *mixer;
 
 /*!
   @brief   indicates whether streaming is happening (active) 
@@ -298,6 +304,8 @@
   @return     YES if streaming is active
 */
 - (BOOL) isActive;
+
+@property (readonly, getter=isActive) BOOL active;
 
 /*!
   @return The streaming sampling rate.

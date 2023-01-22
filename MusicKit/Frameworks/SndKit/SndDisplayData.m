@@ -54,7 +54,6 @@ OF THIS AGREEMENT.
 {
 	if (maxArray) free(maxArray);
 	if (minArray) free(minArray);
-    [super dealloc];
 }
 
 @synthesize pixelCount;

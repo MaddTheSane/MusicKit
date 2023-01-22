@@ -28,24 +28,11 @@
 {
     self = [super init];
     if (self != nil) {
-	if (recorder != nil)
-	    [recorder release];
 	recorder = [[SndAudioProcessorRecorder alloc] init];
 	[self setNeedsInput: TRUE];
 	[self setGeneratesOutput: FALSE];    
     }
     return self;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// dealloc
-////////////////////////////////////////////////////////////////////////////////
-
-- (void) dealloc
-{
-    if (recorder != nil)
-	[recorder release];
-    [super dealloc];
 }
 
 ////////////////////////////////////////////////////////////////////////////////

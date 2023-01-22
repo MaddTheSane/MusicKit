@@ -38,7 +38,7 @@
 /*! postFader A SndAudioFader which modifies the chain of effects volume and pan, effectively it is an "FX return" control */
     SndAudioFader *postFader;
 /*! nowTime Time of processing a buffer in seconds. */
-    double nowTime;
+    NSTimeInterval nowTime;
 }
 
 /*!
@@ -158,12 +158,15 @@
  */
 - (void) setPostFader: (SndAudioFader *) newPostFader;
 
+@property (strong) SndAudioFader *postFader;
+
 /*!
   @brief  Returns the time the buffer is to be played.
   
   @return Returns a double Indicating the play start time of the buffer being processed in seconds.
 */
-- (double) nowTime;
+- (NSTimeInterval) nowTime;
+@property (readonly) NSTimeInterval nowTime;
 
 /*!
   @brief Returns the format of the buffers being processed by the SndAudioProcessors in the SndAudioProcessorChain.

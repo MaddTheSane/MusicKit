@@ -110,7 +110,6 @@ static float lookupEnvForX(SndAudioFader *saf, id <SndEnveloping> anEnvelope, do
   if (clear) {
     if (balanceEnv) {
       [balanceEnvLock lock];
-      [balanceEnv release];
       balanceEnv = nil;
       [balanceEnvLock unlock];
     }
@@ -145,7 +144,6 @@ static float lookupEnvForX(SndAudioFader *saf, id <SndEnveloping> anEnvelope, do
   if (clear) {
     [ampEnvLock lock];
     if (ampEnv) {
-      [ampEnv release];
       ampEnv = nil;
     }
     [ampEnvLock unlock];
@@ -412,15 +410,6 @@ BOOL middleOfMovement(SndAudioFader *saf, double xVal, id <SndEnveloping,NSObjec
 {
     if (uee)
 	free(uee);
-    [envelopesLock release];
-    envelopesLock = nil;
-    [ampEnvLock release];
-    ampEnvLock = nil;
-    [balanceEnvLock release];
-    balanceEnvLock = nil;
-    [ampEnv release];
-    [balanceEnv release];
-    [super dealloc];
 }
 
 - (float) paramValue: (const int) paramIndex

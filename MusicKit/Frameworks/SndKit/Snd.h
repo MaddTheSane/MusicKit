@@ -140,7 +140,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
 {
  @protected
     /*! An array of SndAudioBuffers, the number of elements will depend on the fragmentation. */
-    NSMutableArray *soundBuffers; 
+    NSMutableArray<SndAudioBuffer*> *soundBuffers; 
     /*! The parameters defining the format of the sound. */
     SndFormat soundFormat;
     /*! A descriptive information string read from a sound file. */
@@ -149,7 +149,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
     /*! The priority of the sound - currently unused. */
     int priority;		 
     /*! The target of notification messages */
-    id delegate;		 
+    __weak id<SndDelegate> delegate;
     /*! The name of the sound, typically less verbose than the info string which can be descriptive. */
     NSString *name;
     /*! The code of the most recently occurring error. Zero if no error. */
@@ -366,7 +366,7 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
 */
 - (void) setDelegate: (id<SndDelegate>) anObject;
 
-@property (assign) id<SndDelegate> delegate;
+@property (weak) id<SndDelegate> delegate;
 
 /*!
   @return Returns a double.

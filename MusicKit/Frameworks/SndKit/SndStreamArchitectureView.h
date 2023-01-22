@@ -120,7 +120,7 @@
   @brief   To come  
   @return     Returns the id of the current, user selected audio architecture object.
 */
-- (id) currentlySelectedAudioArchObject;
+@property (readonly, strong) id currentlySelectedAudioArchObject;
 
 /*!
   @brief   Clears the currently selected audio architecture object to nil.

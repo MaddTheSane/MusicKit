@@ -226,24 +226,24 @@
     int errorClosing;
     const char *comment;
     NSFileHandle *readingFileHandle;
-    NSAutoreleasePool *fileReadingPool = [[NSAutoreleasePool alloc] init];
+    @autoreleasepool {
     SndAudioBuffer *fileContents;
     
     if (path == nil)
 	return SND_ERR_BAD_FILENAME;
     if ([path length] == 0)
 	return SND_ERR_BAD_FILENAME;
-    readingFileHandle = [NSFileHandle fileHandleForReadingAtPath: [path stringByExpandingTildeInPath]]; 
+    readingFileHandle = [NSFileHandle fileHandleForReadingAtPath: [path stringByExpandingTildeInPath]];
     if ((sfp = sf_open_fd([readingFileHandle fileDescriptor], SFM_READ, &sfinfo, TRUE)) == NULL) {
 	if(sf_error(sfp) != SF_ERR_NO_ERROR) {
 	    NSLog(@"File reading error: %s\n", sf_strerror(sfp));
-            if([[NSUserDefaults standardUserDefaults] boolForKey: @"SndShowLogOnReadError"]) {
-                char readingLogBuffer[2048];  // TODO: we could malloc and free this here instead.
-
-                sf_command(sfp, SFC_GET_LOG_INFO, readingLogBuffer, sizeof(readingLogBuffer));
-                NSLog(@"Error log of file reading: %s\n", readingLogBuffer);
-            }
-	}	
+	    if([[NSUserDefaults standardUserDefaults] boolForKey: @"SndShowLogOnReadError"]) {
+		char readingLogBuffer[2048];  // TODO: we could malloc and free this here instead.
+		
+		sf_command(sfp, SFC_GET_LOG_INFO, readingLogBuffer, sizeof(readingLogBuffer));
+		NSLog(@"Error log of file reading: %s\n", readingLogBuffer);
+	    }
+	}
 	return SND_ERR_CANNOT_OPEN;
     }
     
@@ -260,8 +260,7 @@
     
     // Retrieve the sound file comment as the info string.
     if((comment = sf_get_string(sfp, SF_STR_COMMENT)) != NULL) {
-	[info release];
-	info = [[NSString stringWithUTF8String: comment] retain];
+	info = [NSString stringWithUTF8String: comment];
     }
     
 #if DEBUG_MESSAGES
@@ -285,12 +284,12 @@
     soundFormat.dataFormat = SndSampleFormatFloat;
     soundFormat.sampleRate = sfinfo.samplerate;
     soundFormat.channelCount = sfinfo.channels;
-
+    
     totalNumOfSamplesToRead = frameCount * sfinfo.channels;
     
     fileContents = [SndAudioBuffer audioBufferWithDataFormat: soundFormat.dataFormat
 						channelCount: soundFormat.channelCount
-					        samplingRate: soundFormat.sampleRate
+						samplingRate: soundFormat.sampleRate
 						  frameCount: frameCount];
     if(fileContents == nil)
 	return SND_ERR_CANNOT_ALLOC;
@@ -302,34 +301,34 @@
 	    return SND_ERR_CANNOT_READ;
 	}
     }
-
+    
     // endian order is handled within sf_read_float().
     numOfSamplesActuallyRead = sf_read_float(sfp, (float *) [fileContents bytes], totalNumOfSamplesToRead);
     if (numOfSamplesActuallyRead < 0)
 	return SND_ERR_CANNOT_READ;
     
     soundFormat.frameCount = numOfSamplesActuallyRead / sfinfo.channels;
-
+    
     if([[NSUserDefaults standardUserDefaults] boolForKey: @"SndShowInputFileFormat"]) {
 	NSLog(@"Input file %@: style %s %@\n", path, soundFileFormatInfo.name, self);
     }
     
     errorClosing = sf_close(sfp);
     [readingFileHandle closeFile];
-
+    
     // Replace all audio buffers with the new file contents buffer.
     [soundBuffers removeAllObjects];
     [soundBuffers addObject: fileContents];
     
     if (errorClosing != 0)
 	return SND_ERR_UNKNOWN;
-        
+    
     // TODO: Need to retrieve loop pointers.
     // This is probably a bit kludgy but it will do for now.
     // TODO: when we can retrieve the loop indexes from the sound file, this should become the default value.
     loopEndIndex = [self lengthInSampleFrames] - 1;
     
-    [fileReadingPool release];
+    }
     
     return SND_ERR_NONE;
 #else
@@ -344,7 +343,6 @@
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *expandedFilename = [filename stringByExpandingTildeInPath];
     
-    [name release];
     name = nil;
     
     if (![[NSFileManager defaultManager] fileExistsAtPath: expandedFilename]) {

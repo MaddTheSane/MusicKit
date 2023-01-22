@@ -68,6 +68,8 @@
  */
 - (BOOL) isReceivingInput;
 
+@property (readonly, getter=isReceivingInput) BOOL receivingInput;
+
 /*!
   @method averageLatencyForOutput:
   @brief Returns the average latency for either the input or output processing in samples.

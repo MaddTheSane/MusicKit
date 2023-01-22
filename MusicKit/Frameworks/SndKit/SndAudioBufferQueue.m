@@ -32,7 +32,7 @@ enum {
 
 + (instancetype)audioBufferQueueWithLength: (NSInteger) n
 {
-    return [[[self alloc] initQueueWithLength: n] autorelease];
+    return [[self alloc] initQueueWithLength: n];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -66,30 +66,11 @@ enum {
     return self;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// dealloc
-////////////////////////////////////////////////////////////////////////////////
-
-- (void) dealloc
-{
-    [pendingBuffersLock release];
-    pendingBuffersLock = nil;
-    [processedBuffersLock release];
-    processedBuffersLock = nil;
-    [pendingBuffers release];
-    pendingBuffers = nil;
-    [processedBuffers release];
-    processedBuffers = nil;
-    [super dealloc];
-}
-
 - copyWithZone: (NSZone *) zone
 {
     SndAudioBufferQueue *queueCopy = [[[self class] allocWithZone: zone] init];
     
-    [queueCopy->pendingBuffers release];
     queueCopy->pendingBuffers = [pendingBuffers copy];
-    [queueCopy->processedBuffers release];
     queueCopy->processedBuffers = [processedBuffers copy];
 
     return queueCopy;
@@ -123,12 +104,12 @@ enum {
     if([pendingBuffers count] == 0) {
 	NSLog(@"Warning: -popNextPendingBuffer attempted to pop a buffer from an empty pending queue\n");
     }
-    ab = [[pendingBuffers objectAtIndex: 0] retain]; // retain so it's not released by removeObjectAtIndex: below.
+    ab = [pendingBuffers objectAtIndex: 0]; // retain so it's not released by removeObjectAtIndex: below.
 						     // NSLog(@"ab %@ retainCount %d\n", ab, [ab retainCount]);
     [pendingBuffers removeObjectAtIndex: 0];
   // NSLog(@"after remove [pendingBuffers objectAtIndex: 0] retainCount %d\n", [[pendingBuffers objectAtIndex: 0] retainCount]);
     [pendingBuffersLock unlockWithCondition: ([pendingBuffers count] > 0 ? ABQ_hasData : ABQ_noData)];
-    return [ab autorelease];
+    return ab;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -146,10 +127,10 @@ enum {
     if([processedBuffers count] == 0) {
 	NSLog(@"Warning: -popNextProcessedBuffer attempted to pop a buffer from an empty processed queue\n");
     }
-    ab = [[processedBuffers objectAtIndex: 0] retain]; // retain so it's not released by removeObjectAtIndex: below.
+    ab = [processedBuffers objectAtIndex: 0]; // retain so it's not released by removeObjectAtIndex: below.
     [processedBuffers removeObjectAtIndex: 0];
     [processedBuffersLock unlockWithCondition: ([processedBuffers count] > 0 ? ABQ_hasData : ABQ_noData)];
-    return [ab autorelease];
+    return ab;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -206,11 +187,10 @@ enum {
     NSLog(@"moving %d processed buffers to pending...\n", numOfProcessedBuffers);
 #endif    
     for(bufferIndex = 0; bufferIndex < numOfProcessedBuffers; bufferIndex++) {
-	SndAudioBuffer *processedAudioBuffer = [[processedBuffers objectAtIndex: 0] retain];
+	SndAudioBuffer *processedAudioBuffer = [processedBuffers objectAtIndex: 0];
 	
 	[processedBuffers removeObjectAtIndex: 0];
 	[self addPendingBuffer: processedAudioBuffer];
-	[processedAudioBuffer release];
     }
     [processedBuffersLock unlockWithCondition: ABQ_noData];
 }
@@ -247,13 +227,11 @@ enum {
 - (void) setBufferCount: (int) newNumberOfBuffers
 {
     [pendingBuffersLock lock];
-    [pendingBuffers release];
-    pendingBuffers = [[NSMutableArray arrayWithCapacity: newNumberOfBuffers] retain];
+    pendingBuffers = [NSMutableArray arrayWithCapacity: newNumberOfBuffers];
     [pendingBuffersLock unlockWithCondition: ABQ_noData];
 
     [processedBuffersLock lock];
-    [processedBuffers release];
-    processedBuffers = [[NSMutableArray arrayWithCapacity: newNumberOfBuffers] retain];
+    processedBuffers = [NSMutableArray arrayWithCapacity: newNumberOfBuffers];
     [processedBuffersLock unlockWithCondition: ABQ_noData];
     numBuffers = newNumberOfBuffers;
 }
@@ -286,7 +264,7 @@ enum {
 	    [pendingBuffersLock unlockWithCondition: ABQ_noData];
 	    [processedBuffersLock lock];
 	    for (processedBufferIndex = 0; processedBufferIndex < numBuffers; processedBufferIndex++)
-		[processedBuffers addObject: [[buff copy] autorelease]];
+		[processedBuffers addObject: [buff copy]];
 	    [processedBuffersLock unlockWithCondition: ABQ_hasData];
 	}
 	break;
@@ -298,7 +276,7 @@ enum {
 	    [processedBuffersLock unlockWithCondition: ABQ_noData];
 	    [pendingBuffersLock lock];
 	    for (pendingBufferIndex = 0; pendingBufferIndex < numBuffers; pendingBufferIndex++)
-		[pendingBuffers addObject: [[buff copy] autorelease]];
+		[pendingBuffers addObject: [buff copy]];
 	    [pendingBuffersLock unlockWithCondition: ABQ_hasData];
 	}
 	break;
