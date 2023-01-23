@@ -56,7 +56,7 @@
     feedback = val;
 }
 
-- (float) getFeedback
+- (float) feedback
 {
     return feedback;
 }

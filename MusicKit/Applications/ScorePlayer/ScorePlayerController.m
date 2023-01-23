@@ -359,7 +359,7 @@ static BOOL needToReread(void)
 
 - (void)getNeXTDACCurrentValues:sender
 {
-    float l = [[[theOrch audioProcessorChain] postFader] getAmp];
+    float l = [[[theOrch audioProcessorChain] postFader] amp];
     [NeXTDacVolumeSlider setFloatValue: l];
     [NeXTDacMuteSwitch setIntValue: [Snd isMuted]];
 }

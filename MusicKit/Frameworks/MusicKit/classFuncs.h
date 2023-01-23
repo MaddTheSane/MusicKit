@@ -36,13 +36,13 @@
    subclass of <b><i>Class</i></b>; otherwise it returns YES.
   @ingroup ScorefileCreationFns
 */
-extern BOOL MKSetNoteClass(id noteSubclass);
+extern BOOL MKSetNoteClass(Class noteSubclass);
 
 /*!
   @brief Returns class set with MKSetNoteClass() or [MKNote class] if none. 
   @ingroup ScorefileCreationFns
  */
-extern id MKGetNoteClass(void);
+extern Class MKGetNoteClass(void);
 
 /*!
   @brief Similar to MKSetNoteClass() for MKParts.
@@ -63,7 +63,7 @@ extern id MKGetNoteClass(void);
   @see <b>MKSetNoteClass()</b>.
   @ingroup ScorefileCreationFns
 */
-extern BOOL MKSetPartClass(id partSubclass);
+extern BOOL MKSetPartClass(Class partSubclass);
 
 /*!
   @brief Similar to MKSetNoteClass() for MKEnvelopes.
@@ -82,7 +82,7 @@ extern BOOL MKSetPartClass(id partSubclass);
   @see <b>MKSetNoteClass()</b>.
   @ingroup ScorefileCreationFns
 */
-extern BOOL MKSetEnvelopeClass(id envelopeSubclass);
+extern BOOL MKSetEnvelopeClass(Class envelopeSubclass);
 
 /*!
   @brief Similar to MKSetNoteClass() for MKPartials.
@@ -101,7 +101,7 @@ extern BOOL MKSetEnvelopeClass(id envelopeSubclass);
   @see <b>MKSetNoteClass()</b>.
   @ingroup ScorefileCreationFns
 */
-extern BOOL MKSetPartialsClass(id aPartialsSubclass);
+extern BOOL MKSetPartialsClass(Class aPartialsSubclass);
 
 /*!
   @brief Set and retrieve scorefile creation classes
@@ -120,7 +120,7 @@ extern BOOL MKSetPartialsClass(id aPartialsSubclass);
   @see <b>MKSetNoteClass()</b>.
   @ingroup ScorefileCreationFns
 */
-extern BOOL MKSetSamplesClass(id aSamplesSubclass);
+extern BOOL MKSetSamplesClass(Class aSamplesSubclass);
 
 /*!
   @brief Similar to MKGetNoteClass() for MKParts.
@@ -139,7 +139,7 @@ extern BOOL MKSetSamplesClass(id aSamplesSubclass);
   @see MKSetNoteClass().
   @ingroup ScorefileCreationFns
  */
-extern id MKGetPartClass(void);
+extern Class MKGetPartClass(void);
 
 /*!
   @brief Similar to MKGetNoteClass() for MKEnvelopes.
@@ -158,7 +158,7 @@ extern id MKGetPartClass(void);
   @return Returns an id.
   @ingroup ScorefileCreationFns
  */
-extern id MKGetEnvelopeClass(void);
+extern Class MKGetEnvelopeClass(void);
 
 /*!
   @brief Similar to MKGetNoteClass() for MKPartials.
@@ -177,7 +177,7 @@ extern id MKGetEnvelopeClass(void);
   @see <b>MKSetNoteClass()</b>.
   @ingroup ScorefileCreationFns
  */
-extern id MKGetPartialsClass(void);
+extern Class MKGetPartialsClass(void);
 
 /*!
   @brief Similar to MKGetNoteClass() for MKSamples.
@@ -196,7 +196,7 @@ extern id MKGetPartialsClass(void);
   @see <b>MKSetNoteClass()</b>.
   @ingroup ScorefileCreationFns
  */
-extern id MKGetSamplesClass(void);
+extern Class MKGetSamplesClass(void);
 
 /*@}*/
 

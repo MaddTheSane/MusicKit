@@ -31,8 +31,8 @@ extern id _MKSynthPatchCmp();
 
 @interface MKSynthPatch(/*Private*/)
 
-+ _newWithTemplate: (id) aTemplate
- inOrch: (id) anOrch index: (int) whichDSP;
++ _newWithTemplate: (MKPatchTemplate*) aTemplate
+ inOrch: (MKOrchestra*) anOrch index: (int) whichDSP;
 - _free;
 - _preemptNoteOn: aNote controllers: controllers;
 - _remove: aUG;

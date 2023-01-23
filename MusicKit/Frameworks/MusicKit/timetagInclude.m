@@ -22,7 +22,7 @@ Modification history:
 
 */
 
--setFirstTimeTag:(double) aTimeTag
+-(void)setFirstTimeTag:(double) aTimeTag
   /* TYPE: Accessing time; Sets firstTimeTag to aTimeTag
    * Sets the variable firstTimeTag to aTimeTag and 
    * returns the receiver.
@@ -34,12 +34,11 @@ Modification history:
    */
 { 
     if (status != MK_inactive) 
-      return nil;
+      return;
     firstTimeTag = aTimeTag;
-    return self;
 }		
 
--setLastTimeTag:(double) aTimeTag
+-(void)setLastTimeTag:(double) aTimeTag
   /* TYPE: Accessing time; Sets lastTimeTag to aTimeTag
    * Sets the variable lastTimeTag to aTimeTag and 
    * returns the receiver.
@@ -51,10 +50,9 @@ Modification history:
    */
 { 
     if (status != MK_inactive) 
-      return nil;
+      return;
     lastTimeTag = aTimeTag;
-    return self;
-}		
+}
 
 
 -(double)firstTimeTag 

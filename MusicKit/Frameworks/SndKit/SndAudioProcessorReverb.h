@@ -85,7 +85,7 @@ enum {
     float *outputAccumR;
 }
 
-- init;
+- (instancetype) init;
 
 - (void) mute;
 
@@ -101,31 +101,35 @@ enum {
 // Recalculate internal values after parameter change
 - (void) update;
 
-- (void) setRoomSize: (float) value;
+@property (nonatomic) float roomSize;
 
-- (float) getRoomSize;
+@property (nonatomic) float damp;
 
-- (void) setDamp: (float) value;
+@property (nonatomic) float wet;
 
-- (float) getDamp;
+@property (nonatomic) float dry;
 
-- (void) setWet: (float) value;
+@property (nonatomic) float width;
 
-- (float) getWet;
-
-- (void) setDry: (float) value;
-
-- (float) getDry;
-
-- (void) setWidth: (float) value;
-
-- (float) getWidth;
-
-- (void) setMode: (float) value;
-
-- (float) getMode;
+@property (nonatomic) float mode;
 
 ////////////////////////////////////////////////////////////////////////////////
+
+@end
+
+@interface SndAudioProcessorReverb (Deprecated)
+
+- (float) getRoomSize NS_DEPRECATED_WITH_REPLACEMENT_MAC("-roomSize", 10.0, 10.8);
+
+- (float) getDamp NS_DEPRECATED_WITH_REPLACEMENT_MAC("-damp", 10.0, 10.8);
+
+- (float) getWet NS_DEPRECATED_WITH_REPLACEMENT_MAC("-wet", 10.0, 10.8);
+
+- (float) getDry NS_DEPRECATED_WITH_REPLACEMENT_MAC("-dry", 10.0, 10.8);
+
+- (float) getWidth NS_DEPRECATED_WITH_REPLACEMENT_MAC("-width", 10.0, 10.8);
+
+- (float) getMode NS_DEPRECATED_WITH_REPLACEMENT_MAC("-mode", 10.0, 10.8);
 
 @end
 

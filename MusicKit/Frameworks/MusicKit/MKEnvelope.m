@@ -209,9 +209,9 @@ double **arrPtr)
   return self;
 }
 
-static id theSubclass = nil;
+static Class theSubclass = nil;
 
-BOOL MKSetEnvelopeClass(id aClass)
+BOOL MKSetEnvelopeClass(Class aClass)
 {
   if (!_MKInheritsFrom(aClass,[MKEnvelope class]))
     return NO;
@@ -335,9 +335,9 @@ id MKGetEnvelopeClass(void)
   return nil;
 }
 
--  setPointCount:(int)n
-          xArray:(double *) xPtr
-          yArray:(double *)yPtr
+-  (void) setPointCount:(int)n
+		 xArray:(double *) xPtr
+		 yArray:(double *)yPtr
 {
   if (smoothingArray != NULL)
     _MK_REALLOC(smoothingArray,double,n);
@@ -346,7 +346,7 @@ id MKGetEnvelopeClass(void)
     for (i=n; i<pointCount; i++)
       smoothingArray[i] = 1.0;
   }
-  return [self setPointCount:n
+  [self setPointCount:n
                        xArray:xPtr
              orSamplingPeriod:samplingPeriod /* Old value */
                        yArray:yPtr
@@ -354,12 +354,12 @@ id MKGetEnvelopeClass(void)
            orDefaultSmoothing:defaultSmoothing]; /* old value */
 }
 
--  setPointCount:(int)n
-          xArray:(double *) xPtr
-orSamplingPeriod:(double)period
-          yArray:(double *)yPtr
-  smoothingArray:(double *)smoothingPtr
-orDefaultSmoothing:(double)smoothing
+- (void) setPointCount:(int)n
+		xArray:(double *) xPtr
+      orSamplingPeriod:(double)period
+		yArray:(double *)yPtr
+	smoothingArray:(double *)smoothingPtr
+    orDefaultSmoothing:(double)smoothing
   /* Allocates arrays and fills them with values.
   xP or smoothingP may be NULL, in which case the corresponding constant
   value is used. If yP is NULL, the y values are unchanged. */
@@ -387,7 +387,6 @@ orDefaultSmoothing:(double)smoothing
     memmove(smoothingArray, smoothingPtr, n * sizeof(double));
   }
   pointCount = n;
-  return self;
 }
 
 - (double)samplingPeriod

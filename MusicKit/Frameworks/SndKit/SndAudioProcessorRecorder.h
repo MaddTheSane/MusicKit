@@ -60,7 +60,7 @@ enum SndRecorderParam {
   A threshold can be set to prevent silence being recorded prior to the sound. An automatic shutoff
   after a specifiable period of silence is also possible.
 */
-@interface SndAudioProcessorRecorder : SndAudioProcessor {
+@interface SndAudioProcessorRecorder : SndAudioProcessor <NSCopying> {
 
 @protected
     /*! A queue of buffers copied from those received by processReplacingInputBuffer: ready for writing. */
@@ -106,6 +106,7 @@ enum SndRecorderParam {
   @return  YES if currently recording.
 */
 - (BOOL) isRecording;
+@property (readonly, getter=isRecording) BOOL recording;
 
 /*!
   @brief YES if recording started ok.
@@ -159,7 +160,8 @@ enum SndRecorderParam {
   @brief Returns the number of frames recorded.
   @return The number of frames recorded.
 */
-- (long) framesRecorded;
+- (unsigned long) framesRecorded;
+@property (readonly) unsigned long framesRecorded;
 
 /*!
   @brief Sets the linear amplitude the stream must rise above before recording begins.
@@ -169,8 +171,6 @@ enum SndRecorderParam {
   and maximum dynamic range (1.0).
 */
 - (void) setStartTriggerThreshold: (float) amplitudeThreshold;
-
-- copyWithZone: (NSZone *) zone;
 
 @end
 

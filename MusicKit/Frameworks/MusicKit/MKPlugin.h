@@ -27,18 +27,20 @@
 #import <Foundation/Foundation.h>
 #import <MusicKit/MKScore.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @protocol MusicKitPlugin <NSObject>
 + (NSString *) protocolVersion;
 @property (class, readonly, copy) NSString *protocolVersion;
-- (void) setDelegate:(id)delegate;
+- (void) setDelegate:(nullable id)delegate;
 - (NSArray<NSString*>*)fileSavingSuffixes;
 - (NSArray<NSString*>*)fileOpeningSuffixes;
 @property (nonatomic, readonly, copy) NSArray<NSString*> *fileSavingSuffixes;
 @property (nonatomic, readonly, copy) NSArray<NSString*> *fileOpeningSuffixes;
 
-- (MKScore*)openFileName:(NSString *)f forScore:(MKScore*)s;
+- (nullable MKScore*)openFileName:(NSString *)f forScore:(MKScore*)s;
 @optional
-- (MKScore*)openURL:(NSURL *)f forScore:(MKScore*)s error:(NSError**)error;
+- (nullable MKScore*)openURL:(NSURL *)f forScore:(MKScore*)s error:(NSError**)error;
 @end
 
 #define MK_BUNDLE_DIR @"MusicKitPlugins"
@@ -47,3 +49,4 @@
 extern void MKLoadAllBundlesOneOff(void);
 extern BOOL MKLoadAllBundles(void);
 
+NS_ASSUME_NONNULL_END

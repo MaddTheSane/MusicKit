@@ -82,7 +82,7 @@ returned by <b>initializeFile</b> and <b>finishFile</b> are ignored.
 #import <MusicKit/MKInstrument.h>
 #import <MusicKit/timeunits.h>
 
-@interface MKFileWriter : MKInstrument
+@interface MKFileWriter : MKInstrument <NSCoding, NSCopying>
 {
     MKTimeUnit timeUnit;
     NSString *filename;        /* Or nil. */
@@ -256,9 +256,6 @@ returned by <b>initializeFile</b> and <b>finishFile</b> are ignored.
   @return Returns an id.
 */
 - setTimeShift: (double) timeShift;
-
-- (void) encodeWithCoder: (NSCoder *) aCoder;
-- (id) initWithCoder: (NSCoder *) aDecoder;
 
 @end
 

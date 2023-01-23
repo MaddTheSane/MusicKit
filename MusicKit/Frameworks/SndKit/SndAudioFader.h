@@ -223,7 +223,7 @@ movements, then insert it into the SndAudioProcessorChain later.
     Returns the position between stereo channels as a floating-point number between -1.0 (left) and 1.0 (right).
     @return float (usually -1.0 to +1.0).
 */
-- (float) getBalance;
+- (float) balance;
 
 /*!
     @brief Sets the instantaneous amplitude value, optionally clearing future scheduled events.
@@ -241,7 +241,7 @@ movements, then insert it into the SndAudioProcessorChain later.
     @brief Returns the amplitude value of all channels as of the start of the currently running, or next buffer.
     @return float (usually 0.0 to +1.0)
 */
-- (float) getAmp;
+- (float) amp;
 
 /*
  * "future" getting and setting; transparently reads and writes
@@ -337,14 +337,14 @@ movements, then insert it into the SndAudioProcessorChain later.
   @param index enumerated index for parameters.
   @return Returns a floating point value.
  */
-- (float) paramValue: (const int) index;
+- (float) paramValue: (const NSInteger) index;
 
 /*!
   @brief Retrieve the name of the indexed parameter.
   @param index enumerated index for parameters.
   @return Returns an NSString instance.
  */
-- (NSString *) paramName: (const int) index;
+- (NSString *) paramName: (const NSInteger) index;
 
 /*!
   @brief Assigns the indexed parameter a value.
@@ -353,7 +353,7 @@ movements, then insert it into the SndAudioProcessorChain later.
   @param index enumerated index for parameters.
   @param v The floating point value to assign.
   */
-- (void) setParam: (const int) index toValue: (const float) v;
+- (void) setParam: (const NSInteger) index toValue: (const float) v;
 
 /*!
   @brief Processes the input buffer according to the amplitude and balance settings. 
@@ -367,6 +367,14 @@ movements, then insert it into the SndAudioProcessorChain later.
 */
 - (BOOL) processReplacingInputBuffer: (SndAudioBuffer *) inB
                         outputBuffer: (SndAudioBuffer *) outB;
+
+@end
+
+@interface SndAudioFader (Deprecated)
+
+- (float) getAmp NS_DEPRECATED_WITH_REPLACEMENT_MAC("-amp", 10.0, 10.8);
+
+- (float) getBalance NS_DEPRECATED_WITH_REPLACEMENT_MAC("-balance", 10.0, 10.8);
 
 @end
 

@@ -996,18 +996,14 @@ static void midi_data_reply(void *receivingMidiPtr, short unit, MKMDRawEvent *ev
 
 /* Input configuration */
 
-- setUseInputTimeStamps: (BOOL) yesOrNo
+- (void) setUseInputTimeStamps: (BOOL) yesOrNo
 {
     if (deviceStatus != MKDeviceStatusClosed)
-      return nil;
+      return;
     useInputTimeStamps = yesOrNo;
-    return self;
 }
 
-- (BOOL) useInputTimeStamps
-{
-    return useInputTimeStamps;
-}
+@synthesize useInputTimeStamps;
 
  
 static unsigned ignoreBit(unsigned param)
@@ -1029,20 +1025,18 @@ static unsigned ignoreBit(unsigned param)
     return 0;
 }
 
-- ignoreSys: (MKMidiParVal) param
+- (void) ignoreSys: (MKMidiParVal) param
 {
     systemIgnoreBits |= ignoreBit(param);
     if (deviceStatus != MKDeviceStatusClosed)
 	setMidiSysIgnore(self, systemIgnoreBits);
-    return self;
-} 
+}
 
-- acceptSys: (MKMidiParVal) param 
+- (void) acceptSys: (MKMidiParVal) param
 {
     systemIgnoreBits &= ~(ignoreBit(param));
     if (deviceStatus != MKDeviceStatusClosed)
 	setMidiSysIgnore(self, systemIgnoreBits);
-    return self;
 }
 
 /* MKPerformer-like methods. */
@@ -1052,11 +1046,7 @@ static unsigned ignoreBit(unsigned param)
     return conductor ? conductor : (MKConductor *) [_MKClassConductor() clockConductor];
 }
 
-- setConductor: (MKConductor *) aConductor
-{
-    conductor = aConductor;
-    return self;
-}
+@synthesize conductor;
 
 /* Creation */
 
@@ -1218,10 +1208,7 @@ static BOOL isSoftDevice(NSString *deviceName, int *unitNum)
     return [[self class] getAllAvailableMidiDevices] ? [[bidirectionalDriverNames copy] autorelease] : nil;
 }
 
-- (NSString *) driverName 
-{
-    return [[midiDevName copy] autorelease];
-}
+@synthesize driverName=midiDevName;
 
 - (NSString *) description
 {
@@ -1351,14 +1338,8 @@ static BOOL isSoftDevice(NSString *deviceName, int *unitNum)
     return [self midiOnDevice: DEFAULT_SOFT_NAME];
 }
 
-- copyWithZone: (NSZone *) zone
+- (id) copyWithZone: (NSZone *) zone
   /* Overridden to return self. */
-{
-    return self;
-}
-
-/* Overridden to return self. */
-- copy
 {
     return self;
 }
@@ -1394,13 +1375,11 @@ static BOOL isSoftDevice(NSString *deviceName, int *unitNum)
     noteSenders = nil;
     [super dealloc];
 }
-/* Control of device */
+
+#pragma mark Control of device
 
 /* Returns MKDeviceStatus of receiver. */
-- (MKDeviceStatus) deviceStatus
-{
-    return deviceStatus;
-}
+@synthesize deviceStatus;
 
 // After opening the MIDI device, assigns the MIDI parser system ignores, and output structure.
 - openMidi
@@ -1601,10 +1580,9 @@ static const int _MKAllNotesOffPause = 500; /* mSec between MIDI channel blasts
     return localDeltaT;
 }
 
-- setLocalDeltaT: (double) value
+- (void) setLocalDeltaT: (double) value
 {
     localDeltaT = value;
-    return self;
 }
 
 - run
@@ -1650,7 +1628,7 @@ static const int _MKAllNotesOffPause = 500; /* mSec between MIDI channel blasts
     return self;
 }
 
-- abort
+- (void) abort
 {
     switch (deviceStatus) {
 	case MKDeviceStatusClosed:
@@ -1672,7 +1650,6 @@ static const int _MKAllNotesOffPause = 500; /* mSec between MIDI channel blasts
 	    [self closeMidiDevice];
 	    deviceStatus = MKDeviceStatusClosed;
     }
-    return self;
 }
 
 /* Need to ask for a message when queue is empty and wait for that message. */

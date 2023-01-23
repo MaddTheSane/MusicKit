@@ -850,7 +850,7 @@ extern void MKSetPreemptDuration(double seconds);
   @param  yesOrNo is a BOOL.
   @return Returns an id.
 */
-- setSynchToConductor: (BOOL) yesOrNo;
+- (void)setSynchToConductor: (BOOL) yesOrNo;
 
 /*!
   @brief &lt;&lt;NeXT hardware only.&gt;&gt; Sets the size of the sound
@@ -865,7 +865,7 @@ extern void MKSetPreemptDuration(double seconds);
   @param  yesOrNo is a BOOL.
   @return Returns an id.
 */
-- setFastResponse: (char) yesOrNo;
+- setFastResponse: (BOOL) yesOrNo;
 
 /*!
   @param  yesOrNo is a BOOL.
@@ -885,7 +885,7 @@ extern void MKSetPreemptDuration(double seconds);
   Otherwise returns NO.
   @return Returns a BOOL.
 */
-- (char) fastResponse;
+- (BOOL) fastResponse;
 
 /*!
   @brief Sets the offset, in seconds, that's added to the timestamps of
@@ -896,7 +896,7 @@ extern void MKSetPreemptDuration(double seconds);
   @param  val is a double.
   @return Returns the receiver.
 */
-- setLocalDeltaT: (double) val;
+- (void) setLocalDeltaT: (double) val;
 
 /*!
   @brief Returns the value set through <b>setLocalDeltaT:</b>.
@@ -910,7 +910,7 @@ extern void MKSetPreemptDuration(double seconds);
   @param  val is a double.
   @return Returns an id.
 */
-+ setLocalDeltaT: (double) val;
++ (void) setLocalDeltaT: (double) val;
 
 /*!
   @param  yesOrNo is a BOOL.
@@ -973,7 +973,7 @@ extern void MKSetPreemptDuration(double seconds);
   @param  fileName is an NSString instance.
   @return Returns an id.
 */
-- setOutputSoundfile: (NSString *) fileName;
+- (void) setOutputSoundfile: (NSString *) fileName;
 
 /*!
   @brief Returns a pointer to the name of the receiver's output soundfile, or nil if none.
@@ -981,8 +981,7 @@ extern void MKSetPreemptDuration(double seconds);
 */
 - (NSString *) outputSoundfile;
 
--(void)setOutputSoundDelegate:(id<MKOrchestraDelegate>)aDelegate;
--(id<MKOrchestraDelegate>)outputSoundDelegate;
+@property (nonatomic, copy) NSString *outputSoundfile;
 
 @property (nonatomic, assign) id<MKOrchestraDelegate> outputSoundDelegate;
 
@@ -998,13 +997,15 @@ extern void MKSetPreemptDuration(double seconds);
   format soundfiles is currently (1995) implemented only for NeXT
   hardware.
 */
-- setOutputCommandsFile: (NSString *) fileName;
+- (void)setOutputCommandsFile: (NSString *) fileName;
 
 /*!
   @return Returns a NSString.
   @brief Returns the output soundfile or <b>nil</b> if none.
 */
 - (NSString *) outputCommandsFile;
+
+@property (nonatomic, copy) NSString *outputCommandsFile;
 
 /*!
   @param  classObj is an id.
@@ -1046,7 +1047,7 @@ extern void MKSetPreemptDuration(double seconds);
   @param  aSynthPatchClass is an id.
   @return Returns an id.
 */
-+ allocSynthPatch: (id) aSynthPatchClass;  // (Class) aSynthPatchClass 
++ allocSynthPatch: (Class) aSynthPatchClass;  // (Class) aSynthPatchClass 
 
 /*!
   @brief Allocates a MKSynthPatch with a MKPatchTemplate of <i>p</i> on the first
@@ -1057,7 +1058,7 @@ extern void MKSetPreemptDuration(double seconds);
   @param  p is an id.
   @return Returns an id.
 */
-+ allocSynthPatch: (id) aSynthPatchClass patchTemplate: (id) p;
++ allocSynthPatch: (Class) aSynthPatchClass patchTemplate: (id) p;
 
 /*!
   @brief Deallocates the argument, which must be a previously allocated
@@ -1202,7 +1203,7 @@ extern void MKSetPreemptDuration(double seconds);
   @param  aKeyObj is an id.
   @return Returns an id.
 */
-- sharedObjectFor: (id) aKeyObj;
+- (id)sharedObjectFor: (id) aKeyObj;
 
 /*!
   @brief Returns, from the receiver's shared object table, the MKSynthData,
@@ -1302,7 +1303,7 @@ extern void MKSetPreemptDuration(double seconds);
   You should
   never deallocate this object.
 */
-- sineROM; 
+- (MKSynthData*)sineROM; 
 
 /*!
   @return Returns an id.
@@ -1311,7 +1312,7 @@ extern void MKSetPreemptDuration(double seconds);
   You should
   never deallocate this object.
 */
-- muLawROM; 
+- (MKSynthData*)muLawROM;
 
 /*!
   @param  segment is a MKOrchMemSegment.
@@ -1323,7 +1324,7 @@ extern void MKSetPreemptDuration(double seconds);
   The patchpoint shouldn't be deallocated. 
   <i>segment</i> can be MK_xPatch or MK_yPatch.
 */
-- segmentZero: (MKOrchMemSegment) segment; 
+- (MKSynthData*)segmentZero: (MKOrchMemSegment) segment;
 
 /*!
   @param  segment is a MKOrchMemSegment.
@@ -1336,7 +1337,7 @@ extern void MKSetPreemptDuration(double seconds);
   patchpoint shouldn't be deallocated.  <i>segment</i> can be
   MK_xPatch or MK_yPatch.
 */
-- segmentSink: (MKOrchMemSegment) segment; 
+- (MKSynthData*)segmentSink: (MKOrchMemSegment) segment;
 
 /*!
   @param  segment is a MKOrchMemSegment.
@@ -1349,7 +1350,7 @@ extern void MKSetPreemptDuration(double seconds);
   of idle MKUnitGenerators.  The patchpoint shouldn't be deallocated. 
   <i>segment</i> can be MK_xPatch or MK_yPatch.
 */
-- segmentSinkModulus: (MKOrchMemSegment) segment; 
+- (MKSynthData*)segmentSinkModulus: (MKOrchMemSegment) segment;
 
 /*!
   @return Returns an id.
@@ -1409,7 +1410,7 @@ extern void MKSetPreemptDuration(double seconds);
 */
 - abort;
 
-- useDSP: (BOOL) useIt; 
+- (void) useDSP: (BOOL) useIt; 
 - (BOOL) isDSPUsed; 
 
 /*!
@@ -1421,7 +1422,7 @@ extern void MKSetPreemptDuration(double seconds);
   The arguments to the <b>msg:</b> keyword are like those to <b>printf()</b>.  If the
   <i>typeOfInfo</i> trace is set, prints to stderr.  
 */
-- trace: (int) typeOfInfo msg: (NSString *) fmt,...; 
+- (void)trace: (int) typeOfInfo msg: (NSString *) fmt,... NS_FORMAT_FUNCTION(2,3); 
 
 /*!
   @brief Returns a pointer to the name of the specified MKOrchMemSegment.

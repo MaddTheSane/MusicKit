@@ -662,7 +662,7 @@ enum {
 //          [controllerProxy setProtocolForProxy:@protocol(SndDelegateMessagePassing)];
 		}
 		/* cast to unsigned long to prevent compiler warnings */
-		[controllerProxy _sendDelegateInvocation:(unsigned long)delegateMessage];
+		[controllerProxy _sendDelegateInvocation:delegateMessage];
 	    }
 	    continue;
 	}

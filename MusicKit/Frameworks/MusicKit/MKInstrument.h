@@ -90,7 +90,7 @@ realize MKNotes on an external MIDI synthesizer.
 #import <MusicKit/MKNote.h>
 #import <MusicKit/MKNoteReceiver.h>
 
-@interface MKInstrument: NSObject <NSCoding>
+@interface MKInstrument: NSObject <NSCoding, NSCopying>
 {
     /*! The object's array of MKNoteReceivers. */
     NSMutableArray *noteReceivers;
@@ -159,7 +159,7 @@ realize MKNotes on an external MIDI synthesizer.
   @see - <b>addNoteReceiver</b>, -
   <b>noteReceiver</b>,<b></b> - <b>isNoteReceiverPresent</b>
 */
-- (NSArray *) noteReceivers;
+- (NSArray<MKNoteReceiver*> *) noteReceivers;
 
 /*!
   @param  aNoteReceiver is an id.
@@ -311,18 +311,6 @@ realize MKNotes on an external MIDI synthesizer.
   @see - <b>addNoteReceiver</b>, - <b>noteReceivers</b>, - <b>isNoteReceiverPresent</b>
 */
 - (MKNoteReceiver *) noteReceiver; 
-
- /* 
-  * You never send this message directly.  Archives noteReceiver Array.
-  */
-- (void) encodeWithCoder: (NSCoder *) aCoder;
-
- /* 
-  * You never send this message directly.  
-  * Note that -init is not sent to newly unarchived objects.
-  * See write:. 
-  */
-- (id) initWithCoder: (NSCoder *) aDecoder;
 
 /*!
   @brief Immediately stops playing any sounding notes.

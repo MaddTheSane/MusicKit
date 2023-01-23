@@ -37,8 +37,8 @@
 
 - init
 {
+  self = [super initWithParamCount: dlyNumParams name: @"Delay"];
   if (processingLock == nil) {
-    self = [super initWithParamCount: dlyNumParams name: @"Delay"];
     processingLock = [[NSLock alloc] init];
   }
   [self setLength: 11025 andFeedback: 0.25];
@@ -49,7 +49,7 @@
 // freemem
 ////////////////////////////////////////////////////////////////////////////////
 
-- freemem
+- (void)freemem
 {
   if (chanL != NULL)
     free(chanL);
@@ -58,7 +58,6 @@
     free(chanR);  
   chanR  = NULL;
   length = 0;
-  return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -74,7 +73,7 @@
 // initWithLength
 ////////////////////////////////////////////////////////////////////////////////
 
-- setLength: (const long) nSams andFeedback: (const float) fFB
+- (void)setLength: (const long) nSams andFeedback: (const float) fFB
 {
     [processingLock lock];
     
@@ -88,8 +87,6 @@
     // NSLog(@"Delay init with length: %li and feedback: %f\n", length, feedback);
     
     [processingLock unlock];
-    
-    return self;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

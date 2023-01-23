@@ -96,7 +96,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 - (void) insertAudioProcessor: (SndAudioProcessor *) proc
-		      atIndex: (int) processorIndex
+		      atIndex: (NSInteger) processorIndex
 {
     [audioProcessorArray insertObject: proc atIndex: processorIndex];
     [proc setAudioProcessorChain: self];

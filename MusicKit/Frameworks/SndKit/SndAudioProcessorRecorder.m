@@ -82,27 +82,21 @@
 
 - (NSString *) description
 {
-    return [NSString stringWithFormat: @"%@ %srecording, %ld frames recorded\n",
-	[super description], isRecording ? "" : "not ", framesRecorded];
+    return [NSString stringWithFormat: @"%@ %@recording, %ld frames recorded\n",
+	[super description], isRecording ? @"" : @"not ", framesRecorded];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // isRecording
 ////////////////////////////////////////////////////////////////////////////////
 
-- (BOOL) isRecording
-{
-    return isRecording;
-}
+@synthesize recording=isRecording;
 
 ////////////////////////////////////////////////////////////////////////////////
 // framesRecorded
 ////////////////////////////////////////////////////////////////////////////////
 
-- (long) framesRecorded
-{
-    return framesRecorded;
-}
+@synthesize framesRecorded;
 
 ////////////////////////////////////////////////////////////////////////////////
 // prepareToRecordWithQueueDuration:ofFormat:

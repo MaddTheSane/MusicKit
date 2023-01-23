@@ -125,7 +125,7 @@ Creation of a MKFilePerformer's MKNoteSender(s) is a subclass responsibility.
 
 #import <MusicKit/MKPerformer.h>
 
-@interface MKFilePerformer : MKPerformer
+@interface MKFilePerformer : MKPerformer <NSCopying, NSCoding>
 {
     /*! File name or nil if the file pointer is specifed directly. */
     NSString *filename;
@@ -215,7 +215,7 @@ Creation of a MKFilePerformer's MKNoteSender(s) is a subclass responsibility.
   A subclass may override this method to specify its own file extensions.
   @return Returns an NSArray.
 */
-+ (NSArray *) fileExtensions;
++ (NSArray<NSString*> *) fileExtensions;
 
 /*!
   @brief Gets the next MKNote from the object's file by invoking

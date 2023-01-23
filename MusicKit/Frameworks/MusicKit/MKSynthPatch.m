@@ -793,9 +793,9 @@ id _MKSynthPatchNoteDur(MKSynthPatch *synthP,id aNoteDur,BOOL noTag)
      Private method sent by MKOrchestra to create a new instance. The
        new instance is sent the noteEndSelf message. 
 //////////////////////////////////////////////////////////////////////////////*/
-+ _newWithTemplate: (id) aTemplate inOrch: (id) anOrch index: (int) whichDSP
++ _newWithTemplate: (MKPatchTemplate*) aTemplate inOrch: (MKOrchestra*) anOrch index: (int) whichDSP
 {
-    MKSynthPatch *newObj  = [[self superclass] allocWithZone: NSDefaultMallocZone()];
+    MKSynthPatch *newObj  = [[[self superclass] allocWithZone: NSDefaultMallocZone()] init];
     newObj->synthElements = [[NSMutableArray alloc] initWithCapacity:[aTemplate synthElementCount]];
     newObj->status        = MK_idle;
     newObj->orchestra     = anOrch;
@@ -815,7 +815,7 @@ id _MKSynthPatchNoteDur(MKSynthPatch *synthP,id aNoteDur,BOOL noTag)
 - _free
 {
     id el;
-    unsigned int n;
+    NSUInteger n;
     unsigned int i;
     
     cancelMsgs(self);
@@ -833,6 +833,7 @@ id _MKSynthPatchNoteDur(MKSynthPatch *synthP,id aNoteDur,BOOL noTag)
                      NSStringFromClass([self class]), self);
 //    [synthElements makeObjectsPerformSelector:@selector(retain)]; /*sb: this defers the deallocation of the objects from the following statement to a later time. This may be a leak. */
     [synthElements release];
+    synthElements = nil;
 //    [super release]; /*sb: removed, following advice from NSObject class docs. Ok to do super dealloc though, in dealloc methods */
     return nil;
 }

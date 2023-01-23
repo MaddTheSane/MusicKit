@@ -31,9 +31,9 @@ Modification history now in CVS at musickit.org
 
 #define VERSION2 2
 
-static id theSubclass = nil;
+static Class theSubclass = nil;
 
-BOOL MKSetPartClass(id aClass)
+BOOL MKSetPartClass(Class aClass)
 {
   if (!_MKInheritsFrom(aClass, [MKPart class]))
     return NO;
@@ -41,7 +41,7 @@ BOOL MKSetPartClass(id aClass)
   return YES;
 }
 
-id MKGetPartClass(void)
+Class MKGetPartClass(void)
 {
   if (!theSubclass)
     theSubclass = [MKPart class];

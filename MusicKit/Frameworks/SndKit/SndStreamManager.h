@@ -28,7 +28,7 @@
 /*!
   @protocol SndDelegateMessagePassing
  */
-@protocol SndDelegateMessagePassing
+@protocol SndDelegateMessagePassing <NSObject>
 /*!
   @param mesg
  */
@@ -130,7 +130,7 @@
   @param inputDeviceName Name of the device to stream audio from.
   @param outputDeviceName Name of the device to stream audio to.
  */
-- initOnDeviceForInput: (NSString *) inputDeviceName deviceForOutput: (NSString *) outputDeviceName;
+- (instancetype) initOnDeviceForInput: (NSString *) inputDeviceName deviceForOutput: (NSString *) outputDeviceName;
 
 /*!
   @brief Returns the index into the NSArray returned by +driverNamesForOutput: for the current driver.

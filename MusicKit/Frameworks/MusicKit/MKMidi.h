@@ -170,8 +170,8 @@ See <b>Administration/MidiHardwareInfo.rtf</b> for using MIDI on NeXT hardware.
 
 @interface MKMidi: NSObject
 {
-    NSMutableArray *noteSenders;         /*! The object's collection of MKNoteSenders. */
-    NSMutableArray *noteReceivers;       /*! The object's collection of MKNoteReceivers. */
+    NSMutableArray<MKNoteSender*> *noteSenders;         /*! The object's collection of MKNoteSenders. */
+    NSMutableArray<MKNoteReceiver*> *noteReceivers;     /*! The object's collection of MKNoteReceivers. */
     MKDeviceStatus deviceStatus;         /*! See MKDeviceStatus.h */
     NSString *midiDevName;               /*! Midi device port name. */
     BOOL useInputTimeStamps;             /*! YES if MKConductor's time updated from driver's time stamps. */
@@ -195,9 +195,9 @@ See <b>Administration/MidiHardwareInfo.rtf</b> for using MIDI on NeXT hardware.
     BOOL mergeInput;
     NSString *hostname;          // for MIDI communicated across hosts.
     /*! The index into the input drivers list */
-    int inputUnit;
+    NSInteger inputUnit;
     /*! The index into the output drivers list */
-    int outputUnit;
+    NSInteger outputUnit;
     int queueSize;
     /*! Holds a weak reference to the MKConductor controlled by and controlling MIDI I/O. */
     MKConductor *conductor;      // Used by conductor and setConductor: methods
@@ -209,7 +209,7 @@ See <b>Administration/MidiHardwareInfo.rtf</b> for using MIDI on NeXT hardware.
     MKMidi *mtcMidiObj;
     /*! Controls display of debugging information. */
     BOOL displayReceivedMIDI;
-    double alarmTime;
+    NSTimeInterval alarmTime;
     int intAlarmTime;
     BOOL alarmTimeValid;
     BOOL alarmPending;
@@ -231,7 +231,9 @@ See <b>Administration/MidiHardwareInfo.rtf</b> for using MIDI on NeXT hardware.
   @param  aConductor is an MKConductor.
   @return Returns an id.
 */
-- setConductor: (MKConductor *) aConductor;
+- (void) setConductor: (MKConductor *) aConductor;
+
+@property (nonatomic, assign) MKConductor *conductor;
 
 /*!
   @brief If a MKMidi object for the device <i>devName</i> on host
@@ -249,7 +251,7 @@ See <b>Administration/MidiHardwareInfo.rtf</b> for using MIDI on NeXT hardware.
   @param  hostName is a NSString instance.
   @return Returns an id.
 */
-+ midiOnDevice: (NSString *) devName host: (NSString *) hostName;
++ (instancetype)midiOnDevice: (NSString *) devName host: (NSString *) hostName;
 
 /*!
   @brief If a MKMidi object for the device <i>devName</i> doesn't already
@@ -267,7 +269,7 @@ See <b>Administration/MidiHardwareInfo.rtf</b> for using MIDI on NeXT hardware.
   @param  devName is a NSString instance.
   @return Returns an id.  
 */
-+ midiOnDevice: (NSString *) devName;
++ (instancetype)midiOnDevice: (NSString *) devName;
  /* Allocates and initializes a new object, if one doesn't exist already, for
     specified device. 
     For the NeXT hardware, "midi1" is serial port B and "midi0" is port A.
@@ -287,7 +289,7 @@ See <b>Administration/MidiHardwareInfo.rtf</b> for using MIDI on NeXT hardware.
   NeXT (black) hardware, the default MIDI port on other platforms.  
   @return Returns an id.
 */
-+ midi;
++ (instancetype)midi;
 
 /*!
   @brief Initialises an allocated instance for a named MIDI device on a named host.
@@ -295,7 +297,7 @@ See <b>Administration/MidiHardwareInfo.rtf</b> for using MIDI on NeXT hardware.
   @param hostName An NSString naming the host machine that is running the MIDI device. Currently unused.
   @return Returns an initialised instance.
  */
-- initOnDevice: (NSString *) devName hostName: (NSString *) hostName;
+- (instancetype)initOnDevice: (NSString *) devName hostName: (NSString *) hostName;
 
 /*!
   @brief Initialises an allocated instance for a named MIDI device on the local host.
@@ -320,6 +322,8 @@ See <b>Administration/MidiHardwareInfo.rtf</b> for using MIDI on NeXT hardware.
   @return Returns a MKDeviceStatus.
 */
 - (MKDeviceStatus) deviceStatus;
+
+@property (readonly) MKDeviceStatus deviceStatus;
 
 /*!
   @brief Opens the receiver, thus enabling two-way communication with the
@@ -383,10 +387,8 @@ See <b>Administration/MidiHardwareInfo.rtf</b> for using MIDI on NeXT hardware.
 /*!
   @brief Immediately closes the receiver without waiting for the output queue to empty,
   sets its status to MK_devClosed, and releases the device port.
-
-  @return Returns the receiver.
 */
-- abort;
+- (void) abort;
 
 /*!
   @brief Establishes whether MIDI messages are sent timed or untimed, as
@@ -462,7 +464,7 @@ See <b>Administration/MidiHardwareInfo.rtf</b> for using MIDI on NeXT hardware.
   MKNoteReceiver objects themselves) will not be released.
   @return Returns an NSArray instance.
 */
-- (NSArray *) noteReceivers;
+- (NSArray<MKNoteReceiver*> *) noteReceivers;
 
 /*!
   @brief Returns the default MKNoteSender
@@ -477,7 +479,7 @@ See <b>Administration/MidiHardwareInfo.rtf</b> for using MIDI on NeXT hardware.
   MKNoteSender objects themselves) will not be released.
   @return Returns an NSArray instance.
 */
-- (NSArray *) noteSenders;
+- (NSArray<MKNoteSender*> *) noteSenders;
   
 /* sb: added 30/6/98 to replace MidiIn function */
 - (void) handleMachMessage: (void *) machMessage;
@@ -492,7 +494,7 @@ See <b>Administration/MidiHardwareInfo.rtf</b> for using MIDI on NeXT hardware.
   @param  yesOrNo is a BOOL.
   @return Returns an id.
 */
-- setUseInputTimeStamps: (BOOL) yesOrNo;
+- (void) setUseInputTimeStamps: (BOOL) yesOrNo;
 
 /*!
   @brief Returns YES if the MKConductor's clock is synched to the MIDI
@@ -522,6 +524,8 @@ See <b>Administration/MidiHardwareInfo.rtf</b> for using MIDI on NeXT hardware.
 */
 - (BOOL) useInputTimeStamps;
 
+@property (nonatomic) BOOL useInputTimeStamps;
+
 /*!
   @brief Instructs the receiver to ignore messages that set the
   MK_sysRealTime parameter to <i>param</i>.
@@ -532,7 +536,7 @@ See <b>Administration/MidiHardwareInfo.rtf</b> for using MIDI on NeXT hardware.
   @param  param is a MKMidiParVal.
   @return Returns an id.
 */
-- ignoreSys: (MKMidiParVal) param;
+- (void) ignoreSys: (MKMidiParVal) param;
 
 /*!
   @brief Instructs the receiver to accept in-coming MIDI messages that set
@@ -555,7 +559,7 @@ See <b>Administration/MidiHardwareInfo.rtf</b> for using MIDI on NeXT hardware.
   @param  param is a MKMidiParVal.
   @return Returns the receiver.
 */
-- acceptSys: (MKMidiParVal) param;
+- (void) acceptSys: (MKMidiParVal) param;
 
 /*!
   @brief Returns the receiver's local delta time in seconds
@@ -574,7 +578,7 @@ See <b>Administration/MidiHardwareInfo.rtf</b> for using MIDI on NeXT hardware.
   @param  value is a double.
   @return Returns an the receiver (an id).
 */
-- setLocalDeltaT: (double) value;
+- (void) setLocalDeltaT: (double) value;
 
 /*!
   @brief If set to YES, the MKNotes fashioned from the incoming MIDI stream
@@ -667,7 +671,7 @@ See <b>Administration/MidiHardwareInfo.rtf</b> for using MIDI on NeXT hardware.
   input or output, use +<b>getDriverNamesForInput:</b>.
   @return Returns an NSArray instance.
 */
-+ (NSArray *) getDriverNames;
++ (NSArray<NSString*> *) getDriverNames;
 
 /*!
   @brief Returns an array of all available driver names for input.
@@ -675,7 +679,7 @@ See <b>Administration/MidiHardwareInfo.rtf</b> for using MIDI on NeXT hardware.
   This list may include drivers that are also available for output and those drivers which are for input only.
   @return Returns an NSArray instance.
  */
-+ (NSArray *) getDriverNamesForInput;
++ (NSArray<NSString*> *) getDriverNamesForInput;
 
 /*!
   @brief Returns an array of all available driver names for output.
@@ -683,13 +687,15 @@ See <b>Administration/MidiHardwareInfo.rtf</b> for using MIDI on NeXT hardware.
   This list may include drivers that are also available for input and those drivers which are for output only.
   @return Returns an NSArray instance.
  */
-+ (NSArray *) getDriverNamesForOutput;
++ (NSArray<NSString*> *) getDriverNamesForOutput;
 
 /*!
   @brief Returns the name of the MIDI driver associated with this instance of MKMidi.
   @return Returns an NSString instance.
 */
 - (NSString *) driverName;
+
+@property (readonly, copy) NSString *driverName;
 
 /*!
   @brief Returns description of which device, the unit and the host the MKMidi

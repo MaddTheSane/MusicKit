@@ -117,9 +117,9 @@ static void normalform(MKPartials *obj)
   obj->_freqArrayFreeable = obj->_ampArrayFreeable = YES;
 }
 
-static id theSubclass = nil;
+static Class theSubclass = nil;
 
-BOOL MKSetPartialsClass(id aClass)
+BOOL MKSetPartialsClass(Class aClass)
 {
   if (!_MKInheritsFrom(aClass,[MKPartials class]))
     return NO;
@@ -127,7 +127,7 @@ BOOL MKSetPartialsClass(id aClass)
   return YES;
 }
 
-id MKGetPartialsClass(void)
+Class MKGetPartialsClass(void)
 {
   if (!theSubclass)
     theSubclass = [MKPartials class];

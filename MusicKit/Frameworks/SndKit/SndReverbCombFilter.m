@@ -58,20 +58,12 @@
     damp2 = 1 - val;
 }
 
-- (float) getDamp
+- (float) damp
 {
     return damp1;
 }
 
-- (void) setFeedback: (float) val
-{
-    feedback = val;
-}
-
-- (float) getFeedback 
-{
-    return feedback;
-}
+@synthesize feedback;
 
 // This used to be inline for C++, for speed. 
 // For now we keep it dynamic, but we may need to statically call the method.

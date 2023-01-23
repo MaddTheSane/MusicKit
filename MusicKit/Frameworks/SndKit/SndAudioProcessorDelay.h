@@ -65,7 +65,7 @@ enum SndDelayParam {
   @param      fFB Percentage of feedback.
   @return     A freshly initialized, autoreleased delay processor.
 */
-+ delayWithLength: (const long) nSams feedback: (const float) fFB;
++ (instancetype) delayWithLength: (const long) nSams feedback: (const float) fFB;
 
 /*!
   @brief 
@@ -73,13 +73,13 @@ enum SndDelayParam {
   @param fFB
   @return 
 */
-- setLength: (const long) nSams andFeedback: (const float) fFB;
+- (void) setLength: (const long) nSams andFeedback: (const float) fFB;
 
 /*!
   @brief 
   @return self
 */
-- freemem;
+- (void) freemem;
 
 @end
 

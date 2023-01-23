@@ -101,7 +101,7 @@
     int allPassIndex;
     int channelIndex;
 
-    if ([self getMode] >= freezemode)
+    if ([self mode] >= freezemode)
 	return;
     
     for (combIndex = 0; combIndex < NUMCOMBS; combIndex++) {
@@ -184,12 +184,12 @@
     float r;
 
     switch (index) {
-    case rvrbRoomSize: r = [self getRoomSize]; break;
-    case rvrbDamp:     r = [self getDamp];     break;
-    case rvrbWet:      r = [self getWet];      break;
-    case rvrbDry:      r = [self getDry];      break;
-    case rvrbWidth:    r = [self getWidth];    break;
-    case rvrbMode:     r = [self getMode];     break; 
+    case rvrbRoomSize: r = [self roomSize]; break;
+    case rvrbDamp:     r = [self damp];     break;
+    case rvrbWet:      r = [self wet];      break;
+    case rvrbDry:      r = [self dry];      break;
+    case rvrbWidth:    r = [self width];    break;
+    case rvrbMode:     r = [self mode];     break; 
     default:           r = 0.0f;
     }
     return r;
@@ -283,7 +283,7 @@
     [self update];
 }
 
-- (float) getRoomSize
+- (float) roomSize
 {
     return (roomsize - offsetroom) / scaleroom;
 }
@@ -294,7 +294,7 @@
     [self update];
 }
 
-- (float) getDamp
+- (float) damp
 {
     return damp / scaledamp;
 }
@@ -305,7 +305,7 @@
     [self update];
 }
 
-- (float) getWet
+- (float) wet
 {
     return wet / scalewet;
 }
@@ -315,7 +315,7 @@
     dry = value * scaledry;
 }
 
-- (float) getDry
+- (float) dry
 {
     return dry / scaledry;
 }
@@ -326,7 +326,7 @@
     [self update];
 }
 
-- (float) getWidth
+- (float) width
 {
     return width;
 }
@@ -337,7 +337,7 @@
     [self update];
 }
 
-- (float) getMode
+- (float) mode
 {
     if (mode >= freezemode)
 	return 1;
@@ -346,5 +346,39 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+
+@end
+
+@implementation SndAudioProcessorReverb (Deprecated)
+
+- (float) getRoomSize
+{
+    return self.roomSize;
+}
+
+- (float) getDamp
+{
+    return self.damp;
+}
+
+- (float) getWet
+{
+    return self.wet;
+}
+
+- (float) getDry
+{
+    return self.dry;
+}
+
+- (float) getWidth
+{
+    return self.width;
+}
+
+- (float) getMode
+{
+    return self.mode;
+}
 
 @end

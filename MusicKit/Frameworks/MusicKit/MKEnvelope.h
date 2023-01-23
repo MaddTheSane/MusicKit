@@ -146,7 +146,7 @@ typedef enum _MKEnvStatus {
     MK_lastPoint
 } MKEnvStatus;
 
-@interface MKEnvelope : NSObject
+@interface MKEnvelope : NSObject <NSCoding>
 {
     /*! If no Smoothing-array, this is time constant. */
     double defaultSmoothing;
@@ -222,21 +222,21 @@ typedef enum _MKEnvStatus {
   @return Returns a double *.
   @brief Returns a pointer to the object's <i>y</i> array, or NULL if none.
 */
-- (double *) yArray;
+- (double *) yArray NS_RETURNS_INNER_POINTER;
 
 /*!
   @return Returns a double *.
   @brief Returns a pointer to the object's <i>x</i> array, or NULL if
   none.
 */
-- (double *) xArray;
+- (double *) xArray NS_RETURNS_INNER_POINTER;
 
 /*!
   @return Returns a double *.
   @brief Returns a pointer to the object's smoothing array, or NULL if
   none.
 */
-- (double *) smoothingArray;
+- (double *) smoothingArray NS_RETURNS_INNER_POINTER;
 
 /*!
   @param  n is an int.
@@ -358,7 +358,7 @@ typedef enum _MKEnvStatus {
   @param  stickPointIndex is an int.
   @return Returns an id.
 */
-- setStickPoint: (int) stickPointIndex; 
+- setStickPoint: (int) stickPointIndex;
 
 /*!
   @brief Fills the object with data by copying the values from <i>xPtr</i>,
@@ -378,7 +378,7 @@ typedef enum _MKEnvStatus {
  @param  smoothing is a double.
  @return Returns an id.
  */
--    setPointCount: (int) n
+- (void) setPointCount: (int) n
             xArray: (double *) xPtr
   orSamplingPeriod: (double) period
             yArray: (double *) yPtr
@@ -398,7 +398,7 @@ orDefaultSmoothing: (double) smoothing;
   to insure that the new value of <i>n</i> is the same as the <i>pointCount</i> of the old array. 
   Returns the object.
 */
-- setPointCount: (int) n
+- (void) setPointCount: (int) n
          xArray: (double *) xPtr
          yArray: (double *) yPtr;
 

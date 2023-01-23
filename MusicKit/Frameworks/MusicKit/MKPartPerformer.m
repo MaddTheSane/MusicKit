@@ -54,10 +54,9 @@ void _MKSetScorePerformerOfPartPerformer(MKPartPerformer *aPP, id aSP)
 
 static BOOL fastActivation = NO;
 
-+ setFastActivation: (BOOL) yesOrNo
++ (void) setFastActivation: (BOOL) yesOrNo
 {
     fastActivation = YES;
-    return self;
 }
 
 + (BOOL) fastActivation

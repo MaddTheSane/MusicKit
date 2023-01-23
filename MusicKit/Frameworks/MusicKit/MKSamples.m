@@ -48,9 +48,9 @@ Modification history before CVS commital:
 
 @implementation MKSamples
 
-static id theSubclass = nil;
+static Class theSubclass = nil;
 
-BOOL MKSetSamplesClass(id aClass)
+BOOL MKSetSamplesClass(Class aClass)
 {
     if (!_MKInheritsFrom(aClass,[MKSamples class]))
 	return NO;
@@ -58,7 +58,7 @@ BOOL MKSetSamplesClass(id aClass)
     return YES;
 }
 
-id MKGetSamplesClass(void)
+Class MKGetSamplesClass(void)
 {
     if (!theSubclass)
 	theSubclass = [MKSamples class];

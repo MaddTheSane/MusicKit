@@ -43,6 +43,6 @@
 
 - (void) setFeedback: (float) val;
 
-- (float) getFeedback;
+- (float) feedback;
   
 @end

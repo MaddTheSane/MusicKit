@@ -205,14 +205,14 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
   @brief Returns a newly allocated, initialized and autoreleased MKPart.
   @return Returns an MKPart instance.
 */
-+ (MKPart *) part;
++ (instancetype) part;
 
 /*!
   @brief Returns a newly allocated, initialized and autoreleased MKPart with the given name.
   @param partName is an NSString instance.
   @return Returns a newly allocated, initialized and autoreleased MKPart.
  */
-+ (MKPart *) partWithName: (NSString *) partName;
++ (instancetype) partWithName: (NSString *) partName;
 
 /*!
   @return Returns <b>self</b>.

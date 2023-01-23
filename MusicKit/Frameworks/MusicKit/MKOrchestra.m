@@ -427,15 +427,15 @@ static NSString * orchMemSegmentNames[(int) MK_numOrchMemSegments] =
 	return NULL;
     DSPSetCurrentDSP(index);
     s = DSPGetDriverParameter([parameterName UTF8String]);
-    return s ? [NSString stringWithUTF8String: s] : @"";
+    return s ? @(s) : @"";
 }
 
 - (NSString *) driverParameter: (NSString *) parameterName
 {
-    char *s;
+    const char *s;
     DSPSetCurrentDSP(orchIndex);
     s = DSPGetDriverParameter([parameterName UTF8String]);
-    return s ? [NSString stringWithUTF8String: s] : @"";
+    return s ? @(s) : @"";
 }
 
 + (NSArray *) getDriverNames
@@ -464,11 +464,13 @@ static NSString * orchMemSegmentNames[(int) MK_numOrchMemSegments] =
 /* Sent once at start-up time. */
 + (void) initialize
 {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
     _MKLinkUnreferencedClasses([MKUnitGenerator class], [MKSynthData class], [_OrchloopbeginUG class]);
     NSAssert(((DSP_SINE_SPACE == 2) && (DSP_MULAW_SPACE == 1)), @"Need to change SINTABLESPACE or MULAWTABLESPACE.");
     defaultOrchloopClass = [_OrchloopbeginUG class];
     nDSPs = (unsigned short) DSPGetDSPCount();
-    dspNumToOrch = [[NSMutableDictionary dictionaryWithCapacity: nDSPs] retain];
+    dspNumToOrch = [[NSMutableDictionary alloc] initWithCapacity: nDSPs];
     _MK_CALLOC(orchs,id,(int) nDSPs+1); /* + 1 for trailing nil */
     _MK_CALLOC(orchestraClasses,id,(int) nDSPs);
     {   
@@ -489,6 +491,7 @@ static NSString * orchMemSegmentNames[(int) MK_numOrchMemSegments] =
     }
     _MKCheckInit();
     initDataMemBlockCache();
+    });
 }    
 
 // Nowdays a "DSP" becomes an abstract concept of processing resource rather than an actual hardware device.
@@ -503,7 +506,7 @@ static NSString * orchMemSegmentNames[(int) MK_numOrchMemSegments] =
 	orchIndex = dspIndex;
 	deviceStatus = MKDeviceStatusClosed;
 	_simFP = NULL;
-	[dspNumToOrch setObject: self forKey: [NSNumber numberWithInt: orchIndex]];
+	[dspNumToOrch setObject: self forKey: @(orchIndex)];
 	// TODO: orchs = [dspNumToOrch values];
 	/* Now add it to the end of orchs */
 	for (i = 0; orchs[i] != nil; i++) /* Get to end */
@@ -563,7 +566,7 @@ static NSString * orchMemSegmentNames[(int) MK_numOrchMemSegments] =
 #endif
     // TODO: this means we can only create one instance of MKOrchestra on a DSP resource.
     // We may want to relax this constraint in the future.
-    orch = [dspNumToOrch objectForKey: [NSNumber numberWithInt: index]];
+    orch = [dspNumToOrch objectForKey: @(index)];
     if (orch != nil)
 	return orch;
     if (self == [MKOrchestra class]) { /* Avoid infinite recursion */
@@ -579,7 +582,7 @@ static NSString * orchMemSegmentNames[(int) MK_numOrchMemSegments] =
 {
     if (index >= nDSPs)
 	return nil;
-    return [dspNumToOrch objectForKey: [NSNumber numberWithInt: index]];
+    return [dspNumToOrch objectForKey: @(index)];
 }
 
 #define DEBUG_DELTA_T 0
@@ -879,14 +882,13 @@ MKOrchestra returns nil, else self. TODO: self should be replaced by the known s
 	[orchs[i] setHeadroom: newHeadroom];
 }
 
-+ setLocalDeltaT: (double) newLocalDeltaT
++ (void) setLocalDeltaT: (double) newLocalDeltaT
     /* Sets localDeltaT for all orchs. */
 {
     unsigned short i;
     localDeltaTDefault = newLocalDeltaT;
     FOREACHORCH(i)
 	[orchs[i] setLocalDeltaT: localDeltaTDefault];
-    return self;
 }
 
 
@@ -946,7 +948,7 @@ MKOrchestra returns nil, else self. TODO: self should be replaced by the known s
     return nil;
 }
 
-+ allocSynthPatch: aSynthPatchClass
++ allocSynthPatch: (Class) aSynthPatchClass
   /* Same as allocSynthPatch: patchTemplate: but uses default template. The default
     template is obtained by sending [aSynthPatchClass defaultPatchTemplate].*/
 {
@@ -954,7 +956,7 @@ MKOrchestra returns nil, else self. TODO: self should be replaced by the known s
 	[aSynthPatchClass defaultPatchTemplate]];
 }
 
-+ allocSynthPatch: aSynthPatchClass
++ allocSynthPatch: (Class) aSynthPatchClass
     patchTemplate: p
     /* Get a MKSynthPatch on the first DSP which has sufficient resources. */
 {
@@ -1293,7 +1295,7 @@ associated with it exists.
     return self;
 }
 
-- setFastResponse: (char) yesOrNo
+- setFastResponse: (BOOL) yesOrNo
     /* Set whether response is fast. 
     Only legal when receiver is closed. Returns self
     or nil if receiver is not closed. */ 
@@ -1304,7 +1306,7 @@ associated with it exists.
     return self;
 }
 
-- (char) fastResponse
+- (BOOL) fastResponse
 {
     return fastResponse;
 }
@@ -1319,7 +1321,7 @@ associated with it exists.
     return hostSoundOut || soundIn;
 }
 
-- setOutputSoundfile: (NSString *) file
+- (void) setOutputSoundfile: (NSString *) file
     /* Sets a file name to which output samples are to be written as a 
     soundfile (the string is copied). In the current release, it
     is not permissable to have an output soundfile and do sound-out at the same
@@ -1332,24 +1334,19 @@ associated with it exists.
      send setHostSoundOut: YES. You must do this yourself. */
 {
     if (deviceStatus != MKDeviceStatusClosed)
-	return nil;
+	return;
     if (outputSoundfile) {
         [outputSoundfile release];
         outputSoundfile = nil;
     }
     if (!file)
-	return self;
+	return;
     outputSoundfile = [file copy];
     hostSoundOut = NO;
     [self useDSP: YES];
-    return self;
 }
 
-- (NSString *) outputSoundfile
-    /* Returns the output soundfile or NULL if none. */
-{
-    return outputSoundfile;
-}
+@synthesize outputSoundfile;
 
 - (void)setOutputSoundDelegate: aDelegate
     /* Sets an object to receive delegate messages.  Same restrictions as
@@ -1367,7 +1364,7 @@ associated with it exists.
 
 @synthesize outputSoundDelegate;
 
-- setOutputCommandsFile: (NSString *) file
+- (void)setOutputCommandsFile: (NSString *) file
     /* Sets a file name to which DSP commands are to be written as a DSPCommands
     format soundfile.  A copy of the fileName is stored in the instance variable
     outputCommandsFile.
@@ -1375,20 +1372,15 @@ associated with it exists.
     */
 {
     if (deviceStatus != MKDeviceStatusClosed)
-        return nil;
+        return;
     if (!file)
-        return self;
+        return;
     [outputCommandsFile release];
     outputCommandsFile = [file copy];
     [self useDSP: YES];
-    return self;
 }
 
-- (NSString *) outputCommandsFile
-    /* Returns the output soundfile or NULL if none. */
-{
-    return outputCommandsFile;
-}
+@synthesize outputCommandsFile;
 
 /* READ DATA */
 - setInputSoundfile: (NSString *) file
@@ -2019,7 +2011,7 @@ do so generates an error.
     int i;
     
     [self abort];
-    [dspNumToOrch removeObjectForKey: [NSNumber numberWithInt: orchIndex]];
+    [dspNumToOrch removeObjectForKey: @(orchIndex)];
     /* Now fill in the gap in orchs[] */
     for (i=0; orchs[i] != self; i++)
 	;
@@ -2028,15 +2020,14 @@ do so generates an error.
     [super dealloc];
 }
 
-- useDSP: (BOOL) useIt
+- (void) useDSP: (BOOL) useIt
     /* Controls whether or not the output actually goes to the DSP. Has no effect
     if the MKOrchestra is not closed. The default is YES. 
     This method should not be used in release 0.9. */
 {
     if (deviceStatus != MKDeviceStatusClosed)
-	return nil;
+	return;
     useDSP = useIt;
-    return self;
 }
 
 -(BOOL) isDSPUsed
@@ -2058,26 +2049,28 @@ non-private, should check for valid orchIndex.  */
 static void _traceMsg(FILE *simFP, int typeOfInfo, NSString *fmt, va_list ap)
 /* See trace: below */
 {
+    NSString *msg = [[NSString alloc] initWithFormat:fmt arguments:ap];
     if (MKIsTraced(typeOfInfo)) {
-        NSLogv([fmt stringByAppendingString: @"\n"], ap);
+        NSLog(@"%@", msg);
     }
     if (simFP) {
-        vfprintf(simFP, [[NSString stringWithFormat: @"; %@\n", fmt] UTF8String], ap);
+        fprintf(simFP, "; %s\n", [msg UTF8String]);
     }
+    [msg release];
 }
 
 static void _traceNSStringMsg(FILE *simFP, int typeOfInfo, NSString *msg)
 /* See trace: below */
 {
     if (MKIsTraced(typeOfInfo)) {
-        NSLog(@"%@\n", msg);
+        NSLog(@"%@", msg);
     }
     if (simFP) {
         fprintf(simFP, "%s", [msg UTF8String]);
     }
 }
 
-- trace: (int) typeOfInfo msg: (NSString *) fmt, ...;
+- (void)trace: (int) typeOfInfo msg: (NSString *) fmt, ...;
     /* Arguments are like printf. Writes text, as a comment, to the
     simulator file, if any. Text may not contain new-lines. 
     If the typeOfInfo trace is set, prints info to stderr as well. */
@@ -2086,7 +2079,6 @@ static void _traceNSStringMsg(FILE *simFP, int typeOfInfo, NSString *msg)
     va_start(ap,fmt); 
     _traceMsg(_simFP, typeOfInfo, fmt, ap);
     va_end(ap);
-    return self;
 }
 
 void _MKOrchTrace(MKOrchestra *orch,int typeOfInfo, NSString *fmt, ...)
@@ -2247,12 +2239,11 @@ static void adjustOrchTE(MKOrchestra *self,BOOL yesOrNo,BOOL reset) {
     }
 }
 
--setSynchToConductor: (BOOL) yesOrNo
+-(void)setSynchToConductor: (BOOL) yesOrNo
 {
     synchToConductor = yesOrNo;
     if (deviceStatus == MKDeviceStatusRunning)
 	[self _adjustOrchTE: yesOrNo reset: YES];
-    return self;
 }
 
 -(double) localDeltaT
@@ -2260,10 +2251,9 @@ static void adjustOrchTE(MKOrchestra *self,BOOL yesOrNo,BOOL reset) {
     return localDeltaT;
 }
 
--setLocalDeltaT: (double) value
+-(void)setLocalDeltaT: (double) value
 {
     localDeltaT = value;
-    return self;
 }
 
 static BOOL compactResourceStack(MKOrchestra *self); /* Forward ref */

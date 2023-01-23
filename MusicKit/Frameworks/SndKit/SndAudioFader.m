@@ -124,7 +124,7 @@ static float lookupEnvForX(SndAudioFader *saf, id <SndEnveloping> anEnvelope, do
   staticBalance = balance;
 }
 
-- (float) getBalance
+- (float) balance
 {
   double nowTime;
   float yVal;
@@ -158,21 +158,21 @@ static float lookupEnvForX(SndAudioFader *saf, id <SndEnveloping> anEnvelope, do
   staticAmp = amp;
 }
 
-- (float) getAmp
+- (float) amp
 {
   double nowTime;
   float yVal;
   if (!ampEnv) {
     return staticAmp;
   }
-  nowTime = [(SndStreamManager *)[SndStreamManager defaultStreamManager] nowTime];
+  nowTime = [[SndStreamManager defaultStreamManager] nowTime];
   [ampEnvLock lock];
   yVal = lookupEnvForX(self, ampEnv, nowTime);
   [ampEnvLock unlock];
   return yVal;
 }
 
-BOOL middleOfMovement(SndAudioFader *saf, double xVal, id <SndEnveloping,NSObject> anEnvelope)
+static BOOL middleOfMovement(SndAudioFader *saf, double xVal, id <SndEnveloping,NSObject> anEnvelope)
 {
   int prevBreakpoint = saf->bpBeforeOrEqual(anEnvelope, bpBeforeOrEqualSel, xVal);
   if (prevBreakpoint == BP_NOT_FOUND) {
@@ -412,22 +412,22 @@ BOOL middleOfMovement(SndAudioFader *saf, double xVal, id <SndEnveloping,NSObjec
 	free(uee);
 }
 
-- (float) paramValue: (const int) paramIndex
+- (float) paramValue: (const NSInteger) paramIndex
 {
     float r = 0.0f;
     
     switch (paramIndex) {
     case faderAmp:
-	r = [self getAmp];
+	r = [self amp];
 	break;
     case faderBalance:
-	r = [self getBalance];
+	r = [self balance];
 	break;
     }
     return r;
 }
 
-- (NSString *) paramName: (const int) paramIndex
+- (NSString *) paramName: (const NSInteger) paramIndex
 {
     NSString *paramName = nil;
     
@@ -442,7 +442,7 @@ BOOL middleOfMovement(SndAudioFader *saf, double xVal, id <SndEnveloping,NSObjec
     return paramName;  
 }
 
-- (void) setParam: (const int) paramIndex toValue: (const float) v
+- (void) setParam: (const NSInteger) paramIndex toValue: (const float) v
 {
     switch (paramIndex) {
     case faderAmp:   
@@ -934,3 +934,16 @@ static inline int processBalance(int xPtr,
 
 @end
 
+@implementation SndAudioFader (Deprecated)
+
+- (float) getAmp
+{
+    return self.amp;
+}
+
+- (float) getBalance
+{
+    return self.balance;
+}
+
+@end

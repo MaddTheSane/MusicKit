@@ -72,7 +72,7 @@
   @param      processorIndex The location in the effects chain to insert the SndAudioProcessor.
 */
 - (void) insertAudioProcessor: (SndAudioProcessor *) newAudioProcessor
-		      atIndex: (int) processorIndex;
+		      atIndex: (NSInteger) processorIndex;
 
 /*!
   @brief   Removes an SndAudioProcesor from the effects chain

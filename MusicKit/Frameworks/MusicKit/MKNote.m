@@ -118,12 +118,12 @@ static BOOL parClassInited = NO;
 
 #define _ISPAR(_x) (_ISMKPAR(_x) || ISAPPPAR(_x))
 
-static id theSubclass = nil;
+static Class theSubclass = nil;
 
 static double getNoteEndTime(MKNote *aNote);
 
 
-BOOL MKSetNoteClass(id aClass)
+BOOL MKSetNoteClass(Class aClass)
 {
     if (!_MKInheritsFrom(aClass,[MKNote class]))
         return NO;
@@ -131,7 +131,7 @@ BOOL MKSetNoteClass(id aClass)
     return YES;
 }
 
-id MKGetNoteClass(void)
+Class MKGetNoteClass(void)
 {
     if (!theSubclass)
       theSubclass = [MKNote class];

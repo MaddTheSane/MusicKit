@@ -59,7 +59,7 @@ MKPartPerformer is activated at time 1, the first note will sound at time 3.
 #import <MusicKit/MKPerformer.h>
 #import <MusicKit/MKScorePerformer.h>
 
-@interface MKPartPerformer : MKPerformer
+@interface MKPartPerformer : MKPerformer <NSCopying, NSCoding>
 {
     MKNote *nextNote;            /*!< The next note to perform. Updated in -perform. */ 
     MKPart *part;                /*!< The MKPart associated with this object. */
@@ -90,7 +90,7 @@ MKPartPerformer is activated at time 1, the first note will sound at time 3.
   @param  yesOrNo is a BOOL.
   @return Returns an id.
 */
-+ setFastActivation: (BOOL) yesOrNo;
++ (void) setFastActivation: (BOOL) yesOrNo;
 
 /*!
   @brief Returns whether Fast Activation mode is enabled for the class.
@@ -186,7 +186,7 @@ MKPartPerformer is activated at time 1, the first note will sound at time 3.
   @param  aTimeTag is a double.
   @return Returns an id.
 */
-- setFirstTimeTag: (double) aTimeTag; 
+- (void) setFirstTimeTag: (double) aTimeTag;
 
 /*!
   @brief Sets the value of the receiver's <b>lasTimeTag</b> variable to
@@ -197,7 +197,7 @@ MKPartPerformer is activated at time 1, the first note will sound at time 3.
   @param  aTimeTag is a double.
   @return Returns an id.
 */
-- setLastTimeTag: (double) aTimeTag; 
+- (void) setLastTimeTag: (double) aTimeTag;
 
 /*!
   @brief Returns the value of the receiver's <b>firstTimeTag</b>instance
@@ -227,18 +227,6 @@ MKPartPerformer is activated at time 1, the first note will sound at time 3.
   @return Returns an id.
  */
 - copyWithZone: (NSZone *) zone; 
-
-/* 
-  You never send this message directly.  
-  Invokes superclass write: then archives firstTimeTag and lastTimeTag.
-  Optionally archives part using NXWriteObjectReference().
- */
-- (void) encodeWithCoder: (NSCoder *) aCoder;
-
-/* 
-  Note that -init is not sent to newly unarchived objects.
- */
-- (id) initWithCoder: (NSCoder *) aDecoder;
 
 @end
 

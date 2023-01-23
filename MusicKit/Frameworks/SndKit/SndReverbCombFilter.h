@@ -33,7 +33,7 @@
     NSUInteger bufferIndex;
 }
 
-- initWithLength: (NSUInteger) size;
+- (instancetype)initWithLength: (NSUInteger) size;
 
 - (float) process: (float) input;
 
@@ -46,11 +46,9 @@
 
 - (void) setDamp: (float) val;
 
-- (float) getDamp;
+- (float) damp;
 
-- (void) setFeedback: (float) val;
-
-- (float) getFeedback;
+@property float feedback;
 
 @end
 
