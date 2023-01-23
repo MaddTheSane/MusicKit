@@ -193,7 +193,7 @@
 
 /* Be sure to notify the delegate that our display changed
 */
-    if (delegate && [delegate respondsToSelector: @selector(displayChanged:)])
+    if ([delegate respondsToSelector: @selector(displayChanged:)])
 	[delegate performSelector: @selector(displayChanged:) withObject: self];
     return self;
 }
@@ -208,7 +208,7 @@
 	[super reflectScrolledClipView:sender];		/* Do the default actions */
 	if (srate == 0)
             srate = [[soundView sound] samplingRate];
-	if (delegate && [delegate respondsToSelector:@selector(displayChanged:)])
+	if ([delegate respondsToSelector:@selector(displayChanged:)])
             [delegate performSelector:@selector(displayChanged:) withObject:self];
 }
 

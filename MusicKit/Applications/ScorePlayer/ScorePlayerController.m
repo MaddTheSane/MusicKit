@@ -729,7 +729,7 @@ static double getUntempo(float tempoVal)
 	if (!partInfo) {
             errMsg = [NSString stringWithFormat: STR_INFO_MISSING, MKGetObjectName(aPart)];
             [errorLog addText: errMsg];
-            if (!NSRunAlertPanel(STR_SCOREPLAYER, errMsg, STR_CONTINUE, STR_CANCEL, nil)) 
+            if (!NSRunAlertPanel(STR_SCOREPLAYER, @"%@", STR_CONTINUE, STR_CANCEL, nil, errMsg))
                 return;
 	    continue;
 	}		
@@ -771,7 +771,7 @@ static double getUntempo(float tempoVal)
 	    if (!synthPatchClass) {         /* Class not loaded in program? */
                 errMsg = [NSString stringWithFormat: STR_NO_SYNTHPATCH, synthPatchName];
                 [errorLog addText: errMsg];
-		if (!NSRunAlertPanel(STR_SCOREPLAYER, errMsg, STR_CONTINUE, STR_CANCEL, nil))
+		if (!NSRunAlertPanel(STR_SCOREPLAYER, @"%@", STR_CONTINUE, STR_CANCEL, nil, errMsg))
 		    return;
 		/* TODO: We would prefer to dynamically load the class here. */
 		continue;
@@ -893,7 +893,7 @@ static void abortNow(void);
     theOrch = [[MKOrchestra alloc] init];
     capabilities = [theOrch capabilities];
     
-    if (capabilities & MK_hostSoundOut) {
+    if (capabilities & MKOrchestraCapabilitiesHostSoundOut) {
         s = [scorePlayerDefaults stringForKey: @"MKOrchestraSoundOut"];
 	if ([s isEqual: @"Host"]) {
 	    [self setSoundOutDevice: NEXT_SOUND];
@@ -905,7 +905,7 @@ static void abortNow(void);
 	}
     } 
     else {
-	if ((capabilities & MK_nextCompatibleDSPPort)) {
+        if ((capabilities & MKOrchestraCapabilitiesNeXTCompatibleDSPPort)) {
             s = [scorePlayerDefaults stringForKey: @"MKDSPSerialPortDevice0"];
 	    [soundOutputDevicePopUp selectItemWithTitle: s];
 	    [self setSoundOutDevice: s];

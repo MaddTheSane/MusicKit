@@ -95,7 +95,7 @@ static void calcValues(SndMeter *self, float *aveVal, float *peakVal)
     static SndStreamClient *outStream = nil;
     static SndStreamClient *inStream = nil;
     SndStreamClient *stream = nil;
-    float leftPeak, rightPeak;
+    float leftPeak=0, rightPeak=0;
 
     *peakVal = *aveVal = 0.0;
     if ([self->sound isRecording]) {

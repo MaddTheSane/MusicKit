@@ -426,7 +426,7 @@ void  _MKWriteMidiOut(MKNote *aNote, double timeTag, unsigned chan, /* 1 based *
       case MK_noteOn:
 	{
 	    int             velocity;
-	    int             noteTag = [aNote noteTag];
+	    NSInteger       noteTag = [aNote noteTag];
 	    BOOL newTag = NO;
 	    midiOutNode *mapNode;
 	    /* Every noteOn must have a keyNumber or it gets the default

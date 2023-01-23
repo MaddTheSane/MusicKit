@@ -595,7 +595,7 @@ static SndStreamManager *defaultStreamManager = nil;
 	// If we don't, the streamStartStopThread can end before the mixer can send startProcessingNextBufferWithInput
 	// which should disconnect the client from the manager. Therefore the clients stay connected and are not 
 	// reinitialisable due to output buffer locks not being unlocked.
-	while([mixer clientCount] != 0) {
+	while([mixer countOfClients] != 0) {
 	    [NSThread sleepForTimeInterval: 0.250]; // sleep for 250mS to let the clients shut down.
 #if SNDSTREAMMANAGER_DEBUG_STARTSTOP
 	    NSLog(@"[SndStreamManager stopStreaming] woken up, waiting on mixer, client count %d\n", [mixer clientCount]);
@@ -628,7 +628,7 @@ static SndStreamManager *defaultStreamManager = nil;
 
 - (BOOL) addClient: (SndStreamClient *) client
 {
-    int  oldClientCount    = [mixer clientCount];
+    int  oldClientCount    = [mixer countOfClients];
     int  clientCount       = [mixer addClient: client];
     BOOL alreadyRegistered = (oldClientCount == clientCount);
     
@@ -742,7 +742,7 @@ static void processAudio(double bufferTime, SNDStreamBuffer *streamInputBuffer, 
 	NSLog(@"[SndStreamManager] after mixing\n");
 #endif
 	// NSLog(@"processStreamAtTime: mixer client count %d\n", [mixer clientCount]);
-	if ([mixer clientCount] == 0) { // Shut down the stream if there are no clients.
+	if ([mixer countOfClients] == 0) { // Shut down the stream if there are no clients.
 #if SNDSTREAMMANAGER_DEBUG_STARTSTOP
 	    // NSLog(@"[SndStreamManager] signalling a stop stream...\n");
 #endif

@@ -2461,7 +2461,7 @@ static DSPAddress allocMem(MKOrchestra *self,MKOrchMemSegment segment,unsigned s
 	lastAllocFailStr = 
 	@"Allocation failure: Patchpoints must be 16 samples long.";
 	if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC))
-	    _MKOrchTrace(self,MK_TRACEORCHALLOC,lastAllocFailStr);
+	    _MKOrchTrace(self,MK_TRACEORCHALLOC, @"%@", lastAllocFailStr);
         return nil;
     }
     else if (baseAddr == NOMEMORY) {
@@ -2469,7 +2469,7 @@ static DSPAddress allocMem(MKOrchestra *self,MKOrchMemSegment segment,unsigned s
 	@"Allocation failure: No more offchip data memory.";
         if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC))
 	    _MKOrchTrace(self,MK_TRACEORCHALLOC,
-			 lastAllocFailStr);
+			 @"%@", lastAllocFailStr);
         return nil;
     }
     else if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC)) 
@@ -3431,7 +3431,7 @@ int allocErr;
 	    break;
     }
     if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC))
-	_MKOrchTrace(self,MK_TRACEORCHALLOC,self->lastAllocFailStr);
+	_MKOrchTrace(self,MK_TRACEORCHALLOC,@"%@",self->lastAllocFailStr);
 }
 
 static id 
@@ -3504,7 +3504,7 @@ allocUG(register MKOrchestra *self,id factObj,id beforeObj,id afterObj)
 		    @"Allocation failure: Can't allocate before specified unit generator.";
                     if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC))
 			_MKOrchTrace(self,MK_TRACEORCHALLOC,
-				     self->lastAllocFailStr);
+				     @"%@", self->lastAllocFailStr);
                 }
                 else
 		    allocError(self,allocErr);

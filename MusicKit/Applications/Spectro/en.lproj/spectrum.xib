@@ -48,9 +48,7 @@
                     <slider horizontalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="28">
                         <rect key="frame" x="580" y="66" width="21" height="486"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <sliderCell key="cell" continuous="YES" alignment="left" maxValue="1" tickMarkPosition="right" sliderType="linear" id="152">
-                            <font key="font" size="12" name="Helvetica"/>
-                        </sliderCell>
+                        <sliderCell key="cell" continuous="YES" alignment="left" maxValue="1" tickMarkPosition="right" sliderType="linear" id="152"/>
                         <connections>
                             <action selector="wfFrameSliderMoved:" target="-2" id="118"/>
                         </connections>
@@ -100,14 +98,14 @@
                         <size key="cellSize" width="168" height="21"/>
                         <size key="intercellSpacing" width="1" height="3"/>
                         <formCell key="prototype" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="161">
-                            <font key="font" size="12" name="Helvetica"/>
-                            <font key="titleFont" size="12" name="Helvetica"/>
+                            <font key="font" metaFont="system"/>
+                            <font key="titleFont" metaFont="system" size="11"/>
                         </formCell>
                         <cells>
                             <column>
                                 <formCell selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Frame Plot Height (&gt;1):" stringValue="3" id="75">
-                                    <font key="font" size="12" name="Helvetica"/>
-                                    <font key="titleFont" size="12" name="Helvetica"/>
+                                    <font key="font" metaFont="system"/>
+                                    <font key="titleFont" metaFont="system" size="11"/>
                                 </formCell>
                             </column>
                         </cells>
@@ -391,20 +389,20 @@ Time</string>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <form verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14">
-                                    <rect key="frame" x="5" y="30" width="133" height="21"/>
+                                    <rect key="frame" x="0.0" y="30" width="138" height="21"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    <size key="cellSize" width="133" height="21"/>
+                                    <size key="cellSize" width="138" height="21"/>
                                     <size key="intercellSpacing" width="1" height="3"/>
                                     <formCell key="prototype" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="169">
-                                        <font key="font" size="12" name="Helvetica"/>
-                                        <font key="titleFont" size="12" name="Helvetica"/>
+                                        <font key="font" metaFont="cellTitle"/>
+                                        <font key="titleFont" metaFont="cellTitle"/>
                                     </formCell>
                                     <cells>
                                         <column>
                                             <formCell lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Window Size:" id="68">
-                                                <font key="font" size="12" name="Helvetica"/>
-                                                <font key="titleFont" size="12" name="Helvetica"/>
+                                                <font key="font" metaFont="cellTitle"/>
+                                                <font key="titleFont" metaFont="cellTitle"/>
                                             </formCell>
                                         </column>
                                     </cells>
@@ -413,20 +411,20 @@ Time</string>
                                     </connections>
                                 </form>
                                 <form verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4">
-                                    <rect key="frame" x="140" y="30" width="208" height="21"/>
+                                    <rect key="frame" x="140" y="30" width="205" height="21"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    <size key="cellSize" width="208" height="21"/>
+                                    <size key="cellSize" width="205" height="21"/>
                                     <size key="intercellSpacing" width="1" height="3"/>
                                     <formCell key="prototype" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="170">
-                                        <font key="font" size="12" name="Helvetica"/>
-                                        <font key="titleFont" size="12" name="Helvetica"/>
+                                        <font key="font" metaFont="cellTitle"/>
+                                        <font key="titleFont" metaFont="cellTitle"/>
                                     </formCell>
                                     <cells>
                                         <column>
                                             <formCell selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Zero Pad Factor (&gt;=1):" id="20">
-                                                <font key="font" size="12" name="Helvetica"/>
-                                                <font key="titleFont" size="12" name="Helvetica"/>
+                                                <font key="font" metaFont="cellTitle"/>
+                                                <font key="titleFont" metaFont="cellTitle"/>
                                             </formCell>
                                         </column>
                                     </cells>
@@ -435,20 +433,20 @@ Time</string>
                                     </connections>
                                 </form>
                                 <form verticalHuggingPriority="750" fixedFrame="YES" mode="track" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19">
-                                    <rect key="frame" x="22" y="4" width="117" height="21"/>
+                                    <rect key="frame" x="20" y="4" width="119" height="21"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                    <size key="cellSize" width="117" height="21"/>
+                                    <size key="cellSize" width="119" height="21"/>
                                     <size key="intercellSpacing" width="1" height="3"/>
                                     <formCell key="prototype" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="171">
-                                        <font key="font" size="12" name="Helvetica"/>
-                                        <font key="titleFont" size="12" name="Helvetica"/>
+                                        <font key="font" metaFont="cellTitle"/>
+                                        <font key="titleFont" metaFont="cellTitle"/>
                                     </formCell>
                                     <cells>
                                         <column>
                                             <formCell selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Hop Ratio:" id="35">
-                                                <font key="font" size="12" name="Helvetica"/>
-                                                <font key="titleFont" size="12" name="Helvetica"/>
+                                                <font key="font" metaFont="cellTitle"/>
+                                                <font key="titleFont" metaFont="cellTitle"/>
                                             </formCell>
                                         </column>
                                     </cells>
@@ -505,24 +503,22 @@ Time</string>
                                     <size key="cellSize" width="120" height="21"/>
                                     <size key="intercellSpacing" width="1" height="3"/>
                                     <formCell key="prototype" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="174">
-                                        <font key="font" size="12" name="Helvetica"/>
-                                        <font key="titleFont" size="12" name="Helvetica"/>
+                                        <font key="font" metaFont="cellTitle"/>
+                                        <font key="titleFont" metaFont="smallSystem"/>
                                     </formCell>
                                     <cells>
                                         <column>
                                             <formCell borderStyle="bezel" alignment="left" title="Total Frames:" stringValue="0" id="46">
-                                                <font key="font" size="12" name="Helvetica"/>
-                                                <font key="titleFont" size="12" name="Helvetica"/>
+                                                <font key="font" metaFont="cellTitle"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
                                             </formCell>
                                         </column>
                                     </cells>
                                 </form>
                                 <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9">
-                                    <rect key="frame" x="103" y="1" width="165" height="21"/>
+                                    <rect key="frame" x="103" y="3" width="165" height="21"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <sliderCell key="cell" continuous="YES" alignment="left" maxValue="1" tickMarkPosition="below" sliderType="linear" id="158">
-                                        <font key="font" size="12" name="Helvetica"/>
-                                    </sliderCell>
+                                    <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" maxValue="1" tickMarkPosition="below" sliderType="linear" id="158"/>
                                     <connections>
                                         <action selector="frameSliderMoved:" target="-2" id="88"/>
                                     </connections>
@@ -635,14 +631,14 @@ Time</string>
                                     <size key="cellSize" width="180" height="21"/>
                                     <size key="intercellSpacing" width="1" height="3"/>
                                     <formCell key="prototype" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="172">
-                                        <font key="font" size="12" name="Helvetica"/>
-                                        <font key="titleFont" size="12" name="Helvetica"/>
+                                        <font key="font" metaFont="cellTitle"/>
+                                        <font key="titleFont" metaFont="smallSystem"/>
                                     </formCell>
                                     <cells>
                                         <column>
                                             <formCell borderStyle="bezel" alignment="left" title="Frequency at Peak:" stringValue="0.0" id="22">
-                                                <font key="font" size="12" name="Helvetica"/>
-                                                <font key="titleFont" size="12" name="Helvetica"/>
+                                                <font key="font" metaFont="cellTitle"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
                                             </formCell>
                                         </column>
                                     </cells>
@@ -654,14 +650,14 @@ Time</string>
                                     <size key="cellSize" width="158" height="21"/>
                                     <size key="intercellSpacing" width="1" height="3"/>
                                     <formCell key="prototype" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" title="Field:" id="173">
-                                        <font key="font" size="12" name="Helvetica"/>
-                                        <font key="titleFont" size="12" name="Helvetica"/>
+                                        <font key="font" metaFont="cellTitle"/>
+                                        <font key="titleFont" metaFont="smallSystem"/>
                                     </formCell>
                                     <cells>
                                         <column>
                                             <formCell borderStyle="bezel" alignment="left" title="RMS Error of Peak:" stringValue="0.0" id="42">
-                                                <font key="font" size="12" name="Helvetica"/>
-                                                <font key="titleFont" size="12" name="Helvetica"/>
+                                                <font key="font" metaFont="cellTitle"/>
+                                                <font key="titleFont" metaFont="smallSystem"/>
                                             </formCell>
                                         </column>
                                     </cells>
@@ -672,7 +668,7 @@ Time</string>
                     </box>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="-67" y="702"/>
+            <point key="canvasLocation" x="-67.5" y="702"/>
         </window>
     </objects>
     <resources>
