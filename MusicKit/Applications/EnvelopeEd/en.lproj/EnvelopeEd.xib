@@ -203,7 +203,7 @@
             </items>
             <point key="canvasLocation" x="-136" y="120"/>
         </menu>
-        <customObject id="54" userLabel="ControllerInstance" customClass="Controller">
+        <customObject id="54" userLabel="ControllerInstance" customClass="EEController">
             <connections>
                 <outlet property="theGraphType" destination="31" id="137"/>
                 <outlet property="theLinkX" destination="41" id="147"/>

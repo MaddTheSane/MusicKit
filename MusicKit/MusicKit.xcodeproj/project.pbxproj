@@ -1299,7 +1299,7 @@
 		D8E31F110FA7A1680049DC04 /* _unitGeneratorInclude.h in Headers */ = {isa = PBXBuildFile; fileRef = D8E31F0E0FA7A1680049DC04 /* _unitGeneratorInclude.h */; };
 		D8E31F120FA7A1680049DC04 /* timings.h in Headers */ = {isa = PBXBuildFile; fileRef = D8E31F0F0FA7A1680049DC04 /* timings.h */; };
 		D8E31F160FA7A1850049DC04 /* ugUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E31F150FA7A1850049DC04 /* ugUtilities.m */; };
-		D8E8D5C6078463D400AAE755 /* Controller.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8D5C0078463D400AAE755 /* Controller.m */; };
+		D8E8D5C6078463D400AAE755 /* EEController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8D5C0078463D400AAE755 /* EEController.m */; };
 		D8E8D5CA078463D400AAE755 /* EnvelopeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8D5C4078463D400AAE755 /* EnvelopeView.m */; };
 		D8E8D5CE078463FB00AAE755 /* EnvelopeEd_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8D5CD078463FB00AAE755 /* EnvelopeEd_main.m */; };
 		D8E8D5F10784649E00AAE755 /* EnvelopeEd.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8E8D5ED0784649E00AAE755 /* EnvelopeEd.xib */; };
@@ -3129,17 +3129,17 @@
 		D828F99B0780C24B00215EB9 /* MKAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKAlert.m; sourceTree = "<group>"; };
 		D828F9C90780CC1E00215EB9 /* PianoRoll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PianoRoll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D828F9CB0780CC1F00215EB9 /* PianoRoll-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PianoRoll-Info.plist"; sourceTree = "<group>"; };
-		D828F9CF0780CCDE00215EB9 /* Distributor.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Distributor.h; sourceTree = "<group>"; };
-		D828F9D00780CCDE00215EB9 /* Distributor.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Distributor.m; sourceTree = "<group>"; };
-		D828F9D10780CCDE00215EB9 /* Document.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Document.h; sourceTree = "<group>"; };
-		D828F9D20780CCDE00215EB9 /* Document.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Document.m; sourceTree = "<group>"; };
-		D828F9D30780CCDE00215EB9 /* PartView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PartView.h; sourceTree = "<group>"; };
-		D828F9D40780CCDE00215EB9 /* PartView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PartView.m; sourceTree = "<group>"; };
-		D828F9D50780CCDE00215EB9 /* PlayScore.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PlayScore.h; sourceTree = "<group>"; };
-		D828F9D60780CCDE00215EB9 /* PlayScore.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PlayScore.m; sourceTree = "<group>"; };
-		D828F9D70780CCDF00215EB9 /* TadPole.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = TadPole.h; sourceTree = "<group>"; };
-		D828F9D80780CCDF00215EB9 /* TadPole.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = TadPole.m; sourceTree = "<group>"; };
-		D828F9E50780CD0600215EB9 /* PianoRoll_main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PianoRoll_main.m; sourceTree = "<group>"; };
+		D828F9CF0780CCDE00215EB9 /* Distributor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Distributor.h; sourceTree = "<group>"; };
+		D828F9D00780CCDE00215EB9 /* Distributor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Distributor.m; sourceTree = "<group>"; };
+		D828F9D10780CCDE00215EB9 /* Document.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Document.h; sourceTree = "<group>"; };
+		D828F9D20780CCDE00215EB9 /* Document.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Document.m; sourceTree = "<group>"; };
+		D828F9D30780CCDE00215EB9 /* PartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PartView.h; sourceTree = "<group>"; };
+		D828F9D40780CCDE00215EB9 /* PartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PartView.m; sourceTree = "<group>"; };
+		D828F9D50780CCDE00215EB9 /* PlayScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayScore.h; sourceTree = "<group>"; };
+		D828F9D60780CCDE00215EB9 /* PlayScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayScore.m; sourceTree = "<group>"; };
+		D828F9D70780CCDF00215EB9 /* TadPole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TadPole.h; sourceTree = "<group>"; };
+		D828F9D80780CCDF00215EB9 /* TadPole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TadPole.m; sourceTree = "<group>"; };
+		D828F9E50780CD0600215EB9 /* PianoRoll_main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PianoRoll_main.m; sourceTree = "<group>"; };
 		D828FA5A0780D1F400215EB9 /* EnvelopeEd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EnvelopeEd.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D828FA5C0780D1F500215EB9 /* EnvelopeEd-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EnvelopeEd-Info.plist"; sourceTree = "<group>"; };
 		D82AC3B905A0F6DA00780F57 /* SndKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SndKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3149,8 +3149,8 @@
 		D8379A830FEE8C6E00E7B708 /* icon16x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon16x16.png; path = ../Images/icon16x16.png; sourceTree = "<group>"; };
 		D8379A8A0FEE8CBA00E7B708 /* icon16x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon16x16.png; path = ../icon16x16.png; sourceTree = "<group>"; };
 		D8379AA20FEEC3DD00E7B708 /* icon16x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon16x16.png; path = ../icon16x16.png; sourceTree = "<group>"; };
-		D837AB8606C80F4F00A6CFEB /* Juno106.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Juno106.h; sourceTree = "<group>"; };
-		D837AB8706C80F4F00A6CFEB /* Juno106.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Juno106.m; sourceTree = "<group>"; };
+		D837AB8606C80F4F00A6CFEB /* Juno106.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Juno106.h; sourceTree = "<group>"; };
+		D837AB8706C80F4F00A6CFEB /* Juno106.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Juno106.m; sourceTree = "<group>"; };
 		D837AB9506C80F8B00A6CFEB /* 24bitJunoSwitchDown.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = 24bitJunoSwitchDown.tiff; sourceTree = "<group>"; };
 		D837AB9606C80F8B00A6CFEB /* 24bitJunoSwitchUp.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = 24bitJunoSwitchUp.tiff; sourceTree = "<group>"; };
 		D837AB9706C80F8B00A6CFEB /* JunoEnvelope.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = JunoEnvelope.tiff; sourceTree = "<group>"; };
@@ -3160,16 +3160,16 @@
 		D837AB9B06C80F8B00A6CFEB /* JunoSwitchUp.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = JunoSwitchUp.tiff; sourceTree = "<group>"; };
 		D837AB9C06C80F8C00A6CFEB /* PWM.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = PWM.tiff; sourceTree = "<group>"; };
 		D837AB9D06C80F8C00A6CFEB /* Ramp.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Ramp.tiff; sourceTree = "<group>"; };
-		D837ABB406C8102B00A6CFEB /* AxonNGC77.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = AxonNGC77.h; sourceTree = "<group>"; };
-		D837ABB506C8102B00A6CFEB /* AxonNGC77.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = AxonNGC77.m; sourceTree = "<group>"; };
-		D837ABB606C8102B00A6CFEB /* GuitarFretboardView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GuitarFretboardView.h; sourceTree = "<group>"; };
-		D837ABB706C8102B00A6CFEB /* GuitarString.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = GuitarString.h; sourceTree = "<group>"; };
-		D837ABB806C8102B00A6CFEB /* Segment.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Segment.h; sourceTree = "<group>"; };
+		D837ABB406C8102B00A6CFEB /* AxonNGC77.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AxonNGC77.h; sourceTree = "<group>"; };
+		D837ABB506C8102B00A6CFEB /* AxonNGC77.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxonNGC77.m; sourceTree = "<group>"; };
+		D837ABB606C8102B00A6CFEB /* GuitarFretboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuitarFretboardView.h; sourceTree = "<group>"; };
+		D837ABB706C8102B00A6CFEB /* GuitarString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuitarString.h; sourceTree = "<group>"; };
+		D837ABB806C8102B00A6CFEB /* Segment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Segment.h; sourceTree = "<group>"; };
 		D837AC4A06C819AA00A6CFEB /* QVFrontPanel.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = QVFrontPanel.tiff; sourceTree = "<group>"; };
-		D837AC4E06C819C200A6CFEB /* QuadraverbGT.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = QuadraverbGT.h; sourceTree = "<group>"; };
-		D837AC4F06C819C200A6CFEB /* QuadraverbGT.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = QuadraverbGT.m; sourceTree = "<group>"; };
-		D837AC6806C81AAC00A6CFEB /* ProphetVS.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ProphetVS.h; sourceTree = "<group>"; };
-		D837AC6906C81AAC00A6CFEB /* ProphetVS.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ProphetVS.m; sourceTree = "<group>"; };
+		D837AC4E06C819C200A6CFEB /* QuadraverbGT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuadraverbGT.h; sourceTree = "<group>"; };
+		D837AC4F06C819C200A6CFEB /* QuadraverbGT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuadraverbGT.m; sourceTree = "<group>"; };
+		D837AC6806C81AAC00A6CFEB /* ProphetVS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProphetVS.h; sourceTree = "<group>"; };
+		D837AC6906C81AAC00A6CFEB /* ProphetVS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProphetVS.m; sourceTree = "<group>"; };
 		D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MKPerformSndMIDI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D84395EB059FAA450054BEEE /* MKPerformSndMIDI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MKPerformSndMIDI-Info.plist"; sourceTree = "<group>"; };
 		D844A75807C7EF320086A55B /* playsnd */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = playsnd; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3395,20 +3395,20 @@
 		D886C3E70FA64871000AC7C4 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		D88C502906C7E37100D33D99 /* PatchCord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PatchCord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D88C502B06C7E37200D33D99 /* PatchCord-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PatchCord-Info.plist"; sourceTree = "<group>"; };
-		D88C503F06C7E4C800D33D99 /* PatchBankDocument.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PatchBankDocument.h; path = Applications/PatchCord/PatchBankDocument.h; sourceTree = "<group>"; };
-		D88C504006C7E4C800D33D99 /* PatchBankDocument.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = PatchBankDocument.m; path = Applications/PatchCord/PatchBankDocument.m; sourceTree = "<group>"; };
-		D88C504106C7E4C800D33D99 /* PatchCordController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PatchCordController.h; path = Applications/PatchCord/PatchCordController.h; sourceTree = "<group>"; };
-		D88C504206C7E4C800D33D99 /* PatchCordController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = PatchCordController.m; path = Applications/PatchCord/PatchCordController.m; sourceTree = "<group>"; };
-		D88C504306C7E4C800D33D99 /* MIDISysExSynth.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = MIDISysExSynth.h; path = Applications/PatchCord/MIDISysExSynth.h; sourceTree = "<group>"; };
-		D88C504406C7E4C800D33D99 /* MIDISysExSynth.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = MIDISysExSynth.m; path = Applications/PatchCord/MIDISysExSynth.m; sourceTree = "<group>"; };
-		D88C504506C7E4C800D33D99 /* PatchBank.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PatchBank.h; path = Applications/PatchCord/PatchBank.h; sourceTree = "<group>"; };
-		D88C504606C7E4C800D33D99 /* PatchBank.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = PatchBank.m; path = Applications/PatchCord/PatchBank.m; sourceTree = "<group>"; };
-		D88C504B06C7E4C900D33D99 /* SysExMessage.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = SysExMessage.h; path = Applications/PatchCord/SysExMessage.h; sourceTree = "<group>"; };
-		D88C504C06C7E4C900D33D99 /* SysExMessage.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = SysExMessage.m; path = Applications/PatchCord/SysExMessage.m; sourceTree = "<group>"; };
-		D88C504D06C7E4C900D33D99 /* SysExReceiver.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = SysExReceiver.h; path = Applications/PatchCord/SysExReceiver.h; sourceTree = "<group>"; };
-		D88C504E06C7E4C900D33D99 /* SysExReceiver.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = SysExReceiver.m; path = Applications/PatchCord/SysExReceiver.m; sourceTree = "<group>"; };
-		D88C504F06C7E4C900D33D99 /* UnhandledSynth.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = UnhandledSynth.h; path = Applications/PatchCord/UnhandledSynth.h; sourceTree = "<group>"; };
-		D88C505006C7E4C900D33D99 /* UnhandledSynth.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = UnhandledSynth.m; path = Applications/PatchCord/UnhandledSynth.m; sourceTree = "<group>"; };
+		D88C503F06C7E4C800D33D99 /* PatchBankDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PatchBankDocument.h; path = Applications/PatchCord/PatchBankDocument.h; sourceTree = "<group>"; };
+		D88C504006C7E4C800D33D99 /* PatchBankDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PatchBankDocument.m; path = Applications/PatchCord/PatchBankDocument.m; sourceTree = "<group>"; };
+		D88C504106C7E4C800D33D99 /* PatchCordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PatchCordController.h; path = Applications/PatchCord/PatchCordController.h; sourceTree = "<group>"; };
+		D88C504206C7E4C800D33D99 /* PatchCordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PatchCordController.m; path = Applications/PatchCord/PatchCordController.m; sourceTree = "<group>"; };
+		D88C504306C7E4C800D33D99 /* MIDISysExSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIDISysExSynth.h; path = Applications/PatchCord/MIDISysExSynth.h; sourceTree = "<group>"; };
+		D88C504406C7E4C800D33D99 /* MIDISysExSynth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIDISysExSynth.m; path = Applications/PatchCord/MIDISysExSynth.m; sourceTree = "<group>"; };
+		D88C504506C7E4C800D33D99 /* PatchBank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PatchBank.h; path = Applications/PatchCord/PatchBank.h; sourceTree = "<group>"; };
+		D88C504606C7E4C800D33D99 /* PatchBank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PatchBank.m; path = Applications/PatchCord/PatchBank.m; sourceTree = "<group>"; };
+		D88C504B06C7E4C900D33D99 /* SysExMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SysExMessage.h; path = Applications/PatchCord/SysExMessage.h; sourceTree = "<group>"; };
+		D88C504C06C7E4C900D33D99 /* SysExMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SysExMessage.m; path = Applications/PatchCord/SysExMessage.m; sourceTree = "<group>"; };
+		D88C504D06C7E4C900D33D99 /* SysExReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SysExReceiver.h; path = Applications/PatchCord/SysExReceiver.h; sourceTree = "<group>"; };
+		D88C504E06C7E4C900D33D99 /* SysExReceiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SysExReceiver.m; path = Applications/PatchCord/SysExReceiver.m; sourceTree = "<group>"; };
+		D88C504F06C7E4C900D33D99 /* UnhandledSynth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UnhandledSynth.h; path = Applications/PatchCord/UnhandledSynth.h; sourceTree = "<group>"; };
+		D88C505006C7E4C900D33D99 /* UnhandledSynth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UnhandledSynth.m; path = Applications/PatchCord/UnhandledSynth.m; sourceTree = "<group>"; };
 		D88C507D06C7E4F000D33D99 /* PatchCord_main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PatchCord_main.m; sourceTree = "<group>"; };
 		D88C50DD06C7EA2000D33D99 /* PatchCord.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = PatchCord.tiff; sourceTree = "<group>"; };
 		D88C50DE06C7EA2000D33D99 /* pc_Doc_File.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = pc_Doc_File.tiff; sourceTree = "<group>"; };
@@ -3655,10 +3655,10 @@
 		D8E31F0E0FA7A1680049DC04 /* _unitGeneratorInclude.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _unitGeneratorInclude.h; sourceTree = "<group>"; };
 		D8E31F0F0FA7A1680049DC04 /* timings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timings.h; sourceTree = "<group>"; };
 		D8E31F150FA7A1850049DC04 /* ugUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ugUtilities.m; sourceTree = "<group>"; };
-		D8E8D5BF078463D400AAE755 /* Controller.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Controller.h; sourceTree = "<group>"; };
-		D8E8D5C0078463D400AAE755 /* Controller.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Controller.m; sourceTree = "<group>"; };
-		D8E8D5C3078463D400AAE755 /* EnvelopeView.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = EnvelopeView.h; sourceTree = "<group>"; };
-		D8E8D5C4078463D400AAE755 /* EnvelopeView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = EnvelopeView.m; sourceTree = "<group>"; };
+		D8E8D5BF078463D400AAE755 /* EEController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EEController.h; sourceTree = "<group>"; };
+		D8E8D5C0078463D400AAE755 /* EEController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EEController.m; sourceTree = "<group>"; };
+		D8E8D5C3078463D400AAE755 /* EnvelopeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnvelopeView.h; sourceTree = "<group>"; };
+		D8E8D5C4078463D400AAE755 /* EnvelopeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnvelopeView.m; sourceTree = "<group>"; };
 		D8E8D5CD078463FB00AAE755 /* EnvelopeEd_main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = EnvelopeEd_main.m; sourceTree = "<group>"; };
 		D8E8D5D20784641D00AAE755 /* TODO */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
 		D8F8011307A1C749005C1665 /* SndKitConfig.h.in */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = SndKitConfig.h.in; sourceTree = "<group>"; };
@@ -6268,8 +6268,8 @@
 		D837AC3406C8193C00A6CFEB /* Quadraverb */ = {
 			isa = PBXGroup;
 			children = (
-				D837AC3A06C8195C00A6CFEB /* Resources */,
 				D837AC3706C8195600A6CFEB /* Classes */,
+				D837AC3A06C8195C00A6CFEB /* Resources */,
 			);
 			name = Quadraverb;
 			path = Quadraverb.subproj;
@@ -6312,8 +6312,8 @@
 		D837AC5406C81A5300A6CFEB /* ProphetVS */ = {
 			isa = PBXGroup;
 			children = (
-				D837AC5A06C81A6400A6CFEB /* Resources */,
 				D837AC5706C81A5C00A6CFEB /* Classes */,
+				D837AC5A06C81A6400A6CFEB /* Resources */,
 			);
 			name = ProphetVS;
 			path = ProphetVS.subproj;
@@ -7870,8 +7870,8 @@
 		D880FD310780AD6400FD03CC /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				D8E8D5BF078463D400AAE755 /* Controller.h */,
-				D8E8D5C0078463D400AAE755 /* Controller.m */,
+				D8E8D5BF078463D400AAE755 /* EEController.h */,
+				D8E8D5C0078463D400AAE755 /* EEController.m */,
 				D8E8D5C3078463D400AAE755 /* EnvelopeView.h */,
 				D8E8D5C4078463D400AAE755 /* EnvelopeView.m */,
 			);
@@ -11087,7 +11087,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D8E8D5C6078463D400AAE755 /* Controller.m in Sources */,
+				D8E8D5C6078463D400AAE755 /* EEController.m in Sources */,
 				D8E8D5CA078463D400AAE755 /* EnvelopeView.m in Sources */,
 				D8E8D5CE078463FB00AAE755 /* EnvelopeEd_main.m in Sources */,
 			);
@@ -12838,6 +12838,8 @@
 					"OPUS_BUILD=1",
 					"$(inherited)",
 					"VAR_ARRAYS=1",
+					"HAVE_LRINT=1",
+					"HAVE_LRINTF=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				OTHER_CFLAGS = "";
@@ -12865,6 +12867,8 @@
 					"OPUS_BUILD=1",
 					"$(inherited)",
 					"VAR_ARRAYS=1",
+					"HAVE_LRINT=1",
+					"HAVE_LRINTF=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				OTHER_CFLAGS = "";
@@ -12892,6 +12896,8 @@
 					"OPUS_BUILD=1",
 					"$(inherited)",
 					"VAR_ARRAYS=1",
+					"HAVE_LRINT=1",
+					"HAVE_LRINTF=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				OTHER_CFLAGS = "";

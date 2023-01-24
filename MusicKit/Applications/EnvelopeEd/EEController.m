@@ -5,10 +5,10 @@
 #import <stdlib.h>
 #import <ctype.h>
 #import <math.h>
-#import "Controller.h"
+#import "EEController.h"
 #import "EnvelopeView.h"
 
-@implementation Controller
+@implementation EEController
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
@@ -24,19 +24,17 @@
 - (void)infoPanel:sender
 {
     if(!infoPanel) {
-        [NSBundle loadNibNamed:@"Info.nib" owner:self];
+        [NSBundle loadNibNamed:@"Info" owner:self];
     }
     [infoPanel makeKeyAndOrderFront:sender];
-//    return self;
 }
 
 - (void)helpPanel:sender
 {
     if(!helpPanel) {
-        [NSBundle loadNibNamed:@"Info.nib" owner:self];
+        [NSBundle loadNibNamed:@"Info" owner:self];
     }
     [helpPanel makeKeyAndOrderFront:sender];
-//    return self;
 }
 
 //===================================================================

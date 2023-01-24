@@ -9,10 +9,12 @@
 #import <MusicKit/MusicKit.h>            // for envelope class stuff
 //#import <Envelope.h>			   // so we substitute this for now.
 
+@class EEController;
+
 @interface EnvelopeView : NSView <NSCopying>
 {
     // Controller theController;
-    id theController;				// object which controls the envelope view
+    EEController *theController;				// object which controls the envelope view
     MKEnvelope *theEnvelope;			// the envelope object being viewed
     NSCursor *theCross;				// crosshairs cursor
     NSCursor *theFilledCross;			// crosshairs plus knob cursor
@@ -38,7 +40,8 @@
 
 - (void)resetCursorRects;
 - initWithFrame:(NSRect)frameRect;
-- (void)controllerIs:sender;
+@property (assign) IBOutlet EEController *controller;
+- (void)controllerIs:sender NS_DEPRECATED_WITH_REPLACEMENT_MAC("-setController:" , 10.0, 10.8);
 - (void)drawRect:(NSRect)rect;
 - (int) hitKnobAt:(NSPoint)p border:(CGFloat)delta;
 - (int) movePoint:(int)n to: (NSPoint)p;
@@ -60,13 +63,13 @@
 - setYAt: (int)point to: (CGFloat)coord;
 - setYrAt: (int)point to: (CGFloat)coord;
 - setSmoothAt: (int)point to: (CGFloat)val;
-- (void)setXMinTo:(CGFloat)coord;
-- (void)setXMaxTo:(CGFloat)coord;
-- setXLimitsTo: (CGFloat)min : (CGFloat)max;
-- (void)setYMinTo:(CGFloat)coord;
-- (void)setYMaxTo:(CGFloat)coord;
-- (void)setXSnapTo:(CGFloat)coord;
-- (void)setYSnapTo:(CGFloat)coord;
+- (void)setXMinTo:(CGFloat)coord NS_DEPRECATED_WITH_REPLACEMENT_MAC("-setXMin:", 10.0, 10.8);
+- (void)setXMaxTo:(CGFloat)coord NS_DEPRECATED_WITH_REPLACEMENT_MAC("-setXMax:", 10.0, 10.8);
+- (void)setXLimitsTo: (CGFloat)min : (CGFloat)max;
+- (void)setYMinTo:(CGFloat)coord NS_DEPRECATED_WITH_REPLACEMENT_MAC("-setYMin:", 10.0, 10.8);
+- (void)setYMaxTo:(CGFloat)coord NS_DEPRECATED_WITH_REPLACEMENT_MAC("-setYMax:", 10.0, 10.8);
+- (void)setXSnapTo:(CGFloat)coord NS_DEPRECATED_WITH_REPLACEMENT_MAC("-setXSnap:", 10.0, 10.8);
+- (void)setYSnapTo:(CGFloat)coord NS_DEPRECATED_WITH_REPLACEMENT_MAC("-setYSnap:", 10.0, 10.8);
 - (void)setStickyAt:(int)point To:(NSControlStateValue)state;
 - (void) setShowSmooth: (BOOL) state;
 - (void) setDrawSegments: (BOOL) state;
@@ -77,13 +80,23 @@
 - (CGFloat)getYr:(int)i;
 - (CGFloat)getSmoothing:(int)i;
 - (int)getSticky:(int)i;
-- (CGFloat)getXMax;
-- (CGFloat)getXMin;
-- (CGFloat)getYMax;
-- (CGFloat)getYMin;
-- (CGFloat)getXSnap;
-- (CGFloat)getYSnap;
-- (BOOL) getShowSmooth;
-- (BOOL) getDrawSegments;
+- (CGFloat)getXMax NS_DEPRECATED_WITH_REPLACEMENT_MAC("-xMax", 10.0, 10.8);
+- (CGFloat)getXMin NS_DEPRECATED_WITH_REPLACEMENT_MAC("-xMin", 10.0, 10.8);
+- (CGFloat)getYMax NS_DEPRECATED_WITH_REPLACEMENT_MAC("-yMax", 10.0, 10.8);
+- (CGFloat)getYMin NS_DEPRECATED_WITH_REPLACEMENT_MAC("-yMin", 10.0, 10.8);
+- (CGFloat)getXSnap NS_DEPRECATED_WITH_REPLACEMENT_MAC("-xSnap", 10.0, 10.8);
+- (CGFloat)getYSnap NS_DEPRECATED_WITH_REPLACEMENT_MAC("-ySnap", 10.0, 10.8);
+- (BOOL) getShowSmooth NS_DEPRECATED_WITH_REPLACEMENT_MAC("-showSmooth", 10.0, 10.8);
+- (BOOL) getDrawSegments NS_DEPRECATED_WITH_REPLACEMENT_MAC("-drawSegments", 10.0, 10.8);
+
+@property (nonatomic) CGFloat xMax;
+@property (nonatomic) CGFloat xMin;
+@property (nonatomic) CGFloat yMax;
+@property (nonatomic) CGFloat yMin;
+@property (nonatomic) CGFloat xSnap;
+@property (nonatomic) CGFloat ySnap;
+@property (nonatomic) BOOL showSmooth;
+@property (nonatomic) BOOL drawSegments;
+
 
 @end

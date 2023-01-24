@@ -17,7 +17,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
-#import "Controller.h"
+#import "EEController.h"
 #import "EnvelopeView.h"
 
 #define KNOBSIZE 8
@@ -218,12 +218,11 @@ void freeDraw(void)
 // Selects point number n in the envelope and broadcasts the change
 // to the controller object.
 
-- selectPoint:(int)n
+- (void)selectPoint:(int)n
 {
     selected=n;
-    [self display];
-    [(Controller *)theController update:self];
-    return self;
+    [self setNeedsDisplay:YES];
+    [(EEController *)theController update:self];
 }
 
 //-------------------------------------------------------------------
@@ -299,12 +298,14 @@ void freeDraw(void)
    return nil;
 }
 
+@synthesize controller = theController;
+
 //-------------------------------------------------------------------
 // - controllerIs:  Receive the object id of the controller of the view
 
 - (void) controllerIs:sender
 {
-    theController = sender; 
+    self.controller = sender;
 }
 
 //-------------------------------------------------------------------
@@ -751,7 +752,7 @@ void freeDraw(void)
         [NSCursor pop];                                   // return to crosshair cursor
         [self unlockFocus];
     }
-    [self display];
+    [self setNeedsDisplay:YES];
 }
 
 //===================================================================
@@ -790,7 +791,7 @@ void freeDraw(void)
 - (BOOL) becomeFirstResponder
 {
     if (theController != nil)
-        [(Controller *)theController update: self];
+        [(EEController *)theController update: self];
     envColour = BLACK;
     [self display];
     return YES;
@@ -1200,7 +1201,7 @@ int token(char *t)
     if (point < 0)
         point = 0;
     [self selectPoint: point];
-    [(Controller *)theController update:self]; 
+    [(EEController *)theController update:self]; 
 }
 
 //-------------------------------------------------------------------
@@ -1215,7 +1216,7 @@ int token(char *t)
     if (next<0) next=0;
     if (next!=selected) {
         [self selectPoint:next];
-        [(Controller *)theController update:self];
+        [(EEController *)theController update:self];
     } 
 }
 
@@ -1233,7 +1234,7 @@ int token(char *t)
 	previous = 0;
     if (previous != selected) {
         [self selectPoint: previous];
-        [(Controller *)theController update: self];
+        [(EEController *)theController update: self];
     } 
 }
 
@@ -1248,7 +1249,7 @@ int token(char *t)
     if (coord != xValues[n]) {                    // if x changed update display panel
         xValues[n] = coord;
         [self setNeedsDisplay:YES];
-        [(Controller *)theController update: self];
+        [(EEController *)theController update: self];
     }
     return self;
 }
@@ -1263,7 +1264,7 @@ int token(char *t)
     if (coord != yValues[n]) {                   // if y changed update display panel
         yValues[n] = coord;
         [self setNeedsDisplay:YES];
-        [(Controller *)theController update: self];
+        [(EEController *)theController update: self];
     }
     return self;
 }
@@ -1294,7 +1295,7 @@ int token(char *t)
     if (value != sValues[n]) {                  // if smoothing changed update panel
         sValues[n] = value;
         [self setNeedsDisplay:YES];
-        [(Controller *)theController update: self];
+        [(EEController *)theController update: self];
     }
     return self;
 }
@@ -1304,12 +1305,16 @@ int token(char *t)
  
 - (void) setXMinTo: (CGFloat) coord
 {
+    self.xMin = coord;
+}
+- (void) setXMin: (CGFloat) coord
+{
     if (coord < xMax) {
         xMin = coord;
         [self setNeedsDisplay:YES];
     }
     else if (theController != nil)
-        [(Controller *)theController update: self]; 
+        [(EEController *)theController update: self]; 
 }
 
 //-------------------------------------------------------------------
@@ -1317,23 +1322,27 @@ int token(char *t)
  
 - (void) setXMaxTo: (CGFloat) coord
 {
+    self.xMax = coord;
+}
+
+- (void) setXMax:(CGFloat)coord
+{
     if (coord > xMin) {
         xMax = coord;
         [self setNeedsDisplay:YES];
     }
     else if (theController != nil)
-        [(Controller *)theController update: self]; 
+        [(EEController *)theController update: self]; 
 }
 
 //-------------------------------------------------------------------
 // setXLimitsTo:: changes max and min values of x component
  
-- setXLimitsTo: (CGFloat) min : (CGFloat) max
+- (void)setXLimitsTo: (CGFloat) min : (CGFloat) max
 {
     xMin = min;
     xMax = max;
     [self setNeedsDisplay:YES];
-    return self;
 }
 
 //-------------------------------------------------------------------
@@ -1341,12 +1350,15 @@ int token(char *t)
  
 - (void) setYMinTo: (CGFloat) coord
 {
+    self.yMin = coord;
+}
+- (void) setYMin: (CGFloat) coord {
     if (coord < yMax) {
         yMin = coord;
         [self setNeedsDisplay:YES];
     }
     else if (theController != nil)
-        [(Controller *)theController update: self]; 
+        [(EEController *)theController update: self]; 
 }
 
 //-------------------------------------------------------------------
@@ -1354,12 +1366,17 @@ int token(char *t)
  
 - (void) setYMaxTo: (CGFloat) coord
 {
+    self.yMax = coord;
+}
+
+- (void) setYMax: (CGFloat) coord
+{
     if (coord > yMax) {
         yMax = coord;
         [self setNeedsDisplay:YES];
     }
     else if (theController != nil)
-        [(Controller *)theController update: self]; 
+        [(EEController *)theController update: self]; 
 }
 
 //-------------------------------------------------------------------
@@ -1389,8 +1406,8 @@ int token(char *t)
         [theEnvelope setStickPoint: MAXINT];
     else
         [theEnvelope setStickPoint: point];
-    [(Controller *)theController update: self];
-    [self display]; 
+    [(EEController *)theController update: self];
+    [self setNeedsDisplay:YES];
 }
 
 //-------------------------------------------------------------------
@@ -1399,8 +1416,8 @@ int token(char *t)
 - (void) setShowSmooth: (BOOL) state
 {
     showSmooth = state;
-    [self display];
-    [(Controller *)theController update: self]; 
+    [self setNeedsDisplay:YES];
+    [(EEController *)theController update: self]; 
 }
 
 //-------------------------------------------------------------------
@@ -1409,8 +1426,8 @@ int token(char *t)
 - (void) setDrawSegments: (BOOL) state
 {
     drawSegments = state;
-    [self display];
-    [(Controller *)theController update: self]; 
+    [self setNeedsDisplay:YES];
+    [(EEController *)theController update: self];
 }
 
 //-------------------------------------------------------------------
@@ -1523,6 +1540,8 @@ int token(char *t)
 //-------------------------------------------------------------------
 // (float) getXMax 
 
+@synthesize xMax;
+
 - (CGFloat) getXMax
 { 
     return xMax;
@@ -1531,54 +1550,67 @@ int token(char *t)
 //-------------------------------------------------------------------
 // (float)getXMin 
 
+@synthesize xMin;
+
 - (CGFloat) getXMin
 {
-    return xMin;
+    return self.xMin;
 }
 
 //-------------------------------------------------------------------
 // (float)getYMax 
 
+@synthesize yMax;
+
 - (CGFloat) getYMax
 {
-    return yMax;
+    return self.yMax;
 }
 
 //-------------------------------------------------------------------
 // (float)getYMin 
 
+@synthesize yMin;
+
 - (CGFloat) getYMin
 {
-    return yMin;
+    return self.yMin;
 }
 
 //-------------------------------------------------------------------
 // (float)getXSnap 
 
+@synthesize xSnap;
+
 - (CGFloat) getXSnap
 {
-    return xSnap;
+    return self.xSnap;
 }
 
 //-------------------------------------------------------------------
 // (float)getYSnap 
 
+@synthesize ySnap;
+
 - (CGFloat) getYSnap
 {
-    return ySnap;
+    return self.ySnap;
 }
 
 //-------------------------------------------------------------------
 - (BOOL) getShowSmooth
 {
-    return showSmooth;
+    return self.showSmooth;
 }
+@synthesize showSmooth;
 
 //-------------------------------------------------------------------
 - (BOOL) getDrawSegments
 {
-    return drawSegments;
+    return self.drawSegments;
 }
+
+@synthesize drawSegments;
 
 @end
 
