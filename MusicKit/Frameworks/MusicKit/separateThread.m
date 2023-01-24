@@ -257,7 +257,7 @@ static void killMusicKitThread(void)
 {
     if (performanceThread == nil)
         return;
-    if (MKIsTraced(MK_TRACECONDUCTOR))
+    if (MKIsTraced(MKTraceConductor))
         NSLog(@"Attempting to kill the MK Thread\n");
 
     // This is only called by a function that has checked it is not in the MusicKit thread.
@@ -280,12 +280,12 @@ static void removeTimedEntry(BackgroundThreadAction arg)
 {
     switch (arg) {
     case pauseThread:
-        if (MKIsTraced(MK_TRACECONDUCTOR))
+        if (MKIsTraced(MKTraceConductor))
             NSLog(@"Pausing separate MK performance thread\n");
         adjustTimedEntry(MK_ENDOFTIME); // pausing consists of waiting for a long, long time.
         break;
     case exitThread:
-        if (MKIsTraced(MK_TRACECONDUCTOR))
+        if (MKIsTraced(MKTraceConductor))
             NSLog(@"Exiting separate MK performance thread\n");
 	if (separateThread && notInMusicKitThread() && performanceThread != nil) {
 	    killMusicKitThread();
@@ -528,7 +528,7 @@ static void resetPriority(void)
         timeToWait = ([MKConductor isPaused] ? MK_ENDOFTIME :
                       ([MKConductor isClocked] ? _MKTheTimeToWait(condQueue->nextMsgTime) : 0.0));
 
-        if (MKIsTraced(MK_TRACECONDUCTOR))
+        if (MKIsTraced(MKTraceConductor))
             NSLog(@"MK: timeToWait in seconds %lf\n", timeToWait);
 
 	// We better have the lock and we know we want to give it up.
@@ -573,7 +573,7 @@ static void resetPriority(void)
 	    // NSLog(@"MK: Now have the performance thread lock %@ before exit\n", performanceLock);
 	}
     }
-    if (MKIsTraced(MK_TRACECONDUCTOR))
+    if (MKIsTraced(MKTraceConductor))
         NSLog(@"MK: Exited the inPerformance loop\n");
     resetPriority();
     performanceThread = nil;
@@ -630,7 +630,7 @@ enum {
 	[bgdm_threadLock lockWhenCondition: BGDM_hasFlag];
 	if (bgdm_sem == BGDM_delegateMessageReady)  {
 	    NSInvocation *delegateMessage = nil;
-	    int count;
+	    NSInteger count;
 	    
       // quickly release the lock so we don't deadlock if the queued messages take
       // a while to go through.

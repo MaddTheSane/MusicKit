@@ -434,7 +434,7 @@ void  _MKWriteMidiOut(MKNote *aNote, double timeTag, unsigned chan, /* 1 based *
 	       this note tag. */
             if (noteTag == MAXINT) {
                 if (type == MK_noteOn) {
-                    if (MKIsTraced(MK_TRACEMIDI)) {
+                    if (MKIsTraced(MKTraceMIDI)) {
                         NSLog(@"NoteOn missing a noteTag at time %f",
                                 ptr->_timeTag);
                     }
@@ -509,13 +509,13 @@ void  _MKWriteMidiOut(MKNote *aNote, double timeTag, unsigned chan, /* 1 based *
 		if (MKGetInclusiveMidiTranslation()) {
 		    keyNum = [aNote parAsInt:MK_keyNum];
 		    if (keyNum == MAXINT) {
-                        if (MKIsTraced(MK_TRACEMIDI)) {
+                        if (MKIsTraced(MKTraceMIDI)) {
 			    NSLog(@"NoteOff missing a note tag and keyNum at time %f", ptr->_timeTag);
 			}
 			break;
 		    } else noteOff(chan,UCHAR(keyNum),velocity,ptr);
 		} else {
-                    if (MKIsTraced(MK_TRACEMIDI)) {
+                    if (MKIsTraced(MKTraceMIDI)) {
                         NSLog(@"NoteOff missing a note tag at time %f", ptr->_timeTag);
                     }
                 }
@@ -524,7 +524,7 @@ void  _MKWriteMidiOut(MKNote *aNote, double timeTag, unsigned chan, /* 1 based *
                 // NSLog(@"ptr %p Map %p, Note tag %d", ptr, ptr->_map[chan], noteTag);
                 mapNode = (midiOutNode *) NSMapGet(ptr->_map[chan], noteTag);
 		if (!mapNode) {
-                    if (MKIsTraced(MK_TRACEMIDI)) {
+                    if (MKIsTraced(MKTraceMIDI)) {
 			NSLog(@"NoteOff for noteTag %d which is already off at time %f", noteTag, ptr->_timeTag);
 		    }
 		    break;
@@ -550,7 +550,7 @@ void  _MKWriteMidiOut(MKNote *aNote, double timeTag, unsigned chan, /* 1 based *
 		}
 		else {
 		    (*ptr->_sendBufferedData)(ptr);
-                    if (MKIsTraced(MK_TRACEMIDI)) {
+                    if (MKIsTraced(MKTraceMIDI)) {
 			NSLog(@"PolyKeyPressure with invalid noteTag or missing keyNum: %s %f;", _MKTokNameNoCheck(_MK_time), ptr->_timeTag);
 		    }
 		    break; /* Gets us out of entire case statement */

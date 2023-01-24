@@ -156,7 +156,7 @@ int _MKGetPar(NSString *aName, _ParName **aPar)
 		parArrSize = highestPar + EXPANDAMT;
 	    }
 	parIds[highestPar] = *aPar;
-	if (MKIsTraced(MK_TRACEPARS))
+	if (MKIsTraced(MKTraceParameters))
 	    NSLog(@"Adding new parameter %@\n", (*aPar)->s);
 	return highestPar;
     }

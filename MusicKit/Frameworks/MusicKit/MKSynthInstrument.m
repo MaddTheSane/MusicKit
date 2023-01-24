@@ -375,8 +375,8 @@ static id adjustRunningPatch(MKSynthInstrument *self,int newNoteTag,id aNote,
 	return nil;
     }
 
-    if (MKIsTraced(MK_TRACESYNTHINS) ||
-	MKIsTraced(MK_TRACEPREEMPT))
+    if (MKIsTraced(MKTraceSynthInstrument) ||
+	MKIsTraced(MKTracePreempt))
         NSLog(@"MKSynthInstrument preempts patch %lu at time %f for tag %@.\n",
 	      (uintptr_t)*currentPatch,MKGetTime(), tagStr(newNoteTag));
     *phraseStatus = MK_phraseOnPreempt;
@@ -416,9 +416,9 @@ static id adjustIdlePatch(SynthPatchList *aPatchList,int noteTag)
 			_MK_IDLELIST);
     aPatchList->idleCount--;
     CONSISTENCY_CHECK(aPatchList);
-    if (MKIsTraced(MK_TRACESYNTHINS))
-      NSLog(@"MKSynthInstrument uses patch %d at time %f for tag %@.\n",
-	      (int)currentPatch,MKGetTime(), tagStr(noteTag));
+    if (MKIsTraced(MKTraceSynthInstrument))
+      NSLog(@"MKSynthInstrument uses patch %p at time %f for tag %@.\n",
+	      currentPatch,MKGetTime(), tagStr(noteTag));
     return currentPatch;
 }
 
@@ -467,7 +467,7 @@ static void alternatePatchMsg(void)
  	currentPatch = nil;
 	break;
       case MK_mute:
-	if (MKIsTraced(MK_TRACESYNTHINS))
+	if (MKIsTraced(MKTraceSynthInstrument))
             NSLog(@"MKSynthInstrument receives mute MKNote at time %f.\n", MKGetTime());
 	if (MKIsNoteParPresent(aNote,MK_synthPatch)) {
 	    NSString *sp = [aNote parAsStringNoCopy:MK_synthPatch];
@@ -494,7 +494,7 @@ static void alternatePatchMsg(void)
 	  MKPhraseStatus phraseStatus;
 	  if (currentPatch) {/* We have an active patch already for this tag */
 	      phraseStatus = MK_phraseRearticulate;
-	      if (MKIsTraced(MK_TRACESYNTHINS))
+	      if (MKIsTraced(MKTraceSynthInstrument))
 		NSLog(@"MKSynthInstrument receives note for active notetag stream %@ at time %f.\n",
 			tagStr(noteTag), MKGetTime());
 	  }
@@ -509,7 +509,7 @@ static void alternatePatchMsg(void)
 	      aPatchList = getList(self,aTemplate);
 	      if (!aPatchList)
 		aPatchList = addList(self,aTemplate);
-              if (MKIsTraced(MK_TRACESYNTHINS))
+              if (MKIsTraced(MKTraceSynthInstrument))
 		NSLog(@"MKSynthInstrument receives note for new notetag stream %@ at time %f ",
 			 tagStr(noteTag), MKGetTime());
 	      switch (allocMode) {
@@ -526,9 +526,9 @@ static void alternatePatchMsg(void)
 		  if (currentPatch) {
 		      aPatchList->totalCount++;
 		      CONSISTENCY_CHECK(aPatchList);
-		      if (MKIsTraced(MK_TRACESYNTHINS))
-			  NSLog(@"MKSynthInstrument assigns patch %d at time %f for tag %@.\n",
-				  (int)currentPatch, MKGetTime(), tagStr(noteTag));
+		      if (MKIsTraced(MKTraceSynthInstrument))
+			  NSLog(@"MKSynthInstrument assigns patch %p at time %f for tag %@.",
+				  currentPatch, MKGetTime(), tagStr(noteTag));
 		  }
 		  break;
 		case MK_MANUALALLOC:
@@ -555,7 +555,7 @@ static void alternatePatchMsg(void)
 							     noteTag);
                               /*NB RETURNS RETAINED OBJECT*/
 			      if (currentPatch) {
-				  if (MKIsTraced(MK_TRACESYNTHINS))
+				  if (MKIsTraced(MKTraceSynthInstrument))
 				      alternatePatchMsg();
 				  _MKSynthPatchSetInfo(currentPatch,noteTag,
 						       self);
@@ -573,12 +573,12 @@ static void alternatePatchMsg(void)
 						 aPatchList,
 						 &phraseStatus)) {
                               /* RETURNS RETAINED *currentPatch OBJECT */
-			      if (MKIsTraced(MK_TRACESYNTHINS))
+			      if (MKIsTraced(MKTraceSynthInstrument))
 				  alternatePatchMsg();
 			  }
 			  else { /* Now we give up. */
-			      if (MKIsTraced(MK_TRACESYNTHINS) ||
-				  MKIsTraced(MK_TRACEPREEMPT)) 
+			      if (MKIsTraced(MKTraceSynthInstrument) ||
+				  MKIsTraced(MKTracePreempt))
 				  NSLog(@"MKSynthInstrument omits note at time %f for tag %@.\n",
 					  MKGetTime(), tagStr(noteTag));
 			      MKErrorCode(MK_synthInsOmitNoteErr,MKGetTime());
@@ -967,7 +967,7 @@ static void deallocRunningVoices(MKSynthInstrument *self,id orch)
 		allocSynthPatch:synthPatchClass patchTemplate:aTemplate];
 	if (!aPatch)
 	  break;
-	if (MKIsTraced(MK_TRACESYNTHINS))
+	if (MKIsTraced(MKTraceSynthInstrument))
 	  NSLog(@"MKSynthInstrument allocates patch %p from orchestra %p.\n",aPatch,[aPatch orchestra]);
 	aPatchList->manualCount++;  
 	aPatchList->totalCount++;  

@@ -828,8 +828,8 @@ id _MKSynthPatchNoteDur(MKSynthPatch *synthP,id aNoteDur,BOOL noTag)
         }
     /* We know it can't be shared because you can't specify shared 
        synthElements in the Template. */
-    if (_MK_ORCHTRACE(orchestra,MK_TRACEORCHALLOC))
-        _MKOrchTrace(orchestra,MK_TRACEORCHALLOC,@"Freeing %@_%p",
+    if (_MK_ORCHTRACE(orchestra,MKTraceOrchestraAlloc))
+        _MKOrchTrace(orchestra,MKTraceOrchestraAlloc,@"Freeing %@_%p",
                      NSStringFromClass([self class]), self);
 //    [synthElements makeObjectsPerformSelector:@selector(retain)]; /*sb: this defers the deallocation of the objects from the following statement to a later time. This may be a leak. */
     [synthElements release];
@@ -1158,8 +1158,8 @@ id _MKAddPatchToList(MKSynthPatch *self, MKSynthPatch **headP, MKSynthPatch **ta
     isAllocated = NO;
     [_MKDeallocatedSynthPatches(patchTemplate,_orchIndex) addObject:self];
     _MKOrchResetPreviousLosingTemplate(orchestra);
-    if (_MK_ORCHTRACE(orchestra,MK_TRACEORCHALLOC))
-      _MKOrchTrace(orchestra,MK_TRACEORCHALLOC,
+    if (_MK_ORCHTRACE(orchestra,MKTraceOrchestraAlloc))
+      _MKOrchTrace(orchestra,MKTraceOrchestraAlloc,
                    @"Returning %@_%p to avail pool.",NSStringFromClass([self class]),self);
     return self;
 }

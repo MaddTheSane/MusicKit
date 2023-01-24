@@ -213,6 +213,7 @@ NSScrollView.
 
 #import <AppKit/AppKit.h>
 
+#import <SndKit/SndDefines.h>
 #import <SndKit/SndDisplayDataList.h>
 #import <SndKit/SndDisplayData.h>
 #import <SndKit/Snd.h>
@@ -230,11 +231,8 @@ typedef NS_ENUM(int, SndViewDisplayMode) {
     SndViewDisplayModeWave
 };
 
-#define DeprecatedEnum(type, oldname, newval) \
-static const type oldname NS_DEPRECATED_WITH_REPLACEMENT_MAC( #newval , 10.0, 10.8) = newval
-DeprecatedEnum(SndViewDisplayMode, SND_SOUNDVIEW_MINMAX, SndViewDisplayModeMinMax);
-DeprecatedEnum(SndViewDisplayMode, SND_SOUNDVIEW_WAVE, SndViewDisplayModeWave);
-#undef DeprecatedEnum
+SndDeprecatedEnum(SndViewDisplayMode, SND_SOUNDVIEW_MINMAX, SndViewDisplayModeMinMax);
+SndDeprecatedEnum(SndViewDisplayMode, SND_SOUNDVIEW_WAVE, SndViewDisplayModeWave);
 
 // Legacy definitions
 #define NX_SOUNDVIEW_MINMAX SND_SOUNDVIEW_MINMAX

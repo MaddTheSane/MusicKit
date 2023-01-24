@@ -55,8 +55,8 @@ static void doDealloc(SynthElement *synthEl, BOOL shouldIdle)
     if (shouldIdle)
       [synthEl idle];
     synthEl->synthPatch = nil;
-    if (_MK_ORCHTRACE(synthEl->orchestra,MK_TRACEORCHALLOC))
-        _MKOrchTrace(synthEl->orchestra,MK_TRACEORCHALLOC,
+    if (_MK_ORCHTRACE(synthEl->orchestra,MKTraceOrchestraAlloc))
+        _MKOrchTrace(synthEl->orchestra,MKTraceOrchestraAlloc,
                      @"Deallocating %@",
                      [NSStringFromClass([synthEl class]) stringByAppendingFormat:@" %p", synthEl]);
 		    /* [[synthEl name] UTF8String]); */

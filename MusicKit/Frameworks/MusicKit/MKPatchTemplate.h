@@ -190,7 +190,7 @@ MKUnitGenerator directly to another MKUnitGenerator.
   @param  isOrdered is a BOOL.
   @return Returns an unsigned.
  */
-- (unsigned) addUnitGenerator: (id) aUGClass ordered: (BOOL) isOrdered; 
+- (NSInteger) addUnitGenerator: (Class) aUGClass ordered: (BOOL) isOrdered;
 
 /*!
   @brief Adds an ordered MKUnitGenerator specification to the receiver.
@@ -199,7 +199,7 @@ MKUnitGenerator directly to another MKUnitGenerator.
   @param  aUGClass is an id.
   @return Returns an unsigned integer that identifies the MKUnitGenerator specification.
 */
-- (unsigned) addUnitGenerator: (id) aUGClass; 
+- (NSInteger) addUnitGenerator: (Class) aUGClass; 
 
 /*!
   @brief Adds a MKSynthData specification to the receiver.
@@ -210,7 +210,7 @@ MKUnitGenerator directly to another MKUnitGenerator.
   @param  len is an unsigned.
   @return Returns an unsigned integer that identifies the MKSynthData specification.
  */
-- (unsigned) addSynthData: (MKOrchMemSegment) segment length: (unsigned) len; 
+- (NSInteger) addSynthData: (MKOrchMemSegment) segment length: (unsigned) len;
 
 /*!
   @brief Adds a patchpoint (MKSynthData) specification to the receiver.
@@ -221,14 +221,14 @@ MKUnitGenerator directly to another MKUnitGenerator.
   @param  segment is a MKOrchMemSegment.
   @return Returns an unsigned.
 */
-- (unsigned) addPatchpoint: (MKOrchMemSegment) segment;
+- (NSInteger) addPatchpoint: (MKOrchMemSegment) segment;
 
 /*!
   @brief Returns the number of MKUnitGenerator and MKSynthData specifications
   (including patchpoints) that have been added to the receiver.
   @return Returns an unsigned.
 */
-- (unsigned) synthElementCount;
+- (NSInteger) synthElementCount;
 
 /* 
  You never send this message directly.  

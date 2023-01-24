@@ -199,19 +199,19 @@ NSMutableArray *_MKDeepMutableArrayCopy(NSMutableArray *oldArray)
 /* See musickit.h for details */
 
 /* Set a trace bit */
-unsigned MKSetTrace(int debugFlag)
+MKTraceFlags MKSetTrace(MKTraceFlags debugFlag)
 {
-    return (unsigned)(_MKTraceFlag |= debugFlag);
+    return (MKTraceFlags)(_MKTraceFlag |= debugFlag);
 }
 
 /* Clear a trace bit */
-unsigned MKClearTrace(int debugFlag)
+MKTraceFlags MKClearTrace(MKTraceFlags debugFlag)
 {
-    return (unsigned)(_MKTraceFlag &= (~debugFlag));
+    return (MKTraceFlags)(_MKTraceFlag &= (~debugFlag));
 }
 
 /* Check a trace bit */
-BOOL MKIsTraced(int debugFlag)
+BOOL MKIsTraced(MKTraceFlags debugFlag)
 {
     return (_MKTraceFlag & debugFlag) ? YES : NO;
 }

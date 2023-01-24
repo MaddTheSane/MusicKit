@@ -325,6 +325,7 @@ release notes for the latest information on supported drivers.
 #define __MK_Orchestra_H___
 
 #import <Foundation/Foundation.h>
+#import <SndKit/SndDefines.h>
 #import <SndKit/SndKit.h>
 #import <MusicKit/orch.h>
 #import <MusicKit/MKDeviceStatus.h>
@@ -1774,28 +1775,23 @@ typedef NS_OPTIONS(unsigned, MKOrchestraCapabilities) {
 
 @end
 
-#define DeprecatedEnum(type, oldname, newval) \
-static const type oldname NS_DEPRECATED_WITH_REPLACEMENT_MAC( #newval , 10.0, 10.8) = newval
+SndDeprecatedEnum(MKOrchestraSharedType, MK_noOrchSharedType, MKOrchestraSharedTypeNone);
+SndDeprecatedEnum(MKOrchestraSharedType, MK_oscTable, MKOrchestraSharedTypeOscillatorTable);
+SndDeprecatedEnum(MKOrchestraSharedType, MK_waveshapingTable, MKOrchestraSharedTypeWaveshapingTable);
+SndDeprecatedEnum(MKOrchestraSharedType, MK_excitationTable, MKOrchestraSharedTypeExcitationTable);
 
-DeprecatedEnum(MKOrchestraSharedType, MK_noOrchSharedType, MKOrchestraSharedTypeNone);
-DeprecatedEnum(MKOrchestraSharedType, MK_oscTable, MKOrchestraSharedTypeOscillatorTable);
-DeprecatedEnum(MKOrchestraSharedType, MK_waveshapingTable, MKOrchestraSharedTypeWaveshapingTable);
-DeprecatedEnum(MKOrchestraSharedType, MK_excitationTable, MKOrchestraSharedTypeExcitationTable);
+SndDeprecatedEnum(MKEMemType, MK_orchEmemNonOverlaid, MKEMemTypeNonOverlaid);
+SndDeprecatedEnum(MKEMemType, MK_orchEmemOverlaidXYP, MKEMemTypeOverlaidXYP);
+SndDeprecatedEnum(MKEMemType, MK_orchEmemOverlaidPX, MKEMemTypeOverlaidPX);
 
-DeprecatedEnum(MKEMemType, MK_orchEmemNonOverlaid, MKEMemTypeNonOverlaid);
-DeprecatedEnum(MKEMemType, MK_orchEmemOverlaidXYP, MKEMemTypeOverlaidXYP);
-DeprecatedEnum(MKEMemType, MK_orchEmemOverlaidPX, MKEMemTypeOverlaidPX);
+SndDeprecatedEnum(MKOrchestraTiming, MK_UNTIMED, MKOrchestraTimingUntimed);
+SndDeprecatedEnum(MKOrchestraTiming, MK_TIMED, MKOrchestraTimingTimed);
+SndDeprecatedEnum(MKOrchestraTiming, MK_SOFTTIMED, MKOrchestraTimingSoft);
 
-DeprecatedEnum(MKOrchestraTiming, MK_UNTIMED, MKOrchestraTimingUntimed);
-DeprecatedEnum(MKOrchestraTiming, MK_TIMED, MKOrchestraTimingTimed);
-DeprecatedEnum(MKOrchestraTiming, MK_SOFTTIMED, MKOrchestraTimingSoft);
-
-DeprecatedEnum(MKOrchestraCapabilities, MK_nextCompatibleDSPPort, MKOrchestraCapabilitiesNeXTCompatibleDSPPort);
-DeprecatedEnum(MKOrchestraCapabilities, MK_hostSoundOut, MKOrchestraCapabilitiesHostSoundOut);
-DeprecatedEnum(MKOrchestraCapabilities, MK_serialSoundOut, MKOrchestraCapabilitiesSerialSoundOut);
-DeprecatedEnum(MKOrchestraCapabilities, MK_soundIn, MKOrchestraCapabilitiesSoundIn);
-DeprecatedEnum(MKOrchestraCapabilities, MK_soundfileOut, MKOrchestraCapabilitiesSoundFileOut);
-
-#undef DeprecatedEnum
+SndDeprecatedEnum(MKOrchestraCapabilities, MK_nextCompatibleDSPPort, MKOrchestraCapabilitiesNeXTCompatibleDSPPort);
+SndDeprecatedEnum(MKOrchestraCapabilities, MK_hostSoundOut, MKOrchestraCapabilitiesHostSoundOut);
+SndDeprecatedEnum(MKOrchestraCapabilities, MK_serialSoundOut, MKOrchestraCapabilitiesSerialSoundOut);
+SndDeprecatedEnum(MKOrchestraCapabilities, MK_soundIn, MKOrchestraCapabilitiesSoundIn);
+SndDeprecatedEnum(MKOrchestraCapabilities, MK_soundfileOut, MKOrchestraCapabilitiesSoundFileOut);
 
 #endif

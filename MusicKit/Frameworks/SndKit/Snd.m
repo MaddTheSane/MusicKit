@@ -125,7 +125,7 @@
 	tag = 0;
 	
 	if (performancesArray == nil) {
-	    performancesArray     = [NSMutableArray array];
+	    performancesArray     = [[NSMutableArray alloc] init];
 	    performancesArrayLock = [NSLock new];
 	}
 	else

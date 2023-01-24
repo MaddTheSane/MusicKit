@@ -1214,9 +1214,9 @@ static BOOL isSoftDevice(NSString *deviceName, int *unitNum)
 {
     NSString *hostnameDisplay = [hostname length] ? [NSString stringWithFormat: @"host %@", hostname] : @"local host";
     
-    return [NSString stringWithFormat: @"%@ %s %@, unit %d, on %@", [super description],
-      ioMode == MKMidiInputOnly ? "Input from" : ioMode == MKMidiOutputOnly ? "Output to" : "I/O from/to",
-	midiDevName, ioMode == MKMidiInputOnly ? inputUnit : outputUnit, hostnameDisplay];
+    return [NSString stringWithFormat: @"%@ %s %@, unit %ld, on %@", [super description],
+	    ioMode == MKMidiInputOnly ? "Input from" : ioMode == MKMidiOutputOnly ? "Output to" : "I/O from/to",
+	    midiDevName, (long)(ioMode == MKMidiInputOnly ? inputUnit : outputUnit), hostnameDisplay];
 }
 
 // Here we initialize our class variables.

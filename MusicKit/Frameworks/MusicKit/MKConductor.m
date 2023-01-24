@@ -789,7 +789,7 @@ static void initializeConductorList()
     setTime(clockTime = 0.0);       // this forces oldClockTime to 0.0 also.
     initializeConductorList();          // Was before setTime()
     setupMTC();
-    if (MKIsTraced(MK_TRACECONDUCTOR))
+    if (MKIsTraced(MKTraceConductor))
         NSLog(@"Evaluating the beforePerformance queue,%s separate threaded,%s clocked.\n",
 	      separateThread ? "" : " not", isClocked ? "" : " not");
     beforePerformanceQueue = evalSpecialQueue(beforePerformanceQueue, &beforePerformanceQueueEnd);
@@ -848,7 +848,7 @@ static void evalAfterQueues()
     /* Calls evalSpecialQueue for both the private and public after-performance
        queues. */
 {
-    if (MKIsTraced(MK_TRACECONDUCTOR))
+    if (MKIsTraced(MKTraceConductor))
         NSLog(@"Evaluating afterPerformance queue.\n");
    _afterPerformanceQueue = evalSpecialQueue(_afterPerformanceQueue, &_afterPerformanceQueueEnd);
    afterPerformanceQueue = evalSpecialQueue(afterPerformanceQueue, &afterPerformanceQueueEnd);
@@ -870,7 +870,7 @@ static void evalAfterQueues()
 {	
     double lastTime;
     
-    if (MKIsTraced(MK_TRACECONDUCTOR))
+    if (MKIsTraced(MKTraceConductor))
         NSLog(@"finishPerformance,%s separate threaded,%s in performance.\n", separateThread ? "" : " not", inPerformance ? "" : " not");
     if (!inPerformance) {
 	evalAfterQueues(); /* This is needed for MKFinishPerformance() */
@@ -1918,7 +1918,7 @@ static double getNextMsgTime(MKConductor *aCond)
     // able to check the performance status, it's possible for the performance to end while waiting, 
     // such that by the time we arrive here, we don't want to perform anything, so we split this crazy scene...
     if(!inPerformance) {
-        if (MKIsTraced(MK_TRACECONDUCTOR))
+        if (MKIsTraced(MKTraceConductor))
             NSLog(@"Early escape from masterConductorBody as not in performance\n"); 
         _MKUnlock(); // drop the lock before this early out.
         return;
@@ -1935,7 +1935,7 @@ static double getNextMsgTime(MKConductor *aCond)
         curProc = popMsgQueue(&(curRunningCond->_msgQueue));
         if (curProc->_timeOfMsg > curRunningCond->time) // IMPORTANT--Performers can give us negative vals
             curRunningCond->time = curProc->_timeOfMsg;
-        if (MKIsTraced(MK_TRACECONDUCTOR))
+        if (MKIsTraced(MKTraceConductor))
             NSLog(@"t %g\n", clockTime);
         if (!curProc->_conductorFrees) {
             // NSLog(@"I'm not supposed to free %d, %@\n", curProc->_argCount, curProc->_toObject);

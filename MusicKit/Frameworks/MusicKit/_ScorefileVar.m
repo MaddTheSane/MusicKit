@@ -251,16 +251,6 @@ id _MKSetScorefileVarPostDaemon(_ScorefileVar *self,void (*funPtr)(id ScorefileV
     return self;
 }
 
--copy 
-    /* Returns a copy of the ScorefileVar with the string datum
-       copied. */
-{
-    _ScorefileVar *rtnVal;
-    rtnVal = [super copy];
-    rtnVal->myParameter = _MKCopyParameter(myParameter);
-    return rtnVal;
-}
-
 - (id)copyWithZone:(NSZone *)zone
 {
     _ScorefileVar *copied = [[_ScorefileVar alloc] init];
@@ -287,10 +277,7 @@ id _MKSetScorefileVarPostDaemon(_ScorefileVar *self,void (*funPtr)(id ScorefileV
     [super dealloc];
 }
 
-- (NSString *) varName
-{
-    return s;
-}
+@synthesize varName=s;
 
 @end
 

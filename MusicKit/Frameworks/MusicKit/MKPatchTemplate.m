@@ -194,7 +194,7 @@ Modification history:
     return newObj;
 }
 
-- (unsigned) synthElementCount
+- (NSInteger) synthElementCount
   /* Returns the number of entries in the template. */
 {
     return [_elementStorage count];
@@ -219,7 +219,7 @@ Modification history:
     MKPatchConnection *conn = [[MKPatchConnection alloc] initWithTargetObjectOffset: toObjInt
                                                                            selector: aSelector
                                                                            argument: withObjInt];
-    unsigned int i = [_elementStorage count];
+    NSInteger i = [_elementStorage count];
     if ((toObjInt < i) && (withObjInt < i))
       // This implies that rather than keeping the instance method for the selector, we should retain the selector
       conn->_methodImp =
@@ -236,16 +236,16 @@ Modification history:
 #define SYNTHDATA ((short)3)
 #define PATCHPOINT ((short)4)
 
-static unsigned addEl(MKPatchTemplate *self, MKPatchEntry *newEntry)
+static NSInteger addEl(MKPatchTemplate *self, MKPatchEntry *newEntry)
 {
-    unsigned curIndex = [self->_elementStorage count];
+    NSInteger curIndex = [self->_elementStorage count];
     /* Count is num elements. But we pass an index so need to subtract 1. */ 
     [self->_elementStorage addObject: newEntry];
     // LMS: I'm not quite sure if we should be returning curIndex before the addObject or after.
     return curIndex; 
 }
 
-- (unsigned) addUnitGenerator: (id) aUGClass ordered: (BOOL) isOrdered
+- (NSInteger) addUnitGenerator: (Class) aUGClass ordered: (BOOL) isOrdered
   /* Adds a MKUnitGenerator or PatchPoint class to the receiver. If isOrdered
      is NO, the ordering of the MKUnitGenerator in memory is considered
      irrelevant. It is more efficient, from the standpoint of memory 
@@ -258,13 +258,13 @@ static unsigned addEl(MKPatchTemplate *self, MKPatchEntry *newEntry)
     return addEl(self, newEntry);
 }
 
-- (unsigned) addUnitGenerator: aUGClass
+- (NSInteger) addUnitGenerator: (Class) aUGClass
   /* Same as [self addUnitGenerator:aUGClass ordered:YES]; */
 {
     return [self addUnitGenerator: aUGClass ordered:YES];
 }
 
-- (unsigned) addSynthData: (MKOrchMemSegment) segment length: (unsigned) len
+- (NSInteger) addSynthData: (MKOrchMemSegment) segment length: (unsigned) len
   /* Adds a request for a data memory segment of the specified segment type
      and length. */
 {
@@ -275,7 +275,7 @@ static unsigned addEl(MKPatchTemplate *self, MKPatchEntry *newEntry)
     return addEl(self, newEntry);
 }
 
-- (unsigned) addPatchpoint: (MKOrchMemSegment) segment
+- (NSInteger) addPatchpoint: (MKOrchMemSegment) segment
   /* Adds a request for a data memory segment of the specified segment type */
 {
     MKPatchEntry *newEntry = [[MKPatchEntry alloc] initWithClass: [MKSynthData class]
@@ -340,7 +340,7 @@ id _MKAllocSynthPatch(MKPatchTemplate *templ, id synthPatchClass, id anOrch, int
     id aPatch;
 #if CHECKCLASS
     if (templ) {
-    	int n = [templ->_deallocatedPatches[orchIndex] count];
+	NSInteger n = [templ->_deallocatedPatches[orchIndex] count];
         int ptr=n; id tempObj; //sb
 //        id *ptr = NX_ADDRESS(templ->_deallocatedPatches[orchIndex]) + n; 
 			/* points 1 beyond last object */
@@ -356,8 +356,8 @@ id _MKAllocSynthPatch(MKPatchTemplate *templ, id synthPatchClass, id anOrch, int
 	    }	
 	}
 	if (aPatch) {
-	    if (_MK_ORCHTRACE(anOrch,MK_TRACEORCHALLOC))
-	      _MKOrchTrace(anOrch,MK_TRACEORCHALLOC,
+	    if (_MK_ORCHTRACE(anOrch,MKTraceOrchestraAlloc))
+	      _MKOrchTrace(anOrch,MKTraceOrchestraAlloc,
 			   @"allocSynthPatch returns %@_%p",
                     NSStringFromClass([synthPatchClass class]),aPatch);
 	    [aPatch _allocate]; /* Tell it it's allocated */
@@ -368,8 +368,8 @@ id _MKAllocSynthPatch(MKPatchTemplate *templ, id synthPatchClass, id anOrch, int
     if (templ && 
 #error ListToMutableArray: removeLastObject raises when List equivalent returned nil
 	(aPatch = [templ->_deallocatedPatches[orchIndex] removeLastObject])) {
-	if (_MK_ORCHTRACE(anOrch,MK_TRACEORCHALLOC))
-	  _MKOrchTrace(anOrch,MK_TRACEORCHALLOC,
+	if (_MK_ORCHTRACE(anOrch,MKTraceOrchestraAlloc))
+	  _MKOrchTrace(anOrch,MKTraceOrchestraAlloc,
 		       "allocSynthPatch returns %s_%p",
                 [NSStringFromClass([synthPatchClass class]) UTF8String],aPatch);
 	[aPatch _allocate]; /* Tell it it's allocated */
@@ -382,8 +382,8 @@ id _MKAllocSynthPatch(MKPatchTemplate *templ, id synthPatchClass, id anOrch, int
 	      orchIndex];
     if (!templ)
       return aPatch;
-    if (_MK_ORCHTRACE(anOrch,MK_TRACEORCHALLOC))
-      _MKOrchTrace(anOrch,MK_TRACEORCHALLOC,
+    if (_MK_ORCHTRACE(anOrch,MKTraceOrchestraAlloc))
+      _MKOrchTrace(anOrch,MKTraceOrchestraAlloc,
 		   @"allocSynthPatch building %@_%p...",
                    NSStringFromClass([synthPatchClass class]),aPatch);
     
@@ -433,8 +433,8 @@ id _MKAllocSynthPatch(MKPatchTemplate *templ, id synthPatchClass, id anOrch, int
 	[anOrch endAtomicSection];
 	return nil;
     }
-    if (_MK_ORCHTRACE(anOrch,MK_TRACEORCHALLOC))
-      _MKOrchTrace(anOrch,MK_TRACEORCHALLOC,
+    if (_MK_ORCHTRACE(anOrch,MKTraceOrchestraAlloc))
+      _MKOrchTrace(anOrch,MKTraceOrchestraAlloc,
 		   @"allocSynthPatch connectsContents of %@_%p",
                    NSStringFromClass([synthPatchClass class]),aPatch);
     [anOrch endAtomicSection];

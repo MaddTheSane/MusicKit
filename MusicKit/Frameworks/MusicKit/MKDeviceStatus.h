@@ -17,6 +17,7 @@
  */
 
 #import <Foundation/NSObjCRuntime.h>
+#import <SndKit/SndDefines.h>
 
 /*!
   @brief Status for MKMidi/MKOrchestra MusicKit classes.
@@ -55,11 +56,9 @@ typedef NS_ENUM(int, MKDeviceStatus) {
     MKDeviceStatusStopped
 };
 
-#define DeprecatedEnum(type, oldname, newval) \
-static const type oldname NS_DEPRECATED_WITH_REPLACEMENT_MAC( #newval , 10.0, 10.8) = newval
-DeprecatedEnum(MKDeviceStatus, MK_devClosed, MKDeviceStatusClosed);
-DeprecatedEnum(MKDeviceStatus, MK_devOpen, MKDeviceStatusOpen);
-DeprecatedEnum(MKDeviceStatus, MK_devRunning, MKDeviceStatusRunning);
-DeprecatedEnum(MKDeviceStatus, MK_devStopped, MKDeviceStatusStopped);
-#undef DeprecatedEnum
+SndDeprecatedEnum(MKDeviceStatus, MK_devClosed, MKDeviceStatusClosed);
+SndDeprecatedEnum(MKDeviceStatus, MK_devOpen, MKDeviceStatusOpen);
+SndDeprecatedEnum(MKDeviceStatus, MK_devRunning, MKDeviceStatusRunning);
+SndDeprecatedEnum(MKDeviceStatus, MK_devStopped, MKDeviceStatusStopped);
+
 #endif

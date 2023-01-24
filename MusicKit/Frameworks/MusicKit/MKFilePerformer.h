@@ -289,7 +289,7 @@ Creation of a MKFilePerformer's MKNoteSender(s) is a subclass responsibility.
   @param  aTimeTag is a double.
   @return Returns an id.
 */
-- setFirstTimeTag: (double) aTimeTag;
+- (void) setFirstTimeTag: (double) aTimeTag;
 
 /*!
   @brief Sets the largest timeTag considered for performance to <i>aTimeTag</i>.
@@ -299,7 +299,7 @@ Creation of a MKFilePerformer's MKNoteSender(s) is a subclass responsibility.
   @param  aTimeTag is a double.
   @return Returns an id.
 */
-- setLastTimeTag: (double) aTimeTag; 
+- (void) setLastTimeTag: (double) aTimeTag; 
 
 /*!
   @brief Returns the object's <b>firstTimeTag</b> value.

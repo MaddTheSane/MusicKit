@@ -1125,8 +1125,8 @@ associated with it exists.
 	return nil;
     if (_MKInstallSharedObject(self->_sharedSet,aSynthObj,aKeyObj,whichSegment,
                                length,type)) {
-        if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC))
-	    _MKOrchTrace(self,MK_TRACEORCHALLOC,
+        if (_MK_ORCHTRACE(self,MKTraceOrchestraAlloc))
+	    _MKOrchTrace(self,MKTraceOrchestraAlloc,
 			 @"Installing shared data %@ in segment %@.",
 			 NSStringFromClass([aKeyObj class]) ,[self segmentName: whichSegment]);
         return self;
@@ -1698,8 +1698,8 @@ useful for DSP debugging. */
     if (!noops)
 	return;
     DSPSetCurrentDSP(self->orchIndex);
-    if (_MK_ORCHTRACE(self,MK_TRACEDSP))
-	_MKOrchTrace(self,MK_TRACEDSP,@"inserting %d NOOPs at %d",noops,where);
+    if (_MK_ORCHTRACE(self,MKTraceDSP))
+	_MKOrchTrace(self,MKTraceDSP,@"inserting %d NOOPs at %d",noops,where);
     DSPMKMemoryFillSkipTimed(_MKCurSample(self),NOOP,DSP_MS_P,where,1,noops);
 }
 
@@ -2142,9 +2142,9 @@ static void putLeaper(MKOrchestra *self, int leapTo)
 off chip. */
 {
     int leaper[LEAPERSIZE]; 
-    if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC))
+    if (_MK_ORCHTRACE(self,MKTraceOrchestraAlloc))
 	if (!self->isLoopOffChip)
-	    _MKOrchTrace(self,MK_TRACEORCHALLOC, @"Moving loop off chip.");
+	    _MKOrchTrace(self,MKTraceOrchestraAlloc, @"Moving loop off chip.");
     leaper[0] = NOOP;
     leaper[1] = JUMP;
     leaper[2] = leapTo;
@@ -2167,8 +2167,8 @@ off chip. */
     if (_parenCount == -1)
 	return self;
     if (_parenCount++ == 0) {
-        if (_MK_ORCHTRACE(self,MK_TRACEDSP))
-	    _MKOrchTrace(self,MK_TRACEDSP,@"<<< Begin orchestra atomic unit ");
+        if (_MK_ORCHTRACE(self,MKTraceDSP))
+	    _MKOrchTrace(self,MKTraceDSP,@"<<< Begin orchestra atomic unit ");
         DSPMKEnableAtomicTimed(_MKCurSample(self));
     }
     return self;
@@ -2182,8 +2182,8 @@ off chip. */
     if (_parenCount == -1)
 	return self;
     if (--_parenCount == 0) {
-        if (_MK_ORCHTRACE(self,MK_TRACEDSP))
-	    _MKOrchTrace(self,MK_TRACEDSP,@"end orchestra atomic unit.>>> ");
+        if (_MK_ORCHTRACE(self,MKTraceDSP))
+	    _MKOrchTrace(self,MKTraceDSP,@"end orchestra atomic unit.>>> ");
         DSPMKDisableAtomicTimed(_MKCurSample(self));
     }
     else if (_parenCount < 0) 
@@ -2346,8 +2346,8 @@ MK_xSig or MK_ySig memory. */
     CHECKADJUSTTIME();
     if ((_previousLosingTemplate == p) || /* If we just lost, don't even try */
         (!(rtnVal = _MKAllocSynthPatch(p,aSynthPatchClass,self,orchIndex)))){
-        if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC))
-	    _MKOrchTrace(self,MK_TRACEORCHALLOC,
+        if (_MK_ORCHTRACE(self,MKTraceOrchestraAlloc))
+	    _MKOrchTrace(self,MKTraceOrchestraAlloc,
 			 @"allocSynthPatch can't allocate %@",
 			 NSStringFromClass([aSynthPatchClass class]));
         _previousLosingTemplate = p;
@@ -2362,13 +2362,13 @@ return rtnVal;
     /* Allocate unit generator of the specified class. */
 {
     id rtnVal;
-    if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC))
-	_MKOrchTrace(self,MK_TRACEORCHALLOC,
+    if (_MK_ORCHTRACE(self,MKTraceOrchestraAlloc))
+	_MKOrchTrace(self,MKTraceOrchestraAlloc,
 		     @"allocUnitGenerator looking for a %@.",NSStringFromClass([factObj class]));
     rtnVal = allocUG(self,factObj,nil,nil);
-    if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC))
+    if (_MK_ORCHTRACE(self,MKTraceOrchestraAlloc))
 	if (rtnVal)
-	    _MKOrchTrace(self,MK_TRACEORCHALLOC,
+	    _MKOrchTrace(self,MKTraceOrchestraAlloc,
 			 @"allocUnitGenerator returns %@_%p",NSStringFromClass([rtnVal class]),rtnVal);
     return rtnVal;
 }
@@ -2378,15 +2378,15 @@ return rtnVal;
     instance. */
 {
     id rtnVal;
-    if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC))
-	_MKOrchTrace(self,MK_TRACEORCHALLOC,
+    if (_MK_ORCHTRACE(self,MKTraceOrchestraAlloc))
+	_MKOrchTrace(self,MKTraceOrchestraAlloc,
 		     @"allocUnitGenerator looking for a %@ before %@_%p",
 		     NSStringFromClass([factObj class]),
 		     NSStringFromClass([aUnitGeneratorInstance class]),
 		     aUnitGeneratorInstance);
     rtnVal = allocUG(self,factObj,aUnitGeneratorInstance,nil);
-    if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC))
-	_MKOrchTrace(self,MK_TRACEORCHALLOC,
+    if (_MK_ORCHTRACE(self,MKTraceOrchestraAlloc))
+	_MKOrchTrace(self,MKTraceOrchestraAlloc,
 		     @"allocUnitGenerator returns %@_%p",
 		     NSStringFromClass([rtnVal class]), rtnVal);
     return rtnVal;
@@ -2397,15 +2397,15 @@ return rtnVal;
     after the specified instance. */
 {
     id rtnVal;
-    if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC))
-	_MKOrchTrace(self,MK_TRACEORCHALLOC,
+    if (_MK_ORCHTRACE(self,MKTraceOrchestraAlloc))
+	_MKOrchTrace(self,MKTraceOrchestraAlloc,
 		     @"allocUnitGenerator looking for a %@ after %@_%p",
 		     NSStringFromClass([factObj class]),
 		     NSStringFromClass([aUnitGeneratorInstance class]),
 		     aUnitGeneratorInstance);
     rtnVal = allocUG(self,factObj,nil,aUnitGeneratorInstance);
-    if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC))
-	_MKOrchTrace(self,MK_TRACEORCHALLOC,
+    if (_MK_ORCHTRACE(self,MKTraceOrchestraAlloc))
+	_MKOrchTrace(self,MKTraceOrchestraAlloc,
 		     @"allocUnitGenerator returns %@_%p",
 		     NSStringFromClass([rtnVal class]),
 		     rtnVal);
@@ -2418,8 +2418,8 @@ return rtnVal;
     specified instances. */
 {
     id rtnVal;
-    if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC))
-	_MKOrchTrace(self,MK_TRACEORCHALLOC,
+    if (_MK_ORCHTRACE(self,MKTraceOrchestraAlloc))
+	_MKOrchTrace(self,MKTraceOrchestraAlloc,
 		     @"allocUnitGenerator looking for a %@ after %@_%p and before %@_%p",
 		     NSStringFromClass([factObj class]),
 		     NSStringFromClass([aUnitGeneratorInstance class]),
@@ -2428,9 +2428,9 @@ return rtnVal;
 		     anotherUnitGeneratorInstance);
     rtnVal = allocUG(self,factObj,anotherUnitGeneratorInstance,
                      aUnitGeneratorInstance);
-    if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC))
+    if (_MK_ORCHTRACE(self,MKTraceOrchestraAlloc))
 	if (rtnVal)
-	    _MKOrchTrace(self,MK_TRACEORCHALLOC,
+	    _MKOrchTrace(self,MKTraceOrchestraAlloc,
 			 @"allocUnitGenerator returns %@_%p",
 			 NSStringFromClass([rtnVal class]),rtnVal);
     return rtnVal;
@@ -2452,28 +2452,28 @@ static DSPAddress allocMem(MKOrchestra *self,MKOrchMemSegment segment,unsigned s
     to allocate patch points but the size must be DSPMK_NTICK. */
 {
     DSPAddress baseAddr;
-    if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC))
-	_MKOrchTrace(self,MK_TRACEORCHALLOC,
+    if (_MK_ORCHTRACE(self,MKTraceOrchestraAlloc))
+	_MKOrchTrace(self,MKTraceOrchestraAlloc,
 		     @"allocSynthData: looking in segment %@ for size %d.",
 		     orchMemSegmentNames[segment],size);
     baseAddr = allocMem(self,segment,size,NO);
     if (baseAddr == BADADDR) {
 	lastAllocFailStr = 
 	@"Allocation failure: Patchpoints must be 16 samples long.";
-	if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC))
-	    _MKOrchTrace(self,MK_TRACEORCHALLOC, @"%@", lastAllocFailStr);
+	if (_MK_ORCHTRACE(self,MKTraceOrchestraAlloc))
+	    _MKOrchTrace(self,MKTraceOrchestraAlloc, @"%@", lastAllocFailStr);
         return nil;
     }
     else if (baseAddr == NOMEMORY) {
 	lastAllocFailStr = 
 	@"Allocation failure: No more offchip data memory.";
-        if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC))
-	    _MKOrchTrace(self,MK_TRACEORCHALLOC,
+        if (_MK_ORCHTRACE(self,MKTraceOrchestraAlloc))
+	    _MKOrchTrace(self,MKTraceOrchestraAlloc,
 			 @"%@", lastAllocFailStr);
         return nil;
     }
-    else if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC)) 
-	_MKOrchTrace(self,MK_TRACEORCHALLOC,
+    else if (_MK_ORCHTRACE(self,MKTraceOrchestraAlloc))
+	_MKOrchTrace(self,MKTraceOrchestraAlloc,
 		     @"allocSynthData returns %@ %d of length %d.",
 		     orchMemSegmentNames[segment],baseAddr,size);
     return [MKSynthData _newInOrch: self index: orchIndex
@@ -2623,8 +2623,8 @@ freed.
 	    sp = [aUG synthPatch];
 	    if (sp)
 		[sp _prepareToFree: &spHead : &spTail];
-	    if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC))
-		_MKOrchTrace(self,MK_TRACEORCHALLOC,garbageMsg,NSStringFromClass([aUG class]),
+	    if (_MK_ORCHTRACE(self,MKTraceOrchestraAlloc))
+		_MKOrchTrace(self,MKTraceOrchestraAlloc,garbageMsg,NSStringFromClass([aUG class]),
 			     aUG);
 	    freeUG(self,aUG,sp);/*sb: this includes a release, to finally release what we held above */
     }
@@ -2674,8 +2674,8 @@ Note that endOfUGList is one past the last UG we'll blt */
 {
     DSPFix48 *ts = _MKCurSample(self);
     register id el;
-    if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC)) 
-	_MKOrchTrace(self,MK_TRACEORCHALLOC,@"Copying arguments.");
+    if (_MK_ORCHTRACE(self,MKTraceOrchestraAlloc))
+	_MKOrchTrace(self,MKTraceOrchestraAlloc,@"Copying arguments.");
     if (reso->xArg && (argBLTFrom->xArg != argBLTTo->xArg))
 	DSPMKBLTTimed(ts,DSP_MS_X,argBLTFrom->xArg,
 		      argBLTTo->xArg,reso->xArg);
@@ -2719,8 +2719,8 @@ Note that endOfUGList is one past the last UG we'll blt */
     DSPFix48 *ts = _MKCurSample(self);
     unsigned int el;
 //    register id *el;
-    if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC)) 
-	_MKOrchTrace(self,MK_TRACEORCHALLOC,@"Copying p memory.");
+    if (_MK_ORCHTRACE(self,MKTraceOrchestraAlloc))
+	_MKOrchTrace(self,MKTraceOrchestraAlloc,@"Copying p memory.");
     if (reso->pLoop && (loopBLTFrom->pLoop != loopBLTTo->pLoop))
 	DSPMKBLTTimed(ts,DSP_MS_P,loopBLTFrom->pLoop,
 		      loopBLTTo->pLoop,reso->pLoop);
@@ -2787,9 +2787,9 @@ Returns YES if compaction was accomplished.
 	if ((sp = [aUG synthPatch]))
 	    [sp _prepareToFree: &spHead : &spTail]; /* won't add twice */
 	DSPSetCurrentDSP(self->orchIndex);
-	if (_MK_ORCHTRACE(self, MK_TRACEORCHALLOC)) {
-	    _MKOrchTrace(self, MK_TRACEORCHALLOC, @"Compacting unitGeneratorStack.");
-	    _MKOrchTrace(self, MK_TRACEORCHALLOC, garbageMsg, NSStringFromClass([aUG class]), aUG);
+	if (_MK_ORCHTRACE(self, MKTraceOrchestraAlloc)) {
+	    _MKOrchTrace(self, MKTraceOrchestraAlloc, @"Compacting unitGeneratorStack.");
+	    _MKOrchTrace(self, MKTraceOrchestraAlloc, garbageMsg, NSStringFromClass([aUG class]), aUG);
 	}
 	/* freeUG sets unitGeneratorStacks to what they would be if this were actually
 	    the top of the unitGeneratorStack. */
@@ -2807,8 +2807,8 @@ Returns YES if compaction was accomplished.
 		[self->unitGeneratorStack removeObject: aUG]; /* Same routine as above.*/ 
 		if ((sp = [aUG synthPatch]))
 		    [sp _prepareToFree: &spHead : &spTail]; 
-		if (_MK_ORCHTRACE(self, MK_TRACEORCHALLOC))
-		    _MKOrchTrace(self, MK_TRACEORCHALLOC, garbageMsg, NSStringFromClass([aUG class]), aUG);
+		if (_MK_ORCHTRACE(self, MKTraceOrchestraAlloc))
+		    _MKOrchTrace(self, MKTraceOrchestraAlloc, garbageMsg, NSStringFromClass([aUG class]), aUG);
 		freeUG2(self,aUG,sp);      /* But now just free offchip mem */ 
 		elNum++;
 	    }
@@ -3195,8 +3195,8 @@ static void setLooper(MKOrchestra *self)
 	(((dataMemBlockStruct *)self->_eMemList[P_IND(self)])->next->baseAddr - 
 	 LOOPERSIZE) 
 					    : self->_piLoop;
-    if (_MK_ORCHTRACE(self,MK_TRACEDSP))
-	_MKOrchTrace(self,MK_TRACEDSP,@"Adding looper at 0x%x.",addr);
+    if (_MK_ORCHTRACE(self,MKTraceDSP))
+	_MKOrchTrace(self,MKTraceDSP,@"Adding looper at 0x%x.",addr);
     DSPSetCurrentDSP(self->orchIndex);
     looper[0] = NOOP; /* Jos says you need a noop before the looper to 
 	insure that there's no problem if final word of 
@@ -3368,12 +3368,12 @@ instance. */
 if (leapOffChip)
 putLeaper(self,reloc->pLoop);
 self->computeTime += time;
-if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC)) {
-    _MKOrchTrace(self,MK_TRACEORCHALLOC,
+if (_MK_ORCHTRACE(self,MKTraceOrchestraAlloc)) {
+    _MKOrchTrace(self,MKTraceOrchestraAlloc,
 		 @"Reloc: pLoop %d, xArg %d, yArg %d, lArg %d, xData %d, yData %d, pSubr %d",
 		 reloc->pLoop,reloc->xArg,reloc->yArg,reloc->lArg,
 		 reloc->xData,reloc->yData,reloc->pSubr);
-    _MKOrchTrace(self,MK_TRACEORCHALLOC,
+    _MKOrchTrace(self,MKTraceOrchestraAlloc,
 		 @"Reso: pLoop %d, xArg %d, yArg %d, lArg %d, xData %d, yData %d, pSubr %d, time %e",
 		 pLoopNeeds,reso->xArg,reso->yArg,reso->lArg,
 		 reso->xData,reso->yData,reso->pSubr,time);
@@ -3430,8 +3430,8 @@ int allocErr;
 		orchMemSegmentNames[allocErr]];
 	    break;
     }
-    if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC))
-	_MKOrchTrace(self,MK_TRACEORCHALLOC,@"%@",self->lastAllocFailStr);
+    if (_MK_ORCHTRACE(self,MKTraceOrchestraAlloc))
+	_MKOrchTrace(self,MKTraceOrchestraAlloc,@"%@",self->lastAllocFailStr);
 }
 
 static id 
@@ -3502,8 +3502,8 @@ allocUG(register MKOrchestra *self,id factObj,id beforeObj,id afterObj)
                 if (beforeObj) {
 		    self->lastAllocFailStr = 
 		    @"Allocation failure: Can't allocate before specified unit generator.";
-                    if (_MK_ORCHTRACE(self,MK_TRACEORCHALLOC))
-			_MKOrchTrace(self,MK_TRACEORCHALLOC,
+                    if (_MK_ORCHTRACE(self,MKTraceOrchestraAlloc))
+			_MKOrchTrace(self,MKTraceOrchestraAlloc,
 				     @"%@", self->lastAllocFailStr);
                 }
                 else

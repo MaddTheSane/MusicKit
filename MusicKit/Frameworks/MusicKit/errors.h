@@ -16,6 +16,7 @@
 #define __MK_errors_H___
 
 #import <Foundation/Foundation.h>
+#import <SndKit/SndDefines.h>
 
 /*!
   @file errors.h
@@ -38,26 +39,39 @@
   @see <b>MKSetTrace()</b>.
   @ingroup Tracing
  */
-/*! DSP (MKOrchestra) resource allocation */
-#define MK_TRACEORCHALLOC 1
-/*! Application-defined parameters, when first encountered. */
-#define MK_TRACEPARS 2
-/*! DSP manipulation */
-#define MK_TRACEDSP 4
-/*! MIDI in/out/time warnings */
-#define MK_TRACEMIDI 8
-/*! MKSynthPatch preemption */
-#define MK_TRACEPREEMPT 16
-/*! MKSynthInstrument mechanations */
-#define MK_TRACESYNTHINS  32
-/*! MKSynthPatch library messages */
-#define MK_TRACESYNTHPATCH 64
-/*! MKUnitGenerator library messages */
-#define MK_TRACEUNITGENERATOR 128
-/*! MKConductor time setting messages */
-#define MK_TRACECONDUCTOR 256
-/*! DSP array-setting messages */
-#define MK_TRACEDSPARRAYS 512
+typedef NS_OPTIONS(unsigned, MKTraceFlags) {
+    /*! DSP (MKOrchestra) resource allocation */
+    MKTraceOrchestraAlloc = 1,
+    /*! Application-defined parameters, when first encountered. */
+    MKTraceParameters = 2,
+    /*! DSP manipulation */
+    MKTraceDSP = 4,
+    /*! MIDI in/out/time warnings */
+    MKTraceMIDI = 8,
+    /*! MKSynthPatch preemption */
+    MKTracePreempt = 16,
+    /*! MKSynthInstrument mechanations */
+    MKTraceSynthInstrument = 32,
+    /*! MKSynthPatch library messages */
+    MKTraceSynthPatches = 64,
+    /*! MKUnitGenerator library messages */
+    MKTraceUnitGenerator = 128,
+    /*! MKConductor time setting messages */
+    MKTraceConductor = 256,
+    /*! DSP array-setting messages */
+    MKTraceDSPArrays = 512
+};
+
+SndDeprecatedEnum(MKTraceFlags, MK_TRACEORCHALLOC, MKTraceOrchestraAlloc);
+SndDeprecatedEnum(MKTraceFlags, MK_TRACEPARS, MKTraceParameters);
+SndDeprecatedEnum(MKTraceFlags, MK_TRACEDSP, MKTraceDSP);
+SndDeprecatedEnum(MKTraceFlags, MK_TRACEMIDI, MKTraceMIDI);
+SndDeprecatedEnum(MKTraceFlags, MK_TRACEPREEMPT, MKTracePreempt);
+SndDeprecatedEnum(MKTraceFlags, MK_TRACESYNTHINS, MKTraceSynthInstrument);
+SndDeprecatedEnum(MKTraceFlags, MK_TRACESYNTHPATCH, MKTraceSynthPatches);
+SndDeprecatedEnum(MKTraceFlags, MK_TRACEUNITGENERATOR, MKTraceUnitGenerator);
+SndDeprecatedEnum(MKTraceFlags, MK_TRACECONDUCTOR, MKTraceConductor);
+SndDeprecatedEnum(MKTraceFlags, MK_TRACEDSPARRAYS, MKTraceDSPArrays);
 
 /*!
   @brief Turns on specified trace bit.
@@ -400,7 +414,7 @@
   @return Return the value of the new (cumulative) trace code.
   @ingroup Tracing
 */
-extern unsigned MKSetTrace(int traceCode);
+extern MKTraceFlags MKSetTrace(MKTraceFlags traceCode);
 
 /*!
   @brief Turns off specified trace bit.
@@ -421,7 +435,7 @@ extern unsigned MKSetTrace(int traceCode);
   @see <b>MKSetTrace()</b>.
   @ingroup Tracing
 */
-extern unsigned MKClearTrace(int traceCode);
+extern MKTraceFlags MKClearTrace(MKTraceFlags traceCode);
 
 /*!
   @brief Returns whether specified trace bit is on.
@@ -442,7 +456,7 @@ extern unsigned MKClearTrace(int traceCode);
   @see <b>MKSetTrace()</b>.
   @ingroup Tracing
 */
-extern BOOL MKIsTraced(int traceCode);
+extern BOOL MKIsTraced(MKTraceFlags traceCode);
 
 /*!
   @defgroup ErrorFns Handle MusicKit errors.

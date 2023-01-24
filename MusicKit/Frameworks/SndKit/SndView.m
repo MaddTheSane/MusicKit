@@ -411,12 +411,12 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 // since retrieving a fragment may be an expensive operation.
 - (void) storeIntoCacheMax: (float *) cacheMaxArray
 		  cacheMin: (float *) cacheMinArray
-		 fromPixel: (int) startPixel
-		   toPixel: (int) endPixel // endPixel
+		 fromPixel: (NSInteger) startPixel
+		   toPixel: (NSInteger) endPixel // endPixel
 		   channel: (int) whichChannel
 {
-    int currentPixel;
-    int frameCount = [sound lengthInSampleFrames];
+    NSInteger currentPixel;
+    NSInteger frameCount = [sound lengthInSampleFrames];
     float maxNinety = 0, minNinety = 0, theValue, previousValue = 0;
     float actualBaseF;
     /* for stepping through sound data */
@@ -634,7 +634,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     void *pcmData;
     // max point and current counter in current fragged sound data segment
     unsigned long fragmentLength, currentFrameInFragment; 
-    int frameCount = [soundToDraw lengthInSampleFrames];
+    NSInteger frameCount = [soundToDraw lengthInSampleFrames];
     SndSampleFormat dataFormat;
     int chanCount = [soundToDraw channelCount];
     NSBezierPath *soundPath = [NSBezierPath bezierPath];
@@ -715,10 +715,10 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 	}
 	
 	for (pixelIndex = startX; pixelIndex < endX; pixelIndex++) {
-	    NSPoint max2 = { pixelIndex + 0.5, maximumPixels[pixelIndex + 1 - startX] * ampScaler + amplitudeDisplayHeight };
-	    NSPoint min2 = { pixelIndex + 0.5, minimumPixels[pixelIndex + 1 - startX] * ampScaler + amplitudeDisplayHeight };
-	    NSPoint max1 = { pixelIndex + 0.5, maxY1 };
-	    NSPoint min1 = { pixelIndex + 0.5, minY1 };
+	    NSPoint max2 = NSMakePoint( pixelIndex + 0.5, maximumPixels[pixelIndex + 1 - startX] * ampScaler + amplitudeDisplayHeight );
+	    NSPoint min2 = NSMakePoint( pixelIndex + 0.5, minimumPixels[pixelIndex + 1 - startX] * ampScaler + amplitudeDisplayHeight );
+	    NSPoint max1 = NSMakePoint( pixelIndex + 0.5, maxY1 );
+	    NSPoint min1 = NSMakePoint( pixelIndex + 0.5, minY1 );
 	    
 	    [soundPath moveToPoint: max1];
 	    [soundPath lineToPoint: min1];
@@ -741,7 +741,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 		    [soundPath moveToPoint: reverse];
 		}
 		
-		NSPoint startOfNextSample = { pixelIndex + 1 + 0.5, (min2.y > maxY1) ? min2.y : max2.y };
+		NSPoint startOfNextSample = NSMakePoint( pixelIndex + 1 + 0.5, (min2.y > maxY1) ? min2.y : max2.y );
 		
 		[soundPath lineToPoint: startOfNextSample];
 		
@@ -751,12 +751,12 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 	}
     }
     else { // Draw the minimum and maximum outline.
-	NSPoint startLineFrom = { startX + 0.5, maximumPixels[0] * ampScaler + amplitudeDisplayHeight };
+	NSPoint startLineFrom = NSMakePoint( startX + 0.5, maximumPixels[0] * ampScaler + amplitudeDisplayHeight );
 	
 	[soundPath moveToPoint: startLineFrom];
 	
 	for (pixelIndex = startX; pixelIndex < endX; pixelIndex++) {
-	    NSPoint nextMaximumPoint = { pixelIndex + 0.5, maximumPixels[pixelIndex - startX] * ampScaler + amplitudeDisplayHeight };
+	    NSPoint nextMaximumPoint = NSMakePoint( pixelIndex + 0.5, maximumPixels[pixelIndex - startX] * ampScaler + amplitudeDisplayHeight );
 	    [soundPath lineToPoint: nextMaximumPoint];
 	}
 	
@@ -764,7 +764,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 	[soundPath moveToPoint: startLineFrom];
 	
 	for (pixelIndex = startX; pixelIndex < endX; pixelIndex++) {
-	    NSPoint nextMinimumPoint = { pixelIndex + 0.5, minimumPixels[pixelIndex - startX] * ampScaler + amplitudeDisplayHeight };
+	    NSPoint nextMinimumPoint = NSMakePoint( pixelIndex + 0.5, minimumPixels[pixelIndex - startX] * ampScaler + amplitudeDisplayHeight );
 	    [soundPath lineToPoint: nextMinimumPoint];
 	}
     }
@@ -1031,13 +1031,13 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     
     /* set colors */
     // selectionColour = [[NSColor controlHighlightColor] retain];
-    selectionColour = [NSColor colorWithCalibratedRed: 0.8 green: 0.8 blue: 0.8 alpha: 0.8];
+    selectionColour = [NSColor controlHighlightColor];
     
     // backgroundColour = [[NSColor controlBackgroundColor] retain];
-    backgroundColour = [NSColor colorWithCalibratedWhite: 1.0 alpha: 1.0];
+    backgroundColour = [NSColor controlBackgroundColor];
     
     // foregroundColour = [[NSColor blueColor] retain];//black
-    foregroundColour = [NSColor colorWithCalibratedRed: 0.6 green: 0.25 blue: 1.0 alpha: 0.7];
+    foregroundColour = [NSColor systemPurpleColor];
     
     displayMode = SndViewDisplayModeMinMax;
     selectedFrames = NSMakeRange(0, 0);

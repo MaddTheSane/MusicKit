@@ -48,6 +48,7 @@
 #define __SND_H__
 
 #import <Foundation/Foundation.h>
+#import <SndKit/SndDefines.h>
 #import <SndKit/SndFormat.h>
 #import <SndKit/SndError.h>
 
@@ -1345,13 +1346,8 @@ from 1 to many, many to 1, or any power of 2 to any other power of 2
 
 @end
 
-#define DeprecatedEnum(type, oldname, newval) \
-static const type oldname NS_DEPRECATED_WITH_REPLACEMENT_MAC( #newval , 10.0, 10.8) = newval
-
-DeprecatedEnum(SndConversionQuality, SndConvertLowQuality, SndConversionQualityLow);
-DeprecatedEnum(SndConversionQuality, SndConvertMediumQuality, SndConversionQualityMedium);
-DeprecatedEnum(SndConversionQuality, SndConvertHighQuality, SndConversionQualityHigh);
-
-#undef DeprecatedEnum
+SndDeprecatedEnum(SndConversionQuality, SndConvertLowQuality, SndConversionQualityLow);
+SndDeprecatedEnum(SndConversionQuality, SndConvertMediumQuality, SndConversionQualityMedium);
+SndDeprecatedEnum(SndConversionQuality, SndConvertHighQuality, SndConversionQualityHigh);
 
 #endif

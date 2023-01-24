@@ -127,11 +127,51 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 
 	@IBAction func play(_ sender: Any) {
-		
-		
-		
-		somethingChanged = false
-
+		let theLength = soundLength.floatValue
+		let amp1 = volumeNum1.floatValue * 32768 / 10
+		let amp2 = volumeNum2.floatValue * 32768 / 10
+		let freq1 = frequencyNum1.floatValue
+		let freq2 = frequencyNum2.floatValue
+		if somethingChanged {
+			newSound = Snd(format: .linear16, channelCount: 1, frames: UInt(SAMPLING_RATE * theLength), samplingRate: SAMPLING_RATE)
+			let pointer = newSound.bytes.assumingMemoryBound(to: Int16.self)
+			
+			for i in 0 ..< Int(theLength * SAMPLING_RATE) {
+				var num1: Float
+				switch type1 {
+				case .sine:
+					num1 = SINWAVE(SAMPLING_RATE,freq1,amp1,i)
+				case .cosine:
+					num1 = COSWAVE(SAMPLING_RATE,freq1,amp1,i)
+				case .square:
+					num1 = SQUAREWAVE(SAMPLING_RATE,freq1,amp1,i)
+				case .sawtooth:
+					num1 = SAWTOOTH(SAMPLING_RATE,freq1,amp1,i);
+				case .reversedSawtooth:
+					num1 = REVSAWTOOTH(SAMPLING_RATE,freq1,amp1,i)
+				case .triangle:
+					num1 = TRIANGLE(SAMPLING_RATE,freq1,amp1,i);
+				}
+				var num2: Float
+				switch type2 {
+				case .sine:
+					num2 = SINWAVE(SAMPLING_RATE,freq2,amp2,i)
+				case .cosine:
+					num2 = COSWAVE(SAMPLING_RATE,freq2,amp2,i)
+				case .square:
+					num2 = SQUAREWAVE(SAMPLING_RATE, freq2, amp2,i);
+				case .sawtooth:
+					num2 = SAWTOOTH(SAMPLING_RATE, freq2, amp2,i);
+				case .reversedSawtooth:
+					num2 = REVSAWTOOTH(SAMPLING_RATE, freq2, amp2,i);
+				case .triangle:
+					num2 = TRIANGLE(SAMPLING_RATE, freq2, amp2,i);
+				}
+				pointer[i] = Int16(num1 + num2)
+			}
+			somethingChanged = false
+		}
+		newSound.play()
 	}
 	
 	@IBAction func playA(_ sender: Any) {
@@ -153,7 +193,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	@IBAction func waveChanged(_ sender: NSButton?) {
 		somethingChanged = true
 		if let sendTag = sender?.tag,
-		   let aCalc = CalcType(rawValue: sendTag){
+		   let aCalc = CalcType(rawValue: sendTag) {
 			type1 = aCalc
 		} else {
 			type1 = .sine
@@ -170,7 +210,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	@IBAction func waveChangedB(_ sender: NSButton?) {
 		somethingChanged = true
 		if let sendTag = sender?.tag,
-		   let aCalc = CalcType(rawValue: sendTag){
+		   let aCalc = CalcType(rawValue: sendTag) {
 			type2 = aCalc
 		} else {
 			type2 = .sine
@@ -209,7 +249,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		let pointer3 = soundView3.sound.bytes.assumingMemoryBound(to: Int16.self)
 
 		for i in 0 ..< Int(SECONDS * SAMPLING_RATE) {
-			var newVal = Int32(pointer1[i]) + Int32(pointer2[i])
+			let newVal = Int32(pointer1[i]) + Int32(pointer2[i])
 			
 			if (newVal > 32768 || newVal < -32767) {
 				clipping = true
@@ -224,5 +264,4 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		}
 		messageBox.needsDisplay = true
 	}
-
 }

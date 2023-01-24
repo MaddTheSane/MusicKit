@@ -47,7 +47,7 @@
 @implementation ScorePlayerController
 
 static NSMutableArray *synthInstruments;
-static id openPanel;
+static NSOpenPanel *openPanel;
 static NSString *fileName, *shortFileName;
 static MKScore *scoreObj;
 static MKScorePerformer *scorePerformer;
@@ -97,7 +97,7 @@ static NSArray *fileTypes;
 static NSArray *saveFileExtensions;
 
 static NSButton *accessoryView = nil;
-static id savePanel = nil;
+static NSSavePanel *savePanel = nil;
 static NSString *soundFile = nil;
 
 static int warnedAboutSrate = NO;
@@ -229,11 +229,7 @@ static void setFileTime(void)
     if (scoreForm == PLAYSCORE_FILE)
         return;
     
-#if !defined(MAC_OS_X_VERSION_10_5) || (MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_5)
-    fattrs = [[NSFileManager defaultManager] fileAttributesAtPath: fileName traverseLink: YES];
-#else
     fattrs = [[NSFileManager defaultManager] attributesOfItemAtPath: fileName error: NULL];
-#endif
     lastModifyTime = [[fattrs objectForKey:NSFileModificationDate] retain];
 }
 
@@ -246,11 +242,7 @@ static BOOL needToReread(void)
     
     if (scoreForm == PLAYSCORE_FILE)
         return NO;
-#if !defined(MAC_OS_X_VERSION_10_5) || (MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_5)
-    fattrs = [[NSFileManager defaultManager] fileAttributesAtPath: fileName traverseLink: YES];
-#else
     fattrs = [[NSFileManager defaultManager] attributesOfItemAtPath: fileName error: NULL];
-#endif
     fileModifyTime = [fattrs objectForKey: NSFileModificationDate];
     reread = ([fileModifyTime compare: lastModifyTime] == NSOrderedDescending);
     [lastModifyTime release];
@@ -631,7 +623,7 @@ static double getUntempo(float tempoVal)
     NSEnumerator *midiDevEnumerator = [playingMidiDevices objectEnumerator];
     MKMidi *midiDev;
     
-    while ((midiDev = [midiDevEnumerator nextObject])) {
+    for (MKMidi *midiDev in midiDevEnumerator) {
 	if ([midiDev openOutputOnly]) {	// set the localDeltaT time offset, negative values are for orchestras
 	    if (midiOffset > 0) 
 		[midiDev setLocalDeltaT: midiOffset];
@@ -648,7 +640,7 @@ static double getUntempo(float tempoVal)
 
 - (void) startPlay
 {
-    int partCount, synthPatchCount, voices, i;
+    NSInteger partCount, synthPatchCount, voices, i;
     NSString *msg = nil;
     double actualSrate;  
     NSArray *partPerformers;
@@ -851,7 +843,11 @@ static void abortNow(void);
 - (void)orchestraDidAbort: whichOrch
     /* This is received by the appkit thread */
 {
-    NSRunAlertPanel(STR_SCOREPLAYER,STR_HUNG_DSP,NULL,NULL,NULL);
+    NSAlert *alert = [[NSAlert alloc] init];
+    alert.messageText = STR_SCOREPLAYER;
+    alert.informativeText = STR_HUNG_DSP;
+    [alert runModal];
+    [alert release];
     abortNow();
 }
 
@@ -933,37 +929,30 @@ static BOOL setUpFile(NSString *workspaceFileName)
     if (!openPanel)
         openPanel = [NSOpenPanel new];    
     if (!workspaceFileName) {
-	BOOL success = NO;
-
+	NSModalResponse success = NSModalResponseCancel;
+	openPanel.allowedFileTypes = openFileExtensions;
 	if (firstTime) {
             NSArray *libraryDirs = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSAllDomainsMask, YES);
-	    
-            success = [openPanel runModalForDirectory: [[libraryDirs objectAtIndex: 0]
-                       stringByAppendingPathComponent: @"/Music/Scores"]
-                                                 file: @"Examp1.score"
-                                                types: openFileExtensions];
-        }
-        else if (dir) {
-	    success = [openPanel runModalForDirectory: dir
-						 file: shortFileName 
-						types: openFileExtensions]; 
+	    openPanel.directoryURL = [NSURL fileURLWithPath:
+				      [[libraryDirs objectAtIndex: 0]
+				       stringByAppendingPathComponent: @"/Music/Scores"]];
+        } else if (dir) {
+	    openPanel.directoryURL = [NSURL fileURLWithPath:dir];
 	    [dir release];
 	    dir = nil;
 	}
-	else 
-	    success = [openPanel runModalForTypes: openFileExtensions];
-	if (!success)
+	success = [openPanel runModal];
+	if (success != NSModalResponseOK)
 	    return NO;
         [fileName release];
-        fileName = [[openPanel filename] retain];
+	fileName = [[openPanel URL].path copy];
         [shortFileName release];
-        shortFileName = [[fileName lastPathComponent] retain];
-    }
-    else {
+	shortFileName = [[fileName lastPathComponent] copy];
+    } else {
         [fileName release];
 	fileName = [workspaceFileName copy];
         [shortFileName release];
-        shortFileName = [[workspaceFileName lastPathComponent] retain];
+	shortFileName = [[workspaceFileName lastPathComponent] copy];
     }
     if ([shortFileName isEqualToString:@"Jungle.score"] ||
         [shortFileName isEqualToString:@"Jungle.playscore"])
@@ -1171,12 +1160,12 @@ static void adjustTempo(double slowDown)
     abortNow();
 }
 
-/* Set up and run the Save panel for the given type.  The accessory view
-* is a button which allows the type to be changed when saving scores.
-*/
-BOOL getSavePath(NSString **returnBuf, NSString *dir, NSString *name, NSString *theType)
+/*! Set up and run the Save panel for the given type.  The accessory view
+ * is a button which allows the type to be changed when saving scores.
+ */
+static BOOL getSavePath(NSString **returnBuf, NSString *dir, NSString *name, NSString *theType)
 {
-    BOOL flag;
+    NSModalResponse flag;
     
     if (!savePanel) {
 	savePanel = [NSSavePanel new];
@@ -1189,12 +1178,12 @@ BOOL getSavePath(NSString **returnBuf, NSString *dir, NSString *name, NSString *
     [savePanel setAccessoryView: accessoryView];
     if (theType && [theType length])
         [savePanel setAllowedFileTypes: @[theType]];
-    flag = [savePanel runModalForDirectory:@"" file:@""];
-    if (flag)
-        *returnBuf = [savePanel filename];
+    flag = [savePanel runModal];
+    if (flag == NSModalResponseOK)
+        *returnBuf = [savePanel URL].path;
     soundFile = (saveType==SOUND_FILE) ? *returnBuf : NULL;
     
-    return flag;
+    return flag == NSModalResponseOK;
 }
 
 NSString *getPath(NSString *dir, NSString *name, NSString *ext)

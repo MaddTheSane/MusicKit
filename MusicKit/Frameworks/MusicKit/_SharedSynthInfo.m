@@ -156,7 +156,7 @@ static id findSharedSynthInfo(id aList,MKOrchMemSegment whichSegment,int howLong
 	    break;
 	}
 	if (test) {
-	    if ((type == MK_noOrchSharedType) || (type == (el)->type))
+	    if ((type == MKOrchestraSharedTypeNone) || (type == (el)->type))
 	      return (el);
 	}
     }
@@ -189,9 +189,9 @@ BOOL _MKCollectSharedDataGarbage(id orch,NSHashTable *garbageTable)
     BOOL gotOne = NO;
     _SharedSynthInfo *infoObj;
     NSHashEnumerator state = NSEnumerateHashTable(garbageTable);
-    if (_MK_ORCHTRACE(orch, MK_TRACEORCHALLOC)) {
+    if (_MK_ORCHTRACE(orch, MKTraceOrchestraAlloc)) {
         NSLog(@"MK OK\n");
-        _MKOrchTrace(orch, MK_TRACEORCHALLOC,
+        _MKOrchTrace(orch, MKTraceOrchestraAlloc,
 		   @"Garbage collecting unreferenced shared data.");
     }
     while ((infoObj = (_SharedSynthInfo *) NSNextHashEnumeratorItem(&state))) {
@@ -205,8 +205,8 @@ BOOL _MKCollectSharedDataGarbage(id orch,NSHashTable *garbageTable)
     }
     if (gotOne)
         NSResetHashTable(garbageTable);
-    else if (_MK_ORCHTRACE(orch,MK_TRACEORCHALLOC))
-        _MKOrchTrace(orch,MK_TRACEORCHALLOC,@"No unreferenced shared data found.");
+    else if (_MK_ORCHTRACE(orch,MKTraceOrchestraAlloc))
+        _MKOrchTrace(orch,MKTraceOrchestraAlloc,@"No unreferenced shared data found.");
     return gotOne;
 }	
 

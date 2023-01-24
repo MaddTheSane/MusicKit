@@ -52,6 +52,7 @@
 
 #import <SndKit/sndfile.h>
 #ifdef __OBJC__
+#import <SndKit/SndDefines.h>
 #import <SndKit/SndFormat.h>
 #import <SndKit/SndEndianFunctions.h>
 #import <SndKit/SndTable.h>

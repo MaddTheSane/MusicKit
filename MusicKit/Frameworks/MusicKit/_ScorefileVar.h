@@ -55,9 +55,8 @@
     NSString *s;     // name string of the variable.
 }
 
-- copy;
 - (BOOL)writeScorefileStream:(NSMutableData *)aStream;
-- (NSString *) varName;
+@property (readonly, copy) NSString *varName;
 
 @end
 

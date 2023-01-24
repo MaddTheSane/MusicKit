@@ -204,10 +204,10 @@ void _MKRerelocUG(MKUnitGenerator *self,MKOrchMemStruct *newReloc)
      It moves the pLoop and arguments but changes neither the pSubr, 
      yData nor xData. */
 {
-    if (_MK_ORCHTRACE(self->orchestra,MK_TRACEORCHALLOC)) {
-	_MKOrchTrace(self->orchestra,MK_TRACEORCHALLOC,
-              @"Moving %s_%p.",NSStringFromClass([self class]),self);
-	_MKOrchTrace(self->orchestra,MK_TRACEORCHALLOC,
+    if (_MK_ORCHTRACE(self->orchestra,MKTraceOrchestraAlloc)) {
+	_MKOrchTrace(self->orchestra,MKTraceOrchestraAlloc,
+		     @"Moving %@_%p.",NSStringFromClass([self class]),self);
+	_MKOrchTrace(self->orchestra,MKTraceOrchestraAlloc,
 		     @"NewReloc: pLoop %d, xArg %d, yArg %d, lArg %d.",
 		     newReloc->pLoop,newReloc->xArg,newReloc->yArg,
 		     newReloc->lArg);
@@ -510,8 +510,8 @@ static id addrSetErr(MKUnitGenerator *self,unsigned argNum)
 
 static void reportOpt(MKUnitGenerator *self,unsigned argNum)
 {
-    if (_MK_ORCHTRACE(self->orchestra,MK_TRACEDSP))
-      _MKOrchTrace(self->orchestra,MK_TRACEDSP,
+    if (_MK_ORCHTRACE(self->orchestra,MKTraceDSP))
+      _MKOrchTrace(self->orchestra,MKTraceDSP,
 		   @"Optimizing away poke of %@ of UG%d_%@.",
                    argName(self,argNum),self->_instanceNumber,NSStringFromClass([self class]));
 }
@@ -640,8 +640,8 @@ id MKSetUGDatumArg(MKUnitGenerator *self, unsigned argNum, DSPDatum val)
 	DSPFix48 value;
 	value.high24 = val;
 	value.low24 = 0;
-	if (_MK_ORCHTRACE(self->orchestra, MK_TRACEDSP))
-            _MKOrchTrace(self->orchestra, MK_TRACEDSP,
+	if (_MK_ORCHTRACE(self->orchestra, MKTraceDSP))
+            _MKOrchTrace(self->orchestra, MKTraceDSP,
 		       @"Setting (L-just, 0-filled) %@ of UG%d_%@ to datum 0x%x.",
                 argName(self, argNum), self->_instanceNumber, NSStringFromClass([self class]), val);
 	ec = DSPMKSendLongTimed(aTimeStamp, &value, p->addrStruct.address);
@@ -656,8 +656,8 @@ id MKSetUGDatumArg(MKUnitGenerator *self, unsigned argNum, DSPDatum val)
         }
         return self;
     }
-    if (_MK_ORCHTRACE(self->orchestra,MK_TRACEDSP))
-	_MKOrchTrace(self->orchestra,MK_TRACEDSP,
+    if (_MK_ORCHTRACE(self->orchestra,MKTraceDSP))
+	_MKOrchTrace(self->orchestra,MKTraceDSP,
 		 @"Setting %@ of UG%d_%@ to datum 0x%x.",argName(self,argNum),
 		 self->_instanceNumber,NSStringFromClass([self class]),val);
     ec = DSPMKSendValueTimed(aTimeStamp,val,
@@ -701,8 +701,8 @@ id MKSetUGDatumArgLong(MKUnitGenerator *self, unsigned argNum, DSPLongDatum *val
     CHECKADJUSTTIME();
     aTimeStamp = TIMESTAMP();
     if (p->addrStruct.memSpace == DSP_MS_L) {
-	if (_MK_ORCHTRACE(self->orchestra,MK_TRACEDSP))
-	  _MKOrchTrace(self->orchestra,MK_TRACEDSP,
+	if (_MK_ORCHTRACE(self->orchestra,MKTraceDSP))
+	  _MKOrchTrace(self->orchestra,MKTraceDSP,
 		       @"Setting %@ of UG%d_%@ to long: {0x%x,0x%x}.",
 		       argName(self,argNum),self->_instanceNumber,NSStringFromClass([self class]),
 		       val->high24,val->low24);
@@ -718,9 +718,9 @@ id MKSetUGDatumArgLong(MKUnitGenerator *self, unsigned argNum, DSPLongDatum *val
         }
     }
     else {
-	if (_MK_ORCHTRACE(self->orchestra,MK_TRACEDSP))
-	  _MKOrchTrace(self->orchestra,MK_TRACEDSP,
-		       @"Setting %@ of UG%d_%s to: 0x%x",
+	if (_MK_ORCHTRACE(self->orchestra,MKTraceDSP))
+	  _MKOrchTrace(self->orchestra,MKTraceDSP,
+		       @"Setting %@ of UG%d_%@ to: 0x%x",
 		       argName(self,argNum),self->_instanceNumber,NSStringFromClass([self class]),
 		       val->high24);
 	ec = DSPMKSendValueTimed(aTimeStamp,val->high24,
@@ -782,8 +782,8 @@ id MKSetUGAddressArg(MKUnitGenerator *self,unsigned argNum,id memoryObj)
     }
     if (optimize(self,argNum,argP,memP->address,0))
         return self;
-    if (_MK_ORCHTRACE(self->orchestra,MK_TRACEDSP)) {
-	_MKOrchTrace(self->orchestra,MK_TRACEDSP,
+    if (_MK_ORCHTRACE(self->orchestra,MKTraceDSP)) {
+	_MKOrchTrace(self->orchestra,MKTraceDSP,
 		     @"Setting %@ of UG%d_%@ to %@%d (0x%x).",argName(self,argNum),
 		     self->_instanceNumber,NSStringFromClass([self class]),
 		     [self->orchestra segmentName:memP->memSegment],
@@ -825,8 +825,8 @@ id MKSetUGAddressArgToInt(MKUnitGenerator *self,unsigned argNum,DSPAddress addr)
     }
     if (optimize(self,argNum,argP,addr,0))
       return self;
-    if (_MK_ORCHTRACE(self->orchestra,MK_TRACEDSP))
-	_MKOrchTrace(self->orchestra,MK_TRACEDSP,
+    if (_MK_ORCHTRACE(self->orchestra,MKTraceDSP))
+	_MKOrchTrace(self->orchestra,MKTraceDSP,
 		     @"Setting %@ of UG%d_%@ to address 0x%x.",argName(self,argNum),
 		     self->_instanceNumber,NSStringFromClass([self class]),addr);
     DSPSetCurrentDSP(self->_orchIndex);
@@ -870,8 +870,8 @@ static id specialAddressVal(MKUnitGenerator *self, unsigned int argNum, SEL orch
     memP =  [memObj orchAddrPtr];
     if (optimize(self,argNum,argP,memP->address,0))
       return self;
-    if (_MK_ORCHTRACE(self->orchestra,MK_TRACEDSP))
-      _MKOrchTrace(self->orchestra,MK_TRACEDSP,
+    if (_MK_ORCHTRACE(self->orchestra,MKTraceDSP))
+      _MKOrchTrace(self->orchestra,MKTraceDSP,
 		   @"Setting %@ of UG%d_%@ to address 0x%x.",
 		   argName(self,argNum),self->_instanceNumber,NSStringFromClass([self class]),
 		   memP->address);
@@ -1205,8 +1205,8 @@ extern int _MKOrchestraGetNoops(void);
     aUG->orchestra = anOrch;
     aUG->_orchIndex = whichDSP;
     /* Send relocated unit generator code to dsp. */
-    if (_MK_ORCHTRACE(aUG->orchestra,MK_TRACEDSP))
-	_MKOrchTrace(aUG->orchestra,MK_TRACEDSP,
+    if (_MK_ORCHTRACE(aUG->orchestra,MKTraceDSP))
+	_MKOrchTrace(aUG->orchestra,MKTraceDSP,
               @"Loading %@_%p as UG%d. ",
               NSStringFromClass([aUG class]),
               aUG,aUG->_instanceNumber);
@@ -1261,8 +1261,8 @@ extern int _MKOrchestraGetNoops(void);
     free(args);
     args = NULL;
 //    [super release];
-    if (_MK_ORCHTRACE(orchestra,MK_TRACEORCHALLOC))
-        _MKOrchTrace(orchestra,MK_TRACEORCHALLOC,@"Freeing %@_%p",NSStringFromClass([self class]),
+    if (_MK_ORCHTRACE(orchestra,MKTraceOrchestraAlloc))
+        _MKOrchTrace(orchestra,MKTraceOrchestraAlloc,@"Freeing %@_%p",NSStringFromClass([self class]),
                      self);
     return nil; /*sb: to maintain compatibility with return of old [super free] method */
 }

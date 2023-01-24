@@ -89,8 +89,8 @@ Modification history:
 	MKErrorCode(MK_synthDataReadonlyErr);
 	return nil;
     }
-    if (_MK_ORCHTRACE(orchestra,MK_TRACEDSP))
-	_MKOrchTrace(orchestra,MK_TRACEDSP,
+    if (_MK_ORCHTRACE(orchestra,MKTraceDSP))
+	_MKOrchTrace(orchestra,MKTraceDSP,
 		     @"Clearing %@%d (addr 0x%x size:0x%x).",
 		     [orchestra segmentName:orchAddr.memSegment],
 		     self->_instanceNumber,
@@ -176,10 +176,10 @@ static id sendPreamble(MKSynthData *self,void *dataArray /* Or CONSTANT */,unsig
 	MKErrorCode(MK_synthDataReadonlyErr);
 	return nil;
     }
-    if (_MK_ORCHTRACE(self->orchestra,MK_TRACEDSP)) {
+    if (_MK_ORCHTRACE(self->orchestra,MKTraceDSP)) {
 	if (len == self->length && off == 0) 
 	  if (dataArray == CONSTANT)
-	    _MKOrchTrace(self->orchestra,MK_TRACEDSP,
+	    _MKOrchTrace(self->orchestra,MKTraceDSP,
 			 @"Loading constant 0x%x into %@%d [0x%x-0x%x].",
 			 value,
 			 [self->orchestra segmentName:self->orchAddr.memSegment],
@@ -187,7 +187,7 @@ static id sendPreamble(MKSynthData *self,void *dataArray /* Or CONSTANT */,unsig
 			 self->orchAddr.address,
 			 self->orchAddr.address-1+len);
 	  else 
-	    _MKOrchTrace(self->orchestra,MK_TRACEDSP,
+	    _MKOrchTrace(self->orchestra,MKTraceDSP,
 			 @"Loading array into %@%d [0x%x-0x%x].",
 			 [self->orchestra segmentName:self->orchAddr.memSegment],
 			 self->_instanceNumber,
@@ -195,7 +195,7 @@ static id sendPreamble(MKSynthData *self,void *dataArray /* Or CONSTANT */,unsig
 			 self->orchAddr.address-1+len);
 	else 
 	  if (dataArray == CONSTANT)
-	    _MKOrchTrace(self->orchestra,MK_TRACEDSP,
+	    _MKOrchTrace(self->orchestra,MKTraceDSP,
 			 @"Loading constant 0x%x into %@%d sub-block [0x%x-0x%x].\n  Length = 0x%x offset = 0x%x.",
 			 value,
 			 [self->orchestra segmentName:self->orchAddr.memSegment],
@@ -204,7 +204,7 @@ static id sendPreamble(MKSynthData *self,void *dataArray /* Or CONSTANT */,unsig
 			 self->orchAddr.address-1+off+len,
 			 len,off);
 	  else 
-	    _MKOrchTrace(self->orchestra,MK_TRACEDSP,
+	    _MKOrchTrace(self->orchestra,MKTraceDSP,
 			 @"Loading array into %@%d sub-block [0x%x-0x%x].\n   Length = 0x%x offset = 0x%x.",
 			 [self->orchestra segmentName:self->orchAddr.memSegment],
 			 self->_instanceNumber,
@@ -223,13 +223,13 @@ static id sendPreamble(MKSynthData *self,void *dataArray /* Or CONSTANT */,unsig
       return self;
     if (!sendPreamble(self,dataArray,len,off,0))
 	return nil;
-    if (_MK_ORCHTRACE(orchestra,MK_TRACEDSPARRAYS)) {
+    if (_MK_ORCHTRACE(orchestra,MKTraceDSPArrays)) {
 	unsigned int i;
-	_MKOrchTrace(orchestra,MK_TRACEDSPARRAYS,@"Setting array of %@%d.",
+	_MKOrchTrace(orchestra,MKTraceDSPArrays,@"Setting array of %@%d.",
 		     [orchestra segmentName:orchAddr.memSegment],
 		     _instanceNumber);
 	for (i = 0; i < len; i++)
-	  _MKOrchTrace(orchestra,MK_TRACEDSPARRAYS,@"  0x%x",dataArray[i]);
+	  _MKOrchTrace(orchestra,MKTraceDSPArrays,@"  0x%x",dataArray[i]);
     }
     ec = DSPMKSendArraySkipTimed(_MKCurSample(orchestra),dataArray,
 				 orchAddr.memSpace,orchAddr.address + off,
@@ -259,13 +259,13 @@ static id sendPreamble(MKSynthData *self,void *dataArray /* Or CONSTANT */,unsig
       return self;
     if (!sendPreamble(self,dataArray,len,off,0))
 	return nil;
-    if (_MK_ORCHTRACE(orchestra,MK_TRACEDSPARRAYS)) {
+    if (_MK_ORCHTRACE(orchestra,MKTraceDSPArrays)) {
 	unsigned int i;
-	_MKOrchTrace(orchestra,MK_TRACEDSPARRAYS,@"Setting array of %@%d.",
+	_MKOrchTrace(orchestra,MKTraceDSPArrays,@"Setting array of %@%d.",
 		     [orchestra segmentName:orchAddr.memSegment],
 		     _instanceNumber);
 	for (i = 0; i < len; i++)
-	  _MKOrchTrace(orchestra,MK_TRACEDSPARRAYS,@"  0x%x",dataArray[i]);
+	  _MKOrchTrace(orchestra,MKTraceDSPArrays,@"  0x%x",dataArray[i]);
     }
     ec =  DSPMKSendShortArraySkipTimed(_MKCurSample(orchestra),dataArray,
 				       orchAddr.memSpace,orchAddr.address + off,

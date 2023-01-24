@@ -238,7 +238,7 @@ static int myDSPMKInit(MKOrchestra *self)
 	    errorCode = DSPReadFile(&self->mkSys, [*foundFile fileSystemRepresentation]);
 	    if(errorCode)                            /* Can't open file */
 		return _DSPError1(errorCode, "DSPMKInit: Could not read music system '%s' for booting the DSP", (char *)[s UTF8String]);
-	    if (_MK_ORCHTRACE(self, MK_TRACEDSP))
+	    if (_MK_ORCHTRACE(self, MKTraceDSP))
 		NSLog(@"Music Kit: Loaded DSP monitor %@\n", *foundFile);
 	}
     }
@@ -887,26 +887,26 @@ to send open to an already opened, running or stopped MKOrchestra.
                        self->localDeltaT); 
             doubleIntToFix48UseArg(endTime * samplingRate, &endTimeStamp);
             if (_simFP) 
-		if (_MK_ORCHTRACE(self,MK_TRACEDSP))
-		    _MKOrchTrace(self,MK_TRACEDSP,@"End of timed messages queue. Do timed read of clips.\n");
+		if (_MK_ORCHTRACE(self,MKTraceDSP))
+		    _MKOrchTrace(self,MKTraceDSP,@"End of timed messages queue. Do timed read of clips.\n");
             DSPSetCurrentDSP(orchIndex);
             DSPMKDisableBlockingOnTMQEmptyTimed(&endTimeStamp);
 	    DSPMKStopMsgReader(); /* Stop msg reader thread.  We're going 
 		* to take over that roll. 
 		*/
             if (![self awaitEndOfTime:endTime timeStamp:&endTimeStamp ])
-		if (_MK_ORCHTRACE(self,MK_TRACEDSP))
-		    _MKOrchTrace(self,MK_TRACEDSP,
+		if (_MK_ORCHTRACE(self,MKTraceDSP))
+		    _MKOrchTrace(self,MKTraceDSP,
 				 @"Could not send timed peek to orchestra.");
             if (nclip)
-		if (_MK_ORCHTRACE(self,MK_TRACEDSP))
-		    _MKOrchTrace(self,MK_TRACEDSP,
+		if (_MK_ORCHTRACE(self,MKTraceDSP))
+		    _MKOrchTrace(self,MKTraceDSP,
 				 @"Clipping detected for %d ticks.\n",nclip);
             
             if (outputCommandsFile) {
                 if (DSPMKCallTimedV(&endTimeStamp,DSP_HM_HOST_WD_OFF,1,1))
-		    if (_MK_ORCHTRACE(self,MK_TRACEDSP))
-			_MKOrchTrace(self,MK_TRACEDSP,
+		    if (_MK_ORCHTRACE(self,MKTraceDSP))
+			_MKOrchTrace(self,MKTraceDSP,
 				     @"Could not send timed write data off to orchestra.");
                 DSPMKFlushTimedMessages();
                 DSPCloseCommandsFile(&endTimeStamp);

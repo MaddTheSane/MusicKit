@@ -161,6 +161,7 @@
 		428998E910359CF0005FEC40 /* Twilight.score in CopyFiles */ = {isa = PBXBuildFile; fileRef = 428998C210359CF0005FEC40 /* Twilight.score */; };
 		428998EA10359CF0005FEC40 /* WhatChildIsThis.score in CopyFiles */ = {isa = PBXBuildFile; fileRef = 428998C310359CF0005FEC40 /* WhatChildIsThis.score */; };
 		428998EB10359CF0005FEC40 /* WTC1.score in CopyFiles */ = {isa = PBXBuildFile; fileRef = 428998C410359CF0005FEC40 /* WTC1.score */; };
+		5514E428297FBD1C001BF25D /* SndDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 5514E427297FBD1C001BF25D /* SndDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		556A3CD429711DAD007FFAA7 /* soundInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 556A3CD229711DAD007FFAA7 /* soundInfo.xib */; };
 		556A3CDD29711E50007FFAA7 /* Spectro.xib in Resources */ = {isa = PBXBuildFile; fileRef = 556A3CD529711E4F007FFAA7 /* Spectro.xib */; };
 		556A3CDE29711E50007FFAA7 /* soundDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 556A3CD729711E4F007FFAA7 /* soundDocument.xib */; };
@@ -1931,6 +1932,7 @@
 		428998C210359CF0005FEC40 /* Twilight.score */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Twilight.score; sourceTree = "<group>"; };
 		428998C310359CF0005FEC40 /* WhatChildIsThis.score */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WhatChildIsThis.score; sourceTree = "<group>"; };
 		428998C410359CF0005FEC40 /* WTC1.score */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WTC1.score; sourceTree = "<group>"; };
+		5514E427297FBD1C001BF25D /* SndDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SndDefines.h; sourceTree = "<group>"; };
 		556A3CF329722006007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/EnvelopeEd.sgml; sourceTree = "<group>"; };
 		556A3CF429722006007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EnvelopeEd.xib; sourceTree = "<group>"; };
 		556A3CF529722006007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Info.xib; sourceTree = "<group>"; };
@@ -3123,8 +3125,8 @@
 		D82557E705A21B5900B0192B /* tokenNames.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tokenNames.m; sourceTree = "<group>"; };
 		D82557E805A21B5900B0192B /* trigonometry.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = trigonometry.c; sourceTree = "<group>"; };
 		D82557EC05A21B7F00B0192B /* utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = utilities.m; sourceTree = "<group>"; };
-		D828F99A0780C24B00215EB9 /* MKAlert.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MKAlert.h; sourceTree = "<group>"; };
-		D828F99B0780C24B00215EB9 /* MKAlert.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MKAlert.m; sourceTree = "<group>"; };
+		D828F99A0780C24B00215EB9 /* MKAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKAlert.h; sourceTree = "<group>"; };
+		D828F99B0780C24B00215EB9 /* MKAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKAlert.m; sourceTree = "<group>"; };
 		D828F9C90780CC1E00215EB9 /* PianoRoll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PianoRoll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D828F9CB0780CC1F00215EB9 /* PianoRoll-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PianoRoll-Info.plist"; sourceTree = "<group>"; };
 		D828F9CF0780CCDE00215EB9 /* Distributor.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Distributor.h; sourceTree = "<group>"; };
@@ -3246,9 +3248,9 @@
 		D85C2F8806308A2900E6397B /* SndEditing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SndEditing.m; sourceTree = "<group>"; usesTabs = 1; };
 		D85E27F406FA0C0100385C32 /* ScorePlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScorePlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D85E27F606FA0C0300385C32 /* ScorePlayer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ScorePlayer-Info.plist"; sourceTree = "<group>"; };
-		D85E27FB06FA0D0800385C32 /* ScorePlayer_main.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ScorePlayer_main.m; sourceTree = "<group>"; };
-		D85E280006FA0D2E00385C32 /* ScorePlayerController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ScorePlayerController.h; sourceTree = "<group>"; };
-		D85E280106FA0D2E00385C32 /* ScorePlayerController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ScorePlayerController.m; sourceTree = "<group>"; };
+		D85E27FB06FA0D0800385C32 /* ScorePlayer_main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScorePlayer_main.m; sourceTree = "<group>"; };
+		D85E280006FA0D2E00385C32 /* ScorePlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScorePlayerController.h; sourceTree = "<group>"; };
+		D85E280106FA0D2E00385C32 /* ScorePlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScorePlayerController.m; sourceTree = "<group>"; usesTabs = 1; };
 		D85F905207DFE7D4009DC57B /* MKUnitGenerators.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MKUnitGenerators.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D85F905307DFE7D7009DC57B /* MKUnitGenerators-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MKUnitGenerators-Info.plist"; sourceTree = "<group>"; };
 		D85F905A07DFE882009DC57B /* Add2UG.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Add2UG.h; sourceTree = "<group>"; };
@@ -3383,8 +3385,8 @@
 		D87BF78A0F097C740078AD51 /* InterfaceBuilderKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InterfaceBuilderKit.framework; path = Library/Frameworks/InterfaceBuilderKit.framework; sourceTree = DEVELOPER_DIR; };
 		D87BF80E0F0985530078AD51 /* SndViewIBPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SndViewIBPlugin.h; sourceTree = "<group>"; };
 		D87BF80F0F0985530078AD51 /* SndViewIBPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SndViewIBPlugin.m; sourceTree = "<group>"; };
-		D880FD1F0780AC2A00FD03CC /* ErrorLog.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = ErrorLog.h; sourceTree = "<group>"; };
-		D880FD200780AC2A00FD03CC /* ErrorLog.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = ErrorLog.m; sourceTree = "<group>"; };
+		D880FD1F0780AC2A00FD03CC /* ErrorLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorLog.h; sourceTree = "<group>"; };
+		D880FD200780AC2A00FD03CC /* ErrorLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorLog.m; sourceTree = "<group>"; };
 		D882794407008F510060CAFE /* MKOrchestra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKOrchestra.m; sourceTree = "<group>"; };
 		D8831D2F0AE6BA6C00201B3D /* SpectroController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = SpectroController.h; sourceTree = "<group>"; };
 		D8831D300AE6BA6C00201B3D /* SpectroController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SpectroController.m; sourceTree = "<group>"; };
@@ -6115,6 +6117,7 @@
 				D88FE34005A0FBC10024FD88 /* Sndsmallfilter.h */,
 				D88FE33F05A0FBC10024FD88 /* Sndlargefilter.h */,
 				D88FE35505A0FCC00024FD88 /* SndFormat.h */,
+				5514E427297FBD1C001BF25D /* SndDefines.h */,
 			);
 			name = Headers;
 			sourceTree = "<group>";
@@ -6870,6 +6873,7 @@
 			);
 			name = Classes;
 			sourceTree = "<group>";
+			usesTabs = 1;
 		};
 		D85E280606FA0DBD00385C32 /* Interfaces */ = {
 			isa = PBXGroup;
@@ -8905,6 +8909,7 @@
 				D88FE2E505A0F8430024FD88 /* SndEnvelope.h in Headers */,
 				D88FE2E705A0F8430024FD88 /* SndError.h in Headers */,
 				D88FE2E905A0F8430024FD88 /* SndOnDisk.h in Headers */,
+				5514E428297FBD1C001BF25D /* SndDefines.h in Headers */,
 				D88FE32005A0F9E40024FD88 /* SndMeter.h in Headers */,
 				D88FE32205A0F9E40024FD88 /* SndMP3.h in Headers */,
 				D88FE32405A0F9E40024FD88 /* SndMuLaw.h in Headers */,

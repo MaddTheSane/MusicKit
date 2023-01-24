@@ -137,7 +137,7 @@ static BOOL startMTC(MKConductor *self,BOOL shouldSeek)
 	    self->time = [self->delegate clockToBeat: MTCTime from: self];
 	else 
 	    self->time = MTCTime * self->inverseBeatSize;
-	if (MKIsTraced(MK_TRACEMIDI))
+	if (MKIsTraced(MKTraceMIDI))
 	    NSLog(@"MIDI time code MKConductor seeking.\n");
 	if ([self->delegate respondsToSelector: @selector(conductorWillSeek:)])
 	    [self->delegate conductorWillSeek: self];
@@ -165,7 +165,7 @@ static BOOL startMTC(MKConductor *self,BOOL shouldSeek)
 	return NO;
     if (mtcStatus != MTC_FORWARD) {
 	mtcStatus = MTC_FORWARD;
-	if (MKIsTraced(MK_TRACEMIDI))
+	if (MKIsTraced(MKTraceMIDI))
 	    NSLog(@"MIDI time code MKConductor running.\n");
 	[theMTCCond _resume];
 	[mtcHelper resume];
@@ -181,7 +181,7 @@ static BOOL startMTC(MKConductor *self,BOOL shouldSeek)
     double newTime;
     if (![MKConductor inPerformance])         /* This can happen if we're not separate-threaded */
 	return self;
-    if (MKIsTraced(MK_TRACEMIDI))
+    if (MKIsTraced(MKTraceMIDI))
 	NSLog(@"Midi time code exception: %s\n",
 	      (exception == MKMD_EXCEPTION_MTC_STARTED_FORWARD) ? "time code started" :
 	      (exception == MKMD_EXCEPTION_MTC_STOPPED) ? "time code stopped" :
@@ -319,7 +319,7 @@ static double slipThreshold = .01;
 -_adjustPauseOffset:(double)v
     /* Invoked by _MTCHelper */
 {
-    if (MKIsTraced(MK_TRACEMIDI))
+    if (MKIsTraced(MKTraceMIDI))
 	NSLog(@"Slipping MIDI time code time by %f\n", v);
     _pauseOffset += v;
     sysTime = [[NSDate date] retain];
