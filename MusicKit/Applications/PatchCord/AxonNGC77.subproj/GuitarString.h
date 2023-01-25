@@ -1,3 +1,4 @@
+#import <Foundation/Foundation.h>
 // Holds all characteristics of a String, Tuning, dimensions, arrangement etc.
 @interface GuitarString: NSObject
 {

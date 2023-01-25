@@ -6,15 +6,15 @@
 
 @interface GuitarFretboardView: NSView
 {
-    NSArray Strings;                  //  holds attributes of each  GuitarString instance
-    (BOOL) displayHighestStringUp;    // orientation of the fretboard.
-    (BOOL) displayHighestFretIsLeft;  // orientation of the fretboard.
+    NSArray *Strings;                  //  holds attributes of each  GuitarString instance
+    BOOL displayHighestStringUp;    // orientation of the fretboard.
+    BOOL displayHighestFretIsLeft;  // orientation of the fretboard.
 
 // What about rational (fretlet) arrangements?
 // Number of frets
 // tuning of each fret (note and cents)
 
-    NSImage fretboardPattern;         // repeated and patterned as need be (EPS file)
+    NSImage *fretboardPattern;         // repeated and patterned as need be (EPS file)
     float scaleLength;
     float widthAtNut;
     float widthAtSoundHole;           // Allows a fanned neck like an Oud.
@@ -22,8 +22,9 @@
 
 }
 
-- showNote: (pitch which includes optional microtonality) onString: 1-Number of strings
-- showHeadstock: (BOOL);
+//- showNote: (pitch which includes optional microtonality) onString: 1-Number of strings
+- showNote:aNote onString: aString;
+- showHeadstock: (BOOL)yesOrNo;
 - setWidthAtNut: (float) width;
 - setWidthAtSoundHole: (float) width;
 - setScaleLength: (float) length;

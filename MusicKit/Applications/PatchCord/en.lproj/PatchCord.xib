@@ -268,16 +268,15 @@
         <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="88p-sB-wWa" userLabel="PreferencesPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="873" y="330" width="386" height="213"/>
+            <rect key="contentRect" x="873" y="330" width="267" height="106"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
             <value key="minSize" type="size" width="213" height="107"/>
             <view key="contentView" id="UPb-tJ-gCm">
-                <rect key="frame" x="0.0" y="0.0" width="386" height="213"/>
+                <rect key="frame" x="0.0" y="0.0" width="267" height="90"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Fn-Vx-PCe">
-                        <rect key="frame" x="135" y="169" width="230" height="26"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                    <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5Fn-Vx-PCe">
+                        <rect key="frame" x="102" y="46" width="86" height="25"/>
                         <popUpButtonCell key="cell" type="push" title="driver 0" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="Inm-6v-30E" id="YdI-ID-cWb">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="titleBar" size="12" textStyle="headline"/>
@@ -291,9 +290,8 @@
                             <action selector="setDriverName:" target="4eI-ga-3Z8" id="fZD-6y-7bh"/>
                         </connections>
                     </popUpButton>
-                    <popUpButton verticalHuggingPriority="750" fixedFrame="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="pZP-kB-09f">
-                        <rect key="frame" x="135" y="128" width="230" height="26"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                    <popUpButton verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="pZP-kB-09f">
+                        <rect key="frame" x="102" y="16" width="86" height="25"/>
                         <popUpButtonCell key="cell" type="push" title="driver 0" bezelStyle="rounded" imagePosition="right" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="jwC-ml-uX8" id="ObO-5d-QCj">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="titleBar" size="12" textStyle="headline"/>
@@ -307,27 +305,39 @@
                             <action selector="setDriverName:" target="4eI-ga-3Z8" id="iLj-bD-NO8"/>
                         </connections>
                     </popUpButton>
-                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Mt-mJ-IGa">
-                        <rect key="frame" x="26" y="175" width="74" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="MIDI Input:" id="WUz-5u-ZYu">
+                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8Mt-mJ-IGa">
+                        <rect key="frame" x="18" y="53" width="81" height="16"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="MIDI Input:" id="WUz-5u-ZYu">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OKX-EE-2x5">
-                        <rect key="frame" x="22" y="135" width="85" height="17"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="MIDI Output:" id="VyL-5W-iUU">
+                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OKX-EE-2x5">
+                        <rect key="frame" x="18" y="23" width="81" height="16"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="MIDI Output:" id="VyL-5W-iUU">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="8Mt-mJ-IGa" firstAttribute="leading" secondItem="UPb-tJ-gCm" secondAttribute="leading" constant="20" symbolic="YES" id="2V6-yG-wUq"/>
+                    <constraint firstItem="pZP-kB-09f" firstAttribute="firstBaseline" secondItem="OKX-EE-2x5" secondAttribute="firstBaseline" id="7SI-be-shn"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="5Fn-Vx-PCe" secondAttribute="trailing" constant="20" symbolic="YES" id="9EJ-Ef-u4d"/>
+                    <constraint firstItem="5Fn-Vx-PCe" firstAttribute="top" secondItem="UPb-tJ-gCm" secondAttribute="top" constant="20" symbolic="YES" id="EQ8-HW-Ufb"/>
+                    <constraint firstItem="pZP-kB-09f" firstAttribute="leading" secondItem="OKX-EE-2x5" secondAttribute="trailing" constant="8" symbolic="YES" id="TYU-BG-MhT"/>
+                    <constraint firstItem="OKX-EE-2x5" firstAttribute="leading" secondItem="UPb-tJ-gCm" secondAttribute="leading" constant="20" symbolic="YES" id="Tq7-WV-tc7"/>
+                    <constraint firstItem="OKX-EE-2x5" firstAttribute="trailing" secondItem="8Mt-mJ-IGa" secondAttribute="trailing" id="XLi-WX-4r1"/>
+                    <constraint firstItem="pZP-kB-09f" firstAttribute="top" secondItem="5Fn-Vx-PCe" secondAttribute="bottom" constant="10" symbolic="YES" id="c3A-Ah-qeK"/>
+                    <constraint firstAttribute="bottom" secondItem="pZP-kB-09f" secondAttribute="bottom" constant="20" symbolic="YES" id="cbb-pW-NxX"/>
+                    <constraint firstItem="5Fn-Vx-PCe" firstAttribute="leading" secondItem="8Mt-mJ-IGa" secondAttribute="trailing" constant="8" symbolic="YES" id="cpW-vt-pxU"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pZP-kB-09f" secondAttribute="trailing" constant="20" symbolic="YES" id="kbQ-Wq-yxB"/>
+                    <constraint firstItem="5Fn-Vx-PCe" firstAttribute="firstBaseline" secondItem="8Mt-mJ-IGa" secondAttribute="firstBaseline" id="oNn-0L-xpa"/>
+                </constraints>
             </view>
-            <point key="canvasLocation" x="198" y="-62"/>
+            <point key="canvasLocation" x="138.5" y="-116"/>
         </window>
         <window title="Info" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="nV6-Sq-fUf" userLabel="Info" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>

@@ -162,6 +162,8 @@
 		428998EA10359CF0005FEC40 /* WhatChildIsThis.score in CopyFiles */ = {isa = PBXBuildFile; fileRef = 428998C310359CF0005FEC40 /* WhatChildIsThis.score */; };
 		428998EB10359CF0005FEC40 /* WTC1.score in CopyFiles */ = {isa = PBXBuildFile; fileRef = 428998C410359CF0005FEC40 /* WTC1.score */; };
 		5514E428297FBD1C001BF25D /* SndDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 5514E427297FBD1C001BF25D /* SndDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5514E42C2980AC86001BF25D /* GuitarFretboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5514E4292980AC86001BF25D /* GuitarFretboardView.m */; };
+		5514E42D2980AC86001BF25D /* GuitarString.m in Sources */ = {isa = PBXBuildFile; fileRef = 5514E42A2980AC86001BF25D /* GuitarString.m */; };
 		556A3CD429711DAD007FFAA7 /* soundInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 556A3CD229711DAD007FFAA7 /* soundInfo.xib */; };
 		556A3CDD29711E50007FFAA7 /* Spectro.xib in Resources */ = {isa = PBXBuildFile; fileRef = 556A3CD529711E4F007FFAA7 /* Spectro.xib */; };
 		556A3CDE29711E50007FFAA7 /* soundDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 556A3CD729711E4F007FFAA7 /* soundDocument.xib */; };
@@ -1933,6 +1935,9 @@
 		428998C310359CF0005FEC40 /* WhatChildIsThis.score */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WhatChildIsThis.score; sourceTree = "<group>"; };
 		428998C410359CF0005FEC40 /* WTC1.score */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WTC1.score; sourceTree = "<group>"; };
 		5514E427297FBD1C001BF25D /* SndDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SndDefines.h; sourceTree = "<group>"; };
+		5514E4292980AC86001BF25D /* GuitarFretboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuitarFretboardView.m; sourceTree = "<group>"; };
+		5514E42A2980AC86001BF25D /* GuitarString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuitarString.m; sourceTree = "<group>"; };
+		5514E42B2980AC86001BF25D /* Segment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Segment.m; sourceTree = "<group>"; };
 		556A3CF329722006007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/EnvelopeEd.sgml; sourceTree = "<group>"; };
 		556A3CF429722006007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/EnvelopeEd.xib; sourceTree = "<group>"; };
 		556A3CF529722006007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Info.xib; sourceTree = "<group>"; };
@@ -6242,8 +6247,11 @@
 				D837ABB406C8102B00A6CFEB /* AxonNGC77.h */,
 				D837ABB506C8102B00A6CFEB /* AxonNGC77.m */,
 				D837ABB606C8102B00A6CFEB /* GuitarFretboardView.h */,
+				5514E4292980AC86001BF25D /* GuitarFretboardView.m */,
 				D837ABB706C8102B00A6CFEB /* GuitarString.h */,
+				5514E42A2980AC86001BF25D /* GuitarString.m */,
 				D837ABB806C8102B00A6CFEB /* Segment.h */,
+				5514E42B2980AC86001BF25D /* Segment.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -11432,6 +11440,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5514E42D2980AC86001BF25D /* GuitarString.m in Sources */,
 				D88C505206C7E4C900D33D99 /* PatchBankDocument.m in Sources */,
 				D88C505406C7E4C900D33D99 /* PatchCordController.m in Sources */,
 				D88C505606C7E4C900D33D99 /* MIDISysExSynth.m in Sources */,
@@ -11443,6 +11452,7 @@
 				D837AB8906C80F4F00A6CFEB /* Juno106.m in Sources */,
 				D837ABBA06C8102B00A6CFEB /* AxonNGC77.m in Sources */,
 				D837AC5106C819C200A6CFEB /* QuadraverbGT.m in Sources */,
+				5514E42C2980AC86001BF25D /* GuitarFretboardView.m in Sources */,
 				D837AC6B06C81AAC00A6CFEB /* ProphetVS.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
