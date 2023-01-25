@@ -154,7 +154,7 @@ static BOOL errorDuringPlayback = NO;
 
 #define STR_PLAYING NSLocalizedString(@"Playing %@...", "This message appears when a file is being played.  The trailing argument is the name of the file.")
 
-#define STR_TOO_MANY_SYNTHPATCHES NSLocalizedString(@"Could only allocate %d instead of %d %@s for %@", "This message apepars when too many Synthpatches are requested in the scorefile for a given part. There are four arguments, which must appear in the following order: 1 = the number of patches that could be allocated, 2 = number of patches that were requested to be allocated, 3 = the name of the synthpatch specified in the scorefile and 4 = the part name")
+#define STR_TOO_MANY_SYNTHPATCHES NSLocalizedString(@"Could only allocate %ld instead of %ld %@s for %@", "This message apepars when too many Synthpatches are requested in the scorefile for a given part. There are four arguments, which must appear in the following order: 1 = the number of patches that could be allocated, 2 = number of patches that were requested to be allocated, 3 = the name of the synthpatch specified in the scorefile and 4 = the part name")
 
 #define STR_SCOREFILE NSLocalizedString(@"Score File", "This appears in the SaveAs... panel")
 
@@ -193,17 +193,16 @@ static BOOL errorDuringPlayback = NO;
     [timeCodeTextField setStringValue: @"Time code running"];
 }
 
-- (void) showErrorLog: sender
+- (IBAction) showErrorLog: sender
 {
     [errorLog show]; 
 }
 
-- runAlert: (NSString *) text
+- (void)runAlert: (NS_RELEASES_ARGUMENT NSString *) text
 {
     [errorLog addText: text];
     [text release];
     errorDuringPlayback = YES;
-    return self;
 }
 
 static void handleMKError(NSString *msg)
@@ -281,14 +280,18 @@ static BOOL needToReread(void)
     if ([soundOutDeviceName isEqualToString: selectedDevice])
 	return;
     if ([selectedDevice isEqualToString: NEXT_SOUND] && (!([theOrch capabilities] & MKOrchestraCapabilitiesHostSoundOut))) {
-	NSRunAlertPanel(STR_SCOREPLAYER, @"%@", STR_OK, nil, nil, @"NeXT sound not supported on this architecture");
+	NSAlert *alert = [[NSAlert alloc] init];
+	alert.messageText = STR_SCOREPLAYER;
+	alert.informativeText = @"NeXT sound not supported on this architecture";
+	[alert runModal];
+	[alert release];
 	[soundOutputDevicePopUp selectItemWithTitle: soundOutDeviceName];
 	return;
     }
     [self setSoundOutDevice: selectedDevice];
 }
 
-- (void) saveAsDefaultDevice: sender
+- (IBAction) saveAsDefaultDevice: sender
 {
     MKOrchestraCapabilities caps = [theOrch capabilities];
     if (caps & MKOrchestraCapabilitiesHostSoundOut) {
@@ -313,7 +316,7 @@ static BOOL needToReread(void)
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (void) deviceSpecificSettings: sender
+- (IBAction) deviceSpecificSettings: sender
 {
     if ([soundOutDeviceName isEqualToString: DAI2400]) {
 	if (!StealthDAI2400Panel) {
@@ -334,44 +337,81 @@ static BOOL needToReread(void)
 	[NeXTDACPanel makeKeyAndOrderFront:self];
     }
     else {
-	NSRunAlertPanel(STR_SCOREPLAYER, @"No special settings for this device", STR_OK, nil, nil);
-    } 
+	NSAlert *alert = [[NSAlert alloc] init];
+	alert.messageText = STR_SCOREPLAYER;
+	alert.informativeText = @"No special settings for this device";
+	[alert runModal];
+    }
 }
 
 // - (void) setOrchestraVolume: (id) sender
-- (void) setNeXTDACVolume:sender
+- (IBAction) setNeXTDACVolume:sender
 {
     [[[theOrch audioProcessorChain] postFader] setAmp: [sender floatValue] clearingEnvelope: NO];
 }
 
-- (void)setNeXTDACMute:sender
+- (IBAction)setNeXTDACMute:sender
 {
     [Snd setMute:[sender intValue]];
 }
 
-- (void)getNeXTDACCurrentValues:sender
+- (IBAction)getNeXTDACCurrentValues:sender
 {
     float l = [[[theOrch audioProcessorChain] postFader] amp];
     [NeXTDacVolumeSlider setFloatValue: l];
     [NeXTDacMuteSwitch setIntValue: [Snd isMuted]];
 }
 
-- (void) openEditFile: sender
+- (IBAction) setAD64xConsumer: (id) sender
+{
+    
+}
+
+- (IBAction) setAD64xProfessional: (id) sender
+{
+    
+}
+
+- (IBAction) setDAI2400CopyProhibit: (id) sender
+{
+    
+}
+
+ - (IBAction) setDAI2400Emphasis: (id) sender
+{
+    
+}
+
+- (IBAction) openEditFile: sender
 {
     NSString *editor;
     
     if (!fileName) {
-	NSRunAlertPanel(STR_SCOREPLAYER, STR_NO_FILE_OPEN, STR_OK, nil, nil);
+	NSAlert *alert = [[NSAlert alloc] init];
+	alert.messageText = STR_SCOREPLAYER;
+	alert.informativeText = STR_NO_FILE_OPEN;
+	[alert runModal];
+	[alert release];
 	return;
     }
     editor = [ScorePlayerController scoreFileEditorAppName];
     if ([editor length] == 0) {
-        if (![[NSWorkspace sharedWorkspace] openFile: fileName])
-            NSRunAlertPanel(STR_SCOREPLAYER, STR_EDIT_CANT_OPEN_FILE, STR_OK, nil, nil);
+	if (![[NSWorkspace sharedWorkspace] openFile: fileName]) {
+	    NSAlert *alert = [[NSAlert alloc] init];
+	    alert.messageText = STR_SCOREPLAYER;
+	    alert.informativeText = STR_EDIT_CANT_OPEN_FILE;
+	    [alert runModal];
+	    [alert release];
+	}
     }
     else {
-        if (![[NSWorkspace sharedWorkspace] openFile: fileName withApplication: editor])
-            NSRunAlertPanel(STR_SCOREPLAYER, STR_EDIT_CANT_OPEN_FILE, STR_OK, nil, nil);
+	if (![[NSWorkspace sharedWorkspace] openFile: fileName withApplication: editor]) {
+	    NSAlert *alert = [[NSAlert alloc] init];
+	    alert.messageText = STR_SCOREPLAYER;
+	    alert.informativeText = STR_EDIT_CANT_OPEN_FILE;
+	    [alert runModal];
+	    [alert release];
+	}
     }
 }
 
@@ -382,12 +422,10 @@ static int fileType(NSString *name)
     
     if ([[MKScore midifileExtensions] indexOfObject: ext] != NSNotFound)
         return MIDI_FILE;
-    else if ([ext isEqualToString:@"playscore"] ||
-             [ext isEqualToString:@"PLAYSCORE"])
+    else if ([ext caseInsensitiveCompare:@"playscore"] == NSOrderedSame)
         return PLAYSCORE_FILE;
     // TODO: [[Snd fileExtensions] indexOfObject: ext] != NSNotFound
-    else if ([ext isEqualToString:@"snd"] ||
-             [ext isEqualToString:@"SND"])
+    else if ([ext caseInsensitiveCompare:@"snd"] == NSOrderedSame)
         return (soundFile && [soundFile length]) ? SOUND_FILE : DSP_COMMANDS_FILE;
     return SCORE_FILE;
 }
@@ -538,8 +576,13 @@ static BOOL setUpFile(NSString *workspaceFileName);
     [playButton setState: NSOffState];
     [tooFastErrorMsg setTextColor: [NSColor lightGrayColor]];
     [tooFastErrorMsg setBackgroundColor: [NSColor lightGrayColor]];
-    if (errorDuringPlayback && ![errorLog isVisible])
-	NSRunAlertPanel(STR_SCOREPLAYER, @"%@", STR_OK, nil, nil, STR_ERRORS);
+    if (errorDuringPlayback && ![errorLog isVisible]) {
+	NSAlert *alert = [[NSAlert alloc] init];
+	alert.messageText = STR_SCOREPLAYER;
+	alert.informativeText = STR_ERRORS;
+	[alert runModal];
+	[alert release];
+    }
     messageFlashed = NO;
     isLate = NO;
     wasLate = NO;
@@ -621,7 +664,6 @@ static double getUntempo(float tempoVal)
 - (void) startMidi
 {
     NSEnumerator *midiDevEnumerator = [playingMidiDevices objectEnumerator];
-    MKMidi *midiDev;
     
     for (MKMidi *midiDev in midiDevEnumerator) {
 	if ([midiDev openOutputOnly]) {	// set the localDeltaT time offset, negative values are for orchestras
@@ -684,7 +726,11 @@ static double getUntempo(float tempoVal)
     if (msg && !warnedAboutSrate) {	
         [errorLog addText: msg];
 	warnedAboutSrate = YES;
-	NSRunAlertPanel(STR_SCOREPLAYER, @"%@", STR_OK, NULL, NULL, msg);
+	NSAlert *alert = [[NSAlert alloc] init];
+	alert.messageText = STR_SCOREPLAYER;
+	alert.informativeText = msg;
+	[alert runModal];
+	[alert release];
     }
     [theOrch setSamplingRate: actualSrate];
     
@@ -721,8 +767,17 @@ static double getUntempo(float tempoVal)
 	if (!partInfo) {
             errMsg = [NSString stringWithFormat: STR_INFO_MISSING, MKGetObjectName(aPart)];
             [errorLog addText: errMsg];
-            if (!NSRunAlertPanel(STR_SCOREPLAYER, @"%@", STR_CONTINUE, STR_CANCEL, nil, errMsg))
-                return;
+	    NSAlert *alert = [[NSAlert alloc] init];
+	    alert.messageText = STR_SCOREPLAYER;
+	    alert.informativeText = errMsg;
+	    [alert addButtonWithTitle:STR_CONTINUE];
+	    [alert addButtonWithTitle:STR_CANCEL];
+
+	    if ([alert runModal] == NSAlertSecondButtonReturn) {
+		[alert release];
+		return;
+	    }
+	    [alert release];
 	    continue;
 	}		
         if([partInfo isParPresent: MK_synthPatch]) {
@@ -763,9 +818,17 @@ static double getUntempo(float tempoVal)
 	    if (!synthPatchClass) {         /* Class not loaded in program? */
                 errMsg = [NSString stringWithFormat: STR_NO_SYNTHPATCH, synthPatchName];
                 [errorLog addText: errMsg];
-		if (!NSRunAlertPanel(STR_SCOREPLAYER, @"%@", STR_CONTINUE, STR_CANCEL, nil, errMsg))
+		NSAlert *alert = [[NSAlert alloc] init];
+		alert.messageText = STR_SCOREPLAYER;
+		alert.informativeText = errMsg;
+		[alert addButtonWithTitle:STR_CONTINUE];
+		[alert addButtonWithTitle:STR_CANCEL];
+		if ([alert runModal] == NSAlertSecondButtonReturn) {
+		    [alert release];
 		    return;
+		}
 		/* TODO: We would prefer to dynamically load the class here. */
+		[alert release];
 		continue;
 	    }
 	    anIns = [MKSynthInstrument new];      
@@ -779,11 +842,20 @@ static double getUntempo(float tempoVal)
                                           patchTemplate: [synthPatchClass patchTemplateFor: partInfo]];
 	    if (synthPatchCount < voices) {
                 errMsg = [NSString stringWithFormat: STR_TOO_MANY_SYNTHPATCHES,
-                    synthPatchCount, voices, synthPatchName, MKGetObjectName(aPart)];
+			  (long)synthPatchCount, (long)voices, synthPatchName, MKGetObjectName(aPart)];
 		
                 [errorLog addText: errMsg];
-		if (!NSRunAlertPanel(STR_SCOREPLAYER, @"%@", STR_CONTINUE, STR_CANCEL, NULL, errMsg))
+		NSAlert *alert = [[NSAlert alloc] init];
+		alert.messageText = STR_SCOREPLAYER;
+		alert.informativeText = errMsg;
+		[alert addButtonWithTitle:STR_CONTINUE];
+		[alert addButtonWithTitle:STR_CANCEL];
+
+		if ([alert runModal] == NSAlertSecondButtonReturn) {
+		    [alert release];
 		    return;
+		}
+		[alert release];
 	    }
 	}
     }
@@ -984,7 +1056,7 @@ static void abortNow()
     }
 }
 
-- (void) selectFile: sender
+- (IBAction) selectFile: sender
 {
     abortNow(); /* Could move this to after setUpFile() */
     if (!setUpFile(nil)) {
@@ -1005,7 +1077,7 @@ static void abortNow()
     return YES;
 }
 
-- (void) playStop: sender
+- (IBAction) playStop: sender
 {
     if (!fileName || ![fileName length])
         [self selectFile: self];
@@ -1059,7 +1131,7 @@ static void adjustTempo(double slowDown)
     return self;
 }
 
-- animateTempo: sender
+- (void)animateTempo:(NSTimer*) sender
 {
     double diff;
     BOOL forceAdjustment = isLate;
@@ -1081,7 +1153,7 @@ static void adjustTempo(double slowDown)
     if (diff < 0.0)  /* Abs value */
         diff = -diff;
     if (!forceAdjustment && diff < ANIMATE_DIFF_THRESHOLD) /* diff too small */
-        return self;
+        return;
     [MKConductor lockPerformance];
     [[MKConductor defaultConductor] setTempo: desiredTempo];
     [MKConductor unlockPerformance];
@@ -1089,7 +1161,6 @@ static void adjustTempo(double slowDown)
     if (wasLate || isLate)
 	[tempoSlider setFloatValue: getUntempo(desiredTempo)];
     lastTempo = desiredTempo;
-    return self;
 }
 
 - (IBAction) setTempoFrom: sender	// currently called by slider only
@@ -1200,7 +1271,7 @@ NSString *getPath(NSString *dir, NSString *name, NSString *ext)
     return [dir stringByAppendingPathComponent: [name stringByAppendingPathExtension: ext]];
 }
 
-- setSaveType:(int)type
+- (void)setSaveType:(int)type
     /* Set the Save panel accessory view icon and label according to type. */
 {
     saveType = type;
@@ -1215,10 +1286,9 @@ NSString *getPath(NSString *dir, NSString *name, NSString *ext)
     [accessoryView setImage: [NSImage imageNamed: [fileIcons objectAtIndex: type]]];
     [accessoryView setTitle: [fileTypes objectAtIndex: type]];
     [savePanel setAllowedFileTypes: @[[saveFileExtensions objectAtIndex: type]]];
-    return self;
 }
 
-- changeSaveType: sender
+- (IBAction)changeSaveType: sender
     /* Called by the accessory view (the Type button on the Save Panel */
 {
     saveType++;
@@ -1227,10 +1297,9 @@ NSString *getPath(NSString *dir, NSString *name, NSString *ext)
     if (saveType > SOUND_FILE) 
 	saveType = SCORE_FILE; /* Wrap */
     [self setSaveType: saveType];
-    return self;
 }
 
-- (void) saveScoreAs: sender
+- (IBAction) saveScoreAs: sender
     /* Save the score, always prompting for a file name first.
        This is what the SaveAs: menu item calls. */
 {
@@ -1278,8 +1347,13 @@ NSString *getPath(NSString *dir, NSString *name, NSString *ext)
     /* Look in the app wrapper */
     NSString *helpfile = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent: @"help.html"];
     
-    if (![[NSWorkspace sharedWorkspace] openFile: helpfile])
-        NSRunAlertPanel(STR_SCOREPLAYER, STR_EDIT_CANT_OPEN_FILE, @"", nil, nil);
+    if (![[NSWorkspace sharedWorkspace] openFile: helpfile]) {
+	NSAlert *alert = [[NSAlert alloc] init];
+	alert.messageText = STR_SCOREPLAYER;
+	alert.informativeText = STR_EDIT_CANT_OPEN_FILE;
+	[alert runModal];
+	[alert release];
+    }
 }
 
 - (IBAction)pause: sender

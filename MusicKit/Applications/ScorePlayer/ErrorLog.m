@@ -17,15 +17,10 @@
 
 @implementation ErrorLog
 
-+ new
-{
-    return [[self allocWithZone:NSDefaultMallocZone()] init];
-}
-
-- init
+- (instancetype)init
 {
     NSString *path;
-    [super init];
+    self = [super init];
     if (((path = [[NSBundle mainBundle] pathForResource:@"ErrorLog" ofType:@"nib"]) == nil))
         NSLog(@"Nib file missing for ScorePlayer!\n");
     else
@@ -37,11 +32,10 @@
     return self;
 }
 
-- clear 
+- (void)clear
 {
     NSInteger endPos = [[[msg textStorage] string] length];
     [msg replaceCharactersInRange:NSMakeRange(0,endPos) withString:@"\n"];
-    return self;
 }
 
 - (void)buttonPressed:sender

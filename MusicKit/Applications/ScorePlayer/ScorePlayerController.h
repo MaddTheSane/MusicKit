@@ -23,11 +23,11 @@
     IBOutlet NSTextField *serialPortDeviceNameField;
     
     // Redundant NeXT specific hardware, needs to be removed.
-    id NeXTDacMuteSwitch;
-    id NeXTDacVolumeSlider;
-    id SSAD64xPanel;
-    id StealthDAI2400Panel;
-    id NeXTDACPanel;
+    IBOutlet NSButton *NeXTDacMuteSwitch;
+    IBOutlet NSSlider *NeXTDacVolumeSlider;
+    IBOutlet NSPanel *SSAD64xPanel;
+    IBOutlet NSPanel *StealthDAI2400Panel;
+    IBOutlet NSPanel *NeXTDACPanel;
 
     // Name of the sound output device.
     NSString *soundOutDeviceName;
@@ -50,9 +50,11 @@
 - (IBAction) selectFile: (id) sender;
 - (IBAction) showErrorLog: (id) sender;
 - (IBAction) saveScoreAs: (id) sender;
-- (void) setNeXTDACVolume: (id) sender;
-- (void) setNeXTDACMute: (id) sender;
-- (void) getNeXTDACCurrentValues: (id) sender;
+- (IBAction) setNeXTDACVolume: (id) sender;
+- (IBAction) setNeXTDACMute: (id) sender;
+- (IBAction) getNeXTDACCurrentValues: (id) sender;
+- (IBAction) setAD64xConsumer: (id) sender;
+- (IBAction) setAD64xProfessional: (id) sender;
 
 @end
 

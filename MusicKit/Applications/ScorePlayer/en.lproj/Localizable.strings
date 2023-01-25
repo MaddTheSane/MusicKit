@@ -71,7 +71,7 @@
 "Playing %@..." = "Playing %@…";
 
 /* This message apepars when too many Synthpatches are requested in the scorefile for a given part. There are four arguments, which must appear in the following order. 1 = the number of patches that could be allocated, 2 = the number of patches that were requested to be allocated, 3 = the name of the synthpatch specified in the scorefile and 4 = the part name. */
-"Could only allocate %d instead of %d %@s for %@" = "Could only allocate %1$d instead of %2$d %3$@s for %4$@";
+"Could only allocate %ld instead of %ld %@s for %@" = "Could only allocate %1$ld instead of %2$ld %3$@s for %4$@";
 
 /* This appears in the SaveAs... panel */
 "Score File" = "Score File";

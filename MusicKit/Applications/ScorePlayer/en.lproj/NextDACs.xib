@@ -8,6 +8,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ScorePlayerController">
             <connections>
+                <outlet property="NeXTDACPanel" destination="8" id="3db-xT-Dvr"/>
                 <outlet property="NeXTDacMuteSwitch" destination="3" id="14"/>
                 <outlet property="NeXTDacVolumeSlider" destination="4" id="13"/>
             </connections>
