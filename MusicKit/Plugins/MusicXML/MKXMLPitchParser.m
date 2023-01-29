@@ -33,7 +33,7 @@
         return;
     }
 
-    printf("pitch parser got sent a start tag it does not grok: %s\n",[elementName cString]);
+    printf("pitch parser got sent a start tag it does not grok: %s\n",[elementName UTF8String]);
 }
 
 - (void) endElement: (NSString*)elementName

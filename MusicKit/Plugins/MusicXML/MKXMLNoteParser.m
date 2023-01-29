@@ -18,7 +18,7 @@
     int oct;
     if (!step) return 0;
     if ([step length] != 1) return 0;
-    s = ((char *)[step cString])[0];
+    s = ((char *)[step UTF8String])[0];
     switch (s) {
         case 'c':
         default:
@@ -61,7 +61,7 @@
     }
     else {
         [n setNoteType:MK_noteDur];
-        [n setDur:duration];
+        [n setDuration:duration];
     }
     if ((p = [d objectForKey:@"dynamics"])) {
         [n setPar:MK_velocity toDouble:(double)[p intValue] * 90.0 / 100.0f];
