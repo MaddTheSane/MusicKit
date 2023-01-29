@@ -508,77 +508,77 @@ static void resetPriority(void)
 // This is the main loop for a separate-threaded performance.
 + (void) separateThreadLoop
 {
-    NSAutoreleasePool *pool = [NSAutoreleasePool new];
-    double timeToWait; // In fractions of seconds
-
-    performanceThread = [[NSThread currentThread] retain];
-    abortPlayLock = [abortPlayLock initWithCondition: MK_PLAYING_UNINTERRUPTED];
-    lockPerformance(4); // Must be the first thing in this function
-    setPriority();           // if ever this does something, we may need to retrieve the currentRunLoop afterwards.
-
-    while ([MKConductor inPerformance]) {
-        BOOL didAbort;
-
-        // finishPerformance can be called from within the MusicKit thread
-        // or from the application thread.  In both cases, inPerformance gets
-        // set to NO. In the application thread case, we also set the MK_ABORTED_PLAYING
-        // condition when unlocking abortPlayLock (in wakeUpMKThread) to kick the MusicKit
-        // thread outta bed.
-
-        timeToWait = ([MKConductor isPaused] ? MK_ENDOFTIME :
-                      ([MKConductor isClocked] ? _MKTheTimeToWait(condQueue->nextMsgTime) : 0.0));
-
-        if (MKIsTraced(MKTraceConductor))
-            NSLog(@"MK: timeToWait in seconds %lf\n", timeToWait);
-
-	// We better have the lock and we know we want to give it up.
-	// NSLog(@"MK: about to unlock performance lock\n");
-	unlockPerformance(4, RECURSIVE_LOCKING); 
+    @autoreleasepool {
+	double timeToWait; // In fractions of seconds
 	
-        // if we need to wait longer than 100 uSec, use the timed condition lock, this is just a zero check.
-        if(timeToWait > 0.0001) {
-            /**************************** GOODNIGHT ***************************/
-            // This wakes up when an abort condition occurs arrives or until timeout.
-            // On waking, the masterConductorBody will be performed.
-	    // NSLog(@"MK: Waiting to lock %@ when condition MK_ABORTED_PLAYING occurs\n", abortPlayLock);
-            didAbort = [abortPlayLock lockWhenCondition: MK_ABORTED_PLAYING 
-					     beforeDate: [NSDate dateWithTimeIntervalSinceNow: timeToWait]];
-            /**************************** IT'S MORNING! *************************/
-            // If the desire is to exit the thread, this will be
-            // accomplished by the setting of inPerformance to false.
-            // If the desire is to pause the thread, this will be
-            // accomplished by the setting of timedEntry to MK_ENDOFTIME.
-            // If the desire is to reposition the thread, this will be
-            // accomplished by the setting of timedEntry to the new
-            // time.
-        }
-        else {
-            // NSLog(@"Skipped locking due to timeToWait being so small");
-            didAbort = NO;
-        }
-	// check if we aborted, preventing calling masterConductorBody
-	if(!didAbort) {
-	    // NSLog(@"MK: Timed out, waiting on performance lock\n");
-	    lockPerformance(5);
-	    // NSLog(@"MK: Now have the performance thread lock %@\n", performanceLock);
-	    [MKConductor masterConductorBody: nil];
+	performanceThread = [[NSThread currentThread] retain];
+	abortPlayLock = [abortPlayLock initWithCondition: MK_PLAYING_UNINTERRUPTED];
+	lockPerformance(4); // Must be the first thing in this function
+	setPriority();           // if ever this does something, we may need to retrieve the currentRunLoop afterwards.
+	
+	while ([MKConductor inPerformance]) {
+	    BOOL didAbort;
+	    
+	    // finishPerformance can be called from within the MusicKit thread
+	    // or from the application thread.  In both cases, inPerformance gets
+	    // set to NO. In the application thread case, we also set the MK_ABORTED_PLAYING
+	    // condition when unlocking abortPlayLock (in wakeUpMKThread) to kick the MusicKit
+	    // thread outta bed.
+	    
+	    timeToWait = ([MKConductor isPaused] ? MK_ENDOFTIME :
+			  ([MKConductor isClocked] ? _MKTheTimeToWait(condQueue->nextMsgTime) : 0.0));
+	    
+	    if (MKIsTraced(MKTraceConductor))
+		NSLog(@"MK: timeToWait in seconds %lf\n", timeToWait);
+	    
+	    // We better have the lock and we know we want to give it up.
+	    // NSLog(@"MK: about to unlock performance lock\n");
+	    unlockPerformance(4, RECURSIVE_LOCKING);
+	    
+	    // if we need to wait longer than 100 uSec, use the timed condition lock, this is just a zero check.
+	    if(timeToWait > 0.0001) {
+		/**************************** GOODNIGHT ***************************/
+		// This wakes up when an abort condition occurs arrives or until timeout.
+		// On waking, the masterConductorBody will be performed.
+		// NSLog(@"MK: Waiting to lock %@ when condition MK_ABORTED_PLAYING occurs\n", abortPlayLock);
+		didAbort = [abortPlayLock lockWhenCondition: MK_ABORTED_PLAYING
+						 beforeDate: [NSDate dateWithTimeIntervalSinceNow: timeToWait]];
+		/**************************** IT'S MORNING! *************************/
+		// If the desire is to exit the thread, this will be
+		// accomplished by the setting of inPerformance to false.
+		// If the desire is to pause the thread, this will be
+		// accomplished by the setting of timedEntry to MK_ENDOFTIME.
+		// If the desire is to reposition the thread, this will be
+		// accomplished by the setting of timedEntry to the new
+		// time.
+	    }
+	    else {
+		// NSLog(@"Skipped locking due to timeToWait being so small");
+		didAbort = NO;
+	    }
+	    // check if we aborted, preventing calling masterConductorBody
+	    if(!didAbort) {
+		// NSLog(@"MK: Timed out, waiting on performance lock\n");
+		lockPerformance(5);
+		// NSLog(@"MK: Now have the performance thread lock %@\n", performanceLock);
+		[MKConductor masterConductorBody: nil];
+	    }
+	    else {
+		// NSLog(@"MK: Exited timed condition lock with abort condition, unlocking abortPlayLock\n");
+		[abortPlayLock unlockWithCondition: MK_PLAYING_UNINTERRUPTED];
+		// Now lock the performance lock to ensure we correctly unlock it after exiting the loop.
+		// Note that we lock this after the abortPlayLock has been unlocked to avoid a deadlock.
+		// NSLog(@"MK: Waiting on performance lock to lock for final exit\n");
+		lockPerformance(6);
+		// NSLog(@"MK: Now have the performance thread lock %@ before exit\n", performanceLock);
+	    }
 	}
-	else {
-	    // NSLog(@"MK: Exited timed condition lock with abort condition, unlocking abortPlayLock\n");
-	    [abortPlayLock unlockWithCondition: MK_PLAYING_UNINTERRUPTED];
-	    // Now lock the performance lock to ensure we correctly unlock it after exiting the loop.
-	    // Note that we lock this after the abortPlayLock has been unlocked to avoid a deadlock.
-	    // NSLog(@"MK: Waiting on performance lock to lock for final exit\n");
-	    lockPerformance(6);
-	    // NSLog(@"MK: Now have the performance thread lock %@ before exit\n", performanceLock);
-	}
+	if (MKIsTraced(MKTraceConductor))
+	    NSLog(@"MK: Exited the inPerformance loop\n");
+	resetPriority();
+	performanceThread = nil;
+	unlockPerformance(5, NONRECURSIVE_LOCKING);
     }
-    if (MKIsTraced(MKTraceConductor))
-        NSLog(@"MK: Exited the inPerformance loop\n");
-    resetPriority();
-    performanceThread = nil;
-    unlockPerformance(5, NONRECURSIVE_LOCKING);
-    [pool release];
     [NSThread exit];
 }
 
@@ -617,70 +617,70 @@ enum {
 
 + (void) delegateMessageThread:(NSArray*) ports
 {
-    NSAutoreleasePool *localPool = [[NSAutoreleasePool alloc] init];
-    id controllerProxy = nil;
-    
-    [self retain];
-    
+    @autoreleasepool {
+	id controllerProxy = nil;
+	
+	[self retain];
+	
 #if MKCONDUCTOR_DEBUG
-    NSLog(@"MKConductor::entering delegate thread\n");
+	NSLog(@"MKConductor::entering delegate thread\n");
 #endif
-    
-    while (bgdm_sem != BGDM_threadStopped) {
-	[bgdm_threadLock lockWhenCondition: BGDM_hasFlag];
-	if (bgdm_sem == BGDM_delegateMessageReady)  {
-	    NSInvocation *delegateMessage = nil;
-	    NSInteger count;
-	    
-      // quickly release the lock so we don't deadlock if the queued messages take
-      // a while to go through.
-	    [bgdm_threadLock unlockWithCondition: bgdm_sem];
-	    while (1) {
-		[delegateMessageArrayLock lock];
-		count = [delegateMessageArray count];
-		if (count) {
-		    delegateMessage = [[delegateMessageArray objectAtIndex: 0] retain];
-		    [delegateMessageArray removeObjectAtIndex: 0];
+	
+	while (bgdm_sem != BGDM_threadStopped) {
+	    [bgdm_threadLock lockWhenCondition: BGDM_hasFlag];
+	    if (bgdm_sem == BGDM_delegateMessageReady)  {
+		NSInvocation *delegateMessage = nil;
+		NSInteger count;
+		
+		// quickly release the lock so we don't deadlock if the queued messages take
+		// a while to go through.
+		[bgdm_threadLock unlockWithCondition: bgdm_sem];
+		while (1) {
+		    [delegateMessageArrayLock lock];
+		    count = [delegateMessageArray count];
+		    if (count) {
+			delegateMessage = [[delegateMessageArray objectAtIndex: 0] retain];
+			[delegateMessageArray removeObjectAtIndex: 0];
+		    }
+		    [delegateMessageArrayLock unlock];
+		    if (!count)
+			break;
+		    if (!controllerProxy) {
+			NSConnection *theConnection = [NSConnection connectionWithReceivePort: [ports objectAtIndex: 0]
+										     sendPort: [ports objectAtIndex: 1]];
+			// Note: if there's a problem with the NSRunLoop not running or
+			// responding here, the -rootProxy method will block. We could
+			// set a timout here and catch the exception thrown as a result,
+			// but there may be valid reasons why the NSRunLoop does not respond
+			// (perhaps the main loop is busy doing other stuff?). THis could do
+			// with some testing cos I think a timeout exception would be the
+			// best way forward.
+			
+			//[theConnection setReplyTimeout:0.1];
+			controllerProxy = [theConnection rootProxy];
+			// this causes a problem, and shouldn't, becuase the same code works in the SndKit!
+			//          [controllerProxy setProtocolForProxy:@protocol(SndDelegateMessagePassing)];
+		    }
+		    /* cast to unsigned long to prevent compiler warnings */
+		    [controllerProxy _sendDelegateInvocation:delegateMessage];
 		}
-		[delegateMessageArrayLock unlock];
-		if (!count)
-		    break;
-		if (!controllerProxy) {
-		    NSConnection *theConnection = [NSConnection connectionWithReceivePort: [ports objectAtIndex: 0]
-										 sendPort: [ports objectAtIndex: 1]];
-          // Note: if there's a problem with the NSRunLoop not running or
-          // responding here, the -rootProxy method will block. We could
-          // set a timout here and catch the exception thrown as a result,
-          // but there may be valid reasons why the NSRunLoop does not respond
-          // (perhaps the main loop is busy doing other stuff?). THis could do
-          // with some testing cos I think a timeout exception would be the
-          // best way forward.
-		    
-          //[theConnection setReplyTimeout:0.1];
-		    controllerProxy = [theConnection rootProxy];
-// this causes a problem, and shouldn't, becuase the same code works in the SndKit!
-//          [controllerProxy setProtocolForProxy:@protocol(SndDelegateMessagePassing)];
-		}
-		/* cast to unsigned long to prevent compiler warnings */
-		[controllerProxy _sendDelegateInvocation:delegateMessage];
+		continue;
 	    }
-	    continue;
-	}
-	else if (bgdm_sem == BGDM_abortNow) {
+	    else if (bgdm_sem == BGDM_abortNow) {
 #if MKCONDUCTOR_DEBUG
-	    NSLog(@"MKConductor::Killing delegate message thread.\n");
+		NSLog(@"MKConductor::Killing delegate message thread.\n");
 #endif
-	    bgdm_sem = BGDM_threadStopped;
-	    break;
+		bgdm_sem = BGDM_threadStopped;
+		break;
+	    }
+	    else {
+		fprintf(stderr,"Semaphore status: %i\n", bgdm_sem);
+		bgdm_sem = BGDM_ready;
+	    }
+	    [bgdm_threadLock unlockWithCondition: bgdm_sem];
 	}
-	else {
-	    fprintf(stderr,"Semaphore status: %i\n", bgdm_sem);
-	    bgdm_sem = BGDM_ready;
-	}
-	[bgdm_threadLock unlockWithCondition: bgdm_sem];
+	[self release];
     }
-    [self release];
-    [localPool release];
     /* even if there is a new thread is created between the following two
      * statements, that would be ok -- there would temporarily be one
      * extra thread but it won't cause a problem

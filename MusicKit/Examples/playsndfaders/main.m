@@ -150,100 +150,100 @@ int main (int argc, const char * argv[])
     // Finally: do the actual sound playing!  
     else  
     {
-      NSAutoreleasePool *pool     = [NSAutoreleasePool new];
-      Snd               *s        = [Snd new]; 
-      NSString          *filename = nil, *extension = nil;
-      NSFileManager     *fm       = [NSFileManager defaultManager];
-      BOOL               bFileExists = FALSE, bIsDir = FALSE; 
-    
-      filename  = [fm stringWithFileSystemRepresentation:soundFileName
-                                                  length:strlen(soundFileName)];
-      extension = [filename pathExtension];
-      
-      bFileExists = [fm fileExistsAtPath: filename isDirectory: &bIsDir];      
-      if (!bFileExists || bIsDir) {
-        NSArray *ext = [Snd soundFileExtensions];
-        int i, c = [ext count];
-        
-        for (i = 0; i < c; i++) {
-          NSString *temp = [filename stringByAppendingPathExtension: [ext objectAtIndex: i]];
-          if ([fm fileExistsAtPath: temp]) {
-            bFileExists = TRUE;
-            filename = temp;
-            break;
-          }
-        } 
-      }
-
-      if (![fm fileExistsAtPath: filename]) {
-        PrintError("Can't find sound file",-2);
-      }
-      else {
-        int waitCount = 0;
-        int maxWait;
-        SndPlayer  *player = [SndPlayer defaultSndPlayer];
-        SndStreamManager *manager;
-        SndStreamMixer *mixer;
-        SndAudioProcessorChain *pchain;
-        SndAudioFader *fader;
-
-        [s readSoundfile: filename];
-
-        /* It's best to do all this setting up of the faders before telling the
-         * snd to play, since there's a chance that buffers might start to be
-         * filled and played before the faders are set up if they are done
-         * afterwards.
-         */
-        manager = [SndStreamManager defaultStreamManager];
-        mixer = [manager mixer];
-        pchain = [mixer audioProcessorChain];
-        fader = [pchain postFader];
-
-        if (amplitude != 1) {
-          [fader setAmp:amplitude atTime:0];
+        @autoreleasepool {
+            Snd               *s        = [Snd new];
+            NSString          *filename = nil, *extension = nil;
+            NSFileManager     *fm       = [NSFileManager defaultManager];
+            BOOL               bFileExists = FALSE, bIsDir = FALSE;
+            
+            filename  = [fm stringWithFileSystemRepresentation:soundFileName
+                                                        length:strlen(soundFileName)];
+            extension = [filename pathExtension];
+            
+            bFileExists = [fm fileExistsAtPath: filename isDirectory: &bIsDir];
+            if (!bFileExists || bIsDir) {
+                NSArray *ext = [Snd soundFileExtensions];
+                NSInteger i, c = [ext count];
+                
+                for (i = 0; i < c; i++) {
+                    NSString *temp = [filename stringByAppendingPathExtension: [ext objectAtIndex: i]];
+                    if ([fm fileExistsAtPath: temp]) {
+                        bFileExists = TRUE;
+                        filename = temp;
+                        break;
+                    }
+                }
+            }
+            
+            if (![fm fileExistsAtPath: filename]) {
+                PrintError("Can't find sound file",-2);
+            }
+            else {
+                int waitCount = 0;
+                int maxWait;
+                SndPlayer  *player = [SndPlayer defaultSndPlayer];
+                SndStreamManager *manager;
+                SndStreamMixer *mixer;
+                SndAudioProcessorChain *pchain;
+                SndAudioFader *fader;
+                
+                [s readSoundfile: filename];
+                
+                /* It's best to do all this setting up of the faders before telling the
+                 * snd to play, since there's a chance that buffers might start to be
+                 * filled and played before the faders are set up if they are done
+                 * afterwards.
+                 */
+                manager = [SndStreamManager defaultStreamManager];
+                mixer = [manager mixer];
+                pchain = [mixer audioProcessorChain];
+                fader = [pchain postFader];
+                
+                if (amplitude != 1) {
+                    [fader setAmp:amplitude atTime:0];
+                }
+                if (balance != 0) {
+                    [fader setBalance:balance atTime:0];
+                }
+                if (fadeInTime > 0) {
+                    [fader rampAmpFrom:0 to:1 startTime:0 endTime:fadeInTime];
+                }
+                if (fadeOutTime > 0) {
+                    [fader rampAmpFrom:1 to:0 startTime:[s duration]-fadeOutTime endTime:[s duration]];
+                }
+                if (numzigzags) {
+                    double dur = [s duration] / numzigzags;
+                    for (i = 0 ; i < numzigzags ; i++) {
+                        [fader rampBalanceFrom:-1 to:1 startTime:i*dur endTime:(i+0.5)*dur];
+                        [fader rampBalanceFrom:1 to:-1 startTime:(i+0.5)*dur endTime:(i+1)*dur];
+                    }
+                }
+                
+                maxWait = [s duration] + 5 + timeOffset;
+                [player setRemainConnectedToManager: FALSE];
+                
+                if (useReverb) {
+                    SndAudioProcessorReverb *rv = [[[SndAudioProcessorReverb alloc] init] autorelease];
+                    [rv setActive: TRUE];
+                    [pchain addAudioProcessor:rv];
+                }
+                
+                [s playInFuture: timeOffset beginSample: startTimeInSamples sampleCount: durationInSamples];
+                
+                if (bTimeOutputFlag) printf("Sound duration: %.3f\n",[s duration]);
+                
+                // Wait for stream manager to go inactive, signalling the sound has finished playing
+                while ([[SndStreamManager defaultStreamManager] isActive] && waitCount < maxWait) {
+                    [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
+                    if (bTimeOutputFlag)  printf("Time: %i\n",i+1);
+                    waitCount++;
+                }
+                if (waitCount >= maxWait) {
+                    fprintf(stderr,"Aborting wait for stream manager shutdown - taking too long.\n");
+                    fprintf(stderr,"(snd dur:%.3f, maxwait:%i)\n",[s duration],maxWait);
+                }
+            }
         }
-        if (balance != 0) {
-          [fader setBalance:balance atTime:0];
-        }
-        if (fadeInTime > 0) {
-          [fader rampAmpFrom:0 to:1 startTime:0 endTime:fadeInTime];
-        }
-        if (fadeOutTime > 0) {
-          [fader rampAmpFrom:1 to:0 startTime:[s duration]-fadeOutTime endTime:[s duration]];
-        }
-        if (numzigzags) {
-          double dur = [s duration] / numzigzags;
-          for (i = 0 ; i < numzigzags ; i++) {
-            [fader rampBalanceFrom:-1 to:1 startTime:i*dur endTime:(i+0.5)*dur];
-            [fader rampBalanceFrom:1 to:-1 startTime:(i+0.5)*dur endTime:(i+1)*dur];
-          }
-        }
-
-        maxWait = [s duration] + 5 + timeOffset;
-        [player setRemainConnectedToManager: FALSE];
-
-        if (useReverb) {
-            SndAudioProcessorReverb *rv = [[[SndAudioProcessorReverb alloc] init] autorelease];
-            [rv setActive: TRUE];
-            [pchain addAudioProcessor:rv];
-        }
-        
-        [s playInFuture: timeOffset beginSample: startTimeInSamples sampleCount: durationInSamples];
-
-        if (bTimeOutputFlag) printf("Sound duration: %.3f\n",[s duration]);
-
-        // Wait for stream manager to go inactive, signalling the sound has finished playing
-        while ([[SndStreamManager defaultStreamManager] isActive] && waitCount < maxWait) {
-          [NSThread sleepUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
-          if (bTimeOutputFlag)  printf("Time: %i\n",i+1);
-          waitCount++;
-        }
-        if (waitCount >= maxWait) {
-          fprintf(stderr,"Aborting wait for stream manager shutdown - taking too long.\n");
-          fprintf(stderr,"(snd dur:%.3f, maxwait:%i)\n",[s duration],maxWait);
-        }
-      }
-      [pool release];
     }
     return iReturnCode;
 }

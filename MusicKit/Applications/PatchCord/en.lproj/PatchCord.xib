@@ -277,7 +277,7 @@
                 <subviews>
                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5Fn-Vx-PCe">
                         <rect key="frame" x="102" y="46" width="86" height="25"/>
-                        <popUpButtonCell key="cell" type="push" title="driver 0" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="Inm-6v-30E" id="YdI-ID-cWb">
+                        <popUpButtonCell key="cell" type="push" title="driver 0" bezelStyle="rounded" imagePosition="left" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="Inm-6v-30E" id="YdI-ID-cWb">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="titleBar" size="12" textStyle="headline"/>
                             <menu key="menu" title="OtherViews" id="sfn-lk-9Hp">
@@ -292,7 +292,7 @@
                     </popUpButton>
                     <popUpButton verticalHuggingPriority="750" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="pZP-kB-09f">
                         <rect key="frame" x="102" y="16" width="86" height="25"/>
-                        <popUpButtonCell key="cell" type="push" title="driver 0" bezelStyle="rounded" imagePosition="right" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="jwC-ml-uX8" id="ObO-5d-QCj">
+                        <popUpButtonCell key="cell" type="push" title="driver 0" bezelStyle="rounded" imagePosition="left" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="jwC-ml-uX8" id="ObO-5d-QCj">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="titleBar" size="12" textStyle="headline"/>
                             <menu key="menu" title="OtherViews" id="YU7-Mr-Vtd">
@@ -348,70 +348,102 @@
                 <rect key="frame" x="0.0" y="0.0" width="425" height="158"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="58" translatesAutoresizingMaskIntoConstraints="NO" id="jr1-Gi-5CY">
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="58" translatesAutoresizingMaskIntoConstraints="NO" id="jr1-Gi-5CY">
                         <rect key="frame" x="3" y="20" width="62" height="13"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="13" id="TvJ-kg-qGy"/>
+                            <constraint firstAttribute="width" constant="58" id="zKr-nP-0lA"/>
+                        </constraints>
                         <textFieldCell key="cell" alignment="left" title="Version 2.0" id="VAj-Cm-RoW">
-                            <font key="font" size="10" name="Helvetica"/>
-                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <font key="font" metaFont="miniSystem"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="117" translatesAutoresizingMaskIntoConstraints="NO" id="t4K-uO-hwV">
-                        <rect key="frame" x="247" y="64" width="121" height="18"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="117" translatesAutoresizingMaskIntoConstraints="NO" id="t4K-uO-hwV">
+                        <rect key="frame" x="247" y="62" width="121" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="117" id="cfa-wt-T9U"/>
+                        </constraints>
                         <textFieldCell key="cell" alignment="left" title="by Leigh M. Smith" id="JgC-mi-uzo">
-                            <font key="font" metaFont="cellTitle"/>
+                            <font key="font" metaFont="system"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="237" translatesAutoresizingMaskIntoConstraints="NO" id="IZG-4I-vQf">
-                        <rect key="frame" x="160" y="20" width="241" height="13"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="237" translatesAutoresizingMaskIntoConstraints="NO" id="IZG-4I-vQf">
+                        <rect key="frame" x="181" y="20" width="226" height="13"/>
                         <textFieldCell key="cell" alignment="left" title="Copyright 1998, Leigh Smith.  All Rights Reserved." id="N8y-Da-4un">
-                            <font key="font" size="10" name="Helvetica"/>
-                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <font key="font" metaFont="miniSystem"/>
+                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Uoa-hc-l0I">
+                    <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Uoa-hc-l0I">
                         <rect key="frame" x="0.0" y="37" width="402" height="6"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="2" id="JuI-DW-oHS"/>
+                        </constraints>
                     </box>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="129" translatesAutoresizingMaskIntoConstraints="NO" id="tz9-aV-KU3">
-                        <rect key="frame" x="106" y="109" width="133" height="29"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="129" translatesAutoresizingMaskIntoConstraints="NO" id="tz9-aV-KU3">
+                        <rect key="frame" x="106" y="110" width="123" height="28"/>
                         <textFieldCell key="cell" alignment="center" title="PatchCord" id="mHd-wb-boZ">
-                            <font key="font" size="24" name="Helvetica-Oblique"/>
+                            <font key="font" size="24" name="HelveticaNeue-Italic"/>
                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" preferredMaxLayoutWidth="125" translatesAutoresizingMaskIntoConstraints="NO" id="vFl-7l-5q7">
-                        <rect key="frame" x="247" y="47" width="129" height="15"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="125" translatesAutoresizingMaskIntoConstraints="NO" id="vFl-7l-5q7">
+                        <rect key="frame" x="247" y="47" width="116" height="13"/>
                         <textFieldCell key="cell" alignment="center" title="leigh@leighsmith.com" id="OZ8-16-Z2L">
-                            <font key="font" size="12" name="Helvetica-Oblique"/>
-                            <color key="textColor" red="0.11603831000000001" green="0.31118881999999998" blue="0.10789748" alpha="1" colorSpace="calibratedRGB"/>
+                            <font key="font" size="11" name="Helvetica-Oblique"/>
+                            <color key="textColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" red="0.31118881999999998" green="0.18268132000000001" blue="0.24832863999999999" alpha="1" colorSpace="calibratedRGB"/>
                         </textFieldCell>
                     </textField>
-                    <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IfD-bQ-WLm">
+                    <imageView translatesAutoresizingMaskIntoConstraints="NO" id="IfD-bQ-WLm">
                         <rect key="frame" x="18" y="88" width="48" height="48"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="48" id="Nrz-iI-SgV"/>
+                            <constraint firstAttribute="width" constant="48" id="jzX-ye-v9P"/>
+                        </constraints>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="NSApplicationIcon" id="xEa-H5-jhc"/>
                     </imageView>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F0V-Xe-cCt">
-                        <rect key="frame" x="84" y="80" width="305" height="28"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="MIDI Synthesiser Patch Librarian" id="ZgV-Sl-Wge">
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="F0V-Xe-cCt">
+                        <rect key="frame" x="84" y="79" width="268" height="30"/>
+                        <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="MIDI Synthesiser Patch Librarian" id="ZgV-Sl-Wge">
                             <font key="font" metaFont="system" size="18"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="IfD-bQ-WLm" firstAttribute="leading" secondItem="s73-wd-FvR" secondAttribute="leading" constant="18" id="2Iv-FH-d9f"/>
+                    <constraint firstItem="tz9-aV-KU3" firstAttribute="leading" secondItem="IfD-bQ-WLm" secondAttribute="trailing" constant="42" id="480-gv-q0J"/>
+                    <constraint firstItem="vFl-7l-5q7" firstAttribute="top" secondItem="t4K-uO-hwV" secondAttribute="bottom" constant="2" id="5HC-Go-JQl"/>
+                    <constraint firstItem="tz9-aV-KU3" firstAttribute="top" secondItem="s73-wd-FvR" secondAttribute="top" constant="20" symbolic="YES" id="7en-jL-SOA"/>
+                    <constraint firstItem="F0V-Xe-cCt" firstAttribute="leading" secondItem="IfD-bQ-WLm" secondAttribute="trailing" constant="20" id="CRL-7A-Kzr"/>
+                    <constraint firstItem="jr1-Gi-5CY" firstAttribute="firstBaseline" secondItem="IZG-4I-vQf" secondAttribute="firstBaseline" id="Gwd-0y-OX0"/>
+                    <constraint firstItem="Uoa-hc-l0I" firstAttribute="top" secondItem="vFl-7l-5q7" secondAttribute="bottom" constant="6" id="IFM-2c-Pxl"/>
+                    <constraint firstItem="F0V-Xe-cCt" firstAttribute="top" secondItem="tz9-aV-KU3" secondAttribute="bottom" constant="1" id="JWs-AR-oMu"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="tz9-aV-KU3" secondAttribute="trailing" constant="188" id="Mgg-jy-SNl"/>
+                    <constraint firstItem="IZG-4I-vQf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="jr1-Gi-5CY" secondAttribute="trailing" constant="8" symbolic="YES" id="N1H-Vs-d8E"/>
+                    <constraint firstAttribute="trailing" secondItem="IZG-4I-vQf" secondAttribute="trailing" constant="20" symbolic="YES" id="QTb-NE-0ta"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="F0V-Xe-cCt" secondAttribute="trailing" constant="20" symbolic="YES" id="Sng-jG-aAz"/>
+                    <constraint firstAttribute="trailing" secondItem="t4K-uO-hwV" secondAttribute="trailing" constant="59" id="Tbl-Kl-txM"/>
+                    <constraint firstAttribute="trailing" secondItem="Uoa-hc-l0I" secondAttribute="trailing" constant="23" id="W9n-tb-aI9"/>
+                    <constraint firstItem="jr1-Gi-5CY" firstAttribute="baseline" secondItem="IZG-4I-vQf" secondAttribute="baseline" id="bO6-h6-piW"/>
+                    <constraint firstItem="jr1-Gi-5CY" firstAttribute="top" secondItem="Uoa-hc-l0I" secondAttribute="bottom" constant="6" id="dRJ-yP-dnQ"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vFl-7l-5q7" secondAttribute="trailing" constant="20" symbolic="YES" id="f3K-xc-dxa"/>
+                    <constraint firstItem="jr1-Gi-5CY" firstAttribute="leading" secondItem="s73-wd-FvR" secondAttribute="leading" constant="5" id="h6W-Rs-KZW"/>
+                    <constraint firstItem="t4K-uO-hwV" firstAttribute="leading" secondItem="vFl-7l-5q7" secondAttribute="leading" id="jDV-hS-H56"/>
+                    <constraint firstItem="t4K-uO-hwV" firstAttribute="top" secondItem="F0V-Xe-cCt" secondAttribute="bottom" constant="1" id="mHc-7c-T8W"/>
+                    <constraint firstAttribute="bottom" secondItem="jr1-Gi-5CY" secondAttribute="bottom" constant="20" symbolic="YES" id="mQf-qs-hdY"/>
+                    <constraint firstItem="Uoa-hc-l0I" firstAttribute="leading" secondItem="s73-wd-FvR" secondAttribute="leading" id="n4D-QC-V87"/>
+                    <constraint firstItem="IfD-bQ-WLm" firstAttribute="top" secondItem="s73-wd-FvR" secondAttribute="top" constant="22" id="usx-md-WTB"/>
+                    <constraint firstItem="Uoa-hc-l0I" firstAttribute="top" secondItem="IfD-bQ-WLm" secondAttribute="bottom" constant="47" id="w9p-Yo-OUx"/>
+                </constraints>
             </view>
             <point key="canvasLocation" x="333.5" y="284"/>
         </window>

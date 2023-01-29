@@ -623,75 +623,75 @@ static void inline setThreadPriority()
 
 - (void) processingThread
 {
-    NSAutoreleasePool *localPool = [NSAutoreleasePool new];
-
-    //[self retain]; // Increase the retain count to avoid NSAutoreleasePool removing this while it's playing.
-
+    @autoreleasepool {
+	
+	//[self retain]; // Increase the retain count to avoid NSAutoreleasePool removing this while it's playing.
+	
 #ifdef SET_THREAD_PRIORITY
-    // It isn't actually possible to escalate the thread priority, so we do so using sched_setscheduler.
-    setThreadPriority();
+	// It isn't actually possible to escalate the thread priority, so we do so using sched_setscheduler.
+	setThreadPriority();
 #endif
-    [[NSThread currentThread] setName: clientName]; // Just for debugging.
-    active = TRUE;
-    [managerConnectionLock lockWhenCondition: SC_connected];
+	[[NSThread currentThread] setName: clientName]; // Just for debugging.
+	active = TRUE;
+	[managerConnectionLock lockWhenCondition: SC_connected];
 #if SNDSTREAMCLIENT_DEBUG_SYNTHTHREAD
-    NSLog(@"SYNTH THREAD: (%@) starting processing thread\n", [NSThread currentThread]);
+	NSLog(@"SYNTH THREAD: (%@) starting processing thread\n", [NSThread currentThread]);
 #endif
-    while (active) @autoreleasepool {
-	if (generatesOutput) {
-	    synthOutputBuffer = [[outputQueue popNextPendingBuffer] retain];
-	    [synthOutputBuffer zero];
-        }
-        if (needsInput) {
-	    synthInputBuffer = [[inputQueue popNextPendingBuffer] retain];
-        }
+	while (active) @autoreleasepool {
+	    if (generatesOutput) {
+		synthOutputBuffer = [[outputQueue popNextPendingBuffer] retain];
+		[synthOutputBuffer zero];
+	    }
+	    if (needsInput) {
+		synthInputBuffer = [[inputQueue popNextPendingBuffer] retain];
+	    }
 #if SNDSTREAMCLIENT_DEBUG_SYNTHTHREAD
-        NSLog(@"[%@] SYNTH THREAD: preparing to processBuffers\n", clientName);
+	    NSLog(@"[%@] SYNTH THREAD: preparing to processBuffers\n", clientName);
 #endif
-        [synthThreadLock lock];
+	    [synthThreadLock lock];
 #if SNDSTREAMCLIENT_DEBUG_SYNTHTHREAD
-        NSLog(@"[%@] SYNTH THREAD: ... LOCKED\n", clientName);
+	    NSLog(@"[%@] SYNTH THREAD: ... LOCKED\n", clientName);
 #endif
-	@autoreleasepool {
+	    @autoreleasepool {
+		
+		// processBuffers in the sub-class should fill or modify synthOutputBuffer and/or retrieve synthInputBuffer.
+		[self processBuffers];
+	    }
+#if SNDSTREAMCLIENT_DEBUG_SYNTHTHREAD
+	    NSLog(@"[%@] SYNTH THREAD: ... done processBuffers\n", clientName);
+#endif
+	    if (synthOutputBuffer != nil) {
+		[processorChain processBuffer: synthOutputBuffer forTime: clientNowTime];
+	    }
+	    if (delegateRespondsToDidProcessBufferSelector) {
+		[delegate didProcessStreamBuffer: self];
+	    }
 	    
-	    // processBuffers in the sub-class should fill or modify synthOutputBuffer and/or retrieve synthInputBuffer.
-	    [self processBuffers];
-        }
+	    if (generatesOutput) {
+		clientNowTime = [self streamTime] + [synthOutputBuffer duration] * [outputQueue processedBuffersCount];
+		[outputQueue addProcessedBuffer: synthOutputBuffer];
+		[synthOutputBuffer release];
+		synthOutputBuffer = nil;
+	    }
+	    else {
+		clientNowTime += [synthOutputBuffer duration];
+	    }
+	    
+	    [synthThreadLock unlock];
+	    
 #if SNDSTREAMCLIENT_DEBUG_SYNTHTHREAD
-        NSLog(@"[%@] SYNTH THREAD: ... done processBuffers\n", clientName);
+	    NSLog(@"[%@] SYNTH THREAD: ... UNLOCKED\n", clientName);
 #endif
-        if (synthOutputBuffer != nil) {
-	    [processorChain processBuffer: synthOutputBuffer forTime: clientNowTime];
-        }
-	if (delegateRespondsToDidProcessBufferSelector) {
-	    [delegate didProcessStreamBuffer: self];
+	    
+	    if (needsInput) {
+		[inputQueue addProcessedBuffer: synthInputBuffer];
+		[synthInputBuffer release];
+	    }
 	}
-
-        if (generatesOutput) {
-	    clientNowTime = [self streamTime] + [synthOutputBuffer duration] * [outputQueue processedBuffersCount];
-	    [outputQueue addProcessedBuffer: synthOutputBuffer];
-	    [synthOutputBuffer release];
-	    synthOutputBuffer = nil;
-        }
-        else {
-	    clientNowTime += [synthOutputBuffer duration];
-        }
-
-        [synthThreadLock unlock];
-
-#if SNDSTREAMCLIENT_DEBUG_SYNTHTHREAD
-        NSLog(@"[%@] SYNTH THREAD: ... UNLOCKED\n", clientName);
-#endif
-
-        if (needsInput) {
-	    [inputQueue addProcessedBuffer: synthInputBuffer];
-	    [synthInputBuffer release];
-        }
+	[managerConnectionLock unlockWithCondition: SC_disconnecting];
+	[managerConnectionLock lockWhenCondition: SC_disconnected];
+	//[self release]; // Reduce the retain count now the thread is finishing.
     }
-    [managerConnectionLock unlockWithCondition: SC_disconnecting];
-    [managerConnectionLock lockWhenCondition: SC_disconnected];
-    //[self release]; // Reduce the retain count now the thread is finishing.
-    [localPool release];
     [managerConnectionLock unlockWithCondition: SC_disconnected];
 #if SNDSTREAMCLIENT_DEBUG_SYNTHTHREAD
     NSLog(@"SYNTH THREAD: (%@ %@) processing thread ended\n", [NSThread currentThread], clientName);
