@@ -39,10 +39,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
-		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		D8F028FF1842A9A900EE0FE9 /* Info-MusicXML__Upgraded_.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-MusicXML__Upgraded_.plist"; sourceTree = "<group>"; };
 		D8F029001842A9A900EE0FE9 /* MusicXML.mkplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MusicXML.mkplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5D048AE0280204E01A80103 /* MKXMLObjectContainerParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKXMLObjectContainerParser.h; sourceTree = "<group>"; };
@@ -82,7 +82,7 @@
 		F5D261F3027EF28D01A80103 /* MKXMLMeasureParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKXMLMeasureParser.h; sourceTree = "<group>"; };
 		F5D261F4027EF28D01A80103 /* MKXMLMidiInstrumentParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKXMLMidiInstrumentParser.h; sourceTree = "<group>"; };
 		F5D261F5027EF28D01A80103 /* MKXMLNoteParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKXMLNoteParser.h; sourceTree = "<group>"; };
-		F5D261F6027EF28D01A80103 /* MKXMLParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKXMLParser.h; sourceTree = "<group>"; };
+		F5D261F6027EF28D01A80103 /* MKXMLParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKXMLParser.h; sourceTree = "<group>"; usesTabs = 0; };
 		F5D261F7027EF28D01A80103 /* MKXMLPartListParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKXMLPartListParser.h; sourceTree = "<group>"; };
 		F5D261F8027EF28D01A80103 /* MKXMLPartParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKXMLPartParser.h; sourceTree = "<group>"; };
 		F5D261F9027EF28D01A80103 /* MKXMLPitchParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKXMLPitchParser.h; sourceTree = "<group>"; };
@@ -132,8 +132,10 @@
 		089C1671FE841209C02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */,
-				1058C7AEFEA557BF11CA2CBB /* Other Frameworks */,
+				1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */,
+				F5D2621B027EF3D101A80103 /* MusicKit.framework */,
+				089C1672FE841209C02AAC07 /* Foundation.framework */,
+				089C167FFE841241C02AAC07 /* AppKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -206,24 +208,6 @@
 				F5D26221027EF6F101A80103 /* MusicXML.m */,
 			);
 			name = Classes;
-			sourceTree = "<group>";
-		};
-		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */,
-				F5D2621B027EF3D101A80103 /* MusicKit.framework */,
-			);
-			name = "Linked Frameworks";
-			sourceTree = "<group>";
-		};
-		1058C7AEFEA557BF11CA2CBB /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				089C1672FE841209C02AAC07 /* Foundation.framework */,
-				089C167FFE841241C02AAC07 /* AppKit.framework */,
-			);
-			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
 		19C28FB8FE9D52D311CA2CBB /* Products */ = {

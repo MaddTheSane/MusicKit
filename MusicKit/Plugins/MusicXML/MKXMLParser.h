@@ -20,7 +20,7 @@ extern id MK_XML_NullString;
     MKXMLInfoStruct            *info; /* simply passed around */
 }
 
-+ (MKNote *)noteWithParametersFromStringArray:(NSArray*)a
++ (MKNote *)noteWithParametersFromStringArray:(NSArray<NSString*>*)a
                                  withBaseName:(NSString *)base;
 
 - (void) passElementName:      (NSString *) elementName
