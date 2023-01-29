@@ -63,7 +63,7 @@ static id newParName(const NSString * name,int param)
 /* Make a new one */
 {
   register _ParName *self = [_ParName new];
-  self->s = [(const id)name retain]; // no need to make copy?
+  self->s = [(const id)name copy];
   _MKNameGlobal((const id)name,self,_MK_param | _MK_BACKHASHBIT,YES,YES);
   self->par = param;
   self->printfunc = NULL;

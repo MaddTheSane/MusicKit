@@ -256,7 +256,7 @@ Modification history prior to commit to CVS repository:
 
 /* Methods required by superclasses. ------------------------------- */
 
-- activateSelf
+- (BOOL) activateSelf
   /* TYPE: Performing; Prepares the receiver for a performance.
    * Invoked by the activate method, this prepares the receiver 
    * for a performance by opening the associated file (if necessary)
@@ -290,7 +290,7 @@ Modification history prior to commit to CVS repository:
     }
     fileTime = 0;
     if ((!stream) || (![self initializeFile])) 
-      return nil;
+      return NO;
     [noteSenders makeObjectsPerformSelector: @selector(_setPerformer:) withObject: self];
     /* The first element in the file may be a time or a note. If it's a note,
        than its time is implicitly 0. Since we don't lookahead unless 
@@ -301,7 +301,7 @@ Modification history prior to commit to CVS repository:
             [self nextNote];
             if (fileTime > (MK_ENDOFTIME-1))  {
                 [self deactivate];
-                return nil;
+                return NO;
             }
             if (fileTime >= firstTimeTag)
                 break;
@@ -310,10 +310,10 @@ Modification history prior to commit to CVS repository:
     /* Insure we run for the first time on our first note. */
 //  nextPerform = fileTime - firstTimeTag;
     nextPerform = fileTime;
-    return self;
+    return YES;
 }
 
-- perform 
+- (void) perform
   /* TYPE: Performing
    * Grabs the next MKNote out of the file through nextNote,
    * processes it through 
@@ -337,7 +337,6 @@ Modification history prior to commit to CVS repository:
       [self deactivate];
     else 
       nextPerform = fileTime - t;
-    return self;
 }
 
 /* Methods which must be supplied by subclass. ---------------- */

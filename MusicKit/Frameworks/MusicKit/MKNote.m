@@ -856,9 +856,7 @@ static BOOL isParPresent(MKNote *aNote, unsigned aPar)
         return NO;    
 }
 
-static BOOL setParBit(self,aPar)
-    MKNote *self;
-    unsigned aPar;
+static BOOL setParBit(MKNote *self, unsigned aPar)
     /* Returns whether or not param is present and sets bit. */
 {
     register unsigned bitVectIndex = aPar / BITS_PER_INT;
@@ -893,9 +891,7 @@ static BOOL setParBit(self,aPar)
 
 /* Clears param bit if set. Returns whether param was present. */
 
-static BOOL clearParBit(self,aPar)
-    MKNote *self;
-    unsigned aPar;
+static BOOL clearParBit(MKNote *self, unsigned aPar)
 {
     unsigned thisBitVect = aPar / BITS_PER_INT;
     unsigned modBit = aPar % BITS_PER_INT;

@@ -23,9 +23,9 @@
 }
 
 -init;
--activateSelf;
+-(BOOL)activateSelf;
 -setPeriod:(double)p;
--perform;
+-(void)perform;
 -setTimeSlip:(double)v;
 -setMTCCond:obj;
 

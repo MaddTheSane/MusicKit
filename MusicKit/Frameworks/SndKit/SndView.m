@@ -879,8 +879,8 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
      * 3. plot max and min values, and remember last ones.
      */
     
-    cacheMaxArray = (float *) malloc(sizeof(float) * (NSWidth(drawWithinRectangle) + 3));
-    cacheMinArray = (float *) malloc(sizeof(float) * (NSWidth(drawWithinRectangle) + 3));
+    cacheMaxArray = (float *) calloc(NSWidth(drawWithinRectangle) + 3, sizeof(float));
+    cacheMinArray = (float *) calloc(NSWidth(drawWithinRectangle) + 3, sizeof(float));
     
     // NSLog(@"cache array width in samples %g\n", (NSWidth(drawWithinRectangle) + 3));
     

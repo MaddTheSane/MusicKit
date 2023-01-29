@@ -718,8 +718,10 @@ static void condInit()
 	}
 	if (![allConductors containsObject: self])
 	    [allConductors addObject: self];
-	if ([allConductors lastObject] != self)
+	if ([allConductors lastObject] != self) {
+	    [self autorelease];
 	    return nil; /* Attempt to init twice */
+	}
 	activePerformers = [[NSMutableArray allocWithZone: [self zone]] init];
 	beatSize = 1;
 	pauseFor = NULL; 

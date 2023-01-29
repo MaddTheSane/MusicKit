@@ -43,15 +43,15 @@ Modification history:
     return self;
 }
 
--activateSelf
+-(BOOL)activateSelf
 {
     nextPerform = period;
     timeSlip = 0;
     timeSlipped = NO;
-    return self;
+    return YES;
 }
 
--perform
+-(void)perform
 {
     if (timeSlipped) {
 	[theMTCCond _adjustPauseOffset:timeSlip];
@@ -59,7 +59,6 @@ Modification history:
 	timeSlipped = NO;
     }
     nextPerform = period;
-    return self;
 }
 
 -setTimeSlip:(double)v

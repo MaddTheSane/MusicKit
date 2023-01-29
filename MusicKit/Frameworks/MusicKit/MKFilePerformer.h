@@ -195,7 +195,7 @@ Creation of a MKFilePerformer's MKNoteSender(s) is a subclass responsibility.
   You never invoke this method; its invoked by the <b>activate</b> method inherited from MKPerformer.
   @return Returns an id.
 */
-- activateSelf;
+- (BOOL)activateSelf;
 
 /*!
   @brief Returns the file name extension that's recognized by the class.
@@ -226,7 +226,7 @@ Creation of a MKFilePerformer's MKNoteSender(s) is a subclass responsibility.
   The return value is ignored.
   @return Returns an id.
 */
-- perform; 
+- (void)perform; 
 
 /*!
   @brief A subclass responsibility expected to manipulate and send

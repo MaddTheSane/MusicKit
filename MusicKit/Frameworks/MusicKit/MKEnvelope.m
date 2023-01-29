@@ -381,8 +381,10 @@ id MKGetEnvelopeClass(void)
   if (smoothingPtr == NULL)
     defaultSmoothing = smoothing;
   else {
-    if (smoothingArray != NULL)
+    if (smoothingArray != NULL) {
       free(smoothingArray);
+      smoothingArray = NULL;
+    }
     _MK_MALLOC(smoothingArray,double,n);
     memmove(smoothingArray, smoothingPtr, n * sizeof(double));
   }

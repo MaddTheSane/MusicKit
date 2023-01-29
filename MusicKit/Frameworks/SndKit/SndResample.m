@@ -333,7 +333,7 @@ static int err_ret(const char *formatString, ...)
     va_list ap;
 
     va_start(ap, formatString);
-    sprintf(fullString, "resample: %s \n\n", formatString);
+    snprintf(fullString, sizeof(fullString), "resample: %s \n\n", formatString);
     vfprintf(stderr, fullString, ap); /* Display error message  */
     va_end(ap);
 

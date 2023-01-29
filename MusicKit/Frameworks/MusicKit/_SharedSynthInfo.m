@@ -237,6 +237,7 @@ BOOL _MKInstallSharedObject(NSMutableDictionary* sharedSet,id aSynthObj,
     [aList addObject:aSharedSynthInfo];
     [aSynthObj _setShared:aSharedSynthInfo];
     _MKAddSharedSynthClaim(aSharedSynthInfo);
+    [aSharedSynthInfo release];
     return YES;
 }
 

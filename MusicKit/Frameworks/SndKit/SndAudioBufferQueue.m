@@ -53,6 +53,7 @@ enum {
     self = [super init];
     if(self != nil) {
 	numBuffers = n;
+	assert(pendingBuffersLock == nil);
 	if (pendingBuffersLock == nil) {
 	    pendingBuffersLock   = [[NSConditionLock alloc] initWithCondition: ABQ_noData];
 	    processedBuffersLock = [[NSConditionLock alloc] initWithCondition: ABQ_noData];

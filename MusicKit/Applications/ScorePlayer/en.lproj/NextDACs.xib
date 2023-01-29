@@ -25,16 +25,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="424" height="65"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <box fixedFrame="YES" title="Volume" translatesAutoresizingMaskIntoConstraints="NO" id="9">
+                    <box title="Volume" translatesAutoresizingMaskIntoConstraints="NO" id="9">
                         <rect key="frame" x="9" y="7" width="400" height="57"/>
-                        <autoresizingMask key="autoresizingMask"/>
                         <view key="contentView" id="ppg-KE-ktL">
                             <rect key="frame" x="4" y="5" width="392" height="37"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <button fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3">
-                                    <rect key="frame" x="185" y="13" width="58" height="15"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                <button imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3">
+                                    <rect key="frame" x="202" y="13" width="53" height="15"/>
                                     <buttonCell key="cell" type="check" title="Mute" imagePosition="leading" alignment="justified" inset="2" id="16">
                                         <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                         <font key="font" size="12" name="Helvetica"/>
@@ -43,17 +41,15 @@
                                         <action selector="setNeXTDACMute:" target="-2" id="12"/>
                                     </connections>
                                 </button>
-                                <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4">
-                                    <rect key="frame" x="5" y="9" width="171" height="21"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4">
+                                    <rect key="frame" x="5" y="9" width="193" height="21"/>
                                     <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" maxValue="1" doubleValue="0.28205129504203796" tickMarkPosition="below" sliderType="linear" id="17"/>
                                     <connections>
                                         <action selector="setNeXTDACVolume:" target="-2" id="11"/>
                                     </connections>
                                 </slider>
-                                <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5">
-                                    <rect key="frame" x="252" y="3" width="144" height="33"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                <button verticalHuggingPriority="750" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5">
+                                    <rect key="frame" x="256" y="3" width="136" height="33"/>
                                     <buttonCell key="cell" type="push" title="Get Current Values" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="18">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" size="12" name="Helvetica"/>
@@ -63,10 +59,28 @@
                                     </connections>
                                 </button>
                             </subviews>
+                            <constraints>
+                                <constraint firstItem="3" firstAttribute="top" secondItem="ppg-KE-ktL" secondAttribute="top" constant="11" id="1ua-8v-9c6"/>
+                                <constraint firstItem="3" firstAttribute="leading" secondItem="4" secondAttribute="trailing" constant="8" symbolic="YES" id="OYn-lO-75G"/>
+                                <constraint firstItem="4" firstAttribute="leading" secondItem="ppg-KE-ktL" secondAttribute="leading" constant="7" id="Pse-0k-XS6"/>
+                                <constraint firstItem="4" firstAttribute="baseline" secondItem="3" secondAttribute="firstBaseline" id="ZTo-O8-B1w"/>
+                                <constraint firstItem="5" firstAttribute="leading" secondItem="3" secondAttribute="trailing" constant="8" symbolic="YES" id="jg3-MW-JiU"/>
+                                <constraint firstItem="4" firstAttribute="top" secondItem="ppg-KE-ktL" secondAttribute="top" constant="9" id="jlK-If-Dh6"/>
+                                <constraint firstItem="3" firstAttribute="centerY" secondItem="5" secondAttribute="centerY" id="rM7-rj-vPt"/>
+                                <constraint firstItem="5" firstAttribute="baseline" secondItem="4" secondAttribute="firstBaseline" id="umy-Oq-OvT"/>
+                                <constraint firstAttribute="trailing" secondItem="5" secondAttribute="trailing" constant="7" id="vBz-Tt-S9T"/>
+                                <constraint firstItem="5" firstAttribute="top" secondItem="ppg-KE-ktL" secondAttribute="top" constant="6" id="xNi-rL-Z2l"/>
+                            </constraints>
                         </view>
                         <font key="titleFont" size="12" name="Helvetica-Bold"/>
                     </box>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="9" secondAttribute="bottom" constant="11" id="AKh-1o-GJh"/>
+                    <constraint firstItem="9" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="12" id="CWS-kj-i0W"/>
+                    <constraint firstAttribute="trailing" secondItem="9" secondAttribute="trailing" constant="18" id="Qsj-5F-kSg"/>
+                    <constraint firstItem="9" firstAttribute="top" secondItem="6" secondAttribute="top" constant="1" id="ktF-AZ-d2p"/>
+                </constraints>
             </view>
             <point key="canvasLocation" x="14" y="133"/>
         </window>
