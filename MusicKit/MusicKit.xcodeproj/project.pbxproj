@@ -3105,7 +3105,7 @@
 		D82557A705A2191600B0192B /* writeMidi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = writeMidi.m; sourceTree = "<group>"; };
 		D82557A805A2191600B0192B /* writeScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = writeScore.m; sourceTree = "<group>"; };
 		D82557B105A2198200B0192B /* _MKAppProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MKAppProxy.m; sourceTree = "<group>"; };
-		D82557B205A2198200B0192B /* _MKNameTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MKNameTable.m; sourceTree = "<group>"; };
+		D82557B205A2198200B0192B /* _MKNameTable.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; path = _MKNameTable.m; sourceTree = "<group>"; };
 		D82557B305A2198200B0192B /* _ParName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ParName.m; sourceTree = "<group>"; };
 		D82557B405A2198200B0192B /* _ScorefileVar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _ScorefileVar.m; sourceTree = "<group>"; };
 		D82557B505A2198200B0192B /* _SharedSynthInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _SharedSynthInfo.m; sourceTree = "<group>"; };

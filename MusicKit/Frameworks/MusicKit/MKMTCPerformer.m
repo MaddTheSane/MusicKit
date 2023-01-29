@@ -122,33 +122,30 @@ void
     }
 }
 
--setFirstTimeTag:(double)f
+-(void)setFirstTimeTag:(double)f
 {
     if (status != MK_inactive)
-      return nil;
+      return;
     firstTimeTag = f;
     if (MKGetDeltaTMode() == MK_DELTAT_DEVICE_LAG)
       f += MKGetDeltaT();
     MKConvertSecondsToMTC(f,format,&_hours,&_minutes,&_seconds,&_frames);
-    return self;
 }
 
--setLastTimeTag:(double)l
+-(void)setLastTimeTag:(double)l
 {
     if (status != MK_inactive) 
-      return nil;
+      return;
     lastTimeTag = l;
     if (MKGetDeltaTMode() == MK_DELTAT_DEVICE_LAG)
       l += MKGetDeltaT();
     MKConvertSecondsToMTC(l,format,&_lastHours,&_lastMinutes,
 			  &_lastSeconds,&_lastFrames);
-    return self;
 }
 
--setFormat:(int)fmt
+-(void)setFormat:(int)fmt
 {
     format = fmt;
-    return self;
 }
 
 -setFirstTimeTagMTCHours:(short)h minutes:(short)m seconds:(short)s frames:(short)f
@@ -280,35 +277,31 @@ void
     [self _sendNAK];
 }
 
--pause
+-(void)pause
   /* Sends NAK SYSEX */
 {
     [super pause];
     [self _sendNAK];
-    return self;
 }
 
--resume
+-(void)resume
 {
     [super resume];
     [self sendFullMTCMessage];
-    return self;
 }
 
--freezeTimeCode
+-(void)freezeTimeCode
   /* Continues sending time code, but time doesn't advance */
 {
     frozen = YES;
-    return self;
 }
 
--thawTimeCode
+-(void)thawTimeCode
 {
     frozen = NO;
-    return self;
 }
 
-- perform
+- (void)perform
 {
     int data;
     if (performCount == 1)
@@ -345,7 +338,7 @@ void
 		    if (_cmpStat == CMP_MINUTES && _seconds == _lastSeconds)
 		      _cmpStat = CMP_SECONDS;
 		}
-		if (_cmpStat == CMP_SECONDS && _frames >= _lastFrames) {[self deactivate]; return self;}
+		if (_cmpStat == CMP_SECONDS && _frames >= _lastFrames) {[self deactivate]; return;}
 	    }
 	}
     } else {
@@ -373,7 +366,7 @@ void
 		    if (_cmpStat == CMP_MINUTES && _seconds == _lastSeconds)
 		      _cmpStat = CMP_SECONDS;
 		}
-		if (_cmpStat == CMP_SECONDS && _frames <= _lastFrames) {[self deactivate]; return self;}
+		if (_cmpStat == CMP_SECONDS && _frames <= _lastFrames) {[self deactivate]; return;}
 	    }
 	}
     }
@@ -409,7 +402,6 @@ void
     [aNote setPar:MK_timeCodeQ toInt:data];
     [noteSender sendNote:aNote];
     nextPerform = mtcQuarterFrameInc[format];
-    return self;
 }
 
 -setDirection:(int)newDirection

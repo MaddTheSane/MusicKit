@@ -258,7 +258,7 @@ extern void MKConvertSecondsToMTC(double seconds,
  @param  firstTimeTag is a double.
  @return Returns an id.
 */
-- setFirstTimeTag: (double) firstTimeTag;
+- (void)setFirstTimeTag: (double) firstTimeTag;
 
 /*!
   @brief Sets <i>lastTimeTag</i>, the last time code value that will be sent.
@@ -270,7 +270,7 @@ extern void MKConvertSecondsToMTC(double seconds,
   @param  lastTimeTag is a double.
   @return Returns an id.
 */
-- setLastTimeTag: (double) lastTimeTag;
+- (void)setLastTimeTag: (double) lastTimeTag;
 
 /*!
   @brief Same as <tt>setFirstTimeTag:</tt>, except that the time is specified in MIDI time
@@ -335,7 +335,7 @@ extern void MKConvertSecondsToMTC(double seconds,
   MK_MTC_FORMAT_DROP_30  (30 frames/second, drop-frame)
   MK_MTC_FORMAT_30 (30 frames/second, no drop-frame)
 */
--setFormat:(int)fmt;
+-(void)setFormat:(int)fmt;
 
 /*!
   @return Returns a double.
@@ -388,7 +388,7 @@ extern void MKConvertSecondsToMTC(double seconds,
   code will continue to be generated, but the same value will be sent
   over and over.
 */
--freezeTimeCode;  
+-(void)freezeTimeCode;
 
 /*!
   @return Returns an id.
@@ -396,7 +396,7 @@ extern void MKConvertSecondsToMTC(double seconds,
 
   
 */
--thawTimeCode;
+-(void)thawTimeCode;
 
 /*!
   @return Returns an id.
@@ -430,7 +430,7 @@ extern void MKConvertSecondsToMTC(double seconds,
   Then invokes superclass version of method to pause
   the MKMTCPerformer.
 */
--pause;           /* Sends NAK SYSEX, then pauses.  */
+-(void)pause;           /* Sends NAK SYSEX, then pauses.  */
 
 /*!
   @return Returns an id.
@@ -439,9 +439,9 @@ extern void MKConvertSecondsToMTC(double seconds,
   Then invokes superclass
   version of method to resume the MKMTCPerformer.
 */
--resume;          /* Resumes time code. Sends a Full message */
+-(void)resume;          /* Resumes time code. Sends a Full message */
 
--perform;
+-(void)perform;
 
 @end
 

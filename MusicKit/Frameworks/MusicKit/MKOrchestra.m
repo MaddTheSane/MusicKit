@@ -2059,7 +2059,7 @@ static void _traceMsg(FILE *simFP, int typeOfInfo, NSString *fmt, va_list ap)
     [msg release];
 }
 
-static void _traceNSStringMsg(FILE *simFP, int typeOfInfo, NSString *msg)
+static void _traceNSStringMsg(FILE *simFP, MKTraceFlags typeOfInfo, NSString *msg)
 /* See trace: below */
 {
     if (MKIsTraced(typeOfInfo)) {
@@ -2081,7 +2081,7 @@ static void _traceNSStringMsg(FILE *simFP, int typeOfInfo, NSString *msg)
     va_end(ap);
 }
 
-void _MKOrchTrace(MKOrchestra *orch,int typeOfInfo, NSString *fmt, ...)
+void _MKOrchTrace(MKOrchestra *orch,MKTraceFlags typeOfInfo, NSString *fmt, ...)
 /* See trace: above */
 {
     va_list ap;

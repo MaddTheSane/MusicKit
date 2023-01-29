@@ -68,7 +68,7 @@ _MK_GLOBAL _MKClassLoaded _MKSamplesClass = {0};
 _MK_GLOBAL _MKClassLoaded _MKConductorClass = {0};
 _MK_GLOBAL _MKClassLoaded _MKPartialsClass = {0};
 _MK_GLOBAL _MKClassLoaded _MKMidiClass = {0};
-_MK_GLOBAL unsigned _MKTraceFlag = 0;
+_MK_GLOBAL MKTraceFlags _MKTraceFlag = 0;
 
 /* A dumb function that causes a reference to its arguments (to fool the linker.) */
 void _MKLinkUnreferencedClasses(Class aClass, ...)

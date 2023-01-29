@@ -142,7 +142,7 @@ Class MKGetNoteClass(void)
   /* Returns the par int corresponding to the given name. If a parameter
      with aName does not exist, creates a new one. */
 {
-    id aPar;
+    id aPar = nil;
     return _MKGetPar(aName,&aPar);
 }    
 

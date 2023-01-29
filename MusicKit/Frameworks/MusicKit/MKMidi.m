@@ -196,7 +196,7 @@ NSLocalizedStringFromTableInBundle(@"Problem communicating with MIDI device driv
 static int addedPortsCount = 0; // For MTC.
 // Maps driver names to MKMidi instances. This is a slight misnomer since instances are added when 
 // they are initialised, not when they are opened, yet they are removed when they are closed, not deallocated.
-static NSMutableDictionary *openDrivers = nil;  
+static NSMutableDictionary<NSString*,MKMidi*> *openDrivers = nil;
 static NSMutableArray *bidirectionalDriverNames = nil;
 static NSMutableArray *inputDriverNames = nil;
 static NSMutableArray *outputDriverNames = nil;
@@ -341,18 +341,15 @@ NSString *midiDriverErrorString(int errorCode)
 
 // This method searches for any other open MKMidi instances on hostname NOT matching the specified unit.
 + (NSMutableArray<MKMidi*> *) midisOnHost: (NSString *) midiHostname
-	      otherThanInputUnit: (int) midiInputUnit
-		    orOutputUnit: (int) midiOutputUnit
+	      otherThanInputUnit: (NSInteger) midiInputUnit
+		    orOutputUnit: (NSInteger) midiOutputUnit
 {
-    MKMidi *midiObj;
     NSMutableArray *midisNotMatching = [NSMutableArray array];
     // This is inefficient, once we can do better compares we should retrieve the objectsForKeys:notFoundMarker:.
     // which has the port as the key
-    NSEnumerator *enumerator = [openDrivers objectEnumerator];
-    
-    while ((midiObj = [enumerator nextObject])) {
-        if ([midiObj->hostname isEqualToString: midiHostname] && 
-	    ((midiObj->inputUnit != midiInputUnit) || (midiObj->outputUnit != midiOutputUnit)))
+    for (MKMidi *midiObj in [openDrivers objectEnumerator]) {
+        if ([midiObj.hostName isEqualToString: midiHostname] && 
+	    ((midiObj.inputUnit != midiInputUnit) || (midiObj.outputUnit != midiOutputUnit)))
             [midisNotMatching addObject: midiObj];
     }
     return midisNotMatching;
@@ -370,11 +367,11 @@ NSString *midiDriverErrorString(int errorCode)
     
     if (INPUTENABLED(ioMode)) {
 	if(MKMDReleaseUnit(YES, devicePort, ownerPort, inputUnit, (void *) self) != MKMD_SUCCESS)
-	    NSLog(@"Unable to release input unit %d, was not claimed.", inputUnit);
+	    NSLog(@"Unable to release input unit %ld, was not claimed.", (long)inputUnit);
     }
     if (OUTPUTENABLED(ioMode)) {
 	if(MKMDReleaseUnit(NO, devicePort, ownerPort, outputUnit, (void *) self) != MKMD_SUCCESS)
-	    NSLog(@"Unable to release output unit %d, was not claimed.", outputUnit);
+	    NSLog(@"Unable to release output unit %ld, was not claimed.", (long)outputUnit);
     }
     if ([self unitHasMTC])
         [self tearDownMTC];
@@ -1210,6 +1207,12 @@ static BOOL isSoftDevice(NSString *deviceName, int *unitNum)
 
 @synthesize driverName=midiDevName;
 
+@synthesize hostName=hostname;
+
+@synthesize inputUnit;
+
+@synthesize outputUnit;
+
 - (NSString *) description
 {
     NSString *hostnameDisplay = [hostname length] ? [NSString stringWithFormat: @"host %@", hostname] : @"local host";
@@ -1276,16 +1279,17 @@ static BOOL isSoftDevice(NSString *deviceName, int *unitNum)
 	hostname = [hostName retain];
 	midiDevName = [devName retain];
 	
-	if (noteSenders != nil) /* Already initialized */
+	assert(noteSenders == nil);
+	if (noteSenders != nil) { /* Already initialized */
+	    [self autorelease];
 	    return nil;
+	}
 	outputIsTimed = YES;               /* Default is outputIsTimed */
-	noteSenders = [NSMutableArray arrayWithCapacity: _MK_MIDINOTEPORTS];
-	[noteSenders retain];
-	noteReceivers = [NSMutableArray arrayWithCapacity: _MK_MIDINOTEPORTS];
-	[noteReceivers retain];
+	noteSenders = [[NSMutableArray alloc] initWithCapacity: _MK_MIDINOTEPORTS];
+	noteReceivers = [[NSMutableArray alloc] initWithCapacity: _MK_MIDINOTEPORTS];
 	for (notePortIndex = 0; notePortIndex < _MK_MIDINOTEPORTS; notePortIndex++) {
-	    MKNoteSender *aNoteSender = [MKNoteSender new];
-	    MKNoteReceiver *aNoteReceiver = [MKNoteReceiver new];
+	    MKNoteSender *aNoteSender = [[MKNoteSender alloc] init];
+	    MKNoteReceiver *aNoteReceiver = [[MKNoteReceiver alloc] init];
 	    
 	    [noteReceivers addObject: aNoteReceiver];
 	    [aNoteReceiver _setOwner: self];
@@ -1373,6 +1377,7 @@ static BOOL isSoftDevice(NSString *deviceName, int *unitNum)
     noteReceivers = nil;
     [noteSenders release];
     noteSenders = nil;
+    [midiDevName release];
     [super dealloc];
 }
 

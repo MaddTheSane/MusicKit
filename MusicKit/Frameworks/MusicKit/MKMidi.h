@@ -697,6 +697,13 @@ See <b>Administration/MidiHardwareInfo.rtf</b> for using MIDI on NeXT hardware.
 
 @property (readonly, copy) NSString *driverName;
 
+@property (readonly, copy) NSString *hostName;
+
+/*! The index into the input drivers list */
+@property (readonly) NSInteger inputUnit;
+/*! The index into the output drivers list */
+@property (readonly) NSInteger outputUnit;
+
 /*!
   @brief Returns description of which device, the unit and the host the MKMidi
   object has been initialised on
