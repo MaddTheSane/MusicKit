@@ -145,9 +145,8 @@ void PRINTSTAMPS(void) {
 
 // @implementation MKOrchestra(Control)
 
--setUpDSP
+-(void)setUpDSP
 {
-    return self;
 }
 
 static void startSoundAndFillBuffers(MKOrchestra *self)
@@ -179,11 +178,12 @@ as measured. Thus, the total time to wait is about .1 second.
 static BOOL sysExists(MKOrchestra *self, int *prevSys, NSString *name)
 {
     int i;
+    NSArray *_orchs = orchs.allObjects;
     MKOrchestra *orch;
     
-    FOREACHORCH(i) {
-	if (i != self->orchIndex && [[orchs[i] monitorFileName] isEqualToString: name]) {//sb: was strcmp([orchs[i] monitorFileName],name)==0
-	    orch = orchs[i];
+    for (i=0; i < orchs.count; i++) {
+	if (i != self->orchIndex && [[_orchs[i] monitorFileName] isEqualToString: name]) {//sb: was strcmp([orchs[i] monitorFileName],name)==0
+	    orch = _orchs[i];
 	    if (orch->mkSys) {
 		*prevSys = i;
 		DSPSetCurrentDSP(self->orchIndex); /* monitorFileName can change it */

@@ -150,12 +150,12 @@ int _MKGetPar(NSString *aName, _ParName **aPar)
 	
 	aName = _MKSymbolize(aName, &wasChanged); /* Make valid sf symbol */
 	*aPar = newParName(aName, ++highestPar);
-	if (wasChanged) { /* _MKSymbolize copied the string */
+//	if (wasChanged) { /* _MKSymbolize copied the string */
 	    if (highestPar >= parArrSize) {
 		_MK_REALLOC(parIds, _ParName *, (highestPar + EXPANDAMT));
 		parArrSize = highestPar + EXPANDAMT;
 	    }
-	}
+//	}
 	parIds[highestPar] = *aPar;
 	if (MKIsTraced(MKTraceParameters))
 	    NSLog(@"Adding new parameter %@\n", (*aPar)->s);

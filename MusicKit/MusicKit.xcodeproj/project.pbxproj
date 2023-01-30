@@ -3117,7 +3117,7 @@
 		D82557CA05A219E000B0192B /* OrchloopbeginUG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrchloopbeginUG.m; sourceTree = "<group>"; };
 		D82557D005A21AC000B0192B /* noteDispatcherMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = noteDispatcherMethods.m; sourceTree = "<group>"; };
 		D82557D105A21AC000B0192B /* noteRecorderMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = noteRecorderMethods.m; sourceTree = "<group>"; };
-		D82557D205A21AC000B0192B /* orchControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = orchControl.m; sourceTree = "<group>"; };
+		D82557D205A21AC000B0192B /* orchControl.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = orchControl.m; sourceTree = "<group>"; };
 		D82557D305A21AC000B0192B /* orchloopbeginUGInclude.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = orchloopbeginUGInclude.m; sourceTree = "<group>"; };
 		D82557D405A21AC000B0192B /* parNames.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = parNames.m; sourceTree = "<group>"; };
 		D82557D505A21AC000B0192B /* partialsDBInclude.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = partialsDBInclude.m; sourceTree = "<group>"; };

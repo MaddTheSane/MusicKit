@@ -610,7 +610,7 @@ extern void MKSetPreemptDuration(double seconds);
   <b>open</b>message.
   @return Returns an autoreleased MKOrchestra instance.
 */
-+ orchestra; 
++ (instancetype)orchestra;
 
 /*!
   @brief Creates and returns an MKOrchestra instance for the <i>index</i>'th DSP.
@@ -670,7 +670,7 @@ extern void MKSetPreemptDuration(double seconds);
 /*!
   @brief Initialises the MKOrchestra instance on the first (default) DSP resource.
  */
-- init;
+- (instancetype) init;
 
 /*!
   @brief Initialises an MKOrchestra instance on the given DSP processing resource.
@@ -679,7 +679,7 @@ extern void MKSetPreemptDuration(double seconds);
   may refer to a hardware DSP processor, vector unit or networked processor.
   @param dspIndex The index of the DSP processing resource as returned by +driverNames.
  */
-- initOnDSP: (unsigned short) dspIndex;
+- (instancetype) initOnDSP: (unsigned short) dspIndex;
 
 /*!
   @brief Sends <b>open</b> to each of the MKOrchestra instances and sets each
@@ -796,7 +796,7 @@ extern void MKSetPreemptDuration(double seconds);
   however, that this method changes the default to
   <i>areOrchsTimed</i>.
 */
-+ setTimed: (MKOrchestraTiming) areOrchsTimed; 
++ (void) setTimed: (MKOrchestraTiming) areOrchsTimed; 
 
 // TODO: candidate to return void
 /*!
@@ -816,7 +816,7 @@ extern void MKSetPreemptDuration(double seconds);
   providing the minimum possible latency.  It is permissable to change
   time timing mode during a Music Kit performance.
 */
-- setTimed: (MKOrchestraTiming) isOrchTimed; 
+- (void) setTimed: (MKOrchestraTiming) isOrchTimed;
 
 /*!
   @brief Returns <b>YES</b> if the receiver is timed <b>NO</b> if it's untimed.
@@ -851,7 +851,7 @@ extern void MKSetPreemptDuration(double seconds);
   @param  yesOrNo is a BOOL.
   @return Returns an id.
 */
-- (void)setSynchToConductor: (BOOL) yesOrNo;
+- (void) setSynchToConductor: (BOOL) yesOrNo;
 
 /*!
   @brief &lt;&lt;NeXT hardware only.&gt;&gt; Sets the size of the sound
@@ -866,7 +866,7 @@ extern void MKSetPreemptDuration(double seconds);
   @param  yesOrNo is a BOOL.
   @return Returns an id.
 */
-- setFastResponse: (BOOL) yesOrNo;
+- (void) setFastResponse: (BOOL) yesOrNo;
 
 /*!
   @param  yesOrNo is a BOOL.
@@ -877,7 +877,7 @@ extern void MKSetPreemptDuration(double seconds);
   This also sets the
   default used by subsequently created MKOrchestras.
 */
-+setFastResponse:(char)yesOrNo;
++ (void) setFastResponse:(BOOL)yesOrNo;
 
 /*!
   @brief Returns YES if the receiver is using small sound-out buffers to
@@ -929,18 +929,18 @@ extern void MKSetPreemptDuration(double seconds);
   Sending <b>setHostSoundOut:YES</b> also sends s<b>etSerialSoundOut: NO</b>;
   you can't write samples to the DSP serial port and to the DAC at the same time.
 */
-- setHostSoundOut: (BOOL) yesOrNo;
+- (void) setHostSoundOut: (BOOL) yesOrNo;
 
 - (BOOL) hostSoundOut;
 
-- setSoundOut: (BOOL) yesOrNo;
+- (void) setSoundOut: (BOOL) yesOrNo;
 
 /*!
   @brief Sets whether the receiver, which must be closed, receives sound, as <i>yesOrNo</i> is YES or NO.
   @param  yesOrNo is a BOOL.
   @return Returns the receiver, or <b>nil</b> if it isn't closed.
  */
-- setSoundIn: (BOOL) yesOrNo;
+- (void) setSoundIn: (BOOL) yesOrNo;
 
 /*!
   @brief Sets whether soundIn is enabled.
@@ -1017,7 +1017,7 @@ extern void MKSetPreemptDuration(double seconds);
   the MKUnitGenerator, or <b>nil</b> if the object couldn't be
   allocated.
 */
-+ allocUnitGenerator: (id) classObj; // (Class) classObj 
++ allocUnitGenerator: (Class) classObj; // (Class) classObj 
 
 /*!
   @param  segment is a MKOrchMemSegment.
@@ -1649,6 +1649,8 @@ typedef NS_OPTIONS(unsigned, MKOrchestraCapabilities) {
 */
 - (MKOrchestraCapabilities) capabilities;
 
+@property (nonatomic, readonly) MKOrchestraCapabilities capabilities;
+
 /*!
   @brief Returns the number of output channels.
 
@@ -1681,7 +1683,7 @@ typedef NS_OPTIONS(unsigned, MKOrchestraCapabilities) {
   The default implementation does nothing.
   @return Returns an id.
 */
-- setUpDSP;
+- (void) setUpDSP;
 
 /*!
   @brief Returns YES.
@@ -1702,11 +1704,10 @@ typedef NS_OPTIONS(unsigned, MKOrchestraCapabilities) {
   @param  index is an int.
   @return Returns an id.
  */
-+ registerOrchestraSubclass: (id) classObject forOrchIndex: (int) index;
++ (void) registerOrchestraSubclass: (Class) classObject forOrchIndex: (int) index;
 
 - segmentInputSoundfile: (MKOrchMemSegment) segment;
-- setInputSoundfile: (NSString *) file;
-- (NSString *) inputSoundfile;
+@property (nonatomic, copy) NSString *inputSoundfile;
 - pauseInputSoundfile;
 - resumeInputSoundfile;
 
@@ -1735,6 +1736,8 @@ typedef NS_OPTIONS(unsigned, MKOrchestraCapabilities) {
 - (int) driverUnit;
 
 - (int) driverSubUnit;
+@property (nonatomic, readonly) int driverUnit;
+@property (nonatomic, readonly) int driverSubUnit;
 
 /*!
   @brief &lt;&lt;Intel-based hardware only&gt;&gt; Returns the parameter

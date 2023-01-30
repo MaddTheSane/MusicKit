@@ -380,7 +380,7 @@ static id *patchTemplates = NULL; /* Array of PatchTemplates */
 static int nTemplates = 0;  /* Number of templates about which the orchestra knows. */
 static unsigned short nDSPs = 0;  /* Number of DSP resources */
 // TODO: should become an NSArray
-static id *orchestraClasses = NULL;
+static NSMutableArray<Class> *orchestraClasses = NULL;
 
 // The default loop unit generator class
 static id defaultOrchloopClass = nil;
@@ -391,7 +391,7 @@ static id defaultOrchloopClass = nil;
 static NSMutableDictionary *dspNumToOrch = nil; 
 
 // TODO: should become an NSArray caching the result of [dspNumToOrch valueObjects]
-static id *orchs = NULL;
+static NSHashTable<MKOrchestra*> *orchs = NULL;
 /* Packed nil-terminated array of Orchestras that have actually been created */
 // TODO: should become [orchs makeObjectsPerformSelector: @sel(blah)];
 #define FOREACHORCH(_i) for (_i=0; orchs[i]; _i++) 
@@ -471,9 +471,9 @@ static NSString * orchMemSegmentNames[(int) MK_numOrchMemSegments] =
     defaultOrchloopClass = [_OrchloopbeginUG class];
     nDSPs = (unsigned short) DSPGetDSPCount();
     dspNumToOrch = [[NSMutableDictionary alloc] initWithCapacity: nDSPs];
-    _MK_CALLOC(orchs,id,(int) nDSPs+1); /* + 1 for trailing nil */
-    _MK_CALLOC(orchestraClasses,id,(int) nDSPs);
-    {   
+	orchs = [[NSHashTable alloc] initWithOptions: NSPointerFunctionsObjectPointerPersonality | NSPointerFunctionsWeakMemory capacity:nDSPs];
+	orchestraClasses = [[NSMutableArray alloc] initWithCapacity:nDSPs];
+    {
 	/* If there's an ORCHESTRA parameter provided by the DSP driver,
 	* get its value and use it as the MKOrchestra class.
 	*/
@@ -499,8 +499,6 @@ static NSString * orchMemSegmentNames[(int) MK_numOrchMemSegments] =
 // We retain the indexing to allow allocation of processing resources.
 - initOnDSP: (unsigned short) dspIndex;
 {
-    int i;
-    
     self = [super init];
     if(self != nil) {
 	orchIndex = dspIndex;
@@ -509,9 +507,7 @@ static NSString * orchMemSegmentNames[(int) MK_numOrchMemSegments] =
 	[dspNumToOrch setObject: self forKey: @(orchIndex)];
 	// TODO: orchs = [dspNumToOrch values];
 	/* Now add it to the end of orchs */
-	for (i = 0; orchs[i] != nil; i++) /* Get to end */
-	    ;
-	orchs[i] = self; 
+	[orchs addObject:self];
 	[self setSamplingRate: samplingRateDefault];
 	[self setFastResponse: fastResponseDefault];
 	[self setHeadroom: headroomDefault];
@@ -570,7 +566,7 @@ static NSString * orchMemSegmentNames[(int) MK_numOrchMemSegments] =
     if (orch != nil)
 	return orch;
     if (self == [MKOrchestra class]) { /* Avoid infinite recursion */
-	if (orchestraClasses[index]) 
+	if (orchestraClasses.count == index)
 	    return [[[orchestraClasses[index] alloc] initOnDSP: index] autorelease];
     }
     orch = [[MKOrchestra alloc] initOnDSP: index];
@@ -775,9 +771,9 @@ static id broadcastAndRtn(Class self, SEL sel)
     register unsigned short i;
     id rtn = self;
     id tmp;
-    FOREACHORCH(i) {
-        tmp = [orchs[i] performSelector: sel];
-        if (!tmp && orchs[i])
+    for (MKOrchestra *orch in orchs) {
+        tmp = [orch performSelector: sel];
+        if (!tmp && orch)
 	    rtn = nil;
     }
     return rtn;
@@ -787,9 +783,8 @@ static id broadcastAndRtn(Class self, SEL sel)
     /* Send all buffered DSP messages immediately for all orchestras. 
     Returns self. */
 {
-    register unsigned short i;
-    FOREACHORCH(i) 
-	[orchs[i] flushTimedMessages];
+    for (MKOrchestra *obj in orchs)
+	[obj flushTimedMessages];
     return self;
 }
 
@@ -856,53 +851,46 @@ MKOrchestra returns nil, else self. TODO: self should be replaced by the known s
 {
     unsigned short i;
     samplingRateDefault = newSRate;
-    FOREACHORCH(i)
-	[(MKOrchestra *) orchs[i] setSamplingRate: newSRate];
+    for (MKOrchestra *orch in orchs)
+	[orch setSamplingRate: newSRate];
 }
 
-+ setFastResponse: (char) yesOrNo
++ (void) setFastResponse: (BOOL) yesOrNo
     /* Sets whether fast response (small sound out buffers) is used (for all
     orchs). It is illegal to do this while an
     orchestra is open */
 {
-    unsigned short i;
     fastResponseDefault = yesOrNo;
-    FOREACHORCH(i)
-	[orchs[i] setFastResponse: fastResponseDefault];
-    return self;
+    for (MKOrchestra *orch in orchs)
+	[orch setFastResponse: fastResponseDefault];
 }
 
 + (void) setHeadroom: (double) newHeadroom
     /* Sets headroom for all orchs. */
 {
-    unsigned short i;
-    
     headroomDefault = newHeadroom;
-    FOREACHORCH(i)
-	[orchs[i] setHeadroom: newHeadroom];
+    for (MKOrchestra *orch in orchs)
+	[orch setHeadroom: newHeadroom];
 }
 
 + (void) setLocalDeltaT: (double) newLocalDeltaT
     /* Sets localDeltaT for all orchs. */
 {
-    unsigned short i;
     localDeltaTDefault = newLocalDeltaT;
-    FOREACHORCH(i)
-	[orchs[i] setLocalDeltaT: localDeltaTDefault];
+    for (MKOrchestra *orch in orchs)
+	[orch setLocalDeltaT: localDeltaTDefault];
 }
 
 
-+ setTimed: (MKOrchestraTiming) areOrchsTimed
++ (void) setTimed: (MKOrchestraTiming) areOrchsTimed
     /* Controls (for all orchs) whether DSP commands are sent timed or untimed. 
     Untimed DSP commands are executed as soon as they are received by the DSP.
     It is permitted to change from timed to untimed during a performance, 
     but it will not work correctly in release 0.9.  */
 {
-    int  i;
     isTimedDefault = areOrchsTimed;
-    FOREACHORCH(i)
-	[orchs[i] setTimed: areOrchsTimed];
-    return self;
+    for (MKOrchestra *orch in orchs)
+	[orch setTimed: areOrchsTimed];
 }
 
 - (MKOrchestraTiming) isTimed
@@ -918,9 +906,8 @@ MKOrchestra returns nil, else self. TODO: self should be replaced by the known s
     on the first DSP which has room. */
 {
     id rtnVal;
-    register unsigned short i;
-    FOREACHORCH(i);
-    if ((rtnVal = [orchs[i] allocUnitGenerator: classObj]))
+    for (MKOrchestra *orch in orchs)
+    if ((rtnVal = [orch allocUnitGenerator: classObj]))
         return rtnVal;
     return nil;
 }
@@ -929,9 +916,8 @@ MKOrchestra returns nil, else self. TODO: self should be replaced by the known s
     /* Allocate some private data memory on the first DSP which has room. */
 {
     id rtnVal;
-    register unsigned short i;
-    FOREACHORCH(i);
-    if ((rtnVal = [orchs[i] allocSynthData: segment length: size]))
+    for (MKOrchestra *orch in orchs)
+    if ((rtnVal = [orch allocSynthData: segment length: size]))
         return rtnVal;
     return nil;
 }
@@ -941,9 +927,8 @@ MKOrchestra returns nil, else self. TODO: self should be replaced by the known s
     be MK_xPatch or MK_yPatch. */
 {
     id rtnVal;
-    register unsigned short i;
-    FOREACHORCH(i);
-    if ((rtnVal = [orchs[i] allocPatchpoint: segment]))
+    for (MKOrchestra *orch in orchs)
+    if ((rtnVal = [orch allocPatchpoint: segment]))
         return rtnVal;
     return nil;
 }
@@ -961,9 +946,8 @@ MKOrchestra returns nil, else self. TODO: self should be replaced by the known s
     /* Get a MKSynthPatch on the first DSP which has sufficient resources. */
 {
     id rtnVal;
-    register int i;
-    FOREACHORCH(i);
-    if ((rtnVal = [orchs[i] allocSynthPatch: aSynthPatchClass patchTemplate: p]))
+    for (MKOrchestra *orch in orchs)
+    if ((rtnVal = [orch allocSynthPatch: aSynthPatchClass patchTemplate: p]))
         return rtnVal;
     return nil;
 }
@@ -1295,15 +1279,14 @@ associated with it exists.
     return self;
 }
 
-- setFastResponse: (BOOL) yesOrNo
+- (void) setFastResponse: (BOOL) yesOrNo
     /* Set whether response is fast. 
     Only legal when receiver is closed. Returns self
     or nil if receiver is not closed. */ 
 {
     if (deviceStatus != MKDeviceStatusClosed)
-	return nil;
+	return;
     fastResponse = yesOrNo;
-    return self;
 }
 
 - (BOOL) fastResponse
@@ -1383,26 +1366,20 @@ associated with it exists.
 @synthesize outputCommandsFile;
 
 /* READ DATA */
-- setInputSoundfile: (NSString *) file
+- (void) setInputSoundfile: (NSString *) file
 {
     if (deviceStatus != MKDeviceStatusClosed)
-	return nil;
+	return;
     if (inputSoundfile) {
         [inputSoundfile release];
         inputSoundfile = nil;
     }
     if (!file)
-	return self;
+	return;
     inputSoundfile = [file copy];
-    return self;
 }
 
-/* READ DATA */
-- (NSString *) inputSoundfile
-    /* Returns the input soundfile or NULL if none. */
-{
-    return inputSoundfile;
-}
+@synthesize inputSoundfile;
 
 - setSimulatorFile: (char *) filename
     /* Sets a file name to which logfile output suitable for the DSP simulator
@@ -1431,9 +1408,9 @@ associated with it exists.
     return simulatorFile;
 }
 
-- setSoundOut: (BOOL) yesOrNo
+- (void) setSoundOut: (BOOL) yesOrNo
 {
-    return [self setHostSoundOut: yesOrNo];
+    [self setHostSoundOut: yesOrNo];
 }
 
 /* Controls whether sound is sent to the DACs. The default is YES. 
@@ -1442,17 +1419,16 @@ It is not permissable to have an output soundfile and do sound-out at the
  setOutputSoundfile: NULL. 
 If the receiver is not closed, this message has no effect.
 */
-- setHostSoundOut: (BOOL) yesOrNo
+- (void) setHostSoundOut: (BOOL) yesOrNo
 {
     if (deviceStatus != MKDeviceStatusClosed)
-	return nil;
+	return;
     hostSoundOut = yesOrNo;
     if (hostSoundOut) {
 	[self setOutputSoundfile: nil];
 	[self setOutputSoundDelegate: nil];
     }
     [self useDSP: YES];
-    return self;
 }
 
 - (BOOL) hostSoundOut
@@ -1491,16 +1467,15 @@ Now disabled.
     return NO;
 }
 
-- setSoundIn: (BOOL) yesOrNo
+- (void) setSoundIn: (BOOL) yesOrNo
     /* Controls whether sound is sent to the SSI port. The default is NO. 
     If the receiver is not closed, this message has no effect.
     */
 {
     if (deviceStatus != MKDeviceStatusClosed)
-	return nil;
+	return;
     soundIn = yesOrNo;
     [self useDSP: YES];
-    return self;
 }
 
 - (BOOL) soundIn
@@ -1964,7 +1939,7 @@ BOOL _MKOrchLateDeltaTMode(MKOrchestra *self)
     return (self->isTimed == MKOrchestraTimingSoft);
 }
 
-- setTimed: (MKOrchestraTiming) isOrchTimed
+- (void) setTimed: (MKOrchestraTiming) isOrchTimed
     /* Controls (for all orchs) whether DSP commands are sent timed or untimed. 
     The default is timed unless the Conductor is not loaded. 
     It is permitted to change
@@ -1973,7 +1948,6 @@ BOOL _MKOrchLateDeltaTMode(MKOrchestra *self)
     if (deviceStatus != MKDeviceStatusClosed && (isTimed != isOrchTimed))
 	DSPSetTimedZeroNoFlush(0);
     isTimed = isOrchTimed;
-    return self;
 }
 
 #if 0
@@ -2012,11 +1986,7 @@ do so generates an error.
     
     [self abort];
     [dspNumToOrch removeObjectForKey: @(orchIndex)];
-    /* Now fill in the gap in orchs[] */
-    for (i=0; orchs[i] != self; i++)
-	;
-    for (; orchs[i]; i++) /* Guaranteed to stop because we keep one nil at end */
-	orchs[i] = orchs[i+1];
+    [orchs removeObject:self];
     [super dealloc];
 }
 
@@ -3530,15 +3500,14 @@ allocUG(register MKOrchestra *self,id factObj,id beforeObj,id afterObj)
     return nil;
 }
 
-+ registerOrchestraSubclass: (id) classObject forOrchIndex: (int) index
++ (void)registerOrchestraSubclass: (Class) classObject forOrchIndex: (int) index
 {
     if (index >= nDSPs)
-	return nil;
+	return;
     orchestraClasses[index] = classObject;
-    return self;
 }
 
-- writeSymbolTable: (NSString *) fileName
+- (BOOL)writeSymbolTable: (NSString *) fileName
 {
     NSInteger i=0,cnt;//sb: fd
     NSMutableData *s = [[NSMutableData alloc] initWithCapacity: 100];
@@ -3546,7 +3515,7 @@ allocUG(register MKOrchestra *self,id factObj,id beforeObj,id afterObj)
 	((dataMemBlockStruct *) _eMemList[P_IND(self)])->next->baseAddr - LOOPERSIZE : 
         _piLoop;
     if (!s)
-	return nil;
+	return NO;
     for (id obj in unitGeneratorStack)
         [obj writeSymbolsToStream: s];
 //    [NX_ADDRESS(unitGeneratorStack)[i] writeSymbolsToStream: s];
@@ -3562,7 +3531,7 @@ allocUG(register MKOrchestra *self,id factObj,id beforeObj,id afterObj)
     _MKOpenFileStreamForWriting(fileName,@"lod",s, YES);
     [s release];
     
-    return self;
+    return YES;
 }
 
 - (int) hardwareSupportedSamplingRates: (double **) arr 
