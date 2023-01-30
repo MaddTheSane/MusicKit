@@ -19,7 +19,7 @@
     IBOutlet NSMatrix *waveType1;
     IBOutlet NSMatrix *waveType2;
     IBOutlet NSTextView *mesgBox;
-    IBOutlet id  sLength;
+    IBOutlet NSFormCell *sLength;
     
     Snd * theSound1;
     Snd * theSound2;

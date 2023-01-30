@@ -21,10 +21,10 @@
 - initWithFrame:(NSRect)theFrame
 {
 	NSRect tempRect = theFrame;
-	NSView *theSoundView;
-	int borderType = NSBezelBorder;
+    SndView *theSoundView;
+    NSBorderType borderType = NSBezelBorder;
     
-	(tempRect.size) = [NSScrollView contentSizeForFrameSize:(theFrame.size) hasHorizontalScroller:YES hasVerticalScroller:NO borderType:borderType];
+	tempRect.size = [NSScrollView contentSizeForFrameSize:(theFrame.size) hasHorizontalScroller:YES hasVerticalScroller:NO borderType:borderType];
 	theSoundView = [[SndView alloc] initWithFrame:tempRect];
 	self = [super initWithFrame:theFrame];
     [self setBorderType:borderType];
@@ -40,16 +40,16 @@
     return self;
 }
 
-- centerAt:(int)sample
+- (void)centerOnSample:(int)sample
 {
-	float r;
-	int samples;
+	CGFloat r;
+	unsigned long samples;
 	NSPoint p;
 	NSRect tframe;
 	
 	p.y = p.x = 0.0;
 	if ((samples = [[soundView sound] lengthInSampleFrames]) < 1) goto empty;
-	r = ((float) sample) / ((float) samples);
+	r = ((CGFloat) sample) / ((CGFloat) samples);
 	tframe = [soundView frame];
 	p.y = 0.0;
 	p.x = tframe.size.width * r;
@@ -59,10 +59,9 @@
 	
 	empty:
 	[soundView scrollPoint:p];
-	return self;
 }
 
-- (int)centerSample
+- (int)sampleAtCenter
 {
 	NSRect aRect;			
 	float r;
@@ -76,18 +75,16 @@
         return (int) (r * [[soundView sound] lengthInSampleFrames] + 0.5);
 }
 
-- (void)setDelegate:(id)anObject
-{
-	delegate = anObject;
-}
+@synthesize delegate;
+@synthesize soundView;
+@synthesize reductionFactor;
 
-- setSoundView:aSoundView
+- (void)setSoundView:aSoundView
 {
 	if (soundView)
 		[soundView release];
-	soundView = aSoundView;
+	soundView = [aSoundView retain];
 	[self setDocumentView:soundView];
-	return self;
 }
 
 - (void)setSound:(Snd *)aSound
@@ -99,30 +96,14 @@
     srate = [aSound samplingRate];
 }
 
--(BOOL) setReductionFactor: (float) rf
+-(void) setReductionFactor: (CGFloat) rf
 {
-    unsigned int start, size;
+    NSInteger start, size;
 
     [soundView getSelection:&start size: &size];
     reductionFactor = rf;
     [soundView setReductionFactor: rf];
     [soundView setSelection: start size: size];
-    return YES;
-}
-
-- delegate
-{
-    return delegate;
-}
-
-- soundView
-{
-	return soundView;
-}
-
-- (float)reductionFactor
-{
-	return reductionFactor;
 }
 
 - getWindowSamples:(int *)stptr Size:(int *)sizptr
@@ -138,12 +119,12 @@
 	return self;
 }
 
-- setWindowStart:(int)start
+- (void)setWindowStart:(NSInteger)start
 {
 	NSRect aRect;			/* Visible part of SoundView */
 
 	if (srate == 0)
-		return self;
+		return;
 
 /* Get the coordinates of the visible part of the SoundView,
  * change its origin, and force a scroll.
@@ -151,7 +132,6 @@
 	aRect = [self documentVisibleRect];
 	aRect.origin.x = start / reductionFactor;
  	[soundView scrollRectToVisible:aRect];
-	return self;
 }
 
 /* setWindowSize:  -- Change the duration of the display.
@@ -159,13 +139,13 @@
  *	changing the reduction factor while keeping the graphic
  *	size of the SoundView constant.
  */
-- setWindowSize:(int)size
+- (void) setWindowSize:(NSInteger)size
 {
 	NSRect aRect;			/* Visible part of SoundView */
-	float rFactor;
+	CGFloat rFactor;
 	
 	if (srate == 0)
-		return self;
+		return;
 
 /* Get the width of the display and calculate the new reduction factor
  * needed to fit the requested duration within that size.
@@ -175,7 +155,6 @@
 	if (rFactor < 0.05)		/* reductionFactor can't be < 1 */
 		rFactor = 0.05;
 	[self setReductionFactor:rFactor];
-	return self;
 }
 
 /* sizeToSelection: -- Set the display start/size to the start/size of
@@ -183,7 +162,7 @@
  */
 - sizeToSelection: sender
 {
-    unsigned int selstart, selsize;
+    NSInteger selstart, selsize;
 
     [soundView getSelection: &selstart size: &selsize];
     if (!selsize)

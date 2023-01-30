@@ -17,6 +17,10 @@
 			<string>Viewer</string>
 			<key>LSHandlerRank</key>
 			<string>Default</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.next.musickit.score</string>
+			</array>
 		</dict>
 	</array>
 	<key>CFBundleHelpBookFolder</key>
@@ -27,5 +31,89 @@
 	<string>ScorePlayerApp</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.audio</string>
+				<string>public.text</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>MusicKit Score</string>
+			<key>UTTypeIconFile</key>
+			<string>Score</string>
+			<key>UTTypeIcons</key>
+			<dict/>
+			<key>UTTypeIdentifier</key>
+			<string>com.next.musickit.score</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>score</string>
+				</array>
+			</dict>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.audio</string>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>MusicKit Binary Score</string>
+			<key>UTTypeIconFile</key>
+			<string>PlayScore</string>
+			<key>UTTypeIcons</key>
+			<dict/>
+			<key>UTTypeIdentifier</key>
+			<string>com.next.musickit.playscore</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>playscore</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
+	<key>UTImportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.audio</string>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>MIDI</string>
+			<key>UTTypeIconFile</key>
+			<string>Midi</string>
+			<key>UTTypeIcons</key>
+			<dict/>
+			<key>UTTypeIdentifier</key>
+			<string>public.midi-audio</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>midi</string>
+					<string>mid</string>
+					<string>smf</string>
+					<string>kar</string>
+				</array>
+				<key>com.apple.ostype</key>
+				<array>
+					<string>Midi</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>audio/midi</string>
+					<string>audio/x-midi</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
 </dict>
 </plist>

@@ -257,9 +257,9 @@ SndDeprecatedEnum(SndViewDisplayMode, SND_SOUNDVIEW_WAVE, SndViewDisplayModeWave
     /*! Colour used when user selects a region of sound. */
     NSColor	*selectionColour;
     /*! Reduction in the horizontal time axis */
-    float	reductionFactor;
+    CGFloat	reductionFactor;
     /*! Zoom in the vertical amplitude axis */
-    float       amplitudeZoom;
+    CGFloat       amplitudeZoom;
 
     /*! @struct svFlags 
         @field disabled To be described.
@@ -292,7 +292,7 @@ SndDeprecatedEnum(SndViewDisplayMode, SND_SOUNDVIEW_WAVE, SndViewDisplayModeWave
     
     int		optThreshold;
     int		optSkip;
-    float	peakFraction;
+    CGFloat	peakFraction;
 
     /*! of type SndViewStereoMode indicating to display a single channel or an average of all channels. */
     int		stereoMode;
@@ -320,8 +320,8 @@ SndDeprecatedEnum(SndViewDisplayMode, SND_SOUNDVIEW_WAVE, SndViewDisplayModeWave
     SndDisplayDataList *dataList;
     
 @private
-    float ampScaler;
-    float amplitudeDisplayHeight;
+    CGFloat ampScaler;
+    CGFloat amplitudeDisplayHeight;
     /*! valid pasteboard types. */
     NSArray *validPasteboardSendTypes;
     /*! valid pasteboard types. */
@@ -457,7 +457,7 @@ SndDeprecatedEnum(SndViewDisplayMode, SND_SOUNDVIEW_WAVE, SndViewDisplayModeWave
   The index of the selection's first sample (counting from 0) is returned in <i>firstSample</i>.
   The size of the selection in samples is returned in <i>sampleCount</i>. 
 */
-- (void) getSelection: (unsigned int *) firstSample size: (unsigned int *) sampleCount;
+- (void) getSelection: (NSInteger *) firstSample size: (NSInteger *) sampleCount;
 
 /*!
   @param  firstSample is an int.
@@ -465,7 +465,7 @@ SndDeprecatedEnum(SndViewDisplayMode, SND_SOUNDVIEW_WAVE, SndViewDisplayModeWave
   @brief Sets the selection to be <i>sampleCount</i> samples wide, starting
               with sample <i>firstSample</i> (samples are counted from 0).
 */
-- (void) setSelection: (int) firstSample size: (int) sampleCount;
+- (void) setSelection: (NSInteger) firstSample size: (NSInteger) sampleCount;
 
 /*!
   @brief Sent to the delegate if an error is encountered during recording or playback of the SndView's sound.
@@ -646,15 +646,15 @@ SndDeprecatedEnum(SndViewDisplayMode, SND_SOUNDVIEW_WAVE, SndViewDisplayModeWave
   If less than 1.0 the signal will be reduced within the view. 
   Values less than or equal to zero are not set.
  */
-- (void) setAmplitudeZoom: (float) newAmplitudeZoom;
+- (void) setAmplitudeZoom: (CGFloat) newAmplitudeZoom;
 
 /*!
   @return Returns a float.
   @brief Returns the current vertical amplitude axis zoom factor.
  */
-- (float) amplitudeZoom;
+- (CGFloat) amplitudeZoom;
 
-@property (nonatomic) float amplitudeZoom;
+@property (nonatomic) CGFloat amplitudeZoom;
 
 /*!
   @return Returns a float.
@@ -662,9 +662,9 @@ SndDeprecatedEnum(SndViewDisplayMode, SND_SOUNDVIEW_WAVE, SndViewDisplayModeWave
   
    Computed as follows: <tt>reductionFactor = sampleCount / displayUnits</tt>
 */
-- (float) reductionFactor;
+- (CGFloat) reductionFactor;
 
-@property (nonatomic, readonly) float reductionFactor;
+@property (nonatomic, readonly) CGFloat reductionFactor;
 
 /*!
   @param  reductionFactor is a float.
@@ -690,7 +690,7 @@ SndDeprecatedEnum(SndViewDisplayMode, SND_SOUNDVIEW_WAVE, SndViewDisplayModeWave
   the method returns immediately without recomputing the frame
   size.
 */
-- (BOOL) setReductionFactor: (float) reductionFactor;
+- (BOOL) setReductionFactor: (CGFloat) reductionFactor;
 
 /*!
   @brief Sets the proportion of the sound displayed within the SndView frame.
@@ -698,7 +698,7 @@ SndDeprecatedEnum(SndViewDisplayMode, SND_SOUNDVIEW_WAVE, SndViewDisplayModeWave
    Recomputes the SndViews reduction factor to fit a portion of the sound data (horizontally) within the views frame.
   @param scaleRatio The ratio of displayed content within the frame 1.0 = entire sound, 0.5 = half the sound etc.
  */
-- (void) scaleTo: (float) scaleRatio;
+- (void) scaleTo: (CGFloat) scaleRatio;
 
 /*!
   @brief Recomputes the SndView's reduction factor to fit the sound data
@@ -741,7 +741,7 @@ SndDeprecatedEnum(SndViewDisplayMode, SND_SOUNDVIEW_WAVE, SndViewDisplayModeWave
   @param scaleRatio Scaling of the sound within the frame:  0 > scaleRatio <= 1.0 
   @brief Resizes the sound within the frame to a normalized scale.
  */
-- (void) resizeToScale: (float) scaleRatio;
+- (void) resizeToScale: (CGFloat) scaleRatio;
 
 /*!
   @param  aFlag is a BOOL.
@@ -933,9 +933,9 @@ SndDeprecatedEnum(SndViewDisplayMode, SND_SOUNDVIEW_WAVE, SndViewDisplayModeWave
  * these methods are unique to SndKit.
  *************************/
 
-- (BOOL) invalidateCacheStartPixel: (int) start end: (int) end NS_SWIFT_NAME(invalidateCachePixels(start:end:));
+- (BOOL) invalidateCacheStartPixel: (NSInteger) start end: (NSInteger) end NS_SWIFT_NAME(invalidateCachePixels(start:end:));
 	/* if end == -1, invalidates to end of last cache*/
-- (BOOL) invalidateCacheStartSample: (int) start end: (int) end NS_SWIFT_NAME(invalidateCacheSamples(start:end:));
+- (BOOL) invalidateCacheStartSample: (NSInteger) start end: (NSInteger) end NS_SWIFT_NAME(invalidateCacheSamples(start:end:));
 	/* start and end are samples. Must be exact. */
 
 /*!

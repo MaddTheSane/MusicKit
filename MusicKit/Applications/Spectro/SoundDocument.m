@@ -450,13 +450,13 @@
     if ([theSound isEmpty])
 	return;
     [scrollSound setReductionFactor: scale];
-    [scrollSound centerAt: sample];
+    [scrollSound centerOnSample: sample];
 }
 
 - (IBAction) zoomIn: sender
 {
     [self zoom: ([scrollSound reductionFactor] / ZOOM_FACTOR)
-	center: [scrollSound centerSample]];
+	center: [scrollSound sampleAtCenter]];
 }
 
 - (IBAction) zoomOut:sender
@@ -471,7 +471,7 @@
     if (scale > maxRFactor)
 	[self zoomAll: sender];
     else
-	[self zoom: scale center: [scrollSound centerSample]];
+	[self zoom: scale center: [scrollSound sampleAtCenter]];
 }
 
 - (IBAction) zoomSelect:sender

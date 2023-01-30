@@ -101,7 +101,7 @@ extern void _MKParWriteOn(_MKParameter *rcvr, NSMutableData *aStream, _MKScoreOu
 extern void _MKParWriteValueOn(_MKParameter *rcvr, NSMutableData *aStream, _MKScoreOutStruct *p);
 extern void _MKArchiveParOn(_MKParameter *param, NSCoder *aTypedStream); /*sb: NSCoder originally converted as NSArchiver */
 extern void _MKUnarchiveParOn(_MKParameter *param, NSCoder *aTypedStream); /*sb: originally converted as NSArchiver */
-extern id  _MKDummyParameter();
+extern id  _MKDummyParameter(void);
 extern BOOL _MKIsPar(unsigned aPar);
 extern BOOL _MKIsPrivatePar(unsigned aPar);
 

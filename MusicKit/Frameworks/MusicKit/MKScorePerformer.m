@@ -444,12 +444,11 @@ static void unsetPartPerformers(MKScorePerformer *self)
      Returns an auto-released array of the sender's MKPartPerformers' MKNoteSenders. 
      It's NOT the caller's responsibility to free the array. */
 {
-    NSInteger n = [partPerformers count], i;
-    NSMutableArray *anArray = [[NSMutableArray alloc] init];
+    NSMutableArray *anArray = [[NSMutableArray alloc] initWithCapacity:[partPerformers count]];
     void (*addImp)(id _Nonnull, SEL _Nonnull, id) = [anArray methodForSelector: @selector(addObject:)];
     
-    for (i = 0; i < n; i++)
-        (*addImp)(anArray, @selector(addObject:), [[partPerformers objectAtIndex: i] noteSender]);
+    for (MKPartPerformer *obj in partPerformers)
+        (*addImp)(anArray, @selector(addObject:), [obj noteSender]);
     return [anArray autorelease];
 }
 

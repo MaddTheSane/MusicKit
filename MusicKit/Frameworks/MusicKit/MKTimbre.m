@@ -125,7 +125,8 @@ static void initNeXTTimbres(void)
        put these in a file instead of having them in memory. */
 {
     int i, j;
-    id p,partialsClass;
+    id p;
+    Class partialsClass;
     MKTimbre *timbre;
     void (*setAll)(id _Nonnull, SEL _Nonnull, int, short *, float *, double *, double);
     id (*addObj)(id _Nonnull, SEL _Nonnull, MKWaveTable*, double);

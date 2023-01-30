@@ -4,38 +4,50 @@
 #import <SndKit/Snd.h>
 #import <SndKit/SndView.h>
 
+@protocol ScrollingSoundDelegate;
+
 @interface ScrollingSound:NSScrollView
 {
-	IBOutlet SndView *soundView;
-	id delegate;
+	SndView *soundView;
+	id<ScrollingSoundDelegate> delegate;
 	float srate;
-	float reductionFactor;
+	CGFloat reductionFactor;
 }
 
-- initWithFrame:(NSRect)theFrame;
-- centerAt:(int)sample;
-- (int)centerSample;
+- (instancetype)initWithFrame:(NSRect)theFrame;
+- (void)centerOnSample:(int)sample;
+- (int)sampleAtCenter;
 
 /* Methods to set up the object: */
-- (void)setDelegate:(id)anObject;
-- setSoundView:anObject;
+- (void)setDelegate:(id<ScrollingSoundDelegate>)anObject;
+- (void)setSoundView:(SndView *)anObject;
 - (void)setSound:(Snd *)aSound;
-- (BOOL)setReductionFactor:(float)rf;
+- (void)setReductionFactor:(CGFloat)rf;
 
 /* Methods to retrieve information about the object: */
-- delegate;
-- soundView;
-- (float)reductionFactor;
+- (id<ScrollingSoundDelegate>)delegate;
+- (SndView *)soundView;
+- (CGFloat)reductionFactor;
+
+@property (assign) id<ScrollingSoundDelegate> delegate;
+@property (nonatomic, retain) IBOutlet SndView *soundView;
+@property (nonatomic) CGFloat reductionFactor;
 
 /* Methods to get time information about the sound, display, and selection */
 - getWindowSamples:(int *)stptr Size:(int *)sizptr;
 
 /* Methods to set display and selection by timings */
-- setWindowStart:(int)start;
-- setWindowSize:(int)size;
+- (void)setWindowStart:(NSInteger)start;
+- (void)setWindowSize:(NSInteger)size;
 - sizeToSelection:sender;
 
 /* Method to replace normal ScrollView methods: */
 - (void)reflectScrolledClipView:(NSClipView *)sender;
+
+@end
+
+@protocol ScrollingSoundDelegate <NSObject>
+@optional
+- (void)displayChanged:(ScrollingSound*) sender;
 
 @end

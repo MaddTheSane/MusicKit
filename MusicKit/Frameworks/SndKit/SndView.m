@@ -29,6 +29,7 @@ OF THIS AGREEMENT.
 ******************************************************************************/
 
 #import <math.h>
+#include <tgmath.h>
 #import "SndView.h"
 #import "SndFunctions.h"
 #import "SndMuLaw.h"
@@ -242,13 +243,13 @@ OF THIS AGREEMENT.
 // retrieve a sound value at the given frame, for a specified channel, or average over all channels.
 // channelNumber is 0 - channelCount to retrieve a single channel, channelCount to average all channels
 // SndSampleAtFrame()
-static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int frameNumber, int channelNumber, int channelCount)
+static CGFloat getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, NSInteger frameNumber, int channelNumber, int channelCount)
 {
-    float theValue = 0.0;
+    CGFloat theValue = 0.0;
     int averageOverChannels;
     int startingChannel;
-    int sampleIndex;
-    int sampleNumber;
+    NSInteger sampleIndex;
+    NSInteger sampleNumber;
     
     if (channelNumber == channelCount) {
 	averageOverChannels = channelCount;
@@ -300,16 +301,16 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     return (averageOverChannels > 1) ? theValue / averageOverChannels : theValue;
 }
 
-- (BOOL) invalidateCacheStartSample: (int) start end: (int) end
+- (BOOL) invalidateCacheStartSample: (NSInteger) start end: (NSInteger) end
 {
-    int startPixel = start / reductionFactor;
-    int endPixel = end / reductionFactor;
+    NSInteger startPixel = start / reductionFactor;
+    NSInteger endPixel = end / reductionFactor;
     
     if (startPixel < 0 || endPixel < startPixel) return NO;
     return [self invalidateCacheStartPixel: startPixel end: endPixel];
 }
 
-- (BOOL) invalidateCacheStartPixel: (int) start end: (int) end
+- (BOOL) invalidateCacheStartPixel: (NSInteger) start end: (NSInteger) end
 {
     NSInteger startOfCache;
     NSInteger startpix, endpix;
@@ -373,8 +374,8 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 {
     NSRange scaledSelectionRange;
     
-    scaledSelectionRange.location = (int) ((float) selectedFrames.location / (float) reductionFactor);
-    scaledSelectionRange.length = (int) ((NSMaxRange(selectedFrames) - 1) / reductionFactor) - scaledSelectionRange.location + 1;
+    scaledSelectionRange.location = (NSInteger) ((CGFloat) selectedFrames.location / (CGFloat) reductionFactor);
+    scaledSelectionRange.length = (NSInteger) ((NSMaxRange(selectedFrames) - 1) / reductionFactor) - scaledSelectionRange.location + 1;
     
     if (!((scaledSelectionRange.location >= NSMinX(rects) &&
 	   scaledSelectionRange.location <= NSMaxX(rects)) ||
@@ -390,9 +391,9 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 	// NSLog(@"HIGHLIGHTing scaled sel range... %g to %g\n", scaledSelectionRange.location, NSMaxRange(scaledSelectionRange));	 
 	// NSLog(@"HIGHLIGHTing rects... %g to %g\n", NSMinX(rects), NSMaxX(rects));
 	
-	highlightRect.origin.x = (int) ((scaledSelectionRange.location >= NSMinX(rects)) ? scaledSelectionRange.location : NSMinX(rects));
+	highlightRect.origin.x = floor((scaledSelectionRange.location >= NSMinX(rects)) ? scaledSelectionRange.location : NSMinX(rects));
 	
-	highlightRect.size.width = (int) (((NSMaxRange(scaledSelectionRange) <= NSMaxX(rects)) ?
+	highlightRect.size.width = floor(((NSMaxRange(scaledSelectionRange) <= NSMaxX(rects)) ?
 					   NSMaxRange(scaledSelectionRange) : NSMaxX(rects)) - NSMinX(highlightRect) + 0.1);
 	
 	[selectionColour set];
@@ -628,9 +629,9 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 	    within: (NSRect) drawWithinRectangle 
 	   channel: (int) whichChannel
 {
-    int lastFrameToDisplay;
-    float theValue;
-    int firstFrameToDisplay;
+    NSInteger lastFrameToDisplay;
+    CGFloat theValue;
+    NSInteger firstFrameToDisplay;
     void *pcmData;
     // max point and current counter in current fragged sound data segment
     unsigned long fragmentLength, currentFrameInFragment; 
@@ -641,7 +642,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     NSPoint nextSoundPixel;
     
     /* first sample */
-    firstFrameToDisplay = (int) ((float) NSMinX(drawWithinRectangle) * (float) reductionFactor);
+    firstFrameToDisplay = (int) ((CGFloat) NSMinX(drawWithinRectangle) * (CGFloat) reductionFactor);
     
     if (firstFrameToDisplay > 0)
         firstFrameToDisplay--;
@@ -652,7 +653,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 				dataFormat: &dataFormat];
 
     /* last sample */
-    lastFrameToDisplay = (int) ((float) (NSMaxX(drawWithinRectangle)) * (float) reductionFactor) + 1;
+    lastFrameToDisplay = (NSInteger) ((CGFloat) (NSMaxX(drawWithinRectangle)) * (CGFloat) reductionFactor) + 1;
     
     if (lastFrameToDisplay >= frameCount)
         lastFrameToDisplay = frameCount - 1;
@@ -661,7 +662,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     
     /* establish initial point */
     nextSoundPixel.y = theValue * ampScaler + amplitudeDisplayHeight;    
-    nextSoundPixel.x = (float) ((float) firstFrameToDisplay / (float) reductionFactor);
+    nextSoundPixel.x = (CGFloat) ((CGFloat) firstFrameToDisplay / (CGFloat) reductionFactor);
     
     [soundPath moveToPoint: nextSoundPixel];
     
@@ -675,7 +676,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
         theValue = getSoundValue(pcmData, dataFormat, currentFrameInFragment, whichChannel, chanCount);
 
 	nextSoundPixel.y = theValue * ampScaler + amplitudeDisplayHeight;
-	nextSoundPixel.x = (float) ((float) firstFrameToDisplay / (float) reductionFactor) + 0.5;
+	nextSoundPixel.x = (CGFloat) ((CGFloat) firstFrameToDisplay / (CGFloat) reductionFactor) + 0.5;
 	[soundPath lineToPoint: nextSoundPixel];
 	
         // Draw crosses if we have zoomed in so far as to pass the cross threshold.
@@ -782,7 +783,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     double maxAmp = 32767.0;
     void *pcmData;
     int chanCount;
-    int frameCount;
+    NSInteger frameCount;
     int startX, endX;
     int whichChannel = 0;
     /* holds the data to be drawn. Calculated from caches, or from examining sound data */
@@ -977,13 +978,13 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     }
 }
 
-- (void) getSelection: (unsigned int *) firstSample size: (unsigned int *) sampleCount
+- (void) getSelection: (NSInteger *) firstSample size: (NSInteger *) sampleCount
 {
     *firstSample = selectedFrames.location;
     *sampleCount = selectedFrames.length;
 }
 
-- (void) setSelection: (int) firstSample size: (int) sampleCount
+- (void) setSelection: (NSInteger) firstSample size: (NSInteger) sampleCount
 {
     NSRect scaledSelection;
 
@@ -2054,7 +2055,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 
 @synthesize reductionFactor;
 
-- (BOOL) setReductionFactor: (float) newReductionFactor
+- (BOOL) setReductionFactor: (CGFloat) newReductionFactor
 {
     if (svFlags.autoscale) return NO;
     if (!sound) return NO;
@@ -2070,7 +2071,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
     return YES;
 }
 
-- (void) setAmplitudeZoom: (float) newAmplitudeZoom
+- (void) setAmplitudeZoom: (CGFloat) newAmplitudeZoom
 {
     // Don't allow zero or negative zoom values. 
     if(newAmplitudeZoom > 0.0)
@@ -2079,7 +2080,7 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 
 @synthesize amplitudeZoom;
 
-- (void) scaleTo: (float) scaleRatio
+- (void) scaleTo: (CGFloat) scaleRatio
 {	
     NSRect newFrame = [self frame];
     unsigned long lengthInFrames = [sound lengthInSampleFrames];
@@ -2117,13 +2118,13 @@ static float getSoundValue(void *pcmData, SndSampleFormat sampleDataFormat, int 
 #endif
 }
 
-- (void) resizeToScale: (float) scaleRatio
+- (void) resizeToScale: (CGFloat) scaleRatio
 {    
     NSScrollView *scrollView = [self enclosingScrollView];
     
     if (scrollView != nil) {
 	NSRect visibleRegion = [scrollView documentVisibleRect];
-	float newFrameWidth = visibleRegion.size.width / scaleRatio;
+	CGFloat newFrameWidth = visibleRegion.size.width / scaleRatio;
     
 	NSLog(@"visibleRegion.size.width %f scaleRatio %f newFrameWidth %f\n", visibleRegion.size.width, scaleRatio, newFrameWidth);
 	[[self window] disableFlushWindow];
