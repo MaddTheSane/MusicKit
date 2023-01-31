@@ -6,7 +6,7 @@
 //////////////////////////////////////////////////////////////
 
 #import <AppKit/AppKit.h>
-#import <MusicKit/MusicKit.h>            // for envelope class stuff
+#import <MusicKitLegacy/MusicKitLegacy.h>            // for envelope class stuff
 //#import <Envelope.h>			   // so we substitute this for now.
 
 @class EEController;

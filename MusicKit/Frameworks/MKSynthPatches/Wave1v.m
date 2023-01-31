@@ -12,8 +12,8 @@
    10/07/91/daj - Fixed possible bug in patchTemplateFor:
 */
 
-#import <MusicKit/MusicKit.h>
-#import <MusicKit/midi_spec.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
+#import <MusicKitLegacy/midi_spec.h>
 #import <MKUnitGenerators/MKUnitGenerators.h>
 #import "Wave1v.h"
 #import "_Wave1i.h"

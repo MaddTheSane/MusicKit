@@ -2,7 +2,7 @@
 #define __MK_MidiFilter_H___
 /* Based on Ensemble MidiFilter */
 
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 
 typedef enum _actionType {STOP,THIN,PASS} actionType;
 

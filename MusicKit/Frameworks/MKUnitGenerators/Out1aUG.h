@@ -67,7 +67,7 @@ that overrides the <b>-outputChannelCount</b> method to return 4 and overrides t
 #ifndef __MK_Out1aUG_H___
 #define __MK_Out1aUG_H___
 
-#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
 
 @interface Out1aUG : MKUnitGenerator
 {

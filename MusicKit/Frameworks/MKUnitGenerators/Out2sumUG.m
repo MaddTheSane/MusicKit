@@ -17,7 +17,7 @@ Modification history:
   07/23/91/daj - Added fix up of libdsp symbol OUT_SKIP2 (to support
                  skip factors)
 */
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import "_unitGeneratorInclude.h"
 #import "_exportedPrivateMusickit.h"
 #import <MKDSP/dsp_memory_map.h>

@@ -74,7 +74,7 @@
 #ifndef __MK_Pluck_H___
 #define __MK_Pluck_H___
 
-#import <MusicKit/MKSynthPatch.h>
+#import <MusicKitLegacy/MKSynthPatch.h>
 
 @interface Pluck:MKSynthPatch
 

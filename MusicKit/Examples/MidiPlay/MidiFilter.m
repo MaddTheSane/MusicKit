@@ -9,7 +9,7 @@
      This is the case for input direct from MIDI, but not necessarily the case 
      for arbitrary Notes from an application or scorefile.
 */
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import "MidiFilter.h"
 
 @implementation MidiFilter

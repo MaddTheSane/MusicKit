@@ -24,7 +24,7 @@ Modification history:
   04/18/90/mmm - Added missing definition of +shouldOptimize
   07/23/91/daj - Added init method to fix up libdsp symbol. Hm.
 */
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import "_unitGeneratorInclude.h"
 #import "_exportedPrivateMusickit.h"
 #import <MKDSP/dsp_memory_map.h>

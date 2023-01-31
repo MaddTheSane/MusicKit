@@ -35,7 +35,7 @@
    stickPoint = MAXINT
 */
 
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import <objc/List.h> /*sb: for List */
 #import "_exportedPrivateMusickit.h"
 #import "AsympenvUG.h"

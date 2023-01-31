@@ -147,7 +147,7 @@ classes.
 
 #import <Foundation/NSData.h> /*sb for NSData */
 #import <Foundation/NSObject.h>
-#import <MusicKit/orch.h>
+#import <MusicKitLegacy/orch.h>
 
 /* It's actually either MKUnitGenerator or MKSynthData, but this makes compiler happy */
 #define SynthElement MKUnitGenerator 
@@ -173,12 +173,15 @@ typedef struct _MKUGArgStruct {
     int type;
 } MKUGArgStruct;
 
-#import <MusicKit/dspwrap.h>
+#import <MusicKitLegacy/dspwrap.h>
+
+@class MKSynthPatch;
+@class MKOrchestra;
 
 @interface MKUnitGenerator : NSObject
 {
-    id synthPatch;      /* The MKSynthPatch that owns this object, if any. */
-    id orchestra;       /* The MKOrchestra on which the object is allocated. */
+    MKSynthPatch *synthPatch;     /* The MKSynthPatch that owns this object, if any. */
+    MKOrchestra *orchestra;       /* The MKOrchestra on which the object is allocated. */
 
 @protected
     unsigned short _orchIndex;
@@ -423,13 +426,13 @@ typedef struct _MKUGArgStruct {
   hardware is that represented by MKOrchestra, the DSP56001.
   @return Returns an id.
 */
-+ orchestraClass;
++ (Class)orchestraClass;
 
 /*!
   @brief Returns the receiver's MKOrchestra object.
   @return Returns an id.
 */
-- orchestra; 
+- (MKOrchestra*)orchestra;
 
  /* 
  * Deallocates the receiver and frees its MKSynthPatch, if any.
@@ -452,7 +455,7 @@ typedef struct _MKUGArgStruct {
   @brief Returns the MKSynthPatch that the receiver is part of, if any.
   @return Returns an id.
 */
-- synthPatch; 
+- (MKSynthPatch*)synthPatch; 
 
 /*!
   @brief Returns YES if the receiver has been allocated (by its MKOrchestra), NO if it hasn't.

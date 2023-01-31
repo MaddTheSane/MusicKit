@@ -5,7 +5,7 @@
    A simple note filter that does MIDI echo 
  */
 
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 
 @interface EchoFilter : MKNoteFilter
 {

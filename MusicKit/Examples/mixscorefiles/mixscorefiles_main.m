@@ -17,7 +17,7 @@
 */
 
 #import <Foundation/Foundation.h>
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 
 static const char *const helpString =
 "Usage: mixscorefiles -o <outFile> -i <inFile1> -i <inFile2> ...\n"

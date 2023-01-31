@@ -37,7 +37,7 @@ To run the program with the file /NextLibrary/Music/Scores/Examp7.score:
 If you do not get the results you expect, you may want to turn on
 tracing of various Music Kit information. You do this by specifying a
 numeric argument after -t. The bits are defined in
-<musickit/errors.h>.  For example,
+<MusicKitLegacy/errors.h>.  For example,
 
 	playscorefile -t 32 <  /NextLibrary/Music/Scores/Examp7.score
 

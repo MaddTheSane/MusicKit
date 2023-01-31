@@ -87,7 +87,7 @@
   6/12/93/daj -  Removed define of MK_INLINE
   9/25/93/daj -  Updated for new typed sharedSynthInfo
   */
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import "_exportedPrivateMusickit.h"
 #import "_unitGeneratorInclude.h"
 #import <SndKit/SndKit.h>

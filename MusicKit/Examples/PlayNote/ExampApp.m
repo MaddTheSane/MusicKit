@@ -60,9 +60,9 @@
 */
 
 #import <AppKit/AppKit.h>
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import <MKSynthPatches/Pluck.h>
-#import <MusicKit/pitches.h>
+#import <MusicKitLegacy/pitches.h>
 #import "ExampApp.h"
 
 #define DEFAULTFREQ 440

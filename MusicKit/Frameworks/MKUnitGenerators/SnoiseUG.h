@@ -41,7 +41,7 @@ produces a new random value every sample.
 #ifndef __MK_SnoiseUG_H___
 #define __MK_SnoiseUG_H___
 
-#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
 
 @interface SnoiseUG: MKUnitGenerator
 

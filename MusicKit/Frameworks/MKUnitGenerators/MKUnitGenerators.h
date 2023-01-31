@@ -29,7 +29,7 @@
 #ifndef UNITGENERATORS_H
 #define UNITGENERATORS_H
 
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 
 /* Allpass1UG - from dsp macro allpass1. See Allpass1UG.h for details. */
 #import "Allpass1UGxx.h"

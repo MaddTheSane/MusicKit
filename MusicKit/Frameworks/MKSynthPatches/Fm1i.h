@@ -167,9 +167,9 @@ noteTag.
 #ifndef __MK_Fm1i_H___
 #define __MK_Fm1i_H___
 
-#import <MusicKit/MKSynthPatch.h>
-#import <MusicKit/MKEnvelope.h>
-#import <MusicKit/MKWaveTable.h>
+#import <MusicKitLegacy/MKSynthPatch.h>
+#import <MusicKitLegacy/MKEnvelope.h>
+#import <MusicKitLegacy/MKWaveTable.h>
 
 @interface Fm1i:MKSynthPatch
 {

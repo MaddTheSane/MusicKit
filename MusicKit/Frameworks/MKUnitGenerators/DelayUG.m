@@ -10,7 +10,7 @@ Modification history:
   2/6/93/daj -   Changed DSP code to not use R_L.  Added version check.
 
 */
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import "_exportedPrivateMusickit.h"
 #import "_unitGeneratorInclude.h"
 

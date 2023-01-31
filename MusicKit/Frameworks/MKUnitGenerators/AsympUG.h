@@ -206,7 +206,7 @@ provided by AsympUG, but not by AsympenvUG.</li>
 #ifndef __MK_AsympUG_H___
 #define __MK_AsympUG_H___
 
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 
 @interface AsympUG: MKUnitGenerator
 {

@@ -5,7 +5,7 @@
  * Author: David A. Jaffe
  */
 
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import <MKUnitGenerators/Out1aUGx.h>
 #import <MKUnitGenerators/Out1bUGy.h>
 #import <MKUnitGenerators/In1qpUGx.h>

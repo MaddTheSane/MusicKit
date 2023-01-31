@@ -827,7 +827,7 @@ static char *writeUGMasterHeader(DSPLoadSpec *nxtPtr,char *fileName,FILE *fp)
     if (isupper(macroName[0]))
       macroName[0] = tolower(macroName[0]);
     fprintf(fp,includeMsg,macroName,objName);
-    fprintf(fp,"#import <MusicKit/UnitGenerator.h>\n");
+    fprintf(fp,"#import <MusicKitLegacy/UnitGenerator.h>\n");
     return objName;
 }
 

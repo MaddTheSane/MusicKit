@@ -2,7 +2,7 @@
  ** Routines to control sys-ex MIDI messages being received and sent, converting
  ** to and from ASCII and retrieving individual bytes from the message.
  */
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import "SysExReceiver.h"
 #import "SysExMessage.h"
 

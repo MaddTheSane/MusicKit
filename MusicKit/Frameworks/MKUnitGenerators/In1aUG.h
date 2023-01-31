@@ -49,7 +49,7 @@ In1bUG<i>a</i>
 */
 #ifndef __MK_In1aUG_H___
 #define __MK_In1aUG_H___
-#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
 
 @interface In1aUG : MKUnitGenerator
 {

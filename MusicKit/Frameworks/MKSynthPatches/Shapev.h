@@ -56,7 +56,7 @@ fundamental frequency.  In the range 0.0:1.0.  Default is 0.0.
 #define __MK_Shapev_H___
 
 #import "Shape.h"
-#import <MusicKit/MKWaveTable.h>
+#import <MusicKitLegacy/MKWaveTable.h>
 
 @interface Shapev:Shape
 {

@@ -28,7 +28,7 @@ Modification history:
                  table segment.
 
 */
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import "_exportedPrivateMusickit.h"
 #import <SndKit/SndKit.h>
 #import "OscgafUG.h"

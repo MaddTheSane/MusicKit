@@ -12,7 +12,7 @@
  * messages remain intact and accompany all relevant code.
  *
  */
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import <MKSynthPatches/Pluck.h>
 #import "NotePlayer.h"
 

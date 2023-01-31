@@ -16,7 +16,7 @@
 */
 
 #import <Foundation/Foundation.h>
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 
 #define SCOREFILE_PERFORMER 0 // 1 to use MKScorefilePerformer, 0 to use MKScorePerformer
 

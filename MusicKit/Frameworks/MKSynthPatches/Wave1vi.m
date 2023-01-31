@@ -11,8 +11,8 @@
    10/07/91/daj - Fixed possible bug in patchTemplateFor:
 */
 
-#import <MusicKit/MusicKit.h>
-#import <MusicKit/midi_spec.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
+#import <MusicKitLegacy/midi_spec.h>
 #import <MKUnitGenerators/MKUnitGenerators.h>
 #import "Wave1vi.h"
 #import "_Wave1i.h"
@@ -80,7 +80,7 @@ WAVEDECL(ranVibTemplate,ranVibUgs);
 -_setDefaults
   /* Set the instance variables to reasonable default values. We do this
    * after each phrase and upon initialization. This insures that a freshly
-    * allocated MKSynthPatch will be in a known state. See <MusicKit/params.h> 
+    * allocated MKSynthPatch will be in a known state. See <MusicKitLegacy/params.h> 
    */
 {
     [super _setDefaults];

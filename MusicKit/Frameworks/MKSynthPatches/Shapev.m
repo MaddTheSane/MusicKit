@@ -4,7 +4,7 @@
  */
 
 #import <MKUnitGenerators/MKUnitGenerators.h> 
-#import <MusicKit/midi_spec.h>
+#import <MusicKitLegacy/midi_spec.h>
 #import <math.h>
 
 #import "Shapev.h"
@@ -101,7 +101,7 @@ static int
   /* Sent when a new phrase starts. controllers is a HashTable containing
    * key/value pairs as controller-number/controller-value. Our implementation
    * here ignores all but MIDI_MAINVOLUME and MIDI_MODWHEEL. See
-    * <objc/HashTable.h>, <MusicKit/midi_spec.h>, and <MusicKit/MKSynthPatch.h>. */
+    * <objc/HashTable.h>, <MusicKitLegacy/midi_spec.h>, and <MusicKitLegacy/MKSynthPatch.h>. */
 {
 #   define CONTROLPRESENT(_key) [controllers isKey:(const void *)_key]
 #   define GETVALUE(_key) (int)[controllers valueForKey:(const void *)_key]

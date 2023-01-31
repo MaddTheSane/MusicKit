@@ -50,7 +50,7 @@ a ConstantUG to clear the patchpoint before the first oscillator reads it.
 #ifndef __MK_ConstantUG_H___
 #define __MK_ConstantUG_H___
 
-#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
 @interface ConstantUG: MKUnitGenerator
 
 /*!

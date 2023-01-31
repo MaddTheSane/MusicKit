@@ -51,7 +51,7 @@ Modification history:
 /* AsympUG assumes that the envelope is not modified once it's set. */
 
 // #define INLINE_MATH 1 /* Workaround for exp() bug. */
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import "_exportedPrivateMusickit.h"
 #import "_unitGeneratorInclude.h"
 

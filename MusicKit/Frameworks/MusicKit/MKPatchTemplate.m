@@ -119,6 +119,15 @@ Modification history:
 #import "PatchTemplatePrivate.h"
 
 @implementation MKPatchTemplate
+{
+    /* All MKPatchTemplate instance variables are for internal use only */
+@private
+    NSMutableArray *_elementStorage;         /* Array of template entries */
+    NSMutableArray *_connectionStorage;      /* Array of MKPatchConnection objects of connection info */
+    /* If MKOrchestra is loaded, this is an array of NSMutableArrays of deallocated patches, one per DSP. */
+    NSMutableArray **_deallocatedPatches;
+    unsigned int _eMemSegments; /* External memory segment bit vector */
+}
 
 #define ENTRYDESCR @"{#SSI}"
 

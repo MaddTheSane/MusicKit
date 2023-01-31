@@ -37,7 +37,7 @@
 
 #import "BiquadUG.h"
 #import <math.h>
-#import <MusicKit/MKOrchestra.h>
+#import <MusicKitLegacy/MKOrchestra.h>
 
 @implementation BiquadUG:MKUnitGenerator
 

@@ -35,7 +35,7 @@ and changes relatively slowly.
 <i>b</i>	input
 */
 
-#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
 
 @interface EnvFollowUG : MKUnitGenerator
 {

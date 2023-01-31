@@ -11,7 +11,7 @@
    08/28/90/daj - Changed initialize to init.
 */
 
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import <MKUnitGenerators/MKUnitGenerators.h>
 #import "Wave1.h"
 #import "_Wave1i.h"

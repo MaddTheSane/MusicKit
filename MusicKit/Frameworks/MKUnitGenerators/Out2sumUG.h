@@ -58,7 +58,7 @@ stream.
 #ifndef __MK_Out2sumUG_H___
 #define __MK_Out2sumUG_H___
 
-#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
 
 @interface Out2sumUG : MKUnitGenerator
 {

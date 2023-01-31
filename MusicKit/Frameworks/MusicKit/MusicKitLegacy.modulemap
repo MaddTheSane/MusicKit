@@ -1,5 +1,5 @@
-framework module MusicKit {
-    umbrella header "MusicKit.h"
+framework module MusicKitLegacy {
+    umbrella header "MusicKitLegacy.h"
     
     export *
     module * { export * }

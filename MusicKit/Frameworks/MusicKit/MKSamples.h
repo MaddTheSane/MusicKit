@@ -99,7 +99,7 @@ non-integer resampling is not currently supported.
 #ifndef __MK_Samples_H___
 #define __MK_Samples_H___
 
-#import <MusicKit/MKWaveTable.h>
+#import <MusicKitLegacy/MKWaveTable.h>
 #import <SndKit/SndKit.h>
 
 @interface MKSamples : MKWaveTable

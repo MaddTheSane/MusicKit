@@ -3,7 +3,7 @@
 	synthpatch.  
 
 	If you use your own Music Kit program, Fm1vi must be loaded into your 
-	program to play this. See <musickit/synthpatches/Fm1vi.h> for details
+	program to play this. See <MusicKitLegacy/synthpatches/Fm1vi.h> for details
 	on the meaning of the parameters in the Notes in this file. 
 
 

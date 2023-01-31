@@ -1,6 +1,6 @@
 /* Copyright 1988-1992, NeXT Inc.  All rights reserved. */
 
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import <MKUnitGenerators/MKUnitGenerators.h>
 #import "DBWave1v.h"
 #import "_Wave1i.h"

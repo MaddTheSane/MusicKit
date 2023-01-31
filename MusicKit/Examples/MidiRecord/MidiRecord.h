@@ -8,7 +8,7 @@
 */
 
 #import <AppKit/AppKit.h>
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 
 @interface MidiRecord : NSObject <NSApplicationDelegate>
 {

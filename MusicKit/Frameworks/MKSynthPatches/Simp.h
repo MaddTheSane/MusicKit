@@ -83,7 +83,7 @@ velocitySensitivity is 0, velocity has no effect.
 #ifndef __MK_Simp_H___
 #define __MK_Simp_H___
 
-#import <MusicKit/MKSynthPatch.h>
+#import <MusicKitLegacy/MKSynthPatch.h>
 
 @interface Simp:MKSynthPatch
 {

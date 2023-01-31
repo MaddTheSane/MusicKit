@@ -13,10 +13,10 @@
 
 */
 
-#import <MusicKit/MusicKit.h>
-#import <MusicKit/midi_spec.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
+#import <MusicKitLegacy/midi_spec.h>
 #import <objc/HashTable.h>
-//#import <MusicKit/MKUnitGenerators/MKUnitGenerators.h>
+//#import <MusicKitLegacy/MKUnitGenerators/MKUnitGenerators.h>
 #import <MKUnitGenerators/MKUnitGenerators.h>
 //#import <appkit/nextstd.h>
 #import "DBWave1vi.h"
@@ -256,7 +256,7 @@
 	  break;
 	case MK_freq:
 	case MK_keyNum:
-	  freq1 = [aNote frequency]; /* A special method (see <MusicKit/Note.h>) */
+	  freq1 = [aNote frequency]; /* A special method (see <MusicKitLegacy/Note.h>) */
 	  setFreqEnv = YES;
 	  break;
 	case MK_freq0:

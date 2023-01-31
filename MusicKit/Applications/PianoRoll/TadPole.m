@@ -1,5 +1,5 @@
 /* $Id$ */
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import <math.h>
 #import "TadPole.h"
 #import "PartView.h"

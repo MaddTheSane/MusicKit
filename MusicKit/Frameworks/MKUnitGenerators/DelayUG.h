@@ -58,7 +58,7 @@ method.
 #ifndef __MK_DelayUG_H___
 #define __MK_DelayUG_H___
 
-#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
 
 @interface DelayUG : MKUnitGenerator
 {

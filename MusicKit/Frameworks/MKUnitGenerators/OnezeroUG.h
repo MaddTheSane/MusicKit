@@ -64,7 +64,7 @@ the sign of the coefficent is switched in the OnepoleUG.
 #ifndef __MK_OnezeroUG_H___
 #define __MK_OnezeroUG_H___
 
-#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
 
 @interface OnezeroUG: MKUnitGenerator
 

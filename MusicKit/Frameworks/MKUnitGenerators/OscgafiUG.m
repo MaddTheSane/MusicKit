@@ -25,7 +25,7 @@ Modification history:
 
   11/13/89/daj - Simplified defaultTableLength:.
 */
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import "_exportedPrivateMusickit.h"
 #import <SndKit/SndKit.h>
 #import "OscgafiUG.h"

@@ -79,8 +79,8 @@ returned by <b>initializeFile</b> and <b>finishFile</b> are ignored.
 
 #import <Foundation/Foundation.h>
 
-#import <MusicKit/MKInstrument.h>
-#import <MusicKit/timeunits.h>
+#import <MusicKitLegacy/MKInstrument.h>
+#import <MusicKitLegacy/timeunits.h>
 
 @interface MKFileWriter : MKInstrument <NSCoding, NSCopying>
 {

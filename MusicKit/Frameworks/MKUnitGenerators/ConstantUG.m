@@ -8,7 +8,7 @@ Modification history:
   11/22/89/daj - Changed to use UnitGenerator C functions instead of methods.
   04/25/90/daj - Added _exportedPrivateMusicKit.h import
 */
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import "_unitGeneratorInclude.h"
 #import "_exportedPrivateMusickit.h"
 #import "ConstantUG.h"

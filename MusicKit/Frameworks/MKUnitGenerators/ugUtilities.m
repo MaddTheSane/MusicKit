@@ -5,7 +5,7 @@
 #include "shlib.h"
 #endif
 
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 
 #import "AsympUG.h"
 #import "AsympUGx.h"

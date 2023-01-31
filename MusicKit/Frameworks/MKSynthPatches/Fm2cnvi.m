@@ -9,9 +9,9 @@
   09/02/90/daj - Changed MAXDOUBLE references to noDVal.h way of doing things
   6/12/93/daj -  Removed define of MK_INLINE
 */
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import <libc.h>                   /* Has random() */
-#import <MusicKit/midi_spec.h>
+#import <MusicKitLegacy/midi_spec.h>
 #import <objc/HashTable.h>
 #import <MKUnitGenerators/MKUnitGenerators.h>
 #import "Fm2cnvi.h"

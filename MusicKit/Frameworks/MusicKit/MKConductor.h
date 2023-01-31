@@ -297,7 +297,7 @@ typedef struct _MKMsgStruct {
     id _arg2;
     struct _MKMsgStruct *_next;	
     IMP _methodImp;        
-    id *_otherArgs;
+    id __unsafe_unretained*_otherArgs;
     BOOL _conductorFrees;  
     BOOL _onQueue;      
     struct _MKMsgStruct *_prev;
@@ -1487,7 +1487,7 @@ Appendix entitled MIDI Time Code in the MusicKit
 
 @end
 
-#import <MusicKit/MKConductorDelegate.h>
+#import <MusicKitLegacy/MKConductorDelegate.h>
 
 #ifdef __cplusplus
 }

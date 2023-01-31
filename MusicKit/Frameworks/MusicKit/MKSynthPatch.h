@@ -71,10 +71,10 @@ stream that it's synthesizing.
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSArray.h>
-#import <MusicKit/MKPatch.h>
-#import <MusicKit/MKConductor.h>
-#import <MusicKit/MKUnitGenerator.h>
-#import <MusicKit/orch.h>
+#import <MusicKitLegacy/MKPatch.h>
+#import <MusicKitLegacy/MKConductor.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
+#import <MusicKitLegacy/orch.h>
 
 /*!
   @file MKSynthPatch.h

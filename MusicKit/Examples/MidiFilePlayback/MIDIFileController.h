@@ -1,6 +1,6 @@
 /* MIDIPartController.h created by leigh on Tue 04-May-1999 */
 
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 
 @interface MIDIFileController : NSObject
 {

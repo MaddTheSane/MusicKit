@@ -87,8 +87,8 @@ realize MKNotes on an external MIDI synthesizer.
 #import <Foundation/Foundation.h>
 //#import <Foundation/NSObject.h>
 //#import <Foundation/NSArray.h>
-#import <MusicKit/MKNote.h>
-#import <MusicKit/MKNoteReceiver.h>
+#import <MusicKitLegacy/MKNote.h>
+#import <MusicKitLegacy/MKNoteReceiver.h>
 
 @interface MKInstrument: NSObject <NSCoding, NSCopying>
 {

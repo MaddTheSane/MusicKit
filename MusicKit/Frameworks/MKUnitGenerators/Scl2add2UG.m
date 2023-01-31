@@ -7,7 +7,7 @@ Modification history:
 
   11/22/89/daj - Changed to use UnitGenerator C functions for speed.	 
 */
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import "Scl2add2UG.h"
 #import "_unitGeneratorInclude.h"
 @implementation Scl2add2UG:MKUnitGenerator

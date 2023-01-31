@@ -3,10 +3,9 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 
 @interface PlayScore:NSObject
-{}
 
 - init; 
 - (void)setUpPlay: (MKScore *) scoreObj;

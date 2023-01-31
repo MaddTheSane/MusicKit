@@ -6,7 +6,7 @@
 */
 
 #import <AppKit/AppKit.h>
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 
 @class MIDISysExSynth;        // Forward declaration of the parameter type for registerSynth:
 @class SysExReceiver;

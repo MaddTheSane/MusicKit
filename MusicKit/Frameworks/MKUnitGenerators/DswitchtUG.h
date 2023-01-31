@@ -51,7 +51,7 @@ scaling on the second input.
 #ifndef __MK_DswitchtUG_H___
 #define __MK_DswitchtUG_H___
 
-#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
 
 @interface DswitchtUG : MKUnitGenerator
 

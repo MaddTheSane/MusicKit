@@ -50,7 +50,7 @@ timing of the switch to a tick boundary.
 #ifndef __MK_DswitchUG_H___
 #define __MK_DswitchUG_H___
 
-#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
 
 @interface DswitchUG : MKUnitGenerator
 

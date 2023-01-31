@@ -7,7 +7,7 @@
 	synthpatch.
 	
 	If you use your own Music Kit program, Pluck must be loaded into your 
-	program to play this.  See <musickit/synthpatches/Pluck.h> for details
+	program to play this.  See <MusicKitLegacy/synthpatches/Pluck.h> for details
 	on the meaning of the parameters in the Notes in this file. 
 
 	Feel free to copy and modify this example.

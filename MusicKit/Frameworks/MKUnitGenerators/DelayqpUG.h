@@ -64,7 +64,7 @@ the input location to <b>[orchestra segmentZero: MK_xPatch]</b> (or
 #ifndef __MK_DelayqpUG_H___
 #define __MK_DelayqpUG_H___
 
-#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
 
 @interface DelayqpUG : MKUnitGenerator	
 {

@@ -39,7 +39,7 @@ Mul2UG multiplies two signals:
 #ifndef __MK_Mul2UG_H___
 #define __MK_Mul2UG_H___
 
-#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
 @interface Mul2UG:MKUnitGenerator
 
 /*!

@@ -9,7 +9,7 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 
 /* flags for writeParameters hackery */
 

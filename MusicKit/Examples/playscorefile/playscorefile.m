@@ -13,7 +13,7 @@
   See README for further description of this program.
 */
 
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 //#import <MKSynthPatches/MKSynthPatches.h>
 
 int main(int ac, char *av[])

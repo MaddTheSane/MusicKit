@@ -49,7 +49,7 @@ Mul1add2UG adds one signal to the product of two others:
 #ifndef __MK_Mul1add2UG_H___
 #define __MK_Mul1add2UG_H___
 
-#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
 
 @interface Mul1add2UG: MKUnitGenerator
 

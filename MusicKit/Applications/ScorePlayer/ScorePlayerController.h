@@ -2,7 +2,7 @@
 #define __MK_ScorePlayerController_H___
 
 #import <AppKit/AppKit.h>
-#import <MusicKit/MKConductor.h>
+#import <MusicKitLegacy/MKConductor.h>
 #define TEXT 0
 
 @interface ScorePlayerController: NSObject <MKConductorDelegate, NSMenuItemValidation>

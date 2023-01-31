@@ -25,7 +25,7 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <MusicKit/MKScore.h>
+#import <MusicKitLegacy/MKScore.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

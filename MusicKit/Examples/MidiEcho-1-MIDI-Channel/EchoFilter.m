@@ -12,7 +12,7 @@
    We use a standard hash utility that comes with Objective-C.  It requires
    us to provide a few helper functions.
  */
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import "EchoFilter.h"
 
 @implementation EchoFilter

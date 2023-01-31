@@ -51,7 +51,7 @@ MKPartRecorders receives a MKNote until the performance is finished.
 #define __MK_ScoreRecorder_H___
 
 #import <Foundation/NSObject.h>
-#import <MusicKit/MKScore.h>
+#import <MusicKitLegacy/MKScore.h>
 
 @interface MKScoreRecorder : NSObject
 {

@@ -61,7 +61,7 @@ Modification history before commital to CVS repository:
 
 #import <stdarg.h> 
 #import "midi_spec.h"
-#import "MusicKit.h"
+#import "MusicKitLegacy.h"
 
 /* These are used to see if a class is loaded */ 
 /* These are used to avoid going through the findClass hash every time */

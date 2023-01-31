@@ -26,7 +26,7 @@
 */
 #ifndef __MK_ArielQPMix_H___
 #define __MK_ArielQPMix_H___
-#import <MusicKit/MKSynthPatch.h>
+#import <MusicKitLegacy/MKSynthPatch.h>
 
 @interface ArielQPMix: MKSynthPatch
 {

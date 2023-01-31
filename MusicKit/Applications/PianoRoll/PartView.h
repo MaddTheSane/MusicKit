@@ -1,7 +1,7 @@
 /* $Id$ */
 
 #import <AppKit/NSView.h>
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import <Foundation/Foundation.h>
 #define MAXFREQ 7040
 

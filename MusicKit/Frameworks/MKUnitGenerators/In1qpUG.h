@@ -41,7 +41,7 @@ and satellite DSP setting.
 #define __MK_In1qpUG_H___
 /* */
 
-#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
 
 @interface In1qpUG : MKUnitGenerator
 {

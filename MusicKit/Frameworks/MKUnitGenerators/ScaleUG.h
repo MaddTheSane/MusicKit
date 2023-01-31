@@ -37,7 +37,7 @@ ScaleUG multiplies its input by a constant scaler:
 #ifndef __MK_ScaleUG_H___
 #define __MK_ScaleUG_H___
 
-#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
 
 @interface ScaleUG: MKUnitGenerator
 

@@ -6,5 +6,9 @@
 //  Copyright © 2023 MusicKit Project. All rights reserved.
 //
 
-import Foundation
+import Cocoa
 import MusicKit
+
+class PartView: NSView {
+	
+}

@@ -39,7 +39,7 @@ Add2UG produces the sum of two input signals:
 #ifndef __MK_Add2UG_H___
 #define __MK_Add2UG_H___
 
-#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
 
 @interface Add2UG:MKUnitGenerator
 

@@ -56,7 +56,7 @@ In addition to the parameters described in <b>Fm11vi.rtfd</b>, the following par
 #ifndef __MK_Fm2cvi_H___
 #define __MK_Fm2cvi_H___
 
-#import <MusicKit/MKSynthPatch.h>
+#import <MusicKitLegacy/MKSynthPatch.h>
 
 @interface Fm2cvi:MKSynthPatch
 {

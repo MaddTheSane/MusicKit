@@ -39,7 +39,7 @@ produce a new random value every tick.
 #ifndef __MK_UnoiseUG_H___
 #define __MK_UnoiseUG_H___
 
-#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
 
 @interface UnoiseUG: MKUnitGenerator
 

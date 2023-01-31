@@ -377,8 +377,8 @@ retrieve the MKNote class with <b>MKGetNoteClass()</b>.
 
 #import <Foundation/Foundation.h>
 #import <Foundation/NSObject.h>
-#import <MusicKit/MKConductor.h>
-#import <MusicKit/params.h>
+#import <MusicKitLegacy/MKConductor.h>
+#import <MusicKitLegacy/params.h>
 
 #define BITS_PER_INT 32
 #define MK_MKPARBITVECTS ((((int)MK_appPars-1)/ BITS_PER_INT)+1)

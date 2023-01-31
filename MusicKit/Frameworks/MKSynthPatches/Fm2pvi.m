@@ -8,8 +8,8 @@
    08/28/90/daj - Changed initialize to init.
   6/12/93/daj -  Removed define of MK_INLINE
 */
-#import <MusicKit/MusicKit.h>
-#import <MusicKit/midi_spec.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
+#import <MusicKitLegacy/midi_spec.h>
 #import <objc/HashTable.h>
 #import <MKUnitGenerators/MKUnitGenerators.h>
 #import "Fm2pvi.h"

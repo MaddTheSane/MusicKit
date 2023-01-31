@@ -3,7 +3,7 @@
 	synthpatch.
 
 	If you make your own Music Kit program, Wave1i must be loaded into 
-	your program to play this. See <musickit/synthpatches/Wave1i.h> for 
+	your program to play this. See <MusicKitLegacy/synthpatches/Wave1i.h> for 
 	details on the meaning of the Note parameters.
 
 	This example illustrates independent frequency trajectories for each

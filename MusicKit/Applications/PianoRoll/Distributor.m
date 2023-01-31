@@ -1,7 +1,7 @@
 // $Id$
 
 #import <AppKit/AppKit.h>
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #ifdef NeXT
 #import <synthpatches/Pluck.h> // TODO: MOXS MusicKit can't compile synthpatches yet.
 #endif

@@ -13,7 +13,7 @@
 */
 
 
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import <MKUnitGenerators/MKUnitGenerators.h>
 #import "Fm1.h"
 #import "_Fm1i.h"

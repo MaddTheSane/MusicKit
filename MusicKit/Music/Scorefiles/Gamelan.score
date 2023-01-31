@@ -4,7 +4,7 @@
 	synthpatch.
 
 	If you make your own Music Kit program, Fm1i must be loaded into 
-	your program to play this. See <musickit/synthpatches/Fm1i.h> for 
+	your program to play this. See <MusicKitLegacy/synthpatches/Fm1i.h> for 
 	details on the meaning of the Note parameters.
 
 	"Gamelan" is a adaptation of an piece of Balinese music for four

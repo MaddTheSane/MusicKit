@@ -44,7 +44,7 @@ Scl1add2UG adds two input signals, the first of which is scaled:
 #ifndef __MK_Scl1add2UG_H___
 #define __MK_Scl1add2UG_H___
 
-#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
 @interface Scl1add2UG:MKUnitGenerator
 
 /*!

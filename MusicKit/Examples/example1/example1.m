@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #include <stdlib.h>
 #include <stdio.h>
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 
 int main (int argc, const char *argv[])
 {

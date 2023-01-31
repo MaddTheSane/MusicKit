@@ -87,7 +87,7 @@ p. 155) for further discussion.
 #ifndef __MK_BiquadUG_H___
 #define __MK_BiquadUG_H___
 
-#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
 
 @interface BiquadUG : MKUnitGenerator
 {

@@ -327,9 +327,9 @@ release notes for the latest information on supported drivers.
 #import <Foundation/Foundation.h>
 #import <SndKit/SndDefines.h>
 #import <SndKit/SndKit.h>
-#import <MusicKit/orch.h>
-#import <MusicKit/MKDeviceStatus.h>
-#import <MusicKit/MKSynthData.h>
+#import <MusicKitLegacy/orch.h>
+#import <MusicKitLegacy/MKDeviceStatus.h>
+#import <MusicKitLegacy/MKSynthData.h>
 
 /*!
   @file MKOrchestra.h

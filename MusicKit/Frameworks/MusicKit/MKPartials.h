@@ -134,8 +134,8 @@ For more information on waveshaping synthesis, see the <b>Shape</b> and
 #import <Foundation/Foundation.h>
 
 #import <Foundation/NSObject.h>
-#import <MusicKit/MKWaveTable.h>
-#import <MusicKit/MKSamples.h>
+#import <MusicKitLegacy/MKWaveTable.h>
+#import <MusicKitLegacy/MKSamples.h>
 
 @interface MKPartials : MKWaveTable <NSCopying, NSCoding>
 {

@@ -11,8 +11,8 @@
   08/28/90/daj - Changed initialize to init.
   07/09/91/daj - Changed to use Timbre.
 */
-#import <MusicKit/MusicKit.h>
-#import <MusicKit/midi_spec.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
+#import <MusicKitLegacy/midi_spec.h>
 #import <objc/HashTable.h>
 #import <MKUnitGenerators/MKUnitGenerators.h>
 //#import <appkit/nextstd.h>
@@ -271,7 +271,7 @@
 	  break;
 	case MK_freq:
 	case MK_keyNum:
-	  freq1 = [aNote frequency]; /* A special method (see <MusicKit/Note.h>) */
+	  freq1 = [aNote frequency]; /* A special method (see <MusicKitLegacy/Note.h>) */
 	  setFreqEnv = YES;
 	  break;
 	case MK_freq0:

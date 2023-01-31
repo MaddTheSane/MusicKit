@@ -6,8 +6,8 @@ Modification history:
   3/6/93/daj - Created
 
 */
-#import <MusicKit/MusicKit.h>
-#import <MusicKit/ArielQP.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
+#import <MusicKitLegacy/ArielQP.h>
 #import "_unitGeneratorInclude.h"
 #import "_exportedPrivateMusickit.h"
 

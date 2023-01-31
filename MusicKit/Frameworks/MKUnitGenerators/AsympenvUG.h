@@ -120,7 +120,7 @@ It is included only for compatability with <b>MKUpdateAsymp()</b>.</li>
 <i>a</i>	output 
 */
 
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 
 @interface AsympenvUG: MKUnitGenerator
 {

@@ -47,7 +47,7 @@ In addition to the parameters described in <b>Wave1i.rtfd</b>, the following par
 #ifndef __MK_Wave1vi_H___
 #define __MK_Wave1vi_H___
 
-#import <MusicKit/MKSynthPatch.h>
+#import <MusicKitLegacy/MKSynthPatch.h>
 
 #import "Wave1i.h"
 

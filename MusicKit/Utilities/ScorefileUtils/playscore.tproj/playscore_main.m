@@ -36,7 +36,7 @@ Modification history prior to commit to CVS:
  */ 
 
 #import <Foundation/Foundation.h>
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import <stdlib.h>
 #import <stdio.h>
 

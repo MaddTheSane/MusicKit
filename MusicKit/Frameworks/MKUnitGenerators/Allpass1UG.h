@@ -80,7 +80,7 @@ are used.
 #ifndef __MK_Allpass1UG_H___
 #define __MK_Allpass1UG_H___
 
-#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
 
 @interface Allpass1UG: MKUnitGenerator
 

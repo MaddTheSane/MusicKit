@@ -51,7 +51,7 @@ exactly<i> input2.</i>  An AsympUG is often used to produce the control signal.
 #ifndef __MK_InterpUG_H___
 #define __MK_InterpUG_H___
 
-#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
 @interface InterpUG:MKUnitGenerator
 
 /*!

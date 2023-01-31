@@ -49,7 +49,7 @@ typedef struct _MKLeafUGStruct {
         unit generator is on chip. */
     double computeTime;
     /*! Array of lists of idle patches, indexed by dsp number. */
-    id **availLists;
+    id __unsafe_unretained**availLists;
     /*! Sorted absolute data records.  */
     DSPDataRecord *data[DSP_LC_NUM];
     /*! Fix-up array for each P space. */

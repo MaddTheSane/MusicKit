@@ -74,9 +74,9 @@ When using this MKSynthPatch in an interactive real-time context, such as playin
 
 
 */
-#import <MusicKit/MKSynthPatch.h>
-#import <MusicKit/MKWaveTable.h>
-#import <MusicKit/MKEnvelope.h>
+#import <MusicKitLegacy/MKSynthPatch.h>
+#import <MusicKitLegacy/MKWaveTable.h>
+#import <MusicKitLegacy/MKEnvelope.h>
 
 @interface Wave1i: MKSynthPatch
 {

@@ -7,8 +7,8 @@
 
    08/28/90/daj - Changed initialize to init.
 */
-#import <MusicKit/MusicKit.h>
-#import <MusicKit/midi_spec.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
+#import <MusicKitLegacy/midi_spec.h>
 #import <objc/HashTable.h>
 #import <MKUnitGenerators/MKUnitGenerators.h>
 #import "Simp.h"

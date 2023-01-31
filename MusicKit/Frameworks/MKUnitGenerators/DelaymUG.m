@@ -5,7 +5,7 @@ Modification history:
   3/16/96/daj - Created by DAJ, based on DelayUG.m
 
 */
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 
 #import "DelaymUG.h"
 @implementation DelaymUG:MKUnitGenerator

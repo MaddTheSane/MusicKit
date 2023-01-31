@@ -131,7 +131,7 @@ provide, ignoring MK_OSCFREQSCALE, incRatio, etc.
 #ifndef __MK_OscgafUGs_H___
 #define __MK_OscgafUGs_H___
 
-#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
 
 @interface OscgafUGs: MKUnitGenerator
 {

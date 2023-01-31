@@ -138,28 +138,13 @@ MKUnitGenerator directly to another MKUnitGenerator.
 
 #import <Foundation/NSObject.h>
 
-@interface MKPatchTemplate : NSObject
-{    
-    /* All MKPatchTemplate instance variables are for internal use only */
-@private
-    NSMutableArray *_elementStorage;         /* Array of template entries */
-    NSMutableArray *_connectionStorage;      /* Array of MKPatchConnection objects of connection info */
-    /* If MKOrchestra is loaded, this is an array of NSMutableArrays of deallocated patches, one per DSP. */
-    NSMutableArray **_deallocatedPatches;
-    unsigned int _eMemSegments; /* External memory segment bit vector */
-}
+@interface MKPatchTemplate : NSObject <NSCopying, NSCoding>
 
 /*!
   @brief Initializes a new MKPatchTemplate and returns <b>self</b>.
   @return Returns <b>self</b>.
 */
 - init;
-
-/*!
-  @brief Returns a copy of the MKPatchTemplate. 
-  @return Returns an id.
- */
-- copyWithZone: (NSZone *) zone;
 
 /*!
   @brief Specifies a connection between the MKUnitGenerator identified by
@@ -229,18 +214,6 @@ MKUnitGenerator directly to another MKUnitGenerator.
   @return Returns an unsigned.
 */
 - (NSInteger) synthElementCount;
-
-/* 
- You never send this message directly.  
-*/
-- (void) encodeWithCoder: (NSCoder *) aCoder;
-
-/* 
- You never send this message directly.  
- Should be invoked via NXReadObject(). 
- See write:. 
-*/
-- (id) initWithCoder: (NSCoder *) aDecoder;
 
 @end
 

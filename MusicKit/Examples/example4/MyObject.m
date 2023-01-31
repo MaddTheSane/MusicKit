@@ -1,7 +1,7 @@
 /* $Id$ */
 
 #import "MyObject.h"
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import <MKSynthPatches/Pluck.h>
 #import <AppKit/AppKit.h>
 

@@ -45,7 +45,7 @@ Controller may need to inform the user that a complete bank must be downloaded, 
 */
 // - (BOOL) mustDownloadBank
 
-#import <MusicKit/MusicKit.h>   // for the MIDI file I/O
+#import <MusicKitLegacy/MusicKitLegacy.h>   // for the MIDI file I/O
 #import "PatchBank.h"
 
 @implementation PatchBank

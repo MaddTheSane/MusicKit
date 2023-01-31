@@ -1,4 +1,4 @@
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 
 /*!
   @class EchoFilter

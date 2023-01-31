@@ -1,5 +1,5 @@
 #import <AppKit/AppKit.h>
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 //#import <MKSynthPatches/Pluck.h>
 
 @interface Metronome: NSObject 

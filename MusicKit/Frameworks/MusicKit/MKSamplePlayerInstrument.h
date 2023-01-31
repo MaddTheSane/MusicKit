@@ -20,7 +20,7 @@
 #define __MK_SamplerInstrument_H___
 
 #import <SndKit/SndKit.h>
-#import <MusicKit/MKInstrument.h>
+#import <MusicKitLegacy/MKInstrument.h>
 
 @interface MKSamplePlayerInstrument: MKInstrument <SndDelegate>
 {

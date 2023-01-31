@@ -46,7 +46,7 @@ In addition to the parameters described in <b>Fm2pvi.rtfd</b>, the following par
 #ifndef __MK_Fm2pnvi_H___
 #define __MK_Fm2pnvi_H___
 
-#import <MusicKit/MKSynthPatch.h>
+#import <MusicKitLegacy/MKSynthPatch.h>
 
 @interface Fm2pnvi:MKSynthPatch
 {

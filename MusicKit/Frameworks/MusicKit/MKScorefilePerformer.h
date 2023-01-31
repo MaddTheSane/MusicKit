@@ -41,7 +41,7 @@
 #ifndef __MK_ScorefilePerformer_H___
 #define __MK_ScorefilePerformer_H___
 
-#import <MusicKit/MKFilePerformer.h>
+#import <MusicKitLegacy/MKFilePerformer.h>
 
 @interface MKScorefilePerformer : MKFilePerformer
 {

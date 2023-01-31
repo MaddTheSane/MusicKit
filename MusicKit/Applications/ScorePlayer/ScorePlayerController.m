@@ -38,7 +38,7 @@
 
 #import <AppKit/AppKit.h>
 #import <Foundation/NSBundle.h>
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 
 #import "ErrorLog.h"
 #import "MKAlert.h"

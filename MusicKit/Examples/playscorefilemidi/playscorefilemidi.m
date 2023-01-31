@@ -29,7 +29,7 @@
    +startPerformance method initiates a tight loop that sends Notes as
    fast as possible until all Notes have been sent, then returns.  */
 
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 
 int main(int ac, char * av[])
 {

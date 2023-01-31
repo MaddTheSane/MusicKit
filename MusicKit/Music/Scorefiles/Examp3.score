@@ -3,7 +3,7 @@
 	synthpatch.  
 
 	If you make your own Music Kit program, DBWave1vi must be loaded into 
-	your program to	play this. See <musickit/synthpatches/DBWave1vi.h> for 
+	your program to	play this. See <MusicKitLegacy/synthpatches/DBWave1vi.h> for 
 	details	on the meaning of the parameters in the Notes in this file. 
 
 	Feel free to copy and modify this example.

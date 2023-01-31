@@ -18,7 +18,7 @@
     real-time  device. In this manner, MKMidi is somewhat like MKOrchestra, 
     which represents the DSP. The protocol for controlling MKMidi is the same 
     as that for the MKOrchestra. This protocol is described in the file 
-    <MusicKit/MKDeviceStatus.h>.
+    <MusicKitLegacy/MKDeviceStatus.h>.
     
     The conversion between MusicKit and MIDI semantics is described in the
     MusicKit documentation.
@@ -156,9 +156,9 @@ See <b>Administration/MidiHardwareInfo.rtf</b> for using MIDI on NeXT hardware.
 
 #import <Foundation/NSObject.h>
 #import <MKPerformSndMIDI/PerformMIDI.h>
-#import <MusicKit/MKDeviceStatus.h>
-#import <MusicKit/params.h>
-#import <MusicKit/_midi.h>  // for _MKMidiInStruct and _MKMidiOutStruct definitions
+#import <MusicKitLegacy/MKDeviceStatus.h>
+#import <MusicKitLegacy/params.h>
+#import <MusicKitLegacy/_midi.h>  // for _MKMidiInStruct and _MKMidiOutStruct definitions
 
 /* sbrandon: 10/05/2001
  * get around the fact that GNUstep does not have NSMach ports, but does respond to -machPort

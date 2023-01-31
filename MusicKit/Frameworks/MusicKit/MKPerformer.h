@@ -168,8 +168,8 @@ the MusicKit MKPartPerformer:
 #define __MK_Performer_H___
 
 #import <Foundation/Foundation.h>
-#import <MusicKit/MKNoteSender.h>
-#import <MusicKit/MKConductor.h>
+#import <MusicKitLegacy/MKNoteSender.h>
+#import <MusicKitLegacy/MKConductor.h>
 
 @protocol MKPerformerDelegate;
 
@@ -563,7 +563,7 @@ typedef NS_ENUM(int, MKPerformerStatus) {
 @end
 
 /* Describes the protocol that may be implemented by the delegate: */
-#import <MusicKit/MKPerformerDelegate.h>
+#import <MusicKitLegacy/MKPerformerDelegate.h>
 
 @interface MKPerformer () <MKPerformer>
 

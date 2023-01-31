@@ -53,7 +53,7 @@ increment must be nonnegative.
 #ifndef __MK_OscgUG_H___
 #define __MK_OscgUG_H___
 
-#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
 
 @interface OscgUG: MKUnitGenerator
 {

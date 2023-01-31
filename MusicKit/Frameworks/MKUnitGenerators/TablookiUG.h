@@ -45,7 +45,7 @@ corresponding to positive input (51-100, inclusive).
 #ifndef __MK_TablookiUG_H___
 #define __MK_TablookiUG_H___
 
-#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
 
 @interface TablookiUG : MKUnitGenerator
 {

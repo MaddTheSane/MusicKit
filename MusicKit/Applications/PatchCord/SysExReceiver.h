@@ -4,7 +4,7 @@
   @description
      Object responsible for managing reception of system exclusive messages.
  */
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import "SysExMessage.h"
 
 @class MIDISysExSynth;

@@ -48,7 +48,7 @@ In1bUGs.
 */
 #ifndef __MK_In1bUG_H___
 #define __MK_In1bUG_H___
-#import <MusicKit/MKUnitGenerator.h>
+#import <MusicKitLegacy/MKUnitGenerator.h>
 
 @interface In1bUG : MKUnitGenerator
 {

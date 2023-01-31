@@ -10,7 +10,7 @@
   Portions Copyright (c) 1994 Stanford University
   Portions Copyright (c) 1999-, The MusicKit Project.
 */
-#import "MusicKit.h"
+#import "MusicKitLegacy.h"
 #import "MKMTCPerformer.h"
 
 /* To do:  Add user bits, NAK, full messages */

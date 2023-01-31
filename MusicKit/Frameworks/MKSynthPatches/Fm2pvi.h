@@ -80,7 +80,7 @@ FM index.
 #ifndef __MK_Fm2pvi_H___
 #define __MK_Fm2pvi_H___
 
-#import <MusicKit/MKSynthPatch.h>
+#import <MusicKitLegacy/MKSynthPatch.h>
 
 @interface Fm2pvi:MKSynthPatch
 {

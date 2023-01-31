@@ -90,7 +90,7 @@ In addition to the parameters described in <b>Wave1vi.rtfd</b>, the following pa
 #ifndef __MK_DBWave2vi_H___
 #define __MK_DBWave2vi_H___
 
-#import <MusicKit/MKSynthPatch.h>
+#import <MusicKitLegacy/MKSynthPatch.h>
 
 @interface DBWave2vi: MKSynthPatch
 {

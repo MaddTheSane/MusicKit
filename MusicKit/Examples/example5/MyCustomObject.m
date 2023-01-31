@@ -1,6 +1,6 @@
-#import <MusicKit/MusicKit.h>
-#import <musickit/unitgenerators/Out2sumUGx.h>
-#import <musickit/unitgenerators/OscgUGxy.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
+#import <MusicKitLegacy/unitgenerators/Out2sumUGx.h>
+#import <MusicKitLegacy/unitgenerators/OscgUGxy.h>
 #import <AppKit/AppKit.h>
 
 #import "MyCustomObject.h"

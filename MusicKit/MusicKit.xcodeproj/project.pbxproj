@@ -188,7 +188,7 @@
 		5576EAAD2989044C00954041 /* PianoRoll.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5576EAA72989041700954041 /* PianoRoll.xib */; };
 		5576EAB02989046900954041 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A2A8D929751AB100BCC536 /* Media.xcassets */; };
 		5576EAB229890A7C00954041 /* PartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5576EAB129890A7C00954041 /* PartView.swift */; };
-		5576EAB829890D5E00954041 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
+		5576EAB829890D5E00954041 /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
 		5576EAB929890D5E00954041 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		55A2A8C62973D69C00BCC536 /* SoundLib.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55A2A8C82973D69C00BCC536 /* SoundLib.strings */; };
 		55A2A8CD29750FB200BCC536 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FE39805A101690024FD88 /* Foundation.framework */; };
@@ -560,23 +560,23 @@
 		55C32006297BC87200A8F163 /* ogg_decoder_aspect.c in Sources */ = {isa = PBXBuildFile; fileRef = 55C31BB8297BBE1A00A8F163 /* ogg_decoder_aspect.c */; };
 		55C32007297BC87200A8F163 /* stream_encoder_intrin_sse2.c in Sources */ = {isa = PBXBuildFile; fileRef = 55C31B93297BBE1A00A8F163 /* stream_encoder_intrin_sse2.c */; };
 		55C32008297BC87200A8F163 /* window.c in Sources */ = {isa = PBXBuildFile; fileRef = 55C31BD3297BBE1A00A8F163 /* window.c */; };
-		D8001DE30762D2F700508A26 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
+		D8001DE30762D2F700508A26 /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
 		D8001FE00762D3B100508A26 /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D8001FE10762D3B100508A26 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D8001FE20762D3B100508A26 /* MKDSP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FED7105A10EAF0024FD88 /* MKDSP.framework */; };
-		D8001FE60762D4A900508A26 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
+		D8001FE60762D4A900508A26 /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
 		D8001FEB0762D54100508A26 /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D8001FEC0762D54100508A26 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D8001FED0762D54100508A26 /* MKDSP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FED7105A10EAF0024FD88 /* MKDSP.framework */; };
 		D8001FEE0762D58400508A26 /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D8001FEF0762D58400508A26 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D8001FF00762D58400508A26 /* MKDSP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FED7105A10EAF0024FD88 /* MKDSP.framework */; };
-		D8001FF10762D58400508A26 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
+		D8001FF10762D58400508A26 /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
 		D8001FF20762D5E900508A26 /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D8001FF30762D5E900508A26 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D8001FF40762D5E900508A26 /* MKDSP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FED7105A10EAF0024FD88 /* MKDSP.framework */; };
-		D8001FF50762D5E900508A26 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
-		D80020230763768800508A26 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
+		D8001FF50762D5E900508A26 /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
+		D80020230763768800508A26 /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
 		D8002024076376B300508A26 /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D8002025076376B300508A26 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D8002026076376B300508A26 /* MKDSP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FED7105A10EAF0024FD88 /* MKDSP.framework */; };
@@ -586,31 +586,31 @@
 		D80020330763776C00508A26 /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D80020340763776C00508A26 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D80020350763776C00508A26 /* MKDSP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FED7105A10EAF0024FD88 /* MKDSP.framework */; };
-		D80020360763776C00508A26 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
+		D80020360763776C00508A26 /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
 		D80020370763778700508A26 /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D80020380763778700508A26 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D80020390763778700508A26 /* MKDSP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FED7105A10EAF0024FD88 /* MKDSP.framework */; };
-		D800203A0763778700508A26 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
+		D800203A0763778700508A26 /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
 		D800203B0763779300508A26 /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D800203C0763779300508A26 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D800203D0763779300508A26 /* MKDSP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FED7105A10EAF0024FD88 /* MKDSP.framework */; };
-		D800203E0763779300508A26 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
+		D800203E0763779300508A26 /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
 		D80032580819F0C600E47C6C /* MidiEcho.icns in Resources */ = {isa = PBXBuildFile; fileRef = D80032570819F0C600E47C6C /* MidiEcho.icns */; };
 		D800325D0819F52E00E47C6C /* midi.icns in Resources */ = {isa = PBXBuildFile; fileRef = D800325C0819F52E00E47C6C /* midi.icns */; };
 		D80151C60FA64B31002FB882 /* MKDSP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FED7105A10EAF0024FD88 /* MKDSP.framework */; };
 		D80151C70FA64B31002FB882 /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
-		D80151C80FA64B31002FB882 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
+		D80151C80FA64B31002FB882 /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
 		D80151C90FA64B31002FB882 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D80151CF0FA64B77002FB882 /* playpart.m in Sources */ = {isa = PBXBuildFile; fileRef = D80151CD0FA64B77002FB882 /* playpart.m */; };
 		D80151D00FA64B77002FB882 /* playpart_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D80151CE0FA64B77002FB882 /* playpart_main.m */; };
 		D80151D90FA64D26002FB882 /* MKDSP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FED7105A10EAF0024FD88 /* MKDSP.framework */; };
 		D80151DA0FA64D26002FB882 /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
-		D80151DB0FA64D26002FB882 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
+		D80151DB0FA64D26002FB882 /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
 		D80151DC0FA64D26002FB882 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D80151DD0FA64D47002FB882 /* MKDSP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FED7105A10EAF0024FD88 /* MKDSP.framework */; };
 		D80151DE0FA64D47002FB882 /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D80151DF0FA64D47002FB882 /* MKUnitGenerators.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D85F905207DFE7D4009DC57B /* MKUnitGenerators.framework */; };
-		D80151E00FA64D47002FB882 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
+		D80151E00FA64D47002FB882 /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
 		D80151E10FA64D47002FB882 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D80246EE122EB60F00A88264 /* SndVSTController.h in Headers */ = {isa = PBXBuildFile; fileRef = D80246EA122EB60F00A88264 /* SndVSTController.h */; };
 		D80246EF122EB60F00A88264 /* SndVSTController.m in Sources */ = {isa = PBXBuildFile; fileRef = D80246EB122EB60F00A88264 /* SndVSTController.m */; };
@@ -620,7 +620,7 @@
 		D80DA57D0764C8A20052DFAF /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D80DA57E0764C8A20052DFAF /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D80DA57F0764C8A20052DFAF /* MKDSP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FED7105A10EAF0024FD88 /* MKDSP.framework */; };
-		D80DA5800764C8A20052DFAF /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
+		D80DA5800764C8A20052DFAF /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
 		D80DA5850764C8DE0052DFAF /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D80DA5860764C8DE0052DFAF /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D80DA5870764C90D0052DFAF /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
@@ -721,7 +721,7 @@
 		D825570005A2142800B0192B /* MKUnitGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = D82556B205A2142800B0192B /* MKUnitGenerator.m */; };
 		D825570105A2142800B0192B /* MKWaveTable.h in Headers */ = {isa = PBXBuildFile; fileRef = D82556B305A2142800B0192B /* MKWaveTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D825570205A2142800B0192B /* MKWaveTable.m in Sources */ = {isa = PBXBuildFile; fileRef = D82556B405A2142800B0192B /* MKWaveTable.m */; };
-		D825573105A2163400B0192B /* MusicKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D825571405A2163400B0192B /* MusicKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D825573105A2163400B0192B /* MusicKitLegacy.h in Headers */ = {isa = PBXBuildFile; fileRef = D825571405A2163400B0192B /* MusicKitLegacy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D825573205A2163400B0192B /* names.h in Headers */ = {isa = PBXBuildFile; fileRef = D825571505A2163400B0192B /* names.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D825573305A2163400B0192B /* noDVal.h in Headers */ = {isa = PBXBuildFile; fileRef = D825571605A2163400B0192B /* noDVal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D825573405A2163400B0192B /* NotePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = D825571705A2163400B0192B /* NotePrivate.h */; };
@@ -812,12 +812,12 @@
 		D828F9F80780CD4A00215EB9 /* Info.xib in Resources */ = {isa = PBXBuildFile; fileRef = D828F9F10780CD4A00215EB9 /* Info.xib */; };
 		D828F9F90780CD4A00215EB9 /* PianoRoll.xib in Resources */ = {isa = PBXBuildFile; fileRef = D828F9F30780CD4A00215EB9 /* PianoRoll.xib */; };
 		D828F9FA0780CD4A00215EB9 /* Score.xib in Resources */ = {isa = PBXBuildFile; fileRef = D828F9F50780CD4A00215EB9 /* Score.xib */; };
-		D828FA410780CFD200215EB9 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
+		D828FA410780CFD200215EB9 /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
 		D82D42F113AE616700F6CE50 /* SndStreamInput.h in Headers */ = {isa = PBXBuildFile; fileRef = D82D42EF13AE616700F6CE50 /* SndStreamInput.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D82D42F213AE616700F6CE50 /* SndStreamInput.m in Sources */ = {isa = PBXBuildFile; fileRef = D82D42F013AE616700F6CE50 /* SndStreamInput.m */; };
 		D834DA7C0FA6467000EEBC03 /* MKDSP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FED7105A10EAF0024FD88 /* MKDSP.framework */; };
 		D834DA7D0FA6467000EEBC03 /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
-		D834DA7E0FA6467000EEBC03 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
+		D834DA7E0FA6467000EEBC03 /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
 		D834DA7F0FA6467000EEBC03 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D8379A840FEE8C6E00E7B708 /* icon16x16.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = D8379A830FEE8C6E00E7B708 /* icon16x16.png */; };
 		D8379A8B0FEE8CBA00E7B708 /* icon16x16.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = D8379A8A0FEE8CBA00E7B708 /* icon16x16.png */; };
@@ -870,7 +870,7 @@
 		D847902007A8BDB400F7C83A /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D847902107A8BDB400F7C83A /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D847902207A8BDB400F7C83A /* MKDSP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FED7105A10EAF0024FD88 /* MKDSP.framework */; };
-		D847902307A8BDB400F7C83A /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
+		D847902307A8BDB400F7C83A /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
 		D84905E011E504B400D7AAC8 /* SignalProcessingController.m in Sources */ = {isa = PBXBuildFile; fileRef = D84905DF11E504B400D7AAC8 /* SignalProcessingController.m */; };
 		D84905E711E506CB00D7AAC8 /* SignalProcessing.xib in Resources */ = {isa = PBXBuildFile; fileRef = D84905E611E506CB00D7AAC8 /* SignalProcessing.xib */; };
 		D849067411E5240500D7AAC8 /* SndStreamInput.m in Sources */ = {isa = PBXBuildFile; fileRef = D849067311E5240500D7AAC8 /* SndStreamInput.m */; };
@@ -979,7 +979,7 @@
 		D85F90E107DFE884009DC57B /* TablookiUG.m in Sources */ = {isa = PBXBuildFile; fileRef = D85F909C07DFE883009DC57B /* TablookiUG.m */; };
 		D85F90E207DFE884009DC57B /* UnoiseUG.h in Headers */ = {isa = PBXBuildFile; fileRef = D85F909D07DFE883009DC57B /* UnoiseUG.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D85F90E307DFE884009DC57B /* UnoiseUG.m in Sources */ = {isa = PBXBuildFile; fileRef = D85F909E07DFE883009DC57B /* UnoiseUG.m */; };
-		D866B62F07447C97007AD17E /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
+		D866B62F07447C97007AD17E /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
 		D8684F60081CA74700926058 /* MelodicGenerator.h in Resources */ = {isa = PBXBuildFile; fileRef = D8684F5E081CA74700926058 /* MelodicGenerator.h */; };
 		D8684F61081CA74700926058 /* MelodicGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = D8684F5F081CA74700926058 /* MelodicGenerator.m */; };
 		D8684F65081CA75E00926058 /* example3_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8684F64081CA75E00926058 /* example3_main.m */; };
@@ -987,12 +987,12 @@
 		D8684FED081CB7EB00926058 /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D8684FEE081CB7EB00926058 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D8684FEF081CB7EB00926058 /* MKDSP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FED7105A10EAF0024FD88 /* MKDSP.framework */; };
-		D8684FF0081CB7EB00926058 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
+		D8684FF0081CB7EB00926058 /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
 		D86963C507C1653700785798 /* example1.m in Sources */ = {isa = PBXBuildFile; fileRef = D86963C407C1653700785798 /* example1.m */; };
 		D869644A07C1657F00785798 /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D869644B07C1657F00785798 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D869644C07C1657F00785798 /* MKDSP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FED7105A10EAF0024FD88 /* MKDSP.framework */; };
-		D869644D07C1657F00785798 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
+		D869644D07C1657F00785798 /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
 		D86B0ACD09F6CAA2003B4720 /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D86B0ACE09F6CAA2003B4720 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D86B0ACF09F6CAA2003B4720 /* MKDSP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FED7105A10EAF0024FD88 /* MKDSP.framework */; };
@@ -1043,21 +1043,21 @@
 		D88032AD0FF17F4E00182A0C /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D88032AE0FF17F4E00182A0C /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D88032AF0FF17F4E00182A0C /* MKDSP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FED7105A10EAF0024FD88 /* MKDSP.framework */; };
-		D88032B00FF17F4E00182A0C /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
+		D88032B00FF17F4E00182A0C /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
 		D880FBC7077FD9B700FD03CC /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D880FBCE077FDD4A00FD03CC /* MKDSP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FED7105A10EAF0024FD88 /* MKDSP.framework */; };
 		D880FBE4077FDD7E00FD03CC /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D880FC0E077FDDBA00FD03CC /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D880FC23077FE25900FD03CC /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D880FCBB077FE29F00FD03CC /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
-		D880FCC7077FEAD000FD03CC /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
+		D880FCC7077FEAD000FD03CC /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
 		D880FD0D0780882F00FD03CC /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D880FD220780AC2A00FD03CC /* ErrorLog.m in Sources */ = {isa = PBXBuildFile; fileRef = D880FD200780AC2A00FD03CC /* ErrorLog.m */; };
 		D882794507008F510060CAFE /* MKOrchestra.m in Sources */ = {isa = PBXBuildFile; fileRef = D882794407008F510060CAFE /* MKOrchestra.m */; };
 		D8831D320AE6BA6C00201B3D /* SpectroController.m in Sources */ = {isa = PBXBuildFile; fileRef = D8831D300AE6BA6C00201B3D /* SpectroController.m */; };
 		D886C3DC0FA64816000AC7C4 /* MKDSP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FED7105A10EAF0024FD88 /* MKDSP.framework */; };
 		D886C3DD0FA64816000AC7C4 /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
-		D886C3DE0FA64816000AC7C4 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
+		D886C3DE0FA64816000AC7C4 /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
 		D886C3DF0FA64816000AC7C4 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D886C3E40FA64851000AC7C4 /* playscorefile2.m in Sources */ = {isa = PBXBuildFile; fileRef = D886C3E30FA64851000AC7C4 /* playscorefile2.m */; };
 		D88C505106C7E4C900D33D99 /* PatchBankDocument.h in Headers */ = {isa = PBXBuildFile; fileRef = D88C503F06C7E4C800D33D99 /* PatchBankDocument.h */; };
@@ -1284,7 +1284,7 @@
 		D8D1B72E08124ED000D9156A /* MKPerformSndMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */; };
 		D8D1B72F08124ED000D9156A /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
 		D8D1B73008124ED000D9156A /* MKDSP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FED7105A10EAF0024FD88 /* MKDSP.framework */; };
-		D8D1B73108124ED000D9156A /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
+		D8D1B73108124ED000D9156A /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
 		D8D2A3D90FA905E2008DBF68 /* dkeislar.tiff in Resources */ = {isa = PBXBuildFile; fileRef = D8D2A3D40FA905E2008DBF68 /* dkeislar.tiff */; };
 		D8D2A3DA0FA905E2008DBF68 /* ExampApp.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D2A3D60FA905E2008DBF68 /* ExampApp.m */; };
 		D8D2A3DB0FA905E2008DBF68 /* PlayNote_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8D2A3D70FA905E2008DBF68 /* PlayNote_main.m */; };
@@ -1318,8 +1318,8 @@
 		D8E8D5CE078463FB00AAE755 /* EnvelopeEd_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8E8D5CD078463FB00AAE755 /* EnvelopeEd_main.m */; };
 		D8E8D5F10784649E00AAE755 /* EnvelopeEd.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8E8D5ED0784649E00AAE755 /* EnvelopeEd.xib */; };
 		D8E8D5F20784649E00AAE755 /* Info.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8E8D5EF0784649E00AAE755 /* Info.xib */; };
-		D8E8D5F8078465A500AAE755 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
-		D8FD86B609F65F87001E01B4 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKit.framework */; };
+		D8E8D5F8078465A500AAE755 /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
+		D8FD86B609F65F87001E01B4 /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
 		D8FD874009F666F0001E01B4 /* example5_main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FD873D09F666F0001E01B4 /* example5_main.m */; };
 		D8FD874109F666F0001E01B4 /* MyCustomObject.m in Sources */ = {isa = PBXBuildFile; fileRef = D8FD873F09F666F0001E01B4 /* MyCustomObject.m */; };
 		D8FD874409F6670F001E01B4 /* example5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D8FD874209F6670F001E01B4 /* example5.xib */; };
@@ -2022,7 +2022,7 @@
 		556A3D2B29722665007FFAA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localized.strings; sourceTree = "<group>"; };
 		556A3D2D2972AB82007FFAA7 /* MKPerformSndMIDI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKPerformSndMIDI.h; sourceTree = "<group>"; };
 		556A3D372972B1B3007FFAA7 /* MKDSP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKDSP.h; sourceTree = "<group>"; };
-		556A3D39297343D0007FFAA7 /* MusicKit.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = MusicKit.modulemap; sourceTree = "<group>"; };
+		556A3D39297343D0007FFAA7 /* MusicKitLegacy.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = MusicKitLegacy.modulemap; sourceTree = "<group>"; };
 		5576EA8D2988F9B700954041 /* PianoRollSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PianoRollSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5576EA8F2988F9B800954041 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5576EA912988F9B800954041 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
@@ -2997,7 +2997,7 @@
 		D8227E720F8B343100681ED5 /* SndReverbAllpassFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SndReverbAllpassFilter.m; sourceTree = "<group>"; };
 		D8227E730F8B343100681ED5 /* SndReverbCombFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SndReverbCombFilter.h; sourceTree = "<group>"; };
 		D8227E740F8B343100681ED5 /* SndReverbCombFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SndReverbCombFilter.m; sourceTree = "<group>"; };
-		D825564A05A211B400B0192B /* MusicKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MusicKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D825564A05A211B400B0192B /* MusicKitLegacy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MusicKitLegacy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D825564B05A211B400B0192B /* MusicKit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MusicKit-Info.plist"; sourceTree = "<group>"; };
 		D825566705A2142800B0192B /* MKConductor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKConductor.h; sourceTree = "<group>"; };
 		D825566805A2142800B0192B /* MKConductor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKConductor.m; sourceTree = "<group>"; };
@@ -3076,7 +3076,7 @@
 		D82556B205A2142800B0192B /* MKUnitGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKUnitGenerator.m; sourceTree = "<group>"; };
 		D82556B305A2142800B0192B /* MKWaveTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKWaveTable.h; sourceTree = "<group>"; };
 		D82556B405A2142800B0192B /* MKWaveTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKWaveTable.m; sourceTree = "<group>"; };
-		D825571405A2163400B0192B /* MusicKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicKit.h; sourceTree = "<group>"; };
+		D825571405A2163400B0192B /* MusicKitLegacy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicKitLegacy.h; sourceTree = "<group>"; };
 		D825571505A2163400B0192B /* names.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = names.h; sourceTree = "<group>"; };
 		D825571605A2163400B0192B /* noDVal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = noDVal.h; sourceTree = "<group>"; };
 		D825571705A2163400B0192B /* NotePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotePrivate.h; sourceTree = "<group>"; };
@@ -3719,7 +3719,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5576EAB829890D5E00954041 /* MusicKit.framework in Frameworks */,
+				5576EAB829890D5E00954041 /* MusicKitLegacy.framework in Frameworks */,
 				5576EAB929890D5E00954041 /* SndKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3789,7 +3789,7 @@
 				D80151C70FA64B31002FB882 /* MKPerformSndMIDI.framework in Frameworks */,
 				D80151C90FA64B31002FB882 /* SndKit.framework in Frameworks */,
 				D80151C60FA64B31002FB882 /* MKDSP.framework in Frameworks */,
-				D80151C80FA64B31002FB882 /* MusicKit.framework in Frameworks */,
+				D80151C80FA64B31002FB882 /* MusicKitLegacy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3799,7 +3799,7 @@
 			files = (
 				D834DA7C0FA6467000EEBC03 /* MKDSP.framework in Frameworks */,
 				D834DA7D0FA6467000EEBC03 /* MKPerformSndMIDI.framework in Frameworks */,
-				D834DA7E0FA6467000EEBC03 /* MusicKit.framework in Frameworks */,
+				D834DA7E0FA6467000EEBC03 /* MusicKitLegacy.framework in Frameworks */,
 				D834DA7F0FA6467000EEBC03 /* SndKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3823,7 +3823,7 @@
 				D847900407A8B01700F7C83A /* SndKit.framework in Frameworks */,
 				55A2A8DF29751DCD00BCC536 /* AppKit.framework in Frameworks */,
 				D847900507A8B01700F7C83A /* MKDSP.framework in Frameworks */,
-				D828FA410780CFD200215EB9 /* MusicKit.framework in Frameworks */,
+				D828FA410780CFD200215EB9 /* MusicKitLegacy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3835,7 +3835,7 @@
 				D847900707A8B06100F7C83A /* SndKit.framework in Frameworks */,
 				55A2A8E029751DCE00BCC536 /* AppKit.framework in Frameworks */,
 				D847900807A8B06100F7C83A /* MKDSP.framework in Frameworks */,
-				D8E8D5F8078465A500AAE755 /* MusicKit.framework in Frameworks */,
+				D8E8D5F8078465A500AAE755 /* MusicKitLegacy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3913,7 +3913,7 @@
 				D80020370763778700508A26 /* MKPerformSndMIDI.framework in Frameworks */,
 				D80020380763778700508A26 /* SndKit.framework in Frameworks */,
 				D80020390763778700508A26 /* MKDSP.framework in Frameworks */,
-				D800203A0763778700508A26 /* MusicKit.framework in Frameworks */,
+				D800203A0763778700508A26 /* MusicKitLegacy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3924,7 +3924,7 @@
 				D800203B0763779300508A26 /* MKPerformSndMIDI.framework in Frameworks */,
 				D800203C0763779300508A26 /* SndKit.framework in Frameworks */,
 				D800203D0763779300508A26 /* MKDSP.framework in Frameworks */,
-				D800203E0763779300508A26 /* MusicKit.framework in Frameworks */,
+				D800203E0763779300508A26 /* MusicKitLegacy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3935,7 +3935,7 @@
 				D80DA57D0764C8A20052DFAF /* MKPerformSndMIDI.framework in Frameworks */,
 				D80DA57E0764C8A20052DFAF /* SndKit.framework in Frameworks */,
 				D80DA57F0764C8A20052DFAF /* MKDSP.framework in Frameworks */,
-				D80DA5800764C8A20052DFAF /* MusicKit.framework in Frameworks */,
+				D80DA5800764C8A20052DFAF /* MusicKitLegacy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3984,7 +3984,7 @@
 				D847900207A8AFD700F7C83A /* MKDSP.framework in Frameworks */,
 				55A2A8DE29751DCC00BCC536 /* AppKit.framework in Frameworks */,
 				D880FD0D0780882F00FD03CC /* SndKit.framework in Frameworks */,
-				D880FCC7077FEAD000FD03CC /* MusicKit.framework in Frameworks */,
+				D880FCC7077FEAD000FD03CC /* MusicKitLegacy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3995,7 +3995,7 @@
 				55A2A8D029750FB300BCC536 /* Foundation.framework in Frameworks */,
 				D80151D90FA64D26002FB882 /* MKDSP.framework in Frameworks */,
 				D80151DA0FA64D26002FB882 /* MKPerformSndMIDI.framework in Frameworks */,
-				D80151DB0FA64D26002FB882 /* MusicKit.framework in Frameworks */,
+				D80151DB0FA64D26002FB882 /* MusicKitLegacy.framework in Frameworks */,
 				D80151DC0FA64D26002FB882 /* SndKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4007,7 +4007,7 @@
 				D8684FED081CB7EB00926058 /* MKPerformSndMIDI.framework in Frameworks */,
 				D8684FEE081CB7EB00926058 /* SndKit.framework in Frameworks */,
 				D8684FEF081CB7EB00926058 /* MKDSP.framework in Frameworks */,
-				D8684FF0081CB7EB00926058 /* MusicKit.framework in Frameworks */,
+				D8684FF0081CB7EB00926058 /* MusicKitLegacy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4018,7 +4018,7 @@
 				D869644A07C1657F00785798 /* MKPerformSndMIDI.framework in Frameworks */,
 				D869644B07C1657F00785798 /* SndKit.framework in Frameworks */,
 				D869644C07C1657F00785798 /* MKDSP.framework in Frameworks */,
-				D869644D07C1657F00785798 /* MusicKit.framework in Frameworks */,
+				D869644D07C1657F00785798 /* MusicKitLegacy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4047,7 +4047,7 @@
 				D8001FE00762D3B100508A26 /* MKPerformSndMIDI.framework in Frameworks */,
 				D8001FE10762D3B100508A26 /* SndKit.framework in Frameworks */,
 				D8001FE20762D3B100508A26 /* MKDSP.framework in Frameworks */,
-				D8001DE30762D2F700508A26 /* MusicKit.framework in Frameworks */,
+				D8001DE30762D2F700508A26 /* MusicKitLegacy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4058,7 +4058,7 @@
 				D8001FEB0762D54100508A26 /* MKPerformSndMIDI.framework in Frameworks */,
 				D8001FEC0762D54100508A26 /* SndKit.framework in Frameworks */,
 				D8001FED0762D54100508A26 /* MKDSP.framework in Frameworks */,
-				D8001FE60762D4A900508A26 /* MusicKit.framework in Frameworks */,
+				D8001FE60762D4A900508A26 /* MusicKitLegacy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4069,7 +4069,7 @@
 				D8001FEE0762D58400508A26 /* MKPerformSndMIDI.framework in Frameworks */,
 				D8001FEF0762D58400508A26 /* SndKit.framework in Frameworks */,
 				D8001FF00762D58400508A26 /* MKDSP.framework in Frameworks */,
-				D8001FF10762D58400508A26 /* MusicKit.framework in Frameworks */,
+				D8001FF10762D58400508A26 /* MusicKitLegacy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4080,7 +4080,7 @@
 				D8002024076376B300508A26 /* MKPerformSndMIDI.framework in Frameworks */,
 				D8002025076376B300508A26 /* SndKit.framework in Frameworks */,
 				D8002026076376B300508A26 /* MKDSP.framework in Frameworks */,
-				D866B62F07447C97007AD17E /* MusicKit.framework in Frameworks */,
+				D866B62F07447C97007AD17E /* MusicKitLegacy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4091,7 +4091,7 @@
 				D8001FF20762D5E900508A26 /* MKPerformSndMIDI.framework in Frameworks */,
 				D8001FF30762D5E900508A26 /* SndKit.framework in Frameworks */,
 				D8001FF40762D5E900508A26 /* MKDSP.framework in Frameworks */,
-				D8001FF50762D5E900508A26 /* MusicKit.framework in Frameworks */,
+				D8001FF50762D5E900508A26 /* MusicKitLegacy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4102,7 +4102,7 @@
 				D8002027076376C100508A26 /* MKPerformSndMIDI.framework in Frameworks */,
 				D8002028076376C100508A26 /* SndKit.framework in Frameworks */,
 				D8002029076376C100508A26 /* MKDSP.framework in Frameworks */,
-				D80020230763768800508A26 /* MusicKit.framework in Frameworks */,
+				D80020230763768800508A26 /* MusicKitLegacy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4113,7 +4113,7 @@
 				D80020330763776C00508A26 /* MKPerformSndMIDI.framework in Frameworks */,
 				D80020340763776C00508A26 /* SndKit.framework in Frameworks */,
 				D80020350763776C00508A26 /* MKDSP.framework in Frameworks */,
-				D80020360763776C00508A26 /* MusicKit.framework in Frameworks */,
+				D80020360763776C00508A26 /* MusicKitLegacy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4134,7 +4134,7 @@
 			files = (
 				D886C3DC0FA64816000AC7C4 /* MKDSP.framework in Frameworks */,
 				D886C3DD0FA64816000AC7C4 /* MKPerformSndMIDI.framework in Frameworks */,
-				D886C3DE0FA64816000AC7C4 /* MusicKit.framework in Frameworks */,
+				D886C3DE0FA64816000AC7C4 /* MusicKitLegacy.framework in Frameworks */,
 				D886C3DF0FA64816000AC7C4 /* SndKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4147,7 +4147,7 @@
 				D847902107A8BDB400F7C83A /* SndKit.framework in Frameworks */,
 				55A2A8DC29751DCA00BCC536 /* AppKit.framework in Frameworks */,
 				D847902207A8BDB400F7C83A /* MKDSP.framework in Frameworks */,
-				D847902307A8BDB400F7C83A /* MusicKit.framework in Frameworks */,
+				D847902307A8BDB400F7C83A /* MusicKitLegacy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4166,7 +4166,7 @@
 				D86B0ACD09F6CAA2003B4720 /* MKPerformSndMIDI.framework in Frameworks */,
 				D86B0ACE09F6CAA2003B4720 /* SndKit.framework in Frameworks */,
 				D86B0ACF09F6CAA2003B4720 /* MKDSP.framework in Frameworks */,
-				D8FD86B609F65F87001E01B4 /* MusicKit.framework in Frameworks */,
+				D8FD86B609F65F87001E01B4 /* MusicKitLegacy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4185,7 +4185,7 @@
 				55A2A8CF29750FB300BCC536 /* Foundation.framework in Frameworks */,
 				D80151DE0FA64D47002FB882 /* MKPerformSndMIDI.framework in Frameworks */,
 				D80151DF0FA64D47002FB882 /* MKUnitGenerators.framework in Frameworks */,
-				D80151E00FA64D47002FB882 /* MusicKit.framework in Frameworks */,
+				D80151E00FA64D47002FB882 /* MusicKitLegacy.framework in Frameworks */,
 				D80151E10FA64D47002FB882 /* SndKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4204,7 +4204,7 @@
 				D8D1B72E08124ED000D9156A /* MKPerformSndMIDI.framework in Frameworks */,
 				D8D1B72F08124ED000D9156A /* SndKit.framework in Frameworks */,
 				D8D1B73008124ED000D9156A /* MKDSP.framework in Frameworks */,
-				D8D1B73108124ED000D9156A /* MusicKit.framework in Frameworks */,
+				D8D1B73108124ED000D9156A /* MusicKitLegacy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4215,7 +4215,7 @@
 				D88032AD0FF17F4E00182A0C /* MKPerformSndMIDI.framework in Frameworks */,
 				D88032AE0FF17F4E00182A0C /* SndKit.framework in Frameworks */,
 				D88032AF0FF17F4E00182A0C /* MKDSP.framework in Frameworks */,
-				D88032B00FF17F4E00182A0C /* MusicKit.framework in Frameworks */,
+				D88032B00FF17F4E00182A0C /* MusicKitLegacy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5945,7 +5945,7 @@
 			isa = PBXGroup;
 			children = (
 				D847900B07A8B7F500F7C83A /* Configured Headers */,
-				D825571405A2163400B0192B /* MusicKit.h */,
+				D825571405A2163400B0192B /* MusicKitLegacy.h */,
 				D825569705A2142800B0192B /* MKPlugin.h */,
 				D825569E05A2142800B0192B /* MKScorefileObject.h */,
 				D825566A05A2142800B0192B /* MKDeviceStatus.h */,
@@ -6453,7 +6453,7 @@
 				D84395E9059FAA450054BEEE /* MKPerformSndMIDI.framework */,
 				D82AC3B905A0F6DA00780F57 /* SndKit.framework */,
 				D88FED7105A10EAF0024FD88 /* MKDSP.framework */,
-				D825564A05A211B400B0192B /* MusicKit.framework */,
+				D825564A05A211B400B0192B /* MusicKitLegacy.framework */,
 				D8C274E105A739E6008ABA16 /* MKSynthPatches.framework */,
 				D85F905207DFE7D4009DC57B /* MKUnitGenerators.framework */,
 				D879C3C005A2B47F005DB251 /* SndViewP.palette */,
@@ -7917,7 +7917,7 @@
 		D87D0BD105A1239E00D23A69 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				556A3D39297343D0007FFAA7 /* MusicKit.modulemap */,
+				556A3D39297343D0007FFAA7 /* MusicKitLegacy.modulemap */,
 				D825564B05A211B400B0192B /* MusicKit-Info.plist */,
 			);
 			name = "Supporting Files";
@@ -8899,7 +8899,7 @@
 				D82556FD05A2142800B0192B /* MKTuningSystem.h in Headers */,
 				D82556FF05A2142800B0192B /* MKUnitGenerator.h in Headers */,
 				D825570105A2142800B0192B /* MKWaveTable.h in Headers */,
-				D825573105A2163400B0192B /* MusicKit.h in Headers */,
+				D825573105A2163400B0192B /* MusicKitLegacy.h in Headers */,
 				D825573205A2163400B0192B /* names.h in Headers */,
 				D825573305A2163400B0192B /* noDVal.h in Headers */,
 				D825573405A2163400B0192B /* NotePrivate.h in Headers */,
@@ -9512,7 +9512,7 @@
 			);
 			name = "MusicKit (Framework)";
 			productName = MusicKit;
-			productReference = D825564A05A211B400B0192B /* MusicKit.framework */;
+			productReference = D825564A05A211B400B0192B /* MusicKitLegacy.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		D828F9C80780CC1E00215EB9 /* PianoRoll (Application) */ = {
@@ -14209,19 +14209,10 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INSTALL_PATH = "$(USER_APPS_DIR)";
 				MARKETING_VERSION = 5.6.0;
-				MODULEMAP_FILE = Frameworks/MusicKit/MusicKit.modulemap;
+				MODULEMAP_FILE = Frameworks/MusicKit/MusicKitLegacy.modulemap;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-					"-seg1addr",
-					983B0000,
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.MusicKit;
-				PRODUCT_NAME = MusicKit;
-				SECTORDER_FLAGS = "";
+				PRODUCT_NAME = MusicKitLegacy;
 				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = "-Wall";
 				ZERO_LINK = YES;
@@ -14251,19 +14242,10 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				MARKETING_VERSION = 5.6.0;
-				MODULEMAP_FILE = Frameworks/MusicKit/MusicKit.modulemap;
+				MODULEMAP_FILE = Frameworks/MusicKit/MusicKitLegacy.modulemap;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-					"-seg1addr",
-					983B0000,
-				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.MusicKit;
-				PRODUCT_NAME = MusicKit;
-				SECTORDER_FLAGS = "";
+				PRODUCT_NAME = MusicKitLegacy;
 				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = "-Wall";
 			};
@@ -14291,20 +14273,11 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				MARKETING_VERSION = 5.6.0;
-				MODULEMAP_FILE = Frameworks/MusicKit/MusicKit.modulemap;
+				MODULEMAP_FILE = Frameworks/MusicKit/MusicKitLegacy.modulemap;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-					"-seg1addr",
-					983B0000,
-				);
 				OTHER_REZFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = org.musickit.MusicKit;
-				PRODUCT_NAME = MusicKit;
-				SECTORDER_FLAGS = "";
+				PRODUCT_NAME = MusicKitLegacy;
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				WARNING_CFLAGS = "-Wall";

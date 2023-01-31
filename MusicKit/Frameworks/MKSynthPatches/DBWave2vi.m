@@ -15,8 +15,8 @@
 
 */
 
-#import <MusicKit/MusicKit.h>
-#import <MusicKit/midi_spec.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
+#import <MusicKitLegacy/midi_spec.h>
 #import <objc/HashTable.h>
 #import <MKUnitGenerators/MKUnitGenerators.h>
 #import "DBWave2vi.h"

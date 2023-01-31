@@ -20,7 +20,7 @@ Modification history:
 
   1/25/93/daj - Created
 */
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import "_unitGeneratorInclude.h"
 #import "_exportedPrivateMusickit.h"
 #import <MKDSP/dsp_memory_map.h>

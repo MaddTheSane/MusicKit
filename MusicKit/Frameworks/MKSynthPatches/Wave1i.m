@@ -61,8 +61,8 @@
 
 /* Written by Mike McNabb and David Jaffe. */
 
-#import <MusicKit/MusicKit.h>
-#import <MusicKit/midi_spec.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
+#import <MusicKitLegacy/midi_spec.h>
 #import <MKUnitGenerators/MKUnitGenerators.h>
 #import "Wave1i.h"
 
@@ -258,7 +258,7 @@ id _MKSPGetWaveNoVibTemplate(_MKSPWAVENums *ugs,id oscClass) {
   /* Sent when a new phrase starts. controllers is a HashTable containing
    * key/value pairs as controller-number/controller-value. Our implementation
    * here ignores all but MIDI_MAINVOLUME and MIDI_MODWHEEL. See
-    * <objc/HashTable.h>, <MusicKit/midi_spec.h>, and <MusicKit/MKSynthPatch.h>. */
+    * <objc/HashTable.h>, <MusicKitLegacy/midi_spec.h>, and <MusicKitLegacy/MKSynthPatch.h>. */
 {
 #   define CONTROLPRESENT(_key) [controllers isKey:(const void *)_key]
 #   define GETVALUE(_key) (int)[controllers valueForKey:(const void *)_key]
@@ -401,7 +401,7 @@ id _MKSPGetWaveNoVibTemplate(_MKSPWAVENums *ugs,id oscClass) {
 	  break;
 	case MK_freq:
 	case MK_keyNum:
-	  freq1 = [aNote frequency]; /* A special method (see <MusicKit/Note.h>) */
+	  freq1 = [aNote frequency]; /* A special method (see <MusicKitLegacy/Note.h>) */
 	  setFreqEnv = YES;
 	  break;
 	case MK_freq0:
@@ -509,7 +509,7 @@ id _MKSPGetWaveNoVibTemplate(_MKSPWAVENums *ugs,id oscClass) {
 -_setDefaults
   /* Set the instance variables to reasonable default values. We do this
    * after each phrase and upon initialization. This insures that a freshly
-    * allocated MKSynthPatch will be in a known state. See <MusicKit/params.h> 
+    * allocated MKSynthPatch will be in a known state. See <MusicKitLegacy/params.h> 
    */
 {
   waveform = nil;                   /* WaveTables */

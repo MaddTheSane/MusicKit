@@ -101,7 +101,7 @@ waveform1 is a synonym for waveform.
 #define __MK_DBWave1vi_H___
 
 #import "Wave1vi.h"
-#import <MusicKit/MKSynthData.h>
+#import <MusicKitLegacy/MKSynthData.h>
 
 @interface DBWave1vi:Wave1vi
 {

@@ -65,7 +65,7 @@ be seen by the MKScorePerformer.
 #define __MK_ScorePerformer_H___
 
 #import <Foundation/NSObject.h>
-#import <MusicKit/MKPerformer.h>
+#import <MusicKitLegacy/MKPerformer.h>
 
 @protocol MKPerformerDelegate;
 
@@ -378,7 +378,7 @@ be seen by the MKScorePerformer.
 @end
 
 /* Describes the protocol that may be implemented by the delegate: */
-#import <MusicKit/MKPerformerDelegate.h>
+#import <MusicKitLegacy/MKPerformerDelegate.h>
 
 @interface MKScorePerformer () <MKPerformer>
 

@@ -13,9 +13,9 @@
    +startPerformance method initiates a tight loop that sends Notes as
    fast as possible until all Notes have been sent, then returns.  */
 
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 // LMS #import <MKSynthPatches/MKSynthPatches.h>
-#import <MusicKit/pitches.h>
+#import <MusicKitLegacy/pitches.h>
 
 /* Returns a random number between 0 and 1. */
 static double ranNum(void)
