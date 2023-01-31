@@ -22,6 +22,24 @@
 				<string>com.next.musickit.score</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>playscore</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>PlayScore</string>
+			<key>CFBundleTypeName</key>
+			<string>playscore</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.next.musickit.playscore</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleHelpBookFolder</key>
 	<string>scoreplayerhelp</string>
