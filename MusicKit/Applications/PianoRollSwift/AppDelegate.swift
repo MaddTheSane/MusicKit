@@ -28,25 +28,20 @@ class PianoAppDelegate: NSObject, NSApplicationDelegate {
 	}
 
     @IBAction func play(_ sender: Any?) {
-        
+        /*
+		 MKScore *aScore;
+		 
+		 aScore = [[self findCurrent] whatScore];
+		 if (aScore) {
+			 [scorePlayer setUpPlay:aScore];
+			 [scorePlayer play:aScore];
+		 }
+
+		 */
     }
-/*
- - (IBAction)play:sender
- {
-     MKScore *aScore;
-     
-     aScore = [[self findCurrent] whatScore];
-     if (aScore) {
-         [scorePlayer setUpPlay:aScore];
-         [scorePlayer play:aScore];
-     }
- }
-
- - (IBAction)stopPlay:sender
- {
-     [scorePlayer stop];
- }
-
- */
+	
+	@IBAction func stopPlay(_ sender: Any?) {
+		
+	}
 }
 

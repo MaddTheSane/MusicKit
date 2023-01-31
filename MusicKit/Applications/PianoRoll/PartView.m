@@ -38,7 +38,7 @@
     for (i = 0; i < [theParts count]; i++) {
         thePart = [theParts objectAtIndex:i];
         for (j = 0; j < [thePart noteCount]; j++) {
-            theNote = [thePart nth:j];
+            theNote = [thePart noteAtIndex:j];
             if ([theNote noteType] == MK_noteDur) {
                 if ([theNote timeTag] + [theNote duration] > scoreDuration)
                     scoreDuration = [theNote timeTag] + [theNote duration];
@@ -56,7 +56,7 @@
     for (i = 0; i < partCount; i++) {
         thePart = [theParts objectAtIndex:i];
         for (j = 0; j < [thePart noteCount]; j++) {
-            theNote = [thePart nth: j];
+            theNote = [thePart noteAtIndex: j];
             switch ([theNote noteType]) {
             case MK_mute:
             case MK_noteOff:
@@ -76,11 +76,11 @@
                 if (MKIsNoDVal([theNote frequency])) /* no frequency - not quite kosher */
                     break;
                 for (k = j+1; k < [thePart noteCount]; k++)
-                    if ([[thePart nth:k] noteTag] == [theNote noteTag])
+                    if ([[thePart noteAtIndex:k] noteTag] == [theNote noteTag])
                         break;
                 if (k < [thePart noteCount]) {
                     newTad = [[TadPole alloc] initNote:theNote
-                                                second:[thePart nth:k]
+                                                second:[thePart noteAtIndex:k]
                                                 partNum:i
                                                 beatscale:beatScale
                                                 freqscale:freqScale];

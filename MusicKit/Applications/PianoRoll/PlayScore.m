@@ -33,7 +33,7 @@ static void handleMKError(NSString *msg)
 
 -(BOOL)isPlaying
 {
-    return (BOOL)(theOrch && [theOrch deviceStatus] == MK_devRunning);
+    return (BOOL)(theOrch && [theOrch deviceStatus] == MKDeviceStatusRunning);
 }
 
 - (void)setUpPlay: (MKScore *) scoreObj
@@ -94,7 +94,7 @@ static void handleMKError(NSString *msg)
 	partInfo = [aPart infoNote];      
 	if ((!partInfo) || ![partInfo isParPresent:MK_synthPatch]) {
 	    if (!NSRunAlertPanel(@"ScorePlayer", 
-                [NSString stringWithFormat: @"%@ info missing.\n", MKGetObjectName(aPart)], @"Continue", @"Cancel", nil)) 
+                                 @"%@ info missing.\n", @"Continue", @"Cancel", nil, MKGetObjectName(aPart)))
 	      return NO;
 	    continue;
 	}		
@@ -103,8 +103,8 @@ static void handleMKError(NSString *msg)
         
 	if (!synthPatchClass) {         /* Class not loaded in program? */ 
 	    if (!NSRunAlertPanel(@"ScorePlayer", 
-                [NSString stringWithFormat: @"This scorefile calls for a synthesis instrument (%@) that isn't available in this application.\n", className],
-                     @"Continue", @"Cancel", nil))
+                                 @"This scorefile calls for a synthesis instrument (%@) that isn't available in this application.\n",
+                                 @"Continue", @"Cancel", nil, className))
 	      return NO;
 	    /* We would prefer to do dynamic loading here. */
 	    continue;
@@ -122,9 +122,8 @@ static void handleMKError(NSString *msg)
         [anIns release]; /* since retain is now held in synthInstruments array! */
 	if (synthPatchCount < voices) {
 	    if (!NSRunAlertPanel(@"ScorePlayer", 
-                [NSString stringWithFormat: @"Could only allocate %d instead of %d %@s for %@\n",
-		    synthPatchCount, voices, className, MKGetObjectName(aPart)], 
-                    @"Continue", @"Cancel", nil))
+                                 @"Could only allocate %d instead of %d %@s for %@\n", 
+                    @"Continue", @"Cancel", nil, synthPatchCount, voices, className, MKGetObjectName(aPart)))
 	      return NO;
 	}
     }

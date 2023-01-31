@@ -18,7 +18,7 @@
 - partView;
 - (NSWindow *) docWindow;
 @property (copy) NSString *name;
-- (NSString *) whatName;
+- (NSString *) whatName NS_DEPRECATED_WITH_REPLACEMENT_MAC("-name", 10.0, 10.8);
 - whatScore;
 @property (readonly, getter=isCurrent) BOOL current;
 
