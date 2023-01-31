@@ -5,26 +5,16 @@
 	<key>CFBundleDocumentTypes</key>
 	<array>
 		<dict>
-			<key>CFBundleTypeExtensions</key>
-			<array>
-				<string>score</string>
-			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.next.musickit.score</string>
 			</array>
-			<key>CFBundleTypeName</key>
-			<string>Scorefile</string>
-			<key>CFBundleTypeRole</key>
-			<string>Viewer</string>
-			<key>LSHandlerRank</key>
-			<string>Default</string>
+			<key>NSDocumentClass</key>
+			<string>$(PRODUCT_MODULE_NAME).Document</string>
 		</dict>
 	</array>
-	<key>CFBundleIconFile</key>
-	<string>PianoRoll</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
 	<key>UTImportedTypeDeclarations</key>
 	<array>
 		<dict>

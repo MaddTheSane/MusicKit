@@ -11,6 +11,8 @@
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>Score</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>score</string>
 			<key>CFBundleTypeRole</key>
@@ -29,6 +31,8 @@
 			</array>
 			<key>CFBundleTypeIconFile</key>
 			<string>PlayScore</string>
+			<key>CFBundleTypeIconSystemGenerated</key>
+			<integer>0</integer>
 			<key>CFBundleTypeName</key>
 			<string>playscore</string>
 			<key>CFBundleTypeRole</key>
@@ -114,16 +118,16 @@
 			<string>public.midi-audio</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
+				<key>com.apple.ostype</key>
+				<array>
+					<string>Midi</string>
+				</array>
 				<key>public.filename-extension</key>
 				<array>
 					<string>midi</string>
 					<string>mid</string>
 					<string>smf</string>
 					<string>kar</string>
-				</array>
-				<key>com.apple.ostype</key>
-				<array>
-					<string>Midi</string>
 				</array>
 				<key>public.mime-type</key>
 				<array>

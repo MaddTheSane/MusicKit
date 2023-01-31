@@ -9,6 +9,10 @@
 			<array>
 				<string>midi</string>
 			</array>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.midi-audio</string>
+			</array>
 			<key>CFBundleTypeName</key>
 			<string>MIDI</string>
 			<key>CFBundleTypeRole</key>
@@ -21,5 +25,38 @@
 	<string></string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>UTImportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.audio</string>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>MIDI</string>
+			<key>UTTypeIdentifier</key>
+			<string>public.midi-audio</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>com.apple.ostype</key>
+				<array>
+					<string>Midi</string>
+				</array>
+				<key>public.filename-extension</key>
+				<array>
+					<string>midi</string>
+					<string>mid</string>
+					<string>smf</string>
+					<string>kar</string>
+				</array>
+				<key>public.mime-type</key>
+				<array>
+					<string>audio/midi</string>
+					<string>audio/x-midi</string>
+				</array>
+			</dict>
+		</dict>
+	</array>
 </dict>
 </plist>

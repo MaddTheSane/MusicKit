@@ -13,7 +13,7 @@
 @implementation PartView
 
 /* used to quickly identify PartView in a NSWindow */
-- (int) tag
+- (NSInteger) tag
 {
     return 1;
 }

@@ -381,8 +381,8 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
 - _noteTagRangeLowP: (int *) lowTag highP: (int *) highTag
 {
   int noteTag,ht,lt;
-  id notes;
-  unsigned numOfParts = [parts count],m,partIndex,j;
+  NSArray<MKNote*>* notes;
+  NSInteger numOfParts = [parts count],m,partIndex,j;
   ht = 0;
   lt = MAXINT;
   for (partIndex = 0; partIndex < numOfParts; partIndex++) {

@@ -15,7 +15,7 @@
 
 - init
 {
-	[super init];
+	self = [super init];
 	if (!scorePlayer) scorePlayer = [[PlayScore alloc] init];
 	docList = [[NSMutableArray alloc] init];
 	return self;

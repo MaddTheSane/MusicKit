@@ -23,7 +23,7 @@
 {
     NSRect aRect;
     
-    [super init];
+    self = [super init];
     if (!bNote)
         aRect = NSMakeRect([aNote timeTag]*bscale, log([aNote frequency])*fscale, 
             [aNote duration]*bscale, 6.0);
@@ -82,14 +82,14 @@
 - (void)unHighlight
 {
     selected = NO;
-    [self display]; 
+    [self setNeedsDisplay:YES];
 }
 
 - (void)doHighlight
 {
     selected = YES;
     [self erase];
-    [self display]; 
+    [self setNeedsDisplay:YES];
 }
 
 - (void)erase

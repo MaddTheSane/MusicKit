@@ -178,6 +178,12 @@
 		556A3D2A29722665007FFAA7 /* Localized.strings in Resources */ = {isa = PBXBuildFile; fileRef = 556A3D2C29722665007FFAA7 /* Localized.strings */; };
 		556A3D2E2972AB82007FFAA7 /* MKPerformSndMIDI.h in Headers */ = {isa = PBXBuildFile; fileRef = 556A3D2D2972AB82007FFAA7 /* MKPerformSndMIDI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		556A3D382972B1B3007FFAA7 /* MKDSP.h in Headers */ = {isa = PBXBuildFile; fileRef = 556A3D372972B1B3007FFAA7 /* MKDSP.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5576EA902988F9B800954041 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5576EA8F2988F9B800954041 /* AppDelegate.swift */; };
+		5576EA922988F9B800954041 /* Document.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5576EA912988F9B800954041 /* Document.swift */; };
+		5576EA952988F9B800954041 /* Document.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5576EA932988F9B800954041 /* Document.xib */; };
+		5576EA972988F9B900954041 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5576EA962988F9B900954041 /* Assets.xcassets */; };
+		5576EA9A2988F9B900954041 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5576EA982988F9B900954041 /* MainMenu.xib */; };
+		5576EAA22988FB9800954041 /* TadPole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5576EAA12988FB9800954041 /* TadPole.swift */; };
 		55A2A8C62973D69C00BCC536 /* SoundLib.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55A2A8C82973D69C00BCC536 /* SoundLib.strings */; };
 		55A2A8CD29750FB200BCC536 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FE39805A101690024FD88 /* Foundation.framework */; };
 		55A2A8CE29750FB200BCC536 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FE39805A101690024FD88 /* Foundation.framework */; };
@@ -1997,6 +2003,15 @@
 		556A3D2D2972AB82007FFAA7 /* MKPerformSndMIDI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKPerformSndMIDI.h; sourceTree = "<group>"; };
 		556A3D372972B1B3007FFAA7 /* MKDSP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKDSP.h; sourceTree = "<group>"; };
 		556A3D39297343D0007FFAA7 /* MusicKit.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = MusicKit.modulemap; sourceTree = "<group>"; };
+		5576EA8D2988F9B700954041 /* PianoRollSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PianoRollSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5576EA8F2988F9B800954041 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5576EA912988F9B800954041 /* Document.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Document.swift; sourceTree = "<group>"; };
+		5576EA942988F9B800954041 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Document.xib; sourceTree = "<group>"; };
+		5576EA962988F9B900954041 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5576EA992988F9B900954041 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		5576EA9B2988F9B900954041 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5576EA9C2988F9B900954041 /* PianoRollSwift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PianoRollSwift.entitlements; sourceTree = "<group>"; };
+		5576EAA12988FB9800954041 /* TadPole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TadPole.swift; sourceTree = "<group>"; };
 		55A2A8C72973D69C00BCC536 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SoundLib.strings; sourceTree = "<group>"; };
 		55A2A8D12975105100BCC536 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		55A2A8D32975124E00BCC536 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
@@ -3676,6 +3691,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5576EA8A2988F9B700954041 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55A2A8EE297610CB00BCC536 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -4249,6 +4271,21 @@
 				428998C410359CF0005FEC40 /* WTC1.score */,
 			);
 			path = Scorefiles;
+			sourceTree = "<group>";
+		};
+		5576EA8E2988F9B800954041 /* PianoRollSwift */ = {
+			isa = PBXGroup;
+			children = (
+				5576EA8F2988F9B800954041 /* AppDelegate.swift */,
+				5576EA912988F9B800954041 /* Document.swift */,
+				5576EA932988F9B800954041 /* Document.xib */,
+				5576EA962988F9B900954041 /* Assets.xcassets */,
+				5576EA982988F9B900954041 /* MainMenu.xib */,
+				5576EA9B2988F9B900954041 /* Info.plist */,
+				5576EA9C2988F9B900954041 /* PianoRollSwift.entitlements */,
+				5576EAA12988FB9800954041 /* TadPole.swift */,
+			);
+			path = PianoRollSwift;
 			sourceTree = "<group>";
 		};
 		55A2A8CC29750B4700BCC536 /* External Frameworks and Libraries */ = {
@@ -6432,6 +6469,7 @@
 				55C31F0A297BBFD900A8F163 /* libogg.a */,
 				55C31F43297BC1BD00A8F163 /* libopus.a */,
 				55C31FE1297BC46500A8F163 /* libflac.a */,
+				5576EA8D2988F9B700954041 /* PianoRollSwift.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -8471,6 +8509,7 @@
 				D880FD2D0780ACF000FD03CC /* EnvelopeEd */,
 				D88C4FF206C7E0DE00D33D99 /* PatchCord */,
 				D880FD290780ACE000FD03CC /* PianoRoll */,
+				5576EA8E2988F9B800954041 /* PianoRollSwift */,
 			);
 			path = Applications;
 			sourceTree = "<group>";
@@ -9232,6 +9271,23 @@
 /* End PBXLegacyTarget section */
 
 /* Begin PBXNativeTarget section */
+		5576EA8C2988F9B700954041 /* PianoRollSwift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5576EA9D2988F9B900954041 /* Build configuration list for PBXNativeTarget "PianoRollSwift" */;
+			buildPhases = (
+				5576EA892988F9B700954041 /* Sources */,
+				5576EA8A2988F9B700954041 /* Frameworks */,
+				5576EA8B2988F9B700954041 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PianoRollSwift;
+			productName = PianoRollSwift;
+			productReference = 5576EA8D2988F9B700954041 /* PianoRollSwift.app */;
+			productType = "com.apple.product-type.application";
+		};
 		55A2A8F0297610CB00BCC536 /* dspwrap */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 55A2A8F5297610CC00BCC536 /* Build configuration list for PBXNativeTarget "dspwrap" */;
@@ -10153,6 +10209,10 @@
 				LastUpgradeCheck = 1420;
 				ORGANIZATIONNAME = "MusicKit Project";
 				TargetAttributes = {
+					5576EA8C2988F9B700954041 = {
+						CreatedOnToolsVersion = 14.2;
+						ProvisioningStyle = Automatic;
+					};
 					55A2A8F0297610CB00BCC536 = {
 						CreatedOnToolsVersion = 14.2;
 						ProvisioningStyle = Automatic;
@@ -10249,6 +10309,7 @@
 				55A2A9262976239600BCC536 /* TwoWavesSwift */,
 				D85E27F306FA0C0100385C32 /* ScorePlayer (Application) */,
 				D828F9C80780CC1E00215EB9 /* PianoRoll (Application) */,
+				5576EA8C2988F9B700954041 /* PianoRollSwift */,
 				D828FA590780D1F400215EB9 /* EnvelopeEd (Application) */,
 				D8CFD2480B5D66DF003AB3C3 /* Metronome */,
 				D8D2A3C60FA90537008DBF68 /* PlayNote */,
@@ -10262,6 +10323,16 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5576EA8B2988F9B700954041 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5576EA972988F9B900954041 /* Assets.xcassets in Resources */,
+				5576EA952988F9B800954041 /* Document.xib in Resources */,
+				5576EA9A2988F9B900954041 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55A2A9252976239600BCC536 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -10639,6 +10710,16 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5576EA892988F9B700954041 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5576EAA22988FB9800954041 /* TadPole.swift in Sources */,
+				5576EA922988F9B800954041 /* Document.swift in Sources */,
+				5576EA902988F9B800954041 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		55A2A8ED297610CB00BCC536 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -11923,6 +12004,22 @@
 			name = Localized.strings;
 			sourceTree = "<group>";
 		};
+		5576EA932988F9B800954041 /* Document.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5576EA942988F9B800954041 /* Base */,
+			);
+			name = Document.xib;
+			sourceTree = "<group>";
+		};
+		5576EA982988F9B900954041 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5576EA992988F9B900954041 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
 		55A2A8C82973D69C00BCC536 /* SoundLib.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -12325,6 +12422,110 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				DEAD_CODE_STRIPPING = YES;
 				PRODUCT_NAME = "Musical Examples";
+			};
+			name = Embedded;
+		};
+		5576EA9E2988F9B900954041 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_ENTITLEMENTS = Applications/PianoRollSwift/PianoRollSwift.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Applications/PianoRollSwift/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 MusicKit Project. All rights reserved.";
+				INFOPLIST_KEY_NSMainNibFile = MainMenu;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.musickit.PianoRollSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		5576EA9F2988F9B900954041 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_ENTITLEMENTS = Applications/PianoRollSwift/PianoRollSwift.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Applications/PianoRollSwift/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 MusicKit Project. All rights reserved.";
+				INFOPLIST_KEY_NSMainNibFile = MainMenu;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.musickit.PianoRollSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		5576EAA02988F9B900954041 /* Embedded */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_ENTITLEMENTS = Applications/PianoRollSwift/PianoRollSwift.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Applications/PianoRollSwift/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2023 MusicKit Project. All rights reserved.";
+				INFOPLIST_KEY_NSMainNibFile = MainMenu;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 13.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.musickit.PianoRollSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Embedded;
 		};
@@ -17811,6 +18012,16 @@
 				4289989210359C39005FEC40 /* Debug */,
 				4289989410359C39005FEC40 /* Release */,
 				4289989510359C39005FEC40 /* Embedded */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5576EA9D2988F9B900954041 /* Build configuration list for PBXNativeTarget "PianoRollSwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5576EA9E2988F9B900954041 /* Debug */,
+				5576EA9F2988F9B900954041 /* Release */,
+				5576EAA02988F9B900954041 /* Embedded */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
