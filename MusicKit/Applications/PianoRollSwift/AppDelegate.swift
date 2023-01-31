@@ -9,7 +9,9 @@
 import Cocoa
 
 @main
-class AppDelegate: NSObject, NSApplicationDelegate {
+class PianoAppDelegate: NSObject, NSApplicationDelegate {
+    @IBOutlet var infoPanel: NSWindow!
+    @IBOutlet var helpPanel: NSPanel!
 
 
 
@@ -25,6 +27,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		return true
 	}
 
+    @IBAction func play(_ sender: Any?) {
+        
+    }
+/*
+ - (IBAction)play:sender
+ {
+     MKScore *aScore;
+     
+     aScore = [[self findCurrent] whatScore];
+     if (aScore) {
+         [scorePlayer setUpPlay:aScore];
+         [scorePlayer play:aScore];
+     }
+ }
 
+ - (IBAction)stopPlay:sender
+ {
+     [scorePlayer stop];
+ }
+
+ */
 }
 

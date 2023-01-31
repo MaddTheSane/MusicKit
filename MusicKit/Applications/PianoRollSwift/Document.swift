@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class Document: NSDocument {
+class PRDocument: NSDocument, NSWindowDelegate {
 
 	override init() {
 	    super.init()

@@ -1,0 +1,6 @@
+framework module SndKit {
+  umbrella header "SndKit.h"
+
+  export *
+  module * { export * }
+}

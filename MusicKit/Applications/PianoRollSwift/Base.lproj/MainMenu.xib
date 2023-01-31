@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11134" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11134"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -10,8 +11,13 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application" customClass="NSApplication"/>
-        <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider="target"/>
+        <customObject id="-3" userLabel="Application"/>
+        <customObject id="Voe-Tx-rLC" customClass="PianoAppDelegate" customModule="PianoRollSwift" customModuleProvider="target">
+            <connections>
+                <outlet property="helpPanel" destination="Ip7-XA-Vsa" id="zZL-FR-8WT"/>
+                <outlet property="infoPanel" destination="sgj-0x-rXI" id="PbH-jS-rDv"/>
+            </connections>
+        </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
         <menu title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
             <items>
@@ -635,6 +641,22 @@
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem title="Tools" id="n3Z-Ze-4d2">
+                    <menu key="submenu" title="Tools" id="FEw-bU-zU3">
+                        <items>
+                            <menuItem title="Play" keyEquivalent="P" id="Io5-w9-wRV">
+                                <connections>
+                                    <action selector="play:" target="-1" id="bgH-gL-sk0"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Stop play" id="0lD-PJ-IVU">
+                                <connections>
+                                    <action selector="stopPlay:" target="-1" id="Fzq-26-6t4"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
                 <menuItem title="Window" id="aUF-d1-5bR">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Window" systemMenu="window" id="Td7-aD-5lo">
@@ -673,6 +695,269 @@
                     </menu>
                 </menuItem>
             </items>
+            <point key="canvasLocation" x="-29" y="264"/>
         </menu>
+        <window title="Info" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="sgj-0x-rXI" userLabel="Info" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="319" y="847" width="354" height="130"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+            <view key="contentView" id="v78-mK-A3Y">
+                <rect key="frame" x="0.0" y="0.0" width="354" height="130"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="euz-oc-g36">
+                        <rect key="frame" x="109" y="52" width="150" height="41"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="left" title="PianoRoll" id="XmX-tR-q1A">
+                            <font key="font" size="36" name="TimesNewRomanPSMT"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wdD-b6-blb">
+                        <rect key="frame" x="286" y="3" width="54" height="12"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="left" title="Version 1.0" id="ULT-Yl-sUr">
+                            <font key="font" size="10" name="TimesNewRomanPSMT"/>
+                            <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e1K-Uu-qeQ">
+                        <rect key="frame" x="271" y="48" width="66" height="58"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" id="5xk-ew-qjm">
+                            <font key="font" size="14" name="TimesNewRomanPSMT"/>
+                            <string key="title">by
+Jonathan
+Knudsen</string>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="ue8-Ru-JSr">
+                        <rect key="frame" x="1" y="21" width="402" height="2"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </box>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GMI-pz-uq0">
+                        <rect key="frame" x="8" y="3" width="207" height="12"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="left" title="Many thanks to David Jaffe for help and advice." id="rWP-Gz-dge">
+                            <font key="font" size="10" name="TimesNewRomanPSMT"/>
+                            <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u2b-6S-n0U">
+                        <rect key="frame" x="107" y="53" width="150" height="41"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="left" title="PianoRoll" id="TzG-TP-pNI">
+                            <font key="font" size="36" name="TimesNewRomanPSMT"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XzP-Lb-Bdo">
+                        <rect key="frame" x="23" y="52" width="56" height="51"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NSApplicationIcon" id="R6N-ue-4QX"/>
+                    </imageView>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oNC-gl-hUI">
+                        <rect key="frame" x="113" y="28" width="211" height="13"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="OpenStep Conversion by Leigh M. Smith" id="PLx-M4-VNI">
+                            <font key="font" size="10" name="Helvetica-Oblique"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="-136" y="110"/>
+        </window>
+        <window title="Help" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="Ip7-XA-Vsa" userLabel="Help" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="503" y="567" width="439" height="439"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+            <view key="contentView" id="A08-9T-vTJ">
+                <rect key="frame" x="0.0" y="0.0" width="439" height="439"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <scrollView fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sz3-lc-Yd7">
+                        <rect key="frame" x="0.0" y="0.0" width="439" height="439"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <clipView key="contentView" drawsBackground="NO" id="FSo-Eh-esm">
+                            <rect key="frame" x="1" y="1" width="437" height="437"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <textView editable="NO" selectable="NO" drawsBackground="NO" importsGraphics="NO" verticallyResizable="YES" baseWritingDirection="leftToRight" usesFontPanel="YES" usesRuler="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="SYI-TJ-M5Z">
+                                    <rect key="frame" x="0.0" y="0.0" width="5" height="6075"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" red="0.33333333999999998" green="0.33333333999999998" blue="0.33333333999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <size key="minSize" width="5" height="437"/>
+                                    <size key="maxSize" width="439" height="10000000"/>
+                                    <attributedString key="textStorage">
+                                        <fragment>
+                                            <string key="content">Piano Roll
+</string>
+                                            <attributes>
+                                                <color key="NSBackgroundColor" red="0.33333333999999998" green="0.33333333999999998" blue="0.33333333999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <font key="NSFont" size="36" name="Times-Roman"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops>
+                                                        <textTab alignment="left" location="48">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="96">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="144">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="192">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="240">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="288">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="336">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="384">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="432">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="480">
+                                                            <options/>
+                                                        </textTab>
+                                                    </tabStops>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment>
+                                            <string key="content">An interactive MusicKit score editor
+</string>
+                                            <attributes>
+                                                <color key="NSBackgroundColor" red="0.33333333999999998" green="0.33333333999999998" blue="0.33333333999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <font key="NSFont" size="14" name="Times-Roman"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops>
+                                                        <textTab alignment="left" location="48">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="96">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="144">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="192">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="240">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="288">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="336">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="384">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="432">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="480">
+                                                            <options/>
+                                                        </textTab>
+                                                    </tabStops>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                        <fragment>
+                                            <string key="content">
+The items in the Document menu all work.  You can open any scorefile and it will appear on the screen as a plot of frequency versus time.  This is basically like real music notation without the lines.
+
+You can move notes around in time and pitch by clicking and dragging on them.
+
+You can save the modified score using the Save or Save As menu items.</string>
+                                            <attributes>
+                                                <color key="NSBackgroundColor" red="0.33333333999999998" green="0.33333333999999998" blue="0.33333333999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                <font key="NSFont" size="14" name="Times-Roman"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                                    <tabStops>
+                                                        <textTab alignment="left" location="26">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="53">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="80">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="106">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="133">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="160">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="186">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="213">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="240">
+                                                            <options/>
+                                                        </textTab>
+                                                        <textTab alignment="left" location="266">
+                                                            <options/>
+                                                        </textTab>
+                                                    </tabStops>
+                                                </paragraphStyle>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                    <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                </textView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.33333333999999998" alpha="1" colorSpace="calibratedWhite"/>
+                        </clipView>
+                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="RM1-6e-uxc">
+                            <rect key="frame" x="-100" y="-100" width="437" height="16"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="UWd-r3-coB">
+                            <rect key="frame" x="422" y="1" width="16" height="437"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
+                    <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="5nV-3N-QEc">
+                        <rect key="frame" x="20" y="372" width="380" height="2"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </box>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="-136" y="111"/>
+        </window>
     </objects>
+    <resources>
+        <image name="NSApplicationIcon" width="32" height="32"/>
+    </resources>
 </document>
