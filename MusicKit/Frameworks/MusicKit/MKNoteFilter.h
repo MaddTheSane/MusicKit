@@ -32,7 +32,7 @@
 
 #import <MusicKitLegacy/MKInstrument.h>
 
-@interface MKNoteFilter : MKInstrument
+@interface MKNoteFilter : MKInstrument <NSCoding, NSCopying>
 {
     NSMutableArray *noteSenders;     /* Collection of MKNoteSenders. */
 }
@@ -75,18 +75,12 @@
 - (id)copyWithZone: (NSZone *) zone;
 
 /*!
-  @return Returns an id.
   @brief Removes and frees the receiver's MKNoteSenders.
-
-  Returns the receiver.
 */
 - (void)releaseNoteSenders;
 
 /*!
-  @return Returns an id.
   @brief Removes all the receiver's MKNoteSenders.
-
-  Returns the receiver.
 */
 - (void)removeNoteSenders;
 
@@ -130,13 +124,6 @@
   
  */
 - (void) dealloc; 
-
-/* 
-  You never send this message directly. Archives noteSender Array. 
- */
-- (void) encodeWithCoder: (NSCoder *) aCoder;
-
-- (id)initWithCoder:(NSCoder *)aDecoder;
 
 @end
 

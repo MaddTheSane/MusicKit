@@ -184,12 +184,11 @@
 		5576EA972988F9B900954041 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5576EA962988F9B900954041 /* Assets.xcassets */; };
 		5576EA9A2988F9B900954041 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5576EA982988F9B900954041 /* MainMenu.xib */; };
 		5576EAA22988FB9800954041 /* TadPole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5576EAA12988FB9800954041 /* TadPole.swift */; };
-		5576EAAB2989042E00954041 /* Score.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5576EAA92989041700954041 /* Score.xib */; };
-		5576EAAD2989044C00954041 /* PianoRoll.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5576EAA72989041700954041 /* PianoRoll.xib */; };
 		5576EAB02989046900954041 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A2A8D929751AB100BCC536 /* Media.xcassets */; };
 		5576EAB229890A7C00954041 /* PartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5576EAB129890A7C00954041 /* PartView.swift */; };
 		5576EAB829890D5E00954041 /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D825564A05A211B400B0192B /* MusicKitLegacy.framework */; };
 		5576EAB929890D5E00954041 /* SndKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D82AC3B905A0F6DA00780F57 /* SndKit.framework */; };
+		5576EABB298A57F200954041 /* PlayScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5576EABA298A57F200954041 /* PlayScore.swift */; };
 		55A2A8C62973D69C00BCC536 /* SoundLib.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55A2A8C82973D69C00BCC536 /* SoundLib.strings */; };
 		55A2A8CD29750FB200BCC536 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FE39805A101690024FD88 /* Foundation.framework */; };
 		55A2A8CE29750FB200BCC536 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D88FE39805A101690024FD88 /* Foundation.framework */; };
@@ -2032,10 +2031,9 @@
 		5576EA9B2988F9B900954041 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5576EA9C2988F9B900954041 /* PianoRollSwift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PianoRollSwift.entitlements; sourceTree = "<group>"; };
 		5576EAA12988FB9800954041 /* TadPole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TadPole.swift; sourceTree = "<group>"; };
-		5576EAA82989041700954041 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/PianoRoll-macosx.xib"; sourceTree = "<group>"; };
-		5576EAAA2989041700954041 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Score.xib; sourceTree = "<group>"; };
 		5576EAB129890A7C00954041 /* PartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartView.swift; sourceTree = "<group>"; };
 		5576EAB329890BDA00954041 /* SndKit.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = SndKit.modulemap; sourceTree = "<group>"; };
+		5576EABA298A57F200954041 /* PlayScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayScore.swift; sourceTree = "<group>"; };
 		55A2A8C72973D69C00BCC536 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SoundLib.strings; sourceTree = "<group>"; };
 		55A2A8D12975105100BCC536 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		55A2A8D32975124E00BCC536 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
@@ -4302,8 +4300,6 @@
 		5576EA8E2988F9B800954041 /* PianoRollSwift */ = {
 			isa = PBXGroup;
 			children = (
-				5576EAA72989041700954041 /* PianoRoll.xib */,
-				5576EAA92989041700954041 /* Score.xib */,
 				5576EA8F2988F9B800954041 /* AppDelegate.swift */,
 				5576EA912988F9B800954041 /* Document.swift */,
 				5576EA932988F9B800954041 /* Document.xib */,
@@ -4312,6 +4308,7 @@
 				5576EA9B2988F9B900954041 /* Info.plist */,
 				5576EA9C2988F9B900954041 /* PianoRollSwift.entitlements */,
 				5576EAB129890A7C00954041 /* PartView.swift */,
+				5576EABA298A57F200954041 /* PlayScore.swift */,
 				5576EAA12988FB9800954041 /* TadPole.swift */,
 			);
 			path = PianoRollSwift;
@@ -10361,11 +10358,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5576EAAD2989044C00954041 /* PianoRoll.xib in Resources */,
 				5576EAB02989046900954041 /* Media.xcassets in Resources */,
 				5576EA972988F9B900954041 /* Assets.xcassets in Resources */,
 				5576EA952988F9B800954041 /* Document.xib in Resources */,
-				5576EAAB2989042E00954041 /* Score.xib in Resources */,
 				5576EA9A2988F9B900954041 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -10753,6 +10748,7 @@
 			files = (
 				5576EAB229890A7C00954041 /* PartView.swift in Sources */,
 				5576EAA22988FB9800954041 /* TadPole.swift in Sources */,
+				5576EABB298A57F200954041 /* PlayScore.swift in Sources */,
 				5576EA922988F9B800954041 /* Document.swift in Sources */,
 				5576EA902988F9B800954041 /* AppDelegate.swift in Sources */,
 			);
@@ -12066,22 +12062,6 @@
 				5576EA992988F9B900954041 /* Base */,
 			);
 			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-		5576EAA72989041700954041 /* PianoRoll.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5576EAA82989041700954041 /* en */,
-			);
-			name = PianoRoll.xib;
-			sourceTree = "<group>";
-		};
-		5576EAA92989041700954041 /* Score.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5576EAAA2989041700954041 /* en */,
-			);
-			name = Score.xib;
 			sourceTree = "<group>";
 		};
 		55A2A8C82973D69C00BCC536 /* SoundLib.strings */ = {

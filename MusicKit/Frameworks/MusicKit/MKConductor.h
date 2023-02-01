@@ -278,6 +278,8 @@ Appendix B. entitled MIDI Time Code in the MusicKit</a>.
 extern "C" {
 #endif
 
+@class MKPerformer;
+
  /* The MKConductor message structure.  All fields are private and
   * shouldn't be altered directly from an application.
   * LMS: should become an object named MKConductorMessage
@@ -596,7 +598,7 @@ extern MKMsgStruct *MKRepositionMsgRequest(MKMsgStruct *aMsgStructPtr, double ne
  */
 extern void MKFinishPerformance(void);
 
-@interface MKConductor: NSObject <NSCoding>
+@interface MKConductor: NSObject <NSCoding, NSCopying>
 {
   /*! Current Time in beats, updated (for all instances) after timed entry fires off. */
     double time;       
@@ -669,20 +671,20 @@ extern void MKFinishPerformance(void);
   if the performance is unclocked, this method doesn't return until
   the performance is over.
 */
-+ startPerformance;
++ (void)startPerformance;
 
 /*!
-  @return Returns an id.
+  @return Returns a BOOL.
   @brief Ends the performance.
 
   All enqueued messages are removed (from
   MKConductor instances' message queues - not from the before- and
   after-performance queues) and the <b>after-performance</b> messages
-  are sent<b>. </b>If<b> finishWhenEmpty</b> is <b>YES</b>, this
+  are sent. If <b>finishWhenEmpty</b> is <b>YES</b>, this
   message is automatically sent when all message queues are exhausted.
-  Returns <b>nil</b>.
+  Returns <b>NO</b>.
 */
-+ finishPerformance; 
++ (BOOL)finishPerformance; 
 
 /*!
   @return Returns an id.
@@ -690,14 +692,14 @@ extern void MKFinishPerformance(void);
 
   The performance is suspended until the
   MKConductor class receives the <b>resumePerformance</b> message. 
-  You can't pause an unclocked performance; returns <b>nil</b> if the
+  You can't pause an unclocked performance; returns <b>NO</b> if the
   performance is unclocked.  Otherwise returns the receiver.  This
   message is ignore and the receiver is returned if a performance
   isn't in progress.  You cannot pause a performance in which a
   MKConductor is synchronizing to MIDI time code.   An attempt to do
   so will be ignored.     
 */
-+ pausePerformance; 
++ (BOOL)pausePerformance;
 
 /*!
   @return Returns an id.
@@ -707,7 +709,7 @@ extern void MKFinishPerformance(void);
   If the performance is unclocked, return <b>nil</b>,
   otherwise returns the receiver.
 */
-+ resumePerformance; 
++ (BOOL)resumePerformance;
 
 /*!
   @return Returns an id.
@@ -788,7 +790,7 @@ extern void MKFinishPerformance(void);
   @return Returns an id.
   @brief Returns the clockConductor.
 */
-+ clockConductor;
++ (MKConductor*)clockConductor;
 
 /*!
   @return Returns a BOOL.
@@ -797,6 +799,7 @@ extern void MKFinishPerformance(void);
   By default, a performance is clocked.
 */
 + (BOOL) isClocked; 
+@property (class, readonly, getter=isClocked) BOOL clocked;
 
 /*!
   @return Returns a BOOL.
@@ -805,6 +808,7 @@ extern void MKFinishPerformance(void);
   otherwise returns <b>NO.</b>
 */
 + (BOOL) isEmpty;
+@property (class, readonly, getter=isEmpty) BOOL empty;
 
 /*!
   @return Returns a BOOL.
@@ -820,7 +824,7 @@ extern void MKFinishPerformance(void);
 */
 - (BOOL) isPaused;
 
-/*! Returns YES if the receiver is paused. */
+/*! Is <b>YES</b> if the receiver is paused. */
 @property (readonly, nonatomic, getter=isPaused) BOOL paused;
 
 /*!
@@ -858,7 +862,8 @@ extern void MKFinishPerformance(void);
   @return Returns a double.
   @brief Returns the receiver's performance time offset in seconds.
 */
-- (double) timeOffset; 
+- (NSTimeInterval) timeOffset;
+@property (readonly) NSTimeInterval timeOffset;
 
 /*!
   @brief Returns <b>YES</b> if the receiver is currently sending a message
@@ -866,6 +871,7 @@ extern void MKFinishPerformance(void);
  @return Returns a BOOL.
 */
 - (BOOL) isCurrentConductor;
+@property (readonly, getter=isCurrentConductor) BOOL currentConductor;
 
 /*!
  @return Returns a double.
@@ -898,7 +904,7 @@ extern void MKFinishPerformance(void);
   should not be freed or altered.
  @return Returns an id.
 */
-- activePerformers;
+- (NSArray<MKPerformer*>*)activePerformers;
 
 /*@}*/
 
@@ -917,9 +923,9 @@ extern void MKFinishPerformance(void);
   If <b>NO</b>, messages are sent as quickly as possible.  In an
   unclocked performance, a subsequent startPerformance message doesn't
   return until the performance is over, thus effectively disabling the
-  user interface.  Does nothing and returns <b><i>nil</i></b><i></i>
+  user interface.  Does nothing and returns <b><i>nil</i></b>
   if a performance is in progress, otherwise returns the
-  receiver.<i></i>   Unclocked performances involving MIDI time code
+  receiver.   Unclocked performances involving MIDI time code
   conductors are not supported.   
 */
 + setClocked: (BOOL) yesOrNo; 
@@ -950,6 +956,8 @@ extern void MKFinishPerformance(void);
   @see <b>MKSetDeltaT()</b>
 */
 + (void) setDeltaT: (double) newDeltaT;
+
+@property (class) double deltaT;
 
 /*!
   @brief Sets the receiver's delegate object to <i>delegate</i> and returns

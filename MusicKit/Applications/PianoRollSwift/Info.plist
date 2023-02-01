@@ -10,9 +10,10 @@
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>com.next.musickit.score</string>
+				<string>com.next.musickit.playscore</string>
 			</array>
 			<key>NSDocumentClass</key>
-			<string>$(PRODUCT_MODULE_NAME).Document</string>
+			<string>$(PRODUCT_MODULE_NAME).PRDocument</string>
 		</dict>
 	</array>
 	<key>UTImportedTypeDeclarations</key>

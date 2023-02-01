@@ -312,6 +312,8 @@ realize MKNotes on an external MIDI synthesizer.
 */
 - (MKNoteReceiver *) noteReceiver; 
 
+@property (readonly, assign) MKNoteReceiver *noteReceiver;
+
 /*!
   @brief Immediately stops playing any sounding notes.
 

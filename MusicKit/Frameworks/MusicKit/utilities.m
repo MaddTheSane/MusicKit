@@ -833,16 +833,14 @@ void MKLoadAllBundlesOneOff(void)
 BOOL MKLoadAllBundles(void)
 {
     NSArray *libraryDirs = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSAllDomainsMask, YES);
-    NSUInteger i, j;
     id newClass;
     BOOL loadedSome = FALSE;
 
-    for(i = 0; i < [libraryDirs count]; i++) {
-        NSString *path = [[libraryDirs objectAtIndex: i] stringByAppendingPathComponent: MK_BUNDLE_DIR];
+    for(NSString *lib in libraryDirs) {
+        NSString *path = [lib stringByAppendingPathComponent: MK_BUNDLE_DIR];
         NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath: path error: NULL];
 
-        for (j = 0 ; j < [files count] ; j++) {
-            NSString *tryFile = [files objectAtIndex: j];
+        for (NSString *tryFile in files) {
             if ([[tryFile pathExtension] isEqualToString: MK_BUNDLE_EXTENSION]) {
                 tryFile = [path stringByAppendingPathComponent: tryFile];
                 if ([[NSFileManager defaultManager] isReadableFileAtPath: tryFile]) {

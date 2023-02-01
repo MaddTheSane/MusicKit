@@ -111,6 +111,9 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (nullable MKScore*)readScorefile: (NSString *) fileName;
 
+- (nullable MKScore*)readScoreAtURL: (NSURL *) fileURL
+			      error: (NSError **) error;
+
 /*!
   @param  stream is a NSData instance.
   @return  Returns the receiver or <b>nil</b> if the file couldn't be read.
@@ -183,6 +186,9 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (BOOL)writeScorefile: (NSString *) aFileName; 
 
+- (BOOL)writeScoreToURL: (NSURL *) aFileName
+		  error: (NSError**) error;
+
 /*!
   @param  aStream is a NSMutableData instance.
   @return Returns an id.
@@ -211,6 +217,12 @@ NS_ASSUME_NONNULL_BEGIN
            lastTimeTag: (double) lastTimeTag
              timeShift: (double) timeShift;
 
+- (BOOL)writeScoreToURL: (NSURL *) aFileName
+	   firstTimeTag: (double) firstTimeTag
+	    lastTimeTag: (double) lastTimeTag
+	      timeShift: (NSTimeInterval) timeShift
+		  error: (NSError**) error;
+
 /*!
   @param  aStream is a NSMutableData instance.
   @param  firstTimeTag is a double.
@@ -238,6 +250,9 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (BOOL)writeOptimizedScorefile: (NSString *) aFileName;
 
+- (BOOL)writeOptimizedScoreToURL: (NSURL *) aFileName
+			   error: (NSError**) error;
+
 /*!
   @param  aStream is a NSMutableData instance.
   @return Returns the receiver or <b>nil</b> if the file couldn't be written.
@@ -263,6 +278,12 @@ NS_ASSUME_NONNULL_BEGIN
              firstTimeTag: (double) firstTimeTag 
               lastTimeTag: (double) lastTimeTag
                 timeShift: (double) timeShift;
+
+- (BOOL)writeOptimizedScoreToURL: (NSURL *) aFileName
+		    firstTimeTag: (double) firstTimeTag
+		     lastTimeTag: (double) lastTimeTag
+		       timeShift: (NSTimeInterval) timeShift
+			   error: (NSError**) error;
 
 /*!
   @param  aStream is a NSMutableData instance.
@@ -313,6 +334,12 @@ NS_ASSUME_NONNULL_BEGIN
    lastTimeTag: (double) lastTimeTag
      timeShift: (double) timeShift;
 
+- (BOOL)readMidiAtURL: (NSURL *) fileName
+	 firstTimeTag: (double) firstTimeTag
+	  lastTimeTag: (double) lastTimeTag
+	    timeShift: (double) timeShift
+		error: (NSError **) error;
+
 /*!
   @param  aStream is a NSMutableData instance.
   @param  firstTimeTag is a double.
@@ -341,6 +368,9 @@ NS_ASSUME_NONNULL_BEGIN
   @see -<b>readMidifileStream</b>: for a discussion of MIDI to MKNote conversion.
 */
 - (BOOL)readMidifile: (NSString *) fileName;
+
+- (BOOL)readMidiAtURL: (NSURL *) fileName
+		error: (NSError **) error;
 
 /*!
   @param  aStream is a NSMutableData instance.
@@ -402,6 +432,12 @@ NS_ASSUME_NONNULL_BEGIN
     lastTimeTag: (double) lastTimeTag
       timeShift: (double) timeShift;
 
+- (BOOL)writeMidiToURL: (NSURL *) aFileName
+	  firstTimeTag: (double) firstTimeTag
+	   lastTimeTag: (double) lastTimeTag
+	     timeShift: (double) timeShift
+		 error: (NSError**) error;
+
 /*!
   @param  aStream is a NSMutableData instance.
   @param  firstTimeTag is a double.
@@ -443,6 +479,9 @@ NS_ASSUME_NONNULL_BEGIN
   these are written to the midifile.  
 */
 - (BOOL)writeMidifile: (NSString *) aFileName;
+
+- (BOOL)writeMidiToURL: (NSURL *) aFileName
+		 error: (NSError**) error;
 
 /*!
   @return Returns an unsigned.
@@ -603,7 +642,7 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (MKNote *) infoNote;
 
-@property (copy) MKNote *infoNote;
+@property (nullable, copy) MKNote *infoNote;
 
 /*!
   @brief Sets the stream used by ScoreFile <b>print</b> statements to <b>aStream</b>.  

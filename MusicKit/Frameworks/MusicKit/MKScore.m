@@ -317,9 +317,18 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
     stream = _MKOpenFileStreamForReading(fileURL.path, _MK_BINARYSCOREFILEEXT, NO);
     if (!stream)
 	stream = _MKOpenFileStreamForReading(fileURL.path, _MK_SCOREFILEEXT, YES);
-    if (!stream)
+    if (!stream) {
+	if (error && *error == nil) {
+	    *error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadUnknownError userInfo:@{NSURLErrorKey: fileURL}];
+	}
 	return nil;
+    }
     rtnVal = readScorefile(self, stream, firstTimeTag, lastTimeTag, timeShift, fileURL.path);
+    if (rtnVal == nil) {
+	if (error && *error == nil) {
+	    *error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadUnknownError userInfo:@{NSURLErrorKey: fileURL}];
+	}
+    }
     return rtnVal;
 
 }
@@ -368,6 +377,17 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
   return [self readScorefile: fileName firstTimeTag: 0.0
                  lastTimeTag: MK_ENDOFTIME timeShift: 0.0];
 }
+
+- (nullable MKScore*)readScoreAtURL: (NSURL *) fileURL
+			      error: (NSError **) error
+{
+    return [self readScoreAtURL: fileURL
+		   firstTimeTag: 0.0
+		    lastTimeTag: MK_ENDOFTIME
+		      timeShift: 0.0
+			  error: error];
+}
+
 
 - readScorefileStream: (NSData *) stream
 {
@@ -562,6 +582,20 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
                        binary: NO];
 }
 
+- (BOOL)writeScoreToURL: (NSURL *) aFileName
+	   firstTimeTag: (double) firstTimeTag
+	    lastTimeTag: (double) lastTimeTag
+	      timeShift: (NSTimeInterval) timeShift
+		  error: (NSError**) error
+{
+    return [self writeScoreToURL:aFileName
+		    firstTimeTag:firstTimeTag
+		     lastTimeTag:lastTimeTag
+		       timeShift:timeShift
+			  binary:NO
+			   error:error];
+}
+
 - (BOOL)writeScorefileStream: (NSMutableData *) aStream
                 firstTimeTag: (double) firstTimeTag
                  lastTimeTag: (double) lastTimeTag
@@ -588,6 +622,20 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
                     lastTimeTag: lastTimeTag
                       timeShift: timeShift
                          binary: YES];
+}
+
+- (BOOL)writeOptimizedScoreToURL: (NSURL *) aFileName
+		    firstTimeTag: (double) firstTimeTag
+		     lastTimeTag: (double) lastTimeTag
+		       timeShift: (NSTimeInterval) timeShift
+			   error: (NSError**) error
+{
+    return [self writeScoreToURL:aFileName
+		    firstTimeTag:firstTimeTag
+		     lastTimeTag:lastTimeTag
+		       timeShift:timeShift
+			  binary:YES
+			   error:error];
 }
 
 - (BOOL)writeOptimizedScorefileStream: (NSMutableData *) aStream
@@ -636,6 +684,17 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
                       timeShift: 0.0];
 }
 
+- (BOOL)writeScoreToURL: (NSURL *) aFileName
+		  error: (NSError**) error
+{
+    return [self writeScoreToURL: aFileName
+		    firstTimeTag: 0.0
+		     lastTimeTag: MK_ENDOFTIME
+		       timeShift: 0.0
+			   error: error];
+
+}
+
 - (BOOL)writeScorefileStream: (NSMutableData *) aStream
 {
     return [self writeScorefileStream: aStream
@@ -672,6 +731,16 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
                             firstTimeTag: 0.0
                              lastTimeTag: MK_ENDOFTIME
                                timeShift: 0.0];
+}
+
+- (BOOL)writeOptimizedScoreToURL: (NSURL *) aFileName
+			   error: (NSError**) error
+{
+    return [self writeOptimizedScoreToURL: aFileName
+			     firstTimeTag: 0.0
+			      lastTimeTag: MK_ENDOFTIME
+				timeShift: 0.0
+				    error: error];
 }
 
 - (BOOL)writeOptimizedScorefileStream: (NSMutableData *) aStream
@@ -1028,6 +1097,39 @@ static void writeNoteToMidifile(_MKMidiOutStruct *p, MKMIDIFileOut *fileStructP,
     }
 }
 
+- (BOOL)writeMidiToURL: (NSURL *) aFileName
+	  firstTimeTag: (double) firstTimeTag
+	   lastTimeTag: (double) lastTimeTag
+	     timeShift: (double) timeShift
+		 error: (NSError**) error
+{
+    NSMutableData *stream = [[NSMutableData alloc] initWithCapacity:0];
+    BOOL success;
+    
+    success = [self writeMidifileStream: stream
+		 firstTimeTag: firstTimeTag
+		  lastTimeTag: lastTimeTag
+		    timeShift: timeShift];
+    if (!success) {
+	MKErrorCode(MK_musicKitErr, aFileName);
+	if (error) {
+	    *error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteUnknownError userInfo:@{NSURLErrorKey: aFileName}];
+	}
+	return NO;
+    }
+    success = [stream writeToURL:aFileName options:0 error:error];
+    [stream release];
+    
+    if (!success) {
+	MKErrorCode(MK_cantCloseFileErr, aFileName);
+	return NO;
+    }
+    else {
+	return YES;
+    }
+
+}
+
 /* Midi file writing "convenience methods" --------------------------- */
 
 - (BOOL)writeMidifileStream: (NSMutableData *) aStream
@@ -1064,6 +1166,16 @@ static void writeNoteToMidifile(_MKMidiOutStruct *p, MKMIDIFileOut *fileStructP,
 		   lastTimeTag: MK_ENDOFTIME];
 }
 
+- (BOOL)writeMidiToURL: (NSURL *) aFileName
+		 error: (NSError**) error
+{
+    return [self writeMidiToURL: aFileName
+		   firstTimeTag: 0.0
+		    lastTimeTag: MK_ENDOFTIME
+		      timeShift: 0.0
+			  error: error];
+}
+
 
 /* Reading MIDI files ---------------------------------------------- */
 
@@ -1082,6 +1194,34 @@ static void writeNoteToMidifile(_MKMidiOutStruct *p, MKMIDIFileOut *fileStructP,
                          firstTimeTag: firstTimeTag
                           lastTimeTag: lastTimeTag
                             timeShift: timeShift];
+    return rtnVal;
+}
+
+- (BOOL)readMidiAtURL: (NSURL *) fileName
+	 firstTimeTag: (double) firstTimeTag
+	  lastTimeTag: (double) lastTimeTag
+	    timeShift: (double) timeShift
+		error: (NSError **) error
+{
+    BOOL rtnVal;
+    id stream; /*sb: could be NSMutableData or NSData */
+
+    stream = [NSData dataWithContentsOfURL: fileName
+				   options: NSDataReadingMappedIfSafe
+				     error: error];
+    if (stream == nil)
+	return NO;
+    rtnVal = [self readMidifileStream: stream
+			 firstTimeTag: firstTimeTag
+			  lastTimeTag: lastTimeTag
+			    timeShift: timeShift];
+    if (!rtnVal) {
+	if (error) {
+	    *error = [NSError errorWithDomain: NSCocoaErrorDomain
+					 code: NSFileReadUnknownError
+				     userInfo: @{NSURLErrorKey: fileName}];
+	}
+    }
     return rtnVal;
 }
 
@@ -1382,6 +1522,12 @@ outOfLoop:
 {
   return [self readMidifile:fileName firstTimeTag:0.0
                 lastTimeTag:MK_ENDOFTIME timeShift:0.0];
+}
+
+- (BOOL)readMidiAtURL: (NSURL *) fileName error: (NSError **) error
+{
+    
+    return NO;
 }
 
 -(BOOL)readMidifileStream:(NSMutableData *)aStream

@@ -43,5 +43,12 @@ class PianoAppDelegate: NSObject, NSApplicationDelegate {
 	@IBAction func stopPlay(_ sender: Any?) {
 		
 	}
+	
+	@IBAction func newDocument(_ sender: Any?) {
+		let newDoc = PRDocument()
+		newDoc.makeWindowControllers()
+		newDoc.showWindows()
+		NSDocumentController.shared.addDocument(newDoc)
+	}
 }
 

@@ -11,7 +11,7 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="PianoAppDelegate" customModule="PianoRollSwift" customModuleProvider="target">
             <connections>
                 <outlet property="helpPanel" destination="Ip7-XA-Vsa" id="zZL-FR-8WT"/>

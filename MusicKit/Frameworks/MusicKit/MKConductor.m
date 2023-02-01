@@ -772,7 +772,7 @@ static void initializeConductorList()
     curRunningCond = nil;
 }
 
-+ startPerformance
++ (void)startPerformance
   /* TYPE: Managing; Starts a performance.
    * Starts a Music Kit performance.  All Conductor objects
    * begin at the same time.
@@ -783,7 +783,7 @@ static void initializeConductorList()
    */
 {
     if (inPerformance)
-        return self;
+        return;
 
     _MKSetConductedPerformance(YES, self);
     inPerformance = YES;   /* Set this before doing initializeConductorList() so that repositionCond() works right. */
@@ -798,10 +798,10 @@ static void initializeConductorList()
     if (!isClocked && !separateThread) {
 	timedEntry = NOTIMEDENTRY;
 	unclockedLoop();
-	return self;
+	return;
     }
     if (checkForEndOfTime()) {
-	return self;
+	return;
     }
     if (!separateThread) {
         setPriority();
@@ -817,16 +817,11 @@ static void initializeConductorList()
     startTime = [[NSDate date] retain];
     if (MKGetDeltaTMode() == MK_DELTAT_SCHEDULER_ADVANCE) {
         [startTime autorelease];
-#if !defined(MAC_OS_X_VERSION_10_6) || (MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_6)
-        startTime = [[startTime addTimeInterval: (0 - MKGetDeltaT())] retain]; // MacOS 10.5 Cocoa
-#else
 	startTime = [[startTime dateByAddingTimeInterval: (0 - MKGetDeltaT())] retain]; // MacOS 10.6 Cocoa
-#endif
     }
     if (separateThread) {
 	launchThread();
     }
-    return self;
 }
 
 + (MKConductor *) defaultConductor
@@ -856,7 +851,7 @@ static void evalAfterQueues()
    afterPerformanceQueue = evalSpecialQueue(afterPerformanceQueue, &afterPerformanceQueueEnd);
 }
 
-+ finishPerformance
++ (BOOL)finishPerformance
   /* TYPE: Modifying; Ends the performance.
    * Stops the performance.  All enqueued messages are  
    * flushed and the afterPerformance message is sent
@@ -876,7 +871,7 @@ static void evalAfterQueues()
         NSLog(@"finishPerformance,%s separate threaded,%s in performance.\n", separateThread ? "" : " not", inPerformance ? "" : " not");
     if (!inPerformance) {
 	evalAfterQueues(); /* This is needed for MKFinishPerformance() */
-	return nil;
+	return NO;
     }
     performanceIsPaused = NO;
     _MKSetConductedPerformance(NO, self);
@@ -904,10 +899,10 @@ static void evalAfterQueues()
     [allConductors makeObjectsPerformSelector: @selector(_initialize)];
     evalAfterQueues();
 
-    return self;
+    return YES;
 }
 
-+ pausePerformance
++ (BOOL)pausePerformance
   /* TYPE: Controlling; Pauses a performance.
    * Pauses all Conductors.  The performance is resumed when
    * the factory receives the resume message.
@@ -921,9 +916,9 @@ static void evalAfterQueues()
    */
 {	
    if ((!inPerformance)  || performanceIsPaused)
-       return self;
+       return YES;
    if (!isClocked || weGotMTC())
-       return nil;
+       return NO;
    [pauseTime autorelease];
    pauseTime = [[NSDate date] retain];
    if (separateThread)
@@ -934,7 +929,7 @@ static void evalAfterQueues()
    }
    timedEntry = NOTIMEDENTRY;
    performanceIsPaused = YES;
-   return self;
+   return YES;
 }
 
 + (BOOL) isPaused
@@ -945,7 +940,7 @@ static void evalAfterQueues()
     return performanceIsPaused;
 }
 
-+ resumePerformance
++ (BOOL)resumePerformance
   /* TYPE: Controlling; Unpauses a paused performance.
    * Resumes a paused performance.
    * When the performance resumes, the notion of the
@@ -957,21 +952,17 @@ static void evalAfterQueues()
    */
 {	
     if ((!inPerformance) || (!performanceIsPaused))
-	return self;
+	return YES;
     if (!isClocked)
-	return nil;
+	return NO;
     performanceIsPaused = NO;
     [startTime autorelease];
-#if !defined(MAC_OS_X_VERSION_10_6) || (MAC_OS_X_VERSION_MAX_ALLOWED < MAC_OS_X_VERSION_10_6)
-    startTime = [[startTime addTimeInterval: [[NSDate date] timeIntervalSinceDate: pauseTime]] retain]; // MacOS 10.5 Cocoa
-#else
     startTime = [[startTime dateByAddingTimeInterval: [[NSDate date] timeIntervalSinceDate: pauseTime]] retain]; // MacOS 10.6 Cocoa
-#endif
     /* We use cur-start to get the time since the start of the performance
        with all pauses removed. Thus by increasing startTime by the
        paused time, we remove the effect of the pause. */
     adjustTimedEntry(condQueue->nextMsgTime); 
-    return self;
+    return YES;
 }
 
 + currentConductor
@@ -1813,16 +1804,16 @@ static MKMsgStruct *evalSpecialQueue(MKMsgStruct *queue, MKMsgStruct **queueEnd)
         if (delegate)
             [clockCond setDelegate:delegate];
         [super release];
-        return clockCond;
+        return [clockCond retain];
     } else if (inPerformance) {
         [super release];
-        return defaultCond;
+        return [defaultCond retain];
     } else if (archivingFlags == DEFAULTCOND) {
         [defaultCond setDelegate:delegate];
         [defaultCond setBeatSize:beatSize];
         [defaultCond setTimeOffset:timeOffset];
         [super release];
-        return defaultCond;
+        return [defaultCond retain];
     } 
     [allConductors addObject: self];
     inverseBeatSize = 1.0 / beatSize;

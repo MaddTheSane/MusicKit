@@ -268,6 +268,8 @@ typedef NS_ENUM(int, MKPerformerStatus) {
 */
 - (MKNoteSender *) noteSender; 
 
+@property (readonly, assign) MKNoteSender *noteSender;
+
 /*!
   @param  aNoteSender is an MKNoteSender instance.
   @return Returns an id.

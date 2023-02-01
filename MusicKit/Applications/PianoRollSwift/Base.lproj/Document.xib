@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="PRDocument" customModule="PianoRollSwift" customModuleProvider="target">
             <connections>
+                <outlet property="partView" destination="MEf-iL-d16" id="Whv-E2-dBY"/>
                 <outlet property="window" destination="xOd-HO-29H" id="JIz-fz-R2o"/>
             </connections>
         </customObject>
@@ -18,7 +19,7 @@
             <rect key="contentRect" x="133" y="235" width="507" height="413"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
             <value key="minSize" type="size" width="94" height="86"/>
-            <view key="contentView" misplaced="YES" id="gIp-Ho-8D9">
+            <view key="contentView" id="gIp-Ho-8D9">
                 <rect key="frame" x="0.0" y="0.0" width="507" height="413"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>

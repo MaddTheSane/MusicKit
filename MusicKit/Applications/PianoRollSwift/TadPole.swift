@@ -16,6 +16,11 @@ class TadPole: NSView {
 	var partNumber: Int
 	private(set) var isSelected = false
 	private var needsErased = false
+	var isMoving = false {
+		didSet {
+			needsDisplay = true
+		}
+	}
 
 	init(note: MKNote, second: MKNote?, partNumber: Int, beatScale: Double, frequencyScale freqScale: Double) {
 		self.partNumber = partNumber
@@ -31,6 +36,11 @@ class TadPole: NSView {
 		tadNote = note
 		tadNoteB = second
 
+	}
+	
+	func erase() {
+		needsErased = true
+		needsDisplay = true
 	}
 	
 	required init?(coder: NSCoder) {
@@ -71,7 +81,7 @@ class TadPole: NSView {
 		tadPolePath.line(to: maxPoint)
 		if (minPoint.x == 2) {
 			tadPolePath.lineWidth = 3
-			NSColor.systemPurple.set();  // TODO: needs to be some color based on partNum
+//			NSColor.systemPurple.set();  // TODO: needs to be some color based on partNum
 			minPoint.y = 0.0;
 			tadPolePath.move(to: minPoint)
 			maxPoint.x = 2.0;
@@ -86,7 +96,7 @@ class TadPole: NSView {
 		needsDisplay = true
 	}
 	
-	func hilight() {
+	func highlight() {
 		isSelected = true
 		needsErased = true
 		needsDisplay = true
@@ -95,5 +105,9 @@ class TadPole: NSView {
 	func setFromPosWith(beatScale bScale: Double, frequencyScale fScale: Double) {
 		tadNote?.setTimeTag(frame.origin.x/bScale)
 		tadNote?.setPar(Int32(MK_freq.rawValue), to: exp(frame.origin.y/fScale))
+	}
+	
+	override func mouseDown(with event: NSEvent) {
+		(superview as? PartView)?.gotClicked(by: self, with: event)
 	}
 }

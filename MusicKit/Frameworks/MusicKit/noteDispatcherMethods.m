@@ -77,7 +77,7 @@
      which MKNoteSender you get. */
 {
     if ([noteSenders count] == 0)
-        [self addNoteSender: [[MKNoteSender alloc] init]];
+        [self addNoteSender: [[[MKNoteSender alloc] init] autorelease]];
     return [noteSenders objectAtIndex: 0];
 }
 

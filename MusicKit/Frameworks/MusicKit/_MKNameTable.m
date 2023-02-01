@@ -187,7 +187,7 @@ NSString * _MKNameTableGetObjectName(_MKNameTable *table,id theObject,id *theOwn
   
   if (firstFoundName) {
     *theOwner = nil; // never used anyway
-    return [[firstFoundName retain] autorelease];
+    return [[firstFoundName copy] autorelease];
   }
   else
     return nil;
