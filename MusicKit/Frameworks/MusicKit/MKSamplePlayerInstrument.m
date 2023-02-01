@@ -212,7 +212,7 @@
 }
 
 // Stop any playing notes.
-- allNotesOff
+- (void)allNotesOff
 {
     MKNote *note;
     NSEnumerator *noteEnumerator;
@@ -222,7 +222,6 @@
 	[self stopSampleNote: note inFuture: 0.0];
     }
     // [ stopRecording];
-    return self;
 }
 
 // first warning of the impending stream of notes with sounds to be loaded from disk.
@@ -336,9 +335,9 @@
 }
 
 // Early out, no different from just stopping all playing samples.
-- abort
+- (void)abort
 {
-    return [self allNotesOff];
+    [self allNotesOff];
 }
 
 #if 0 // antiquated

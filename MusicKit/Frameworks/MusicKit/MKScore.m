@@ -1394,13 +1394,17 @@ outOfLoop:
 
 /* Number of notes and parts ------------------------------------------ */
 
-- (NSInteger) partCount
+- (NSInteger) countOfParts
 {
     return [parts count];
 }
 
-- (NSInteger) noteCount
-    /* Returns the total number of notes in all the contained MKParts. */
+- (NSInteger) partCount
+{
+    return self.countOfParts;
+}
+
+- (NSInteger)countOfNotes
 {
     NSUInteger numOfParts = [parts count], partIndex;
     NSUInteger numNotes = 0;
@@ -1408,6 +1412,12 @@ outOfLoop:
 	numNotes += [[parts objectAtIndex:partIndex] noteCount];
     
     return numNotes;
+}
+
+- (NSInteger) noteCount
+    /* Returns the total number of notes in all the contained MKParts. */
+{
+    return self.countOfNotes;
 }
 
 /* Modifying the set of MKParts. ------------------------------- */
@@ -1446,16 +1456,15 @@ outOfLoop:
   return self;
 }
 
-- removePart: (MKPart *) aPart
+- (void) removePart: (MKPart *) aPart
   /* Removes aPart from self and returns aPart.
   If aPart is not a member of this score, returns nil. */
 {
   [aPart _unsetScore];
   [parts removeObjectIdenticalTo: aPart];
-  return self; //sb: assume self is correct. Arrays return void...
 }
 
-- shiftTime: (double) shift
+- (void) shiftTime: (double) shift
     /* TYPE: Editing
     * Shift is added to the timeTags of all notes in the MKPart.
     */
@@ -1464,10 +1473,9 @@ outOfLoop:
     
     for (partIndex = 0; partIndex < numOfParts; partIndex++)
 	[[parts objectAtIndex: partIndex] shiftTime: shift];
-    return self;
 }
 
-- scaleTime: (double) scale
+- (void) scaleTime: (double) scale
     /* TYPE: Editing
     * Scale factor is applied to the timeTags and durations of all notes in the MKPart.
     */
@@ -1476,7 +1484,6 @@ outOfLoop:
     
     for (partIndex = 0; partIndex < numOfParts; partIndex++)
 	[[parts objectAtIndex:partIndex] scaleTime: scale];
-    return self;
 }
 
 // Returns the time of the first note in the score.
@@ -1521,7 +1528,7 @@ outOfLoop:
   return nil;
 }
 
-- (MKPart *) partAtIndex: (NSUInteger) partIndex
+- (MKPart *) partAtIndex: (NSInteger) partIndex
 {
     return [parts objectAtIndex: partIndex];
 }

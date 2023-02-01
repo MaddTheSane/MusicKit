@@ -24,7 +24,8 @@
     MKPart *thePart;
     MKNote *theNote;
     TadPole *newTad;
-    int i, j, k, scoreDuration, partCount;
+    int scoreDuration;
+    NSInteger i, j, k, partCount;
     NSRect aRect;
     
     beatScale = DEFAULT_BEATSCALE;
@@ -37,7 +38,7 @@
     scoreDuration = 0;			/* find the length of the score */
     for (i = 0; i < [theParts count]; i++) {
         thePart = [theParts objectAtIndex:i];
-        for (j = 0; j < [thePart noteCount]; j++) {
+        for (j = 0; j < [thePart countOfNotes]; j++) {
             theNote = [thePart noteAtIndex:j];
             if ([theNote noteType] == MK_noteDur) {
                 if ([theNote timeTag] + [theNote duration] > scoreDuration)
@@ -55,7 +56,7 @@
 
     for (i = 0; i < partCount; i++) {
         thePart = [theParts objectAtIndex:i];
-        for (j = 0; j < [thePart noteCount]; j++) {
+        for (j = 0; j < [thePart countOfNotes]; j++) {
             theNote = [thePart noteAtIndex: j];
             switch ([theNote noteType]) {
             case MK_mute:
@@ -75,10 +76,10 @@
             case MK_noteOn:
                 if (MKIsNoDVal([theNote frequency])) /* no frequency - not quite kosher */
                     break;
-                for (k = j+1; k < [thePart noteCount]; k++)
+                for (k = j+1; k < [thePart countOfNotes]; k++)
                     if ([[thePart noteAtIndex:k] noteTag] == [theNote noteTag])
                         break;
-                if (k < [thePart noteCount]) {
+                if (k < [thePart countOfNotes]) {
                     newTad = [[TadPole alloc] initNote:theNote
                                                 second:[thePart noteAtIndex:k]
                                                 partNum:i

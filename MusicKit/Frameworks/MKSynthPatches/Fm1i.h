@@ -280,7 +280,7 @@ noteTag.
 
   <i>currentNote</i> is ignored.
 */
-+patchTemplateFor: (id) currentNote;
++patchTemplateForNote: (id) currentNote;
 
 -init;
 -controllerValues:controllers;

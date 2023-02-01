@@ -182,7 +182,7 @@ id _MKSPGetWaveNoVibTemplate(_MKSPWAVENums *ugs,id oscClass) {
   return aTemplate;
   }
 
-+ patchTemplateFor: (MKNote *) aNote
++ patchTemplateForNote: (MKNote *) aNote
 {
     if (!template)
       template = _MKSPGetWaveNoVibTemplate(&ugs,[OscgafiUGxxyy class]);

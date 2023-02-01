@@ -154,9 +154,8 @@ typedef enum _MKPhraseStatus {
 + new;
 + allocWithZone:(NSZone *)zone;
 + alloc;
-- copy;
 - copyWithZone:(NSZone *)zone;
- /* These methods are overridden to return [self doesNotRecognize]. 
+ /* These methods are overridden to return [self doesNotRecognizeSelector:].
     You never create, free or copy MKSynthPatches directly. These operations
     are always done via an MKOrchestra object. */
 
@@ -176,7 +175,7 @@ typedef enum _MKPhraseStatus {
   should be returned.
   @return Returns an id.
  */
-+ patchTemplateFor: (MKNote *) currentNote;
++ (MKPatchTemplate*)patchTemplateForNote: (MKNote *) currentNote;
 
 /*!
   @return Returns an id.
@@ -188,15 +187,15 @@ typedef enum _MKPhraseStatus {
   default hardware is that represented by MKOrchestra, the
   DSP56001.
 */
-+ orchestraClass;
++ (Class)orchestraClass;
 
 /*!
   @brief Returns the default MKPatchTemplate for the class. 
   @return Returns an id.
   
-  You never implement this method. It is the same as return [self patchTemplateFor: nil].
+  You never implement this method. It is the same as return [self patchTemplateForNote: nil].
 */
-+ defaultPatchTemplate;
++ (MKPatchTemplate*)defaultPatchTemplate;
 
 /*!
   @return Returns an id.
@@ -225,7 +224,7 @@ typedef enum _MKPhraseStatus {
  @param  anIndex is an unsigned int and is zero-based.
  @return Returns an id.
 */
-- synthElementAt: (unsigned) anIndex;
+- (id)synthElementAtIndex: (NSInteger) anIndex;
 
 /*!
   @brief (sb): changed to mkdealloc to prevent conflict with OpenStep deallocation.
@@ -426,10 +425,6 @@ typedef enum _MKPhraseStatus {
 */
 -(BOOL) isFreeable; 
 
-- (void) dealloc; /*sb: was -free before OS conversion. Maybe I should have left it alone... */
- /* Same as dealloc */
-
-
 /*!
   @brief Sent by the MKSynthInstrument to a MKSynthPatch when a new tag stream
   begins, before the <b>noteOn:</b> message is sent.
@@ -542,6 +537,14 @@ typedef enum _MKPhraseStatus {
   @return Returns an id.
 */
 + (Class) findPatchClass: (NSString *) name;
+
+@end
+
+@interface MKSynthPatch (Deprecated)
+
+- synthElementAt: (unsigned) anIndex NS_DEPRECATED_WITH_REPLACEMENT_MAC("-synthElementAtIndex:", 10.0, 10.8);
+
++ (MKPatchTemplate*)patchTemplateFor: (MKNote *) currentNote NS_DEPRECATED_WITH_REPLACEMENT_MAC("+patchTemplateForNote:", 10.0, 10.8);
 
 @end
 

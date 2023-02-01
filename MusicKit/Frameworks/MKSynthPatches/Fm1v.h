@@ -38,7 +38,7 @@
 
   
 */
-+patchTemplateFor: (MKNote *) aNote;
++patchTemplateForNote: (MKNote *) aNote;
 
 @end
 

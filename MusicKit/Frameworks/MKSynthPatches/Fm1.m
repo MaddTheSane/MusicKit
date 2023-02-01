@@ -22,7 +22,7 @@
 
 FMDECL(template,ugs);
 
-+patchTemplateFor: (MKNote *) aNote
++patchTemplateForNote: (MKNote *) aNote
 {
     if (!template)
       template = _MKSPGetFmNoVibTemplate(&ugs,[OscgafUGxxyy class]);

@@ -111,7 +111,7 @@ In addition to the parameters described in <b>Wave1vi.rtfd</b>, the following pa
   @param  aNote is an MKNote instance.
   @return Returns an id.
 */
-+ patchTemplateFor: (MKNote *) aNote;
++ patchTemplateForNote: (MKNote *) aNote;
    
 /*!
   @param  aNote is an id.

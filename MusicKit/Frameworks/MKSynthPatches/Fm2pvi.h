@@ -105,7 +105,7 @@ FM index.
   determines whether vibrato resources are allocated.
   
 */
-+patchTemplateFor: (MKNote *) aNote;
++patchTemplateForNote: (MKNote *) aNote;
    
 /*!
   @param  aNote is an id.

@@ -101,7 +101,7 @@ velocitySensitivity is 0, velocity has no effect.
 
   <i>aNote</i> is ignored.
 */
-+patchTemplateFor: (MKNote *) aNote;
++patchTemplateForNote: (MKNote *) aNote;
  
 /*!
   @param  aNote is an id.

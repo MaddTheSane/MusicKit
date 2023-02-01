@@ -23,7 +23,7 @@ WAVEDECL(allVibTemplate,allVibUgs);
 WAVEDECL(sinVibTemplate,sinVibUgs);
 WAVEDECL(ranVibTemplate,ranVibUgs);
 
-+patchTemplateFor: (MKNote *) aNote
++patchTemplateForNote: (MKNote *) aNote
 {
     if (aNote) {
         #define NON_ZERO_NUMBER 1
@@ -52,7 +52,7 @@ WAVEDECL(ranVibTemplate,ranVibUgs);
 	    return sinVibTemplate;
 	}
 	else
-	  return [super patchTemplateFor:aNote];
+	  return [super patchTemplateForNote:aNote];
     }
     if (!allVibTemplate)
       allVibTemplate = _MKSPGetWaveAllVibTemplate(&allVibUgs,

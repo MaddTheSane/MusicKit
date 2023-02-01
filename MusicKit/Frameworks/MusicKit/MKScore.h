@@ -448,7 +448,9 @@ NS_ASSUME_NONNULL_BEGIN
   @return Returns an unsigned.
   @brief Returns the number of MKNotes in all the receiver's MKParts.
 */
-- (NSInteger) noteCount; 
+@property (readonly) NSInteger countOfNotes;
+
+- (NSInteger) noteCount NS_DEPRECATED_WITH_REPLACEMENT_MAC("-countOfNotes", 10.0, 10.8);
 
 /*!
   @brief Removes <i>oldPart</i> from the receiver and replaces it with <i>newPart</i>.
@@ -476,23 +478,20 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
   @brief Removes <i>aPart</i> from the receiver.  
   @param  aPart is an MKPart instance.
-  @return Returns <i>self</i> or <b>nil</b> if it wasn't a member of the receiver.
 */
-- removePart: (MKPart *) aPart;
+- (void) removePart: (MKPart *) aPart;
 
 /*!
   @brief Shifts the timeTags of all receiver's MKNotes by <i>shift</i> beats.
   @param  shift is a double.
-  @return Returns the receiver.
 */
-- shiftTime: (double) shift; 
+- (void) shiftTime: (double) shift; 
 
 /*!
   @brief Scales the timeTags and durations of all receiver's MKNotes by <i>scale</i> beats. 
   @param  scale is a double.
-  @return Returns the receiver.
 */
-- scaleTime: (double) scale;
+- (void) scaleTime: (double) scale;
 
 /*!
   @brief Returns the time tag of the earliest note in the score.
@@ -525,7 +524,9 @@ NS_ASSUME_NONNULL_BEGIN
   @brief Returns the number of MKPart contained in the receiver.
   @return Returns an unsigned.
 */
-- (NSInteger) partCount;
+- (NSInteger) partCount NS_DEPRECATED_WITH_REPLACEMENT_MAC("-countOfParts", 10.0, 10.8);
+
+@property (readonly) NSInteger countOfParts;
 
 /*!
   @brief Creates and returns a NSMutableArray containing the receiver's MKParts.
@@ -535,11 +536,13 @@ NS_ASSUME_NONNULL_BEGIN
 */
 - (NSArray<MKPart*> *) parts;
 
+@property (readonly, copy) NSArray<MKPart*> *parts;
+
 /*!
   @brief Retrieve the partIndex'th MKPart stored in the receiver.
   @return Returns a MKPart instance or nil if 0 < partIndex > [MKScore partCount].
  */
-- (MKPart *) partAtIndex: (NSUInteger) partIndex;
+- (MKPart *) partAtIndex: (NSInteger) partIndex;
 
 /*!
   @brief Returns the MKPart whose info note has an MK_title parameter

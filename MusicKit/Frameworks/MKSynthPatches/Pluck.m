@@ -125,7 +125,7 @@
  
 static int delay,oneZero,out2Sum,onePole,dSwitch,pp2,pp,allPass,ppy;
 
-+patchTemplateFor:currentNote
++patchTemplateForNote:currentNote
     /* In this simple case, always returns the same patch template. */
 {
     static id tmpl = nil;

@@ -233,7 +233,7 @@ id _MKSPGetFmSinVibTemplate(_MKSPFMNums *ugs,id oscClass) {
     return aTemplate;
 }
 
-+patchTemplateFor: (MKNote *) aNote
++patchTemplateForNote: (MKNote *) aNote
 {
     if (!template)
       template = _MKSPGetFmNoVibTemplate(&ugs,[OscgafiUGxxyy class]);

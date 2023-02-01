@@ -183,7 +183,7 @@ Roads, C. 1979. "A Tutorial on Nonlinear Distortion or Waveshaping Synthesis."
 
   <i>aNote </i>is ignored.
 */
-+ patchTemplateFor: (MKNote *) aNote;
++ patchTemplateForNote: (MKNote *) aNote;
 
 /*!
   @param aNote is a (id)

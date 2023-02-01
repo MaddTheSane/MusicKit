@@ -289,9 +289,8 @@
 }
 
 // Immediately stops playing any sounding notes. The default is to do nothing.
-- allNotesOff
+- (void)allNotesOff
 {
-    return self;
 }
 
 #pragma mark - Private methods

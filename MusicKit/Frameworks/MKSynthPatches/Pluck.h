@@ -86,7 +86,7 @@
   @param  currentNote is an MKNote instance.
   @return Returns an id.
 */
-+ patchTemplateFor: (MKNote *) currentNote;
++ patchTemplateForNote: (MKNote *) currentNote;
 
 - (instancetype)init;
 

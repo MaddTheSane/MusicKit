@@ -319,7 +319,7 @@ realize MKNotes on an external MIDI synthesizer.
   behaviour is to do nothing.
   Subclasses may implement specific behaviour appropriate to the synthesis method.
 */
-- allNotesOff;
+- (void)allNotesOff;
 
 @end
 

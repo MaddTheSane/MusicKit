@@ -242,14 +242,14 @@ static void removeNote(MKPart *self, MKNote *aNote);
     return [newScore addPart: self];
 }
 
--removeFromScore
+-(void)removeFromScore
   /* TYPE: Modifying
     * Removes the receiver from its present MKScore.
     * Returns the receiver, or nil if it isn't part of a MKScore.
     * (Implemented as [score removePart:self].)
     */
 {
-    return [score removePart: self];
+    [score removePart: self];
 }
 
 /* Creation. ------------------------------------------------------------ */
@@ -394,11 +394,11 @@ static id sortIfNeeded(MKPart *self)
 
 @synthesize sorted=isSorted;
 
-- sort
+- (BOOL)sort
     /* If the receiver needs to be sorted, sorts and returns self. Else
     returns nil. */
 {
-    return sortIfNeeded(self);
+    return sortIfNeeded(self) != nil;
 }
 
 static NSInteger findNoteIndex(MKPart *self, MKNote *aNote)
@@ -675,7 +675,7 @@ static void removeNote(MKPart *self, MKNote *aNote)
     [noteList release];
 }
 
-- scaleTime: (double) scale
+- (void) scaleTime: (double) scale
  /* TYPE: Editing
   * Shift is added to the timeTags of all notes in the MKPart.
   * Implemented in terms of addNotes:timeShift:.
@@ -689,7 +689,6 @@ static void removeNote(MKPart *self, MKNote *aNote)
 	    [mkn setDuration: [mkn duration] * scale];
     }
     [noteList release];
-    return self;
 }
 
 /* Accessing ------------------------------------------------------------- */
@@ -720,10 +719,7 @@ static void removeNote(MKPart *self, MKNote *aNote)
     return anArray;
 }
 
-- (unsigned) noteCount
- /* TYPE: Querying
-    * Return the number of MKNotes in the receiver.
-    */
+- (NSInteger) countOfNotes
 {
     return noteCount;
 }
@@ -1144,6 +1140,14 @@ static void removeNote(MKPart *self, MKNote *aNote)
 - (MKNote *) next: (MKNote *) aNote
 {
     return [self noteAfterNote:aNote];
+}
+
+- (unsigned) noteCount
+ /* TYPE: Querying
+    * Return the number of MKNotes in the receiver.
+    */
+{
+    return (unsigned)self.countOfNotes;
 }
 
 @end

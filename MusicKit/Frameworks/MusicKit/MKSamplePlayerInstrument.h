@@ -65,16 +65,16 @@
     Snd *recorder;
 }
 
-- init;
-- abort;
+- (instancetype)init;
+- (void)abort;
 
 /*!
   @return returns self
   @brief Stop any playing (i.e. sounding) notes.
 */
-- allNotesOff;
+- (void)allNotesOff;
 
-- reset;
+- (void)reset;
 - prepareSoundWithNote: (MKNote *) aNote;
 - (void) removePreparedSounds;
 - realizeNote: (MKNote *) aNote fromNoteReceiver: (MKNoteReceiver *) aNoteReceiver;

@@ -19,7 +19,7 @@
 
 static int ins[8],outs[8],ppx,ppy;
 
-+patchTemplateFor:aNote {
++patchTemplateForNote:aNote {
     int i,j,in,out,ctr;
     MKPatchTemplate *aTemplate = nil;
     if (aTemplate)

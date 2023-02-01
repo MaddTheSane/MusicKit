@@ -1229,11 +1229,7 @@ associated with it exists.
     return DSPMK_I_NTICK;       /* from dsp.h */
 }
 
-- (double) samplingRate
-    /* Returns samplingRate. */
-{
-    return samplingRate;
-}
+@synthesize samplingRate;
 
 #if !m68k
 -(int) _waitStates
@@ -1267,16 +1263,15 @@ associated with it exists.
 }
 
 
-- setSamplingRate: (double) newSRate
+- (void)setSamplingRate: (double) newSRate
     /* Set sampling rate. Only legal when receiver is closed. Returns self
     or nil if receiver is not closed. */ 
 {
     if (deviceStatus != MKDeviceStatusClosed)
-	return nil;
+	return;
     samplingRate =  newSRate;
     _effectiveSamplePeriod = (1.0 / newSRate) * (1 - _headroom);
     [self _compensateForDSPClockRate];
-    return self;
 }
 
 - (void) setFastResponse: (BOOL) yesOrNo

@@ -24,7 +24,7 @@ FMDECL(allVibTemplate,allVibUgs);
 FMDECL(sinVibTemplate,sinVibUgs);
 FMDECL(ranVibTemplate,ranVibUgs);
 
-+patchTemplateFor: (MKNote *) aNote
++patchTemplateForNote: (MKNote *) aNote
 {
     if (aNote) {
         #define NON_ZERO_NUMBER 1
@@ -53,7 +53,7 @@ FMDECL(ranVibTemplate,ranVibUgs);
 	    return sinVibTemplate;
 	}
 	else
-	  return [super patchTemplateFor:aNote];
+	  return [super patchTemplateForNote:aNote];
     }
     if (!allVibTemplate)
       allVibTemplate = _MKSPGetFmAllVibTemplate(&allVibUgs,

@@ -262,7 +262,7 @@ static id getNoVibTemplate() {
   return template;
   }
 
-+patchTemplateFor: (MKNote *) aNote
++patchTemplateForNote: (MKNote *) aNote
 {
   if (aNote) {
     double svibpc = doublePar(aNote, MK_svibAmp,.01);

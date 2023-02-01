@@ -26,7 +26,7 @@
 #import "_synthPatchInclude.h"
 static int oscUG, outUG, outsig;
 
-+patchTemplateFor:currentNote
++patchTemplateForNote:currentNote
     /* Creates and returns a patchTemplate which specifies the
        UnitGenerators and Patchpoints to be used and how they are
        to be interconnected when one of these synthPatches is

@@ -142,7 +142,7 @@ int main(int ac, char *av[])
 	    /* Otherwise, use a number of voices specified by the part info.*/
 	    voices = [partInfo parAsInt: MK_synthPatchCount];
 	    synthPatchCount = [anIns setSynthPatchCount: voices
-					  patchTemplate: [synthPatchClass patchTemplateFor: partInfo]];
+					  patchTemplate: [synthPatchClass patchTemplateForNote: partInfo]];
 	    /* A given SynthPatch can have several versions or 
 	       "PatchTemplates". For example, there may be one version
 	       that supports vibrato and another that does not.

@@ -514,7 +514,7 @@ int main(int argc, char *argv[])
                         voices = [partInfo parAsInt: MK_synthPatchCount];
                         synthPatchCount =
                         [(MKSynthInstrument *) anIns setSynthPatchCount: voices patchTemplate:
-                         [synthPatchClass patchTemplateFor: partInfo]];
+                         [synthPatchClass patchTemplateForNote: partInfo]];
                         /* Ignore warning regarding above since target IS the factory */
                         if (repeat == 0 && synthPatchCount < voices && !quiet)
                             fprintf(stderr,
@@ -597,7 +597,7 @@ int main(int argc, char *argv[])
                         voices = [partInfo parAsInt: MK_synthPatchCount];
                         synthPatchCount = 
                         [anIns setSynthPatchCount: voices patchTemplate:
-                         [synthPatchClass patchTemplateFor: partInfo]];
+                         [synthPatchClass patchTemplateForNote: partInfo]];
                         if (repeat == 0 && synthPatchCount < voices) 
                             if (!quiet)
                                 fprintf(stderr, "Could only allocate %d instead of %d %ss for %s\n",

@@ -241,7 +241,7 @@ static id getNoVibTemplate() {
     return;
 }
 
-+patchTemplateFor: (MKNote *) aNote
++patchTemplateForNote: (MKNote *) aNote
     /* Creates and returns a patchTemplate which specifies the
        UnitGenerators and Patchpoints to be used and how they are
        to be interconnected when one of these synthPatches is

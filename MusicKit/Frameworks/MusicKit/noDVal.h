@@ -40,6 +40,7 @@
 #endif
 
 #ifndef MK_NODVAL
+#include <stdbool.h>
 
 /*!
   @defgroup NoDValFns Test for no <b>double</b> value.
@@ -85,10 +86,10 @@ static inline double MKGetNoDVal(void)
   returns nonzero if <i>value</i> is equal to MK_NODVAL and 0 if it isn't.
      
   @param  value is a double.
-  @return Returns an int.
+  @return Returns a bool.
   @ingroup NoDValFns
 */
-static inline int MKIsNoDVal(double value)
+static inline bool MKIsNoDVal(double value)
 {
     union {double d; int i[2];} u;
     u.d = value;

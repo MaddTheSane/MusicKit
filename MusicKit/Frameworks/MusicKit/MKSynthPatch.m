@@ -172,13 +172,6 @@ static void cancelMsgs(register id self)
     [self doesNotRecognizeSelector:_cmd];  return nil;
 }
 
--copy
-  /* We override this method since instances are never created directly. 
-     They are always created by the MKOrchestra. */
-{
-    [self doesNotRecognizeSelector:_cmd];  return nil;
-}
-
   /* We override this method since instances are never created directly.
      They are always created by the MKOrchestra.
      A private version of +new is used internally. */
@@ -214,7 +207,7 @@ static void cancelMsgs(register id self)
 
   /* Returns the MKUnitGenerator or MKSynthData at the specified index or nil if 
      anIndex is out of bounds. */
-- synthElementAt: (unsigned) anIndex
+- (id)synthElementAtIndex: (NSInteger) anIndex
 {
     return [synthElements objectAtIndex:anIndex];
 }
@@ -223,15 +216,19 @@ static void cancelMsgs(register id self)
        an appropriate patchTemplate and returns it. 
        In some cases, it is necessary to look at the current note to 
        determine which patch to use. See documentation for details.
-       patchTemplateFor: is sent by the MKSynthInstrument 
+       patchTemplateForNote: is sent by the MKSynthInstrument
        when a new MKSynthPatch is to be created. It may also be sent by
        an application to obtain the template to be used as an argument to 
        SynthInstrument's -setSynthPatchCount:patchTemplate:.
        Implementation of this method is a subclass responsibility. 
        The subclass should implement this method such that when
        currentNote is nil, a default template is returned. */
-+ patchTemplateFor: (MKNote *) currentNote
++ (MKPatchTemplate*)patchTemplateForNote: (MKNote *) currentNote
 {
+    // For old classes that haven't been updated.
+    if ([self methodForSelector:@selector(patchTemplateFor:)] != [MKSynthPatch methodForSelector:@selector(patchTemplateFor:)]) {
+	return [self patchTemplateFor:currentNote];
+    }
     [NSException raise: NSInvalidArgumentException format: @"*** Subclass responsibility: %@", NSStringFromSelector(_cmd)];
     return nil;
 }
@@ -239,12 +236,12 @@ static void cancelMsgs(register id self)
 /*//////////////////////////////////////////////////////////////////////////////
 + defaultPatchTemplate
      You never implement this method. It is the same as 
-     return [self patchTemplateFor:nil]. 
+     return [self patchTemplateForNote:nil].
 //////////////////////////////////////////////////////////////////////////////*/
 
 + defaultPatchTemplate
 {
-    return [self patchTemplateFor:nil];
+    return [self patchTemplateForNote:nil];
 }
 
   /* Returns a copy of the Array of MKUnitGenerators and MKSynthData. 
@@ -1175,6 +1172,20 @@ id _MKAddPatchToList(MKSynthPatch *self, MKSynthPatch **headP, MKSynthPatch **ta
 {
     // TODO: [@"MKSynthPatches" stringByAppendingPathComponent: className]
     return [[self superclass] findPatchClass: className];
+}
+
+@end
+
+@implementation MKSynthPatch (Deprecated)
+
+- (id)synthElementAt:(unsigned int)anIndex
+{
+    return [self synthElementAtIndex:anIndex];
+}
+
++ (MKPatchTemplate *)patchTemplateFor:(MKNote *)currentNote
+{
+    return [self patchTemplateForNote:currentNote];
 }
 
 @end

@@ -111,7 +111,7 @@
 
 - (IBAction)closeDoc:sender
 {
-	id aDoc;
+        Document *aDoc;
 	
 	aDoc = [self findCurrent];
 	if (!aDoc)

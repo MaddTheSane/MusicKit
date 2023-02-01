@@ -90,7 +90,7 @@ When using this MKSynthPatch in an interactive real-time context, such as playin
 
   <i>aNote </i>is ignored.
 */
-+patchTemplateFor: (MKNote *) aNote;
++patchTemplateForNote: (MKNote *) aNote;
 
 @end
 

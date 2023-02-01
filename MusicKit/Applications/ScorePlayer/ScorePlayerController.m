@@ -839,7 +839,7 @@ static double getUntempo(float tempoVal)
 		continue;         
 	    voices = [partInfo parAsInt: MK_synthPatchCount];
 	    synthPatchCount = [anIns setSynthPatchCount: voices
-                                          patchTemplate: [synthPatchClass patchTemplateFor: partInfo]];
+                                          patchTemplate: [synthPatchClass patchTemplateForNote: partInfo]];
 	    if (synthPatchCount < voices) {
                 errMsg = [NSString stringWithFormat: STR_TOO_MANY_SYNTHPATCHES,
 			  (long)synthPatchCount, (long)voices, synthPatchName, MKGetObjectName(aPart)];

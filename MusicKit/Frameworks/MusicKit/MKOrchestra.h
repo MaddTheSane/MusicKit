@@ -753,9 +753,10 @@ extern void MKSetPreemptDuration(double seconds);
   The default is determined by the method <b>defaultSamplingRate</b>.
   @return Returns a double.
 */
-- (double) samplingRate; 
+- (double) samplingRate;
 
-// TODO: candidate to return void
+@property (nonatomic) double samplingRate;
+
 /*!
   @param  newSRate is a double.
   @return Returns an id.
@@ -780,7 +781,7 @@ extern void MKSetPreemptDuration(double seconds);
   returned if the receiver's status isn't MK_devClosed.  Returns the
   receiver.
 */
-- setSamplingRate: (double) newSRate; 
+- (void) setSamplingRate: (double) newSRate;
 
 // TODO: candidate to return void
 /*!
@@ -824,7 +825,8 @@ extern void MKSetPreemptDuration(double seconds);
 */
 - (MKOrchestraTiming) isTimed; 
 
-// TODO: candidate to return void
+@property (nonatomic, getter=isTimed) MKOrchestraTiming timed;
+
 /*!
   @brief Specify that the MKOrchestra is to synchronize the DSP's notion of
   time to that of the MKConductor's time.

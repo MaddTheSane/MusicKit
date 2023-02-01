@@ -759,7 +759,7 @@ typedef NS_ERROR_ENUM(MKErrorDomain, MKErrors) {
     MK_spsOutOfRangeErr,
     /*!	Indicates that a MKSynthPatch can't allocate an MKUnitGenerator it needs.
         This can arise, for example, if a MKSynthPatch allocates MKUnitGenerators
-	outside of its basic definition (i.e. outside of the <b>patchTemplateFor:</b> method.) */
+	outside of its basic definition (i.e. outside of the <b>patchTemplateForNote:</b> method.) */
     MK_spsCantGetUGErr,
 
     /* Errors added in Release 3.0 */

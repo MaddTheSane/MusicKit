@@ -114,7 +114,7 @@
 
 - (void)mouseDown:(NSEvent *)theEvent 
 {
-//	[[self superview] gotClicked:self with:theEvent];
+	[(PartView*)[self superview] gotClicked:self with:theEvent];
 }
 
 @end

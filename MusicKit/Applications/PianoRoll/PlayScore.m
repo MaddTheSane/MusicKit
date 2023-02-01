@@ -89,43 +89,45 @@ static void handleMKError(NSString *msg)
     partCount = [partPerformers count];
     synthInstruments = [[NSMutableArray alloc] init];
     for (i = 0; i < partCount; i++) {
-	partPerformer = [partPerformers objectAtIndex:i];
-	aPart = [partPerformer part]; 
-	partInfo = [aPart infoNote];      
-	if ((!partInfo) || ![partInfo isParPresent:MK_synthPatch]) {
-	    if (!NSRunAlertPanel(@"ScorePlayer", 
-                                 @"%@ info missing.\n", @"Continue", @"Cancel", nil, MKGetObjectName(aPart)))
-	      return NO;
-	    continue;
-	}		
-	className = [partInfo parAsStringNoCopy:MK_synthPatch];
+        partPerformer = [partPerformers objectAtIndex:i];
+        aPart = [partPerformer part];
+        partInfo = [aPart infoNote];
+        if ((!partInfo) || ![partInfo isParPresent:MK_synthPatch]) {
+            if (!NSRunAlertPanel(@"ScorePlayer",
+                                 @"%@ info missing.\n", @"Continue", @"Cancel", nil,
+                                 MKGetObjectName(aPart))) {
+                return NO;
+            }
+            continue;
+        }
+        className = [partInfo parAsStringNoCopy:MK_synthPatch];
         synthPatchClass = [MKSynthPatch findPatchClass:className];
         
-	if (!synthPatchClass) {         /* Class not loaded in program? */ 
-	    if (!NSRunAlertPanel(@"ScorePlayer", 
+        if (!synthPatchClass) {         /* Class not loaded in program? */
+            if (!NSRunAlertPanel(@"ScorePlayer",
                                  @"This scorefile calls for a synthesis instrument (%@) that isn't available in this application.\n",
                                  @"Continue", @"Cancel", nil, className))
-	      return NO;
-	    /* We would prefer to do dynamic loading here. */
-	    continue;
-	}
-	anIns = [MKSynthInstrument new];      
-	[synthInstruments addObject:anIns];
-	[[partPerformer noteSender] connect:[anIns noteReceiver]];
-	[anIns setSynthPatchClass:synthPatchClass];
-	if (![partInfo isParPresent:MK_synthPatchCount])
-	  continue;         
-	voices = [partInfo parAsInt:MK_synthPatchCount];
-	synthPatchCount = 
-	  [anIns setSynthPatchCount:voices patchTemplate:
-	   [synthPatchClass patchTemplateFor:partInfo]];
+                return NO;
+            /* We would prefer to do dynamic loading here. */
+            continue;
+        }
+        anIns = [MKSynthInstrument new];
+        [synthInstruments addObject:anIns];
+        [[partPerformer noteSender] connect:[anIns noteReceiver]];
+        [anIns setSynthPatchClass:synthPatchClass];
+        if (![partInfo isParPresent:MK_synthPatchCount])
+            continue;
+        voices = [partInfo parAsInt:MK_synthPatchCount];
+        synthPatchCount =
+        [anIns setSynthPatchCount:voices patchTemplate:
+         [synthPatchClass patchTemplateForNote:partInfo]];
         [anIns release]; /* since retain is now held in synthInstruments array! */
-	if (synthPatchCount < voices) {
-	    if (!NSRunAlertPanel(@"ScorePlayer", 
-                                 @"Could only allocate %d instead of %d %@s for %@\n", 
-                    @"Continue", @"Cancel", nil, synthPatchCount, voices, className, MKGetObjectName(aPart)))
-	      return NO;
-	}
+        if (synthPatchCount < voices) {
+            if (!NSRunAlertPanel(@"ScorePlayer",
+                                 @"Could only allocate %d instead of %d %@s for %@\n",
+                                 @"Continue", @"Cancel", nil, synthPatchCount, voices, className, MKGetObjectName(aPart)))
+                return NO;
+        }
     }
 //    [partPerformers release];
     MKSetDeltaT(1.0);

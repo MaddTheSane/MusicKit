@@ -92,6 +92,8 @@ You can examine the updates and controllerTable with the method
 #ifndef __MK_SynthInstrument_H___
 #define __MK_SynthInstrument_H___
 
+#import <Foundation/Foundation.h>
+
 /*!
   @name SynthInstrumentAllocConsts
   @brief MKSynthInstrument Allocation Constants.
@@ -125,23 +127,26 @@ You can examine the updates and controllerTable with the method
 
 /*@{*/
 
-/*! Automatic allocation from a global pool. */
-#define MK_AUTOALLOC 0
-/*! Allocation from a local, manually-allocated, pool. */
-#define MK_MANUALALLOC 1
-/*! Hybrid between AUTO and MANUAL. First tries local pool, then tries global pool. */
-#define MK_MIXEDALLOC 2
+typedef NS_ENUM(unsigned short, MKSynthAllocMode) {
+    /*! Automatic allocation from a global pool. */
+    MKSynthAllocModeAuto = 0,
+    /*! Allocation from a local, manually-allocated, pool. */
+    MKSynthAllocModeManual = 1,
+    /*! Hybrid between AUTO and MANUAL. First tries local pool, then tries global pool. */
+    MKSynthAllocModeMixed = 2
+};
 
 /*@}*/
 
 #import <MusicKitLegacy/MKInstrument.h>
 #import <MusicKitLegacy/MKNote.h>
 #import <MusicKitLegacy/MKSynthPatch.h>
+#import <SndKit/SndDefines.h>
 
-@interface MKSynthInstrument : MKInstrument
+@interface MKSynthInstrument : MKInstrument <NSCopying, NSCoding>
 {
-    id synthPatchClass;                   /*!< class used to create patches. */
-    unsigned short allocMode;             /*!< One of MK_MANUALALLOC, MK_AUTOALLOC, or MK_MIXEDALLOC. */
+    Class synthPatchClass;                /*!< class used to create patches. */
+    MKSynthAllocMode allocMode;           /*!< One of MK_MANUALALLOC, MK_AUTOALLOC, or MK_MIXEDALLOC. */
     NSMutableDictionary *taggedPatches;   /*!< Dictionary mapping noteTags to MKSynthPatches */
     NSMutableDictionary *controllerTable; /*!< Dictionary mapping MIDI controllers to values */
     MKNote *updates;                      /*!< MKNote for storing common (no noteTag) updates. */
@@ -178,7 +183,7 @@ You can examine the updates and controllerTable with the method
   @param  aTemplate is an id.
   @return Returns an int.
  */
-- (int) setSynthPatchCount: (int) voices patchTemplate: (id) aTemplate;
+- (int) setSynthPatchCount: (int) voices patchTemplate: (MKPatchTemplate*) aTemplate;
 
 /*!
   @brief Immediately allocates <i>voices</i> MKSynthPatch objects.
@@ -198,7 +203,7 @@ You can examine the updates and controllerTable with the method
   @param  aTemplate is an id.
   @return Returns an int.
 */
-- (int) synthPatchCountForPatchTemplate: (id) aTemplate;
+- (int) synthPatchCountForPatchTemplate: (MKPatchTemplate*) aTemplate;
 
 /*!
   @brief Returns the number of allocated MKSynthPatch objects created with the
@@ -219,7 +224,7 @@ You can examine the updates and controllerTable with the method
   @brief Returns the receiver's MKSynthPatch class.
   @return Returns an id.
 */
-- synthPatchClass;
+- (Class)synthPatchClass;
 
 /*!
   @brief Sets the receiver's MKSynthPatch class to <i>aSynthPatchClass</i>.
@@ -302,7 +307,7 @@ You can examine the updates and controllerTable with the method
  @param  aMute is an id.
  @return Returns an id.
 */
-- mute: (id) aMute;
+- (void) mute: (id) aMute;
 
 /*!
   @brief Sets the receiver's allocation mode to MK_AUTOALLOC and releases any
@@ -320,7 +325,9 @@ You can examine the updates and controllerTable with the method
   MK_MANUALALLOC.
  @return Returns an unsigned short.
 */
-- (unsigned short) allocMode;
+- (MKSynthAllocMode) allocMode;
+
+@property (readonly) MKSynthAllocMode allocMode;
 
 /*!
   @return Returns an id.
@@ -330,7 +337,7 @@ You can examine the updates and controllerTable with the method
   You should only invoke this method when all other attempts to halt synthesis
   fails.
 */
-- abort;
+- (void)abort;
 
 /*!
   @brief Creates and returns a new MKSynthInstrument as a copy of the receiver.
@@ -350,7 +357,7 @@ You can examine the updates and controllerTable with the method
   Also clears controller info.
  @return Returns an id.
 */
-- clearUpdates;
+- (void)clearUpdates;
 
 /*!
   @brief Controls whether the noteUpdate and controller state is retained
@@ -360,7 +367,7 @@ You can examine the updates and controllerTable with the method
  @param  yesOrNo is a BOOL.
  @return Returns an id.
 */
-- setRetainUpdates: (BOOL) yesOrNo;
+- (void) setRetainUpdates: (BOOL) yesOrNo;
 
 /*!
   @brief Returns whether the noteUpdate and controller state is retained from
@@ -368,6 +375,8 @@ You can examine the updates and controllerTable with the method
  @return Returns a BOOL.
 */
 - (BOOL) doesRetainUpdates;
+
+@property (getter=doesRetainUpdates, setter=setRetainUpdates:) BOOL retainUpdates;
 
 /*!
   @param  aNoteUpdate is a MKNote **.
@@ -385,27 +394,17 @@ You can examine the updates and controllerTable with the method
 */
 - getUpdates: (MKNote **) aNoteUpdate controllerValues: (NSMutableDictionary **) controllers;
 
-/* 
-     You never send this message directly.  
-     Invokes superclass write: method. Also archives allocMode, retainUpdates 
-     and, if retainUpdates is YES, the controllerTable and updates.
-*/
-- (void) encodeWithCoder: (NSCoder *) aCoder;
-
-/* 
-     You never send this message directly.  
-     Note that -init is not sent to newly unarchived objects.
-     See write:. 
-*/
-- (id) initWithCoder: (NSCoder *) aDecoder;
-
 /*!
   @brief Sends a<b> noteOff:</b> message to all running MKSynthPatches managed
   by this MKSynthInstrument.
  @return Returns an id.
 */
-- allNotesOff;
+- (void)allNotesOff;
 
 @end
+
+SndDeprecatedEnum(MKSynthAllocMode,MK_AUTOALLOC,MKSynthAllocModeAuto);
+SndDeprecatedEnum(MKSynthAllocMode,MK_MANUALALLOC,MKSynthAllocModeManual);
+SndDeprecatedEnum(MKSynthAllocMode,MK_MIXEDALLOC,MKSynthAllocModeMixed);
 
 #endif

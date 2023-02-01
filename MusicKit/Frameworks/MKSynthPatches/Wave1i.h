@@ -156,7 +156,7 @@ When using this MKSynthPatch in an interactive real-time context, such as playin
   @param currentNote is a MKNote instance.
   @return An (id).
 */
-+ patchTemplateFor: (MKNote *) currentNote;
++ patchTemplateForNote: (MKNote *) currentNote;
 
 -init;
 -controllerValues:controllers;

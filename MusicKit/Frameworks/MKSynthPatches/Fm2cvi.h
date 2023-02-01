@@ -79,7 +79,7 @@ In addition to the parameters described in <b>Fm11vi.rtfd</b>, the following par
 
   A non-zero for <b>svibAmp</b>and <b>rvibAmp </b> determines whether vibrato resources are allocated. 
 */
-+patchTemplateFor: (MKNote *) aNote;
++patchTemplateForNote: (MKNote *) aNote;
 
 /*!
   @param aNote is a (id)

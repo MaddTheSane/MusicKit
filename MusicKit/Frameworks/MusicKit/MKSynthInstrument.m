@@ -274,16 +274,7 @@ static NSMutableArray *initPatchLists(NSArray *oldLists)
     return newObj;
 }
 
--setRetainUpdates:(BOOL)yesOrNo
-{
-    retainUpdates = yesOrNo;
-    return self;
-}
-
-- (BOOL) doesRetainUpdates
-{
-    return retainUpdates;
-}
+@synthesize retainUpdates;
 
 - preemptSynthPatchFor: (MKNote *) aNote patches: (MKSynthPatch *) firstPatch
   /* You never send this message. Rather, 
@@ -327,7 +318,7 @@ static NSMutableArray *initPatchLists(NSArray *oldLists)
     return nil;
 }
 
--mute:aMute
+-(void)mute:aMute
   /* This method is invoked when a MKNote of type mute is received.
      MKNotes of type mute are not sent to MKSynthPatches because they do not deal 
      directly with sound production. The default implementation does
@@ -337,7 +328,6 @@ static NSMutableArray *initPatchLists(NSArray *oldLists)
 
      */
 {
-    return self;
 }
 
 static NSString *tagStr(int noteTag)
@@ -481,7 +471,7 @@ static void alternatePatchMsg(void)
 	}
 	if (MKIsNoteParPresent(aNote,MK_synthPatchCount)) 
 	    [self setSynthPatchCount:[aNote parAsInt:MK_synthPatchCount]
-	               patchTemplate:[synthPatchClass patchTemplateFor:aNote]];
+	               patchTemplate:[synthPatchClass patchTemplateForNote:aNote]];
  	[self mute:aNote];
 	/* no break here. */
       default:       /* NoteOn or noteOff with no tag or a mute (ignored) */
@@ -505,7 +495,7 @@ static void alternatePatchMsg(void)
 	      aNote = [aNote copyWithZone:zone];
 	      /* Copy common updates into aNote. */
 	      aNote = [aNote _unionWith:updates];
-	      aTemplate = [synthPatchClass patchTemplateFor:aNote];
+	      aTemplate = [synthPatchClass patchTemplateForNote:aNote];
 	      aPatchList = getList(self,aTemplate);
 	      if (!aPatchList)
 		aPatchList = addList(self,aTemplate);
@@ -513,13 +503,13 @@ static void alternatePatchMsg(void)
 		NSLog(@"MKSynthInstrument receives note for new notetag stream %@ at time %f ",
 			 tagStr(noteTag), MKGetTime());
 	      switch (allocMode) {
-		case MK_MIXEDALLOC:
+		case MKSynthAllocModeMixed:
 		  currentPatch = adjustIdlePatch(aPatchList,noteTag);
                     /*NB RETURNS RETAINED OBJECT*/
 		  if (currentPatch)
 		      break;
 		  /* else fall through here. */
-		case MK_AUTOALLOC: 
+		case MKSynthAllocModeAuto:
 		  currentPatch = 
 		      [orchestra allocSynthPatch:
 		       synthPatchClass patchTemplate:aTemplate];
@@ -531,7 +521,7 @@ static void alternatePatchMsg(void)
 				  currentPatch, MKGetTime(), tagStr(noteTag));
 		  }
 		  break;
-		case MK_MANUALALLOC:
+		case MKSynthAllocModeManual:
 		  currentPatch = adjustIdlePatch(aPatchList,noteTag);
                     /*NB RETURNS RETAINED OBJECT*/
 		  break;
@@ -806,13 +796,13 @@ static void deallocRunningVoices(MKSynthInstrument *self,id orch);
     return [self setSynthPatchClass: aSynthPatchClass orchestra: nil];
 }
 
-- synthPatchClass
+- (Class)synthPatchClass
   /* Returns synthPatchClass */
 {
     return synthPatchClass;
 }
 
-- allNotesOff
+- (void)allNotesOff
     /* Broadcasts 'noteOff' to all running voices on given orch. (nil orch
        is wild card) Includes orphan patches. */
 {
@@ -828,7 +818,6 @@ static void deallocRunningVoices(MKSynthInstrument *self,id orch);
 	      [aPatch noteOff: aNote];
 	}
     }
-    return self;
 }
 
 static void deallocRunningVoices(MKSynthInstrument *self,id orch)
@@ -849,16 +838,15 @@ static void deallocRunningVoices(MKSynthInstrument *self,id orch)
    
 }
 
--abort
+-(void)abort
   /* Sends the noteEnd message to all running (or finishing) synthPatches 
      managed by this MKSynthInstrument. This is used only for aborting in 
      emergencies. */
 {
     deallocRunningVoices(self,nil); /* Must be first */
-    return self;
 }
 
--clearUpdates
+-(void)clearUpdates
 /* Causes the MKSynthInstrument to forget any noteUpdate state it has accumulated
    as a result of receiving noteUpdates without noteTags.
    The effect is not felt by the MKSynthPatches until the next phrase. Also
@@ -869,14 +857,12 @@ static void deallocRunningVoices(MKSynthInstrument *self,id orch)
     [updates release];
     updates = [MKGetNoteClass() new];  
     [updates setNoteType:MK_noteUpdate];
-    return self;
 }
 
--afterPerformance
+-(void)afterPerformance
 {
     if (!retainUpdates)
 	[self clearUpdates];
-    return self;
 }
 
 -autoAlloc
@@ -884,21 +870,18 @@ static void deallocRunningVoices(MKSynthInstrument *self,id orch)
      allocated patches. Otherwise, returns self. */
 {
     deallocIdleVoices(self,nil); /* Frees up all idle voices. */
-    allocMode = MK_AUTOALLOC;    
+    allocMode = MKSynthAllocModeAuto;
     return self;
 }
 
--(unsigned short)allocMode
-{
-    return allocMode;
-}
+@synthesize allocMode;
 
 -(int)synthPatchCountForPatchTemplate:aTemplate
   /* Returns number of manually-allocated voices for the specified template. 
      If the receiver is in automatic allocation mode, returns 0. */
 {
     SynthPatchList *aPatchList;
-    if (allocMode == MK_AUTOALLOC) 
+    if (allocMode == MKSynthAllocModeAuto)
       return 0;
     if (!aTemplate)
       aTemplate = [synthPatchClass defaultPatchTemplate];
@@ -920,7 +903,7 @@ static void deallocRunningVoices(MKSynthInstrument *self,id orch)
     return [self setSynthPatchCount:voices patchTemplate:nil];
 }
 
--(int)setSynthPatchCount:(int)voices patchTemplate:aTemplate
+-(int)setSynthPatchCount:(int)voices patchTemplate:(MKPatchTemplate*)aTemplate
   /* Sets the synthPatchCount for the given template.
      This message may only be sent when the MKOrchestra is open.
      If aTemplate is nil, the value returned by
@@ -940,8 +923,8 @@ static void deallocRunningVoices(MKSynthInstrument *self,id orch)
       aPatchList = addList(self,aTemplate);
     if (voices < 0) {
 	voices = -voices;
-	allocMode = MK_MIXEDALLOC;
-    } else allocMode = MK_MANUALALLOC;
+	allocMode = MKSynthAllocModeMixed;
+    } else allocMode = MKSynthAllocModeManual;
     if (voices == aPatchList->manualCount) 
 	return voices;
     if (voices < aPatchList->manualCount) { /* Releasing some */

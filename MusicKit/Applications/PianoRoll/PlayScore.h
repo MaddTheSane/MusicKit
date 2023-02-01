@@ -9,7 +9,7 @@
 
 - init; 
 - (void)setUpPlay: (MKScore *) scoreObj;
-- (BOOL) play:scoreObj;
+- (BOOL) play:(MKScore *)scoreObj;
 - stop;
 
 @end

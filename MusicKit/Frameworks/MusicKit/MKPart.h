@@ -222,7 +222,7 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
   
   @see -<b>isSorted</b>
 */
-- sort;
+- (BOOL)sort;
 
 /*!
   @return Returns a BOOL.
@@ -284,7 +284,7 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
   
   @see -<b>addToScore:</b>, -<b>score</b>
 */
-- removeFromScore; 
+- (void) removeFromScore; 
 
 /*!
   @return Returns an id.
@@ -429,7 +429,7 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
   @return Returns <b>self</b>.
   @brief Scales the MKPart's contents by multiplying <i>scale</i> to each of the MKNotes' time tags and durations.  
 */
-- scaleTime: (double) scale;
+- (void) scaleTime: (double) scale;
 
 /*!
   @brief Returns the number of MKNotes in the MKPart (not counting the info MKNote).
@@ -437,7 +437,7 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
   
   @see -<b>notes</b>, -<b>isEmpty</b>
 */
-- (unsigned) noteCount;
+@property (readonly) NSInteger countOfNotes;
 
 /*!
   @param  aNote is an id.
@@ -663,6 +663,8 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
  */
 - (void) setPartName: (NSString *) newPartName;
 
+@property (nonatomic, retain) NSString *partName;
+
 /*!
   @brief Returns YES or NO if the part is named the given string.
   @param partNameToFind The string to compare to the part name.
@@ -751,6 +753,8 @@ You can find out if the NSArray is currently sorted by the -<b>isSorted</b> meth
   @see -<b>nth:</b>, -<b>atTime:</b>, -<b>atOrAfterTime:</b>
 */
 - (MKNote *) next: (MKNote *) aNote NS_DEPRECATED_WITH_REPLACEMENT_MAC("-noteAfterNote:", 10.0, 10.8);
+
+- (unsigned) noteCount NS_DEPRECATED_WITH_REPLACEMENT_MAC("-countOfNotes", 10.0, 10.8);
 
 @end
 

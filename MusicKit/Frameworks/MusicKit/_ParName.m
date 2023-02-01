@@ -457,11 +457,11 @@ This method is provided as a speed optimzation.
     case MK_string:
       return param->_uVal.sval;
     case MK_envelope:
-      return [param->_uVal.symbol description];//@" (envelope) ";   /*** FIXME ***/
+      return [param->_uVal.symbol description];//@" (envelope) ";   /*** FIXME: ***/
     case MK_waveTable:
-      return [param->_uVal.symbol description];//@" (waveTable) ";  /*** FIXME ***/
+      return [param->_uVal.symbol description];//@" (waveTable) ";  /*** FIXME: ***/
     default:
-      return [param->_uVal.symbol description];//(NSString *)NSStringFromClass([param->_uVal.symbol class]); /*** FIXME ***/
+      return [param->_uVal.symbol description];//(NSString *)NSStringFromClass([param->_uVal.symbol class]); /*** FIXME: ***/
   }
   return @"";
 }

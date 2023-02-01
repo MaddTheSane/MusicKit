@@ -78,7 +78,7 @@ fundamental frequency.  In the range 0.0:1.0.  Default is 0.0.
   A non-zero for <b>svibAmp</b>and <b>rvibAmp </b>
   determines whether vibrato resources are allocated.
 */
-+ patchTemplateFor: (MKNote *) aNote;
++ patchTemplateForNote: (MKNote *) aNote;
 
 @end
 
