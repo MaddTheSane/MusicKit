@@ -81,7 +81,7 @@ Modification history before commital to Subversion repository:
 /*
  * reading
  */
-MKMIDIFileIn *MKMIDIFileBeginReading(NSMutableData *midiStream, BOOL evaluateTempo)
+MKMIDIFileIn *MKMIDIFileBeginReading(NSData *midiStream, BOOL evaluateTempo)
 {
     MKMIDIFileIn *rtn;
     
@@ -127,7 +127,7 @@ static int calcMidiEventSize(int status)
     else return 1;
 }
 
-static int readChunkType(NSMutableData *midiStream,char *buf,unsigned int *streamPos)
+static int readChunkType(NSData *midiStream,char *buf,unsigned int *streamPos)
 {
 //    int count = NXRead(midiStream,buf,4);
     NSRange range4 = NSMakeRange(*streamPos,4);
@@ -142,7 +142,7 @@ static int readChunkType(NSMutableData *midiStream,char *buf,unsigned int *strea
     return midiIO_ok;
 }
 
-static int readLong(NSMutableData *midiStream, int *n,unsigned int *streamPos)
+static int readLong(NSData *midiStream, int *n,unsigned int *streamPos)
 {
     NSRange range4 = NSMakeRange(*streamPos,4);
     if ([midiStream length] < *streamPos + 4) {
@@ -157,7 +157,7 @@ static int readLong(NSMutableData *midiStream, int *n,unsigned int *streamPos)
     return midiIO_ok;
 }
 
-static int readBytes(NSMutableData *midiStream, unsigned char *bytes,int n,unsigned int *streamPos)
+static int readBytes(NSData *midiStream, unsigned char *bytes,int n,unsigned int *streamPos)
 {
     NSRange rangen = NSMakeRange(*streamPos,n);
     if ([midiStream length] < *streamPos + n) {
@@ -171,7 +171,7 @@ static int readBytes(NSMutableData *midiStream, unsigned char *bytes,int n,unsig
     return midiIO_ok;
 }
 
-static int readShort(NSMutableData *midiStream, short *n,unsigned int *streamPos)
+static int readShort(NSData *midiStream, short *n,unsigned int *streamPos)
 {
     NSRange range2 = NSMakeRange(*streamPos,2);
     if ([midiStream length] < *streamPos + 2) {
@@ -186,7 +186,7 @@ static int readShort(NSMutableData *midiStream, short *n,unsigned int *streamPos
     return midiIO_ok;
 }
 
-static int readVariableQuantity(NSMutableData *midiStream, int *n, unsigned int *streamPos)
+static int readVariableQuantity(NSData *midiStream, int *n, unsigned int *streamPos)
 {
     NSInteger lastByte = [midiStream length] - 1;
     const char *theData = [midiStream bytes];
@@ -518,6 +518,18 @@ int MKMIDIFileReadEvent(register MKMIDIFileIn *p)
  * writing
  */
 
+static int writeData(MKMIDIFileOut *p, NSData *dat)
+{
+//    int bytesWritten;
+    /*bytesWritten = */[p->midiStream appendData:dat];
+    p->currentCount += dat.length;
+/*    if (bytesWritten != count)
+      return endOfStream;
+    else return midiIO_ok;
+ */
+    return midiIO_ok;
+}
+
 static int writeBytes(MKMIDIFileOut *p, const unsigned char *bytes, int count)
 {
 //    int bytesWritten;
@@ -638,15 +650,15 @@ int MKMIDIFileBeginWritingTrack(MKMIDIFileOut *p, NSString *trackName)
     p->currentTrack++;
     p->currentCount = 0; /* Set this after the "MTrk" and dummy length are written */
     if (trackName) {
-        NSUInteger trackNameByteLength = [trackName lengthOfBytesUsingEncoding: NSUTF8StringEncoding];
+        NSData *trackNameData = [trackName dataUsingEncoding: NSUTF8StringEncoding];
 
-	if (trackNameByteLength) {
+	if (trackNameData) {
 	    BOOL error = !writeByte(p, 0);
 
 	    error = error || !writeByte(p, 0xff);
 	    error = error || !writeByte(p, 0x03);
-	    error = error || !writeVariableQuantity(p, trackNameByteLength);
-	    error = error || !writeBytes(p, (const unsigned char *)[trackName UTF8String], trackNameByteLength);
+	    error = error || !writeVariableQuantity(p, trackNameData.length);
+	    error = error || !writeData(p, trackNameData);
 	    if (error) 
 		return endOfStream;
 	}
@@ -667,7 +679,7 @@ static int writeTime(MKMIDIFileOut *p, int quanta)
 int MKMIDIFileEndWritingTrack(MKMIDIFileOut *p,int quanta)
 {
     int cc;
-    int trackLengthPos;
+    NSInteger trackLengthPos;
     NSRange replaceRange;
 
     if (!writeTime(p,quanta) || 
@@ -705,14 +717,16 @@ int MKMIDIFileWriteSig(MKMIDIFileOut *p,int quanta,short metaevent,unsigned data
 
 int MKMIDIFileWriteText(MKMIDIFileOut *p,int quanta,short metaevent,NSString *text)
 {
+    NSData *textData;
     int i;
     if (!text)
       return midiIO_ok;
-    i = [text length];
+    textData = [text dataUsingEncoding:NSUTF8StringEncoding];
+    i = [textData length];
     if (!writeTime(p,quanta) || 
 	!writeByte(p,0xff) ||
 	!writeByte(p,metaevent) ||
-	!writeVariableQuantity(p,i) || !writeBytes(p,(const unsigned char *)[text UTF8String],i))
+	!writeVariableQuantity(p,i) || !writeData(p,textData))
       return endOfStream;
     return midiIO_ok;
 }

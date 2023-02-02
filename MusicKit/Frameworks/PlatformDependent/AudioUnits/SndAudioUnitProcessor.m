@@ -247,10 +247,15 @@ static OSStatus auInputCallback(void *inRefCon,
     AudioUnitParameterInfo parameterInfo;
         
     if(getAudioUnitProperty(audioUnit, kAudioUnitProperty_ParameterInfo, kAudioUnitScope_Global, parameterIDList[index], &parameterInfo, sizeof(parameterInfo), NULL)) {
-	if(parameterInfo.flags & kAudioUnitParameterFlag_HasCFNameString)
-            return (__bridge NSString *)(parameterInfo.cfNameString);
-	else
+	if (parameterInfo.flags & kAudioUnitParameterFlag_HasCFNameString) {
+	    if (parameterInfo.flags & kAudioUnitParameterFlag_CFNameRelease) {
+		return CFBridgingRelease(parameterInfo.cfNameString);
+	    } else {
+		return (__bridge NSString *)(parameterInfo.cfNameString);
+	    }
+	} else {
 	    return [NSString stringWithUTF8String: parameterInfo.name];
+	}
     }
     else
 	return [super paramName: index];

@@ -13,8 +13,6 @@ class PianoAppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet var infoPanel: NSWindow!
     @IBOutlet var helpPanel: NSPanel!
 
-
-
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		// Insert code here to initialize your application
 	}
@@ -49,6 +47,14 @@ class PianoAppDelegate: NSObject, NSApplicationDelegate {
 		newDoc.makeWindowControllers()
 		newDoc.showWindows()
 		NSDocumentController.shared.addDocument(newDoc)
+	}
+	
+	@IBAction func showHelp(_ sender: Any?) {
+		helpPanel.makeKeyAndOrderFront(self)
+	}
+	
+	@IBAction func showInfo(_ sender: Any?) {
+		infoPanel.makeKeyAndOrderFront(self)
 	}
 }
 

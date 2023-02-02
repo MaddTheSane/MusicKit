@@ -46,7 +46,7 @@
 
         if (!scorePlayer) scorePlayer = [[PlayScore alloc] init];
 	if (!openPanel)
-		openPanel = [NSOpenPanel openPanel];
+		openPanel = [[NSOpenPanel openPanel] retain];
 	[openPanel setAllowsMultipleSelection:NO];
         if (![openPanel runModalForDirectory:@"" file:@"" types:fileTypes])
 		return;
@@ -74,7 +74,7 @@
 	if (!aScore)
 		return;
 	if (!savePanel)
-		savePanel = [NSSavePanel savePanel];
+		savePanel = [[NSSavePanel savePanel] retain];
 	if (![savePanel runModal]) {
 		NSRunAlertPanel(@"PianoRoll", @"Error with save panel.", @"OK", nil, nil);
 		return;

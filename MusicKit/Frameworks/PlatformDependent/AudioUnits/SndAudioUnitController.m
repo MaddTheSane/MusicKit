@@ -34,10 +34,6 @@
  interface component in a separate window.
 */ 
 
-// TODO: perhaps these should be promoted to ivars?
-static const CGFloat kOffsetForAUView_X = 0;
-static const CGFloat kOffsetForAUView_Y = 0;
-
 // verification method that returns true if the plugin class conforms to the protocol
 // and responds to all of its methods
 + (BOOL) plugInClassIsValid: (Class) pluginClass

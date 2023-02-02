@@ -83,7 +83,7 @@ typedef struct _midiFileInStruct {
     short format;       /* Level 0, 1 or 2 */
     int quantaSize;     /* In micro-seconds. */
     unsigned char runningStatus; /* Current MIDI running status */
-    NSMutableData *midiStream;     /* Midifile stream */
+    NSData *midiStream; /* Midifile stream */
     int curBufSize;     /* Size of data buffer */
     /* Info for current msg. These are passed up to caller */
     int quanta;	        /* Time in quanta */
@@ -108,9 +108,8 @@ typedef struct _midiFileOutStruct {
 
 /*!
   @brief Begins reading the standard MIDI file located in the NSData instance fileData.
-  TODO: should be NSData, not NSMutableData.
  */
-extern MKMIDIFileIn *MKMIDIFileBeginReading(NSMutableData *fileData, BOOL evaluateTempo);
+extern MKMIDIFileIn *MKMIDIFileBeginReading(NSData *fileData, BOOL evaluateTempo);
 
 extern void MKMIDIFileEndReading(MKMIDIFileIn *p);
 

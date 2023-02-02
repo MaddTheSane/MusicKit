@@ -59,7 +59,7 @@
  6/26/93/daj - Added replacePart:with: method.
  */
 
-#import <stdlib.h>
+#include <stdlib.h>
 #import "_musickit.h"
 #import "PartPrivate.h"
 #import "NotePrivate.h"
@@ -68,6 +68,7 @@
 #import "midifile.h"
 #import "tokens.h"
 #import "_error.h"
+#import <Foundation/Foundation.h>
 
 #import "ScorePrivate.h"
 
@@ -89,7 +90,7 @@ static NSArray<NSString*> *scoreFileExtensions = nil;
         return;
     [MKScore setVersion: VERSION2]; //sb: suggested by Stone conversion guide (replaced self)
     _MKCheckInit();
-    scoreFileExtensions = [[NSArray alloc] initWithObjects: _MK_SCOREFILEEXT, _MK_BINARYSCOREFILEEXT, nil];
+    scoreFileExtensions = [@[ _MK_SCOREFILEEXT, _MK_BINARYSCOREFILEEXT ] retain];
 }
 
 /* Create a new instance and sends [self init]. */
@@ -427,7 +428,7 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
 {
     BOOL timeBounds = (firstTimeTag != 0) || (lastTimeTag != MK_ENDOFTIME);
     NSInteger numOfParts = [parts count], partIndex;
-    NSMutableArray *allNotes = [NSMutableArray arrayWithCapacity: [self noteCount]];
+    NSMutableArray *allNotes = [NSMutableArray arrayWithCapacity: [self countOfNotes]];
 
     for (partIndex = 0; partIndex < numOfParts; partIndex++) {
 	MKPart *currentPart = [parts objectAtIndex: partIndex];
@@ -503,6 +504,53 @@ static id readScorefile(MKScore *self, NSData *stream, double firstTimeTag, doub
 	        firstTimeTag: firstTimeTag
                  lastTimeTag: lastTimeTag
 	           timeShift: timeShift];
+    _MKFinishScoreOut(p, YES);            /* Doesn't close aStream. */
+    return YES;
+}
+
+- (BOOL)writeScorefileStream: (NSMutableData *) aStream
+		firstTimeTag: (double) firstTimeTag
+		 lastTimeTag: (double) lastTimeTag
+		   timeShift: (double) timeShift
+		      binary: (BOOL) isBinary
+		       error: (NSError **) error
+{
+    //TODO: More error handling
+    _MKScoreOutStruct * p;
+    int lowTag, highTag;
+
+    if (!aStream) {
+	if (error) {
+	    *error = [NSError errorWithDomain:NSOSStatusErrorDomain code:paramErr userInfo:nil];
+	}
+	return NO;
+    }
+    p = _MKInitScoreOut(aStream, self, info, timeShift, NO, isBinary);
+    if (p == NULL) {
+	if (error) {
+	    *error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteUnknownError userInfo:nil];
+	}
+	return NO;
+    }
+    [self _noteTagRangeLowP: &lowTag highP: &highTag];
+    if (lowTag <= highTag) {
+	if (isBinary) {
+	    _MKWriteShort(aStream, _MK_noteTagRange);
+	    _MKWriteInt(aStream, lowTag);
+	    _MKWriteInt(aStream, highTag);
+	}
+	else {
+	    [aStream appendData:[[NSString stringWithFormat: @"%s = %d %s %d;\n",
+					   _MKTokNameNoCheck(_MK_noteTagRange), lowTag,
+					   _MKTokNameNoCheck(_MK_to), highTag]
+				    dataUsingEncoding: NSNEXTSTEPStringEncoding]];
+	}
+    }
+    [self writeNotesToStream: aStream
+	      scoreOutStruct: p
+		firstTimeTag: firstTimeTag
+		 lastTimeTag: lastTimeTag
+		   timeShift: timeShift];
     _MKFinishScoreOut(p, YES);            /* Doesn't close aStream. */
     return YES;
 }
@@ -947,11 +995,21 @@ static void writeNoteToMidifile(_MKMidiOutStruct *p, MKMIDIFileOut *fileStructP,
     }
 }
 
+- (BOOL)writeMidifileStream:(NSMutableData *)aStream firstTimeTag:(double)firstTimeTag lastTimeTag:(double)lastTimeTag timeShift:(double)timeShift
+{
+    return [self writeMidifileStream: aStream
+			firstTimeTag: firstTimeTag
+			 lastTimeTag: lastTimeTag
+			   timeShift: timeShift
+			       error: NULL];
+}
+
 /* Write midi on aStream. */
 - (BOOL)writeMidifileStream: (NSMutableData *) aStream
 	 firstTimeTag: (double) firstTimeTag
 	  lastTimeTag: (double) lastTimeTag
 	    timeShift: (double) timeShift
+		      error:(NSError * _Nullable * _Nullable)error
 {
     _MKMidiOutStruct *p;
     MKMIDIFileOut *fileStructP;
@@ -970,8 +1028,13 @@ static void writeNoteToMidifile(_MKMidiOutStruct *p, MKMIDIFileOut *fileStructP,
 	      INRANGE(MK_timeSignature) &&
 	      INRANGE(MK_keySignature)), @"Illegal use of parVector.");
     
-    if (!aStream)
+    if (!aStream) {
+	if (error) {
+	    *error = [NSError errorWithDomain:NSOSStatusErrorDomain
+					 code:paramErr userInfo:nil];
+	}
 	return NO;
+    }
     tempo = 60;
     if (info) {
 	if ([info isParPresent: MK_title])
@@ -987,6 +1050,11 @@ static void writeNoteToMidifile(_MKMidiOutStruct *p, MKMIDIFileOut *fileStructP,
     p = _MKInitMidiOut();
     if (!(fileStructP = MKMIDIFileBeginWriting(aStream, 1, title, [MKScore midifilesEvaluateTempo]))) {
 	_MKFinishMidiOut(p);
+	if (error) {
+	    *error = [NSError errorWithDomain:NSCocoaErrorDomain
+					 code:NSFileWriteUnknownError
+				     userInfo:nil];
+	}
 	return NO;
     }
     else 
@@ -1107,14 +1175,12 @@ static void writeNoteToMidifile(_MKMidiOutStruct *p, MKMIDIFileOut *fileStructP,
     BOOL success;
     
     success = [self writeMidifileStream: stream
-		 firstTimeTag: firstTimeTag
-		  lastTimeTag: lastTimeTag
-		    timeShift: timeShift];
+			   firstTimeTag: firstTimeTag
+			    lastTimeTag: lastTimeTag
+			      timeShift: timeShift
+				  error: error];
     if (!success) {
 	MKErrorCode(MK_musicKitErr, aFileName);
-	if (error) {
-	    *error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileWriteUnknownError userInfo:@{NSURLErrorKey: aFileName}];
-	}
 	return NO;
     }
     success = [stream writeToURL:aFileName options:0 error:error];
@@ -1204,24 +1270,18 @@ static void writeNoteToMidifile(_MKMidiOutStruct *p, MKMIDIFileOut *fileStructP,
 		error: (NSError **) error
 {
     BOOL rtnVal;
-    id stream; /*sb: could be NSMutableData or NSData */
+    NSData *stream; /*sb: could be NSMutableData or NSData */
 
     stream = [NSData dataWithContentsOfURL: fileName
 				   options: NSDataReadingMappedIfSafe
 				     error: error];
     if (stream == nil)
 	return NO;
-    rtnVal = [self readMidifileStream: stream
+    rtnVal = [self readMidiFileStream: stream
 			 firstTimeTag: firstTimeTag
 			  lastTimeTag: lastTimeTag
-			    timeShift: timeShift];
-    if (!rtnVal) {
-	if (error) {
-	    *error = [NSError errorWithDomain: NSCocoaErrorDomain
-					 code: NSFileReadUnknownError
-				     userInfo: @{NSURLErrorKey: fileName}];
-	}
-    }
+			    timeShift: timeShift
+				error: error];
     return rtnVal;
 }
 
@@ -1242,9 +1302,22 @@ static void writeDataAsNumString(MKNote *aNote, int par, unsigned char *data, in
 }
 
 - (BOOL)readMidifileStream: (NSMutableData *) aStream
+	      firstTimeTag: (double) firstTimeTag
+	       lastTimeTag: (double) lastTimeTag
+		 timeShift: (double) timeShift
+{
+    return [self readMidiFileStream: aStream
+		       firstTimeTag: firstTimeTag
+			lastTimeTag: lastTimeTag
+			  timeShift: timeShift
+			      error: NULL];
+}
+
+- (BOOL)readMidiFileStream: (NSData *) aStream
 	firstTimeTag: (double) firstTimeTag
          lastTimeTag: (double) lastTimeTag
 	   timeShift: (double) timeShift
+		     error:(NSError * _Nullable * _Nullable)error
 {
     int fileFormatLevel;
     int trackCount;
@@ -1258,11 +1331,16 @@ static void writeDataAsNumString(MKNote *aNote, int par, unsigned char *data, in
     BOOL trackInfoMidiChanWritten = NO;
     MKMIDIFileIn *fileStructP;
     
-    if (!(fileStructP = MKMIDIFileBeginReading(aStream, [MKScore midifilesEvaluateTempo])))
+    if (!(fileStructP = MKMIDIFileBeginReading(aStream, [MKScore midifilesEvaluateTempo]))) {
 	return NO;
+    }
 #   define DATA (fileStructP->data)
-    if (!MKMIDIFileReadPreamble(fileStructP, &fileFormatLevel, &trackCount))
+    if (!MKMIDIFileReadPreamble(fileStructP, &fileFormatLevel, &trackCount)) {
+	if (error) {
+	    *error = [NSError errorWithDomain:NSCocoaErrorDomain code:NSFileReadUnknownError userInfo:nil];
+	}
 	return NO;
+    }
     if (fileFormatLevel == 0)
 	trackCount = MIDIPARTS;
     else 
@@ -1446,7 +1524,7 @@ static void writeDataAsNumString(MKNote *aNote, int par, unsigned char *data, in
 		    unsigned char *p = fileStructP->data;
 		    unsigned char *endP = p + fileStructP->nData;
 		    
-		    sprintf(ptr, "%-2x", j = *p++);
+		    snprintf(ptr, "%-2x", j = *p++);
 		    ptr += 2;
 		    while (p < endP) {
 			sprintf(ptr, ",%-2x", j = *p++);
@@ -1526,8 +1604,11 @@ outOfLoop:
 
 - (BOOL)readMidiAtURL: (NSURL *) fileName error: (NSError **) error
 {
-    
-    return NO;
+    return [self readMidiAtURL: fileName
+		  firstTimeTag: 0.0
+		   lastTimeTag: MK_ENDOFTIME
+		     timeShift: 0.0
+			 error: error];
 }
 
 -(BOOL)readMidifileStream:(NSMutableData *)aStream

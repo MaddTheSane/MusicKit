@@ -105,7 +105,7 @@ static void writePartInfo(_MKScoreOutStruct *p, MKPart *aPart, NSString *partNam
       return;
     if (BINARY(p)) {
 	_MKWriteShort(aStream, _MK_partInstance);
-	_MKWriteShort(aStream, (int)NSMapGet(p->_binaryIndecies,aPart));
+	_MKWriteShort(aStream, (short)(unsigned short)(uintptr_t)NSMapGet(p->_binaryIndecies,aPart));
     }
     else {
         [aStream appendData:[[NSString stringWithFormat:@"%@ ", partName]

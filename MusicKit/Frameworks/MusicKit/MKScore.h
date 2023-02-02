@@ -176,6 +176,8 @@ NS_ASSUME_NONNULL_BEGIN
           lastTimeTag: (double) lastTimeTag
             timeShift: (double) timeShift; 
 
+//TODO: migrate to NSFileHandle?
+
 /*!
   @param  aFileName is a NSString instance.
   @return Returns the receiver or <b>nil</b> if the file couldn't be written.
@@ -356,7 +358,28 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)readMidifileStream: (NSMutableData *) aStream
         firstTimeTag: (double) firstTimeTag
          lastTimeTag: (double) lastTimeTag
-           timeShift: (double) timeShift;
+           timeShift: (double) timeShift
+NS_DEPRECATED_MAC(10.0, 10.8, "Use -readMidiFileStream:firstTimeTag:lastTimeTag:timeShift:error: instead");
+
+/*!
+  @param  aStream is a NSMutableData instance.
+  @param  firstTimeTag is a double.
+  @param  lastTimeTag is a double.
+  @param  timeShift is a double.
+  @param  error is a double.
+  @return Returns a BOOL.
+  @brief Reads the midifile from <i>aStream</i> into the receiver.
+ 
+  Only the MKNote objects that have timeTags within the
+  given boundaries are retained in the receiver.
+  <i>timeShift<b></b></i> is added to each MKNote's
+  timeTag.
+*/
+- (BOOL)readMidiFileStream: (NSData *) aStream
+	      firstTimeTag: (double) firstTimeTag
+	       lastTimeTag: (double) lastTimeTag
+		 timeShift: (double) timeShift
+		     error: (NSError **) error;
 
 /*!
   @param  fileName is a NSString instance.
@@ -437,6 +460,24 @@ NS_ASSUME_NONNULL_BEGIN
 	   lastTimeTag: (double) lastTimeTag
 	     timeShift: (double) timeShift
 		 error: (NSError**) error;
+
+/*!
+  @param  aStream is a NSMutableData instance.
+  @param  firstTimeTag is a double.
+  @param  lastTimeTag is a double.
+  @param  timeShift is a double.
+  @param  error is a pointer to an NSError.
+  @return Returns a BOOL.
+  @brief Write the receiver, as a midifile, to <i>aStream</i>.
+ 
+  Only the MKNotes within the given timeTag boundaries are written.
+  <i>timeShift</i> is added to each MKNote's timeTag.
+*/
+- (BOOL)writeMidifileStream: (NSMutableData *) aStream
+	       firstTimeTag: (double) firstTimeTag
+		lastTimeTag: (double) lastTimeTag
+		  timeShift: (double) timeShift
+		      error: (NSError**) error;
 
 /*!
   @param  aStream is a NSMutableData instance.
