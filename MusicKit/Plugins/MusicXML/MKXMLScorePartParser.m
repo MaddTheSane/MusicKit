@@ -2,7 +2,7 @@
 
 #import <AppKit/AppKit.h>
 #import "MKXMLScorePartParser.h"
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 
 @implementation MKXMLScorePartParser
 

@@ -7,12 +7,13 @@ Modification history:
 
 */
 #import <MusicKitLegacy/MusicKitLegacy.h>
-#import <MusicKitLegacy/ArielQP.h>
+//#import <MusicKitLegacy/ArielQP.h>
 #import "_unitGeneratorInclude.h"
 #import "_exportedPrivateMusickit.h"
 
 #import "DelayqpUG.h"
-@implementation DelayqpUG:MKUnitGenerator
+@implementation DelayqpUG
+#if 0
 /* DRAM Delay line for Quint Processor 
 	You instantiate a subclass of the form 
 	DelayUG<a><b>, where 
@@ -23,6 +24,7 @@ Modification history:
     int memAddr; 
     int len;   
 }
+#endif
 
 enum args { ainp, aout, pdel, adel, edel};
 

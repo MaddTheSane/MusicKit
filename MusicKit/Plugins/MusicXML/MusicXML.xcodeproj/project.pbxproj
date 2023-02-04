@@ -35,12 +35,12 @@
 		D8F028F51842A9A900EE0FE9 /* MusicXML.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D26221027EF6F101A80103 /* MusicXML.m */; };
 		D8F028F61842A9A900EE0FE9 /* MKXMLObjectContainerParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D048AF0280204E01A80103 /* MKXMLObjectContainerParser.m */; };
 		D8F028F81842A9A900EE0FE9 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */; };
-		D8F028F91842A9A900EE0FE9 /* MusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5D2621B027EF3D101A80103 /* MusicKit.framework */; };
+		D8F028F91842A9A900EE0FE9 /* MusicKitLegacy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5D2621B027EF3D101A80103 /* MusicKitLegacy.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		D8F028FF1842A9A900EE0FE9 /* Info-MusicXML__Upgraded_.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-MusicXML__Upgraded_.plist"; sourceTree = "<group>"; };
@@ -95,7 +95,7 @@
 		F5D26200027EF28D01A80103 /* MKXMLSoundParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKXMLSoundParser.h; sourceTree = "<group>"; };
 		F5D26201027EF28D01A80103 /* MKXMLTimeParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKXMLTimeParser.h; sourceTree = "<group>"; };
 		F5D26202027EF28D01A80103 /* MKXMLWorkParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MKXMLWorkParser.h; sourceTree = "<group>"; };
-		F5D2621B027EF3D101A80103 /* MusicKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MusicKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5D2621B027EF3D101A80103 /* MusicKitLegacy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MusicKitLegacy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5D2621D027EF5CD01A80103 /* mut.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = mut.xml; sourceTree = "<group>"; };
 		F5D2621E027EF5CD01A80103 /* reve-timewise.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "reve-timewise.xml"; sourceTree = "<group>"; };
 		F5D2621F027EF5CD01A80103 /* reve.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = reve.xml; sourceTree = "<group>"; };
@@ -109,7 +109,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8F028F81842A9A900EE0FE9 /* Cocoa.framework in Frameworks */,
-				D8F028F91842A9A900EE0FE9 /* MusicKit.framework in Frameworks */,
+				D8F028F91842A9A900EE0FE9 /* MusicKitLegacy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,7 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				1058C7ADFEA557BF11CA2CBB /* Cocoa.framework */,
-				F5D2621B027EF3D101A80103 /* MusicKit.framework */,
+				F5D2621B027EF3D101A80103 /* MusicKitLegacy.framework */,
 				089C1672FE841209C02AAC07 /* Foundation.framework */,
 				089C167FFE841241C02AAC07 /* AppKit.framework */,
 			);
@@ -260,7 +260,6 @@
 			knownRegions = (
 				en,
 				Base,
-				English,
 			);
 			mainGroup = 089C166AFE841209C02AAC07 /* MusicXML */;
 			projectDirPath = "";

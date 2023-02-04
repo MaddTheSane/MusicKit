@@ -11,7 +11,7 @@
 
 @interface Wave:FuncView
 {
-    id fftView;
+    IBOutlet id fftView;
 	MKOrchestra *anOrch;
     id aSP;
     id tableLook;	        /* Lookup Table*/
@@ -22,23 +22,21 @@
 }
 
 - setFftView:anObject;
-- awakeFromNib;
-- mouseDown:(NSEvent *) anEvent;
-- sawTooth:sender;
-- triangle:sender;
-- sine:sender;
-- square:sender;
-- sendFreq:sender;
-- sendAmp:sender;
+- (IBAction)sawTooth:sender;
+- (IBAction)triangle:sender;
+- (IBAction)sine:sender;
+- (IBAction)square:sender;
+- (IBAction)sendFreq:sender;
+- (IBAction)sendAmp:sender;
 - afterDrag:(float*) data length:(int)aLength offset:(int)anOffset;
 - afterUp:(float*)data length:(int)aLength;
-- setSound:sender;
+- (void)setSound:sender;
 - startSound;
 - stopSound;
-- sendPVibFreq:sender;
-- sendPVib:sender;
-- sendRVib:sender;
-- vibOnOff:sender;
+- (IBAction)sendPVibFreq:sender;
+- (IBAction)sendPVib:sender;
+- (IBAction)sendRVib:sender;
+- (IBAction)vibOnOff:sender;
 
 @end
 #endif

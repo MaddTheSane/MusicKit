@@ -1,7 +1,7 @@
 /* All Rights reserved */
 
 #import <AppKit/AppKit.h>
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import "MKXMLSAXHandler.h"
 #import "MKXMLScoreTimewiseParser.h"
 #import "MKXMLScorePartwiseParser.h"
@@ -22,7 +22,7 @@ void *createStructure(CFXMLParserRef parser,
 //    CFStringRef myDataStr2 = nil;
     const CFXMLDocumentInfo *docInfoPtr;
     CFXMLParserContext ct;
-    id h;
+	MKXMLSAXHandler *h;
     BOOL didEntity = FALSE;
     
     CFXMLParserGetContext(parser,&ct);
@@ -219,6 +219,61 @@ Boolean handleError(CFXMLParserRef parser, SInt32 error, void *info) {
     return [MKXMLSAXHandler parseData:[NSData dataWithContentsOfFile:path] intoScore:s];
 }
 
++ (MKScore *) parseURL:(NSURL *)path intoScore:(MKScore*)s error:(NSError**)error
+{
+	NSData *data = [NSData dataWithContentsOfURL:path options:0 error:error];
+	if (!data) {
+		return nil;
+	}
+	MKXMLSAXHandler *h = [MKXMLSAXHandler new];
+	[h setupWithScore:s];
+	NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];
+	parser.delegate = h;
+	if (![parser parse]) {
+		if (error) {
+			*error = parser.parserError;
+		}
+		[parser release];
+		[h release];
+		return nil;
+	}
+	MKScore *retScore = [[h score] retain];
+	[parser release];
+	[h release];
+
+	return [retScore autorelease];
+}
+
+- (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary<NSString *,NSString *> *)attributeDict;
+{
+#if DEBUG
+	fprintf(stderr,"Top level received start element name: %s attributes: %s\n",
+			[elementName cString],[[attributeDict description] cString] );
+#endif
+	if ([elementName isEqualToString:@"score-timewise"]) { //current top-of-stack item
+		id obj;
+		if (!oStack) oStack = [[NSMutableArray alloc] init];
+
+		obj = [[MKXMLScoreTimewiseParser alloc] initWithStack:oStack parent:self info:info];
+		[oStack addObject:obj];
+		[obj release];
+	}
+	else if ([elementName isEqualToString:@"score-partwise"]) {
+		id obj;
+		if (!oStack) oStack = [[NSMutableArray alloc] init];
+
+		obj = [[MKXMLScorePartwiseParser alloc] initWithStack:oStack parent:self info:info];
+		[oStack addObject:obj];
+		[obj release];
+	}
+	else {
+#if DEBUG
+		printf("top level received start element it does not recognise (%s)\n",[elementName cString]);
+#endif
+		[[oStack lastObject] startElement:elementName attributes:[[attributeDict mutableCopy] autorelease]];
+	}
+}
+
 - (void) startElement: (NSString*)elementName attributes:(NSMutableDictionary*)elementAttributes
 {
 #if DEBUG
@@ -269,6 +324,11 @@ Boolean handleError(CFXMLParserRef parser, SInt32 error, void *info) {
     return self;
 }
 
+- (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName;
+{
+	[[oStack lastObject] endElement:elementName]; // give a chance to clean up
+}
+
 - (void) endElement: (NSString*)elementName
 {
 #if DEBUG
@@ -276,6 +336,12 @@ Boolean handleError(CFXMLParserRef parser, SInt32 error, void *info) {
 #endif
     [[oStack lastObject] endElement:elementName]; // give a chance to clean up
 }
+
+- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string
+{
+	[[oStack lastObject] characters:string];
+}
+
 - (void) characters: (NSString*)name
 {
 #if DEBUG

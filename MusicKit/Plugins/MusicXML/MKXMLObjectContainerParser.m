@@ -9,7 +9,7 @@
 #import "MKXMLObjectContainerParser.h"
 #import "MKXMLNoteParser.h"
 #import "MKXMLAttributeStack.h"
-#import <MusicKit/MKPart.h>
+#import <MusicKitLegacy/MKPart.h>
 
 
 @implementation MKXMLObjectContainerParser

@@ -4,7 +4,7 @@
 #import "MKXMLMeasureParser.h"
 #import "MKXMLNoteParser.h"
 #import "MKXMLPartParser.h"
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 
 @implementation MKXMLMeasureParser
 

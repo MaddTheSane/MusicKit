@@ -34,7 +34,7 @@
 */
 #import "MKXMLSoundParser.h"
 #import "MKXMLDirectionParser.h"
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 
 @implementation MKXMLSoundParser
 // "sound" elements mostly have attributes, though can contain midi-instruments.

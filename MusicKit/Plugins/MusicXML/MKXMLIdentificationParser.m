@@ -6,7 +6,7 @@
 //  Copyright (c) 2002 Brandon IT Consulting. All rights reserved.
 //
 
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import "MKXMLIdentificationParser.h"
 
 @implementation MKXMLIdentificationParser

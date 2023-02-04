@@ -1,10 +1,12 @@
 #import "Wave.h"
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 //#import <MKUnitGenerators/MKUnitGenerators.h>
 //#import <musickit/synthpatches/Wave1vi.h>
 
 #define LOG10 2.3025
 #define MAXVALUE 0.9
+
+@class Wave1vi;
 
 @implementation Wave
   
@@ -19,7 +21,7 @@
 
 - stopSound
 {
-    if ([anOrch deviceStatus] == MK_devClosed) /* Should never happen */
+    if ([anOrch deviceStatus] == MKDeviceStatusClosed) /* Should never happen */
       return self;
     [tableLook dealloc];
     [aSP dealloc];
@@ -35,7 +37,7 @@
     /* We use a conductor-less performance.  Not normally a good idea,
      * but what we're doing is so basic that it doesn't hurt. 
      */
-    if ([anOrch deviceStatus] != MK_devClosed) /* Should never happen */
+    if ([anOrch deviceStatus] != MKDeviceStatusClosed) /* Should never happen */
       return self;
     anOrch = [MKOrchestra new];
     [anOrch setSamplingRate:44100];
@@ -75,10 +77,11 @@
     return self;
 }
 
--awakeFromNib
+-(void)awakeFromNib
 {
+    [super awakeFromNib];
     DSPTable = (DSPDatum*) calloc(tableLength,sizeof(DSPDatum));
-    DPSSetTracking(0); //Tells window server to coalesce mouse dragged events
+//    DPSSetTracking(0); //Tells window server to coalesce mouse dragged events
     frq = 10 * exp (1.5 * LOG10);
     amp = .1;
     pvibFrq = 4.5;
@@ -86,7 +89,6 @@
     rvib = .008;
     aNote = [[MKNote alloc] init];
     [self sine:self];
-    return self;
 }
 
 - (void)mouseDown:(NSEvent *) anEvent
@@ -95,7 +97,7 @@
     [super mouseDown:anEvent];
 }
 
-- sawTooth:sender
+- (IBAction)sawTooth:sender
 {
     int i;
     for(i=0;i<tableLength;i++)
@@ -105,12 +107,11 @@
       }
     [tableLook setData:DSPTable];           
     SEND_DSP_CMDS();
-    [self display];
+    [self setNeedsDisplay:YES];
     [fftView receiveData:FuncTable length:tableLength];
-    return self;
 }
 
-- triangle:sender
+- (IBAction)triangle:sender
 {
     int i;
     for(i=0;i<tableLength;i++)
@@ -123,10 +124,9 @@
     SEND_DSP_CMDS();
     [self display];
     [fftView receiveData:FuncTable length:tableLength];
-    return self;
 }
 
-- sine:sender
+- (IBAction)sine:sender
 {
     int i;
     for(i=0;i<tableLength;i++)
@@ -138,10 +138,9 @@
     SEND_DSP_CMDS();
     [self display];
     [fftView receiveData:FuncTable length:tableLength];
-    return self;
 }
 
-- square:sender
+- (IBAction)square:sender
 {
     int i;
     for(i=0;i<tableLength;i++)
@@ -153,7 +152,6 @@
     SEND_DSP_CMDS();
     [self display];
     [fftView receiveData:FuncTable length:tableLength];
-    return self;
 }
 
 - afterDrag:(float*)data length:(int)aLength offset:(int)anOffset
@@ -175,71 +173,65 @@
     return self;
 }
 
--sendFreq:sender
+-(IBAction)sendFreq:sender
 {
     frq = 10 * exp ([sender floatValue] * LOG10);
     [aNote setPar:MK_freq toDouble:frq];
     [aSP noteUpdate:aNote];
     [aNote removePar:MK_freq];
     SEND_DSP_CMDS();
-    return self;
 }
 
--sendAmp:sender
+-(IBAction)sendAmp:sender
 {
     amp = .1 * exp ([sender floatValue]);
     [aNote setPar:MK_amp toDouble:amp];
     [aSP noteUpdate:aNote];
     [aNote removePar:MK_amp];
     SEND_DSP_CMDS();
-    return self;
 }
 
--sendRVib:sender
+-(IBAction)sendRVib:sender
 {
     rvib = .04 * MKMidiToAmp([sender floatValue]);
     if (!vibOn)
-      return self;
+      return;
     [aNote setPar:MK_rvibAmp toDouble:rvib];
     [aSP noteUpdate:aNote];
     [aNote removePar:MK_rvibAmp];
     SEND_DSP_CMDS();
-    return self;
 }
 
--sendPVib:sender
+-(IBAction)sendPVib:sender
 {
     pvib = .04 * MKMidiToAmp([sender floatValue]);
     if (!vibOn)
-      return self;
+      return;
     [aNote setPar:MK_svibAmp toDouble:pvib];
     [aSP noteUpdate:aNote];
     [aNote removePar:MK_svibAmp];
     SEND_DSP_CMDS();
-    return self;
 }
 
--sendPVibFreq:sender
+-(IBAction)sendPVibFreq:sender
 {
     pvibFrq = [sender floatValue];
     [aNote setPar:MK_svibFreq toDouble:pvibFrq];
     [aSP noteUpdate:aNote];
     [aNote removePar:MK_svibFreq];
     SEND_DSP_CMDS();
-    return self;
 }
 
-- setSound:sender
+- (void)setSound:sender
 {
     int i;
     for(i=0;i<tableLength;i++)
       DSPTable[i] = DSP_FLOAT_TO_INT(MAXVALUE*(2*FuncTable[i]-1));  
     [tableLook setData:DSPTable length:tableLength offset:0];
     SEND_DSP_CMDS();
-    return self;
 }
 
-- vibOnOff:sender
+- (IBAction)vibOnOff:sender
 {
     BOOL newVibState = [[sender selectedCell] tag];
     double pa,ra;
@@ -249,7 +241,7 @@
 	pa = pvib;
 	ra = rvib;
     }
-    else return self;
+    else return;
     [aNote setPar:MK_svibAmp toDouble:pa];
     [aNote setPar:MK_rvibAmp toDouble:ra];
     [aSP noteUpdate:aNote];
@@ -257,7 +249,6 @@
     [aNote removePar:MK_svibAmp];
     [aNote removePar:MK_rvibAmp];
     vibOn = newVibState;
-    return self;
 }
 
 @end

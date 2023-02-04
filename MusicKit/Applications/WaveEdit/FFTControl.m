@@ -288,7 +288,7 @@ extern void rfft(float x[], int N, int forward );
     return self;
 }
 
-- normalize:sender
+- (IBAction)normalize:sender
 {
     int i;
     float *indWave,maxAmp,minAmp,x,scl;
@@ -307,7 +307,7 @@ extern void rfft(float x[], int N, int forward );
       }
     indWave = [waveView table];
     if (maxAmp == minAmp) /* Give up */
-      return self; 
+      return;
     scl = 1.0/(maxAmp - minAmp);
     for(i=0;i<dataLength;i++) {
 	x = *indWave;
@@ -317,11 +317,10 @@ extern void rfft(float x[], int N, int forward );
     [waveView draw:self];
     [waveView setSound:sender];
     [self receiveData:[waveView table] length:dataLength];
-    return self;
 }
 
 
-- saveTable:sender
+- (IBAction)saveTable:sender
 {
     int i;
     float *storeInd,*indData;
@@ -330,11 +329,10 @@ extern void rfft(float x[], int N, int forward );
     indData = [waveView table];
     for(i=0;i<dataLength;i++)
       *(storeInd++) =  *(indData++);
-    return self;
 }
 
 
-- restoreTable:sender
+- (IBAction)restoreTable:sender
 {
     float *storeInd;
     
@@ -344,11 +342,9 @@ extern void rfft(float x[], int N, int forward );
     [waveView draw:self];
     [waveView setSound:sender];
     [self receiveData:storeInd length:dataLength];
-    
-    return self;
 }
 
--storeCurrent:sender
+-(IBAction)storeCurrent:sender
 {
     float *indData, *indSwap;
     int i;
@@ -357,11 +353,9 @@ extern void rfft(float x[], int N, int forward );
     indSwap = swap[currentBuffer];
     for(i=0;i<dataLength;i++)
       *(indSwap++) = *(indData++);
-    
-    return self;
 }
 
--previous:sender
+-(IBAction)previous:sender
 {
     
     currentBuffer = 1 - currentBuffer;
@@ -370,10 +364,9 @@ extern void rfft(float x[], int N, int forward );
     [waveView draw:self];
     [waveView setSound:sender];
     [self receiveData:swap[1-currentBuffer] length:dataLength];
-    return self;
-}	
+}
 
-- passDraw:(float)curs :(int) tag
+- (void)passDraw:(CGFloat)curs tag:(NSInteger) tag
 {
     
     switch(tag)
@@ -382,37 +375,32 @@ extern void rfft(float x[], int N, int forward );
 	  
 	case 1 : [phiView drawSelfAux:curs] ; break ;
       }
-    return self;
 }
 
-- zoomIn:sender
+- (IBAction)zoomIn:sender
 {
     [modView zoomIn:self];
     [phiView zoomIn:self];
-    return self;
 }
 
-- zoomOut:sender
+- (IBAction)zoomOut:sender
 {
     [modView zoomOut:self];
     [phiView zoomOut:self];
-    return self;
 }
 
-- appWillTerminate:sender
+- (void)applicationWillTerminate:(NSNotification *)notification
 {
     [waveView stopSound];
-    return self;
 }
 
-- onOff:sender
+- (IBAction)onOff:sender
 {
     if ([sender intValue]) {
 	if (![waveView startSound])
 	  [(NSButton *)sender setState:0];
     }
     else [waveView stopSound];
-    return self;
 }
 
 //===================================================================
@@ -426,40 +414,32 @@ static char outputFilePath[MAXPATHLEN+1] = "";
 static char outputFileDir[MAXPATHLEN+1] = "~";
 static char outputFileName[MAXPATHLEN+1] = "WaveEdit.score";
 
--(char *) _PartialsString {
+-(NSString *) _PartialsNSString {
+    NSMutableString *s = [NSMutableString stringWithCapacity:1024];
     int point;					// current point
     int len = dataLength/2;
     float phaseVal;
-    char *s;		// output string
-    int max;		// max number of chars in the output string
     char tmp[128];	// temporary buffer for conversions
     int weHaveOne = 0;
     if (!FFTData || !dataLength)
         return NULL;
-    max=1024;
-    s=malloc(max*sizeof(char));		/* allocate array for output string */
-    strcpy(s,"[");
+    [s appendString:@"["];
     /* Omit DC component. */
     for (point=1; point<len; point++) {
-	//	phaseVal = .75-PHIData[point];
-	if (MODData[point] >= 0.001) {
-	    weHaveOne = 1;
-	    phaseVal = PHIData[point];
-	    /* 0:1 to degrees */
-	    if (phaseVal < 0)
-	      phaseVal += 1;
-	    phaseVal *= 360;
-	    sprintf(tmp,"{%d,%5.3f,%5.3f}",point,MODData[point],phaseVal);
-	    strcat(s,tmp);
-	    if (strlen(s)>max-128) {
-		max+=1024;
-		s=realloc(s,max*sizeof(char));
-	    }
-	}
+        //	phaseVal = .75-PHIData[point];
+        if (MODData[point] >= 0.001) {
+            weHaveOne = 1;
+            phaseVal = PHIData[point];
+            /* 0:1 to degrees */
+            if (phaseVal < 0)
+                phaseVal += 1;
+            phaseVal *= 360;
+            [s appendFormat:@"{%d,%5.3f,%5.3f}", point,MODData[point],phaseVal];
+        }
     }
     if (!weHaveOne) /* Give it one dummy partial in this case. */
-      strcat(s,"{1,0}]");
-    else strcat(s,"]");
+        [s appendString:@"{1,0}]"];
+    else [s appendString:@"]"];
     return s;
 }
 
@@ -467,26 +447,24 @@ static id savePanel = nil;
 
 -_saveIt:(BOOL)useDefault
 {
+	NSSavePanel *savePanel;
     BOOL flag;
     FILE *fp;
-    char *s;
-    char *name = "WaveEdit";
-    if (!savePanel) {
-	savePanel = [SavePanel new];
-	[savePanel setTitle:"WaveEdit Save"];
-	accessoryView = [[TextField alloc] init];
-	[accessoryView sizeTo:256:21];
-	[accessoryView setStringValueNoCopy:"myWaveTable"];
+    const char *name = "WaveEdit";
+    savePanel = [NSSavePanel new];
+    [savePanel setTitle:@"WaveEdit Save"];
+	accessoryView = [[NSTextField alloc] init];
+	[accessoryView setSize:NSMakeSize(256, 21)];
+	[accessoryView setStringValue:@"myWaveTable"];
 	[savePanel setAccessoryView:accessoryView];
-    }
     if (!useDefault || !strlen(outputFilePath)) {
-	[savePanel setRequiredFileType:@"score"];
-	flag = [savePanel runModalForDirectory:outputFileDir file:outputFileName];
+	[savePanel setAllowedFileTypes:@[@"score"]];
+	flag = [savePanel runModalForDirectory:[@(outputFileDir) stringByExpandingTildeInPath] file:NULL];
 	if (!flag)
 	  return self;
-	strcpy(outputFilePath,[savePanel filename]);
+	strncpy(outputFilePath, sizeof(outputFilePath), [[savePanel URL] fileSystemRepresentation]);
     }
-    s = [self _PartialsString];
+    NSString *s = [self _PartialsNSString];
     if (!s)
       return nil;
     fp = fopen(outputFilePath,"w");
@@ -494,52 +472,39 @@ static id savePanel = nil;
 	NSRunAlertPanel(@"WaveEdit",@"Can't open file %s.",@"OK",NULL,NULL,
 			outputFilePath);
 	outputFilePath[0] = '\0';
-	free(s);
+        return nil;
     }
-    name = (char *)[accessoryView stringValue];
+    name = [[accessoryView stringValue] UTF8String];
     if (!strlen(name))
       name = "WaveEdit";
     fprintf(fp,"/* Wavetable created by WaveEdit */\nwaveTable %s = %s;\n",name,
-	    s);
+	    s.UTF8String);
     fclose(fp);
-    free(s);
     return self;
 }
 
-- saveAs:sender
+- (IBAction)saveAs:sender
 {
-    return [self _saveIt:NO];
+    [self _saveIt:NO];
 }
 
-- save:sender
+- (IBAction)save:sender
 {
-    return [self _saveIt:YES];
+    [self _saveIt:YES];
 }
 
 
-- copy:sender
+- (IBAction)copy:sender
 {
-    const char *types[1];
-    int num=0;
-    char *s;		// output string
-    id pb = [Pasteboard new];
-    s = [self _PartialsString];
+    NSPasteboard *pb = [NSPasteboard pasteboardWithName:NSPasteboardNameGeneral];
+    NSString *s = [self _PartialsNSString];
     if (!s)
-      return nil;
-    types[num++] = NXAsciiPboardType;
-    [pb declareTypes: types num: num owner: [self class]];
-    [pb writeType: NXAsciiPboardType data:s length:strlen(s)];
-    free(s);
-    return self;
+      return;
+    [pb declareTypes:@[NSStringPboardType] owner:self];
+    [pb setString:s forType:NSStringPboardType];
 }
 
-static BOOL IncludesType(const NXAtom *types, NXAtom type)
-{
-    if (types) while (*types) if (*types++ == type) return YES;
-    return NO;
-}
-
-static char *eatWhiteSpace(char *p,char *pEnd)
+static const char *eatWhiteSpace(const char *p,const char *pEnd)
 {
 #define FORMFEED '\f'
 #define CR '\r'
@@ -563,15 +528,7 @@ static char *eatWhiteSpace(char *p,char *pEnd)
     return p;
 }
 
-static id abortPaste(char *data,int length)
-{
-    NXRunAlertPanel("WaveDraw",
-		    "Pasteboard doesn't contain a valid Music Kit scorefile waveTable representation: %s","OK",NULL,NULL,data);
-    [[Pasteboard new] deallocatePasteboardData:data length:length];
-    return nil;
-}
-
-static char *getNum(char *p,char *pEnd,float *rtn)
+static const char *getNum(const char *p,const char *pEnd,float *rtn)
 {
     if (!sscanf(p,"%f",rtn)) return p;
     while (p < pEnd && isdigit(*p)) p++;
@@ -589,24 +546,27 @@ static char *getNum(char *p,char *pEnd,float *rtn)
     return p;
 }
 
-- paste:sender
+- (IBAction)paste:sender
 {
-#define abortCheck() if (p==pEnd) return abortPaste(data,length)
-    char   *data,*p,*pEnd;
+#define abortCheck() if (p==pEnd) return
+    const char   *data,*p,*pEnd;
     int     length,l;
-    const NXAtom *types;
-    id pboard = [Pasteboard new];
+    NSArray *types;
+    NSPasteboard *pboard = [NSPasteboard pasteboardWithName:NSPasteboardNameGeneral];
     int i;
     float x;
     float *myMODData = (float*) calloc(dataLength/2,sizeof(float));
     float *myPHIData = (float*) calloc(dataLength/2,sizeof(float));
     /* Copy it to a local place in case there's a parse error */
     types = [pboard types];
-    if (!IncludesType(types, NXAsciiPboardType)) {
-	NXBeep();
-	return nil;
+    if (![types containsObject:NSStringPboardType]) {
+	NSBeep();
+	return;
     }
-    [pboard readType:NXAsciiPboardType data:&data length:&length];
+	NSString *strData = [pboard stringForType:NSStringPboardType];
+	data = [strData UTF8String];
+	length = strlen(data);
+	//TODO: migrate to NSScanner?
     l = dataLength/2;
     if (!length)
       NSBeep();
@@ -621,13 +581,13 @@ static char *getNum(char *p,char *pEnd,float *rtn)
 	if (*p == ']') 
 	  break;
 	else if (*p++ != '{')
-	  return abortPaste(data,length);
+	  return;
 	p = eatWhiteSpace(p,pEnd); abortCheck();
 	p = getNum(p,pEnd,&x); abortCheck();
 	i = x; 
 	p = eatWhiteSpace(p,pEnd); abortCheck();
 	if (*p++ != ',') 
-	  return abortPaste(data,length);
+	  return;
 	p = eatWhiteSpace(p,pEnd); abortCheck();
 	p = getNum(p,pEnd,&x); abortCheck();
 	if (i < l) { /* Not too high? */
@@ -639,7 +599,7 @@ static char *getNum(char *p,char *pEnd,float *rtn)
 	    p++;
 	} else {
 	    if (*p++ != ',') 
-	      return abortPaste(data,length);
+	      return;
 	    p = eatWhiteSpace(p,pEnd); abortCheck();
 	    p = getNum(p,pEnd,&x); abortCheck();
 	    if (i < l) {
@@ -650,11 +610,10 @@ static char *getNum(char *p,char *pEnd,float *rtn)
 		myPHIData[i] = x;
 	    }
 	    if (*p++ != '}') 
-	      return abortPaste(data,length);
+	      return;
 	}
 	p = eatWhiteSpace(p,pEnd);
     }
-    [pboard deallocatePasteboardData:data length:length];
     [modView setFuncTable:myMODData length:l offset:0];
     [phiView setFuncTable:myPHIData length:l offset:0];
     [modView draw:self];
@@ -663,7 +622,6 @@ static char *getNum(char *p,char *pEnd,float *rtn)
     [self setPhi:myPHIData];
     free(myMODData);
     free(myPHIData);
-    return self;
 }
 
 

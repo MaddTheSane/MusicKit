@@ -2,7 +2,7 @@
 
 #import <AppKit/AppKit.h>
 #import "MKXMLMidiInstrumentParser.h"
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 
 @implementation MKXMLMidiInstrumentParser
 

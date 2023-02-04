@@ -7,7 +7,7 @@
 //
 
 #import "MKXMLScorePartwiseParser.h"
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 
 
 @implementation MKXMLScorePartwiseParser

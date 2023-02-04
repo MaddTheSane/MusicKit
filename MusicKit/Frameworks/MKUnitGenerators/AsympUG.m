@@ -61,7 +61,8 @@ Modification history:
 //#define  MAX(A,B)	((A) > (B) ? (A) : (B))
 //#endif
 
-@implementation AsympUG:MKUnitGenerator
+@implementation AsympUG
+#if 0
 /* Asymptotic ramper for writing to patch points.
    This may be used as a simple ramper but also contains
    support for sending an envelope to the DSP incrementally.
@@ -119,6 +120,7 @@ Modification history:
     double _reservedAsymp7;
     DSPDatum _reservedAsymp8;
 }
+#endif
 enum _args { aout, trg, rate, amp};
 
 #define _tScale _reservedAsymp1

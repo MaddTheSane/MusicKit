@@ -1,7 +1,7 @@
 /* All Rights reserved */
 
 #import <AppKit/AppKit.h>
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 #import "MKXMLNoteParser.h"
 #import "MKXMLPartParser.h"
 #import "MKXMLMeasureParser.h"

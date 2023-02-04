@@ -22,7 +22,7 @@ typedef struct {
 
 @interface MKXMLSAXHandler : GSSAXHandler
 #else
-@interface MKXMLSAXHandler : NSObject
+@interface MKXMLSAXHandler : NSObject <NSXMLParserDelegate>
 #endif
 {
 // stacks on the mill (more on still)
@@ -32,6 +32,7 @@ typedef struct {
 
 + (MKScore *) parseData:(NSData *)data intoScore:(MKScore*)s;
 + (MKScore *) parseFile:(NSString *)path intoScore:(MKScore*)s;
++ (MKScore *) parseURL:(NSURL *)path intoScore:(MKScore*)s error:(NSError**)error;
 - (MKScore *) score;
 - setupWithScore:(MKScore *)s;
 

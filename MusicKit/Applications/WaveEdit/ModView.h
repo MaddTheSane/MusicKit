@@ -12,9 +12,8 @@
     int block;
 }
 
-- setFFTControler:anObject;
+@property (assign) IBOutlet id FFTControler;
 - afterUp:(float*)data length:(int)aLength;
-- drawSelf:(NSRect *)rect : (int)rectCount;
 - drawSelfAux:(float)origin;
 
 @end

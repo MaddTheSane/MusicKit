@@ -25,7 +25,7 @@
 
 @interface FuncView: NSView
 {
-    id scrollView;			// The optional ScrollView containing the FuncView
+    NSScrollView *scrollView;		// The optional ScrollView containing the FuncView
     NSRect clip;
     NSRect funcFrame;
     float *FuncTable;		// The array where the function's values are stored
@@ -40,14 +40,9 @@
 // This method creates a new FuncView instance and sets the size of its FuncTable array to the
 // width of *(frameRect). If you want to set the FuncTable to a different size, use setTableLengh.
 
-+ newFrame:(NSRect *) frameRect;
-
 // Use this method to connect the FuncView to a ScrollView's docView;
 
-- setScrollView:anObject;
-	
-- drawSelf:(NSRect *) rect : (int) rectCount;
-- mouseDown:(NSEvent *) anEvent;
+@property (nonatomic, assign) IBOutlet NSScrollView *scrollView;
 
 // afterDrag is called by the FuncView object each time it receives a mouseDragged event; 
 // The default implementation just returns self. You can override this method to perform any action
@@ -63,37 +58,31 @@
 
 - afterUp:(float*)data length:(int)aLength;
 
-// table returns a pointer to the FuncTable array;
+//! table returns a pointer to the FuncTable array;
+- (float*) table NS_RETURNS_INNER_POINTER;
 
-- (float*) table;
-
-// tableLength returns the size of the FuncTable array;
-
+//! tableLength returns the size of the FuncTable array;
 - (int) tableLength;
 
-// setFuncTable sets copies aLength values from the array data to the FuncTable starting at anOffset
-// It returns the number of data actually read (in case Offset+Length is larger than tableLength.)
-// You must invoque the draw:sender method to make the FuncView display what you sent.
-
+//! setFuncTable sets copies aLength values from the array data to the FuncTable starting at anOffset
+//! It returns the number of data actually read (in case Offset+Length is larger than tableLength.)
+//! You must invoque the draw:sender method to make the FuncView display what you sent.
 - (int)setFuncTable:(float*)data length:(int)aLength offset:(int)anOffset;
 
-// draw sends the FuncView or the scrollView object a display:self message. 
+//! draw sends the FuncView or the scrollView object a display:self message.
+- (IBAction)draw:sender;
 
-- draw:sender;
+//! Use this method to select the display mode: CONTINUOUS or DISCRETE. The method doesn't
+//! do anything if the FuncView object is not used in a scrollView. When the width of the View is
+//! equal to the length of the FuncTable array, the discrete mode is switched to continuous.
+-(void)setDisplayMode:(int)aMode;
 
-// Use this method to select the display mode: CONTINUOUS or DISCRETE. The method doesn't 
-// do anything if the FuncView object is not used in a scrollView. When the width of the View is
-// equal to the length of the FuncTable array, the discrete mode is switched to continuous.
-
--setDisplayMode:(int)aMode;
-
-// Use this method to set the size of the array FuncTable containing the values of the function.
-// If the FuncView is used in a ScrollView, then the size of the array FuncTable is set to aLength.
-// If the FuncView object is not used in a scrollView, the method returns the maximum length 
-// possibly available, and sets the size of the FuncView to the nearest multiple of the FuncTable's
-// size. For example, if the original size of the FuncView object was 200 and if you want to set the
-// FuncTable size to 45, the FuncView object will be resized to 4*45 = 180. 
-
+//! Use this method to set the size of the array FuncTable containing the values of the function.
+//! If the FuncView is used in a ScrollView, then the size of the array FuncTable is set to aLength.
+//! If the FuncView object is not used in a scrollView, the method returns the maximum length
+//! possibly available, and sets the size of the FuncView to the nearest multiple of the FuncTable's
+//! size. For example, if the original size of the FuncView object was 200 and if you want to set the
+//! FuncTable size to 45, the FuncView object will be resized to 4*45 = 180.
 -(int)setTableLength:(int)aLength;
 
 // This method double the current ratio (size of FuncTable / size of the View);
@@ -101,15 +90,13 @@
 
 -(IBAction)zoomIn:sender;
 
-// This method halves the current ratio (size of FuncTable / size of the View);
-// It doesn't do anything if the FuncView object is not used in a scrollView.
-
+//! This method halves the current ratio (size of FuncTable / size of the View);
+//! It doesn't do anything if the FuncView object is not used in a scrollView.
 -(IBAction)zoomOut:sender;
 
-// Use this method to make the FuncView object editable (flag = YES) or not (flag = NO) 
-// The default mode is editable;
-
--setEditable:(BOOL)flag;
+//! Use this method to make the FuncView object editable (flag = YES) or not (flag = NO)
+//! The default mode is editable;
+-(void)setEditable:(BOOL)flag;
 
 @end
 #endif

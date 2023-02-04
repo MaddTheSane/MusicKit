@@ -1,0 +1,818 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
+            <connections>
+                <outlet property="delegate" destination="35" id="172"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <menu title="WaveEdit" systemMenu="main" id="5" userLabel="MainMenu">
+            <items>
+                <menuItem title="WaveEdit" id="qFl-hw-ePV">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="WaveEdit" id="Fab-Ii-Vkp">
+                        <items>
+                            <menuItem title="About WaveEdit" id="71">
+                                <connections>
+                                    <action selector="orderFront:" target="77" id="160"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="ClX-yY-gF3"/>
+                            <menuItem title="Preferences…" keyEquivalent="," id="hs9-FE-jyX"/>
+                            <menuItem isSeparatorItem="YES" id="k9w-Nr-jEM"/>
+                            <menuItem title="Services" id="Qd5-vB-EiH">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Services" systemMenu="services" id="lOx-A4-FO9"/>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="Faa-4d-77T"/>
+                            <menuItem title="Hide WaveEdit" keyEquivalent="h" id="88">
+                                <connections>
+                                    <action selector="hide:" target="-2" id="119"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Hide Others" keyEquivalent="h" id="iJg-ip-pqz">
+                                <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                <connections>
+                                    <action selector="hideOtherApplications:" target="-1" id="Elp-mm-0SH"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Show All" id="bBN-OS-lco">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="unhideAllApplications:" target="-1" id="xfB-g4-p5F"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="siU-Um-lJC"/>
+                            <menuItem title="Quit WaveEdit" keyEquivalent="q" id="34">
+                                <connections>
+                                    <action selector="terminate:" target="-2" id="120"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Document" id="7">
+                    <menu key="submenu" title="Document" id="64">
+                        <items>
+                            <menuItem title="Save" keyEquivalent="s" id="30">
+                                <connections>
+                                    <action selector="save:" target="35" id="170"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Save As..." keyEquivalent="S" id="47">
+                                <connections>
+                                    <action selector="saveAs:" target="35" id="171"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Edit" id="100">
+                    <menu key="submenu" title="Edit" id="45">
+                        <items>
+                            <menuItem title="Copy" keyEquivalent="c" id="56">
+                                <connections>
+                                    <action selector="copy:" target="-1" id="147"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Paste" keyEquivalent="v" id="19">
+                                <connections>
+                                    <action selector="paste:" target="-1" id="148"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Help" id="n3e-qL-kYG">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Help" id="K2x-Vw-L6v">
+                        <items>
+                            <menuItem title="Help..." keyEquivalent="?" id="108">
+                                <connections>
+                                    <action selector="showHelp:" target="-1" id="159"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+            </items>
+            <point key="canvasLocation" x="-136" y="120"/>
+        </menu>
+        <customObject id="35" userLabel="FFTControlInstance" customClass="FFTControl">
+            <connections>
+                <outlet property="convView" destination="81" id="126"/>
+                <outlet property="modView" destination="42" id="123"/>
+                <outlet property="phiView" destination="25" id="121"/>
+                <outlet property="waveView" destination="107" id="122"/>
+            </connections>
+        </customObject>
+        <window title="WaveEdit Vibrato" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="48" userLabel="More Controls" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="827" y="112" width="225" height="182"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+            <view key="contentView" id="43">
+                <rect key="frame" x="0.0" y="0.0" width="225" height="182"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <box fixedFrame="YES" title="Vibrato" translatesAutoresizingMaskIntoConstraints="NO" id="14">
+                        <rect key="frame" x="9" y="8" width="203" height="171"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="g9d-HG-Z1W">
+                            <rect key="frame" x="4" y="5" width="195" height="151"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <box fixedFrame="YES" title="Periodic" translatesAutoresizingMaskIntoConstraints="NO" id="83">
+                                    <rect key="frame" x="6" y="8" width="114" height="125"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <view key="contentView" id="1zf-DG-lC3">
+                                        <rect key="frame" x="4" y="5" width="106" height="105"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <box fixedFrame="YES" title="Freq" translatesAutoresizingMaskIntoConstraints="NO" id="36">
+                                                <rect key="frame" x="9" y="6" width="40" height="101"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <view key="contentView" id="p4A-sf-PIT">
+                                                    <rect key="frame" x="4" y="5" width="32" height="81"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <subviews>
+                                                        <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="106">
+                                                            <rect key="frame" x="9" y="4" width="16" height="78"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" minValue="1" maxValue="9" doubleValue="4.5" tickMarkPosition="right" sliderType="linear" id="180"/>
+                                                            <connections>
+                                                                <action selector="sendPVibFreq:" target="107" id="154"/>
+                                                            </connections>
+                                                        </slider>
+                                                    </subviews>
+                                                </view>
+                                                <font key="titleFont" size="12" name="Helvetica"/>
+                                            </box>
+                                            <box fixedFrame="YES" title="Amp" translatesAutoresizingMaskIntoConstraints="NO" id="4">
+                                                <rect key="frame" x="58" y="6" width="45" height="101"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <view key="contentView" id="9lj-B1-Yec">
+                                                    <rect key="frame" x="4" y="5" width="37" height="81"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <subviews>
+                                                        <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="31">
+                                                            <rect key="frame" x="12" y="5" width="16" height="78"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" maxValue="64" doubleValue="20" tickMarkPosition="right" sliderType="linear" id="181"/>
+                                                            <connections>
+                                                                <action selector="sendPVib:" target="107" id="155"/>
+                                                            </connections>
+                                                        </slider>
+                                                    </subviews>
+                                                </view>
+                                                <font key="titleFont" size="12" name="Helvetica"/>
+                                            </box>
+                                        </subviews>
+                                    </view>
+                                    <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                                </box>
+                                <box fixedFrame="YES" title="Random" translatesAutoresizingMaskIntoConstraints="NO" id="85">
+                                    <rect key="frame" x="128" y="8" width="67" height="124"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <view key="contentView" id="EuP-fy-Uq2">
+                                        <rect key="frame" x="4" y="5" width="59" height="104"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <box fixedFrame="YES" title="Amp" translatesAutoresizingMaskIntoConstraints="NO" id="113">
+                                                <rect key="frame" x="9" y="6" width="43" height="101"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <view key="contentView" id="iGG-5x-5hA">
+                                                    <rect key="frame" x="4" y="5" width="35" height="81"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <subviews>
+                                                        <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9">
+                                                            <rect key="frame" x="12" y="5" width="16" height="78"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" maxValue="64" doubleValue="20" tickMarkPosition="right" sliderType="linear" id="182"/>
+                                                            <connections>
+                                                                <action selector="sendRVib:" target="107" id="156"/>
+                                                            </connections>
+                                                        </slider>
+                                                    </subviews>
+                                                </view>
+                                                <font key="titleFont" size="12" name="Helvetica"/>
+                                            </box>
+                                        </subviews>
+                                    </view>
+                                    <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                                </box>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                    </box>
+                    <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="51">
+                        <rect key="frame" x="59" y="146" width="108" height="15"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <size key="cellSize" width="54" height="15"/>
+                        <size key="intercellSpacing" width="0.0" height="3"/>
+                        <buttonCell key="prototype" type="radio" title="Radio" imagePosition="leading" alignment="left" controlSize="small" inset="2" id="204">
+                            <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="smallSystem"/>
+                        </buttonCell>
+                        <cells>
+                            <column>
+                                <buttonCell type="radio" title="Off" imagePosition="leading" alignment="left" controlSize="small" state="on" inset="2" id="101">
+                                    <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                            </column>
+                            <column>
+                                <buttonCell type="radio" title="On" imagePosition="leading" alignment="left" controlSize="small" tag="1" inset="2" id="23">
+                                    <behavior key="behavior" pushIn="YES" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="smallSystem"/>
+                                </buttonCell>
+                            </column>
+                        </cells>
+                        <connections>
+                            <action selector="vibOnOff:" target="107" id="158"/>
+                        </connections>
+                    </matrix>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="-1612" y="21"/>
+        </window>
+        <window title="Info" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="77" userLabel="InfoPanel" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="166" y="710" width="295" height="81"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+            <view key="contentView" id="93">
+                <rect key="frame" x="0.0" y="0.0" width="295" height="81"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="15">
+                        <rect key="frame" x="80" y="54" width="87" height="22"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="left" title="WaveEdit" id="176">
+                            <font key="font" size="18" name="Helvetica"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="20">
+                        <rect key="frame" x="96" y="36" width="301" height="19"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="left" title="by J. Laroche, " id="177">
+                            <font key="font" size="16" name="Helvetica"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6">
+                        <rect key="frame" x="128" y="5" width="104" height="12"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="center" title="Music Kit release 4.0. " id="175">
+                            <font key="font" size="9" name="Helvetica"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="105">
+                        <rect key="frame" x="113" y="16" width="301" height="19"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" alignment="left" title="with extensions by D. Jaffe" id="178">
+                            <font key="font" size="12" name="Helvetica"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <imageView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="173">
+                        <rect key="frame" x="11" y="5" width="71" height="65"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="foo" id="179"/>
+                    </imageView>
+                </subviews>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="35" id="150"/>
+            </connections>
+            <point key="canvasLocation" x="-465" y="91"/>
+        </window>
+        <window title="WaveEdit" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="109" userLabel="MyWindow">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="123" y="80" width="723" height="729"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
+            <view key="contentView" id="103">
+                <rect key="frame" x="0.0" y="0.0" width="723" height="729"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <box toolTip="Operation Box" fixedFrame="YES" title="Operations" translatesAutoresizingMaskIntoConstraints="NO" id="33">
+                        <rect key="frame" x="11" y="11" width="393" height="216"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="Eig-XA-ltG">
+                            <rect key="frame" x="4" y="5" width="385" height="196"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <box fixedFrame="YES" title="Operation" translatesAutoresizingMaskIntoConstraints="NO" id="53">
+                                    <rect key="frame" x="292" y="38" width="89" height="115"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <view key="contentView" id="lEx-dS-avb">
+                                        <rect key="frame" x="4" y="5" width="81" height="95"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="21">
+                                                <rect key="frame" x="13" y="69" width="55" height="27"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <buttonCell key="cell" type="push" title="Filter" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" inset="2" id="189">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="smallSystem"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="convolve:" target="35" id="127"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="111">
+                                                <rect key="frame" x="6" y="39" width="70" height="27"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <buttonCell key="cell" type="push" title="Multiply" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" inset="2" id="190">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="smallSystem"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="multiply:" target="35" id="137"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="104">
+                                                <rect key="frame" x="0.0" y="8" width="81" height="24"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <buttonCell key="cell" type="push" title="Normalize" bezelStyle="rounded" alignment="center" controlSize="small" borderStyle="border" inset="2" id="191">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="smallSystem"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="normalize:" target="35" id="169"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </view>
+                                    <font key="titleFont" size="12" name="Helvetica"/>
+                                </box>
+                                <box fixedFrame="YES" title="Operation Window" translatesAutoresizingMaskIntoConstraints="NO" id="92">
+                                    <rect key="frame" x="5" y="5" width="285" height="185"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <view key="contentView" id="XuR-7m-CGf">
+                                        <rect key="frame" x="4" y="5" width="277" height="165"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <customView toolTip="Operation Box" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="81" customClass="FuncView">
+                                                <rect key="frame" x="5" y="9" width="256" height="136"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                            </customView>
+                                        </subviews>
+                                    </view>
+                                    <font key="titleFont" size="12" name="Helvetica"/>
+                                </box>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                    </box>
+                    <box toolTip="Memory" fixedFrame="YES" title="Memory" translatesAutoresizingMaskIntoConstraints="NO" id="61">
+                        <rect key="frame" x="415" y="11" width="155" height="215"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="aBb-YV-sZh">
+                            <rect key="frame" x="4" y="5" width="147" height="195"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <box fixedFrame="YES" title="Save" translatesAutoresizingMaskIntoConstraints="NO" id="27">
+                                    <rect key="frame" x="11" y="69" width="44" height="131"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <view key="contentView" id="NKA-b9-5sO">
+                                        <rect key="frame" x="4" y="5" width="36" height="111"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <matrix verticalHuggingPriority="750" fixedFrame="YES" mode="highlight" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="118">
+                                                <rect key="frame" x="5" y="5" width="30" height="108"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                <size key="cellSize" width="30" height="24"/>
+                                                <size key="intercellSpacing" width="4" height="4"/>
+                                                <buttonCell key="prototype" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" tag="-1" inset="2" id="205">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" size="12" name="Helvetica"/>
+                                                </buttonCell>
+                                                <cells>
+                                                    <column>
+                                                        <buttonCell type="push" title="A" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="84">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                        <buttonCell type="push" title="B" bezelStyle="rounded" alignment="center" borderStyle="border" tag="1" inset="2" id="98">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                        <buttonCell type="push" title="C" bezelStyle="rounded" alignment="center" borderStyle="border" tag="2" inset="2" id="8">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                        <buttonCell type="push" title="D" bezelStyle="rounded" alignment="center" borderStyle="border" tag="3" inset="2" id="24">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                    </column>
+                                                </cells>
+                                                <connections>
+                                                    <action selector="saveTable:" target="35" id="139"/>
+                                                </connections>
+                                            </matrix>
+                                        </subviews>
+                                    </view>
+                                    <font key="titleFont" size="12" name="Helvetica"/>
+                                </box>
+                                <box fixedFrame="YES" title="Restore" translatesAutoresizingMaskIntoConstraints="NO" id="55">
+                                    <rect key="frame" x="74" y="69" width="70" height="131"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <view key="contentView" id="aVP-TH-eW8">
+                                        <rect key="frame" x="4" y="5" width="62" height="111"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <matrix verticalHuggingPriority="750" fixedFrame="YES" mode="highlight" allowsEmptySelection="NO" autosizesCells="NO" translatesAutoresizingMaskIntoConstraints="NO" id="38">
+                                                <rect key="frame" x="5" y="5" width="56" height="108"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                <size key="cellSize" width="56" height="24"/>
+                                                <size key="intercellSpacing" width="4" height="4"/>
+                                                <buttonCell key="prototype" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" tag="-1" inset="2" id="206">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" size="12" name="Helvetica"/>
+                                                </buttonCell>
+                                                <cells>
+                                                    <column>
+                                                        <buttonCell type="push" title="A" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="37">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                        <buttonCell type="push" title="B" bezelStyle="rounded" alignment="center" borderStyle="border" tag="1" inset="2" id="80">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                        <buttonCell type="push" title="C" bezelStyle="rounded" alignment="center" borderStyle="border" tag="2" inset="2" id="73">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                        <buttonCell type="push" title="D" bezelStyle="rounded" alignment="center" borderStyle="border" tag="3" inset="2" id="95">
+                                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                            <font key="font" size="12" name="Helvetica"/>
+                                                        </buttonCell>
+                                                    </column>
+                                                </cells>
+                                                <connections>
+                                                    <action selector="restoreTable:" target="35" id="140"/>
+                                                </connections>
+                                            </matrix>
+                                        </subviews>
+                                    </view>
+                                    <font key="titleFont" size="12" name="Helvetica"/>
+                                </box>
+                                <button verticalHuggingPriority="750" fixedFrame="YES" tag="4" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="66">
+                                    <rect key="frame" x="6" y="43" width="141" height="20"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <buttonCell key="cell" type="push" title="UNDO" bezelStyle="rounded" alignment="center" borderStyle="border" tag="4" inset="2" id="196">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" size="12" name="Helvetica"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="previous:" target="35" id="141"/>
+                                    </connections>
+                                </button>
+                                <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="58">
+                                    <rect key="frame" x="6" y="23" width="141" height="20"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <buttonCell key="cell" type="push" title="Copy to Pasteboard " bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="197">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" size="12" name="Helvetica"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="copy:" target="-1" id="152"/>
+                                    </connections>
+                                </button>
+                                <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="60">
+                                    <rect key="frame" x="6" y="3" width="141" height="20"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <buttonCell key="cell" type="push" title="Paste from Pasteboard " bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="198">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" size="12" name="Helvetica"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="paste:" target="-1" id="153"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                    </box>
+                    <box toolTip="Waveform Display" fixedFrame="YES" title="Waveform Display" translatesAutoresizingMaskIntoConstraints="NO" id="2">
+                        <rect key="frame" x="13" y="473" width="699" height="246"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="Fei-Jh-wxs">
+                            <rect key="frame" x="4" y="5" width="691" height="226"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="17" customClass="NSScrollView">
+                                    <rect key="frame" x="5" y="5" width="557" height="223"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </customView>
+                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="107" customClass="Wave">
+                                    <rect key="frame" x="24" y="25" width="512" height="181"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <connections>
+                                        <outlet property="fftView" destination="35" id="124"/>
+                                        <outlet property="scrollView" destination="17" id="135"/>
+                                    </connections>
+                                </customView>
+                                <box fixedFrame="YES" title="Zoom" translatesAutoresizingMaskIntoConstraints="NO" id="114">
+                                    <rect key="frame" x="597" y="11" width="70" height="75"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <view key="contentView" id="EhO-HN-WUh">
+                                        <rect key="frame" x="4" y="5" width="62" height="55"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="57">
+                                                <rect key="frame" x="5" y="33" width="56" height="24"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <buttonCell key="cell" type="push" title="In" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="183">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" size="12" name="Helvetica"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="zoomIn:" target="107" id="133"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="44">
+                                                <rect key="frame" x="5" y="5" width="56" height="24"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <buttonCell key="cell" type="push" title="Out" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="184">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" size="12" name="Helvetica"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="zoomOut:" target="107" id="134"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </view>
+                                    <font key="titleFont" size="12" name="Helvetica"/>
+                                </box>
+                                <box fixedFrame="YES" title="Wave-Forms" translatesAutoresizingMaskIntoConstraints="NO" id="29">
+                                    <rect key="frame" x="579" y="90" width="101" height="137"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <view key="contentView" id="Qoc-Ot-77X">
+                                        <rect key="frame" x="4" y="5" width="93" height="117"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="49">
+                                                <rect key="frame" x="13" y="93" width="71" height="25"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <buttonCell key="cell" type="push" title="Sine" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="185">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" size="12" name="Helvetica"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="sine:" target="107" id="128"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="87">
+                                                <rect key="frame" x="13" y="64" width="71" height="25"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <buttonCell key="cell" type="push" title="Square" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="186">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" size="12" name="Helvetica"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="square:" target="107" id="129"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="46">
+                                                <rect key="frame" x="1" y="38" width="88" height="25"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <buttonCell key="cell" type="push" title="Saw-Tooth" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="187">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" size="12" name="Helvetica"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="sawTooth:" target="107" id="130"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3">
+                                                <rect key="frame" x="1" y="6" width="89" height="25"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <buttonCell key="cell" type="push" title="Triangle" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="188">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" size="12" name="Helvetica"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="triangle:" target="107" id="131"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </view>
+                                    <font key="titleFont" size="12" name="Helvetica"/>
+                                </box>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                    </box>
+                    <box toolTip="Synthesis" fixedFrame="YES" title="Synthesis" translatesAutoresizingMaskIntoConstraints="NO" id="52">
+                        <rect key="frame" x="579" y="9" width="133" height="217"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="Mjt-O9-bM4">
+                            <rect key="frame" x="4" y="5" width="125" height="197"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <box fixedFrame="YES" title="Vol." translatesAutoresizingMaskIntoConstraints="NO" id="89">
+                                    <rect key="frame" x="77" y="96" width="41" height="103"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <view key="contentView" id="pP6-u3-Y3w">
+                                        <rect key="frame" x="4" y="5" width="33" height="83"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="40">
+                                                <rect key="frame" x="11" y="6" width="16" height="79"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" minValue="-4" tickMarkPosition="right" sliderType="linear" id="192"/>
+                                                <connections>
+                                                    <action selector="sendAmp:" target="107" id="138"/>
+                                                </connections>
+                                            </slider>
+                                        </subviews>
+                                    </view>
+                                    <font key="titleFont" size="12" name="Helvetica"/>
+                                </box>
+                                <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="75">
+                                    <rect key="frame" x="3" y="6" width="122" height="58"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <buttonCell key="cell" type="square" title="SOUND" bezelStyle="shadowlessSquare" image="foo" imagePosition="above" alignment="center" borderStyle="border" inset="2" id="193">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="onOff:" target="35" id="151"/>
+                                    </connections>
+                                </button>
+                                <box fixedFrame="YES" title="Pitch" translatesAutoresizingMaskIntoConstraints="NO" id="116">
+                                    <rect key="frame" x="14" y="96" width="43" height="102"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <view key="contentView" id="Ogt-Np-OLH">
+                                        <rect key="frame" x="4" y="5" width="35" height="82"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="82">
+                                                <rect key="frame" x="11" y="6" width="16" height="78"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <sliderCell key="cell" controlSize="small" continuous="YES" alignment="left" minValue="1" maxValue="2" doubleValue="1.5" tickMarkPosition="right" sliderType="linear" id="194"/>
+                                                <connections>
+                                                    <action selector="sendFreq:" target="107" id="132"/>
+                                                </connections>
+                                            </slider>
+                                        </subviews>
+                                    </view>
+                                    <font key="titleFont" size="12" name="Helvetica"/>
+                                </box>
+                                <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="112">
+                                    <rect key="frame" x="11" y="69" width="109" height="20"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <buttonCell key="cell" type="push" title="More Controls" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="195">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" size="12" name="Helvetica"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="orderFront:" target="48" id="157"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                    </box>
+                    <box toolTip="FFT Display" fixedFrame="YES" title="FFT Display" translatesAutoresizingMaskIntoConstraints="NO" id="69">
+                        <rect key="frame" x="10" y="230" width="703" height="237"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <view key="contentView" id="0Ia-cE-iMb">
+                            <rect key="frame" x="4" y="5" width="695" height="217"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="26" customClass="NSScrollView">
+                                    <rect key="frame" x="402" y="28" width="286" height="185"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </customView>
+                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="16" customClass="NSScrollView">
+                                    <rect key="frame" x="14" y="28" width="286" height="185"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </customView>
+                                <box fixedFrame="YES" title="Zoom" translatesAutoresizingMaskIntoConstraints="NO" id="117">
+                                    <rect key="frame" x="316" y="124" width="70" height="75"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <view key="contentView" id="Lkz-d4-jKV">
+                                        <rect key="frame" x="4" y="5" width="62" height="55"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="90">
+                                                <rect key="frame" x="5" y="33" width="56" height="24"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <buttonCell key="cell" type="push" title="IN" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="199">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" size="12" name="Helvetica"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="zoomIn:" target="35" id="142"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="63">
+                                                <rect key="frame" x="5" y="5" width="56" height="24"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <buttonCell key="cell" type="push" title="OUT" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="200">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" size="12" name="Helvetica"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="zoomOut:" target="35" id="143"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </view>
+                                    <font key="titleFont" size="12" name="Helvetica"/>
+                                </box>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="68">
+                                    <rect key="frame" x="485" y="6" width="120" height="21"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <textFieldCell key="cell" selectable="YES" editable="YES" state="on" alignment="center" title="Phase vs frequency" id="201">
+                                        <font key="font" size="12" name="Helvetica"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="18">
+                                    <rect key="frame" x="88" y="5" width="141" height="21"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <textFieldCell key="cell" selectable="YES" editable="YES" state="on" alignment="center" title="Amplitude vs frequency" id="202">
+                                        <font key="font" size="12" name="Helvetica"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <box fixedFrame="YES" title="Display" translatesAutoresizingMaskIntoConstraints="NO" id="102">
+                                    <rect key="frame" x="316" y="44" width="70" height="56"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <view key="contentView" id="XKo-LH-9bH">
+                                        <rect key="frame" x="4" y="5" width="62" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <subviews>
+                                            <button verticalHuggingPriority="750" fixedFrame="YES" imageHugsTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="50">
+                                                <rect key="frame" x="5" y="8" width="63" height="24"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <buttonCell key="cell" type="push" title="Linear" alternateTitle="dB" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="203">
+                                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                                    <font key="font" size="12" name="Helvetica"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="setLogDisplay:" target="35" id="136"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </view>
+                                    <font key="titleFont" size="12" name="Helvetica"/>
+                                </box>
+                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="42" customClass="ModView">
+                                    <rect key="frame" x="31" y="43" width="256" height="144"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <connections>
+                                        <outlet property="FFTControler" destination="35" id="125"/>
+                                        <outlet property="scrollView" destination="16" id="146"/>
+                                    </connections>
+                                </customView>
+                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="25" customClass="PhiView">
+                                    <rect key="frame" x="422" y="47" width="256" height="144"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <connections>
+                                        <outlet property="FFTControler" destination="35" id="144"/>
+                                        <outlet property="scrollView" destination="26" id="145"/>
+                                    </connections>
+                                </customView>
+                            </subviews>
+                        </view>
+                        <font key="titleFont" size="12" name="Helvetica-Bold"/>
+                    </box>
+                </subviews>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="35" id="149"/>
+            </connections>
+            <point key="canvasLocation" x="-1056.5" y="58.5"/>
+        </window>
+    </objects>
+    <resources>
+        <image name="foo" width="48" height="48"/>
+    </resources>
+</document>

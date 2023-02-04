@@ -3,7 +3,7 @@
 #import <AppKit/AppKit.h>
 #import "MKXMLParser.h"
 #import "MKXMLSingleValueParser.h"
-#import <MusicKit/MKNote.h>
+#import <MusicKitLegacy/MKNote.h>
 
 @implementation MKXMLParser
 

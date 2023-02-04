@@ -7,15 +7,16 @@
 #import "FFTControl.h"
 #import <AppKit/AppKit.h>
 
+@class FFTControl;
+
 @interface PhiView:FuncView
 {
-    id	FFTControler;
+	FFTControl *FFTControler;
     int block;
 }
 
-- setFFTControler:anObject;
+@property (assign) IBOutlet FFTControl *FFTControler;
 - afterUp:(float*)data length:(int)aLength;
-- drawSelf:(NSRect *)rect :(int)rectCount;
-- drawSelfAux:(float)origin;
+- (void)drawSelfAux:(CGFloat)origin;
 @end
 #endif

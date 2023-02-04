@@ -16,7 +16,7 @@
 // what to do with them.
 
 #import "MKXMLDirectionParser.h"
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 
 
 @implementation MKXMLDirectionParser

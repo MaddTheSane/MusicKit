@@ -4,12 +4,7 @@
 #import "PhiView.h"
 
 @implementation PhiView
-
-- setFFTControler:anObject
-{
-    FFTControler = anObject;
-    return self;
-}
+@synthesize FFTControler;
 
 - afterUp:(float*)data length:(int)aLength
 {
@@ -17,28 +12,25 @@
     return self;
 }
 
-- drawSelf:(NXRect *) rect : (int) rectCount
+- (void)drawRect:(NSRect)dirtyRect
 {
-    NXRect newVis;
+    NSRect newVis = self.visibleRect;
 
-    [self getVisibleRect:&newVis];
-    [super drawSelf:rect :rectCount];
-    if(!block)[FFTControler passDraw:newVis.origin.x :0.];
+    [super drawRect:dirtyRect];
+    if(!block)[FFTControler passDraw:newVis.origin.x tag:0.];
     else block = 0;
-    return self;
 }
 
-- drawSelfAux:(float)origin
+- (void)drawSelfAux:(CGFloat)origin
 {
-    static NXRect newVis;
+    static NSRect newVis;
     static int first=1;
 
-    if(first) { [self getVisibleRect:&newVis]; first = 0 ;}
+    if(first) { newVis = self.visibleRect; first = 0 ;}
     newVis.origin.x = origin;
     block = 1; 
-    [self scrollRectToVisible:&newVis];
+    [self scrollRectToVisible:newVis];
     block = 0;
-    return self;
 }
 
 @end

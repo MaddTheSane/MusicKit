@@ -8,6 +8,9 @@
 #import "PhiView.h"
 #import "ModView.h"
 
+@class ModView;
+@class PhiView;
+
 @interface FFTControl:NSObject <NSApplicationDelegate>
 {
     ModView	*modView;
@@ -21,7 +24,7 @@
     int dataLength;
     float phizero;
     BOOL logDisplay;
-    id accessoryView;
+    __kindof NSView *accessoryView;
 }
 
 - setModView:anObject;
@@ -31,13 +34,13 @@
 - setPhi:(float*)data;
 - setLogDisplay:sender;
 - receiveData:(float*)data length:(int)aLength;
-- convolve:sender;
-- multiply:sender;
-- saveTable:sender;
-- restoreTable:sender;
-- storeCurrent:sender;
-- previous:sender;
-- passDraw:(float)curs :(int) tag;
+- (IBAction)convolve:sender;
+- (IBAction)multiply:sender;
+- (IBAction)saveTable:sender;
+- (IBAction)restoreTable:sender;
+- (IBAction)storeCurrent:sender;
+- (IBAction)previous:sender;
+- (void)passDraw:(CGFloat)curs tag:(NSInteger) tag;
 - (IBAction)zoomIn:sender;
 - (IBAction)zoomOut:sender;
 - (IBAction)onOff:sender;

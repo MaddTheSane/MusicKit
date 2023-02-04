@@ -7,7 +7,7 @@
 //
 
 #import "MKXMLEncodingParser.h"
-#import <MusicKit/MusicKit.h>
+#import <MusicKitLegacy/MusicKitLegacy.h>
 
 
 @implementation MKXMLEncodingParser

@@ -22,7 +22,7 @@
 
 - (NSArray*)fileOpeningSuffixes
 {
-    return [NSArray arrayWithObjects:@"xml",@"musicxml",@"MusicXML",nil];
+    return @[@"xml", @"musicxml", @"MusicXML"];
 }
 
 - (NSArray*)fileSavingSuffixes
@@ -33,6 +33,11 @@
 - (MKScore*)openFileName:(NSString *)f forScore:(MKScore*)s
 {
     return [MKXMLSAXHandler parseFile:f intoScore:s];
+}
+
+- (MKScore*)openURL:(NSURL *)f forScore:(MKScore *)s error:(NSError **)error
+{
+	return [MKXMLSAXHandler parseURL:f intoScore:s error:error];
 }
 
 @end

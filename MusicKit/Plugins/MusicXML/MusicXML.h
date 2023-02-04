@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <MusicKit/MKPlugin.h>
+#import <MusicKitLegacy/MKPlugin.h>
 
 @interface MusicXML :  NSObject <MusicKitPlugin>
 {
@@ -17,5 +17,6 @@
 - (NSArray*)fileSavingSuffixes;
 - (NSArray*)fileOpeningSuffixes;
 - (MKScore*)openFileName:(NSString *)f forScore:(MKScore*)s;
+- (MKScore*)openURL:(NSURL *)f forScore:(MKScore *)s error:(NSError **)error;
 
 @end
